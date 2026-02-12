@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel AWS S3 - Introduction | CloudDataTuts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles globaux (réutilisés du site principal) */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --aws-orange: #ff9900;
+            --aws-orange-dark: #e68900;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+        
+        .breadcrumb li:not(:last-child)::after {
+            content: '/';
+            margin-left: 0.5rem;
+            color: var(--gray);
+        }
+        
+        .breadcrumb .current {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        /* Layout Tutoriel */
+        .tutorial-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* Sidebar - Table des matières */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .toc-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--secondary);
+        }
+        
+        .toc-title i {
+            color: var(--primary);
+        }
+        
+        .toc-list {
+            list-style: none;
+        }
+        
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .toc-list a {
+            color: var(--gray);
+            text-decoration: none;
+            display: block;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-list a:hover {
+            color: var(--primary);
+            background: #eff6ff;
+            border-left-color: var(--primary);
+        }
+        
+        .toc-list a.active {
+            color: var(--primary);
+            background: #eff6ff;
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .toc-list i {
+            width: 20px;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contenu principal */
+        .tutorial-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* En-tête du tutoriel */
+        .tutorial-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+        
+        .tutorial-header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .tutorial-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .meta-item i {
+            color: var(--primary);
+        }
+        
+        .level-badge {
+            background: var(--aws-orange);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: #fff7e6;
+            color: var(--aws-orange-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid var(--aws-orange);
+        }
+        
+        /* Sections du tutoriel */
+        .tutorial-section {
+            margin-bottom: 3rem;
+        }
+        
+        .tutorial-section h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+        
+        .tutorial-section h2 i {
+            color: var(--primary);
+        }
+        
+        .tutorial-section h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin: 1.8rem 0 1rem;
+        }
+        
+        .tutorial-section p {
+            margin-bottom: 1.2rem;
+            color: #334155;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Info boxes */
+        .info-box {
+            background: #e6f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background: #fff7e6;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .success-box {
+            background: #e6f7e6;
+            border-left: 4px solid var(--success);
+        }
+        
+        .info-box i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Tables */
+        .tutorial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .tutorial-table th,
+        .tutorial-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .tutorial-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .tutorial-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        /* Boutons d'action */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-aws {
+            background: var(--aws-orange);
+        }
+        
+        .btn-aws:hover {
+            background: var(--aws-orange-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Resources */
+        .resources-list {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .resources-list h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .resources-list ul {
+            list-style: none;
+        }
+        
+        .resources-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resources-list a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .resources-list a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Navigation entre tutoriels */
+        .tutorial-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gray-light);
+        }
+        
+        .nav-prev, .nav-next {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-prev:hover, .nav-next:hover {
+            background: var(--gray-light);
+        }
+        
+        .nav-prev i, .nav-next i {
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .tutorial-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .toc-sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .tutorial-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .tutorial-content {
+                padding: 1.5rem;
+            }
+            
+            .tutorial-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .tutorial-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>CloudDataTuts</span>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">AWS</a></li>
+                <li class="current">Introduction à AWS S3</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+                <ul class="toc-list">
+                    <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
+                    <li><a href="#qu-est-ce-que-s3"><i class="fas fa-question-circle"></i>Qu'est-ce que S3 ?</a></li>
+                    <li><a href="#concepts-cles"><i class="fas fa-key"></i>Concepts clés</a></li>
+                    <li><a href="#creation-bucket"><i class="fas fa-bucket"></i>Créer un bucket</a></li>
+                    <li><a href="#upload-fichiers"><i class="fas fa-upload"></i>Uploader des fichiers</a></li>
+                    <li><a href="#gestion-acces"><i class="fas fa-lock"></i>Gestion des accès</a></li>
+                    <li><a href="#versioning"><i class="fas fa-code-branch"></i>Versioning</a></li>
+                    <li><a href="#bonnes-pratiques"><i class="fas fa-check-circle"></i>Bonnes pratiques</a></li>
+                    <li><a href="#exercices"><i class="fas fa-tasks"></i>Exercices pratiques</a></li>
+                    <li><a href="#ressources"><i class="fas fa-bookmark"></i>Ressources</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 45 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête -->
+                <div class="tutorial-header">
+                    <h1>Introduction à AWS S3</h1>
+                    <span class="level-badge">Niveau Débutant</span>
+                    
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Octobre 2023
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 45 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Facile
+                        </span>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag"><i class="fab fa-aws"></i> AWS S3</span>
+                        <span class="tech-tag"><i class="fas fa-cloud"></i> Stockage Cloud</span>
+                        <span class="tech-tag"><i class="fas fa-database"></i> Buckets</span>
+                    </div>
+                </div>
+
+                <!-- Section: Objectifs -->
+                <section id="objectifs" class="tutorial-section">
+                    <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
+                    <p>À la fin de ce tutoriel, vous serez capable de :</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">✓ Comprendre le fonctionnement d'Amazon S3 et son rôle dans le cloud AWS</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Créer et configurer un bucket S3</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Uploader, gérer et organiser des fichiers</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Mettre en place des politiques d'accès basiques</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Activer le versioning et comprendre son utilité</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+                        <strong>Prérequis :</strong> Un compte AWS (niveau gratuit suffit) et des notions de base du cloud computing.
+                    </div>
+                </section>
+
+                <!-- Section: Qu'est-ce que S3 -->
+                <section id="qu-est-ce-que-s3" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i> Qu'est-ce que Amazon S3 ?</h2>
+                    <p>Amazon Simple Storage Service (S3) est un service de stockage d'objets scalable, durable et sécurisé proposé par AWS. Il permet de stocker et récupérer n'importe quelle quantité de données, à tout moment, depuis n'importe où.</p>
+                    
+                    <div class="info-box success-box">
+                        <i class="fas fa-star" style="color: var(--success);"></i>
+                        <strong>Pourquoi utiliser S3 ?</strong> 99.999999999% de durabilité, scalabilité illimitée, 11 classes de stockage différentes, et une intégration native avec tous les services AWS.
+                    </div>
+                    
+                    <h3>Cas d'usage courants :</h3>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.5rem;">📁 Stockage de fichiers statiques pour sites web</li>
+                        <li style="margin-bottom: 0.5rem;">💾 Backup et restauration de données</li>
+                        <li style="margin-bottom: 0.5rem;">📊 Data lake pour big data</li>
+                        <li style="margin-bottom: 0.5rem;">🎥 Hébergement de contenu multimédia</li>
+                        <li style="margin-bottom: 0.5rem;">📦 Archivage à long terme</li>
+                    </ul>
+                </section>
+
+                <!-- Section: Concepts clés -->
+                <section id="concepts-cles" class="tutorial-section">
+                    <h2><i class="fas fa-key"></i> Concepts clés</h2>
+                    
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Bucket</strong></td>
+                                <td>Conteneur racine pour stocker des objets. Nom unique globalement.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Objet</strong></td>
+                                <td>Fichier + métadonnées stocké dans un bucket.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clé (Key)</strong></td>
+                                <td>Identifiant unique d'un objet dans un bucket (chemin).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Versioning</strong></td>
+                                <td>Garde plusieurs versions d'un même objet.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ARN</strong></td>
+                                <td>Amazon Resource Name - identifiant unique des ressources.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Section: Création bucket -->
+                <section id="creation-bucket" class="tutorial-section">
+                    <h2><i class="fas fa-bucket"></i> Créer votre premier bucket S3</h2>
+                    
+                    <h3>Via la console AWS :</h3>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Connectez-vous à votre <a href="https://console.aws.amazon.com" target="_blank">console AWS</a></li>
+                        <li style="margin-bottom: 0.8rem;">Recherchez "S3" dans la barre de recherche</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Créer un bucket"</li>
+                        <li style="margin-bottom: 0.8rem;">Choisissez un nom unique (ex: mon-portfolio-tuto-2024)</li>
+                        <li style="margin-bottom: 0.8rem;">Sélectionnez une région proche de vos utilisateurs (ex: eu-west-3 Paris)</li>
+                        <li style="margin-bottom: 0.8rem;">Laissez les paramètres par défaut pour commencer</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Créer"</li>
+                    </ol>
+                    
+                    <h3>Avec AWS CLI :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre># Configurer AWS CLI
+aws configure
+
+# Créer un bucket
+aws s3 mb s3://mon-portfolio-tuto-2024 --region eu-west-3
+
+# Vérifier la création
+aws s3 ls</pre>
+                    </div>
+                </section>
+
+                <!-- Section: Upload fichiers -->
+                <section id="upload-fichiers" class="tutorial-section">
+                    <h2><i class="fas fa-upload"></i> Uploader et gérer des fichiers</h2>
+                    
+                    <h3>Console AWS :</h3>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Ouvrez votre bucket</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Upload"</li>
+                        <li style="margin-bottom: 0.8rem;">Glissez-déposez vos fichiers</li>
+                        <li style="margin-bottom: 0.8rem;">Configurez les permissions (privé par défaut)</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Upload"</li>
+                    </ol>
+                    
+                    <h3>AWS CLI :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre># Uploader un fichier
+aws s3 cp mon-fichier.pdf s3://mon-portfolio-tuto-2024/documents/
+
+# Uploader un dossier entier
+aws s3 cp --recursive ./dossier-local s3://mon-portfolio-tuto-2024/dossier/
+
+# Lister les fichiers
+aws s3 ls s3://mon-portfolio-tuto-2024/</pre>
+                    </div>
+                    
+                    <div class="info-box warning-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Important :</strong> Par défaut, tous les objets sont privés. Pour rendre un fichier public, vous devez modifier explicitement les permissions.
+                    </div>
+                </section>
+
+                <!-- Section: Gestion des accès -->
+                <section id="gestion-acces" class="tutorial-section">
+                    <h2><i class="fas fa-lock"></i> Gestion des accès</h2>
+                    
+                    <h3>Bucket Policy (exemple pour site web statique) :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::mon-portfolio-tuto-2024/*"
+    }
+  ]
+}</pre>
+                    </div>
+                    
+                    <h3>Activer l'hébergement de site web statique :</h3>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Propriétés du bucket → Hébergement de site web statique</li>
+                        <li style="margin-bottom: 0.8rem;">Activer l'option</li>
+                        <li style="margin-bottom: 0.8rem;">Définir index.html comme document d'index</li>
+                        <li style="margin-bottom: 0.8rem;">Sauvegarder</li>
+                    </ol>
+                    
+                    <p>Votre site sera accessible à l'URL : <code>http://mon-portfolio-tuto-2024.s3-website.eu-west-3.amazonaws.com</code></p>
+                </section>
+
+                <!-- Section: Versioning -->
+                <section id="versioning" class="tutorial-section">
+                    <h2><i class="fas fa-code-branch"></i> Activer le versioning</h2>
+                    
+                    <p>Le versioning vous permet de conserver plusieurs versions d'un même objet, ce qui est essentiel pour la récupération après suppression ou modification accidentelle.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre># Activer le versioning via CLI
+aws s3api put-bucket-versioning \
+    --bucket mon-portfolio-tuto-2024 \
+    --versioning-configuration Status=Enabled</pre>
+                    </div>
+                    
+                    <div class="info-box success-box">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Best Practice :</strong> Activez toujours le versioning pour les buckets critiques. Le coût additionnel est minime comparé à la valeur de vos données.
+                    </div>
+                </section>
+
+                <!-- Section: Bonnes pratiques -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2><i class="fas fa-check-circle"></i> Bonnes pratiques S3</h2>
+                    
+                    <ul style="margin-left: 1.5rem;">
+                        <li style="margin-bottom: 1rem;">
+                            <strong>✅ Nommage des buckets :</strong> Utilisez des noms uniques, en minuscules, sans underscores. Exemple: "mon-appli-data-2024"
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong>✅ Organisation :</strong> Structurez avec des préfixes (dossiers) comme "logs/2024/10/"
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong>✅ Sécurité :</strong> Activez le chiffrement par défaut et bloquez l'accès public sauf si nécessaire
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong>✅ Cycle de vie :</strong> Configurez des règles pour déplacer automatiquement vers Glacier après 30 jours
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <strong>✅ Monitoring :</strong> Activez les logs d'accès et Amazon CloudWatch
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section: Exercices pratiques -->
+                <section id="exercices" class="tutorial-section">
+                    <h2><i class="fas fa-tasks"></i> Exercices pratiques</h2>
+                    
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h3 style="margin-top: 0;">Exercice 1 : Création et upload</h3>
+                        <p>Créez un bucket nommé "mon-premier-bucket-[votre-nom]" et uploadez 3 fichiers différents.</p>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h3 style="margin-top: 0;">Exercice 2 : Site web statique</h3>
+                        <p>Hébergez une page HTML simple sur S3 et rendez-la accessible publiquement.</p>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+                        <h3 style="margin-top: 0;">Exercice 3 : Versioning</h3>
+                        <p>Activez le versioning, uploadez 3 versions d'un même fichier, puis restaurez la version initiale.</p>
+                    </div>
+                </section>
+
+                <!-- Section: Ressources -->
+                <section id="ressources" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ressources supplémentaires</h
