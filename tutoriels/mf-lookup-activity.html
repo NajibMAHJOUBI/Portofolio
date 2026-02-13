@@ -57,15 +57,18 @@
                 </h3>
                 <ul class="toc-list">
                     <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
-                    <li><a href="#qu-est-ce-que-s3"><i class="fas fa-question-circle"></i>Qu'est-ce que S3 ?</a></li>
-                    <li><a href="#concepts-cles"><i class="fas fa-key"></i>Concepts clés</a></li>
-                    <li><a href="#creation-bucket"><i class="fas fa-bucket"></i>Créer un bucket</a></li>
-                    <li><a href="#upload-fichiers"><i class="fas fa-upload"></i>Uploader des fichiers</a></li>
-                    <li><a href="#gestion-acces"><i class="fas fa-lock"></i>Gestion des accès</a></li>
-                    <li><a href="#versioning"><i class="fas fa-code-branch"></i>Versioning</a></li>
-                    <li><a href="#bonnes-pratiques"><i class="fas fa-check-circle"></i>Bonnes pratiques</a></li>
-                    <li><a href="#exercices"><i class="fas fa-tasks"></i>Exercices pratiques</a></li>
-                    <li><a href="#ressources"><i class="fas fa-bookmark"></i>Ressources</a></li>
+                    <li><a href="#qu-est-ce-que-lookup"><i class="fas fa-question-circle"></i>Qu'est-ce que une activité Lookup ?</a></li>
+                    <li><a href="#exemple-tutoriel"><i class="fas fa-bucket"></i>Scénario de l'exemple</a></li>
+                    <li><a href="#create-workspace"><i class="fas fa-upload"></i>Création d'un Workspace</a></li>
+                    <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
+                    <li><a href="#upload-file-lakehouse"><i class="fas fa-code-branch"></i>Upload File in Lakehouse</a></li>
+                    <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
+                    <li><a href="#setup-pipeline"><i class="fas fa-tasks"></i>Paramétrage d'un Pipeline</a></li>
+                    <li><a href="#add-lookup-activity"><i class="fas fa-bookmark"></i>Ajout d'une activité Lookup</a></li>
+                    <li><a href="#setup-lookup-activity"><i class="fas fa-bookmark"></i>Paramétrage de l'activité Lookup</a></li>
+                    <li><a href="#add-foreach-activity"><i class="fas fa-play"></i>Ajout d'une activité ForEach</a></li>
+                    <li><a href="#add-copy-data-activity"><i class="fas fa-play"></i>Ajout d'une activité Copy data</a></li>
+                    <li><a href="#run-pipeline"><i class="fas fa-play-circle"></i>Exécution du Pipeline</a></li>
                 </ul>
                 
                 <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
@@ -82,8 +85,8 @@
             <main class="tutorial-content">
                 <!-- En-tête -->
                 <div class="tutorial-header">
-                    <h1>Flux de contrôle itératif</h1>
-                    <h2>Activité ForEach</h2>
+                    <h1>Des configurations de Pipeline dynamique</h1>
+                    <h1>Activité Lookup</h1>
                     <span class="level-badge">Niveau Débutant</span>
                     
                     <div class="tutorial-meta">
@@ -110,102 +113,53 @@
                     <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
                     <p>À la fin de ce tutoriel, vous serez capable de :</p>
                     <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.5rem;">✓ Comprendre le fonctionnement d'Amazon S3 et son rôle dans le cloud AWS</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Créer et configurer un bucket S3</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Uploader, gérer et organiser des fichiers</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Mettre en place des politiques d'accès basiques</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Activer le versioning et comprendre son utilité</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Comprendre le fonctionnement de l'activité Lookup</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Configurer une activité Lookup pour lire des données de configuration</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Utiliser les résultats de Lookup pour des activités itératives</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Mettre en place un exemple concret d'implémentation dans un pipeline Microsoft Fabric</li>
                     </ul>
                     
                     <div class="info-box">
                         <i class="fas fa-info-circle" style="color: var(--primary);"></i>
-                        <strong>Prérequis :</strong> Un compte AWS (niveau gratuit suffit) et des notions de base du cloud computing.
+                        <strong>Prérequis :</strong> Un capacité Microsoft Fabric (niveau gratuit suffit) et des notions de base du cloud computing.
                     </div>
                 </section>
 
-                <!-- Section: Qu'est-ce que S3 -->
-                <section id="qu-est-ce-que-s3" class="tutorial-section">
-                    <h2><i class="fas fa-question-circle"></i> Qu'est-ce que Amazon S3 ?</h2>
-                    <p>Amazon Simple Storage Service (S3) est un service de stockage d'objets scalable, durable et sécurisé proposé par AWS. Il permet de stocker et récupérer n'importe quelle quantité de données, à tout moment, depuis n'importe où.</p>
+                <!-- Section: Qu'est-ce qu'une activité Lookup -->
+                <section id="qu-est-ce-que-lookup" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité Lookup ?</h2>
+                    <p>Un des points fort d'une plateforme de données est de permettre de créer des modules réutilisables. 
+                       Elle doit intégrer l'intelligence opérationnelle, de la configuration dynamique et des décisions pilotées par la donnée. 
+                       Pour cela, il est notamment nécessaire de pouvoir récupérer des paramètres sans avoir à les coder en durs. 
+                       Et c'est précisément le rôle de l'activité Lookup dans Microsoft Fabric. 
+                       L'activité Lookup dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
+                       de les réutiliser dans les pipelines de données tout en adaptant leur comportement à l'exécution. 
+                       Utilisé efficacement, une activité Lookup permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
+                       en Data Engineering modernes.
+                       Il s'agit d'un composant d'orchestration puissant qui permet d'exposer son résultat sous forme de payload JSON utilisable 
+                       par les autres activités du pipeline.</p>
                     
-                    <div class="info-box success-box">
-                        <i class="fas fa-star" style="color: var(--success);"></i>
-                        <strong>Pourquoi utiliser S3 ?</strong> 99.999999999% de durabilité, scalabilité illimitée, 11 classes de stockage différentes, et une intégration native avec tous les services AWS.
-                    </div>
-                    
-                    <h3>Cas d'usage courants :</h3>
-                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.5rem;">📁 Stockage de fichiers statiques pour sites web</li>
-                        <li style="margin-bottom: 0.5rem;">💾 Backup et restauration de données</li>
-                        <li style="margin-bottom: 0.5rem;">📊 Data lake pour big data</li>
-                        <li style="margin-bottom: 0.5rem;">🎥 Hébergement de contenu multimédia</li>
-                        <li style="margin-bottom: 0.5rem;">📦 Archivage à long terme</li>
-                    </ul>
-                </section>
 
-                <!-- Section: Concepts clés -->
-                <section id="concepts-cles" class="tutorial-section">
-                    <h2><i class="fas fa-key"></i> Concepts clés</h2>
-                    
-                    <table class="tutorial-table">
-                        <thead>
-                            <tr>
-                                <th>Concept</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Bucket</strong></td>
-                                <td>Conteneur racine pour stocker des objets. Nom unique globalement.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Objet</strong></td>
-                                <td>Fichier + métadonnées stocké dans un bucket.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Clé (Key)</strong></td>
-                                <td>Identifiant unique d'un objet dans un bucket (chemin).</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Versioning</strong></td>
-                                <td>Garde plusieurs versions d'un même objet.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>ARN</strong></td>
-                                <td>Amazon Resource Name - identifiant unique des ressources.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                    <figure>
+                    <img src="../assets/images/mf-lookup-activity/schema-lookup.png" 
+                    alt="Schéma explicatif de l'utilisation d'una activité Lookup">
+                    <figcaption><i>Schéma explicatif de l'utilisation d'una activité Lookup</i></figcaption>
+                    </figure>
 
-                <!-- Section: Création bucket -->
+                <!-- Section: Scénario de l'exemple -->
                 <section id="creation-bucket" class="tutorial-section">
-                    <h2><i class="fas fa-bucket"></i> Créer votre premier bucket S3</h2>
+                    <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
                     
-                    <h3>Via la console AWS :</h3>
-                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Connectez-vous à votre <a href="https://console.aws.amazon.com" target="_blank">console AWS</a></li>
-                        <li style="margin-bottom: 0.8rem;">Recherchez "S3" dans la barre de recherche</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Créer un bucket"</li>
-                        <li style="margin-bottom: 0.8rem;">Choisissez un nom unique (ex: mon-portfolio-tuto-2024)</li>
-                        <li style="margin-bottom: 0.8rem;">Sélectionnez une région proche de vos utilisateurs (ex: eu-west-3 Paris)</li>
-                        <li style="margin-bottom: 0.8rem;">Laissez les paramètres par défaut pour commencer</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Créer"</li>
-                    </ol>
+                    <p>Nous allons présenter un exemple simple d'illustration d'une activité LookUp dans un Pipeline de Données. 
+                       Il s'agit de déplacer des fichiers entre deux dossiers du Lakehouse (ingest/ et archive/). 
+                       Apres avoir été déplacés, ces fichiers doivent être renommés selon une règle définie dans une table.</p>
                     
-                    <h3>Avec AWS CLI :</h3>
-                    <div class="code-block">
-                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                        <pre># Configurer AWS CLI
-aws configure
-
-# Créer un bucket
-aws s3 mb s3://mon-portfolio-tuto-2024 --region eu-west-3
-
-# Vérifier la création
-aws s3 ls</pre>
-                    </div>
+                    <figure>
+                    <img src="../assets/images/mf-lookup-activity/schema-scenario.png"  
+                    alt="Schéma explicatif du scénario de l'exemple avec une activité Lookup">
+                    <figcaption><i>Schéma explicatif du scénario de l'exemple avec une activité Lookup</i></figcaption>
+                    </figure>
+                    
                 </section>
 
                 <!-- Section: Upload fichiers -->
