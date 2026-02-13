@@ -61,7 +61,7 @@
                     <li><a href="#exemple-tutoriel"><i class="fas fa-bucket"></i>Scénario de l'exemple</a></li>
                     <li><a href="#create-workspace"><i class="fas fa-upload"></i>Création d'un Workspace</a></li>
                     <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
-                    <li><a href="#upload-file-lakehouse"><i class="fas fa-code-branch"></i>Upload File in Lakehouse</a></li>
+                    <li><a href="#upload-file-lakehouse"><i class="fas fa-code-branch"></i>Chargement de fichiers dans le Lakehouse</a></li>
                     <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
                     <li><a href="#setup-pipeline"><i class="fas fa-tasks"></i>Paramétrage d'un Pipeline</a></li>
                     <li><a href="#add-lookup-activity"><i class="fas fa-bookmark"></i>Ajout d'une activité Lookup</a></li>
@@ -131,8 +131,8 @@
                     <p>Un des points fort d'une plateforme de données est de permettre de créer des modules réutilisables. 
                        Elle doit intégrer l'intelligence opérationnelle, de la configuration dynamique et des décisions pilotées par la donnée. 
                        Pour cela, il est notamment nécessaire de pouvoir récupérer des paramètres sans avoir à les coder en durs. 
-                       Et c'est précisément le rôle de l'activité Lookup dans Microsoft Fabric. 
-                       L'activité Lookup dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
+                       Et c'est précisément le rôle de l'activité <b>Lookup</b> dans <b></b>Microsoft Fabric</b>. 
+                       L'activité <b>Lookup</b> dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
                        de les réutiliser dans les pipelines de données tout en adaptant leur comportement à l'exécution. 
                        Utilisé efficacement, une activité Lookup permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
                        en Data Engineering modernes.
@@ -151,7 +151,7 @@
                     <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
                     
                     <p>Nous allons présenter un exemple simple d'illustration d'une activité LookUp dans un Pipeline de Données. 
-                       Il s'agit de déplacer des fichiers entre deux dossiers du Lakehouse (ingest/ et archive/). 
+                       Il s'agit de déplacer des fichiers entre deux dossiers du Lakehouse (<i>ingest/</i>/ et <i>archive/</i>). 
                        Apres avoir été déplacés, ces fichiers doivent être renommés selon une règle définie dans une table.</p>
                     
                     <figure>
@@ -159,91 +159,129 @@
                     alt="Schéma explicatif du scénario de l'exemple avec une activité Lookup">
                     <figcaption><i>Schéma explicatif du scénario de l'exemple avec une activité Lookup</i></figcaption>
                     </figure>
-                    
+
+                    <p>Dans les paragraphes suivants, nous allons décrire pas à pas les étapes de mise en place de ce scénario. 
+                       L'objectif est de montrer au travers de cet exemple comment mettre en place une activité <b>Lookup</b>.</p>
+
                 </section>
 
-                <!-- Section: Upload fichiers -->
+                <!-- Section: Création d'un Workspace -->
                 <section id="upload-fichiers" class="tutorial-section">
-                    <h2><i class="fas fa-upload"></i> Uploader et gérer des fichiers</h2>
-                    
-                    <h3>Console AWS :</h3>
+                    <h2><i class="fas fa-upload"></i> Création d'un Workspace</h2>
+                    <p>La première étape consiste à créer un Workspace dans <b>Microsoft Fabric</b>. 
+                       Un <b>Workspace</b> est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données. 
+                       Pour créer un <b>Workspace</b>, suivez les étapes suivantes :</p>
+
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Ouvrez votre bucket</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Upload"</li>
-                        <li style="margin-bottom: 0.8rem;">Glissez-déposez vos fichiers</li>
-                        <li style="margin-bottom: 0.8rem;">Configurez les permissions (privé par défaut)</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquez sur "Upload"</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur <b>Home</b> depuis la volet gauche de l'interface de <b>Microsoft Fabric</b></li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New Workspace</b></li>
+                        <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, entrer un nom dans le champ <b>Name</b>. Ici nous allons le nommer <i>TutorielLookupActivity</i>.</li>
+                        <li style="margin-bottom: 0.8rem;">Entrer une description dans le champ <b>Description</b> [Optionnel]</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Apply</b> pour lancer la création du <b>Workspace</b></li>
                     </ol>
-                    
-                    <h3>AWS CLI :</h3>
-                    <div class="code-block">
-                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                        <pre># Uploader un fichier
-aws s3 cp mon-fichier.pdf s3://mon-portfolio-tuto-2024/documents/
 
-# Uploader un dossier entier
-aws s3 cp --recursive ./dossier-local s3://mon-portfolio-tuto-2024/dossier/
+                    <figure>
+                    <img src="../assets/images/mf-lookup-activity/create-workspace.png" 
+                    alt="Schéma explicatif de la création d'un Workspace dans Microsoft Fabric">
+                    <figcaption><i>Schéma explicatif de la création d'un Workspace dans Microsoft Fabric</i></figcaption>
+                    </figure>
 
-# Lister les fichiers
-aws s3 ls s3://mon-portfolio-tuto-2024/</pre>
-                    </div>
-                    
-                    <div class="info-box warning-box">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Important :</strong> Par défaut, tous les objets sont privés. Pour rendre un fichier public, vous devez modifier explicitement les permissions.
-                    </div>
                 </section>
 
-                <!-- Section: Gestion des accès -->
+                <!-- Section: Création d'un Lakehouse -->
                 <section id="gestion-acces" class="tutorial-section">
-                    <h2><i class="fas fa-lock"></i> Gestion des accès</h2>
-                    
-                    <h3>Bucket Policy (exemple pour site web statique) :</h3>
-                    <div class="code-block">
-                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                        <pre>{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::mon-portfolio-tuto-2024/*"
-    }
-  ]
-}</pre>
-                    </div>
-                    
-                    <h3>Activer l'hébergement de site web statique :</h3>
+                    <h2><i class="fas fa-lock"></i> Création d'un Lakehouse</h2>
+                
+                <p>La deuxième étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. 
+                   Un <b>Lakehouse</b> est une ressource de stockage de données qui permet de stocker des données structurées et non structurées. 
+                   Pour créer un <b>Lakehouse</b>, suivez les étapes suivantes :</p>
+
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Propriétés du bucket → Hébergement de site web statique</li>
-                        <li style="margin-bottom: 0.8rem;">Activer l'option</li>
-                        <li style="margin-bottom: 0.8rem;">Définir index.html comme document d'index</li>
-                        <li style="margin-bottom: 0.8rem;">Sauvegarder</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New item</b></li>
+                        <li style="margin-bottom: 0.8rem;">Depuis le volet droit qui s'ouvre, taper le terme <i>"Lakehouse"</i> dans le champ de recherche</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>Lakehouse</b></li>
                     </ol>
-                    
-                    <p>Votre site sera accessible à l'URL : <code>http://mon-portfolio-tuto-2024.s3-website.eu-west-3.amazonaws.com</code></p>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/create-lakehouse-00.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                    </figure>  
+                <br>
+                <p>Cela va ouvrir une fenêtre depuis laquelle nous allons pouvoir renseigner un nom pour ce <b>Lakehouse</b> en suivant les étapes suivantes : </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Renseigner un nom dans le champ <b>Name</b> (ici nous allons le nommer <i>Lookup_Lk</i>)</li>
+                        <li style="margin-bottom: 0.8rem;">Dans le champ <b>Location</b>, choisir le </b>Workspace</b> que nous avons créé</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b></li>
+                    </ol>
+
+                     <figure>
+                        <img src="../assets/images/mf-lookup-activity/create-lakehouse-01.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                     </figure>
+
+                
                 </section>
 
-                <!-- Section: Versioning -->
-                <section id="versioning" class="tutorial-section">
-                    <h2><i class="fas fa-code-branch"></i> Activer le versioning</h2>
-                    
-                    <p>Le versioning vous permet de conserver plusieurs versions d'un même objet, ce qui est essentiel pour la récupération après suppression ou modification accidentelle.</p>
-                    
-                    <div class="code-block">
-                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                        <pre># Activer le versioning via CLI
-aws s3api put-bucket-versioning \
-    --bucket mon-portfolio-tuto-2024 \
-    --versioning-configuration Status=Enabled</pre>
-                    </div>
-                    
-                    <div class="info-box success-box">
-                        <i class="fas fa-shield-alt"></i>
-                        <strong>Best Practice :</strong> Activez toujours le versioning pour les buckets critiques. Le coût additionnel est minime comparé à la valeur de vos données.
-                    </div>
+                <!-- Section: Chargement de fichiers dans le Lakehouse -->
+                <section id="upload-file-lakehouse" class="tutorial-section">
+                    <h2><i class="fas fa-file-upload"></i> Chargement de fichiers dans le Lakehouse</h2>
+                    <p>La troisième étape de notre scénario consiste à charger les fichiers utiles à ce tutoriel dans le <b>Lakehouse</b> que nous avons créé. 
+                       Pour cela, nous allons créer deux dossiers dans ce <b>Lakehouse</b> : <i>ingest/</i> et <i>archive/</i>. 
+                       Nous allons ensuite charger des fichiers dans le dossier <i>ingest/</i>. 
+                       Pour cela, suivez les étapes suivantes :</p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Depuis l'interface du <b>Lakehouse</b>, cliquer sur le bouton <b>+ New</b> et choisir l'option <b>New folder</b></li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'option **Upload** puis sur **Upload files**</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-00.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                    </figure>
+
+                    <p>Ces actions vont ouvrir un volet droit :</p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Cliquer dans le champ pour ouvrir un explorer de fichier</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-01.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                    </figure>
+
+                    <p>Depuis l'explorer de fichier, réaliser les étapes suivantes : </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Sélectionner le fichier <i>params.csv</i> que vous pouvez trouver dans les ressources de ce tutoriel</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton **Open**</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-02.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                    </figure>
+
+                    <p>Après avoir cliqué sur le bouton <b>Open</b>, vous devriez voir le fichier sélectionné dans le volet droit de Microsoft Fabric.</p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Constater que le fichier choisi est bien listé</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton **Upload** pour lancer le téléchargement du fichier</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-03.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                    </figure>
+
                 </section>
 
                 <!-- Section: Bonnes pratiques -->
