@@ -128,16 +128,16 @@
                 <!-- Section: Qu'est-ce qu'une activité Lookup -->
                 <section id="qu-est-ce-que-lookup" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité Lookup ?</h2>
-                    <p>Un des points fort d'une plateforme de données est de permettre de créer des modules réutilisables. 
-                       Elle doit intégrer l'intelligence opérationnelle, de la configuration dynamique et des décisions pilotées par la donnée. 
-                       Pour cela, il est notamment nécessaire de pouvoir récupérer des paramètres sans avoir à les coder en durs. 
-                       Et c'est précisément le rôle de l'activité <b>Lookup</b> dans <b></b>Microsoft Fabric</b>. 
-                       L'activité <b>Lookup</b> dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
-                       de les réutiliser dans les pipelines de données tout en adaptant leur comportement à l'exécution. 
-                       Utilisé efficacement, une activité Lookup permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
-                       en Data Engineering modernes.
-                       Il s'agit d'un composant d'orchestration puissant qui permet d'exposer son résultat sous forme de payload JSON utilisable 
-                       par les autres activités du pipeline.</p>
+                        <p>Un des points fort d'une plateforme de données est de permettre de créer des modules réutilisables. 
+                           Elle doit intégrer l'intelligence opérationnelle, de la configuration dynamique et des décisions pilotées par la donnée. 
+                           Pour cela, il est notamment nécessaire de pouvoir récupérer des paramètres sans avoir à les coder en durs. 
+                           Et c'est précisément le rôle de l'activité <b>Lookup</b> dans <b></b>Microsoft Fabric</b>. 
+                           L'activité <b>Lookup</b> dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
+                           de les réutiliser dans les pipelines de données tout en adaptant leur comportement à l'exécution. 
+                           Utilisé efficacement, une activité Lookup permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
+                           en Data Engineering modernes.
+                           Il s'agit d'un composant d'orchestration puissant qui permet d'exposer son résultat sous forme de payload JSON utilisable 
+                           par les autres activités du pipeline.</p>
                     
 
                     <figure>
@@ -145,6 +145,8 @@
                     alt="Schéma explicatif de l'utilisation d'una activité Lookup">
                     <figcaption><i>Schéma explicatif de l'utilisation d'una activité Lookup</i></figcaption>
                     </figure>
+
+                </section>
 
                 <!-- Section: Scénario de l'exemple -->
                 <section id="creation-bucket" class="tutorial-section">
@@ -233,100 +235,385 @@
                        Nous allons ensuite charger des fichiers dans le dossier <i>ingest/</i>. 
                        Pour cela, suivez les étapes suivantes :</p>
 
+
+                    <h3>Upload des métadonnées</h3>
+
+                    <p>Commençons tout d'abord par télécharger un fichier qui contiendra les paramètres qui seront utilisés dans l'activité Lookup. 
+                        Depuis le volet <b>Explorer</b> de l'interface du <b>Lakehouse</b>, réaliser les étapes suivantes : </p>
+                    
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                         <li style="margin-bottom: 0.8rem;">Depuis l'interface du <b>Lakehouse</b>, cliquer sur le bouton <b>+ New</b> et choisir l'option <b>New folder</b></li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'option **Upload** puis sur **Upload files**</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Upload</b> puis sur <b>Upload files</b></li>
                     </ol>
 
                     <figure>
-                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-00.png" 
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-00.png" 
                              alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 1</i></figcaption>
                     </figure>
-
-                    <p>Ces actions vont ouvrir un volet droit :</p>
+                    <br>
+                    <p>Ces actions vont ouvrir un volet droit depuis lequel nous allons pouvoir télécharger des fichiers :</p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                         <li style="margin-bottom: 0.8rem;">Cliquer dans le champ pour ouvrir un explorer de fichier</li>
                     </ol>
 
                     <figure>
-                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-01.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-01.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric" style="width: 100%; max-width: 1000px;">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 2</i></figcaption>
                     </figure>
 
+                    <br>
                     <p>Depuis l'explorer de fichier, réaliser les étapes suivantes : </p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Sélectionner le fichier <i>params.csv</i> que vous pouvez trouver dans les ressources de ce tutoriel</li>
+                        <li style="margin-bottom: 0.8rem;">Sélectionner le fichier 
+                            <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
+                                <i>params.csv</i></a> que vous pouvez trouver dans les ressources de ce tutoriel</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Open</b></li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-02.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 3</i></figcaption>
+                    </figure>
+                    
+                    <br>
+                    <p>Après avoir cliqué sur le bouton <b>Open</b>, vous devriez voir le fichier sélectionné dans le volet droit de <b>Microsoft Fabric</b>.</p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Constater que le fichier choisi (<a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
+                                <i>params.csv</i></a>) est bien listé</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Upload</b> pour lancer le téléchargement du fichier</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-03.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 4</i></figcaption>
+                    </figure>
+
+                <h3>Upload des fichiers de données</h3>
+
+                    <p>Nous allons à présent télécharger dans le <b>Lakehouse</b> les fichiers que nous allons manipulés et renommés dans la suite de cet article. 
+                       Pour cela, nous allons créer un dossier <i>ingest</i> dans le <b>Lakehouse</b>. 
+                       Pour cela, il faudra cliquer droit  sur le dossier <b>Files</b> dans l'<b>Explorer</b> du <b>Lakehouse</b>. 
+                       Cela va ouvrir une fenêtre dans laquelle vous aller pouvoir nommée ce dossier : </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Entrer un nom pour ce dossier dans le champ <b>Folder name</b> (<i>ingest</i>)</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b> pour lancer la création de ce dossier</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-04.png" 
+                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de la création d'un dossier dans un Lakehouse</i></figcaption>
+                    </figure>
+
+                    <p>Ce dossier va apparaître dans l'affichage du contenu du dossier <b>Files</b> du <b>Lakehouse</b>. 
+                       Pour pouvoir télécharger des fichiers dans ce dossier, suivre les étapes suivantes : </p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Cliquer droit sur le dossier <i>ingest</i> que nous venons de créer</li>
+                        <li style="margin-bottom: 0.8rem;">Dans le menu qui apparaît, choisir l'option <b>Upload</b> puis <b>Upload Files</b></li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-05.png" 
+                             alt="Schéma explicatif de l'upload de fichiers dans un dossier d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un dossier d'un Lakehouse</i></figcaption>
+                    </figure>
+
+                    <p>Cela va ouvrir une fenêtre d'exploration sur votre machine local depuis laquelle vous allez pouvoir choisir les fichiers 
+                    à télécharger : </p>
+
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Sélectionner les trois fichiers <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/movie1.csv"> 
+                                <i>movie1.csv</i></a>, <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/movie2.csv"> 
+                                <i>movie2.csv</i></a> et <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/movie3.json"> 
+                                <i>movie3.csv</i></a></li>
                         <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton **Open**</li>
                     </ol>
 
                     <figure>
-                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-02.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-06.png" 
+                             alt="Schéma explicatif du téléchargement de fichiers dans un dossier d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un dossier d'un Lakehouse</i></figcaption>
                     </figure>
 
-                    <p>Après avoir cliqué sur le bouton <b>Open</b>, vous devriez voir le fichier sélectionné dans le volet droit de Microsoft Fabric.</p>
+                    <p>Cela va faire revenir vers le volet droit de chargement des données dans un dossier : </p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Constater que le fichier choisi est bien listé</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton **Upload** pour lancer le téléchargement du fichier</li>
+                        <li style="margin-bottom: 0.8rem;">S'assurer que les fichiers souhaités sont bien inscrits</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Upload</b> pour lancer le téléchargement</li>
                     </ol>
 
                     <figure>
-                        <img src="../assets/images/mf-lookup-activity/upload files-subfoldder-03.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-07.png" 
+                             alt="Schéma explicatif du téléchargement de fichiers dans un dossier d'un Lakehouse dans Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un dossier d'un Lakehouse</i></figcaption>
+                    </figure>
+
+
+                </section>
+
+                <!-- Section: Création d'un Pipeline -->
+                <section id="creation-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-check-circle"></i>Création d'un Pipeline</h2>
+                        <p>La prochaine étape va consister à créer un <b>Pipeline</b> de données. 
+                            Pour cela, vous allez pouvoir suivre les étapes suivantes :</p>   
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Revenir dans l'interface du **Workspace** que nous avons créé précédemment</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New item</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, taper le terme <i>pipeline</i> dans le champ de recherche</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône du <b>Pipeline</b></li>
+                        </ol>
+
+                        <figure>
+                            <img src="../assets/images/mf-lookup-activity/create-pipeline-00.png" 
+                                 alt="Schéma explicatif de la création d'un Pipeline dans Microsoft Fabric">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+                        
+                        <br>
+                        <p>Cela va ouvrir la fenêtre qui va permettre de nommer ce <b>Pipeline</b> en suivant les étapes suivantes :</p>   
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Dans la fenêtre <b>New Pipeline</b>, entrer un nom de votre choix dans le champ <b>Name</b>. Ici nous le nommons <i>LookupPipeline</i></li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b> pour lancer la création de ce <b>Pipeline</b></li>
+                    </ol>
+
+                        <figure>
+                            <img src="../assets/images/mf-lookup-activity/create-pipeline-01.png" 
+                                 alt="Schéma explicatif de la création d'un Pipeline dans Microsoft Fabric">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+                        </figure>
+                </section>
+
+                <!-- Section: Paramétrage du Pipeline -->
+                <section id="exercices" class="tutorial-section">
+                    <h2><i class="fas fa-tasks"></i>Paramétrage du Pipeline</h2>
+
+                        <p>Pour piloter dynamiquement ce <b>Pipeline</b>, nous allons introduire des paramètres utilisables par les activités qui seront ajoutés au <b>Pipeline</b>. 
+                           Pour faire cela commencer par suivre les étapes suivantes :</p>     
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône de la roue crantée depuis le Menu **Home** du <b>Pipeline</b> ce qui va ouvrir le volet droit</li>
+                        <li style="margin-bottom: 0.8rem;">Fermer le volet droit</li>
+                        <li style="margin-bottom: 0.8rem;">Redimensionner les Menus de pilotage du <b>Pipeline</b> vers le haut</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/pipeline-parameters-00.png" 
+                             alt="">
+                        <figcaption><i>Paramétrage d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
+                    </figure>
+
+                    <p>Les deux paramètres que nous allons créer vont nous servir à renseigner les noms des deux dossiers que nous avons créé précédemment 
+                        dans le <b>Lakehouse</b> (<i>ingest/</i> et <i>archive/</i>). L'ajout de Paramètres se fait ensuite de la façon suivante :</p>
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Sélectionner le menu <b>Parameters</b>,</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New</b> ce qui va ajouter l'ensemble des champs qui permettent de définir un paramètre,</li>
+						<li style="margin-bottom: 0.8rem;">Dans le champ **Name**, entrer un nom (<i>src_dir</i>) pour le paramètre, </li>
+                        <li style="margin-bottom: 0.8rem;">Dans le champ **Type**, choisir un type (<i>String</i>) depuis le menu déroulant pour ce paramètre,</li>
+                        <li style="margin-bottom: 0.8rem;">Entrer une valeur par défaut (<i>ingest</i>) si souhaitée.</li>
+                        <li style="margin-bottom: 0.8rem;">Réaliser les étapes 2., 3., 4. et 5. pour définir un second paramètre ({Name = <i>dest_dir</i>, Type = <i>String</i>, Default Value = <i>archive</i>})</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/pipeline-parameters-01.png" 
+                             alt="">
+                        <figcaption><i>Paramétrage d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+                    </figure>
+
+
+                </section>
+
+                <!-- Section: Ajout d'une activité Lookup -->
+                <section id="ressources" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Lookup</h2>
+                    <p>Nous allons voir maintenant comment mettre en place une activité <b>Lookup</b> dans un **Pipeline**. Cela se fait de l'interface du **Pipeline** de la façon suivante : </p>
+
+
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem;">Aller dans le menu **Home** du **Pipeline**</li>
+                        <li style="margin-bottom: 0.8rem;">Sélectionner l'activité **Lookup**</li>
+						<li style="margin-bottom: 0.8rem;">La dernière action va ajouter l'activité **Lookup** au canevas du **Pipeline**</li>
+                        <li style="margin-bottom: 0.8rem;">Nous allons voir ensuite comment paramétrer cette activité depuis les menus de configuration</li>
+                    </ol>
+
+                    <figure>
+                        <img src="../assets/images/mf-lookup-activity/add-lookup-activity.png" 
+                            alt="Schéma explicatif de l'ajout d'une activité Lookup dans un Pipeline Microsoft Fabric">
+                        <figcaption><i>Schéma explicatif de l'ajout d'une activité Lookup dans un Pipeline Microsoft Fabric</i></figcaption>
                     </figure>
 
                 </section>
 
-                <!-- Section: Bonnes pratiques -->
-                <section id="bonnes-pratiques" class="tutorial-section">
-                    <h2><i class="fas fa-check-circle"></i> Bonnes pratiques S3</h2>
-                    
-                    <ul style="margin-left: 1.5rem;">
-                        <li style="margin-bottom: 1rem;">
-                            <strong>✅ Nommage des buckets :</strong> Utilisez des noms uniques, en minuscules, sans underscores. Exemple: "mon-appli-data-2024"
-                        </li>
-                        <li style="margin-bottom: 1rem;">
-                            <strong>✅ Organisation :</strong> Structurez avec des préfixes (dossiers) comme "logs/2024/10/"
-                        </li>
-                        <li style="margin-bottom: 1rem;">
-                            <strong>✅ Sécurité :</strong> Activez le chiffrement par défaut et bloquez l'accès public sauf si nécessaire
-                        </li>
-                        <li style="margin-bottom: 1rem;">
-                            <strong>✅ Cycle de vie :</strong> Configurez des règles pour déplacer automatiquement vers Glacier après 30 jours
-                        </li>
-                        <li style="margin-bottom: 1rem;">
-                            <strong>✅ Monitoring :</strong> Activez les logs d'accès et Amazon CloudWatch
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Section: Exercices pratiques -->
-                <section id="exercices" class="tutorial-section">
-                    <h2><i class="fas fa-tasks"></i> Exercices pratiques</h2>
-                    
-                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                        <h3 style="margin-top: 0;">Exercice 1 : Création et upload</h3>
-                        <p>Créez un bucket nommé "mon-premier-bucket-[votre-nom]" et uploadez 3 fichiers différents.</p>
-                    </div>
-                    
-                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
-                        <h3 style="margin-top: 0;">Exercice 2 : Site web statique</h3>
-                        <p>Hébergez une page HTML simple sur S3 et rendez-la accessible publiquement.</p>
-                    </div>
-                    
-                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-                        <h3 style="margin-top: 0;">Exercice 3 : Versioning</h3>
-                        <p>Activez le versioning, uploadez 3 versions d'un même fichier, puis restaurez la version initiale.</p>
-                    </div>
-                </section>
-
-                <!-- Section: Ressources -->
+                <!-- Section: Paramétrage de l'activité Lookup -->
                 <section id="ressources" class="tutorial-section">
-                    <h2><i class="fas fa-bookmark"></i> Ressources supplémentaires</h
+                    <h2><i class="fas fa-bookmark"></i> Paramétrage de l'activité Lookup</h2>
+                        <p> Voyons à présent comment paramétrer étape par étape une activité <b>Lookup</b> en visualisant chaque menu de l'activité : </p>    
+
+                        <h3> Activité Lookup - Menu : General </h3>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité (<i>Get File Data Moves</i>)</li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/general-lookup.png" 
+                                    alt="Schéma explicatif du menu General d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : General</i></figcaption>
+                            </figure>  
+  
+                        <h3> Activité Lookup - Menu : Settings </h3>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Settings</b></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Connection</b> ce qui va ouvrir un menu déroulant</li>
+                                <li style="margin-bottom: 0.8rem;">Sélectionner l'option <b>Lakehouse</b>. Dans notre exemple, les paramètres que l'on souhaite récupérer sont stockés dans le fichier [*params_movies.csv*](data/params_movies.csv) téléchargé précédemment dans le **Lakehouse**.</li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/settings-lookup-00.png" 
+                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Connection</i></figcaption>
+                            </figure> 
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Lakehouse</b> ce qui va ouvrir un menu déroulant</li>
+                                <li style="margin-bottom: 0.8rem;">Choisir le nom du <b>Lakehouse</b> que nous avons créé précédemment (<i>Lookup_LK</i>)</li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/settings-lookup-01.png" 
+                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Lakehouse</i></figcaption>
+                            </figure> 
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path type</b>, choisir l'option <b>File path</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le second champ <b>File path</b>, entrer le nom du fichier de paramétrage que nous avons téléchargé précédemment ([*params_movies.csv*](data/params_movies.csv))</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le menu déroulant <b>File format</b>, choisir l'option <b>Delimited Text</b></li>
+                                <li style="margin-bottom: 0.8rem;">Décocher l'option <b>First row only</b></li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/settings-lookup-02.png" 
+                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Root Folder, File path type,  >File path, File format et First row only</i></figcaption>
+                            </figure> 
+
+                            <p>Avant de poursuivre, nous pouvons pré-visualiser le fichier téléchargé de la façon suivante : </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur **Preview data**
+                                <li style="margin-bottom: 0.8rem;">Cela va permettre de visualiser le contenu du fichier CSV de paramétrage. On y retrouve une table avec deux colonnes *old_name* et *new_name*. 
+                                    Il s'agit pour chaque ligne de cette table du nom de fichiers à renommer (*old_name*) et du nouveau nom à donner à ce fichier (*new_name*).</li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/settings-lookup-03.png" 
+                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Preview data</i></figcaption>
+                            </figure> 
+
+                            <p>Une fois que l'activité **Lookup** mise en place, nous pouvons l'exécuter depuis le **Pipeline** afin de pouvoir s'assurer 
+                               des valeurs retournées par l'activité. Pour cela, il suffit de revenir dna l'interface du **Pipeline** et d’exécuter celui-ci. </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Une fois l'exécution terminée, aller dans le menu **Output** du **Pipeline** dans lequel nous pouvons voir le statut de chaque activité </li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le lien **Output** de l'activité **Lookup** mise en place</li>
+                                <li style="margin-bottom: 0.8rem;">Cela va ouvrir une fenêtre **Output** depuis laquelle nous pourrons visualiser le payload JSON retourné par l'activité **Lookup**. Dans le case présent, la clé *value* de ce JSON est un vecteur dont chaque item contient les valeurs d'une ligne du fichier params_movies avec les valeurs de chaque colonne identifié par le nom de la colonne en question.</li>
+                            </ol>
+                
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/settings-lookup-04.png" 
+                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric">
+                                <figcaption><i>Paramétrage de l'activité Lookup - Preview data</i></figcaption>
+                            </figure> 
+                </section>
+
+                <!-- Section: Ajout d'une activité ForEach -->
+                <section id="ressources" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ajout d'une activité ForEach</h2>
+                        <p>Pour illustrer l'utilisation des données retournées par une activité **Lookup**, nous allons utiliser une activité **ForEach**. 
+                           Commençons par ajouter cette activité en suivant les étapes suivantes : </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;"> Depuis l'interface du **Pipeline**, cliquer sur le menu **Activities**</li>
+                            <li style="margin-bottom: 0.8rem;"> Choisir l'activité **ForEach** ce qui va l'ajouter au canevas du **Pipeline** </li>
+                            <li style="margin-bottom: 0.8rem;"> Lier les deux activités (**Lookup** et **ForEach**) comme sur l'image</li>
+                        </ol>  
+
+                        <figure>
+                            <img src="../assets/images/mf-lookup-activity/add-foreach-activity-00.png" 
+                                alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
+                            <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                        </figure>
+
+                        <h3> Activité ForEach - Menu : General </h3>
+
+                            <p>Commençons le paramétrage de cette activité **ForEach** en cliquant sur l'activité dans le canevas du **Pipeline** :</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu **General** </li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ **Name**, entrer un nom de votre choix pour cette activité (*Loop Parameters*)</li>
+                            </ol>  
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/add-foreach-activity-01.png" 
+                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
+                                <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                            </figure>
+
+                        <h3> Activité ForEach - Menu : Settings</h3>
+
+                            <p>Dans le menu **Settings**, nous allons pouvoir définir les paramètres sur </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu **Settings**</li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ **Items**</li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le lien **Add dynamic content**</li>
+                            </ol>
+
+                            <figure>
+                                <img src="../assets/images/mf-lookup-activity/add-foreach-activity-02.png" 
+                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
+                                <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                            </figure>
+
+                            <p>Cela va ouvrir un volet droit **Pipeline expression builder** qui va permettre de définir dynamiquement l'expression de ces paramètres : </p>
+
+1. Cliquer sur le menu **Activity outputs**. Cela va permettre de lister les variables disponibles des autres activités du Pipeline. Plus précisément, nous allons utiliser le champ de valeurs retournés par l'activité **Lookup**
+
+2. Choisir la valeur du vecteur retourné par l'activité *Get File Data Moves* de type *Value array*
+
+3. Vérifier dans l'encart que la bonne valeur a été construite.
+
+4. Cliquer sur le bouton **OK** pour fermer cette fenêtre
+
+![alt text](<images/Article/06.03 - Add ForEach Activity.png>)
+
+
+
+                </section>
+
+                <!-- Section: Ajout d'une activité Copy data -->
+                <section id="ressources" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
+                </section>
+
+                <!-- Section: Exécution du Pipeline -->
+                <section id="ressources" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Exécution du Pipeline</h2>
+                </section>                
