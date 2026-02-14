@@ -521,7 +521,7 @@
                                 <img src="../assets/images/mf-lookup-activity/settings-lookup-02.png" 
                                     alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
                                     class="tutorial-image">
-                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Root Folder, File path type,  >File path, File format et First row only</i></figcaption>
+                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings</i></figcaption>
                             </figure> 
 
                             <p>Avant de poursuivre, nous pouvons pré-visualiser le fichier téléchargé de la façon suivante : </p>
@@ -534,25 +534,26 @@
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/settings-lookup-03.png" 
-                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
+                                    alt="Pré-visualisation du fichier de configuration depuis le menu Settings de l'activité Lookup"
                                     class="tutorial-image">
-                                <figcaption><i>Paramétrage de l'activité Lookup - Preview data</i></figcaption>
+                                <figcaption><i>Pré-visualisation du fichier de configuration depuis le menu Settings de l'activité Lookup</i></figcaption>
                             </figure> 
 
                             <p>Une fois que l'activité <b>Lookup</b> mise en place, nous pouvons l'exécuter depuis le <b>Pipeline</b> afin de pouvoir s'assurer 
-                               des valeurs retournées par l'activité. Pour cela, il suffit de revenir dna l'interface du <b>Pipeline</b> et d’exécuter celui-ci. </p>
+                               des valeurs retournées par l'activité. Pour cela, il suffit de revenir dans l'interface du <b>Pipeline</b> et d’exécuter celui-ci. </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Une fois l'exécution terminée, aller dans le menu <b>Output</b> du <b>Pipeline</b> dans lequel nous pouvons voir le statut de chaque activité </li>
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le lien <b>Output</b> de l'activité <b>Lookup</b> mise en place</li>
-                                <li style="margin-bottom: 0.8rem;">Cela va ouvrir une fenêtre <b>Output</b> depuis laquelle nous pourrons visualiser le payload JSON retourné par l'activité <b>Lookup</b>. Dans le case présent, la clé <i>value</i> de ce JSON est un vecteur dont chaque item contient les valeurs d'une ligne du fichier params_movies avec les valeurs de chaque colonne identifié par le nom de la colonne en question.</li>
+                                <li style="margin-bottom: 0.8rem;">Cela va ouvrir une fenêtre <b>Output</b> depuis laquelle nous pourrons visualiser le payload JSON retourné par l'activité <b>Lookup</b>. Dans le cas présent, la clé <i>value</i> de ce JSON est un vecteur dont chaque item contient les valeurs d'une ligne du fichier <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
+                                    <i>params_movies.csv</i></a> avec les noms des colonnes du fichier comme clés de chaque item.</li>
                             </ol>
                 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/settings-lookup-04.png" 
-                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
+                                    alt="Visualisation du payload JSON retourné par l'activité Lookup"
                                     class="tutorial-image">
-                                <figcaption><i>Paramétrage de l'activité Lookup - Preview data</i></figcaption>
+                                <figcaption><i>Visualisation du payload JSON retourné par l'activité Lookup</i></figcaption>
                             </figure> 
                 </section>
 
