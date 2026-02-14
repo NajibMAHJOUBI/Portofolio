@@ -498,7 +498,7 @@
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/general-lookup.png" 
-                                    alt="Schéma explicatif du menu General d'une activité Lookup dans Microsoft Fabric"
+                                    alt="Paramétrage de l'activité Lookup - Menu : General"
                                     class="tutorial-image">
                                 <figcaption><i>Paramétrage de l'activité Lookup - Menu : General</i></figcaption>
                             </figure>  
@@ -519,7 +519,7 @@
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/settings-lookup-02.png" 
-                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
+                                    alt="Paramétrage de l'activité Lookup - Menu : Settings"
                                     class="tutorial-image">
                                 <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings</i></figcaption>
                             </figure> 
@@ -560,8 +560,11 @@
                 <!-- Section: Ajout d'une activité ForEach -->
                 <section id="add-foreach-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité ForEach</h2>
-                        <p>Pour illustrer l'utilisation des données retournées par une activité <b>Lookup</b>, nous allons utiliser une activité <b>ForEach</b>. 
-                           Commençons par ajouter cette activité en suivant les étapes suivantes : </p>
+                        <p>Pour illustrer l'utilisation des données retournées par une activité <b>Lookup</b>, nous allons utiliser une activité <b>ForEach</b>. </p>
+
+                        <p>Une activité <b>ForEach</b> est une activité de boucle qui permet d'itérer sur un ensemble d'items et d'exécuter un ensemble d'activités pour chaque item de cet ensemble.</p>
+
+                        <p>Commençons par ajouter cette activité en suivant les étapes suivantes : </p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                             <li style="margin-bottom: 0.8rem;"> Depuis l'interface du <b>Pipeline</b>, cliquer sur le menu <b>Activities</b></li>
@@ -571,57 +574,60 @@
 
                         <figure  class="image-container">
                             <img src="../assets/images/mf-lookup-activity/add-foreach-activity-00.png" 
-                                 alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric"
+                                 alt="Ajout d'une activité ForEach dans un Pipeline Microsoft Fabric"
                                  class="tutorial-image">
-                            <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                            <figcaption><i>Ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
                         </figure>
 
-                        <h3> Activité ForEach - Menu : General </h3>
+                        <h3> Activité ForEach - Menu : <i>General</i> </h3>
 
                             <p>Commençons le paramétrage de cette activité <b>ForEach</b> en cliquant sur l'activité dans le canevas du <b>Pipeline</b> :</p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b> </li>
-                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom de votre choix pour cette activité (<i>Loop Parameters</i>)</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom de votre choix pour cette activité. Ici nous nommerons cette activité : <i>Loop Parameters</i>.</li>
                             </ol>  
 
-                            <figure>
+                            <figure class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-foreach-activity-01.png" 
-                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                                    alt="Paramétrage de l'activité ForEach - Menu : General"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité ForEach - Menu : General</i></figcaption>
                             </figure>
 
-                        <h3> Activité ForEach - Menu : Settings</h3>
+                        <h3> Activité ForEach - Menu : <i>Settings</i></h3>
 
-                            <p>Dans le menu <b>Settings</b>, nous allons pouvoir définir les paramètres sur </p>
+                            <p>Dans le menu <b>Settings</b>, nous allons pouvoir définir les paramètres de la façon suivante : </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Settings</b></li>
-                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Items</b></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Items</b> pour définir les items surlesquelles l'activité ForEach va itérer</li>
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le lien <b>Add dynamic content</b></li>
                             </ol>
 
-                            <figure>
+                            <figure class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-foreach-activity-02.png" 
-                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                                    alt="Paramétrage de l'activité ForEach - Menu : Settings"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité ForEach - Menu : Settings</i></figcaption>
                             </figure>
 
                             <p>Cela va ouvrir un volet droit <b>Pipeline expression builder</b> qui va permettre de définir dynamiquement l'expression de ces paramètres : </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Activity outputs</b>. 
-                                                                   Cela va permettre de lister les variables disponibles des autres activités du Pipeline. 
+                                                                   Cela va permettre de lister les variables disponibles des autres activités du <b>Pipeline</b>. 
                                                                    Plus précisément, nous allons utiliser le champ de valeurs retournés par l'activité <b>Lookup</b></li>
                                 <li style="margin-bottom: 0.8rem;">Choisir la valeur du vecteur retourné par l'activité <i>Get File Data Moves</i> de type <i>Value array</i></li>
                                 <li style="margin-bottom: 0.8rem;">Vérifier dans l'encart que la bonne valeur a été construite.</li>
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre</li>
                             </ol>
 
-                                                        <figure>
+                            <figure class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-foreach-activity-03.png" 
-                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric</i></figcaption>
+                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric"
+                                    class="tutorial-image">
+                                <figcaption><i>Définition du paramètre <i>Items</i> de l'activité ForEach</i></figcaption>
                             </figure> 
                 </section>
 
