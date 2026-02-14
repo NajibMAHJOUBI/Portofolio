@@ -644,3 +644,109 @@
                 margin-top: 1rem;
             }
         }
+
+
+
+/* ===== GESTION DES IMAGES ===== */
+
+/* Style de base pour toutes les images du tutoriel */
+.tutorial-content img {
+    max-width: 100%;           /* Ne dépasse jamais la largeur du parent */
+    height: auto;              /* Maintient le ratio d'aspect */
+    display: block;            /* Évite l'espace sous l'image */
+    margin: 2rem auto;         /* Centrage vertical et horizontal */
+    border-radius: 12px;       /* Coins arrondis */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Images avec bordure */
+.tutorial-image.bordered {
+    border: 2px solid var(--gray-light);
+    padding: 4px;
+    background: white;
+}
+
+/* Image dans une figure */
+.image-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.image-container figcaption {
+    margin-top: 0.8rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+
+
+
+
+
+
+/* Image dans une boîte d'information */
+.image-box {
+    background: white;
+    padding: 1.5rem;
+}
+
+.image-box img {
+    margin: 1rem 0;
+}
+
+.image-box h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+/* Image avec effet de survol */
+.tutorial-content img:hover {
+    transform: scale(1.01);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Image à largeur réduite (optionnel) */
+.tutorial-image.medium {
+    max-width: 70%;
+}
+
+.tutorial-image.small {
+    max-width: 50%;
+}
+
+/* Image flottante (pour envelopper le texte) */
+.tutorial-image.float-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0;
+    max-width: 40%;
+}
+
+.tutorial-image.float-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem;
+    max-width: 40%;
+}
+
+/* Clearfix pour éviter les problèmes de flottement */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Images responsives pour mobile */
+@media (max-width: 768px) {
+    .tutorial-image.float-left,
+    .tutorial-image.float-right {
+        float: none;
+        max-width: 100%;
+        margin: 1.5rem 0;
+    }
+    
+    .tutorial-image.medium,
+    .tutorial-image.small {
+        max-width: 100%;
+    }
+}       
