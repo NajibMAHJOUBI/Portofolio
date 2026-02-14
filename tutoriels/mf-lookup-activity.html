@@ -487,13 +487,13 @@
                 <!-- Section: Paramétrage de l'activité Lookup -->
                 <section id="setup-lookup-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Paramétrage de l'activité Lookup</h2>
-                        <p> Voyons à présent comment paramétrer étape par étape une activité <b>Lookup</b> en visualisant chaque menu de l'activité : </p>    
+                        <p> Voyons à présent comment paramétrer étape par étape une activité <b>Lookup</b> : </p>    
 
                         <h3> Activité Lookup - Menu : General </h3>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b></li>
-                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité (<i>Get File Data Moves</i>)</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité. Ici nous la nommerons : <i>Get File Data Moves</i>.</li>
                             </ol>
 
                             <figure  class="image-container">
@@ -507,34 +507,13 @@
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Settings</b></li>
-                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Connection</b> ce qui va ouvrir un menu déroulant</li>
-                                <li style="margin-bottom: 0.8rem;">Sélectionner l'option <b>Lakehouse</b>. Dans notre exemple, les paramètres que l'on souhaite récupérer sont stockés dans le fichier [*params_movies.csv*](data/params_movies.csv) téléchargé précédemment dans le <b>Lakehouse</b>.</li>
-                            </ol>
-
-                            <figure  class="image-container">
-                                <img src="../assets/images/mf-lookup-activity/settings-lookup-00.png" 
-                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
-                                    class="tutorial-image">
-                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Connection</i></figcaption>
-                            </figure> 
-
-                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Lakehouse</b> ce qui va ouvrir un menu déroulant</li>
-                                <li style="margin-bottom: 0.8rem;">Choisir le nom du <b>Lakehouse</b> que nous avons créé précédemment (<i>Lookup_LK</i>)</li>
-                            </ol>
-
-                            <figure  class="image-container">
-                                <img src="../assets/images/mf-lookup-activity/settings-lookup-01.png" 
-                                    alt="Schéma explicatif du menu Settings d'une activité Lookup dans Microsoft Fabric"
-                                    class="tutorial-image">
-                                <figcaption><i>Paramétrage de l'activité Lookup - Menu : Settings et Paramètre : Lakehouse</i></figcaption>
-                            </figure> 
-
-                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Connection</b> ce qui va ouvrir un menu déroulant et choisir l'option <b>Lakehouse</b></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Lakehouse</b> ce qui va ouvrir un menu déroulant et choisir le nom du <b>Lakehouse</b> que nous avons créé précédemment : <i>Lookup_LK</i></li>
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b></li>
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path type</b>, choisir l'option <b>File path</b></li>
-                                <li style="margin-bottom: 0.8rem;">Dans le second champ <b>File path</b>, entrer le nom du fichier de paramétrage que nous avons téléchargé précédemment ([*params_movies.csv*](data/params_movies.csv))</li>
-                                <li style="margin-bottom: 0.8rem;">Dans le menu déroulant <b>File format</b>, choisir l'option <b>Delimited Text</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le second champ <b>File path</b>, entrer le nom du fichier de configuration que nous avons téléchargé précédemment <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
+                                    <i>params_movies.csv</i></a>. Cela va pointer sur le fichier de configuration qui se trouve dans le dossier <b>Files</b> du <b>Lakehouse</b> <i>Lookup_LK</i></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le menu déroulant <b>File format</b>, choisir l'option <b>DelimitedText</b></li>
                                 <li style="margin-bottom: 0.8rem;">Décocher l'option <b>First row only</b></li>
                             </ol>
 
