@@ -245,73 +245,70 @@
                 <section id="upload-file-lakehouse" class="tutorial-section">
                     <h2><i class="fas fa-file-upload"></i> Chargement de fichiers dans le Lakehouse</h2>
                     <p>La troisième étape de notre scénario consiste à charger les fichiers utiles à ce tutoriel dans le <b>Lakehouse</b> que nous avons créé. 
-                       Pour cela, nous allons créer deux dossiers dans ce <b>Lakehouse</b> : <i>ingest/</i> et <i>archive/</i>. 
-                       Nous allons ensuite charger des fichiers dans le dossier <i>ingest/</i>. 
-                       Pour cela, suivez les étapes suivantes :</p>
+                        Un premier fichier de configuration qui contiendra les règles de renommage et trois fichiers de données qui seront manipulés dans le <b>Pipeline</b> seront stockés dans un dossier <i>ingest/</i>.
+                        Un second dossier <i>archive/</i> sera créé et servira à archiver les fichiers traités. </p>
 
 
                     <h3>Upload des métadonnées</h3>
+                        <p>Commençons tout d'abord par télécharger le fichier de configuration contenant les règles de renommage. 
+                            Depuis le volet <b>Explorer</b> de l'interface du <b>Lakehouse</b>, réaliser les étapes suivantes : </p>
+                        
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer droit sur le dossier <b>Files</b> du volet <b>Explorer</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Upload</b> puis sur <b>Upload files</b></li>
+                        </ol>
 
-                    <p>Commençons tout d'abord par télécharger un fichier qui contiendra les paramètres qui seront utilisés dans l'activité Lookup. 
-                        Depuis le volet <b>Explorer</b> de l'interface du <b>Lakehouse</b>, réaliser les étapes suivantes : </p>
-                    
-                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Depuis l'interface du <b>Lakehouse</b>, cliquer sur le bouton <b>+ New</b> et choisir l'option <b>New folder</b></li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Upload</b> puis sur <b>Upload files</b></li>
-                    </ol>
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-00.png" 
+                                alt="Téléchargement du fichier de configuration - Etape 1"
+                                class="tutorial-image">
+                            <figcaption><i>Téléchargement du fichier de configuration - Etape 1</i></figcaption>
+                        </figure>
+                        <br>
+                        <p>Ces actions vont ouvrir un volet droit depuis lequel nous allons pouvoir poursuivre le téléchargement du fichier de configuration :</p>
 
-                    <figure class="image-container">
-                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-00.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
-                             class="tutorial-image">
-                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 1</i></figcaption>
-                    </figure>
-                    <br>
-                    <p>Ces actions vont ouvrir un volet droit depuis lequel nous allons pouvoir télécharger des fichiers :</p>
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer dans le champ pour ouvrir un explorer de fichier sur votre machine locale</li>
+                        </ol>
 
-                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Cliquer dans le champ pour ouvrir un explorer de fichier</li>
-                    </ol>
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-01.png" 
+                                alt="Téléchargement du fichier de configuration - Etape 2"  
+                                class="tutorial-image">
+                            <figcaption><i>Téléchargement du fichier de configuration - Etape 2</i></figcaption>
+                        </figure>
 
-                    <figure class="image-container">
-                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-01.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"  
-                             class="tutorial-image">
-                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 2</i></figcaption>
-                    </figure>
+                        <br>
+                        <p>Depuis l'explorer de fichier, réaliser les étapes suivantes : </p>
 
-                    <br>
-                    <p>Depuis l'explorer de fichier, réaliser les étapes suivantes : </p>
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Sélectionner le fichier 
+                                <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
+                                    <i>params_movies.csv</i></a> que vous pouvez trouver dans les ressources <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity">Github</a> de ce tutoriel</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Open</b></li>
+                        </ol>
 
-                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Sélectionner le fichier 
-                            <a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
-                                <i>params.csv</i></a> que vous pouvez trouver dans les ressources de ce tutoriel</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Open</b></li>
-                    </ol>
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-02.png" 
+                                alt="Téléchargement du fichier de configuration - Etape 3"
+                                class="tutorial-image">
+                            <figcaption><i>Téléchargement du fichier de configuration - Etape 3</i></figcaption>
+                        </figure>
+                        
+                        <br>
+                        <p>Après avoir cliqué sur le bouton <b>Open</b>, vous devriez voir le fichier sélectionné dans le volet droit de <b>Microsoft Fabric</b>.</p>
 
-                    <figure class="image-container">
-                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-02.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
-                             class="tutorial-image">
-                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 3</i></figcaption>
-                    </figure>
-                    
-                    <br>
-                    <p>Après avoir cliqué sur le bouton <b>Open</b>, vous devriez voir le fichier sélectionné dans le volet droit de <b>Microsoft Fabric</b>.</p>
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Constater que le fichier choisi (<a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"><i>params_movies.csv</i></a>) est bien listé</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Upload</b> pour lancer le téléchargement du fichier</li>
+                        </ol>
 
-                    <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Constater que le fichier choisi (<a href="https://github.com/NajibMAHJOUBI/MicrosoftFabric-LookupActivity/blob/main/data/params_movies.csv"> 
-                                <i>params.csv</i></a>) est bien listé</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Upload</b> pour lancer le téléchargement du fichier</li>
-                    </ol>
-
-                    <figure class="image-container">
-                        <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-03.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
-                             class="tutorial-image">
-                        <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 4</i></figcaption>
-                    </figure>
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/upload-files-subfoldder-03.png" 
+                                alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Schéma explicatif du téléchargement de fichiers dans un Lakehouse - Etape 4</i></figcaption>
+                        </figure>
 
                 <h3>Upload des fichiers de données</h3>
 
