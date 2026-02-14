@@ -113,10 +113,10 @@
                     <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
                     <p>À la fin de ce tutoriel, vous serez capable de :</p>
                     <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.5rem;">✓ Comprendre le fonctionnement de l'activité Lookup</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Configurer une activité Lookup pour lire des données de configuration</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Utiliser les résultats de Lookup pour des activités itératives</li>
-                        <li style="margin-bottom: 0.5rem;">✓ Mettre en place un exemple concret d'implémentation dans un pipeline Microsoft Fabric</li>
+                        <li style="margin-bottom: 0.5rem;"> Comprendre le fonctionnement de l'activité <b>Lookup</b></li>
+                        <li style="margin-bottom: 0.5rem;"> Configurer une activité <b>Lookup</b> pour lire des données de configuration</li>
+                        <li style="margin-bottom: 0.5rem;"> Utiliser les résultats de <b>Lookup</b> pour des activités itératives</li>
+                        <li style="margin-bottom: 0.5rem;"> Mettre en place un exemple concret d'implémentation dans un pipeline <b>Microsoft Fabric</b></li>
                     </ul>
                     
                     <div class="info-box">
@@ -129,14 +129,20 @@
                 <section id="qu-est-ce-que-lookup" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité Lookup ?</h2>
                         <p>Un des points fort d'une plateforme de données est de permettre de créer des modules réutilisables. 
+                           
                            Elle doit intégrer l'intelligence opérationnelle, de la configuration dynamique et des décisions pilotées par la donnée. 
+                           
                            Pour cela, il est notamment nécessaire de pouvoir récupérer des paramètres sans avoir à les coder en durs. 
-                           Et c'est précisément le rôle de l'activité <b>Lookup</b> dans <b></b>Microsoft Fabric</b>. 
-                           L'activité <b>Lookup</b> dans Microsoft Fabric permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
+                          
+                           Et c'est précisément le rôle de l'activité <b>Lookup</b> dans <b>Microsoft Fabric</b>. 
+                           
+                           En effet, l'activité <b>Lookup</b> permet de récupérer des métadonnées depuis une source de données (SQL, Lakehouse, Warehouse, etc.) et 
                            de les réutiliser dans les pipelines de données tout en adaptant leur comportement à l'exécution. 
-                           Utilisé efficacement, une activité Lookup permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
+                           
+                           Utilisée efficacement, une activité <b>Lookup</b> permet de concevoir des pipelines dynamiques, configurables et alignés avec les meilleures pratiques 
                            en Data Engineering modernes.
-                           Il s'agit d'un composant d'orchestration puissant qui permet d'exposer son résultat sous forme de payload JSON utilisable 
+                           
+                           Il s'agit d'un composant d'orchestration puissant qui permet d'exposer son résultat sous forme de payload <i>JSON</i> utilisable 
                            par les autres activités du pipeline.</p>
                     
 
@@ -153,17 +159,20 @@
                 <section id="exemple-tutoriel" class="tutorial-section">
                     <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
                     
-                    <p>Nous allons présenter un exemple simple d'illustration d'une activité LookUp dans un Pipeline de Données. 
-                       Il s'agit de déplacer des fichiers entre deux dossiers du Lakehouse (<i>ingest/</i>/ et <i>archive/</i>). 
+                    <p>Nous allons présenter un exemple simple d'illustration d'une activité <b>Lookup</b> dans un <b>Pipeline</b> de <b>Microsoft Fabric</b>. 
+                       Il s'agit de déplacer des fichiers entre deux dossiers du <b>Lakehouse</b> (<i>ingest/</i>/ et <i>archive/</i>). 
                        Apres avoir été déplacés, ces fichiers doivent être renommés selon une règle définie dans une table.</p>
                     
                     <figure class="image-container">
                         <img src="../assets/images/mf-lookup-activity/schema-scenario.png"  
                              alt="Schéma explicatif du scénario de l'exemple avec une activité Lookup"
                              class="tutorial-image">
-                        <figcaption><i>Schéma explicatif du scénario de l'exemple avec une activité Lookup</i></figcaption>
+                        <figcaption><i>Schéma explicatif du scénario de ce tutoriel</i></figcaption>
                     </figure>
-                    <br>
+                    <br
+                    ><p>Dans ce scénario, l'activité <b>Lookup</b> va nous permettre de récupérer les règles de renommage des fichiers depuis une table de configuration. 
+                       Ces règles seront ensuite utilisées dans une activité itérative <b>ForEach</b> pour renommer les fichiers qui seront déplacés du dossier <i>ingest/</i> vers le dossier <i>archive/</i>.</p>
+                    
                     <p>Dans les paragraphes suivants, nous allons décrire pas à pas les étapes de mise en place de ce scénario. 
                        L'objectif est de montrer au travers de cet exemple comment mettre en place une activité <b>Lookup</b>.</p>
 
@@ -172,14 +181,15 @@
                 <!-- Section: Création d'un Workspace -->
                 <section id="create-workspace" class="tutorial-section">
                     <h2><i class="fas fa-upload"></i> Création d'un Workspace</h2>
-                    <p>La première étape consiste à créer un Workspace dans <b>Microsoft Fabric</b>. 
-                       Un <b>Workspace</b> est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données. 
-                       Pour créer un <b>Workspace</b>, suivez les étapes suivantes :</p>
+                    <p>La première étape consiste à créer un <b>Workspace</b> dans <b>Microsoft Fabric</b>. </p>
+                       Un <b>Workspace</b> est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données. </p>
+                    <p>Pour créer un <b>Workspace</b>, suivez les étapes suivantes :</p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                         <li style="margin-bottom: 0.8rem;">Cliquer sur <b>Home</b> depuis la volet gauche de l'interface de <b>Microsoft Fabric</b></li>
                         <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New Workspace</b></li>
-                        <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, entrer un nom dans le champ <b>Name</b>. Ici nous allons le nommer <i>TutorielLookupActivity</i>.</li>
+                        <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, entrer un nom dans le champ <b>Name</b>. 
+                            Ici nous allons nommer ce <b>Workspace</b> : <i>TutorielLookupActivity</i>.</li>
                         <li style="margin-bottom: 0.8rem;">Entrer une description dans le champ <b>Description</b> [Optionnel]</li>
                         <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Apply</b> pour lancer la création du <b>Workspace</b></li>
                     </ol>
@@ -196,36 +206,36 @@
                 <section id="create-lakehouse" class="tutorial-section">
                     <h2><i class="fas fa-lock"></i> Création d'un Lakehouse</h2>
                 
-                <p>La deuxième étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. 
-                   Un <b>Lakehouse</b> est une ressource de stockage de données qui permet de stocker des données structurées et non structurées. 
-                   Pour créer un <b>Lakehouse</b>, suivez les étapes suivantes :</p>
+                <p>La deuxième étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. </p>
+                <p>Un <b>Lakehouse</b> est une ressource de stockage de données qui permet de stocker des données structurées et non structurées. </p>
+                <p>Pour créer un <b>Lakehouse</b>, suivez les étapes suivantes :</p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                         <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New item</b></li>
-                        <li style="margin-bottom: 0.8rem;">Depuis le volet droit qui s'ouvre, taper le terme <i>"Lakehouse"</i> dans le champ de recherche</li>
+                        <li style="margin-bottom: 0.8rem;">Depuis le volet droit qui s'ouvre, taper le terme <i>"lakehouse"</i> dans le champ de recherche</li>
                         <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>Lakehouse</b></li>
                     </ol>
 
                     <figure class="image-container">
                         <img src="../assets/images/mf-lookup-activity/create-lakehouse-00.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
+                             alt="Création d'un Lakehouse dans Microsoft Fabric - Etape 1"
                              class="tutorial-image">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 1</i></figcaption>
                     </figure>  
                 <br>
                 <p>Cela va ouvrir une fenêtre depuis laquelle nous allons pouvoir renseigner un nom pour ce <b>Lakehouse</b> en suivant les étapes suivantes : </p>
 
                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                        <li style="margin-bottom: 0.8rem;">Renseigner un nom dans le champ <b>Name</b> (ici nous allons le nommer <i>Lookup_Lk</i>)</li>
-                        <li style="margin-bottom: 0.8rem;">Dans le champ <b>Location</b>, choisir le </b>Workspace</b> que nous avons créé</li>
-                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b></li>
+                        <li style="margin-bottom: 0.8rem;">Renseigner un nom dans le champ <b>Name</b>. Ici nous allons nommer ce <b>Lakehouse</b> : <i>Lookup_Lk</i></li>
+                        <li style="margin-bottom: 0.8rem;">Dans le champ <b>Location</b>, choisir le <b>Workspace</b> que nous avons créé à l'étape précédente.</li>
+                        <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b></li> pour terminer.
                     </ol>
 
                      <figure class="image-container">
                         <img src="../assets/images/mf-lookup-activity/create-lakehouse-01.png" 
-                             alt="Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric"
+                             alt="Création d'un Lakehouse dans Microsoft Fabric - Etape 2"
                              class="tutorial-image">
-                        <figcaption><i>Schéma explicatif de la création d'un Lakehouse dans Microsoft Fabric</i></figcaption>
+                        <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 2</i></figcaption>
                      </figure>
 
                 
