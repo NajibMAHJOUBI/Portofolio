@@ -625,7 +625,7 @@
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-foreach-activity-03.png" 
-                                    alt="Schéma explicatif de l'ajout d'une activité ForEach dans un Pipeline Microsoft Fabric"
+                                    alt="Définition du paramètre <i>Items</i> de l'activité ForEach"
                                     class="tutorial-image">
                                 <figcaption><i>Définition du paramètre <i>Items</i> de l'activité ForEach</i></figcaption>
                             </figure> 
@@ -635,42 +635,44 @@
                 <section id="add-copy-data-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
                         <p>Après avoir ajouté une activité <b>ForEach</b> qui va venir itérer sur le payload renvoyé l'activité <b>Lookup</b>, 
-                           nous allons devoir mettre en place une activité qui consommera ce payload JSON. Depuis le canevas du <b>Pipeline</b>, 
-                           suivre les étapes suivantes :</p>
+                           nous allons devoir mettre en place une activité qui consommera ce payload JSON. </p>
+                        <p>Dans ce cas, nous allons utiliser une activité <b>Copy data</b> qui va permettre de copier des données d'une source vers une destination en utilisant des connecteurs de données prédéfinis.</p>   
+                           
+                           <p>Pour ajouter cette activité, aller dans l'interface du <b>Pipeline</b> et suivre les étapes suivantes :</p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+</b> vert de l'activité <b>ForEach</b> ce qui va ouvrir un menu déroulant 
                                     proposant un choix d'activité à ajouter</li>
-                                <li style="margin-bottom: 0.8rem;">Choisir l'option <b>Copy data</b></li>
+                                <li style="margin-bottom: 0.8rem;">Choisir l'activité <b>Copy data</b></li>
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-00.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Ajout de l'activité Copy data à l'activité ForEach dans le Pipeline Microsoft Fabric" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Ajout de l'activité Copy data à l'activité ForEach dans le Pipeline Microsoft Fabric</i></figcaption>
                             </figure>
 
-                        <p>Voyons à présent comment paramétrer cette activité <b>Copy data</b> qui devra utiliser les paramètres renvoyés 
-                            par l'activité <b>Lookup</b> pour réaliser ses opérations.</p>
+                        <p>Voyons à présent comment paramétrer cette activité <b>Copy data</b> qui réalisera les opérations de déplacement et de renommage des fichiers en utilisant les items de l'activité ForEach qui sont eux-mêmes issus du payload JSON retourné
+                            par l'activité <b>Lookup</b>.</p>
 
-                        <h3> Activité Copy data - Menu : General </h3>
+                        <h3> Activité Copy data - Menu : <i>General </i></h3>
                             <p>Commençons par le menu <b>General</b> : </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b></li>
-                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom de vote choix pour cette activité (ici nous la nommons <i>Movie Files</i>)</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom de vote choix pour cette activité. Ici nous nommons cette activité <i>Movie Files</i>.</li>
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-01.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Paramétrage de l'activité Copy data - Menu : General" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu : General</i></figcaption>
                             </figure>
 
-                        <h3> Activité Copy data - Menu : Source </h3>
-                            <p>Poursuivons en complétant les paramètres du menu source : </p>
+                        <h3> Activité Copy data - Menu : <i>Source </i></h3>
+                            <p>Poursuivons en complétant les paramètres du menu <b>Source</b> : </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Source</b></li>
@@ -685,9 +687,9 @@
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-02.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Paramétrage de l'activité Copy data - Menu : Source" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu : Source</i></figcaption>
                             </figure>
 
                             <p>Revenons aux étapes 6. et 7. vu précédemment :</p>
@@ -701,60 +703,64 @@
 
                             <ol style="margin-left: 3rem; margin-bottom: 0.5rem;" type="a">
                                 <li style="margin-bottom: 0.2rem;">Choisir le menu <b>Parameters</b>. Cela va permettre d'afficher les paramètres du <b>Pipeline</b></li>
-                                <li style="margin-bottom: 0.2rem;">Cliquer sur le paramètre <i>src_dir</i></li>
+                                <li style="margin-bottom: 0.2rem;">Cliquer sur le paramètre <i>src_dir</i> défini précédemment comme un paramètre du <b>Pipeline</b></li>
                                 <li style="margin-bottom: 0.2rem;">Dans l'encart, cela va afficher le code d'accès au paramètres <i>src_dir</i> du <b>Pipeline</b> : @pipeline().parameters.src_dir</li>
                                 <li style="margin-bottom: 0.2rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre</li>
                             </ol>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.0rem;">
-                                <li style="margin-bottom: 0.8rem;" value="7">Ce second paramètre va permettre de définir le fichier. 
+                                <li style="margin-bottom: 0.8rem;" value="7">Ce second paramètre va permettre de définir le nom du  fichier. 
                                     Cliquer dans le champ et ensuite sur le lien <b>Add dynamic content</b> ce qui va ouvrir un volet droit:</li>
                             </ol>
 
                             <ol style="margin-left: 3rem; margin-bottom: 0.5rem;" type="a">
                                 <li style="margin-bottom: 0.2rem;">Choisir le menu <b>ForEach Iterator</b>. Cela va permettre d'afficher les paramètres renvoyé par l'activité <b>ForEach</b> dans laquelle cette activité <b>Copy data</b> se trouve.</li>
                                 <li style="margin-bottom: 0.2rem;">Choisir l'option <b>Loop Files - Current items</b>. Il s'agit des <i>items</i> que nous avons définis lorsque l'activité <b>ForEach</b> a été paramétré précédemment.</li>
-                                <li style="margin-bottom: 0.2rem;">Dans l'encart, cela va afficher le code d'accès aux items ```@item()```. Le nom du fichier source est défini par la clé *old_name* dans le payload *JSON*. Une fois la clé inscrite dans l'encart, votre paramètre doit correspondre à : ```@item().old_name```</li>
+                                <li style="margin-bottom: 0.2rem;">Dans l'encart, cela va afficher le code d'accès aux items <i>@item()</i>. 
+                                    Le nom du fichier source est défini par la clé <i>old_name</i> dans le payload <i>JSON</i>. 
+                                    Une fois la clé inscrite dans l'encart, votre paramètre doit correspondre à : <i>@item().old_name</i></li>
+                                <li style="margin-bottom: 0.2rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre</li>                            
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-03.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Définition du nom du dossier et du fichier dans le menu Source de l'activité Copy data" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Définition du nom du dossier et du fichier dans le menu Source de l'activité Copy data</i></figcaption>
                             </figure>
 
-                            <p>Une fois les étapes 6. et 7. terminé, le paramètre *File path* doit correspondre à :</p>
+                            <p>Une fois les étapes 6. et 7. terminées, le paramètre <b>File path</b> doit correspondre à :</p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.0rem;">
-                                <li style="margin-bottom: 0.8rem;">Le premier champ reprend le nom du dossier source : ```@pipeline().parameters.src_dir```</li>
-                                <li style="margin-bottom: 0.8rem;">Le second paramètre reprend les nom des fichiers : ```@item().old_name```</li>
+                                <li style="margin-bottom: 0.8rem;">Le premier champ reprend le nom du dossier source : <i>@pipeline().parameters.src_dir</i></li>
+                                <li style="margin-bottom: 0.8rem;">Le second paramètre reprend les noms des fichiers : <i>@item().old_name</i></li>
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-04.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Champs 'File path' dans l'activité Copy data complétés" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Champs 'File path' dans l'activité Copy data complétés</i></figcaption>
                             </figure>
 
-                        <h3> Activité Copy data - Menu : Destination</h3>
+                        <h3> Activité Copy data - Menu : <i>Destination</i></h3>
 
-                            <p>Poursuivons en définissant les différents paramètres à partir du menu **Destination** :</p>
+                            <p>Poursuivons en définissant les différents paramètres du menu <b>Destination</b> :</p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.0rem;">
                                 <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Destination</b></li>
-                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b>, choisir l'option <b>Lakehouse</b> depuis le menu déroulant</li>
-                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Folder</b>, choisir l'option <b>Files</b>. </li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Connection</b>, choisir l'option <b>Lakehouse</b> depuis le menu déroulant</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b>, choisir le <b>Lakehouse</b> <i>Lookup_LK</i> que nous avons crée</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b>. </li>
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>File format</b>, choisir l'option <b>DelimitedText</b> depuis le menu déroulant</li>
-                                <li style="margin-bottom: 0.8rem;">6. et 7. Ces deux champs du paramètre <b>File format</b> sont définis ci-dessous</li>
+                                <li style="margin-bottom: 0.8rem;">et 7. Ces deux champs du paramètre <b>File format</b> sont définis ci-dessous</li>
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-05.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Paramétrage de l'activité Copy data - Menu : Destination" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu : Destination</i></figcaption>
                             </figure>
 
                             <p>Les étapes 6. et 7. peuvent être complétées dynamiquement comme nous allons le décrire. 
@@ -776,16 +782,17 @@
                             </ol>
 
                             <ol style="margin-left: 3rem; margin-bottom: 0.5rem;" type="a">
-                                <li style="margin-bottom: 0.2rem;">Choisir le menu <b>ForEach Iterator</b>. Cela va permettre d'afficher les paramètres renvoyé par l'activité <b>ForEach</b> dans laquelle cette activité <b>Copy data</b> se trouve.</li>
-                                <li style="margin-bottom: 0.2rem;">Choisir l'option <b>Loop Files - Current items</b>. Il s'agit des <i>items</i> que nous avons définis lorsque l'activité <b>ForEach</b> a été paramétré précédemment.</li>
-                                <li style="margin-bottom: 0.2rem;">Dans l'encart, cela va afficher le code d'accès aux items ```@item()```. Le nom du fichier source est défini par la clé <i>old_name</i> dans le payload <i>JSON</i>. Une fois la clé inscrite dans l'encart, votre paramètre doit correspondre à : ```@item().new_name```</li>
+                                <li style="margin-bottom: 0.2rem;">Choisir le menu <b>ForEach Iterator</b>. Cela va permettre d'afficher les paramètres renvoyés par l'activité <b>ForEach</b> dans laquelle cette activité <b>Copy data</b> se trouve.</li>
+                                <li style="margin-bottom: 0.2rem;">Choisir l'option <b>Loop Files - Current item</b>. Il s'agit des <i>items</i> que nous avons définis lorsque l'activité <b>ForEach</b> a été paramétré précédemment.</li>
+                                <li style="margin-bottom: 0.2rem;">Dans l'encart, cela va afficher le code d'accès aux items <i>@item()</i>. Le nouveau nom du fichier source est défini par la clé <i>new_name</i> dans le payload <i>JSON</i>. Une fois la clé inscrite dans l'encart, votre paramètre doit correspondre à : <i>@item().new_name</i></li>
+                                <li style="margin-bottom: 0.2rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre.</li>
                             </ol>
 
                             <figure  class="image-container">
                                 <img src="../assets/images/mf-lookup-activity/add-copy-data-activity-06.png" 
-                                     alt="Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric" 
+                                     alt="Définition du nom du dossier et du fichier dans le menu Destination de l'activité Copy data" 
                                      class="tutorial-image">
-                                <figcaption><i>Schéma explicatif de l'ajout d'une activité Copy data dans un Pipeline Microsoft Fabric</i></figcaption>
+                                <figcaption><i>Définition du nom du dossier et du fichier dans le menu Destination de l'activité Copy data</i></figcaption>
                             </figure>
                 </section>
 
