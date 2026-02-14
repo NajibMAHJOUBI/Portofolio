@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel AWS S3 - Introduction | CloudDataTuts</title>
+    <title>Tutoriel Microsoft Fabric - Activité Lookup | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/tutoriel.css">
 
@@ -59,9 +59,9 @@
                     <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
                     <li><a href="#qu-est-ce-que-lookup"><i class="fas fa-question-circle"></i>Qu'est-ce que une activité Lookup ?</a></li>
                     <li><a href="#exemple-tutoriel"><i class="fas fa-bucket"></i>Scénario de l'exemple</a></li>
-                    <li><a href="#create-workspace"><i class="fas fa-upload"></i>Création d'un Workspace</a></li>
+                    <li><a href="#create-workspace"><i class="fas fa-database"></i>Création d'un Workspace</a></li>
                     <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
-                    <li><a href="#upload-file-lakehouse"><i class="fas fa-code-branch"></i>Chargement de fichiers dans le Lakehouse</a></li>
+                    <li><a href="#upload-file-lakehouse"><i class="fas fa-upload"></i>Chargement de fichiers dans le Lakehouse</a></li>
                     <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
                     <li><a href="#setup-pipeline"><i class="fas fa-tasks"></i>Paramétrage d'un Pipeline</a></li>
                     <li><a href="#add-lookup-activity"><i class="fas fa-bookmark"></i>Ajout d'une activité Lookup</a></li>
@@ -150,7 +150,7 @@
                 </section>
 
                 <!-- Section: Scénario de l'exemple -->
-                <section id="creation-bucket" class="tutorial-section">
+                <section id="exemple-tutoriel" class="tutorial-section">
                     <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
                     
                     <p>Nous allons présenter un exemple simple d'illustration d'une activité LookUp dans un Pipeline de Données. 
@@ -170,7 +170,7 @@
                 </section>
 
                 <!-- Section: Création d'un Workspace -->
-                <section id="upload-fichiers" class="tutorial-section">
+                <section id="create-workspace" class="tutorial-section">
                     <h2><i class="fas fa-upload"></i> Création d'un Workspace</h2>
                     <p>La première étape consiste à créer un Workspace dans <b>Microsoft Fabric</b>. 
                        Un <b>Workspace</b> est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données. 
@@ -193,7 +193,7 @@
                 </section>
 
                 <!-- Section: Création d'un Lakehouse -->
-                <section id="gestion-acces" class="tutorial-section">
+                <section id="create-lakehouse" class="tutorial-section">
                     <h2><i class="fas fa-lock"></i> Création d'un Lakehouse</h2>
                 
                 <p>La deuxième étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. 
@@ -410,7 +410,7 @@
                 </section>
 
                 <!-- Section: Paramétrage du Pipeline -->
-                <section id="exercices" class="tutorial-section">
+                <section id="setup-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-tasks"></i>Paramétrage du Pipeline</h2>
 
                         <p>Pour piloter dynamiquement ce <b>Pipeline</b>, nous allons introduire des paramètres utilisables par les activités qui seront ajoutés au <b>Pipeline</b>. 
@@ -450,7 +450,7 @@
                 </section>
 
                 <!-- Section: Ajout d'une activité Lookup -->
-                <section id="ressources" class="tutorial-section">
+                <section id="add-lookup-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Lookup</h2>
                     <p>Nous allons voir maintenant comment mettre en place une activité <b>Lookup</b> dans un <b>Pipeline</b>. Cela se fait de l'interface du <b>Pipeline</b> de la façon suivante : </p>
 
@@ -471,7 +471,7 @@
                 </section>
 
                 <!-- Section: Paramétrage de l'activité Lookup -->
-                <section id="ressources" class="tutorial-section">
+                <section id="setup-lookup-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Paramétrage de l'activité Lookup</h2>
                         <p> Voyons à présent comment paramétrer étape par étape une activité <b>Lookup</b> en visualisant chaque menu de l'activité : </p>    
 
@@ -564,7 +564,7 @@
                 </section>
 
                 <!-- Section: Ajout d'une activité ForEach -->
-                <section id="ressources" class="tutorial-section">
+                <section id="add-foreach-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité ForEach</h2>
                         <p>Pour illustrer l'utilisation des données retournées par une activité <b>Lookup</b>, nous allons utiliser une activité <b>ForEach</b>. 
                            Commençons par ajouter cette activité en suivant les étapes suivantes : </p>
@@ -632,7 +632,7 @@
                 </section>
 
                 <!-- Section: Ajout d'une activité Copy data -->
-                <section id="ressources" class="tutorial-section">
+                <section id="add-copy-data-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
                         <p>Après avoir ajouté une activité <b>ForEach</b> qui va venir itérer sur le payload renvoyé l'activité <b>Lookup</b>, 
                            nous allons devoir mettre en place une activité qui consommera ce payload JSON. Depuis le canevas du <b>Pipeline</b>, 
@@ -790,7 +790,7 @@
                 </section>
 
                 <!-- Section: Exécution du Pipeline -->
-                <section id="ressources" class="tutorial-section">
+                <section id="run-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Exécution du Pipeline</h2>
                         <p>Pour terminer, nous allons pouvoir exécuter le **Pipeline** que nous venons de construire. Pour cela revenir dans l'interface du **Pipeline** : </p>
 
