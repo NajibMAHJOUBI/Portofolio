@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Microsoft Fabric - Activité ForEach | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Microsoft Fabric</a></li>
+                <li class="current">Activité ForEach</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+                <ul class="toc-list">
+                    <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
+                    <li><a href="#qu-est-ce-que-foreach"><i class="fas fa-question-circle"></i>Qu'est-ce que une activité ForEach ?</a></li>
+                    <li><a href="#exemple-tutoriel"><i class="fas fa-bucket"></i>Scénario de l'exemple</a></li>
+                    <li><a href="#create-workspace"><i class="fas fa-database"></i>Création d'un Workspace</a></li>
+                    <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
+                    <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
+                    <li><a href="#setup-pipeline"><i class="fas fa-bookmark"></i>Paramétrage du Pipeline</a></li>
+                    <li><a href="#add-foreach-activity"><i class="fas fa-bookmark"></i>Ajout d'une activité ForEach</a></li>
+                    <li><a href="#setup-foreach-activity"><i class="fas fa-bookmark"></i>Paramétrage de l'activité ForEach</a></li>
+                    <li><a href="#add-copy-data-activity"><i class="fas fa-play"></i>Ajout d'une activité Copy data</a></li>
+                    <li><a href="#run-pipeline"><i class="fas fa-play-circle"></i>Exécution du Pipeline</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête -->
+                <div class="tutorial-header">
+                    <h1>Mise en place d'un flux de contrôle itératif</h1>
+                    <h1>Activité ForEach</h1>
+                    <span class="level-badge">Niveau Débutant</span>
+                    
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 10 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag"><i class="fab fa-microsoft"></i> Microsoft Fabric</span>
+                        <span class="tech-tag"><i class="fas fa-database"></i> Data Engineering</span>
+                        <span class="tech-tag"><i class="fas fa-cloud"></i> Cloud</span>
+                    </div>
+                </div>
+
+                <!-- Section: Objectifs du tutoriel -->
+                <section id="objectifs" class="tutorial-section">
+                    <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
+
+                    <p>Dans ce tutoriel, nous allons découvrir comment utiliser l'activité <b>ForEach</b> dans <b>Microsoft Fabric</b> pour créer un flux de contrôle itératif.              
+                       À la fin de ce tutoriel, l'apprenant sera capable de concevoir, configurer et dépanner des pipelines dynamiques et évolutifs dans 
+                       <b>Microsoft Fabric</b> en utilisant l'activité <b>ForEach</b> pour traiter des ensembles de données de manière itérative et concurrente. </p>
+                
+
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Identifier le rôle de l'activité <b>ForEach</b> dans l'orchestration de pipelines Fabric pour automatiser des tâches répétitives.</li>
+                            <li style="margin-bottom: 0.8rem;">Configurer correctement les paramètres de base d'une activité <b>ForEach</b>, y compris le nombre maximum de lots pour l'exécution en parallèle.</li>
+                            <li style="margin-bottom: 0.8rem;">Construire des expressions dynamiques complexes (à l'aide du langage d'expression de pipeline) pour manipuler les données avant qu'elles ne soient passées à l'itérateur.</li>
+                            <li style="margin-bottom: 0.8rem;">Implémenter l'activité <b>ForEach</b> pour exécuter un sous-pipeline ou un ensemble d'activités sur chaque élément d'une collection.</li>
+                            <li style="margin-bottom: 0.8rem;">Appliquer la variable système <i>@item()</i> pour référencer dynamiquement l'élément courant de l'itération dans les activités internes.</li>
+                            <li style="margin-bottom: 0.8rem;">Interpréter les journaux d'exécution d'un pipeline contenant une activité <b>ForEach</b> pour identifier les itérations qui ont échoué.</li>
+                    </ul>
+                </section>
+
+                <!-- Section: Qu'est-ce qu'une activité ForEach -->
+                <section id="qu-est-ce-que-foreach" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité ForEach ?</h2>
+
+                        <p>L'activité ForEach est un outil d'orchestration dans les pipelines <b>Microsoft Fabric</b>. 
+                            Elle vous permet de créer des boucles pour itérer sur une collection d'éléments et d'exécuter un ensemble d'activités 
+                            pour chacun de ces éléments.</p>
+
+                        <p>Son fonctionnement est similaire à une structure de boucle <i>for</i> que l'on trouve classiquement 
+                            dans les langages de programmation.</p>                            
+
+                        <h3>Exemple d'utilisation de l'activité ForEach</h3>
+
+                            <p>L'activité ForEach est principalement utilisée pour automatiser des tâches répétitives sur une liste d'éléments, comme :</p>
+
+                            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Traiter une liste de fichiers ou de dossiers.</li>
+                                    <li style="margin-bottom: 0.8rem;">Ingérer plusieurs tables d'une base de données source vers un <b>Lakehouse</b>.</li>
+                                    <li style="margin-bottom: 0.8rem;">Exécuter le même ensemble de transformations sur différentes sources de données.</li>
+                                    <li style="margin-bottom: 0.8rem;">Mettre en place des architectures "pilotées par les métadonnées" (metadata-driven), 
+                                        où une table de configuration dicte les éléments à traiter dans la boucle.</li>
+                            </ul>
+
+                        <h3>Eléments principaux de l'activité ForEach</h3>
+                                <p>Pour configurer une activité <b>ForEach</b>, il y a trois éléments principaux à prendre en compte :</p>
+
+                                <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                        <li style="margin-bottom: 0.8rem;">La collection d'éléments (Items) : C'est la liste sur laquelle vous voulez itérer. 
+                                            Elle doit être fournie sous forme de tableau JSON. 
+                                            Cette liste peut être statique, mais elle est généralement dynamique : elle peut provenir d'une variable du pipeline, 
+                                            de la sortie d'une autre activité (comme une activité Lookup ou Get Metadata), ou d'un paramètre.</li>
+                                        <li style="margin-bottom: 0.8rem;">Les activités enfants : Ce sont les activités (Copie de données, Notebook, Script SQL, Procédure stockée, etc.) 
+                                            qui seront exécutées pour chaque élément de la collection. Vous pouvez en ajouter une ou plusieurs.</li>
+                                        <li style="margin-bottom: 0.8rem;">Le mode d'exécution : Vous pouvez choisir entre un mode séquentiel 
+                                            (les itérations se succèdent une par une) ou un mode parallèle (plusieurs itérations s'exécutent en même temps pour accélérer le traitement). 
+                                            En mode parallèle, vous pouvez contrôler le nombre maximal d'itérations simultanées (batch count) jusqu'à une limite de 50.</li>
+                                </ul>               
+
+                            <p>Pour référencer l'élément courant, il faudra utiliser @item() dans les activités enfants de votre <b>ForEach</b> qui acceptent du contenu dynamique.
+                                Vous pouvez utiliser @item() dans n'importe quel champ d'une activité enfant </p>
+
+                            <p>Cette activité est un élément clé pour créer des pipelines flexibles, évolutifs et capables de gérer des charges de travail complexes sans avoir 
+                                à dupliquer manuellement les mêmes étapes pour chaque élément à traiter.</p>
+                </section>
+
+                <!-- Section: Scénario de l'exemple -->
+                <section id="exemple-tutoriel" class="tutorial-section">
+                    <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
+                
+                        <p>Nous proposons un Scénario pédagogique avec l'API Zippopotam.us dont l'objectif est de montrer comment configurer l'activité ForEach 
+                            pour traiter dynamiquement une liste d'entrées (villes) et comment stocker dans un Lakehouse les données de sortie de l'API.</p>
+
+                        <p>L'idée est de créer un pipeline qui, pour une liste de villes (par exemple Paris, Londres, New York), interroge cette API pour obtenir des informations comme les codes postaux 
+                        ou les lieux-dits associés.</p>
+
+                        <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;"><b>Principe de l'API :</b> Elle est simple et ne nécessite pas d'authentification. 
+                                Le format d'appel est https://api.zippopotam.us/[pays]/[ville]. 
+                                Par exemple, pour Paris (France) : https://api.zippopotam.us/fr/paris.</li>
+                            <li style="margin-bottom: 0.8rem;"><b>Rôle de l'activité ForEach :</b> Elle va itérer sur votre liste de villes. 
+                                Pour chaque ville, elle lancera une activité Web (ou Copie de données) qui appellera l'API et récupérera les données.</li>
+                            <li style="margin-bottom: 0.8rem;"><b>Données renvoyées :</b> L'API répond au format JSON. 
+                                Pour Paris, elle retournera une structure contenant le pays, l'état (région) et un tableau des lieux ("places") avec leurs codes postaux.</li>
+                            <li style="margin-bottom: 0.8rem;"><b>Stockage dans le Lakehouse :</b> Les données récupérées pour chaque ville seront ensuite stockées dans une table de votre Lakehouse, 
+                                            ce qui vous permettra de les exploiter facilement par la suite (analyse, visualisation, etc.).</li>
+                        </ul>
+
+                </section>
+
+                <!-- Section: Création d'un Workspace -->
+                <section id="create-workspace" class="tutorial-section">
+                    <h2><i class="fas fa-upload"></i> Création d'un Workspace</h2>
+ 
+                        <p>La première étape consiste à créer un <b>Workspace</b> dans Microsoft Fabric.</p>
+
+                        <p>Un <b>Workspace</b> est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données.</p>
+                        <p>Pour créer un <b>Workspace</b>, suivez les étapes suivantes :</p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur <b>Home</b> depuis la volet gauche de l'interface de <b>Microsoft Fabric</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New Workspace</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, entrer un nom dans le champ <b>Name</b>. Ici nous allons nommer ce <b>Workspace</b> : <i>TutorielLookupActivity</i>.</li>
+                            <li style="margin-bottom: 0.8rem;">Entrer une description dans le champ Description [<i>Optionnel</i>]</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Apply</b> pour lancer la création du <b>Workspace</b></li>
+                        </ol>      
+                    
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/create-workspace.png" 
+                                 alt="Création d'un Workspace dans Microsoft Fabric"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Workspace dans Microsoft Fabric</i></figcaption>
+                        </figure>
+                </section>
+
+                <!-- Section: Création d'un Lakehouse -->
+                <section id="#create-lakehouse" class="tutorial-section">
+                    <h2><i class="fas fa-file-upload"></i> Création d'un Lakehouse</h2>
+                        <p>La première étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. </p>
+
+                        <p>Depuis l'interface de votre <b>Workspace</b> <b>Microsoft Fabric</b>, suivre les étapes suivantes :
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New item</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ de recherche, taper le mot : <i>lakehouse</i></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'item <b>Lakehouse</b></li>
+                        </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/create-lakehouse-00.png" 
+                                alt="Création d'un Lakehouse dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+
+                        <p>Cela va ouvrir une fenêtre permettant de nommer ce Lakehouse en suivant les étapes suivantes : </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Name, entrer un nom pour ce nouveau <b>Lakehouse</b>. Dans notre exemple, nous le nommons <i>Demo_LK</i>.</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Location, choisir le <b>Lakehouse</b> à utiliser. Dans cet exemple, notre <b>Lakehouse</b> se nomme <i>Tutoriel Download Extract ZIP</i>.</li>
+                        </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/create-lakehouse-01.png" 
+                                alt="Création d'un Lakehouse dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 2</i></figcaption>
+                        </figure>
+                </section>
+
+                <!-- Section: Création d'un Pipeline -->
+                <section id="create-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-check-circle"></i>Création d'un Pipeline</h2>
+                        <p>La prochaine étape va consister à créer un <b>Pipeline</b> de données. </p>
+
+                        <p>Un <b>Pipeline</b> est une ressource d'orchestration qui permet de créer des workflows de données en assemblant des activités de traitement, de déplacement et de transformation de données.</p>
+
+                        <p>Revenir dans l'interface du <b>Workspace</b> que vous utilisez et suivre les étapes suivantes :</p>   
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New item</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, taper le terme <i>pipeline</i> dans le champ de recherche</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône du <b>Pipeline</b></li>
+                        </ol>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/create-pipeline-00.png" 
+                                 alt="Création d'un Pipeline dans Microsoft Fabric - Etape 1"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+                        
+                        <br>
+                        <p>Cela va ouvrir la fenêtre qui va permettre de nommer ce <b>Pipeline</b> en suivant les étapes suivantes :</p>   
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Dans la fenêtre <b>New Pipeline</b>, entrer un nom de votre choix dans le champ <b>Name</b>. 
+                                Ici nous le nommons <i>Download Extract ZIP File</i></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b> pour terminer la création du <b>Pipeline</b></li>
+                        </ol>
+
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/create-pipeline-01.png" 
+                                 alt="Création d'un Pipeline dans Microsoft Fabric - Etape 2"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+
+                </section>
+
+
+                <!-- Section: Paramétrage du Pipeline -->
+                <section id="setup-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Paramétrage du Pipeline</h2>
+                    
+                        <p>Dans cette section, nous allons voir comment paramétrer notre pipeline pour le rendre flexible et réutilisable. 
+                            Plutôt que de coder en dur la liste des villes dans l'activité ForEach, nous allons utiliser des paramètres de pipeline qui pourront être modifiés à chaque exécution. </p>
+
+                        <h3> Pourquoi utiliser des paramètres ? </h3>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Réutiliser le même pipeline avec différentes listes de villes</li>
+                            <li style="margin-bottom: 0.8rem;">Centraliser la configuration au niveau du pipeline</li>
+                            <li style="margin-bottom: 0.8rem;">Tester facilement avec des jeux de données réduits</li>
+                            <li style="margin-bottom: 0.8rem;">Automatiser les exécutions via l'API Fabric ou d'autres orchestrations</li>
+                        </ol>
+
+                        <p>Voyons à présent comment créer un paramètre de pipeline dans Microsoft Fabric.
+                            Dans votre pipeline Microsoft Fabric :
+                        </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Ouvrez l'éditeur de pipeline et cliquez sur une zone vide du canevas</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le panneau des propriétés, allez dans l'onglet Paramètres</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquez sur + Nouveau pour créer un paramètre</li>
+                        </ol>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre>
+[
+    {"country": "US", "zipcode": "90210"},
+    {"country": "DE", "zipcode": "80333"},
+    {"country": "ES", "zipcode": "31013"},
+    {"country": "FR", "zipcode": "71150"},
+    {"country": "JP", "zipcode": "100-0001"},
+    {"country": "AU", "zipcode": "2000"}
+]
+                            </pre>
+                        </div>
+
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/settings-pipeline-00.png" 
+                                 alt="Création de Paramètre dans un Pipeline dans Microsoft Fabric - Etape 1"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/settings-pipeline-01.png" 
+                                 alt="Création de Paramètre dans un Pipeline dans Microsoft Fabric - Etape 2"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+                        </figure>
+
+                </section>
+
+                <!-- Section: Ajout d'une activité ForEach -->
+                <section id="add-foreach-activity" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ajout d'une activité ForEach</h2>
+         
+
+                        <h3>Ajout de l'activité ForEach au pipeline</h3>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/add-foreach-activity.png" 
+                                 alt="Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric"
+                                 class="tutorial-image">
+                            <figcaption><i>Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric</i></figcaption>
+                        </figure>   
+                        
+
+
+                </section>
+
+                <!-- Section: Paramétrage de l'activité ForEach -->
+                <section id="setup-foreach-activity" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Paramétrage de l'activité ForEach</h2>
+
+                    <h3>Activité ForEach - Menu General</h3>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/foreach-activity-menu-general.png" 
+                                 alt="Activité ForEach - Menu Genral"
+                                 class="tutorial-image">
+                            <figcaption><i>Activité ForEach - Menu Genral</i></figcaption>
+                        </figure>   
+
+                    <h3>Activité ForEach - Menu Settings</h3>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/foreach-activity-menu-settings.png" 
+                                 alt="Activité ForEach - Menu Settings"
+                                 class="tutorial-image">
+                            <figcaption><i>Activité ForEach - Menu Settings</i></figcaption>
+
+                </section>
+
+                <!-- Section: Ajout d'une activité Copy data -->
+                <section id="add-copy-data-activity" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
+ 
+                </section>
+
+                <!-- Section: Exécution du Pipeline -->
+                <section id="run-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-play-circle"></i> Exécution du Pipeline</h2>
+                    
+                </section>
+
+              
