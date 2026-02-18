@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Microsoft Fabric - Télécharger et extraire un fichier ZIP | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Microsoft Fabric</a></li>
+                <li class="current">Activité Lookup</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+                <ul class="toc-list">
+                    <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
+                    <li><a href="#exemple-tutoriel"><i class="fas fa-bucket"></i>Scénario de l'exemple</a></li>
+                    <li><a href="#create-workspace"><i class="fas fa-lock"></i>Création d'un Workspace</a></li>
+                    <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
+                    <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
+                    <li><a href="#download-zip"><i class="fas fa-tasks"></i>Télécharger un fichier ZIP</a></li>
+                    <li><a href="#extract-zip"><i class="fas fa-bookmark"></i>Extraire un fichier ZIP</a></li>
+                    <li><a href="#run-pipeline"><i class="fas fa-bookmark"></i>Execution du Pipeline de données</a></li>
+                    <li><a href="#see-lakehouse"><i class="fas fa-play"></i>Aperçu des données dans le Lakehouse</a></li>
+                    <li><a href="#conclusion"><i class="fas fa-play"></i>Conclusion</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête -->
+                <div class="tutorial-header">
+                    <h1>Télécharger et extraire des fichiers ZIP dans un Lakehouse avec une approche no-code</h1>
+                    <span class="level-badge">Niveau Intermédiaire</span>
+                    
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag"><i class="fab fa-aws"></i>Microsoft Fabric</span>
+                        <span class="tech-tag"><i class="fas fa-cloud"></i> Data Engineering</span>
+                    </div>
+                </div>
+
+                <!-- Section: Objectifs -->
+                <section id="objectifs" class="tutorial-section">
+                    <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
+                        <p>Dans le cadre de l'exploitation et de l'enrichissement d'un Lakehouse, l'intégration de données externes est une étape cruciale. 
+                            Il est fréquent de devoir importer des jeux de données publics ou des archives, souvent mis à disposition sous forme de fichiers compressés (ZIP) accessibles via une simple URL.</p>
+                        <p>Cependant, le processus traditionnel qui consiste à télécharger manuellement ces fichiers, les décompresser en local, puis les uploader vers le cloud peut s'avérer chronophage 
+                            et peu reproductible. C'est pourquoi, dans ce tutoriel, nous allons vous présenter comment automatiser entièrement ce flux de travail directement dans Microsoft Fabric.</p>
+                        <p>Nous verrons comment télécharger un fichier ZIP depuis une URL, puis comment extraire son contenu dans un Lakehouse, et ce, sans écrire une seule ligne de code. 
+                            En privilégiant une approche No-Code grâce aux capacités intuitives de la plateforme, nous démontrerons comment Microsoft Fabric permet de simplifier l'ingestion de données complexes 
+                            tout en gagnant en efficacité et en reproductibilité.</p>
+                    
+                        <div class="info-box">
+                            <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+                            <strong>Prérequis : 
+                                <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Un abonnement Microsoft Fabric activé</li>
+                                    <li style="margin-bottom: 0.8rem;">Un workspace avec une capacité.</li>
+                                </ul>
+                                </strong>
+                        </div>
+                </section>
+
+                <!-- Section: Scénario de l'exemple -->
+                <section id="exemple-tutoriel" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i> Scénario de l'exemple </h2>
+                        <p>Pour illustrer ce tutoriel, nous proposons de mettre en place un scénario concret de collecte et d'intégration de données à partir d'une source publique. 
+                            Ce scénario permettra de comprendre le processus complet d'acquisition de données externes vers une plateforme d'analyse moderne comme Microsoft Fabric.</p>
+                        <p>Ce scénario peut être décrit de la façon suivante :</p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;"><b>Acquisition des données sources</b>
+                                <p>La première étape consiste à télécharger un fichier compressé au format .zip disponible en libre accès sur le site de MovieLens (https://movielens.org). 
+                                   Cette plateforme met à disposition des ensembles de données cinématographiques largement utilisés dans la communauté data science pour des projets d'apprentissage automatique 
+                                   et d'analyse exploratoire.</p> 
+                            </li>
+                            <li style="margin-bottom: 0.8rem;"><b>Extraction</b>
+                                <p>Une fois le téléchargement terminé, nous procédons à l'extraction des fichiers individuels au format .csv contenus dans l'archive. 
+                                     Cette opération permet d'isoler chaque table de données dans un format directement exploitable par les outils d'analyse et de traitement.</p> 
+                            </li>
+                            <li style="margin-bottom: 0.8rem;"><b>Stockage dans un Lakehouse</b>
+                                <p>L'ensemble des fichiers .csv extraits seront ensuite déposés et organisés dans un Lakehouse..</p> 
+                            </li>
+                            <li style="margin-bottom: 0.8rem;"><b>Automatisation via un Pipeline de données</b>
+                                <p>Pour assurer la reproductibilité et l'automatisation du processus, l'ensemble des tâches sera orchestré dans un Pipeline de données. Ce pipeline intégrera :</p> 
+                                <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">L'activité de téléchargement : récupération automatique du fichier .zip depuis l'URL de MovieLens</li>
+                                    <li style="margin-bottom: 0.8rem;">L'activité d'extraction : décompression de l'archive et isolation des fichiers .csv</li>
+                                    <li style="margin-bottom: 0.8rem;">L'activité de chargement : transfert des fichiers vers le Lakehouse dans une structure organisée</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    
+                    <figure class="image-container">
+                        <img src="../assets/images/mf-download-extract-zip/schema-scenario.png" 
+                             alt="Schéma explicatif de l'utilisation d'une activité Lookup"
+                             class="tutorial-image">
+                        <figcaption><i>Schéma explicatif du scénario de ce tutoriel</i></figcaption>
+                    </figure>
+
+                </section>
+
+                 <!-- Section: Création d'un Workspace -->
+                <section id="create-workspace" class="tutorial-section">
+                    <h2><i class="fas fa-bucket"></i> Création d'un Workspace</h2>
+                        <p>La première étape consiste à créer un Workspace dans Microsoft Fabric.</p>
+
+                        <p>Un Workspace est un environnement de travail collaboratif qui permet de regrouper des ressources, des données et des pipelines de données.</p>
+                        <p>Pour créer un Workspace, suivez les étapes suivantes :</p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur <b>Home</b> depuis la volet gauche de l'interface de <b>Microsoft Fabric</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New Workspace</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, entrer un nom dans le champ <b>Name</b>. Ici nous allons nommer ce Workspace : <i>TutorielLookupActivity</i>.</li>
+                            <li style="margin-bottom: 0.8rem;">Entrer une description dans le champ Description [<i>Optionnel</i>]</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Apply</b> pour lancer la création du <b>Workspace</b></li>
+                        </ol>                   
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/create-workspace.png" 
+                                alt="Création d'un Workspace dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Workspace dans Microsoft Fabric</i></figcaption>
+                        </figure>
+                </section>               
+
+                <!-- Section: Création d'un Lakehouse -->
+                <section id="create-lakehouse" class="tutorial-section">
+                    <h2><i class="fas fa-bucket"></i> Création d'un Lakehouse</h2>
+                    
+                        <p>La première étape de notre scénario consiste à créer un <b>Lakehouse</b> dans <b>Microsoft Fabric</b>. </p>
+
+                        <p>Depuis l'interface de votre <b>Workspace</b> <b>Microsoft Fabric</b>, suivre les étapes suivantes :
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône <b>+ New item</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ de recherche, taper le mot : <i>lakehouse</i></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'item <b>Lakehouse</b></li>
+                        </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/create-lakehouse-00.png" 
+                                alt="Création d'un Lakehouse dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+
+                        <p>Cela va ouvrir une fenêtre permettant de nommer ce Lakehouse en suivant les étapes suivantes : </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Name, entrer un nom pour ce nouveau <b>Lakehouse</b>. Dans notre exemple, nous le nommons <i>Demo_LK</i>.</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Location, choisir le <b>Lakehouse</b> à utiliser. Dans cet exemple, notre <b>Lakehouse</b> se nomme <i>Tutoriel Download Extract ZIP</i>.</li>
+                        </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/create-lakehouse-01.png" 
+                                alt="Création d'un Lakehouse dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 2</i></figcaption>
+                        </figure>
+
+                </section>
+
+                <!-- Section: Création d'un Pipeline -->
+                <section id="create-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-upload"></i> Création d'un Pipeline</h2>
+                        <p>La prochaine étape va consister à créer un <b>Pipeline</b> de données. </p>
+
+                        <p>Un <b>Pipeline</b> est une ressource d'orchestration qui permet de créer des workflows de données en assemblant des activités de traitement, de déplacement et de transformation de données.</p>
+
+                        <p>Revenir dans l'interface du <b>Workspace</b> que vous utilisez et suivre les étapes suivantes :</p>   
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>+ New item</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le volet droit qui s'ouvre, taper le terme <i>pipeline</i> dans le champ de recherche</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'icône du <b>Pipeline</b></li>
+                        </ol>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/create-pipeline-00.png" 
+                                 alt="Création d'un Pipeline dans Microsoft Fabric - Etape 1"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
+                        </figure>
+                        
+                        <br>
+                        <p>Cela va ouvrir la fenêtre qui va permettre de nommer ce <b>Pipeline</b> en suivant les étapes suivantes :</p>   
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Dans la fenêtre <b>New Pipeline</b>, entrer un nom de votre choix dans le champ <b>Name</b>. 
+                                Ici nous le nommons <i>Download Extract ZIP File</i></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b> pour terminer la création du <b>Pipeline</b></li>
+                        </ol>
+
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/create-pipeline-01.png" 
+                                 alt="Création d'un Pipeline dans Microsoft Fabric - Etape 2"
+                                 class="tutorial-image">
+                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+                </section>
+
+                <!-- Section: Télécharger un fichier ZIP -->
+                <section id="download-zip" class="tutorial-section">
+                    <h2><i class="fas fa-lock"></i> Télécharger un fichier ZIP</h2>
+                        <p>La première étape de notre scénario d'exemple va consister à télécharger un fichier <i>.zip</i> depuis une URL publique avec une approche low-code. </p>
+
+                        <p>Pour cela, nous allons utiliser une activité de type <b>Copy data</b> qui va nous permettre de copier le fichier <i>.zip</i> depuis son URL de source 
+                            vers un emplacement de destination dans notre <b>Lakehouse</b>. </p>
+
+                        <p>Une activité <b>Copy data</b> est une activité de type Copy qui permet de copier des données d'une source vers une destination. 
+                            Elle est très utilisée dans les pipelines pour déplacer des fichiers ou des données d'un endroit à un autre.</p>
+
+                        <p>Pour ajouter une activité de type <b>Copy data</b> dans notre <b>Pipeline</b>, suivre les étapes suivantes : </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Depuis l'interface de notre <b>Pipeline</b>, aller dans le menu <b>Activities</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Copy data</b></li>
+                            <li style="margin-bottom: 0.8rem;">Depuis le menu déroulant, cliquer sur <b>Add copy data activity</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cela va ajouter l'activité <b>Copy data</b> dans le canevas de notre <b>Pipeline</b>. Sélectionner l'activité pour faire apparaître 
+                                ses menus de configuration que nous allons compléter dans ci-dessous étape par étape.</li>
+                        </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-add-copy-data.png" 
+                                    alt="Télécharger un fichier ZIP - Ajout d'une activité Copy data"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP - Ajout d'une activité Copy data</i></figcaption>
+                            </figure>
+
+                            <p>Après avoir ajouté l'activité de type <b>Copy data</b> dans le canevas de notre <b>Pipeline</b>, nous allons devoir configurer cette activité pour lui indiquer d'où
+                                 elle doit copier les données et où elle doit les copier depuis les menus de configuration de l'activité. </p>
+
+                        <h3>Activité Copy data - Menu : <i>General</i></h3>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans menu <b>General</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom de votre choix pour nommer l'activité. 
+                                Dans notre exemple, nous nommons cette activité : <i>Download ZIP File</i></li>
+                        </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-general.png" 
+                                    alt="Télécharger un fichier ZIP - Activité Copy data - Menu : General"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP - Activité Copy data - Menu : General</i></figcaption>
+                            </figure>
+
+                        <h3>Activité Copy data - Menu : <i>Source</i></h3>
+
+                            <p>Dans ce menu, nous allons configurer la source de données de notre activité de type <b>Copy data</b>.</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Source</b></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le champ <b>Connection</b></b></li>
+                                <li style="margin-bottom: 0.8rem;">Sélectionner l'option <b>Browse all</b> dans le menu déroulant qui s'affiche</li>
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-source-00.png" 
+                                    alt="Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 1"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 1</i></figcaption>
+                            </figure>
+
+                            <p>Cela va ouvrir la fenêtre <b>Get data</b> qui va permettre de poursuivre la définition de la source de données en suivant les étapes suivantes :</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ de recherche <b>Choose a data source to get started</b>, taper le terme <i>http</i>,</li>
+                                <li style="margin-bottom: 0.8rem;">Choisir l'option <b>Http</b> dans le champ <b>New sources</b></li>
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-source-01.png" 
+                                    alt="Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 2"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 2</i></figcaption>
+                            </figure>
+
+                            <p>Après l'ouverture de la fenêtre <b>Connect data source</b>, nous allons pouvoir renseigner l'URL de la source en suivant les étapes suivantes:</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Connection settings</b>, entrer l'URL du fichier <i>.zip</i> à télécharger. 
+                                    Dans notre exemple, nous allons utiliser un fichier <i>.zip</i> mis à disposition sur le site MovieLens :
+                                     <a href="https://files.grouplens.org/datasets/movielens/ml-latest-small.zip">https://files.grouplens.org/datasets/movielens/ml-latest-small.zip</a></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Connect</b></li>
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-source-02.png" 
+                                    alt="Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 3"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Etape 3</i></figcaption>
+                            </figure>    
+                            
+                            <p>Une fois la configuration du menu <b>Source</b> terminée, il doit être similaire à celui-ci :</p>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-source-03.png" 
+                                    alt="Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Source - Complet</i></figcaption>
+                            </figure>                            
+
+                        <h3>Activité Copy data - Menu : <i>Destination</i></h3>
+
+                            <p>Dans ce menu, nous allons configurer la destination de données de notre activité de type <b>Copy data</b> en suivant les étapes suivantes :</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Destination</b> de l'activité <b>Copy data</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Connection</b>, choisir l'option <b>Lakehouse</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b>, choisir le <b>Lakehouse</b> que nous avons créé précédemment. 
+                                    Dans notre exemple, ce <b>Lakehouse</b> se nomme <i>Demo_LK</i></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, entrer le chemin de destination dans le <b>Lakehouse</b> où le fichier <i>.zip</i> téléchargé 
+                                    doit être copié. Ici nous allons nommer ce fichier <i>ml-latest-small.zip</i>. 
+                                    Si un dossier n'est pas précisé, le fichier sera stocké à la racine du dossier <b>Files</b> du <b>Lakehouse</b>.</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File format</b>, choisir l'option <b>Binary</b> depuis le menu déroulant</li>
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/download-zip-destination.png" 
+                                    alt="Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Destination"
+                                    class="tutorial-image">
+                                <figcaption><i>Télécharger un fichier ZIP dans un Lakehouse - Activité Copy data - Menu : Destination</i></figcaption>
+                            </figure>
+                         
+                </section>
+
+                <!-- Section: Extraire un fichier ZIP -->
+                <section id="extract-zip" class="tutorial-section">
+                    <h2><i class="fas fa-lock"></i>Extraire un fichier ZIP</h2>
+                        <p>A présent, nous allons présenter comment mettre en place une activité <b>Copy data</b> pour extraire les fichiers du <i>.zip</i> qui a été téléchargé. 
+                            Commencer par créer une nouvelle activité <b>Copy data</b> comme nous l'avons fait précédemment. 
+                            Le symbole de l'activité <b>Copy data</b> comporte une flèche en bas à droite, cliquer dessus et faire glisser vers la nouvelle activité Copy data qui vient d'être ajoutée.
+                            A cette étape, vous devriez avoir un pipeline qui ressemble à ceci :</p>
+                        
+                        <h3>Activité Copy data - Menu : <i>General</i></h3>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité. Dans notre exemple, nous la nommons <i>Extract ZIP File</i>.</li>
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/extract-zip-general.png" 
+                                    alt="Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : General"
+                                    class="tutorial-image">
+                                <figcaption><i>Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : General</i></figcaption>
+                            </figure>
+
+                        <h3>Activité Copy data - Menu : <i>Source</i></h3>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Source</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Connection</b>, sélectionner <i>Lakehouse</i> dans le menu déroulant.</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b>, sélectionner <i>Demo_LK</i>, le <b>Lakehouse</b> que nous avons créé, dans le menu déroulant.</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b>.</li>     
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path type</b>, choisir l'option <b>File path</b>.</li>     
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, inscrire le nom du fichier source <i>ml-latest-small.zip</i>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File format</b>, choisir l'option <b>Binary</b> dans le menu déroulant.</li>   
+                                <li style="margin-bottom: 0.8rem;">La paramétrage spécifique du type Binary sera vu ci-dessous.</li>
+                                <li style="margin-bottom: 0.8rem;">Décocher l'option <b>Delete files after completion</b>.</li>     
+                                <li style="margin-bottom: 0.8rem;">Décocher l'option <b>Preverse zip file name as folder</b>.</li>                                       
+                            </ol>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/extract-zip-source.png" 
+                                    alt="Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Source"
+                                    class="tutorial-image">
+                                <figcaption><i>Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Source</i></figcaption>
+                            </figure>   
+                            
+                            <p>La paramétrage spécifique du type Binary vu à l'étape 8. doit se faire de a façn suivante : </p>      
+                            
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Compression type</b>, choisir l'option <b>ZipDeflate (.zip)</b> dans le menu déroulant</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Compression level</b>, sélectionner <i>Optimal</i> dans le menu déroulant.</li>  
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre.</li>  
+                            </ol>                            
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/extract-zip-source-settings.png" 
+                                    alt="Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Source / Settings"
+                                    class="tutorial-image">
+                                <figcaption><i>Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Source / Settings</i></figcaption>
+                            </figure>   
+
+                        <h3>Activité Copy data - Menu : <i>Destination</i></h3>   
+                        
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Destination</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Connection</b>, sélectionner l'option <i>Lakehouse</i> dans le menu déroulant.</li>  
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b>, sélectionner l'option <i>Demo_LK</i> dans le menu déroulant</li>  
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, sélectionner l'option <i>Files</i></li>  
+                            </ol>                        
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-download-extract-zip/extract-zip-destination.png" 
+                                    alt="Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Destination"
+                                    class="tutorial-image">
+                                <figcaption><i>Extraire un fichier ZIP dans un Lakehouse - Activité : Copy data - Menu : Destination</i></figcaption>
+                            </figure>                                
+                </section>
+
+                <!-- Section: Exécution du Pipeline de données -->
+                <section id="creation-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-check-circle"></i>Exécution du Pipeline de données</h2>
+                        <p>Après avoir ajouté et configuré les activités nécessaires pour réaliser les différentes étapes de notre scénario d'exemple, nous allons pouvoir exécuter ce <b>Pipeline</b> pour voir le résultat. </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Depuis le canevas du <b>Pipeline</b>, lier les deux activités <b>Copy data</b> que nous avons créé pour définir l'ordre d'excécution.</li>
+                            <li style="margin-bottom: 0.8rem;">Depuis le menu <b>Home</b>, cliquer sur l'icône <i>Run</i> pour exécuter le <b>Pipeline</b>.</li>  
+                            <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Output</b> pour suivre l'exécution du <b>Pipeline</b> et vérifier que les activités s'exécutent correctement.</li> 
+                            <li style="margin-bottom: 0.8rem;">Dans l'affichage du menu <b>Output</b>, attendre que les deux activités <b>Copy data</b> sont exécutées avec succès.</li>  
+                        </ol>   
+                        
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/run-pipeline.png" 
+                                 alt="Exécution d'un Pipeline dans Microsoft Fabric"
+                                 class="tutorial-image">
+                            <figcaption><i>Exécution d'un Pipeline dans Microsoft Fabric</i></figcaption>
+                        </figure>
+                </section>
+
+                <!-- Section: Aperçu des données dans le Lakehouse -->
+                <section id="setup-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-tasks"></i>Paramétrage du Pipeline</h2>
+                        <p>Une fois que le <b>Pipeline</b> a été exécuté avec succès, nous allons pouvoir aller vérifier que les données ont bien été copiées dans le <b>Lakehouse</b> 
+                            à l'emplacement de destination que nous avons défini dans les paramètres de l'activité de type <b>Copy data</b>. </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans l'<b>Explorer</b> du <b>Lakehouse</b> et cliquer sur le dossier <i>Files/ml-latest-small</i></li>
+                            <li style="margin-bottom: 0.8rem;">Sélectionner l'un des fichiers extraits. Dans l'image ci-dessous, nous avons choisi le fichier <i>ratings.csv</i>.</li>
+                            <li style="margin-bottom: 0.8rem;">Sélectionner l'option <b>Table view</b>.</li>
+                            <li style="margin-bottom: 0.8rem;">Dans les options <b>View settings</b>, sélectionner <b>First row as header</b>.</li>
+                        </ol>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-download-extract-zip/view-data.png" 
+                                 alt="Aperçu des données dans un Lakehouse Microsoft Fabric"
+                                 class="tutorial-image">
+                            <figcaption><i>Aperçu des données dans un Lakehouse Microsoft Fabric</i></figcaption>
+                        </figure>
+                </section>
+
+                <!-- Section: Conclusion -->
+                <section id="conclusion" class="tutorial-section">
+                    <h2><i class="fas fa-bookmark"></i> Conclusion</h2>
+                    <p>Pour conclure, nous avons démontré la méthode permettant d'extraire et de charger des données depuis des fichiers <i>.zip</i> directement dans votre environnement <b>Microsoft Fabric</b>. 
+                        Cette approche, intégrée dans un pipeline de données <b>Fabric</b>, exploite des outils No-Code pour un traitement efficace et simplifié de vos archives.</p>
+                </section>
+
+                    <!-- <h2><i class="fas fa-bookmark"></i> Exécution du Pipeline</h2>
+                        <p>Pour terminer, nous allons pouvoir exécuter le <b>Pipeline</b> que nous venons de construire. 
+                            Pour cela revenir dans l'interface du <b>Pipeline</b> : </p>
+
+                            <ol style="margin-left: 3rem; margin-bottom: 0.5rem;">
+                                <li style="margin-bottom: 0.2rem;">Aller dans le menu <b>Home</b> depuis l'interface du <b>Pipeline</b> et cliquer sur le bouton <b>Run</b></li>
+                                <li style="margin-bottom: 0.2rem;">Dans le menu <b>Output</b> du <b>Pipeline</b>, suivre l'avancée de l'ensemble des activités que vous avez mise en place</li>
+                            </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/run-pipeline-00.png" 
+                                alt="Exécution d'un Pipeline Microsoft Fabric" 
+                                class="tutorial-image">
+                            <figcaption><i>Exécution d'un Pipeline Microsoft Fabric</i></figcaption>
+                        </figure>
+
+
+                    <p>Une fois que l'ensemble des activités du <b>Pipeline</b> ont un statut <b>Succeeded</b>, vous allez pouvoir vous assurer que le résultat de notre exemple a été réalisé : </p>
+
+                        <ol style="margin-left: 3rem; margin-bottom: 0.5rem;">
+                            <li style="margin-bottom: 0.2rem;">Aller dans le <b>Lakehouse</b> et ouvrir le dossier <i>Files/archive</i></li>
+                            <li style="margin-bottom: 0.2rem;">Dans l'affichage du contenu du dossier, vérifier que l'ensemble des fichiers sont disponibles et sont nommés de la façon prescrites par le fichier de configuration</li>
+                        </ol>
+
+                        <figure  class="image-container">
+                            <img src="../assets/images/mf-lookup-activity/run-pipeline-01.png" 
+                                alt="Schéma explicatif de l'exécution d'un Pipeline Microsoft Fabric" 
+                                class="tutorial-image">
+                            <figcaption><i>Validation de la réalisation du scénario proposé</i></figcaption>
+                        </figure>
+                </section>                   -->
