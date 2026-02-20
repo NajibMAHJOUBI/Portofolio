@@ -397,12 +397,116 @@
                 <section id="add-copy-data-activity" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
  
+
+                        <h3>Ajout de l'activité Copy data à l'intérieur de la boucle ForEach</h3>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/add-copydata-activity.png" 
+                                    alt="Ajout d'une activité Copy data à l'intérieur de la boucle ForEach - Microsoft Fabric"
+                                    class="tutorial-image">
+                                <figcaption><i>Ajout d'une activité Copy data à l'intérieur de la boucle ForEach - Microsoft Fabric</i></figcaption>
+                            </figure>
+
+
+                        <h3>Paramétrage de l'activité Copy data - Menu General</h3>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-general.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu General"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu General</i></figcaption>
+                            </figure>
+
+                        <h3>Paramétrage de l'activité Copy data - Menu Source</h3>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-source-00.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu Source - Etape 1"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 1</i></figcaption>
+                            </figure>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-source-01.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu Source - Etape 2"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 2</i></figcaption>
+                            </figure>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-source-02.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu Source - Etape 3"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 3</i></figcaption>
+                            </figure>
+
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-source-03.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu Source - Etape 4"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 4</i></figcaption>
+                            </figure>
+
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre>
+                                    @concat(item().country, '/', item().zipcode)
+                                </pre>
+                            </div>
+
+                        <h3>Paramétrage de l'activité Copy data - Menu Destination</h3>   
+                        
+                             <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/copydata-menu-destination.png" 
+                                    alt="Paramétrage de l'activité Copy data - Menu Destination"
+                                    class="tutorial-image">
+                                <figcaption><i>Paramétrage de l'activité Copy data - Menu Destination</i></figcaption>
+                            </figure>    
+                            
+                            
+                             <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/run-pipeline.png" 
+                                    alt="Exécution du pipeline"
+                                    class="tutorial-image">
+                                <figcaption><i>Exécution du pipeline</i></figcaption>
+                            </figure> 
+
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre>
+                                    @concat(item().country, '/', item().zipcode)
+                                </pre>
+                            </div>
+
+
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre>
+                                    @concat(item().zipcode, 'json')
+                                </pre>
+                            </div>
+
+
                 </section>
 
                 <!-- Section: Exécution du Pipeline -->
                 <section id="run-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-play-circle"></i> Exécution du Pipeline</h2>
                     
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/run-pipeline.png" 
+                            alt="Exécution du pipeline"
+                            class="tutorial-image">
+                            <figcaption><i>Exécution du pipeline</i></figcaption>
+                        </figure> 
+                    
+                    
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/view-lakehouse.png" 
+                            alt="Visualisation du Lakehouse"
+                            class="tutorial-image">
+                            <figcaption><i>Visualisation du Lakehouse</i></figcaption>
+                        </figure> 
                 </section>
 
               
