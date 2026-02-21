@@ -192,6 +192,12 @@
                                             ce qui vous permettra de les exploiter facilement par la suite (analyse, visualisation, etc.).</li>
                         </ul>
 
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-foreach-activity/schema-foreach.png" 
+                                 alt="Schema explicatif du scénario d'illustration de l'activité ForEach"
+                                 class="tutorial-image">
+                            <figcaption><i>Schema explicatif du scénario d'illustration de l'activité ForEach</i></figcaption>
+                        </figure>
                 </section>
 
                 <!-- Section: Création d'un Workspace -->
@@ -239,7 +245,7 @@
                             <figcaption><i>Création d'un Lakehouse dans Microsoft Fabric - Etape 1</i></figcaption>
                         </figure>
 
-                        <p>Cela va ouvrir une fenêtre permettant de nommer ce Lakehouse en suivant les étapes suivantes : </p>
+                        <p>Cela va ouvrir une fenêtre permettant de nommer ce<b>Lakehouse</b>en suivant les étapes suivantes : </p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                             <li style="margin-bottom: 0.8rem;">Dans le champ Name, entrer un nom pour ce nouveau <b>Lakehouse</b>. Dans notre exemple, nous le nommons <i>Demo_LK</i>.</li>
@@ -294,7 +300,6 @@
 
                 </section>
 
-
                 <!-- Section: Paramétrage du Pipeline -->
                 <section id="setup-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-bookmark"></i> Paramétrage du Pipeline</h2>
@@ -319,8 +324,10 @@
                             <li style="margin-bottom: 0.8rem;">Ouvrez l'éditeur de pipeline et cliquez sur une zone vide du canevas</li>
                             <li style="margin-bottom: 0.8rem;">Dans le panneau des propriétés, allez dans l'onglet Paramètres</li>
                             <li style="margin-bottom: 0.8rem;">Cliquez sur + Nouveau pour créer un paramètre</li>
-                        </ol>
-
+                            <li style="margin-bottom: 0.8rem;">Nommez ce paramètre dans le champ Name <i>api_request</i></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Type, sélectionnez <b>Array</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Default value, entrez la liste des villes au format JSON. 
+                                Par exemple, vous pouvez utiliser la liste suivante : 
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                             <pre>
@@ -334,20 +341,24 @@
 ]
                             </pre>
                         </div>
+                            </li>
+                        </ol>
 
 
-                        <figure class="image-container">
+
+
+                        <!-- <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/settings-pipeline-00.png" 
                                  alt="Création de Paramètre dans un Pipeline dans Microsoft Fabric - Etape 1"
                                  class="tutorial-image">
                             <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 1</i></figcaption>
-                        </figure>
+                        </figure> -->
 
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/settings-pipeline-01.png" 
                                  alt="Création de Paramètre dans un Pipeline dans Microsoft Fabric - Etape 2"
                                  class="tutorial-image">
-                            <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
+                            <figcaption><i>Ajout d'un paramètre dans un Pipeline Microsoft Fabric</i></figcaption>
                         </figure>
 
                 </section>
@@ -358,16 +369,17 @@
          
 
                         <h3>Ajout de l'activité ForEach au pipeline</h3>
+                            <p>Maintenant que nous avons ajouté l'activité <b>ForEach</b> à notre pipeline, il est temps de la configurer pour qu'elle puisse itérer sur notre liste de villes et appeler l'API Zippopotam.us pour chaque ville.</p>
 
-                        <figure class="image-container">
-                            <img src="../assets/images/mf-foreach-activity/add-foreach-activity.png" 
-                                 alt="Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric"
-                                 class="tutorial-image">
-                            <figcaption><i>Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric</i></figcaption>
-                        </figure>   
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-foreach-activity/add-foreach-activity.png" 
+                                    alt="Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric"
+                                    class="tutorial-image">
+                                <figcaption><i>Ajout d'une activité ForEach dans un Pipeline - Microsoft Fabric</i></figcaption>
+                            </figure>   
                         
-
-
+                            <p>Nous allons à présent voir comment ajouter une activité<b>ForEach</b> à notre pipeline. 
+                                Cette activité permet d'itérer sur une liste d'éléments et d'exécuter une ou plusieurs activités pour chaque élément de la liste.</p>
                 </section>
 
                 <!-- Section: Paramétrage de l'activité ForEach -->
@@ -375,6 +387,11 @@
                     <h2><i class="fas fa-bookmark"></i> Paramétrage de l'activité ForEach</h2>
 
                     <h3>Activité ForEach - Menu General</h3>
+                         
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans le menu General</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Name, entrer un nom pour l'activité <b>ForEach</b> : <i>Loop-API_Zippopoteam</i></li>
+                        </ol>
 
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/foreach-activity-menu-general.png" 
@@ -383,7 +400,22 @@
                             <figcaption><i>Activité ForEach - Menu Genral</i></figcaption>
                         </figure>   
 
+
                     <h3>Activité ForEach - Menu Settings</h3>
+
+                        <p>Depuis le menu Settings, nous allons préciser les items surlesquelles l'activité ForEach doit itérer. 
+                            Pour cela, nous allons utiliser la variable de pipeline qui contient la liste des villes.</p>
+                        
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans le menu Settings</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer dans le champ Items ce qui va ouvrir le menu d'édition du paramètre</li>
+                            <li style="margin-bottom: 0.8rem;">Sélectionner le menu Parameters</li>
+                            <li style="margin-bottom: 0.8rem;">Visualiser que le paramètre a été ajouté dans le champ </li>
+                       <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>OK</b> pour valider l'ajout du paramètre et fermer le volet</li>
+                        </ol>
+
+
+
 
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/foreach-activity-menu-settings.png" 
@@ -398,7 +430,23 @@
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
  
 
+                    <p>Pour illustrer l'utilisation de l'activité ForEach, nous allons ajouter une activité Copy data à l'intérieur de la boucle ForEach.
+                        Cette activité Copy data va être configurée pour appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.
+                    </p>
+
                         <h3>Ajout de l'activité Copy data à l'intérieur de la boucle ForEach</h3>
+
+                            <p>Pour ajouter une activité Copy data à l'intérieur de la boucle ForEach, 
+                                cliquer sur l'icône "crayon" de l'actifité ForEach depuis le canevas du pipeline. 
+                                Cela va ouvrir le canevas de la boucle ForEach puis suivre les étapes suivantes : </p>
+
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Depuis ce canevas, cliquer sur le bouton + pour ajouter une activité à l'intérieur de la boucle ForEach. </li>
+                                <li style="margin-bottom: 0.8rem;">Dans le menu qui s'ouvre, sélectionner l'activité Copy data. </li>
+                                <li style="margin-bottom: 0.8rem;"> Cela va ajouter une activité Copy data à l'intérieur de la boucle ForEach</li>
+                            </ol>
+
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/add-copydata-activity.png" 
@@ -408,7 +456,16 @@
                             </figure>
 
 
+                            <p>Maintenant que nous avons ajouté l'activité Copy data à l'intérieur de la boucle ForEach, il est temps de la configurer pour qu'elle puisse appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.</p>
+
                         <h3>Paramétrage de l'activité Copy data - Menu General</h3>
+
+                            <p>Dans le menu General de l'activité Copy data, nous allons simplement donner un nom à cette activité.</p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité. 
+                                    Nous allons la nommer <i>Copy data - API Zippopotam</i></li>
+                            </ol>
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-general.png" 
@@ -418,6 +475,10 @@
                             </figure>
 
                         <h3>Paramétrage de l'activité Copy data - Menu Source</h3>
+
+                            <p>Dans le menu Source de l'activité Copy data, nous allons configurer la source de données pour appeler l'API Zippopotam.us. 
+                                Nous allons utiliser une connexion de type "HTTP" pour faire cet appel API. 
+                                L'URL de l'API sera construite dynamiquement en utilisant les éléments de la liste (pays et ville) grâce à l'expression @concat(item().country, '/', item().zipcode).</p>
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-source-00.png" 
