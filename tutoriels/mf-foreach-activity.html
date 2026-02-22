@@ -464,9 +464,15 @@
 
                         <h3>Paramétrage de l'activité Copy data - Menu Source</h3>
 
-                            <p>Dans le menu Source de l'activité Copy data, nous allons configurer la source de données pour appeler l'API Zippopotam.us. 
-                                Nous allons utiliser une connexion de type "HTTP" pour faire cet appel API. 
-                                L'URL de l'API sera construite dynamiquement en utilisant les éléments de la liste (pays et ville) grâce à l'expression @concat(item().country, '/', item().zipcode).</p>
+                            <p>Dans le menu Source de l'activité <b>Copy data</b>, nous allons configurer la source de données pour appeler l'<i>API Zippopotam.us</i>. 
+                                Nous allons utiliser une connexion de type <i>"HTTP"</i> pour faire cet appel API. 
+                                Voici comment rélaiser cela étape par étape : </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Source</b> de l'activité Copy data</li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Connection</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le menu déroulantqui s'ouvre, choisir l'option <b>Browse all</b></li>
+                            </ol>
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-source-00.png" 
@@ -475,12 +481,26 @@
                                 <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 1</i></figcaption>
                             </figure>
 
+                            <p>Dans la fenêtre qui s'ouvre, vous allez pouvoir créer une nouvelle connexion HTTP :  </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans la fenêtre qui vient de s'ouvrir, taper le terme <i>HTTP</i></li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>HTTP</b></li>
+                            </ol>
+
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-source-01.png" 
                                     alt="Paramétrage de l'activité Copy data - Menu Source - Etape 2"
                                     class="tutorial-image">
                                 <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 2</i></figcaption>
                             </figure>
+                            
+                            <p>Dans la fenêtre de création de la connexion HTTP, il va falloir renseigner les champs suivants : </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Entre l'URL de l'API Zippopotam.us : <i>https://api.zippopotam.us</i>. Laisser les autres champs vides.</li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Connect</b> por fermer la fenêtre.</li>
+                            </ol>
 
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-source-02.png" 
@@ -489,6 +509,22 @@
                                 <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 3</i></figcaption>
                             </figure>
 
+                            <p>Maintenant que la connexion HTTP est créée, il est temps de configurer le champ <b>Relative URL</b> pour faire l'appel dynamique à l'API en utilisant les éléments de la liste (pays et ville) grâce à la variable système @item() : </p>
+
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Relative URL</b>, entrez la valeur suivante : <i>/@{item().country}/@{item().zipcode}</i>
+                                
+                                                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre>
+@concat(item().country, '/', item().zipcode)
+                                </pre>
+                            </div>
+                            Cela va permettre de faire un appel dynamique à l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) grâce à la variable système @item() qui référence l'élément courant de l'itération dans la boucle ForEach.
+                                </li>
+                                <li style="margin-bottom: 0.8rem;">Dans la champ File format, sélectionnez <b>JSON</b> depuis le menu déroulant. </li>
+                            </ol>
+
                             <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-source-03.png" 
                                     alt="Paramétrage de l'activité Copy data - Menu Source - Etape 4"
@@ -496,15 +532,20 @@
                                 <figcaption><i>Paramétrage de l'activité Copy data - Menu Source - Etape 4</i></figcaption>
                             </figure>
 
-                            <div class="code-block">
-                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                                <pre>
-                                    @concat(item().country, '/', item().zipcode)
-                                </pre>
-                            </div>
-
                         <h3>Paramétrage de l'activité Copy data - Menu Destination</h3>   
                         
+                            <p>Dans le menu Destination de l'activité <b>Copy data</b>, nous allons configurer la destination de données pour stocker les données de sortie de 
+                                l'API Zippopotam.us dans une table de notre Lakehouse.</p>
+
+                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Destination</b></li>
+                                <li style="margin-bottom: 0.8rem;">Depuis le champ <b>Lakehouse</b>, sélectionnez l'option <b>Lakehouse</b>.</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Lakehouse</b> qui apparaît, sélectionnez le <b>Lakehouse</b> que vous avez créé précédemment dans ce tutoriel : <i>TutorielForEacch_LK</i></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, sélectionner l'option <b>Files</b></li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, vous allez pouvoir renseigner le nom du dossier de stockage (<i>@item().country</i>) et le nom du fichier de sortie : <i>@concat(item().country, '/', item().zipcode, '.json')</i>.</li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>File format</b>, sélectionnez <b>JSON</b> depuis le menu déroulant.</li>
+                                </ol>                               
+
                              <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-destination.png" 
                                     alt="Paramétrage de l'activité Copy data - Menu Destination"
@@ -512,28 +553,15 @@
                                 <figcaption><i>Paramétrage de l'activité Copy data - Menu Destination</i></figcaption>
                             </figure>    
                             
-                            <div class="code-block">
-                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                                <pre>
-                                    @concat(item().country, '/', item().zipcode)
-                                </pre>
-                            </div>
-
-
-                            <div class="code-block">
-                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
-                                <pre>
-                                    @concat(item().zipcode, 'json')
-                                </pre>
-                            </div>
-
-
                 </section>
 
                 <!-- Section: Exécution du Pipeline -->
                 <section id="run-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-play-circle"></i> Exécution du Pipeline</h2>
                     
+                        <p>Maintenant que nous avons configuré notre pipeline avec une activité ForEach qui itère sur une liste de villes et qui appelle l'API Zippopotam.us pour chaque ville, 
+                            il est temps d'exécuter ce pipeline pour voir les résultats.</p>
+
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/run-pipeline.png" 
                             alt="Exécution du pipeline"
