@@ -125,11 +125,11 @@
                     </ul>
                 </section>
 
-                <!-- Section: Qu'est-ce qu'une activité ForEach -->
+                <!-- Section: Qu'est-ce qu'une activité <b>ForEach</b> -->
                 <section id="qu-est-ce-que-foreach" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité ForEach ?</h2>
 
-                        <p>L'activité ForEach est un outil d'orchestration dans les pipelines <b>Microsoft Fabric</b>. 
+                        <p>L'activité <b>ForEach</b> est un outil d'orchestration dans les pipelines <b>Microsoft Fabric</b>. 
                             Elle vous permet de créer des boucles pour itérer sur une collection d'éléments et d'exécuter un ensemble d'activités 
                             pour chacun de ces éléments.</p>
 
@@ -138,7 +138,7 @@
 
                         <h3>Exemple d'utilisation de l'activité ForEach</h3>
 
-                            <p>L'activité ForEach est principalement utilisée pour automatiser des tâches répétitives sur une liste d'éléments, comme :</p>
+                            <p>L'activité <b>ForEach</b> est principalement utilisée pour automatiser des tâches répétitives sur une liste d'éléments, comme :</p>
 
                             <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Traiter une liste de fichiers ou de dossiers.</li>
@@ -174,8 +174,8 @@
                 <section id="exemple-tutoriel" class="tutorial-section">
                     <h2><i class="fas fa-bucket"></i> Scénario de l'exemple</h2>
                 
-                        <p>Nous proposons un Scénario pédagogique avec l'API Zippopotam.us dont l'objectif est de montrer comment configurer l'activité ForEach 
-                            pour traiter dynamiquement une liste d'entrées (villes) et comment stocker dans un Lakehouse les données de sortie de l'API.</p>
+                        <p>Nous proposons un Scénario pédagogique avec l'API Zippopotam.us dont l'objectif est de montrer comment configurer l'activité <b>ForEach</b> 
+                            pour traiter dynamiquement une liste d'entrées (villes) et comment stocker dans un <b>Lakehouse</b> les données de sortie de l'API.</p>
 
                         <p>L'idée est de créer un pipeline qui, pour une liste de villes (par exemple Paris, Londres, New York), interroge cette API pour obtenir des informations comme les codes postaux 
                         ou les lieux-dits associés.</p>
@@ -322,11 +322,11 @@
                         </p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li style="margin-bottom: 0.8rem;">Dans le panneau des propriétés, allez dans l'onglet Paramètres</li>
-                            <li style="margin-bottom: 0.8rem;">Cliquez sur + Nouveau pour créer un paramètre</li>
-                            <li style="margin-bottom: 0.8rem;">Nommez ce paramètre dans le champ Name <i>api_request</i></li>
-                            <li style="margin-bottom: 0.8rem;">Dans le champ Type, sélectionnez <b>Array</b></li>
-                            <li style="margin-bottom: 0.8rem;">Dans le champ Default value, entrez la liste des villes au format JSON. 
+                            <li style="margin-bottom: 0.8rem;">Dans le panneau des propriétés, allez dans l'onglet <b>Parameters</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquez sur <b>+ Nouveau</b> pour créer un paramètre</li>
+                            <li style="margin-bottom: 0.8rem;">Nommez ce paramètre dans le champ <b>Name</b> <i>api_request</i></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Type</b>, sélectionnez <b>Array</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Default value</b>, entrez la liste des villes au format JSON. 
                                 Par exemple, vous pouvez utiliser la liste suivante : 
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -418,21 +418,21 @@
                     <h2><i class="fas fa-bookmark"></i> Ajout d'une activité Copy data</h2>
  
 
-                    <p>Pour illustrer l'utilisation de l'activité ForEach, nous allons ajouter une activité Copy data à l'intérieur de la boucle ForEach.
-                        Cette activité Copy data va être configurée pour appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.
+                    <p>Pour illustrer l'utilisation de l'activité ForEach, nous allons ajouter une activité <b>Copy data</b>  à l'intérieur de la boucle ForEach.
+                        Cette activité <b>Copy data</b>  va être configurée pour appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.
                     </p>
 
                         <h3>Ajout de l'activité Copy data à l'intérieur de la boucle ForEach</h3>
 
-                            <p>Pour ajouter une activité Copy data à l'intérieur de la boucle ForEach, 
-                                cliquer sur l'icône "crayon" de l'actifité ForEach depuis le canevas du pipeline. 
-                                Cela va ouvrir le canevas de la boucle ForEach puis suivre les étapes suivantes : </p>
+                            <p>Pour ajouter une activité <b>Copy data</b>  à l'intérieur de la boucle ForEach, 
+                                cliquer sur l'icône "crayon" de l'actifité <b>ForEach</b> depuis le canevas du pipeline. 
+                                Cela va ouvrir le canevas de la boucle <b>ForEach</b> puis suivre les étapes suivantes : </p>
 
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                <li style="margin-bottom: 0.8rem;">Depuis ce canevas, cliquer sur le bouton + pour ajouter une activité à l'intérieur de la boucle ForEach. </li>
-                                <li style="margin-bottom: 0.8rem;">Dans le menu qui s'ouvre, sélectionner l'activité Copy data. </li>
-                                <li style="margin-bottom: 0.8rem;"> Cela va ajouter une activité Copy data à l'intérieur de la boucle ForEach</li>
+                                <li style="margin-bottom: 0.8rem;">Depuis ce canevas, cliquer sur le bouton <b>+</b> pour ajouter une activité à l'intérieur de la boucle ForEach. </li>
+                                <li style="margin-bottom: 0.8rem;">Dans le menu qui s'ouvre, sélectionner l'activité <b>Copy data</b> . </li>
+                                <li style="margin-bottom: 0.8rem;"> Cela va ajouter une activité <b>Copy data</b>  à l'intérieur de la boucle ForEach</li>
                                 <li style="margin-bottom: 0.8rem;"></li>
                             </ol>
 
@@ -444,11 +444,11 @@
                             </figure>
 
 
-                            <p>Maintenant que nous avons ajouté l'activité Copy data à l'intérieur de la boucle ForEach, il est temps de la configurer pour qu'elle puisse appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.</p>
+                            <p>Maintenant que nous avons ajouté l'activité <b>Copy data</b>  à l'intérieur de la boucle ForEach, il est temps de la configurer pour qu'elle puisse appeler l'API Zippopotam.us en utilisant les éléments de la liste (pays et ville) et pour stocker les données de sortie dans une table de notre Lakehouse.</p>
 
                         <h3>Paramétrage de l'activité Copy data - Menu General</h3>
 
-                            <p>Dans le menu General de l'activité Copy data, nous allons simplement donner un nom à cette activité.</p>
+                            <p>Dans le menu General de l'activité <b>Copy data</b> , nous allons simplement donner un nom à cette activité.</p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer un nom pour cette activité. 
@@ -469,7 +469,7 @@
                                 Voici comment rélaiser cela étape par étape : </p>
 
                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Source</b> de l'activité Copy data</li>
+                                <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Source</b> de l'activité <b>Copy data</b> </li>
                                 <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Connection</b></li>
                             <li style="margin-bottom: 0.8rem;">Dans le menu déroulantqui s'ouvre, choisir l'option <b>Browse all</b></li>
                             </ol>
@@ -544,7 +544,7 @@
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, sélectionner l'option <b>Files</b></li>
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, vous allez pouvoir renseigner le nom du dossier de stockage (<i>@item().country</i>) et le nom du fichier de sortie : <i>@concat(item().country, '/', item().zipcode, '.json')</i>.</li>
                                 <li style="margin-bottom: 0.8rem;">Dans le champ <b>File format</b>, sélectionnez <b>JSON</b> depuis le menu déroulant.</li>
-                                </ol>                               
+                            </ol>                               
 
                              <figure class="image-container">
                                 <img src="../assets/images/mf-foreach-activity/copydata-menu-destination.png" 
@@ -559,8 +559,16 @@
                 <section id="run-pipeline" class="tutorial-section">
                     <h2><i class="fas fa-play-circle"></i> Exécution du Pipeline</h2>
                     
-                        <p>Maintenant que nous avons configuré notre pipeline avec une activité ForEach qui itère sur une liste de villes et qui appelle l'API Zippopotam.us pour chaque ville, 
+                        <p>Maintenant que nous avons configuré notre pipeline avec une activité <b>ForEach</b> qui itère sur une liste de villes et qui appelle l'API Zippopotam.us pour chaque ville, 
                             il est temps d'exécuter ce pipeline pour voir les résultats.</p>
+
+                             <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Depuis l'interface du Pipeline, aller dans le menu Home</li>
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Run</b></li>
+                                <li style="margin-bottom: 0.8rem;">Vérifier l'état de l'exécution du pipeline dans la section <b>Output</b></li>
+                            </ol>
+
+                        <p>On observe que les appels à l'API Zippopotam.us sont été effectués en parallèle.</p>
 
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/run-pipeline.png" 
@@ -569,7 +577,14 @@
                             <figcaption><i>Exécution du pipeline</i></figcaption>
                         </figure> 
                     
-                    
+                        <p>Une fois l'exécution du pipeline terminée, vous pouvez aller vérifier dans votre <b>Lakehouse</b> que les données de sortie de l'API Zippopotam.us ont bien été stockées dans les fichiers de destination que nous avions configurés dans l'activité <b>Copy data</b> .</p>
+                        
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Depuis l'Explorer de fichier du Lakehouse, sélectionner un des dossiers de destination portant un des codez pays présentant dans les items.</li>
+                                <li style="margin-bottom: 0.8rem;">Vérifier que les fichiers de données sont bien présents dans le dossier sélectionné portant le nom du code postal intérogé. Le fichier contient les données de sortie de l'API Zippopotam.us pour ce code postal au format JSON.</li>
+                                <li style="margin-bottom: 0.8rem;">Vérifier l'état de l'exécution du pipeline dans la section <b>Output</b></li>
+                        </ol>   
+
                         <figure class="image-container">
                             <img src="../assets/images/mf-foreach-activity/view-lakehouse.png" 
                             alt="Visualisation du Lakehouse"
