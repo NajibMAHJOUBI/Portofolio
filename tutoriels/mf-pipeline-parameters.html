@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Microsoft Fabric - Activité ForEach | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Microsoft Fabric</a></li>
+                <li class="current">Activité ForEach</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+                <ul class="toc-list">
+                    <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
+                    <li><a href="#qu-est-ce-que-foreach"><i class="fas fa-question-circle"></i>Qu'est-ce que une activité ForEach ?</a></li>
+                    <li><a href="#exemple-tutoriel"><i class="fas fa-video-camera"></i>Scénario de l'exemple</a></li>
+                    <li><a href="#create-workspace"><i class="fas fa-database"></i>Création d'un Workspace</a></li>
+                    <li><a href="#create-lakehouse"><i class="fas fa-lock"></i>Création d'un Lakehouse</a></li>
+                    <li><a href="#create-pipeline"><i class="fas fa-check-circle"></i>Création d'un Pipeline</a></li>
+                    <li><a href="#setup-pipeline"><i class="fas fa-list"></i>Paramétrage du Pipeline</a></li>
+                    <li><a href="#add-foreach-activity"><i class="fas fa-add"></i>Ajout d'une activité ForEach</a></li>
+                    <li><a href="#setup-foreach-activity"><i class="fas fa-list"></i>Paramétrage de l'activité ForEach</a></li>
+                    <li><a href="#add-copy-data-activity"><i class="fas fa-add"></i>Ajout d'une activité Copy data</a></li>
+                    <li><a href="#run-pipeline"><i class="fas fa-play-circle"></i>Exécution du Pipeline</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête -->
+                <div class="tutorial-header">
+                    <h1>Mise en place d'un flux de contrôle itératif</h1>
+                    <h1>Activité ForEach</h1>
+                    <span class="level-badge">Niveau Débutant</span>
+                    
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 10 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag"><i class="fab fa-microsoft"></i> Microsoft Fabric</span>
+                        <span class="tech-tag"><i class="fas fa-database"></i> Data Engineering</span>
+                        <span class="tech-tag"><i class="fas fa-cloud"></i> Cloud</span>
+                    </div>
+                </div>
+
+                <!-- Section: Objectifs du tutoriel -->
+                <!-- <section id="objectifs" class="tutorial-section">
+                    <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
+
+                </section> -->
+
+                <!-- Section: Qu'est-ce qu'une activité <b>ForEach</b> -->
+                <!-- <section id="qu-est-ce-que-foreach" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i> Qu'est-ce qu'une activité ForEach ?</h2>
+
+                </section> -->
+
+                <!-- Section: Pourquoi paramétriser les Pipelines de données ? -->
+                <!-- Section: Scénario -->
+                <!-- Section: Création d'un Workspace -->
+                <!-- Section: Création d'un Lakehouse -->
+                <!-- Section: Création d'une base SQL Database -->
+                <!-- Section: Création d'un Pipeline -->
+                <!-- Section: Définition des Paramètres dans un Pipeline -->
+                <!-- Section: Utilisation des Paramètres dans une activité Copy data -->
+                <!-- Section: Utiisation des paramètres dans un Notebook -->
+                <!-- Section: Utilisation des Paramètres dans une Procédure Stockée -->
