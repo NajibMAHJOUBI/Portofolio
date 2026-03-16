@@ -319,28 +319,28 @@
                         <p>Pour accéder à cette fonctionnalité, depuis l'interface du <b>Pipeline</b> , suivre les étapes suivantes : </p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li style="margin-bottom: 0.8rem;">1. Cliquer sur le bouton <b>Paramètres</b>. Cela va ouvrir un volet droit sur la page.</li>
-                            <li style="margin-bottom: 0.8rem;">2. Cliquer sur la croix <b>x</b> pour fermer ce volet droit</li>
-                            <li style="margin-bottom: 0.8rem;">3. Redimensionner le menu du bas vers le haut</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Paramètres</b> représenté par une roue crantée. Cela va ouvrir une fenêtre de configuration.</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur la croix <b>x</b> pour fermer cette fenêtre</li>
+                            <li style="margin-bottom: 0.8rem;">Redimensionner le menu du bas vers le haut</li>
                         </ol>
 
                         <figure class="image-container">
                             <img src="../assets/images/mf-pipeline-parameters/define-parameters-00.png" 
                                 alt="Définition des Paramètres dans Microsoft Fabric - Etape 1"
                                 class="tutorial-image">
-                            <figcaption><i>Affichage de l'onglet Parameters du Pipeline de données dans Microsoft Fabric - Etape 1</i></figcaption>
+                            <figcaption><i>Affichage de l'onglet Parameters du mnu du Pipeline</i></figcaption>
                         </figure>
 
-                        <p>Dans le champ du bas du <b>Pipeline</b> , nous allons pouvoir inscrire les paramètres souhaités de la façon suivante :</p>
+                        <p>Dans cette fenêtre de configuration du  <b>Pipeline</b>, nous allons pouvoir inscrire les paramètres souhaités de la façon suivante :</p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li style="margin-bottom: 0.8rem;">1. Sélectionner l'onglet <b>Parameters</b> qui permet d'accéder à une interface dédiée à la gestion des paramètres.</li>
-                            <li style="margin-bottom: 0.8rem;">2. Cliquer sur <b>+ New</b> pour ajouter un paramètre et permettre de définir ses caractéristiques</li>
-                            <li style="margin-bottom: 0.8rem;">3. Dans le champ <b>Name</b> , entrer un nom pour le paramètre. 
+                            <li style="margin-bottom: 0.8rem;">Sélectionner l'onglet <b>Parameters</b> qui permet d'accéder à une interface dédiée à la gestion des paramètres.</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur <b>+ New</b> pour ajouter un paramètre et permettre de définir ses caractéristiques</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b> , entrer un nom pour le paramètre. 
                                 Ici le paramètre est nommé *name*.</li>
-                            <li style="margin-bottom: 0.8rem;">4. Dans le champ <b>Type</b>, choisir le type souhaité pour ce paramètre. 
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Type</b>, choisir le type souhaité pour ce paramètre. 
                                 Ici le type de paramètre est choisi de type *String*.</li>
-                            <li style="margin-bottom: 0.8rem;">5. Dans le champ <b>Default value</b>, définir une valeur par défaut si souhaité. 
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Default value</b>, définir une valeur par défaut si souhaité. 
                                 Ici nous définissons *canada* comme valeur par défaut.</li>
                         </ol>
 
@@ -348,62 +348,66 @@
                             <img src="../assets/images/mf-pipeline-parameters/define-parameters-01.png" 
                                 alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                 class="tutorial-image">
-                            <figcaption><i>Définition d'un paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
+                            <figcaption><i>Définition des caractéristiques d'un paramètre dans Microsoft Fabric - Etape 2</i></figcaption>
                         </figure>
 
-                        <p>>Une fois nos paramètres créés, ils deviennent accessibles dans tout le pipeline via la syntaxe d'expression dynamique @pipeline().parameters.nom_du_parametre, que nous pourrons utiliser dans les configurations de nos activités Copy Data, Notebook et Procédure stockée. Cette approche paramétrée transforme notre pipeline en un modèle réutilisable capable de s'adapter à différentes dates d'exécution, différentes catégories de clients, 
-                            ou même d'autres cas d'usage similaires sans avoir à dupliquer ou modifier la logique métier.</p>
+                        <p>Une fois un paramètre créé, il devient accessible dans tout le pipeline via la syntaxe d'expression dynamique 
+                            <i>@pipeline().parameters.&lsaquo;nom_du_parametre&rsaquo;</i>, que nous pourrons utiliser dans les configurations de 
+                            nos activités <b>Copy Data</b>, <b>Notebook</b> et <b>Procédure stockée</b>. 
+                            Cette approche paramétrée transforme un <b>Pipeline</b> en un modèle réutilisable capable de s'adapter 
+                            à différentes dates d'exécution, différentes catégories de clients, ou même d'autres cas d'usage similaires 
+                            sans avoir à dupliquer ou modifier la logique métier.</p>
                 </section>
 
                 <!-- Section: Utilisation des Paramètres dans une activité Copy data -->
                 <section id="use-parameters-in-copy-data-activity" class="tutorial-section">
-                    <h2><i class="fas fa-question-circle"></i>Utilisation des Paramètres dans une activité Copy data</h2>
+                    <h2><i class="fas fa-question-circle"></i>Mise en place d'une activité Copy Data paramétrée</h2>
 
-                        <p>Nous allons commencer par montrer comment utiliser un Paramètre du Pipeline de données dans un flux de données Copy data. </p>
-                        <p>L'ajout d'une activité Copy data au Pipeline de données se fait de la façon suivante depuis l'interface du <b>Pipeline</b> : </p>
+                        <p>Nous allons maintenant configurer l'activité <b>Copy Data</b> qui assurera l'extraction des données depuis l'API externe vers notre <b>Lakehouse</b>, 
+                            en utilisant les paramètres du pipeline pour dynamiser cette opération. 
+                            
+                        
+                        <p>L'ajout d'une activité <b>Copy data</b> se fait de la façon suivante depuis l'interface du <b>Pipeline</b> : </p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li style="margin-bottom: 0.8rem;">Depuis le menu, cliquer sur <b>Add copy data activity</b>  ce qui va l'ajouter au canevas du <b>Pipeline</b> </li>
-                            <li style="margin-bottom: 0.8rem;">Dans les prochaines étapes, nous allons montrer comment définir les différents paramètres 
-                                de cette activité depuis ce menu.</li>
+                            <li style="margin-bottom: 0.8rem;">Depuis le menu du <b>Pipeline</b>, cliquer sur <b>Add copy data activity</b>  ce qui va ajouter cette activité au canevas du <b>Pipeline</b> </li>
+                            <li style="margin-bottom: 0.8rem;">En cliquant sur cette activité, le panneau de configuration s'ouvre avec plusieurs onglets que nous allons décrire à présent.</li>
                         </ol>
 
                         <figure class="image-container">
-                            <img src="../assets/images/mf-pipeline-parameters/copy-data/01-activité-copy-data-add-new-copy- data-activity.png" 
+                            <img src="../assets/images/mf-pipeline-parameters/copy-data/01-activité-copy-data-add-new-copy--data-activity.png" 
                                 alt="Ajout d'une activité Copy data dans un Pipeline de données dans Microsoft Fabric"
                                 class="tutorial-image">
-                            <figcaption><i>Ajout d'une activité Copy data dans un Pipeline de données dans Microsoft Fabric</i></figcaption>
+                            <figcaption><i>Ajout d'une activité Copy data dans un Pipeline de données</i></figcaption>
                         </figure>
 
+                        <h3>Activité Copy data : menu General</h3>
 
-                        <h3>Activité Copy data : menu *General*</h3>
+                            <p>Nous allons commencer par le menu <b>General</b> , qui va permettre de nommer explicitement cette actvité : </p>
 
-                            <p>Depuis le menu <b>General</b> , définir les paramètres de la façon suivante : </p>
+                            <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.8rem;">Cliquer sur l'onglet <b>General</b> </li>
+                                <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b> , entrer un nom de votre choix à cette activité. Ici l'activité est nommée <i>Request Countries</i> </li>
+                            </ol>
 
-                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                            <li style="margin-bottom: 0.8rem;">1. Cliquer sur le menu <b>General</b> </li>
-                            <li style="margin-bottom: 0.8rem;">1. Dans le champ <b>Name</b> , donner un nom à cette activité <b>Copy data</b> . Ici l'activité est nommée *Request Countries* </li>
-                        </ol>
-
-                        <figure class="image-container">
-                            <img src="../assets/images/mf-pipeline-parameters/copy-data/02-activité-copy-data-menu-general.png" 
-                                alt="Ajout d'une activité Copy data dans un Pipeline de données dans Microsoft Fabric"
-                                class="tutorial-image">
-                            <figcaption><i>Ajout d'une activité Copy data dans un Pipeline de données dans Microsoft Fabric</i></figcaption>
-                        </figure>
-
-
+                            <figure class="image-container">
+                                <img src="../assets/images/mf-pipeline-parameters/copy-data/02-activité-copy-data-menu-general.png" 
+                                    alt="Ajout d'une activité Copy data dans un Pipeline de données dans Microsoft Fabric"
+                                    class="tutorial-image">
+                                <figcaption><i>Activité Copy data : Menu General</i></figcaption>
+                            </figure>
 
                         <h3>Activité Copy data : menu Source</h3>
 
-                            <p>Nous allons définir la source des données de cette activité <b>Copy data</b> .</p>
+                            <p>Nous allons définir la source des données de cette activité <b>Copy data</b> qui va permettre de configure l'URL de l'API RESTful.
+                               C'est dans cette section que nous allons exploiter pour la première fois les paramètres du Pipeline/p>
 
-                            <h4>Activité Copy data : menu Source - Paramètre Connection*</h4>
+                            <h4>Activité Copy data : Menu Source - Paramètre Connection</h4>
 
-                                <p>Pour commencer cette étape, nous allons définir le type de connexion : </p>
+                                <p>Pour commencer, nous allons définir le type de connexion : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Sélectionner le menu <b>Source</b>
+                                    <li style="margin-bottom: 0.8rem;">Sélectionner l'onglet <b>Source</b>
                                     <li style="margin-bottom: 0.8rem;">Développer le menu déroulant du champ <b>Connection</b> </li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Browse all</b></li>
                                     </li>
@@ -413,13 +417,13 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/03-activité-copy-data-menu-source-param-connection-00.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre Connection 00"
                                         class="tutorial-image">
-                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection 00</i></figcaption>
+                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection - Etape 1</i></figcaption>
                                 </figure>
 
-                                <p>Cela va ouvrir la fenêtre <b>Choose a data source to get started</b> dans laquelle vous allez devoir réaliser les étapes suivantes : </p>
+                                <p>Cela va ouvrir la fenêtre de configuration <b>Get dat / Choose a data source to get started</b> dans laquelle vous allez pouvoir inscrire l'URL de base de l'API RESTful : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Dans le champ de recherche, taper le terme *http*
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ de recherche, taper le terme <i>http</i>
                                     <li style="margin-bottom: 0.8rem;">Choisir l'option <b>Htpp - Other</b> dans le champ <b>New sources</b></li>
                                 </ol>
 
@@ -427,14 +431,14 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/03-activité-copy-data-menu-source-param-connection-01.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre Connection 01"
                                         class="tutorial-image">
-                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection 01</i></figcaption>
+                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection - Etape 2</i></figcaption>
                                 </figure>
 
-                                <p>Cela va ouvrir la fenêtre <b>Connect data source</b> dans laquelle vous allez pouvoir définir les paramètres 
-                                    de cette connexion *htttp* en suivant les étapes suivantes : </p>
+                                <p>Cela va ouvrir la fenêtre <b>Connect data source</b> dans laquelle vous allez pouvoir inscrire l'URL de l'API
+                                   en suivant les étapes suivantes : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Renseigner l'adresse de l'API [Restcountries](https://restcountries.com/v3.1/name/) dans le champ <b>Url</b>. </li>
+                                    <li style="margin-bottom: 0.8rem;">Renseigner l'adresse de l'API <a href="https://restcountries.com/v3.1/name/">REST Countries</a> dans le champ <b>Url</b> : <i>https://restcountries.com/v3.1/name/</i> </li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Connect</b></li>
                                 </ol>
 
@@ -442,12 +446,12 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/03-activité-copy-data-menu-source-param-connection-02.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre Connection 02"
                                         class="tutorial-image">
-                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection 02</i></figcaption>
+                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection - Etape 3</i></figcaption>
                                 </figure>
 
-                            <h4>Activité Copy data : menu *Source* - Paramètre *Relative URL*</h4>
+                            <h4>Activité Copy data : menu Source - Paramètre 'Relative URL'</h4>
 
-                                <p>Toujours depuis le menu <b>Source</b>, nous allons définir le paramétrages de l'appel à cette API. Pour cela, suivre les étapes suivantes : </p>
+                                <p>Toujours depuis le menu <b>Source</b>, nous allons définir le paramétrages de l'appel à cette API en utilisant le paramètre du Pipeline. Pour cela, suivre les étapes suivantes : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Relative URL</b></li>
@@ -458,15 +462,15 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/04-activité-copy-data-menu-source-param-relative-url-00.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre Relative URL 00"
                                         class="tutorial-image">
-                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Relative URL 00</i></figcaption>
+                                    <figcaption><i>Activité Copy data - Menu Source - Paramètre Relative URL</i></figcaption>
                                 </figure>
 
                                 <p>Cela va ouvrir la fenêtre <b>Pipeline expression builder</b> qui va permettre de construire le paramétrage dynamiquement en suivant les étapes suivantes :</p>
 
                                     <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                            <li style="margin-bottom: 0.8rem;">Choisir le menu <b>Parameters</b> ce qui va permettre d'afficher les paramètres définis dans le <b>Pipeline</b>  de données</li>
-                                            <li style="margin-bottom: 0.8rem;">Choisir le paramètre *name* que nous avons définis précédemment dans le Pipeline</li>
-                                            <li style="margin-bottom: 0.8rem;">Dans la fenêtre, on voit s'afficher l'expression construite par ses actions. On retrouve ici l'appel du paramètre *name* : ```@pipeline().parameters.name```</li>
+                                            <li style="margin-bottom: 0.8rem;">Sélectionner l'onglet <b>Parameters</b> ce qui va permettre d'afficher en-dessous les paramètres définis dans le <b>Pipeline</b> de données</li>
+                                            <li style="margin-bottom: 0.8rem;">Cliquer sur le paramètre <i>name</i> que nous avons définis précédemment dans le <b>Pipeline</b></li>
+                                            <li style="margin-bottom: 0.8rem;">Dans la fenêtre, on voit s'afficher l'expression construite par cette dernière action. On retrouve ici l'appel du paramètre *name* via la syntaxe d'appal dynamique : <i>@pipeline().parameters.name</i></li>
                                             <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre.</li>
                                     </ol>      
 
@@ -474,15 +478,15 @@
                                         <img src="../assets/images/mf-pipeline-parameters/copy-data/04-activité-copy-data-menu-source-param-relative-url-01.png" 
                                             alt="Activité Copy data - Menu Source - Paramètre Relative URL 00"
                                             class="tutorial-image">
-                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre Relative URL 00</i></figcaption>
+                                        <figcaption><i>Activité Copy data - Définition du paramètre Relative URL avec la syntaxe dynamique</i></figcaption>
                                     </figure>
 
-                            <h4> Activité Copy data : menu Source - Paramètre File format</h4>
+                            <h4> Activité Copy data : Menu Source - Paramètre File format</h4>
 
-                                <p>Enfin pour terminer, vous allez pouvoir le type de fichier qui sera téléchargé de la façon suivante : </p>
+                                <p>Enfin pour terminer, vous allez pouvoir préciser le format de fichier qui sera téléchargé de la façon suivante : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Depuis le champ <b>File format</b>, définir le type de fichier attendu. Ici, nous allons récupérer des fichier de type *JSON* depuis l'API [Rest Countries](https://restcountries.com/v3.1/name/).</li>
+                                    <li style="margin-bottom: 0.8rem;">Depuis le champ <b>File format</b>, définir le type de fichier attendu. Ici, nous allons récupérer des fichiers de type <i>JSON</i> depuis l'API.</li>
                                 </ol>
 
                                 <figure class="image-container">
@@ -492,17 +496,17 @@
                                         <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
                                 </figure>
 
-                        <h3> Activité Copy data : menu *Destination*</h3>
+                        <h3> Activité Copy data : Menu Destination</h3>
 
-                            <p>Depuis le menu <b>Destination</b>, nous allons pouvoir l'endroit où stocker le fichier téléchargé de l'API.</p>
+                            <p>Depuis l'onglet <b>Destination</b>, nous allons pouvoir préciser le lieu de sauvagrade dans un Lakehouse au format JSON, avec un nom de fichier généré dynamiquement.</p>
 
-                            <h4> Activité Copy data : menu *Destination* - Paramètre *Connection*</h4>
+                            <h4> Activité Copy data : Menu Destination - Paramètre Connection</h4>
 
-                                <p>Pour choisir où stocker le fichier téléchargé, il va falloir commencer par choisir la *Lakehouse* que nous avons créé en suivant les étapes suivantes : </p>
+                                <p>Le paramètre Connection va permettre d'indiquer le Lakehouse où sauvegarder les données. Pour cela, suivre les étapes suivantes : </p>
 
                                  <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">                                    
-                                    <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Destination</b></li>
-                                    <li style="margin-bottom: 0.8rem;">Développer le menu déroulant du champ <b>Connection</b> </li>
+                                    <li style="margin-bottom: 0.8rem;">Cliquer sur l'onglet <b>Destination</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Afficher le menu déroulant du champ <b>Connection</b> </li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur l'option <b>Browse all</b></li>
                                 </ol>
  
@@ -510,30 +514,31 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/06-activité-copy-data-menu-destination-param-connection-00.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre File format"
                                         class="tutorial-image"> 
-                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
+                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre Connection</i></figcaption>
                                 </figure>
 
-                                <p>Cela va ouvrir la fenêtre <b>Choose a destination</b> : </p>
+                                <p>Cela va ouvrir une fenêtre <b>Get data / Choose a destination</b> : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Choisir le *Lakehouse* que nous avons créé précédemment</li>
+                                    <li style="margin-bottom: 0.8rem;">Choisir le <b>Lakehouse</b> que nous avons créé précédemment : <i>PipelineParameters_LK</i></li>
                                 </ol>
                                     
                                 <figure class="image-container">
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/06-activité-copy-data-menu-destination-param-connection-01.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre File format"
                                         class="tutorial-image"> 
-                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
+                                        <figcaption><i>Activité Copy data - Menu Destination - Définition du Lakehouse</i></figcaption>
                                 </figure>
 
-                            <h4> Activité Copy data : menu *Destination* - Paramètre *File path*</h4>
+                            <h4> Activité Copy data : menu Destination - Paramètres 'Root folder' et 'File path'</h4>
 
-                                <p>Nous allons  poursuivre de la façon suivante : </p>
+                                <p>Nous allons  poursuivre de la façon suivante en définssant le type de fichier et la façon de le nommer: </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b></li>
-                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, vous allez pouvoir définir le chemin de stockage du fichier. Inscrire le nom du répertoire souhaité dans le premier champ. Dans notre exemple, nous allons les stocker dans un répertoire nommé <b>JSON</b>.</li>
-                                    <li style="margin-bottom: 0.8rem;">Sélectionner le deuxième champ depuis le champ <b>File path</b>. </li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b> pour indiquer que l'on souhaite sauvegarder les données sous un format fichier.</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>File path</b>, vous allez pouvoir définir le chemin de stockage du fichier. 
+                                        Inscrire le nom du répertoire souhaité dans le premier champ. Dans notre exemple, nous allons les stocker dans un répertoire nommé <b>JSON</b>.</li>
+                                    <li style="margin-bottom: 0.8rem;">Sélectionner le deuxième champ depuis le champ <b>File path</b> depuis lequel nous allons pouvoir définir dynamiquement le nom du fichier de sauvegarde. </li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur le lien <b>Add dynamic content [Alt+Shift+D]</b>. </li>
                                 </ol>
 
@@ -541,14 +546,21 @@
                                     <img src="../assets/images/mf-pipeline-parameters/copy-data/07-activité-copy-data-menu-destination-param-file-path-00.png" 
                                         alt="Activité Copy data - Menu Source - Paramètre File format"
                                         class="tutorial-image"> 
-                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
+                                        <figcaption><i>Activité Copy data - Menu Source - Paramètre 'Root floder' et 'File format'</i></figcaption>
                                 </figure>
 
 
-                                <p>Cela va ouvrir la fenêtre <b>Pipeline expression builder</b> qui va permettre de construire l'expression définissant le nom du fichier : </p>
+                                <p>Cela va ouvrir la fenêtre <b>Pipeline expression builder</b> qui va permettre de construire dynamiquement l'expression définissant le nom du fichier : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Dans la fenêtre, nous allez pouvoir entrer l'expression suivante ```@concat(pipeline().parameters.name, '.json')```. LA fonction ```@concat()``` permet de concaténer des chaînes de caractères. Dans cette expression,nous réutilisons le paramètre défini dans le <b>Pipeline</b>  comme nom du fichier avec une extension *JSON*.</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans la fenêtre d'expression, nous allez copier-coller l'expression suivante :
+<div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre>@concat(pipeline().parameters.name, '.json')</pre>
+                        </div> 
+                                        La fonction <i>@concat()</i> permet de concaténer des chaînes de caractères.
+                                         Dans cette expression,nous allons concaténé le nom du fichier avec l'extension <i>.json</i>. 
+                                         Le nom du fichier est défini dynamiquement à partir du paramètre du <b>Pipeline</b> : <i>pipeline().parameters.name</i></li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>OK</b> pour fermer cette fenêtre.</li>
                                 </ol>
 
@@ -577,8 +589,17 @@
 
                 <!-- Section: Utiisation des paramètres dans un Notebook -->
                 <section id="utilisation-parametres-notebook" class="tutorial-section">
-                    <h2><i class="fas fa-question-circle"></i>Utilisation des Paramètres dans un Notebook</h2>
-                        <p>A présent, nous allons voir comment mettre en place un notebook qui utilisera les paramètres définis dans un <b>Pipeline Data Factory</b></p>
+                    <h2><i class="fas fa-question-circle"></i>Mise en place d'une activité Notebook paramétrée</h2>
+
+                        <p>Nous allons voir à présent comment mettre en place d'un notebook qui utilisera de façon dynamique les paramètres d'un Pipeline.
+                           Pour cela, il faudra dans le Notebbok lui-même créer un paramètre dans une cellule dédiée aux paramètres.
+                           Et il faudra ajouter une activité Notebook dans le Pipeline à laquelle il faudra lui ajouter un paramètre de type clé-valuer : 
+                           le nom du paramètre attendu par le notebook (clé) et la valeur dynamique que l'on souhaite lui attribuer.
+                           Ainsi, au moment de l'exécution, le pipeline transmet automatiquement la valeur du paramètre au notebook permettant d'utiliser 
+                           la valeur définie au niveau du Pipeline.
+                        </p>
+
+                        <p>A présent, nous allons voir comment mettre en place l'ensemble des éléments pour réaliser cela/p>
 
                         <h3> Mise en place d'un Notebook - Python</h3>
                             <h4> Création du Notebook</h4>
@@ -595,13 +616,13 @@
                                     <img src="../assets/images/mf-pipeline-parameters/notebook/01-create-notebook-00.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                         class="tutorial-image">
-                                    <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
+                                    <figcaption><i>Création d'un Notebook dans Microsoft Fabric</i></figcaption>
                                 </figure>
 
                                 <p>Cela va ouvrir une fenêtre <b>New Notebook</b>  permettant de nommer ce <b>Notebook</b> en suivant les étapes suivantes :</p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b> , inscrire un nom de votre choix pour ce <b>Notebook</b>. Dans notre exemple, le <b>Notebook</b> est nommé *Parse Country JSON*</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b> , inscrire un nom de votre choix pour ce <b>Notebook</b>. Dans notre exemple, le <b>Notebook</b> est nommé <i>Parse Country JSON</i></li>
                                     <li style="margin-bottom: 0.8rem;">S'assurer que ce <b>Notebook</b> est bien associé au <b>Workspace</b> que nous avons créé dans ce tutoriel.</li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur le bouton <b>Create</b> pour finaliser la création de ce <b>Notebook</b>.</li>
                                 </ol>
@@ -667,21 +688,66 @@
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Import des librairies Python <b>json</b> et <b>pandas</b></li>
-                                    <li style="margin-bottom: 0.8rem;">Déclaration d'une variable de type string. Elle servira par la suite de pont avec la variable définie dans le Pipeline de données</li>
+                            
+                                        <div class="code-block">
+                                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                            <pre>import json
+import pandas as pd</pre>
+                                        </div>                                     
+                                    
+                                    <li style="margin-bottom: 0.8rem;">Déclaration d'une variable <i>name</i> de type string. Elle servira par la suite de pont avec la variable définie dans le <b>Pipeline</b> de données</li>
+                                        <div class="code-block">
+                                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                            <pre>name = "canada"</pre>
+                                        </div>                                      
+                                    
+                                    
                                     <li style="margin-bottom: 0.8rem;">Réalisation du parsing du fichier JSON et enregistrement sous la forme de CSV du résultat</li>
+                                        <div class="code-block">
+                                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                            <pre>with open(f"/lakehouse/default/Files/JSON/{name}.json", 'r') as f:
+    # Read JSON file
+    data = json.load(f)
+
+    # Build dataframe
+    df = pd.DataFrame({'Pays': [data[0]['name']['common']],
+                                    'Capital': [data[0]['capital'][0]],
+                                    'Region': [data[0]['region']],
+                                    'Subregion': [data[0]['subregion']],
+                                    'Flags': [data[0]['flags']['png']]})
+
+    # Define the directory path and file name
+    output_dir = "/lakehouse/default/Files/CSV/"
+    path_csv = os.path.join(output_dir, f"{name}.csv")
+
+    # Create the directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Save the DataFrame to the file
+    df.to_csv(path_csv, index=False)</pre>
+                                        </div>
                                 </ol>
 
                                 <figure class="image-container">
                                     <img src="../assets/images/mf-pipeline-parameters/notebook/03-python-notebook-01.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                         class="tutorial-image">
-                                    <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
+                                    <figcaption><i>Code Python de transformation du fichier </i></figcaption>
                                 </figure>
 
                             <h4>Définition d'un paramètre dans un Notebook</h4>
 
-                                <p>Pour pouvoir piloter la valuer d'un paramètre dans un notebook depuis le <b>Pipeline</b> , il vz falloir le préciser dans la configuration du pramaètre. 
-                                Cela doit se faire depusi la cellule dans lequelle ce paramètre a été défini de la daçon suivante : </p>
+                                <p>La définition d'un paramètre dans un notebook <b>Microsoft Fabric</b> suit une convention spécifique qui permet une intégration fluide avec les pipelines.</p> 
+                                    
+                                <p>Pour créer un paramètre, il faut dédier une cellule en haut du notebook et y déclarer les variables avec des valeurs par défaut. 
+                                    L'élément crucial est ensuite d'activer le tag "paramètres" sur cette cellule. </p> 
+                                    
+                                <p>   Cette action signale à <b>Fabric</b> que cette cellule contient des paramètres pouvant être surchargés lors d'une exécution via un pipeline. 
+                                    
+                                    Ainsi, lorsque le <b>Notebook</b> est appelé par une activité de pipeline, les valeurs définies dynamiquement dans ce dernier remplacent automatiquement les valeurs par défaut 
+                                    de la cellule taguée, permettant au code des cellules suivantes d'utiliser ces variables sans aucune modification.</p>
+
+                                <p>Voyons comment créer ce type de cellule pour paramètre, en suivant les étapes </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Passer la pointeur de la souros dans le coi gaiche de la cdellule et cliquer sur les <b>trois points</b></li>
@@ -698,14 +764,39 @@
                         <h3>Mise en place d'une activité Notebook</h3>
 
                             <h4>Ajout d'une activité Notebook au Pipeline</h4>
+
+                                <p>L'ajout d'une activité notebook dans un pipeline Microsoft Fabric permet d'orchestrer l'exécution de vos notebooks au sein d'un flux de traitement automatisé.</p>
+
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Ouvrir le pipeline dans l'interface <b>Fabric</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Activities</b></li> 
+                                    <li style="margin-bottom: 0.8rem;"> Cela ajoute l'activité <b>Notebook</b> au canevas du <b>Pipeline</b> </li>
+                                    <li style="margin-bottom: 0.8rem;"> Une fois déposée, cliquez sur l'activité pour accéder à ses paramètres de configuration.</li>
+                                </ol>
+
                                 <figure class="image-container">
                                     <img src="../assets/images/mf-pipeline-parameters/notebook/05-add-notebook-activity.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                         class="tutorial-image">
-                                    <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
+                                    <figcaption><i>Ajout d'une activité Notebbok au Pipeline</i></figcaption>
                                 </figure>
 
                             <h4>  Activité Notebook - Menu General</h4>
+                                <p>Le menu <b>General</b> d'une activité <b>Notebook</b> dans un pipeline <b>Microsoft Fabric</b> constitue la première section de configuration, dédiée à l'identification et à 
+                                    la description de l'activité au sein du flux de traitement. </p>
+                                <p>C'est dans cet onglet que l'on définit le nom de l'activité, qui doit être unique au sein du pipeline pour permettre une référence claire, 
+                                    notamment lors de la création de dépendances entre activités. On peut également y ajouter une description détaillée pour documenter le rôle spécifique de ce notebook 
+                                    dans le processus global, facilitant ainsi la maintenance et la compréhension par d'autres collaborateurs.</p>
+
+                                <p>Pour faire cela, suivre les étapes suivantes :</p>
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>General</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Dans la champ <b>Name</b>, entrer un nom explicite pour cette activité <i>Parse JSON to CSV</i></li> 
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Description, entrer une description pour documenter l'activité si souhaité [Optionnel]</b> </li>
+                                </ol>
+
                                 <figure class="image-container">
                                     <img src="../assets/images/mf-pipeline-parameters/notebook/06-notebook-activity-menu-general.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
@@ -714,12 +805,36 @@
                                 </figure>
 
                             <h4>  Activité Notebook - Menu Settings</h4>
-                                <figure class="image-container">
+
+                                <p>Le menu <b>Settings</b> d'une activité notebook dans un pipeline <b>Microsoft Fabric</b> est l'interface centrale permettant de lier le notebook à exécuter 
+                                    et de configurer les paramètres qui lui seront transmis.</p>
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Accéder à l'onglet <b>Settings</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Dans la champ <b>Workspace</b>, sélectionner le workspace que nous avons créé précédemment : <i>TutorialPipeline-Parameter</i></li> 
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Notebook</b>, sélectionner le notebook que nous venons de créer pour transformer le fichier JSON en CSV : <i>Parse Country JSON</i> </li>
+                                    <li style="margin-bottom: 0.8rem;">Développer la section <b>Base parameters</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Cliquer <b>+ New</b> pour ajouter un paramètre dans l'éditeur</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer le nom du parmètre qui est celui utilisé dans le notebook dans la cellule des paramètres. Ici, il s'agit du paramètre <i>name</i>.</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Type</b>, sélectionner le type du paramètre dans le menu déroulant. Ici, choisir le type <i>String</i>.</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Value</b>, entrer la valeur dynamique définie dans le Pipeline :
+                                         <div class="code-block">
+                                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                            <pre>@pipeline().parameters.name</pre>
+                                        </div>                                    
+                                    
+                                    </li>
+                                </ol>
+                                
+                                    <figure class="image-container">
                                     <img src="../assets/images/mf-pipeline-parameters/notebook/07-notebook-activity-menu-settings.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                         class="tutorial-image">
                                     <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
                                 </figure>
+
+                                <p>Cette configuration permet de créer des pipelines génériques où le même notebook peut traiter différentes sources ou cibles selon le contexte d'exécution, 
+                                    sans aucune modification manuelle de son code.</p>
                 </section>
 
                 <!-- Section: Utilisation des Paramètres dans une Procédure Stockée -->
