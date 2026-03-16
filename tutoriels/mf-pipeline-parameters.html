@@ -844,7 +844,53 @@ import pandas as pd</pre>
 
                     <h3>Mise en place des éléments nécessaires dans SQL Database</h3>
                     <h4>Création d'une table</h4>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre>CREATE TABLE [dbo].[Countries]
+(
+   [Pays] NVARCHAR(16) NOT NULL,
+   [Capital] NVARCHAR(16) NOT NULL ,
+   [Region] NVARCHAR(16) NOT NULL ,
+   [Subregion] NVARCHAR(16) NOT NULL ,
+   [Flags] NVARCHAR(32) NOT NULL 
+)
+GO</pre>
+                        </div>  
+
                     <h4>Creation d'une procédure stockée</h4>
+
+                                                <!-- <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre>CREATE PROCEDURE [dbo].[InsertCountry]
+@name NVARCHAR(64)
+AS
+BEGIN
+
+DECLARE @filePath   NVARCHAR(250);
+SET @filePath = CONCAT('abfss://1d758bd5-988e-4979-8c61-4b20bebd8ab1@onelake.dfs.fabric.microsoft.com/61c32063-cd50-4339-91ca-61569a420c2f/Files/CSV/', @name, '.csv');
+
+DECLARE @sqlCommand NVARCHAR(MAX);
+
+SET @sqlCommand = 'INSERT INTO [dbo].[Countries]
+SELECT  
+   [Pays] ,
+   [Capital] ,
+   [Region] ,
+   [Subregion] ,
+   [Flags] 
+FROM OPENROWSET(
+   BULK ''' + @filePath + ''', 
+   FORMAT = ''CSV'' , 
+   FIRSTROW = 2,     
+   FIELDTERMINATOR = '',''
+) WITH ([Pays] NVARCHAR(16), [Capital] NVARCHAR(16), [Region] NVARCHAR(16), [Subregion] NVARCHAR(16), [Flags] NVARCHAR(32)) AS tt ;
+'
+
+EXECUTE sp_executesql @sqlCommand;
+
+END</pre>
+                        </div>   -->
 
                     <h3> Mise en place d'une activité Stored procedure dans le Pipeline de Données</h3>
 
@@ -888,7 +934,7 @@ import pandas as pd</pre>
 
                 </section>
 
-                <!-- Section: Utilisation des Paramètres dans une Procédure Stockée -->
+                <!-- Section: Conclusion -->
                 <section id="conclusion" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i>Conclusion</h2>
 
