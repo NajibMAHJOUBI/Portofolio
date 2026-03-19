@@ -85,8 +85,8 @@
             <main class="tutorial-content">
                 <!-- En-tête -->
                 <div class="tutorial-header">
-                    <h1>Mise en place de pipeline de données dynamiques</h1>
-                    <h1>Parameters dans un flux Data Factory</h1>
+                    <h1>Maîtriser les Paramètres dans les Pipelines Microsoft Fabric</h1>
+                    <h2>Créez des pipelines ETL dynamiques, modulaires et réutilisables</h2>
                     <span class="level-badge">Niveau Débutant</span>
                     
                     <div class="tutorial-meta">
@@ -111,6 +111,11 @@
                 <!-- Section: Objectifs du tutoriel -->
                 <section id="objectifs" class="tutorial-section">
                     <h2><i class="fas fa-bullseye"></i> Objectifs du tutoriel</h2>
+                        <p>Dans ce tutoriel pratique, nous allons explorer comment transformer 
+                            un pipeline de données statique en un moteur ETL flexible grâce aux paramètres. 
+                            En suivant un scénario concret d'ingestion depuis une API, vous apprendrez 
+                            à rendre vos flux de données adaptables à différents contextes sans modifier 
+                            leur logique interne.</p>
                 </section> 
 
                 <!-- Section: Pourquoi paramétriser les Pipelines de données ?</b> -->
@@ -132,9 +137,34 @@
                                 <li style="margin-bottom: 0.8rem;">Appliquer les bonnes pratiques pour maintenir des pipelines clairs et évolutifs</li>
                             </ul>
 
-                        <p>À la fin, vous disposerez des bases pour construire des pipelines modulaires, faciles à maintenir et prêts pour la production.</p>
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Obectif</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>✅ Créer & Configurer</strong></td>
+                                <td>Apprendre à créer et paramétrer des variables dans un pipeline Fabric.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>✅ Utiliser dans les Activités</strong></td>
+                                <td>Intégrer ces paramètres dans des activités clés : Copie de données, Notebook, Procédure stockée.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>✅ Transmettre Dynamiquement</strong></td>
+                                <td>Passer des valeurs différentes à chaque exécution du pipeline.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>✅ Appliquer les Bonnes Pratiques</strong></td>
+                                <td>Concevoir des pipelines clairs, maintenables et évolutifs, prêts pour la production.</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-
+                    <p>À la fin, vous disposerez des bases pour construire des pipelines modulaires, faciles à maintenir et prêts pour la production.</p>
                 </section>
 
                 <!-- Section: Scénario -->
@@ -151,6 +181,13 @@
                         </ol>
 
                         <p>Le paramètre permettra d'exécuter le pipeline avec différents noms de pays.</p>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-pipeline-parameters/scenario.png" 
+                                alt="Création d'un Workspace dans Microsoft Fabric"
+                                class="tutorial-image">
+                            <figcaption><i>Création d'un Workspace dans Microsoft Fabric</i></figcaption>
+                        </figure>
 
                         <p>Avant de commencer l'implémentation du pipeline ETL paramétré, nous allons mettre en place l'infrastructure nécessaire à la réalisation de ce tutoriel : </p>
 
@@ -176,7 +213,7 @@
                         <p>La première étape de notre mise en œuvre consiste à créer un workspace dédié dans Microsoft Fabric, 
                             qui servira de conteneur centralisé pour l'ensemble des ressources de notre projet ETL.</p>
 
-                        <p>Pour cela, commencer par vous conecter au portail Microsoft Fabric avec nos identifiants puis suivre les étapes suivantes :</p>
+                        <p>Pour cela, commencer par vous connecter au portail Microsoft Fabric avec nos identifiants puis suivre les étapes suivantes :</p>
 
                         <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                             <li style="margin-bottom: 0.8rem;">Cliquer sur <b>Home</b>  depuis la volet gauche de l'interface de Microsoft Fabric</li>
@@ -236,7 +273,7 @@
                     <h2><i class="fas fa-question-circle"></i>Création d'une base SQL Database</h2>
 
                         <p>Pour finaliser la mise en place de notre infrastructure, nous allons maintenant créer une <b>SQL Database</b> qui hébergera notre table de destination final 
-                            ainsi que la procédure stockée servant à insérer les donnes dans la table. </p>
+                            ainsi que la procédure stockée servant à insérer les données dans la table. </p>
 
                         <p>Depuis le Workspace qui a été créé suivre les étapes suivantes :</p>
 
@@ -302,7 +339,7 @@
                         </ol>
 
                         <figure class="image-container">
-                            <img src="../assets/images/mf-pipeline-parameters/create-pipeline-01.png" 
+                            <img src="../assets/images/mf-Pipeline-parameters/create-pipeline-01.png" 
                                 alt="Création d'un Pipeline dans Microsoft Fabric - Etape 2"
                                 class="tutorial-image">
                             <figcaption><i>Création d'un Pipeline dans Microsoft Fabric - Etape 2</i></figcaption>
@@ -314,7 +351,7 @@
                 <section id="define-parameters" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i> Définition des Paramètres dans un Pipeline</h2>
 
-                        <p>Après avoir créé notre pipeline PL_Ingestion_Clients_API, nous allons maintenant configurer les paramètres qui le rendront dynamique et réutilisable pour différentes exécutions. </p>
+                        <p>Après avoir créé notre Pipeline PL_Ingestion_Clients_API, nous allons maintenant configurer les paramètres qui le rendront dynamique et réutilisable pour différentes exécutions. </p>
                             
                         <p>Pour accéder à cette fonctionnalité, depuis l'interface du <b>Pipeline</b> , suivre les étapes suivantes : </p>
 
@@ -351,7 +388,7 @@
                             <figcaption><i>Définition des caractéristiques d'un paramètre dans Microsoft Fabric - Etape 2</i></figcaption>
                         </figure>
 
-                        <p>Une fois un paramètre créé, il devient accessible dans tout le pipeline via la syntaxe d'expression dynamique 
+                        <p>Une fois un paramètre créé, il devient accessible dans tout le Pipeline via la syntaxe d'expression dynamique 
                             <i>@pipeline().parameters.&lsaquo;nom_du_parametre&rsaquo;</i>, que nous pourrons utiliser dans les configurations de 
                             nos activités <b>Copy Data</b>, <b>Notebook</b> et <b>Procédure stockée</b>. 
                             Cette approche paramétrée transforme un <b>Pipeline</b> en un modèle réutilisable capable de s'adapter 
@@ -364,7 +401,7 @@
                     <h2><i class="fas fa-question-circle"></i>Mise en place d'une activité Copy Data paramétrée</h2>
 
                         <p>Nous allons maintenant configurer l'activité <b>Copy Data</b> qui assurera l'extraction des données depuis l'API externe vers notre <b>Lakehouse</b>, 
-                            en utilisant les paramètres du pipeline pour dynamiser cette opération. 
+                            en utilisant les paramètres du Pipeline pour dynamiser cette opération. 
                             
                         
                         <p>L'ajout d'une activité <b>Copy data</b> se fait de la façon suivante depuis l'interface du <b>Pipeline</b> : </p>
@@ -451,7 +488,7 @@
 
                             <h4>Activité Copy data : menu Source - Paramètre 'Relative URL'</h4>
 
-                                <p>Toujours depuis le menu <b>Source</b>, nous allons définir le paramétrages de l'appel à cette API en utilisant le paramètre du Pipeline. Pour cela, suivre les étapes suivantes : </p>
+                                <p>Toujours depuis le menu <b>Source</b>, nous allons définir le paramétrage de l'appel à cette API en utilisant le paramètre du Pipeline. Pour cela, suivre les étapes suivantes : </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Cliquer dans le champ <b>Relative URL</b></li>
@@ -498,7 +535,7 @@
 
                         <h3> Activité Copy data : Menu Destination</h3>
 
-                            <p>Depuis l'onglet <b>Destination</b>, nous allons pouvoir préciser le lieu de sauvagrade dans un Lakehouse au format JSON, avec un nom de fichier généré dynamiquement.</p>
+                            <p>Depuis l'onglet <b>Destination</b>, nous allons pouvoir préciser le lieu de sauvegarde dans un Lakehouse au format JSON, avec un nom de fichier généré dynamiquement.</p>
 
                             <h4> Activité Copy data : Menu Destination - Paramètre Connection</h4>
 
@@ -532,7 +569,7 @@
 
                             <h4> Activité Copy data : menu Destination - Paramètres 'Root folder' et 'File path'</h4>
 
-                                <p>Nous allons  poursuivre de la façon suivante en définssant le type de fichier et la façon de le nommer: </p>
+                                <p>Nous allons  poursuivre de la façon suivante en définissant le type de fichier et la façon de le nommer: </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Dans le champ <b>Root folder</b>, choisir l'option <b>Files</b> pour indiquer que l'on souhaite sauvegarder les données sous un format fichier.</li>
@@ -595,7 +632,7 @@
                            Pour cela, il faudra dans le Notebbok lui-même créer un paramètre dans une cellule dédiée aux paramètres.
                            Et il faudra ajouter une activité Notebook dans le Pipeline à laquelle il faudra lui ajouter un paramètre de type clé-valuer : 
                            le nom du paramètre attendu par le notebook (clé) et la valeur dynamique que l'on souhaite lui attribuer.
-                           Ainsi, au moment de l'exécution, le pipeline transmet automatiquement la valeur du paramètre au notebook permettant d'utiliser 
+                           Ainsi, au moment de l'exécution, le Pipeline transmet automatiquement la valeur du paramètre au notebook permettant d'utiliser 
                            la valeur définie au niveau du Pipeline.
                         </p>
 
@@ -737,20 +774,20 @@ import pandas as pd</pre>
 
                             <h4>Définition d'un paramètre dans un Notebook</h4>
 
-                                <p>La définition d'un paramètre dans un notebook <b>Microsoft Fabric</b> suit une convention spécifique qui permet une intégration fluide avec les pipelines.</p> 
+                                <p>La définition d'un paramètre dans un notebook <b>Microsoft Fabric</b> suit une convention spécifique qui permet une intégration fluide avec les Pipelines.</p> 
                                     
                                 <p>Pour créer un paramètre, il faut dédier une cellule en haut du notebook et y déclarer les variables avec des valeurs par défaut. 
                                     L'élément crucial est ensuite d'activer le tag "paramètres" sur cette cellule. </p> 
                                     
-                                <p>   Cette action signale à <b>Fabric</b> que cette cellule contient des paramètres pouvant être surchargés lors d'une exécution via un pipeline. 
+                                <p>   Cette action signale à <b>Fabric</b> que cette cellule contient des paramètres pouvant être surchargés lors d'une exécution via un Pipeline. 
                                     
-                                    Ainsi, lorsque le <b>Notebook</b> est appelé par une activité de pipeline, les valeurs définies dynamiquement dans ce dernier remplacent automatiquement les valeurs par défaut 
+                                    Ainsi, lorsque le <b>Notebook</b> est appelé par une activité de Pipeline, les valeurs définies dynamiquement dans ce dernier remplacent automatiquement les valeurs par défaut 
                                     de la cellule taguée, permettant au code des cellules suivantes d'utiliser ces variables sans aucune modification.</p>
 
                                 <p>Voyons comment créer ce type de cellule pour paramètre, en suivant les étapes </p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Passer la pointeur de la souros dans le coi gaiche de la cdellule et cliquer sur les <b>trois points</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Passer la pointeur de la souros dans le coi gaiche de la cellule et cliquer sur les <b>trois points</b></li>
                                     <li style="margin-bottom: 0.8rem;">Dans les options roposées, chosiir <b>Toggle parameter cell</b></li>
                                 </ol>
 
@@ -765,11 +802,11 @@ import pandas as pd</pre>
 
                             <h4>Ajout d'une activité Notebook au Pipeline</h4>
 
-                                <p>L'ajout d'une activité notebook dans un pipeline Microsoft Fabric permet d'orchestrer l'exécution de vos notebooks au sein d'un flux de traitement automatisé.</p>
+                                <p>L'ajout d'une activité notebook dans un Pipeline Microsoft Fabric permet d'orchestrer l'exécution de vos notebooks au sein d'un flux de traitement automatisé.</p>
 
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                                    <li style="margin-bottom: 0.8rem;">Ouvrir le pipeline dans l'interface <b>Fabric</b></li>
+                                    <li style="margin-bottom: 0.8rem;">Ouvrir le Pipeline dans l'interface <b>Fabric</b></li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer sur le menu <b>Activities</b></li> 
                                     <li style="margin-bottom: 0.8rem;"> Cela ajoute l'activité <b>Notebook</b> au canevas du <b>Pipeline</b> </li>
                                     <li style="margin-bottom: 0.8rem;"> Une fois déposée, cliquez sur l'activité pour accéder à ses paramètres de configuration.</li>
@@ -783,9 +820,9 @@ import pandas as pd</pre>
                                 </figure>
 
                             <h4>  Activité Notebook - Menu General</h4>
-                                <p>Le menu <b>General</b> d'une activité <b>Notebook</b> dans un pipeline <b>Microsoft Fabric</b> constitue la première section de configuration, dédiée à l'identification et à 
+                                <p>Le menu <b>General</b> d'une activité <b>Notebook</b> dans un Pipeline <b>Microsoft Fabric</b> constitue la première section de configuration, dédiée à l'identification et à 
                                     la description de l'activité au sein du flux de traitement. </p>
-                                <p>C'est dans cet onglet que l'on définit le nom de l'activité, qui doit être unique au sein du pipeline pour permettre une référence claire, 
+                                <p>C'est dans cet onglet que l'on définit le nom de l'activité, qui doit être unique au sein du Pipeline pour permettre une référence claire, 
                                     notamment lors de la création de dépendances entre activités. On peut également y ajouter une description détaillée pour documenter le rôle spécifique de ce notebook 
                                     dans le processus global, facilitant ainsi la maintenance et la compréhension par d'autres collaborateurs.</p>
 
@@ -798,7 +835,7 @@ import pandas as pd</pre>
                                 </ol>
 
                                 <figure class="image-container">
-                                    <img src="../assets/images/mf-pipeline-parameters/notebook/06-notebook-activity-menu-general.png" 
+                                    <img src="../assets/images/mf-Pipeline-parameters/notebook/06-notebook-activity-menu-general.png" 
                                         alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
                                         class="tutorial-image">
                                     <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
@@ -806,7 +843,7 @@ import pandas as pd</pre>
 
                             <h4>  Activité Notebook - Menu Settings</h4>
 
-                                <p>Le menu <b>Settings</b> d'une activité notebook dans un pipeline <b>Microsoft Fabric</b> est l'interface centrale permettant de lier le notebook à exécuter 
+                                <p>Le menu <b>Settings</b> d'une activité notebook dans un Pipeline <b>Microsoft Fabric</b> est l'interface centrale permettant de lier le notebook à exécuter 
                                     et de configurer les paramètres qui lui seront transmis.</p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
@@ -815,7 +852,7 @@ import pandas as pd</pre>
                                     <li style="margin-bottom: 0.8rem;">Dans le champ <b>Notebook</b>, sélectionner le notebook que nous venons de créer pour transformer le fichier JSON en CSV : <i>Parse Country JSON</i> </li>
                                     <li style="margin-bottom: 0.8rem;">Développer la section <b>Base parameters</b></li>
                                     <li style="margin-bottom: 0.8rem;">Cliquer <b>+ New</b> pour ajouter un paramètre dans l'éditeur</li>
-                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer le nom du parmètre qui est celui utilisé dans le notebook dans la cellule des paramètres. Ici, il s'agit du paramètre <i>name</i>.</li>
+                                    <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer le nom du paramètre qui est celui utilisé dans le notebook dans la cellule des paramètres. Ici, il s'agit du paramètre <i>name</i>.</li>
                                     <li style="margin-bottom: 0.8rem;">Dans le champ <b>Type</b>, sélectionner le type du paramètre dans le menu déroulant. Ici, choisir le type <i>String</i>.</li>
                                     <li style="margin-bottom: 0.8rem;">Dans le champ <b>Value</b>, entrer la valeur dynamique définie dans le Pipeline :
                                          <div class="code-block">
@@ -833,7 +870,7 @@ import pandas as pd</pre>
                                     <figcaption><i>Définition des Paramètres dans Microsoft Fabric - Etape 2</i></figcaption>
                                 </figure>
 
-                                <p>Cette configuration permet de créer des pipelines génériques où le même notebook peut traiter différentes sources ou cibles selon le contexte d'exécution, 
+                                <p>Cette configuration permet de créer des Pipelines génériques où le même notebook peut traiter différentes sources ou cibles selon le contexte d'exécution, 
                                     sans aucune modification manuelle de son code.</p>
                 </section>
 
@@ -842,10 +879,22 @@ import pandas as pd</pre>
                     <h2><i class="fas fa-question-circle"></i>Utilisation des Paramètres dans une Procédure Stockée</h2>
 
 
-                    <h3>Mise en place des éléments nécessaires dans SQL Database</h3>
-                    <h4>Création d'une table</h4>
+                        <h3>Mise en place des éléments nécessaires dans SQL Database</h3>
 
-                        <div class="code-block">
+                            <p>Dans Microsoft Fabric, la création d'objet dans une base de données SQL peut se faire de plusieurs manières. 
+                               Dans notre exemple, nous allons avoir bessoin d'une table de destination pour le résultat final d'un ETL et 
+                               d'une procédure stockée pour réaliser le chargement.
+                               Dans notre exemple, nous allons utiliser une méthode de création manuelle avec T-SQL (via l'Éditeur de Requêtes).</p>
+
+
+                            <h4>Création d'une table</h4>
+
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Depuis l'espace de travail Fabric, ouvrez l'item de SQL Database que nous avons créé précédemment et qui doit contenir la table finale.</li>
+                                    <li style="margin-bottom: 0.8rem;">Ouvrir un nouvel éditeur de requêtes : Dans le ruban, cliquer sur "New SQL query" .</li>
+                                    <li style="margin-bottom: 0.8rem;">Écririr le script de création avec la commande CREATE TABLE standard :
+                               <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                             <pre>CREATE TABLE [dbo].[Countries]
 (
@@ -857,10 +906,50 @@ import pandas as pd</pre>
 )
 GO</pre>
                         </div>  
+                                    </li>
+                                    </ol>
+
+                                <figure class="image-container">
+                                    <img src="../assets/images/mf-pipeline-parameters/stored-procedure/03-create-table-countries.png" 
+                                        alt="Définition des Paramètres dans Microsoft Fabric - Etape 2"
+                                        class="tutorial-image">
+                                    <figcaption><i>Requête SQL de créaton d'une table en base de données</i></figcaption>
+                                </figure>
+
+                            <p>Une bonne pratique consiste à nommer les requêtes SQL que l'on crée avec un nom explicite pour pouvoir la retrouver 
+                                facilement plus tard ou pouvoir l'appeler depuis une activité dans un Pipeline. Voilà comment vous pouvez le faire
+                            depuis l'éditeur de requête :</p>
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;"></li>
+                                    <li style="margin-bottom: 0.8rem;"></li>
+                                    <li style="margin-bottom: 0.8rem;"></li>
+                                    <li style="margin-bottom: 0.8rem;"></li>
+                                </ol>
+
+                            <!-- Deux images côte à côte -->
+                            <div style="display: flex; gap: 1.5rem; margin: 2rem 0;">
+                                <div style="flex: 1;">
+                                    <img src="../assets/images/mf-pipeline-parameters/stored-procedure/04-rename-query-00.png" 
+                                        alt="Console AWS"
+                                        class="tutorial-image">
+                                    <p style="text-align: center; margin-top: 0.5rem;">Console de gestion</p>
+                                </div>
+                                <div style="flex: 1;">
+                                    <img src="../assets/images/mf-pipeline-parameters/stored-procedure/04-rename-query-01.png" 
+                                        alt="AWS CLI"
+                                        class="tutorial-image">
+                                    <p style="text-align: center; margin-top: 0.5rem;">Interface en ligne de commande</p>
+                                </div>
+                            </div>
 
                     <h4>Creation d'une procédure stockée</h4>
 
-                                                <!-- <div class="code-block">
+                        <p>Pour poursuivre l'illustration d'utilisation de paramètre de Pipeline, nous allons mettre en place une Procédure Stockée en T-SQL.
+                            Comme la requête de création d'un table, depuis l'interface de la base de données SQL, ouvrir une requête vide et copier-coller le code suivant :
+                        </p>
+
+                                                 <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                             <pre>CREATE PROCEDURE [dbo].[InsertCountry]
 @name NVARCHAR(64)
@@ -868,7 +957,7 @@ AS
 BEGIN
 
 DECLARE @filePath   NVARCHAR(250);
-SET @filePath = CONCAT('abfss://1d758bd5-988e-4979-8c61-4b20bebd8ab1@onelake.dfs.fabric.microsoft.com/61c32063-cd50-4339-91ca-61569a420c2f/Files/CSV/', @name, '.csv');
+SET @filePath = CONCAT('&lsaquo;path_abfss&rsaquo;', @name, '.csv');
 
 DECLARE @sqlCommand NVARCHAR(MAX);
 
@@ -884,17 +973,47 @@ FROM OPENROWSET(
    FORMAT = ''CSV'' , 
    FIRSTROW = 2,     
    FIELDTERMINATOR = '',''
-) WITH ([Pays] NVARCHAR(16), [Capital] NVARCHAR(16), [Region] NVARCHAR(16), [Subregion] NVARCHAR(16), [Flags] NVARCHAR(32)) AS tt ;
+) WITH ([Pays] NVARCHAR(16), [Capital] NVARCHAR(16), 
+        [Region] NVARCHAR(16), [Subregion] NVARCHAR(16),
+        [Flags] NVARCHAR(32)) AS tt ;
 '
 
 EXECUTE sp_executesql @sqlCommand;
 
 END</pre>
-                        </div>   -->
+                        </div>   
+
+                        <p>Cette procédure stockée, nommée <i>[dbo].[InsertCountry]</i>, a pour objectif d'automatiser l'ingestion de données à partir de fichiers CSV créés par le notebook 
+                            et stockés dans le lakehouse.
+                            
+                            L'ingestion va se faire dans la table <i>[dbo].[Countries]</i> de la base de données que nous avons cré précédemment. </p>
+                            
+
+                        <p>La procédure attend un paramètre d'entrée unique, <i>@name</i>, qui correspond au nom du fichier du fichier CSV à charger  et qui sera piloté 
+                            par le paramètre du Pipeline <i>@pipeline().parameters.name</i>. </p>
+                            
+                        <p>À partir de ce paramètre, le chemin d'accès complet <i>@filePath</i> vers le fichier source est construit en concaténant un préfixe de chemin ABFSS <i>‹path_abfss›</i> 
+                            avec la valeur du paramètre et l'extension ".csv".  </p>
+                            
+                         
+                        <p>Cette procédure est idéale pour être appelée depuis une activité <b>Stored Procedure</b> d'un Pipeline Data Factory,
+                             où elle pourrait être itérée pour charger plusieurs fichiers CSV correspondant à différents pays, 
+                             chacun étant passé dynamiquement comme paramètre du Pipeline. </p>
+
 
                     <h3> Mise en place d'une activité Stored procedure dans le Pipeline de Données</h3>
 
                     <h4>Ajout d'une activité Stored procedure au Pipeline</h4>
+
+                        <p>L'intégration d'une activité <b>Stored Procedure</b> dans un Pipeline permet d'exécuter des procédures stockées directement 
+                            depuis une base de données source ou de destination. </p>
+                            
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Ouvrir l'interface du Pipeline pour afficher le canevas du data workflow</li>
+                            <li style="margin-bottom: 0.8rem;">Aller dans le menu <b>Activities</b></li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur l'activité <b>Stored Procedure</b> depuis la palette des activités </li>
+                        </ol>
+                        
                         <figure class="image-container">
                             <img src="../assets/images/mf-pipeline-parameters/stored-procedure/00-add-activity-stored-procedure.png" 
                                  alt="Activité Stored procedure - Menu Settings"
@@ -903,6 +1022,18 @@ END</pre>
                         </figure>
 
                     <h4>Activité Stored procedure - Menu General</h4>
+
+                        <p>Dans un Pipeline Microsoft Fabric, le menu <b>General</b> d'une activité <b>Stored Procedure</b> constitue la première étape de configuration, 
+                            accessible dès que l'activité est ajoutée au canevas. 
+                            On y renseigne tout d'abord un nom explicite pour l'activité, qui permettra de l'identifier clairement dans le flux d'exécution du Pipeline. 
+                            Ce menu offre également la possibilité d'ajouter une description détaillée, une bonne pratique pour documenter le rôle de l'étape.
+                        Pour cela, suivre les étapes suivantes : </p>
+
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans l'onglet <b>General</b></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ Name, entrer un nom explicite pour cette activité</li>
+                        </ol>
+
                         <figure class="image-container">
                             <img src="../assets/images/mf-pipeline-parameters/stored-procedure/01-menu-general.png" 
                                  alt="Activité Stored procedure - Menu Settings"
@@ -911,26 +1042,52 @@ END</pre>
                         </figure>
 
                     <h4>Activité Stored procedure - Menu Settings</h4>
-                        <figure class="image-container">
-                            <img src="../assets/images/mf-pipeline-parameters/stored-procedure/02-menu-settings-00.png" 
-                                 alt="Activité Stored procedure - Menu Settings"
-                                 class="tutorial-image"> 
-                            <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
-                        </figure>
 
-                        <figure class="image-container">
-                            <img src="../assets/images/mf-pipeline-parameters/stored-procedure/02-menu-settings-01.png" 
-                                 alt="Activité Stored procedure - Menu Settings"
-                                 class="tutorial-image"> 
-                            <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
-                        </figure>                        
-
+                        <p>Dans un Pipeline Microsoft Fabric, le menu <b>Settings</b> d'une activité Stored Procedure est l'endroit crucial où l'on connecte l'activité à la base de données cible 
+                            et où l'on spécifie la logique à exécuter. 
+                            
+                        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.8rem;">Aller dans l'onglet <b>Settings</b></li>
+                            <li style="margin-bottom: 0.8rem;">Depuis le menu déroulant <b>Connection</b>, sélectionner la connection qui est utilisé par ce <b>Workspace</b></li>
+                            <li style="margin-bottom: 0.8rem;">Depuis le menu déroulant <b>SQL Database</b>, sélectionner la base de données SQL que nous avons créé pour ce tutoriel</li>    
+                            <li style="margin-bottom: 0.8rem;">Dans le menu déroulant <b>Stored procedure name</b>, sélectionner la procédure stockée que nous avons créé</li>
+                            <li style="margin-bottom: 0.8rem;">Sélectioner le menu <b>Stored procedure parameters</b> qui va permettre d'ajouter les variables en entrées attendues par la procédure stockée</li>
+                            <li style="margin-bottom: 0.8rem;">Cliquer sur <b>+ New</b> pour ajouter une variable</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Name</b>, entrer le nom de la variable tel que inscrite dans la définiton de la procédure stockée</li>
+                            <li style="margin-bottom: 0.8rem;">Dans le menu déroulant <b>Type</b>, sélectionner le type du paramètre. Ici le paramètre est de type <i>String</i></li>
+                            <li style="margin-bottom: 0.8rem;">Dans le champ <b>Value</b>, entrer la valeur dynamique issue des paramètres du Pipeline :
+                            <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre>@pipeline().parameters.name</pre>
+                        </div>  
+                            </li>
+                        </ol>
+     
                         <figure class="image-container">
                             <img src="../assets/images/mf-pipeline-parameters/stored-procedure/02-menu-settings-02.png" 
                                  alt="Activité Stored procedure - Menu Settings"
                                  class="tutorial-image"> 
                             <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
-                        </figure>                        
+                        </figure>                                                      
+                </section>
+
+                <!-- Section: Exécution du Pipeline -->
+                <section id="run-pipeline" class="tutorial-section">
+                    <h2><i class="fas fa-question-circle"></i>Exécition d'un Pipeline</h2>
+
+                        <p>Pour lier efficacement les activités au sein d’un Pipeline dans <b>Microsoft Fabric</b>, il est essentiel de comprendre le flux de contrôle 
+                            et les dépendances entre les différentes tâches. 
+                            Dans l’interface de la Data Factory, on établit ces liaisons en connectant visuellement les activités via leur sortie. 
+                            Par exemple, après l'activité <b>Copy data</b>, on peut lui rattacher l'activité <b>Notebook</b> en faisant glisser la poignée verte (ou "success") 
+                            depuis la première activité vers la seconde. 
+                            Cela crée une dépendance explicite : l’activité <b>Notebook</b> ne s’exécutera que si l’activité de copie se termine avec succès.</p>
+
+                        <figure class="image-container">
+                            <img src="../assets/images/mf-Pipeline-parameters/linked-activities.png" 
+                                 alt="Activité Stored procedure - Menu Settings"
+                                 class="tutorial-image"> 
+                            <figcaption><i>Activité Copy data - Menu Source - Paramètre File format</i></figcaption>
+                        </figure>  
 
                 </section>
 
@@ -938,12 +1095,26 @@ END</pre>
                 <section id="conclusion" class="tutorial-section">
                     <h2><i class="fas fa-question-circle"></i>Conclusion</h2>
 
-                        <p>Les paramètres dans Microsoft Fabric offrent une flexibilité essentielle pour créer des pipelines de données robustes et réutilisables. En maîtrisant leur utilisation, vous pouvez :</p>
+                        <p>Les paramètres dans Microsoft Fabric offrent une flexibilité essentielle pour créer des Pipelines de données robustes et réutilisables. En maîtrisant leur utilisation, vous pouvez :</p>
 
                                 <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                                     <li style="margin-bottom: 0.8rem;">Centraliser la configuration</li>
                                     <li style="margin-bottom: 0.8rem;">Faciliter les déploiements multi-environnements</li>
-                                    <li style="margin-bottom: 0.8rem;"> Améliorer la maintenance des pipelines</li>
+                                    <li style="margin-bottom: 0.8rem;"> Améliorer la maintenance des Pipelines</li>
                                     <li style="margin-bottom: 0.8rem;">Automatiser les exécutions</li>
                                 </ol>
+
+                        <p>En suivant ce tutoriel, vous avez non seulement appris la syntaxe pour créer et utiliser des paramètres, mais vous avez surtout acquis une méthodologie 
+                            pour concevoir des Pipelines de données robustes et adaptables. Cette approche paramétrique est la clé pour :
+
+                                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.8rem;">Industrialiser vos traitements de données.</li>
+                                    <li style="margin-bottom: 0.8rem;"></li>Réduire la dette technique liée à la duplication de code.</li>
+                                    <li style="margin-bottom: 0.8rem;"></li>Faciliter la collaboration entre les équipes Data.</li>
+                                </ol>
+
+                        <p>Vous pouvez désormais appliquer ces principes à d'autres types d'activités (Dataflow, Spark jobs) et à des scénarios plus complexes, comme la gestion 
+                            de plusieurs environnements (dev, test, prod) ou l'intégration dans des processus d'ingestion continue. 
+                            L'étape suivante ? Ajouter la gestion des erreurs et des alertes pour des Pipelines encore plus professionnels.</p>
+
             </section>
