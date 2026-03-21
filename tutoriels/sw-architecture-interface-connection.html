@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Activité Lookup | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Microsoft Fabric</a></li>
+                    <li class="current">Activité Lookup</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+                    <ul class="toc-list">
+                        <li><a href="#objectifs" class="active"><i class="fas fa-bullseye"></i>Objectifs du tutoriel</a></li>
+                        <li><a href="#snowsight"><i class="fas fa-question-circle"></i>Snowsight</a></li>
+                        <li><a href="#snowflake-cli"><i class="fas fa-bucket"></i>Snowflake CLI</a></li>
+                        <li><a href="#api-natives"><i class="fas fa-database"></i>API natives</a></li>
+                        <li><a href="#drivers"><i class="fas fa-lock"></i>Drivers</a></li>
+                        <li><a href="#connecteurs-natifs"><i class="fas fa-lock"></i>Connecteurs natifs</a></li>
+                        <li><a href="#outils-tiers"><i class="fas fa-lock"></i>Applications et outils tiers</a></li>
+
+                    </ul>
+
+                    <div
+                        style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 25
+                            minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête -->
+                    <div class="tutorial-header">
+                        <h1>Architecture Snowflake - Interface de Connexion</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour:
+                                Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 10 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté:
+                                Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag"><i
+                                    class="fab fabric-icon"></i>Snowflake</span>
+                            <span class="tech-tag"><i class="fas fa-gears"></i>
+                                Data Engineering</span>
+                            <span class="tech-tag"><i class="fas fa-cloud"></i>
+                                Cloud</span>
+                        </div>
+                    </div>
+
+                    <!-- Section: Objectifs -->
+                    <section id="objectifs" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i> Objectifs du tutoriel</h2>
+
+                        <p>Snowflake offre un maillage technique dense et diversifié : pour interroger, administrer, ingérer ou orchestrer des données
+                             via une multitude de points d’entrée.</p>
+
+                        <p>Que l’on soit data engineer, analyste ou développeur d’applications, il est essentiel de maîtriser l’éventail des interfaces, 
+                            clients, API, drivers et connecteurs qui permettent d’interagir avec la plateforme. De l’interface web Snowsight aux connexions 
+                            JDBC/ODBC, en passant par les API RESTful, les bibliothèques Python (Snowpark) ou les connecteurs natifs vers les outils d’ETL 
+                            et de BI, chaque outil répond à des besoins spécifiques : performance, automatisation, sécurité ou intégration.</p>
+
+                        <p>Cet article a pour objectif de dresser un panorama complet de ces différentes briques. Nous explorerons comment elles s’articulent, 
+                            quels sont leurs cas d’usage privilégiés, et comment choisir la bonne approche pour interagir efficacement avec Snowflake, 
+                            quel que soit le contexte d’utilisation.</p>
+
+                    </section>
+
+                    <!-- Section: Snowsight-->
+                    <section id="snowsight" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>Snowsight</h2>
+
+                            <h3><i class="fas book-reader"></i>1. Qu’est‑ce que Snowsight ? </h3>
+
+                                <p>Snowsight est <b>l’interface Web moderne</b> de Snowflake. </p>
+                                <p>Elle offre une expérience unifiée pour <b>analyser, développer, administrer et collaborer</b> dans Snowflake. </p>
+
+                            <h3><i class="fas book-reader"></i>2. Principales fonctionnalités de Snowsight </h3>
+
+                                <dt style="margin-bottom: 0.0rem;"><h3>A. Analyse & développement</h3></dt>
+                                    <dd>
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                                            <li style="margin-bottom: 0.5rem;"><b>Écrire et exécuter des requêtes SQL</b> dans des Worksheets. </li> 
+                                            <li style="margin-bottom: 0.5rem;"><b>Exécuter du Snowpark Python</b> directement dans l’interface. </li> 
+                                            <li style="margin-bottom: 0.5rem;"><b>Créer et exécuter des Notebooks</b> pour des workflows ML de bout en bout. </li> 
+                                            <li style="margin-bottom: 0.5rem;"><b>Utiliser Snowflake Copilot</b> pour l’assistance à l’analyse de données. </li> 
+                                            <li style="margin-bottom: 0.5rem;"><b>Développer des projets multi‑fichiers</b> (SQL, Python). </li> 
+                                        </ul>
+                                    </dd>  
+
+                                <dt style="margin-bottom: 0.0rem;"><h3>B. Visualisation & Applications </h3></dt>
+                                    <dd>
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">Visualiser les résultats sous forme de <b>graphiques</b>. </li>
+                                            <li style="margin-bottom: 0.5rem;">Créer des <b>dashboards</b> interactifs. </li>
+                                            <li style="margin-bottom: 0.5rem;">Développer et exécuter des <b>applications Streamlit</b> directement dans Snowflake. </li>
+                                            <li style="margin-bottom: 0.5rem;">Développer et partager des <b>Snowflake Native Apps</b>. </li>                                          
+                                        </ul>
+                                    </dd>  
+
+
+                                <dt style="margin-bottom: 0.0rem;"><h3>C. Ingestion & Transformation </h3></dt>
+                                    <p>Snowsight permet de gérer et surveiller : </p>
+                                    <dd>
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">Snowpipe & Snowpipe Streaming </li>
+                                            <li style="margin-bottom: 0.5rem;">Connecteurs </li>
+                                            <li style="margin-bottom: 0.5rem;">Streams & Tasks </li>
+                                            <li style="margin-bottom: 0.5rem;">Pipelines de transformation </li>                                          
+                                        </ul>
+                                    </dd>  
+
+                                <dt style="margin-bottom: 0.0rem;"><h3>D. Monitoring & Administration </h3></dt>
+                                    <dd>
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">Suivi de l’<b>historique des requêtes</b> et de leurs performances. </li>
+                                            <li style="margin-bottom: 0.5rem;">Visualisation des <b>graphes de tasks</b>. </li>
+                                            <li style="margin-bottom: 0.5rem;">Monitoring des <b>chargements de données</b>. </li>
+                                            <li style="margin-bottom: 0.5rem;">Gestion des coûts via des vues dédiées. </li>      
+                                            <li style="margin-bottom: 0.5rem;">Gestion des utilisateurs, rôles, warehouses, bases, etc. </li>                                         
+                                        </ul>
+                                    </dd>  
+
+                                <dt style="margin-bottom: 0.0rem;"><h3>E. Collaboration & Data Sharing </h3></dt>
+                                    <dd>
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">Explorer et partager des données via le <b>Snowflake Marketplace</b>. </li>
+                                            <li style="margin-bottom: 0.5rem;">Créer et gérer des <b>listings</b>.</li>
+                                            <li style="margin-bottom: 0.5rem;">Utiliser <b>Universal Search</b> pour explorer tout le data estate. </li>
+                                            <li style="margin-bottom: 0.5rem;">Accéder au <b>Horizon Catalog</b> pour découvrir et gouverner les données.</li>                                            
+                                        </ul>
+                                    </dd>  
+
+                        <h3><i class="fas book-reader"></i>3. Navigation et organisation dans Snowsight  </h3>
+                            <dt style="margin-bottom: 0.0rem;"><h3>Workspaces </h3></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.5rem;">Organisation des projets SQL/Python/Notebooks. </li>
+                                    <li style="margin-bottom: 0.5rem;">Gestion par dossiers et partage.</li>
+                                </ul> 
+
+                            <dt style="margin-bottom: 0.0rem;"><h3>Worksheets </h3></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.5rem;">Éditeur SQL/Python avec exécution, résultats, graphiques et historique. </li>
+                                </ul>
+
+                            <dt style="margin-bottom: 0.0rem;"><h3>Dashboards </h3></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.5rem;">Création de tableaux de bord interactifs basés sur les résultats de requêtes. </li>
+                                </ul>
+
+                            <dt style="margin-bottom: 0.0rem;"><h3>Universal Search </h3></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                    <li style="margin-bottom: 0.5rem;">Recherche globale dans les objets Snowflake (tables, vues, apps, listings…). </li>
+                                </ul>
+ 
+                        <h3><i class="fas book-reader"></i>4. Opérations critiques réalisables dans Snowsight  </h3>
+                            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                <li style="margin-bottom: 0.5rem;">Gestion des <b>warehouses</b> (start/stop/resize). </li>
+                                <li style="margin-bottom: 0.5rem;">Gestion des <b>bases, schémas, tables, vues</b>. </li>
+                                <li style="margin-bottom: 0.5rem;">Gestion des <b>rôles et utilisateurs</b>. </li>
+                                <li style="margin-bottom: 0.5rem;">Configuration des <b>intégrations</b> (cloud, sécurité, connecteurs). </li>
+                                <li style="margin-bottom: 0.5rem;">Suivi des <b>coûts</b> et de l’utilisation. </li>
+                            </ul>
+                    </section>
+
+                    <!-- Section: Snowflake CLI-->
+                    <section id="snowflake-cli" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>Snowflake CLI</h2>
+                            <h3><i class="fas book-reader"></i>1. Snowflake CLI (nouvelle génération) </h3>
+                                <p>Snowflake CLI est l’outil moderne en ligne de commande pour interagir avec Snowflake. </p>
+                                <p>Il est conçu pour les workflows <b>DevOps, CI/CD, déploiement, et gestion d’objets</b>. </p>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Fonctionnalités clés </h4></dt>
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                                        <li style="margin-bottom: 0.5rem;">Gestion complète des ressources Snowflake :  
+                                            <ul style="margin-left: 7rem; margin-bottom: 1.5rem">                                           
+                                                <li style="margin-bottom: 0.5rem;">Bases, schémas, tables </li>
+                                                <li style="margin-bottom: 0.5rem;">Warehouses </li>
+                                                <li style="margin-bottom: 0.5rem;">Intégrations </li>
+                                                <li style="margin-bottom: 0.5rem;">Snowpark Container Services </li>
+                                                <li style="margin-bottom: 0.5rem;">Snowflake Native Apps</li>
+                                            </ul>
+                                        <li style="margin-bottom: 0.5rem;">Exécution de SQL </li>
+                                        <li style="margin-bottom: 0.5rem;">Automatisation des déploiements (IaC-like) </li>
+                                        <li style="margin-bottom: 0.5rem;">Support natif des projets <b>multi-fichiers</b> </li>
+                                        <li style="margin-bottom: 0.5rem;">Intégration avec Git et pipelines CI/CD </li>
+                                    </ul>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Cas d’usage </h4></dt>
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                                        <li style="margin-bottom: 0.5rem;">Déploiement d’objets Snowflake </li>
+                                        <li style="margin-bottom: 0.5rem;">Automatisation d’environnements (dev/test/prod) </li>
+                                        <li style="margin-bottom: 0.5rem;">Gestion d’applications Snowflake (Native Apps, Streamlit, containers) </li>
+                                        <li style="margin-bottom: 0.5rem;">Scripts DevOps </li>
+                                    </ul>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Points importants pour SnowPro Core </h4></dt>
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                        <li style="margin-bottom: 0.5rem;">Snowflake CLI est le <b>client recommandé</b> pour les nouveaux projets. </li>
+                                        <li style="margin-bottom: 0.5rem;">Il va <b>remplacer progressivement SnowSQL</b> pour les usages avancés. </li>
+                                        <li style="margin-bottom: 0.5rem;">Il gère des fonctionnalités que SnowSQL ne supporte pas (Native Apps, containers…). </li>
+                                        <li style="margin-bottom: 0.5rem;">Il est orienté <b>infrastructure-as-code</b>.</li>
+                                    </ul> 
+
+                            
+                            <h3><i class="fas book-reader"></i> 2. SnowSQL (client historique) </h3>
+
+                            <p>SnowSQL est le <b>client SQL en ligne de commande</b> traditionnel de Snowflake. <p>
+                            <p>Il reste largement utilisé, mais son rôle est plus limité que Snowflake CLI. <p>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Fonctionnalités clés </h4></dt>
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                        <li style="margin-bottom: 0.5rem;">Exécution de requêtes SQL </li>
+                                        <li style="margin-bottom: 0.5rem;">Chargement/déchargement de données (COPY INTO) </li>
+                                        <li style="margin-bottom: 0.5rem;">Gestion basique des objets Snowflake </li>
+                                        <li style="margin-bottom: 0.5rem;">Support des scripts SQL </li>
+                                        <li style="margin-bottom: 0.5rem;">Connexion via profils configurés localement </li>
+                                    </ul>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Cas d’usage</h4></dt> 
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                        <li style="margin-bottom: 0.5rem;">Exécution SQL automatisée </li>
+                                        <li style="margin-bottom: 0.5rem;">Scripts simples </li>
+                                        <li style="margin-bottom: 0.5rem;">Chargement de données via COPY </li>
+                                        <li style="margin-bottom: 0.5rem;">Administration légère </li>
+                                    </ul>
+                                <dt style="margin-bottom: 0.0rem;"><h4>Points importants pour SnowPro Core </h4></dt>
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                        <li style="margin-bottom: 0.5rem;">SnowSQL est orienté SQL, pas DevOps. </li>
+                                        <li style="margin-bottom: 0.5rem;">Il ne gère pas :  
+                                            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                                <li style="margin-bottom: 0.5rem;">Snowpark Container Services </li>
+                                                <li style="margin-bottom: 0.5rem;">Native Apps </li>
+                                                <li style="margin-bottom: 0.5rem;">Projets multi-fichiers </li>
+                                            </ul>
+                                        </li>
+                                        <li style="margin-bottom: 0.5rem;">Il reste utile pour les pipelines ETL/ELT simples.</li>
+                                    </ul>
+
+                            
+                            <h3><i class="fas book-reader"></i>3. Comparaison Snowflake CLI vs SnowSQL</h3>
+                                <table class="tutorial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fonctionnalité</th>
+                                            <th>Snowflake CLI</th>
+                                            <th>SnowSQL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Exécution SQL</td>
+                                            <td>✔</td>
+                                            <td>✔</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Gestion avancée des objets</td>
+                                            <td>✔</td>
+                                            <td>Partielle</td>                
+                                        </tr>                                                                                                                                <tr>
+                                            <td>Snowpark Container Services</td>
+                                            <td>✔</td>
+                                            <td>✘</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Native Apps</td>
+                                            <td>✔</td>
+                                            <td>✘</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Projet multi-fichiers</td>
+                                            <td>✔</td>
+                                            <td>✘</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Chargement de données</td>
+                                            <td>✔</td>
+                                            <td>✔</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Script SQl</td>
+                                            <td>✔</td>
+                                            <td>✔</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Usage principal</td>
+                                            <td>DevOps, CI/CD, apps</td>
+                                            <td>SQl, ETL simple</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Remplacement prévu</td>
+                                            <td>Oui (progressif)</td>
+                                            <td>Non (reste supporté)</td>                
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                    </section>
+
+                    <!-- Section: APIs natives-->
+                    <section id="#api-natives" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>APIs natives</h2> 
+                            <h3><i class="fas book-reader"></i>1. Snowflake Python API</h3>
+                                <p>La <i>Snowflake Python API</i> permet d’interagir avec Snowflake en <b>Python</b>, en utilisant des objets et 
+                                    méthodes haut niveau plutôt que du SQL brut. </p>
+
+                            <dt style="margin-bottom: 0.0rem;"><h4>Fonctionnalités clés </h4></dt>
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Créer, gérer et manipuler :  
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                            <li style="margin-bottom: 0.1rem;">Bases, schémas, tables </li>
+                                            <li style="margin-bottom: 0.1rem;">Warehouses </li>
+                                            <li style="margin-bottom: 0.1rem;">Stages </li>
+                                            <li style="margin-bottom: 0.1rem;">Snowpark objects</li>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem;">Exécuter des requêtes SQL </li>
+                                    <li style="margin-bottom: 0.5rem;">Gérer les résultats sous forme de DataFrames Python </li>
+                                    <li style="margin-bottom: 0.5rem;">Intégration native avec <b>Snowpark Python</b> </li>
+                                    <li style="margin-bottom: 0.5rem;">Support des opérations administratives (création d’utilisateurs, rôles…)</li> 
+                                </ul>
+
+                            <dt style="margin-bottom: 0.0rem;"><h4>Cas d’usage </h4></dt>
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Automatisation de workflows data </li>
+                                    <li style="margin-bottom: 0.5rem;">Développement d’applications Python connectées à Snowflake</li> 
+                                    <li style="margin-bottom: 0.5rem;">Pipelines ML/ETL </li>
+                                    <li style="margin-bottom: 0.5rem;">Déploiement d’objets Snowflake via code </li>
+                                </ul>
+                  
+                            <h3><i class="fas book-reader"></i>2. Snowflake REST API</h3>
+
+                                <p>La <i>Snowflake REST API</i> permet d’exécuter des requêtes SQL via des <b>requêtes HTTP</b>. </p>
+
+                                <p>Elle est idéale pour les environnements où un driver ou un SDK n’est pas disponible. </p>
+
+                                <dt style="margin-bottom: 0.0rem;"><h4>Fonctionnalités clés </h4></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Exécuter des requêtes SQL via HTTP POST </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Récupérer les résultats de manière asynchrone </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Gérer les sessions et authentifications </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Compatible avec :  
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">
+                                            <li style="margin-bottom: 0.5rem;">OAuth </li>
+                                            <li style="margin-bottom: 0.5rem;">JWT </li>
+                                            <li style="margin-bottom: 0.5rem;">Clés privées </li>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem;">Permet d’intégrer Snowflake dans des systèmes externes (microservices, serveurs, outils custom)</li> 
+                                </ul>
+
+                                <dt style="margin-bottom: 0.0rem;"><h4>Cas d’usage </h4></dt>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Intégration avec des applications qui ne supportent pas JDBC/ODBC 
+                                    <li style="margin-bottom: 0.5rem;">Automatisation via des services serverless (AWS Lambda, Azure Functions…) </li>
+                                    <li style="margin-bottom: 0.5rem;">Exécution SQL depuis des environnements restreints </li>
+                                    <li style="margin-bottom: 0.5rem;">Communication entre Snowflake et des API internes </li>
+                                    </ul>
+
+                            <h3><i class="fas book-reader"></i>3. Comparaison Python API vs REST API </h3>
+                                <table class="tutorial-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fonctionnalité</th>
+                                            <th>Python API</th>
+                                            <th>REST API</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Langage</td>
+                                            <td>Python</td>
+                                            <td>Tous (HTTP)</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Nivau d'abstraction</td>
+                                            <td>Haut niveau</td>
+                                            <td>Bas niveau</td>                
+                                        </tr>                                                                                                                              <tr>
+                                        <tr>
+                                            <td>Exécution SQL</td>
+                                            <td>✔</td>
+                                            <td>✔</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Résultats DataFrame</td>
+                                            <td>✔</td>
+                                            <td>✘</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Intégration Snowpark</td>
+                                            <td>✔</td>
+                                            <td>✘</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Environnement serverless</td>
+                                            <td>Possible</td>
+                                            <td>Idéal</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Dépendances</td>
+                                            <td>Python + connector</td>
+                                            <td>Aucune (HTTP)</td>                
+                                        </tr>
+                                        <tr>
+                                            <td>Cas d'usage</td>
+                                            <td>Apps Python, ML, ETL</td>
+                                            <td>Microservices, intégration custom</td>                
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                    </section>
+
+                    <!-- Section: Drivers -->
+                    <section id="drivers" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>Drivers</h2>
+                            <h3><i class="fas book-reader"></i>JDBC Driver</h3>      
+                            
+                                <p>Le driver JDBC Snowflake est un driver JDBC Type 4 permettant aux applications 
+                                    Java et aux outils compatibles JDBC d’accéder à Snowflake. </p>
+
+
+                                <p>Le JDBC driver Snowflake fournit : </p>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">un driver Java Type 4 moderne, sécurisé et performant </li>
+
+                                    <li style="margin-bottom: 0.5rem;">plusieurs modes d'authentification (MFA, OAuth, Key Pair, SSO…) </li>
+
+                                    <li style="margin-bottom: 0.5rem;">des extensions avancées (asynchronous queries, file streaming) </li>
+
+                                    <li style="margin-bottom: 0.5rem;">une configuration fine ( paramètres de connexion, options réseau ) </li>
+
+                                    <li style="margin-bottom: 0.5rem;">plusieurs formats de JAR (standard, thin, FIPS) </li>
+
+                                    <li style="margin-bottom: 0.5rem;">une compatibilité avec tout l’écosystème Java/JDBC </li>
+                                </li>
+                                </ul>
+                                <p>Il constitue la manière la plus complète et performante pour interagir avec
+                                    Snowflake depuis des applications Java. </p>
+                            
+                            <h3><i class="fas book-reader"></i>ODBC Driver</h3>
+                                <p>Le driver ODBC Snowflake permet aux applications ODBC (Power BI, Excel, Tableau, ETL, C/C++ custom, etc.) 
+                                    de se connecter à Snowflake via des DSN ou des connexions ODBC configurées manuellement. </p>
+                                
+                                <p> Voici ce que Snowflake attend typiquement dans la certification : </p>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Le driver ODBC est un driver natif utilisable via DSN (Windows/macOS/Linux) </li>
+                                    <li style="margin-bottom: 0.5rem;">GET et PUT sont supportés uniquement à partir d’une certaine version selon le cloud 
+                                    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                        <li style="margin-bottom: 0.5rem;">AWS ≥ 2.17.5 </li>
+                                        <li style="margin-bottom: 0.5rem;">Azure ≥ 2.20.2 </li>
+                                        <li style="margin-bottom: 0.5rem;">GCP ≥ 2.21.5 </li>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem;">Les paramètres requis : server, user (DSN minimal) </li>
+                                    <li style="margin-bottom: 0.5rem;">Le driver ne stocke jamais le mot de passe dans un DSN </li>
+                                    <li style="margin-bottom: 0.5rem;">Multi‑statements nécessitent la déclaration du nombre exact de requêtes </li>
+                                    <li style="margin-bottom: 0.5rem;">Threading : utiliser -pthread (Linux/macOS) </li>
+                                    <li style="margin-bottom: 0.5rem;">ODBC Driver Diagnostic Service est disponible </li>
+                                    <li style="margin-bottom: 0.5rem;">L'authentification supporte : native / SSO / OAuth / key-pair / MFA </li>
+                                </ul>
+                    </section>
+
+                    <!-- Section: Connecteurs natifs-->
+                    <section id="connecteurs-natifs" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>Connecteurs natifs</h2>
+                            <h3><i class="fas book-reader"></i>Connecteur Kafka</h3>  
+                            
+                                <p>Le Snowflake Connector for Kafka est un connecteur officiel qui lit en continu des messages depuis Apache Kafka et les charge dans Snowflake. C’est un composant clé du parcours ingestion continue / streaming de Snowflake. </p>
+
+                                <p>Points cruciaux du connecteur Kafka :</p>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Le Kafka Connector est un sink connector exécuté dans Kafka Connect. </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Il lit des messages Kafka → les charge dans Snowflake (jamais l’inverse). </li>
+
+                                    <li style="margin-bottom: 0.5rem;"> Deux modes : Snowpipe et Snowpipe Streaming. </li>
+
+                                    <li style="margin-bottom: 0.5rem;"> Peut créer automatiquement les tables si non existantes. </li>
+
+                                    <li style="margin-bottom: 0.5rem;"> Nécessite des privilèges : 
+
+                                        <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                            <li style="margin-bottom: 0.5rem;">DB/Schema: USAGE</li> 
+
+                                            <li style="margin-bottom: 0.5rem;">Schema: CREATE TABLE, CREATE STAGE, CREATE PIPE </li>
+
+                                            <li style="margin-bottom: 0.5rem;">Table existante: OWNERSHIP </li>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-bottom: 0.5rem;"> Recommandation Snowflake : user + role dédié. </li>
+
+                                    <li style="margin-bottom: 0.5rem;"> Support Protobuf, JSON, Avro. </li>
+
+                                    <li style="margin-bottom: 0.5rem;"> Fonctionne avec Kafka OSS ou Confluent Kafka.</li> 
+
+                                    <li style="margin-bottom: 0.5rem;"> Monitoring possible via JMX. </li>
+                                </ul>                            
+
+                            <h3><i class="fas book-reader"></i>Connecteur Spark</h3>   
+                            
+                                <p>Le <i>Snowflake Connector for Spark</i> permet d’intégrer Snowflake dans l’écosystème Apache Spark. 
+                                Il permet à Spark de <b>lire et écrire des données dans Snowflake</b>, en traitant Snowflake 
+                                comme une source de données Spark classique (comme JDBC, S3 ou HDFS). </p>
+
+                                <p>Concepts essentiels : </p>
+
+                                <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+                                    <li style="margin-bottom: 0.5rem;">Snowflake utilise des stages pour transférer des données. 
+
+                                    <li style="margin-bottom: 0.5rem;">Le connecteur repose sur JDBC + stages internes/externes. </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Le pushdown optimise les performances en exécutant des opérations dans Snowflake. </li>
+
+                                    <li style="margin-bottom: 0.5rem;">Snowflake sépare compute (warehouses) et storage. </li>
+
+                                    <li style="margin-bottom: 0.5rem;">L'intégration Spark/Snowflake n’affecte pas la logique Snowflake (tables, micro-partitions, etc.). </li>
+                                </ul>                            
+                    </section>
+
+                    
+                    <!-- Section: Applications et Outils Tierces -->
+                    <section id="outils-tiers" class="tutorial-section">
+                        <h2><i class="fas book-reader"></i>Applications et outils tiers</h2>
+<h3><i class="fas book-reader"></i>1. Définition & Rôle de l’Ecosystème Snowflake </h3>
+
+<p>Snowflake fonctionne avec un très large ensemble d’outils et technologies, incluant : </p>
+    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+        <li style="margin-bottom: 0.5rem;">Connecteurs & drivers (Snowflake et tiers) </li>
+        <li style="margin-bottom: 0.5rem;">Outils cloud et on‑premises </li>
+        <li style="margin-bottom: 0.5rem;">Langages de programmation </li>
+        <li style="margin-bottom: 0.5rem;">Outils d’intégration, BI, ML/AI </li>
+        <li style="margin-bottom: 0.5rem;">Partenaires certifiés </li>
+    </ul>
+
+<p>Snowflake met à disposition : </p>
+    <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">     
+        <li style="margin-bottom: 0.5rem;">des clients officiels : CLI Snowflake, SnowSQL, connecteurs Python/Spark, drivers Node.js/JDBC/ODBC, etc. [docs.snowflake.com] </p>
+        <li style="margin-bottom: 0.5rem;">une liste d’outils partenaires et validés via Snowflake Partner Connect ou la Technology Validation Program. </li>
+    </ul>
+
+<p>Ces solutions sont organisées par catégories.</p>
+
+
+<h3><i class="fas book-reader"></i>2. Catégories principales de l’écosystème </h3>
+
+<p>Selon la documentation, Snowflake regroupe les outils de l’écosystème en plusieurs familles : [docs.snowflake.com] </p>
+    <dt style="margin-bottom: 0.0rem;"><h4>1. Data Integration (ETL / ELT) </h4>
+        <p>Inclut tous les outils qui extraient, transforment et chargent dans Snowflake, comme : </p>
+            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                <li style="margin-bottom: 0.5rem;">Airbyte </li>
+                <li style="margin-bottom: 0.5rem;">AWS Glue </li>
+                <li style="margin-bottom: 0.5rem;">Azure Data Factory </li>
+                <li style="margin-bottom: 0.5rem;">Boomi </li>
+                <li style="margin-bottom: 0.5rem;">Artie </li>
+                <li style="margin-bottom: 0.5rem;">Ascend.io </li>
+                <li style="margin-bottom: 0.5rem;">… ainsi que tous les connecteurs supportant Snowflake en destination ou en source. </li>
+           </ul>     
+        <p>Ces outils fournissent connectivité native, souvent validée via le Snowflake Ready Technology Validation Program. </p>
+    <dt style="margin-bottom: 0.0rem;"><h4>2. Business Intelligence (BI) </h4>
+        <p>Outils courants : </p>
+            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                <li style="margin-bottom: 0.5rem;">Tableau </li>
+                <li style="margin-bottom: 0.5rem;">Power BI </li>
+                <li style="margin-bottom: 0.5rem;">Looker </li>
+                <li style="margin-bottom: 0.5rem;">Sigma </li>
+                <li style="margin-bottom: 0.5rem;">Mode Analytics (Mentionnés sur les pages de l’écosystème général.) </li>
+           </ul> 
+    <dt style="margin-bottom: 0.0rem;"><h4>3. Machine Learning & Data Science </h4>
+        <p>Snowflake s'intègre avec : </p>
+            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                <li style="margin-bottom: 0.5rem;">Python (connecteur natif) </li>
+                <li style="margin-bottom: 0.5rem;">Spark (via Snowflake Connector for Spark) </li>
+                <li style="margin-bottom: 0.5rem;">Outils ML externes (Databricks, DataRobot, etc.) </li>
+                <li style="margin-bottom: 0.5rem;">Connecteurs dédiés dans les outils d'ingestion ou de traitement. </li>
+            </ul>
+    <dt style="margin-bottom: 0.0rem;"><h4>4. Security, Governance & Observability </h4>
+        <p>Outils de gouvernance / monitoring compatibles avec Snowflake. </p>
+    <dt style="margin-bottom: 0.0rem;"><h4>5. SQL Development & Management </h4>
+        <p>Outils permettant de développer SQL ou d’administrer Snowflake. </p>
+    <dt style="margin-bottom: 0.0rem;"><h4>6. Native Programmatic Interfaces </h4>
+        <p>Les interfaces Snowflake fournies directement : </p>
+            <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+                <li style="margin-bottom: 0.5rem;">SnowSQL (CLI) </li>
+                <li style="margin-bottom: 0.5rem;">Python Connector</li> 
+                <li style="margin-bottom: 0.5rem;">Spark Connector </li>
+                <li style="margin-bottom: 0.5rem;">JDBC / ODBC drivers </li>
+                <li style="margin-bottom: 0.5rem;">Node.js driver [docs.snowflake.com] </li>
+            </ul>
+
+
+    
+ 
+
+<h3><i class="fas book-reader"></i>3. 🔌 Applications & outils fournis par Snowflake </h3>
+    <p>Les clients Snowflake officiels sont :</p>
+     <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+        <li style="margin-bottom: 0.5rem;">Snowflake CLI </li>
+        <li style="margin-bottom: 0.5rem;">SnowSQL (client en ligne de commande) </li>
+        <li style="margin-bottom: 0.5rem;">Connecteurs : Python, Spark </li>
+        <li style="margin-bottom: 0.5rem;">Drivers : Node.js, JDBC, ODBC [docs.snowflake.com] </li>
+        </ul>
+    <p>Ces outils servent à automatiser, développer ou administrer Snowflake. </p>
+
+ 
+ 
+
+<h3><i class="fas book-reader"></i>4. 🤝 Partenaires & Technologies certifiées </h3>
+    <p>Snowflake dispose de : </p>
+     <ul style="margin-left: 7rem; margin-bottom: 1.5rem;">                                           
+        <li style="margin-bottom: 0.5rem;">Partenaires certifiés proposant des solutions cloud ou on‑premises pour se connecter à Snowflake (ETL, BI, ML, observabilité, etc.). </li>
+        <li style="margin-bottom: 0.5rem;">Un réseau étendu via Snowflake Partner Connect pour simplifier l’intégration. </li>
+        <li style="margin-bottom: 0.5rem;">Une validation officielle appelée Snowflake Ready Technology Validation Program, garantissant compatibilité et bonnes pratiques. [docs.snowflake.com], [docs.snowflake.com] </li>
+</ul>
+    <p>Cette certification garantit que les solutions tierces sont fiables pour une intégration Snowflake. </p>
+                    </section>
