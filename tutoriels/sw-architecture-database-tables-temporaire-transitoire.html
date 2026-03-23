@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Tables Temporaires et Transitoires | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Tables Temporaires et Transitoires</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#objectifs" class="active">
+                                <i class="fas fa-bullseye"></i>Objectifs du tutoriel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#vue-ensemble">
+                                <i class="fas fa-globe"></i>1. Vue d'ensemble
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#temporary-tables">
+                                <i class="fas fa-hourglass-half"></i>2. Temporary Tables
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#transient-tables">
+                                <i class="fas fa-cloud-sun"></i>3. Transient Tables
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#comparaison">
+                                <i class="fas fa-chart-simple"></i>4. Comparaison synthétique
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#points-essentiels">
+                                <i class="fas fa-lightbulb"></i>5. Points essentiels
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Architecture Snowflake - Tables Temporaires et Tables Transitoires</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 10 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab snowflake-icon"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-gears"></i> Data Engineering
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION: OBJECTIFS
+                    ============================================ -->
+                    <section id="objectifs" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-book-reader"></i> Objectifs du tutoriel
+                        </h2>
+                        <p>
+                            Snowflake propose, en plus des <b>permanent tables</b>, deux types de tables conçues 
+                            pour les données temporaires : <b>temporary</b> et <b>transient tables</b>. 
+                            Elles jouent un rôle essentiel dans la gestion du cycle de vie, du coût 
+                            et de la récupération des données.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 1: VUE D'ENSEMBLE
+                    ============================================ -->
+                    <section id="vue-ensemble" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-globe"></i> 1. Vue d'ensemble
+                        </h2>
+                        <p>Snowflake supporte trois types principaux de tables :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Permanent (par défaut)</li>
+                            <li>Transient</li>
+                            <li>Temporary</li>
+                        </ul>
+
+                        <p>
+                            Temporary & transient tables servent à stocker des données 
+                            <b>non destinées à être conservées à long terme</b>.
+                        </p>
+
+                        <p>
+                            Il est <b>impossible</b> de créer des <b>hybrid tables</b> dans un schéma 
+                            ou une base transient, ni de créer des hybrid tables de type 
+                            <b>temporary ou transient</b>.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: TEMPORARY TABLES
+                    ============================================ -->
+                    <section id="temporary-tables" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-hourglass-half"></i> 2. Temporary Tables
+                        </h2>
+
+                        <h3>Caractéristiques principales</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Visible <b>uniquement dans la session</b> qui les crée.
+                            </li>
+                            <li>
+                                Persistantes uniquement pour la <b>durée de la session</b> 
+                                → supprimées automatiquement à la fermeture de la session.
+                            </li>
+                            <li>
+                                <b>Non visibles</b> par d’autres utilisateurs ou sessions.
+                            </li>
+                            <li>
+                                <b>Données non récupérables</b> après fin de session 
+                                (ni via Time Travel, ni Fail-safe).
+                            </li>
+                        </ul>
+
+                        <h3>Stockage / facturation</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Les données sont facturées tant que la table existe.
+                            </li>
+                            <li>
+                                Recommandation : <b>drop</b> explicitement les tables avant la fin 
+                                de la session pour éviter des coûts inattendus (sessions actives longtemps).
+                            </li>
+                        </ul>
+
+                        <h3>Maintenance et bonnes pratiques</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Ne pas laisser trop de temporary tables actives 
+                                → peut dégrader les performances des vues INFORMATION_SCHEMA (TABLES, COLUMNS).
+                            </li>
+                            <li>
+                                Assurer que les utilisateurs <b>ferment bien leurs sessions</b> inactives.
+                            </li>
+                        </ul>
+
+                        <h3>Conflits de nom</h3>
+                        <p>
+                            On peut créer une temporary table <b>avec le même nom</b> qu’une table 
+                            permanente/transient existante dans le même schéma → la temporary table 
+                            prend <b>la priorité dans la session</b>.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: TRANSIENT TABLES
+                    ============================================ -->
+                    <section id="transient-tables" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cloud-sun"></i> 3. Transient Tables
+                        </h2>
+
+                        <h3>Caractéristiques principales</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Tables persistantes <b>au-delà de la session</b>, sauf suppression explicite.
+                            </li>
+                            <li>
+                                Moins coûteuses que les permanent tables.
+                            </li>
+                            <li>
+                                Conçues pour des données <b>intermédiaires</b>, de transformation ou staging.
+                            </li>
+                        </ul>
+
+                        <h3>Récupération / protection</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                <b>Fail-safe NON pris en charge</b>.
+                            </li>
+                            <li>
+                                <b>Time Travel</b> disponible, mais avec une rétention 
+                                <b>réduite</b> (souvent 0–1 jour).
+                            </li>
+                        </ul>
+
+                        <h3>Schémas et bases transitoires</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                On peut créer des <b>schemas</b> et <b>databases transient</b>, 
+                                dans lesquels <b>toutes les tables créées deviennent automatiquement transient</b>.
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: COMPARAISON SYNTHÉTIQUE
+                    ============================================ -->
+                    <section id="comparaison" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-simple"></i> 4. Temporary vs Transient — Comparaison synthétique
+                        </h2>
+
+                        <table class="tutorial-table">
+                            <thead>
+                                <tr>
+                                    <th>Critère</th>
+                                    <th>Table Temporaire</th>
+                                    <th>Table Transitoire</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Durée de vie</td>
+                                    <td>Session uniquement</td>
+                                    <td>Persistante (jusqu'au DROP)</td>
+                                </tr>
+                                <tr>
+                                    <td>Visibilité</td>
+                                    <td>Session locale uniquement</td>
+                                    <td>Tous les utilisateurs autorisés</td>
+                                </tr>
+                                <tr>
+                                    <td>Time Travel</td>
+                                    <td>❌ Non</td>
+                                    <td>✔ Oui (limité)</td>
+                                </tr>
+                                <tr>
+                                    <td>Fail-safe</td>
+                                    <td>❌ Non</td>
+                                    <td>❌ Non</td>
+                                </tr>
+                                <tr>
+                                    <td>Coût</td>
+                                    <td>Bas</td>
+                                    <td>Moyen (moins que permanent)</td>
+                                </tr>
+                                <tr>
+                                    <td>Usage recommandé</td>
+                                    <td>ETL court, calcul temporaire, staging de session</td>
+                                    <td>Staging durable, transformations intermédiaires</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: POINTS ESSENTIELS
+                    ============================================ -->
+                    <section id="points-essentiels" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-lightbulb"></i> 5. Autres points essentiels
+                        </h2>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Temporary & transient tables participent à la facturation 
+                                du stockage tant qu'elles existent.
+                            </li>
+                            <li>
+                                Temporary tables → jamais récupérables.
+                            </li>
+                            <li>
+                                Transient tables → aucune protection Fail-safe.
+                            </li>
+                            <li>
+                                Impossible de convertir une transient/temporary table en un autre type.
+                                <br>
+                                <small>(Provenant des bonnes pratiques et limitations liées à la documentation secondaire.)</small>
+                            </li>
+                        </ul>
+
+                        <h3>Best practices :</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Drop temporaire pour éviter surcharge INFORMATION_SCHEMA.
+                            </li>
+                            <li>
+                                Éviter la duplication de nom entre tables permanentes & temporaires.
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

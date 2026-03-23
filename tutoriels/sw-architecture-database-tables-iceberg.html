@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Apache Iceberg Tables | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Apache Iceberg Tables</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#definition-objectif" class="active">
+                                <i class="fas fa-bullseye"></i>1. Définition & Objectif
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#architecture">
+                                <i class="fas fa-cubes"></i>2. Architecture & Fonctionnement
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#types">
+                                <i class="fas fa-table"></i>3. Types d'Iceberg Tables
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#creation">
+                                <i class="fas fa-plus-circle"></i>4. Création d'une Iceberg Table
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#requetage-dml">
+                                <i class="fas fa-database"></i>5. Requêtage & DML
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#refresh-metadata">
+                                <i class="fas fa-sync"></i>6. Refresh & Metadata
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#optimisation">
+                                <i class="fas fa-chart-line"></i>7. Optimisation & Best Practices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#iceberg-v3">
+                                <i class="fas fa-star"></i>8. Iceberg v3 (Preview)
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Apache Iceberg™ Tables</h1>
+
+                        <span class="level-badge">Niveau Intermédiaire</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 20 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab fa-snowflake"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-database"></i>Apache Iceberg
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION & OBJECTIF
+                    ============================================ -->
+                    <section id="definition-objectif" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cubes"></i>1. Définition & Objectif
+                        </h2>
+
+                        <p>Les <b>Iceberg Tables</b> dans Snowflake combinent :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>La <b>performance</b> et les <b>sémantiques de requête</b> des tables Snowflake</li>
+                            <li>Avec un <b>stockage externe</b> dans votre propre cloud (S3, GCS, Azure)</li>
+                        </ul>
+
+                        <p>Elles utilisent le format <b>Apache Iceberg</b>, qui offre :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>ACID transactions</b></li>
+                            <li><b>Évolution de schéma</b></li>
+                            <li><b>Hidden partitioning</b></li>
+                            <li><b>Table snapshots</b> <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+
+                        <p>Elles sont idéales pour :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Les <b>data lakes existants</b></li>
+                            <li>Les cas où les données doivent <b>rester hors Snowflake</b></li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: ARCHITECTURE & FONCTIONNEMENT
+                    ============================================ -->
+                    <section id="architecture" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cubes"></i>2. Architecture & Fonctionnement
+                        </h2>
+
+                        <h3>Stockage</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Données et metadata stockées dans un <b>stockage cloud externe</b> 
+                                (S3, GCS, Azure) que <b>vous gérez</b>.
+                            </li>
+                            <li>
+                                Pas de stockage Snowflake → <b>pas de coût de stockage Snowflake</b>.
+                            </li>
+                            <li>
+                                <b>Pas de Fail-safe</b> pour Iceberg tables.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>External Volume</h3>
+
+                        <p>Un <b>external volume</b> est un objet Snowflake permettant :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>De connecter Snowflake au stockage externe</li>
+                            <li>D'y stocker les IAM (permissions cloud)</li>
+                            <li>De desservir une ou plusieurs Iceberg tables
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Iceberg Catalog</h3>
+
+                        <p>Le catalog gère les pointeurs vers la metadata Iceberg.</p>
+
+                        <p>Il doit permettre :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Stocker le pointeur de metadata</li>
+                            <li>Assurer des opérations atomiques</li>
+                        </ul>
+
+                        <p>Types possibles :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowflake Catalog (Snowflake‑managed)</li>
+                            <li>External Catalog (AWS Glue, etc.)
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: TYPES D'ICEBERG TABLES
+                    ============================================ -->
+                    <section id="types" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-table"></i>3. Types d'Iceberg Tables dans Snowflake
+                        </h2>
+
+                        <h3>1) Snowflake‑managed Iceberg tables</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowflake sert de <b>catalog</b></li>
+                            <li>Vous fournissez :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                    <li>un external volume</li>
+                                    <li>un répertoire base</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Supportent le <b>DML complet</b> : INSERT, MERGE, UPDATE, DELETE, TRUNCATE
+                            </li>
+                            <li>
+                                Supportent <b>Snowpipe</b>, COPY INTO…
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>2) Externally‑managed Iceberg tables</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Le catalog externe (Glue, Nessie, etc.) est utilisé</li>
+                            <li>Nécessite <b>metadata refresh</b> régulier</li>
+                            <li>
+                                Prise en charge du DML limitée selon architecture
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: CRÉATION D'UNE ICEBERG TABLE
+                    ============================================ -->
+                    <section id="creation" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-plus-circle"></i>4. Création d'une Iceberg Table
+                        </h2>
+
+                        <p>Nécessite :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Un <b>warehouse Snowflake actif</b>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Exemple Snowflake‑managed</h3>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE OR REPLACE ICEBERG TABLE my_iceberg_table (
+    boolean_col boolean,
+    int_col int,
+    long_col long
+)
+PARTITION BY (int_col)
+CATALOG = 'SNOWFLAKE'
+EXTERNAL_VOLUME = 'my_ext_vol'
+BASE_LOCATION = 'my/relative/path/from/extvol';</code></pre>
+                        </div>
+
+                        <span class="reference">[docs.snowflake.com]</span>
+
+                        <h3>Variantes</h3>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE ICEBERG TABLE … AS SELECT
+CREATE ICEBERG TABLE … LIKE [docs.snowflake.com]</code></pre>
+                        </div>
+
+                        <h3>External catalog</h3>
+
+                        <p>Nécessite :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>External volume</li>
+                            <li>Catalog integration</li>
+                            <li>
+                                Refresh initial automatique
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: REQUÊTAGE & DML
+                    ============================================ -->
+                    <section id="requetage-dml" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-database"></i>5. Requêtage & DML
+                        </h2>
+
+                        <h3>Privileges nécessaires</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>USAGE sur database + schema</li>
+                            <li>
+                                SELECT sur la table
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>DML supporté</h3>
+
+                        <p>Pour Snowflake‑managed tables :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>INSERT</li>
+                            <li>UPDATE</li>
+                            <li>MERGE</li>
+                            <li>DELETE</li>
+                            <li>
+                                TRUNCATE
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Attention aux orphan files</h3>
+
+                        <p>
+                            En cas de rollback, des fichiers Parquet peuvent rester dans le storage 
+                            sans être référencés → <b>orphan files</b>.
+                        </p>
+
+                        <p>
+                            Si mismatch sur métriques de stockage, contacter Snowflake Support.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 6: REFRESH & METADATA
+                    ============================================ -->
+                    <section id="refresh-metadata" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-sync"></i>6. Refresh & Metadata
+                        </h2>
+
+                        <h3>Metadata & snapshots</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Snowflake génère automatiquement la metadata dans /metadata 
+                                pour Snowflake‑managed tables.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>External catalog → Refresh obligatoire</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Après opérations de maintenance Iceberg 
+                                (snapshot expiration, compaction, etc.)
+                            </li>
+                            <li>
+                                Utiliser ALTER ICEBERG TABLE … REFRESH
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 7: OPTIMISATION & BEST PRACTICES
+                    ============================================ -->
+                    <section id="optimisation" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-line"></i>7. Optimisation & Best Practices
+                        </h2>
+
+                        <p>Sources : <span class="reference">[docs.snowflake.com]</span></p>
+
+                        <h3>A. Gestion des External Volumes</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Un seul volume peut héberger plusieurs tables</li>
+                            <li>Mais créer plusieurs volumes permet d'isoler sécurité & organisation</li>
+                        </ul>
+
+                        <h3>B. Options recommandées pour Parquet (COPY/Snowpipe)</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>BINARY_AS_TEXT = FALSE</li>
+                            <li>USE_LOGICAL_TYPE = TRUE</li>
+                            <li>USE_VECTORIZED_SCANNER = TRUE</li>
+                            <li>REPLACE_INVALID_CHARACTERS = TRUE</li>
+                        </ul>
+
+                        <h3>C. Refresh des tables externes</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Faire des refresh fréquents pour maintenir les performances</li>
+                            <li>Alignement avec compaction & expiration de snapshots</li>
+                        </ul>
+
+                        <h3>D. Statistiques complètes dans Parquet</h3>
+
+                        <p>Indispensables pour :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Optimiser les joins</li>
+                            <li>Éviter join explosion</li>
+                        </ul>
+
+                        <p>Statistiques nécessaires :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>min/max</li>
+                            <li>NDV (distinct values)</li>
+                            <li>NULL counts</li>
+                        </ul>
+
+                        <h3>E. Taille de warehouse</h3>
+
+                        <p>Augmenter la taille du warehouse améliore :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Lecture des manifest files</li>
+                            <li>Traitement des statistiques externes</li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 8: ICEBERG V3 (PREVIEW)
+                    ============================================ -->
+                    <section id="iceberg-v3" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-star"></i>8. Iceberg v3 (Preview) – Notions à connaître
+                        </h2>
+
+                        <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowflake supporte le format Iceberg v3 en preview</li>
+                            <li>
+                                Nouveaux types supportés : geography, geometry, nanosecond timestamps, variant
+                            </li>
+                            <li>
+                                Peut choisir la version via :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                    <li>ICEBERG_VERSION_DEFAULT paramètre</li>
+                                    <li>ICEBERG_VERSION = 3 dans CREATE ICEBERG TABLE</li>
+                                </ul>
+                            </li>
+                            <li>Attention : <b>downgrade impossible</b></li>
+                            <li>Tous les moteurs doivent supporter v3 avant migration</li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

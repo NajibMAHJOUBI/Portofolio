@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Views | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Views</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#definition-view" class="active">
+                                <i class="fas fa-eye"></i>1. Définition d'une View
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#fonctionnement">
+                                <i class="fas fa-cogs"></i>2. Fonctionnement général
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#types-vues">
+                                <i class="fas fa-table"></i>3. Types de Vues dans Snowflake
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#creation-view">
+                                <i class="fas fa-plus-circle"></i>4. Création d'une Vue
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#usages-typiques">
+                                <i class="fas fa-lightbulb"></i>5. Usages typiques des Vues
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#bonnes-pratiques">
+                                <i class="fas fa-check-circle"></i>6. Syntaxe & Bonnes pratiques
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Views</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 15 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab snowflake-icon"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-database"></i>Views
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION D'UNE VIEW
+                    ============================================ -->
+                    <section id="definition-view" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-eye"></i>1. Définition d'une View
+                        </h2>
+
+                        <p>
+                            Une view est un objet Snowflake qui expose le <b>résultat d'une requête SQL</b> 
+                            comme s'il s'agissait d'une table.
+                        </p>
+
+                        <p>
+                            La définition de la vue est fournie via la commande <b>CREATE VIEW</b>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <p><b>Objectifs des vues</b> :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Combiner des données</li>
+                            <li>Séparer des données selon les besoins utilisateurs</li>
+                            <li>
+                                Protéger des données sensibles (ex. masquage via une vue partielle)
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>
+                            Exemple d'usage : créer un jeu de vues différentes pour des rôles internes 
+                            (ex. médecins vs comptables).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: FONCTIONNEMENT GÉNÉRAL
+                    ============================================ -->
+                    <section id="fonctionnement" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cogs"></i>2. Fonctionnement général
+                        </h2>
+
+                        <h3>Les vues peuvent être utilisées comme des tables</h3>
+
+                        <p>Elles sont utilisables dans :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>des JOIN</li>
+                            <li>des sous‑requêtes</li>
+                            <li>
+                                des requêtes analytiques
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Noms qualifiés</h3>
+
+                        <p>Une vue peut référencer une table via :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>nom totalement qualifié : db.schema.table</li>
+                            <li>partiellement qualifié : schema.table</li>
+                            <li>
+                                non qualifié : table<br>
+                                Si le schéma n'est pas précisé, Snowflake cherche la table 
+                                <b>dans le même schéma que la vue</b>, pas dans le schéma actif.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: TYPES DE VUES DANS SNOWFLAKE
+                    ============================================ -->
+                    <section id="types-vues" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-table"></i>3. Types de Vues dans Snowflake
+                        </h2>
+
+                        <p>
+                            Snowflake distingue <b>deux types principaux</b> :
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>1️⃣ Non‑Materialized Views (vues classiques)</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Basées sur une définition de requête réévaluée à chaque exécution.</li>
+                            <li>Peuvent être lentes si la requête est lourde.</li>
+                            <li>N'occupent presque pas de stockage (seule la définition SQL est stockée).</li>
+                        </ul>
+
+                        <h3>2️⃣ Materialized Views</h3>
+
+                        <p>Bien que mentionnées dans la page, leur détail se trouve ailleurs, mais à retenir :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Stockent les résultats matérialisés.</li>
+                            <li>Nécessitent du stockage Snowflake.</li>
+                            <li>Accélèrent les requêtes répétitives.</li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: CRÉATION D'UNE VUE
+                    ============================================ -->
+                    <section id="creation-view" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-plus-circle"></i>4. Création d'une Vue
+                        </h2>
+
+                        <h3>Commande CREATE VIEW</h3>
+
+                        <p>Exemples tirés de la documentation :
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE VIEW doctor_view AS
+SELECT patient_id, patient_name, diagnosis, treatment
+FROM hospital_table;
+
+CREATE VIEW accountant_view AS
+SELECT patient_id, patient_name, billing_address, cost
+FROM hospital_table;</code></pre>
+                        </div>
+
+                        <p>
+                            Ces vues permettent de <b>segmenter l'information selon les rôles</b> des utilisateurs.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: USAGES TYPIQUES DES VUES
+                    ============================================ -->
+                    <section id="usages-typiques" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-lightbulb"></i>5. Usages typiques des Vues
+                        </h2>
+
+                        <h3>A. Ségrégation des données</h3>
+                        <p>
+                            Exposer des colonnes différentes pour différentes catégories d'utilisateurs.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>B. Abstraction</h3>
+                        <p>Présenter une interface stable même si les tables sous-jacentes changent.</p>
+
+                        <h3>C. Sécurité</h3>
+                        <p>Restreindre l'accès aux données sensibles via une vue filtrée.</p>
+
+                        <h3>D. Simplification</h3>
+                        <p>Permet de masquer des jointures ou de la logique complexe.</p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 6: SYNTAXE & BONNES PRATIQUES
+                    ============================================ -->
+                    <section id="bonnes-pratiques" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-check-circle"></i>6. Syntaxe & Bonnes pratiques
+                        </h2>
+
+                        <h3>Nommer clairement les vues</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Exemple : vw_sales, vw_customer_public.</li>
+                        </ul>
+
+                        <h3>Éviter les vues profondément imbriquées</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Pour des raisons de performance (chaînes de dépendances longues).</li>
+                        </ul>
+
+                        <h3>Utiliser des noms qualifiés dans CREATE VIEW</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Évite les comportements imprévisibles si l'utilisateur change de schéma actif.</li>
+                        </ul>
+
+                        <h3>Attention aux évolutions des tables sous-jacentes</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Une modification de table peut casser une vue si des colonnes disparaissent.
+                            </li>
+                            <li>
+                                La documentation souligne implicitement l'importance du nommage explicite 
+                                dans CREATE VIEW.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

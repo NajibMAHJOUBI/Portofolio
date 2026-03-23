@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Secure Views | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Secure Views</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#definition-secure-views" class="active">
+                                <i class="fas fa-eye"></i>1. Définition & Objectif des Secure Views
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#risques">
+                                <i class="fas fa-exclamation-triangle"></i>2. Risques liés aux vues non sécurisées
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#quand-utiliser">
+                                <i class="fas fa-question-circle"></i>3. Quand utiliser une Secure View ?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#syntaxe-creation">
+                                <i class="fas fa-code"></i>4. Syntaxe & Création d'une Secure View
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#visibilite">
+                                <i class="fas fa-lock"></i>5. Visibilité & Confidentialité
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#data-sharing">
+                                <i class="fas fa-share-alt"></i>6. Secure Views et Data Sharing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#performance">
+                                <i class="fas fa-chart-line"></i>7. Performance
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Secure Views</h1>
+
+                        <span class="level-badge">Niveau Intermédiaire</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 15 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab snowflake-icon"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-shield-alt"></i>Secure Views
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION & OBJECTIF DES SECURE VIEWS
+                    ============================================ -->
+                    <section id="definition-secure-views" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-eye"></i>1. Définition & Objectif des Secure Views
+                        </h2>
+
+                        <p>
+                            Une <b>Secure View</b> est une vue Snowflake dont la définition et les optimisations internes
+                            sont restreintes afin d'éviter toute fuite d'information. Snowflake garantit ainsi :
+                        </p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Que <b>les utilisateurs ne peuvent pas accéder aux données sous-jacentes</b> 
+                                autrement que via la vue, même indirectement.
+                            </li>
+                            <li>
+                                Que <b>la définition de la vue (le texte SQL)</b> n'est visible 
+                                <b>que par les rôles autorisés</b>.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Pourquoi des Secure Views ?</h3>
+
+                        <p>Les vues non sécurisées peuvent exposer des données en raison :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>d'optimisations internes nécessitant l'accès aux tables sources,</li>
+                            <li>
+                                d'erreurs générées par du code utilisateur permettant d'inférer l'existence 
+                                de données sensibles (ex : division par zéro dans une logique conditionnelle).
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>Les Secure Views désactivent ces optimisations pour empêcher ces fuites.</p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: RISQUES LIÉS AUX VUES NON SÉCURISÉES
+                    ============================================ -->
+                    <section id="risques" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-exclamation-triangle"></i>2. Risques liés aux vues non sécurisées
+                        </h2>
+
+                        <p>Snowflake illustre le risque par un exemple :</p>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>SELECT *
+FROM widgets_view
+WHERE 1/iff(color = 'Purple', 0, 1) = 1;</code></pre>
+                        </div>
+
+                        <p>
+                            Si la couleur "Purple" existe en base, la division par zéro déclenche une erreur 
+                            → l'utilisateur <b>infère</b> l'existence d'une donnée à laquelle il n'a pas accès.
+                        </p>
+
+                        <p>
+                            Les Secure Views évitent ce scénario.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: QUAND UTILISER UNE SECURE VIEW ?
+                    ============================================ -->
+                    <section id="quand-utiliser" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-question-circle"></i>3. Quand utiliser une Secure View ?
+                        </h2>
+
+                        <p>Utilisation recommandée lorsque :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>on expose des <b>données sensibles</b>,</li>
+                            <li>
+                                on souhaite <b>empêcher la révélation de la logique interne</b> 
+                                ou des structures sous-jacentes,
+                            </li>
+                            <li>
+                                les vues sont utilisées dans des contextes de <b>data sharing</b> 
+                                entre comptes Snowflake,
+                            </li>
+                            <li>
+                                les vues servent de <b>barrière de sécurité</b>, et non simplement de 
+                                simplification de requêtes.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p><b>Attention :</b></p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Les Secure Views peuvent être <b>moins performantes</b> que les vues classiques.
+                            </li>
+                            <li>
+                                Il faut arbitrer entre <b>confidentialité</b> et <b>performance</b>.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: SYNTAXE & CRÉATION D'UNE SECURE VIEW
+                    ============================================ -->
+                    <section id="syntaxe-creation" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-code"></i>4. Syntaxe & Création d'une Secure View
+                        </h2>
+
+                        <h3>Créer une Secure View</h3>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE OR REPLACE SECURE VIEW my_secure_view AS
+SELECT col1, col2
+FROM sensitive_table;</code></pre>
+                        </div>
+
+                        <h3>Convertir une vue existante</h3>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>ALTER VIEW my_view SET SECURE;</code></pre>
+                        </div>
+
+                        <h3>Revenir à une vue non sécurisée</h3>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>ALTER VIEW my_view UNSET SECURE;</code></pre>
+                        </div>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: VISIBILITÉ & CONFIDENTIALITÉ
+                    ============================================ -->
+                    <section id="visibilite" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-lock"></i>5. Visibilité & Confidentialité
+                        </h2>
+
+                        <p>Dans une Secure View :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                la définition de la vue <b>n'est visible que par le rôle propriétaire</b>,
+                            </li>
+                            <li>
+                                les autres utilisateurs ne peuvent pas l'obtenir via DESC VIEW, SHOW VIEWS, 
+                                ni d'autres interfaces,
+                            </li>
+                            <li>
+                                certaines erreurs sont <b>redactées (cachées)</b> pour empêcher des inférences 
+                                sur la structure ou le contenu.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 6: SECURE VIEWS ET DATA SHARING
+                    ============================================ -->
+                    <section id="data-sharing" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-share-alt"></i> 6. Secure Views et Data Sharing
+                        </h2>
+
+                        <p>
+                            Les Secure Views sont fortement recommandées lors du <b>Secure Data Sharing</b> 
+                            entre comptes Snowflake :
+                        </p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>elles évitent d'exposer la structure interne des tables,</li>
+                            <li>
+                                elles permettent de partager uniquement l'information autorisée 
+                                tout en protégeant le reste.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>Exemples :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>partager des données structurées via une Secure View</li>
+                            <li>
+                                partager des fichiers non structurés via une Secure View qui répond 
+                                par des scoped URLs ou pre-signed URLs
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 7: PERFORMANCE
+                    ============================================ -->
+                    <section id="performance" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-line"></i>7. Performance
+                        </h2>
+
+                        <p>Points clés :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Les Secure Views <b>désactivent certaines optimisations</b> internes 
+                                pour éviter des fuites → performances parfois plus faibles.
+                            </li>
+                            <li>
+                                À n'utiliser que lorsque la confidentialité prime.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>Lorsque les Secure Views sont utilisées pour des tables très volumineuses partagées :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                recommander l'utilisation de clustering keys sur les tables sous-jacentes 
+                                pour améliorer les performances côté consommateur.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Materialized Views | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Materialized Views</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#definition-mv" class="active">
+                                <i class="fas fa-database"></i>1. Définition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#fonctionnement-avantages">
+                                <i class="fas fa-cogs"></i>2. Fonctionnement et avantages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#limitations-couts">
+                                <i class="fas fa-exclamation-triangle"></i>3. Limitations et coûts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#quand-creer">
+                                <i class="fas fa-question-circle"></i>4. Quand créer une Materialized View ?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#syntaxe-creation">
+                                <i class="fas fa-code"></i>5. Syntaxe – Création d'une Materialized View
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#comparaison">
+                                <i class="fas fa-chart-simple"></i>6. Comparaison avec Views et Dynamic Tables
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Materialized Views</h1>
+
+                        <span class="level-badge">Niveau Intermédiaire</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 15 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab snowflake-icon"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-table"></i>Materialized Views
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION
+                    ============================================ -->
+                    <section id="definition-mv" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-database"></i>1. Définition
+                        </h2>
+
+                        <p>
+                            Une <b>Materialized View</b> est un ensemble de données <b>pré‑calculé</b> et <b>stocké</b>, 
+                            dérivé d'une requête SQL définie dans la vue (SELECT). 
+                            Contrairement aux vues standard, elle conserve physiquement les résultats.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>Objectif principal :</h3>
+
+                        <p>
+                            Accélérer les requêtes répétitives, coûteuses ou complexes grâce à l'utilisation 
+                            de résultats déjà matérialisés.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: FONCTIONNEMENT ET AVANTAGES
+                    ============================================ -->
+                    <section id="fonctionnement-avantages" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cogs"></i>2. Fonctionnement et avantages
+                        </h2>
+
+                        <h3>A. Performances</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Une materialized view est beaucoup plus rapide à interroger qu'une vue classique, 
+                                puisque les résultats sont pré‑calculés.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                            <li>
+                                Idéale pour :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                    <li>agrégations lourdes,</li>
+                                    <li>analyses de données semi‑structurées,</li>
+                                    <li>projections complexes,</li>
+                                    <li>
+                                        grandes tables ou tables externes (moins performantes).
+                                        <span class="reference">[docs.snowflake.com]</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>B. Maintenance automatique</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Snowflake met automatiquement la MV à jour après tout changement 
+                                dans la table sous‑jacente.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                            <li>
+                                Si une requête arrive avant la fin de la mise à jour :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                    <li>
+                                        Snowflake combine les parties à jour et les données de base manquantes.
+                                        <span class="reference">[docs.snowflake.com]</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>C. Données toujours actuelles</h3>
+
+                        <p>
+                            Les données de la MV reflètent toujours les derniers changements, 
+                            quelle que soit l'intensité du DML sur la table source.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>D. Caractéristiques spécifiques à Snowflake</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Maintenance en tâche de fond.</li>
+                            <li>
+                                Gestion transparente par le moteur Snowflake.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: LIMITATIONS ET COÛTS
+                    ============================================ -->
+                    <section id="limitations-couts" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-exclamation-triangle"></i>3. Limitations et coûts
+                        </h2>
+
+                        <h3>A. Édition requise</h3>
+
+                        <p>
+                            Les vues matérialisées nécessitent l'<b>Enterprise Edition</b>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>B. Coûts</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                La matérialisation + la maintenance automatique <b>consomment des crédits</b>.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                            <li>
+                                Les résultats pré‑calculés nécessitent du <b>stockage</b>.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>C. Limitations à considérer</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Peu adaptées si la table sous‑jacente change <b>très fréquemment</b>.
+                            </li>
+                            <li>
+                                Les résultats matérialisés doivent être réutilisés <b>suffisamment souvent</b> 
+                                pour compenser les coûts.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: QUAND CRÉER UNE MATERIALIZED VIEW ?
+                    ============================================ -->
+                    <section id="quand-creer" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-question-circle"></i>4. Quand créer une Materialized View ?
+                        </h2>
+
+                        <p>Pertinente lorsque :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                le résultat contient <b>beaucoup moins de lignes/colonnes</b> que la table source ;
+                            </li>
+                            <li>
+                                la transformation est <b>coûteuse</b> (semi‑structuré, gros agrégats) ;
+                            </li>
+                            <li>
+                                la table est <b>en externe</b> (S3, GCS) ;
+                            </li>
+                            <li>
+                                la table source ne change <b>pas trop fréquemment</b>.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: SYNTAXE – CRÉATION D'UNE MATERIALIZED VIEW
+                    ============================================ -->
+                    <section id="syntaxe-creation" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-code"></i>5. Syntaxe – Création d'une Materialized View
+                        </h2>
+
+                        <h3>Commande CREATE MATERIALIZED VIEW</h3>
+
+                        <span class="reference">[docs.snowflake.com]</span>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE OR REPLACE MATERIALIZED VIEW sales_mv
+AS
+SELECT customer_id, SUM(amount) AS total_amount
+FROM sales
+GROUP BY customer_id;</code></pre>
+                        </div>
+
+                        <h3>Options importantes :</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>SECURE possible</li>
+                            <li>CLUSTER BY pour optimiser l'accès</li>
+                            <li>
+                                Masquage, policies, tags, row access policy disponibles
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 6: COMPARAISON AVEC VIEWS ET DYNAMIC TABLES
+                    ============================================ -->
+                    <section id="comparaison" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-simple"></i>6. Comparaison avec Views et Dynamic Tables
+                        </h2>
+
+                        <p>
+                            Source comparative :
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <table class="tutorial-table">
+                            <thead>
+                                <tr>
+                                    <th>Objet</th>
+                                    <th>Avantages</th>
+                                    <th>Inconvénients</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>View</td>
+                                    <td>Simple, pas de stockage</td>
+                                    <td>Lent, exige du compute</td>
+                                </tr>
+                                <tr>
+                                    <td>Materialized View</td>
+                                    <td>Rapide, pré‑calculée, auto‑maintenue</td>
+                                    <td>Stockage + compute de maintenance</td>
+                                </tr>
+                                <tr>
+                                    <td>Dynamic Table</td>
+                                    <td>Très flexible, transformations complexes</td>
+                                    <td>Coûts de refresh, stockage, tuning nécessaire</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

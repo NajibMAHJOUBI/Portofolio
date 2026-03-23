@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - External Tables | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">External Tables</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#objectifs" class="active">
+                                <i class="fas fa-bullseye"></i>Objectifs du tutoriel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#definition">
+                                <i class="fas fa-question-circle"></i>1. Définition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#caracteristiques">
+                                <i class="fas fa-cogs"></i>2. Caractéristiques principales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#securite">
+                                <i class="fas fa-shield-alt"></i>3. Sécurité & connectivité
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gestion-erreur">
+                                <i class="fas fa-exclamation-triangle"></i>4. Comportement en cas d'erreur
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#schema-on-read">
+                                <i class="fas fa-table"></i>5. Schéma sur lecture
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#virtual-columns">
+                                <i class="fas fa-columns"></i>6. Virtual Columns
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#quand-utiliser">
+                                <i class="fas fa-lightbulb"></i>7. Quand utiliser ?
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 10 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - External Tables</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 10 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab fa-snowflake"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-gears"></i> Data Engineering
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION: OBJECTIFS
+                    ============================================ -->
+                    <section id="objectifs" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-book-reader"></i> Objectifs du tutoriel
+                        </h2>
+                        <p>
+                            Les <b>external tables</b> permettent de <b>requêter des données stockées hors de Snowflake</b> 
+                            (dans un external stage), comme si elles étaient stockées dans une table Snowflake 
+                            — sans déplacer les fichiers.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION
+                    ============================================ -->
+                    <section id="definition" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-question-circle"></i> 1. Définition
+                        </h2>
+
+                        <p>
+                            Une <b>external table</b> est un objet Snowflake qui référence des fichiers stockés 
+                            dans un <b>external stage</b> (S3, GCS, Azure Blob), tout en permettant de les requêter via SQL.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <p>
+                            Snowflake <b>ne stocke pas les données</b> des external tables :
+                        </p>
+
+                        <ul>
+                            <li>la donnée reste dans le <b>storage externe</b></li>
+                            <li>
+                                Snowflake stocke uniquement <b>des métadonnées au niveau fichier</b> 
+                                (filename, version, propriétés).
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: CARACTÉRISTIQUES PRINCIPALES
+                    ============================================ -->
+                    <section id="caracteristiques" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cogs"></i> 2. Caractéristiques principales
+                        </h2>
+
+                        <!-- Read-only -->
+                        <h3>✔ Read-only</h3>
+                        <p>Les external tables sont <strong>en lecture seule</strong> :</p>
+                        <ul>
+                            <li>Aucun DML possible (INSERT, UPDATE, DELETE)</li>
+                            <li>
+                                Elles servent uniquement à interroger et joindre les données.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <!-- Formats supportés -->
+                        <h3>✔ Formats supportés</h3>
+                        <p>
+                            Supporte tous les formats compatibles avec <code class="inline-code">COPY INTO</code> 
+                            <strong>sauf XML</strong>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <!-- Performance -->
+                        <h3>✔ Performance</h3>
+                        <ul>
+                            <li>
+                                Les requêtes peuvent être <strong>plus lentes</strong> que sur des Snowflake tables natives.
+                            </li>
+                            <li>
+                                Pour accélérer : créer une <strong>materialized view</strong> sur l'external table.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <div class="info-note">
+                            ▶ <strong>Recommandation :</strong> Snowflake recommande, pour Parquet, 
+                            de préférer <strong>Iceberg tables</strong> (plus performantes).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </div>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: SÉCURITÉ & CONNECTIVITÉ
+                    ============================================ -->
+                    <section id="securite" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-shield-alt"></i> 3. Sécurité & connectivité
+                        </h2>
+
+                        <p>
+                            L'external stage peut être configuré avec <strong>outbound private connectivity</strong> 
+                            pour renforcer la sécurité (accès privé aux fichiers).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: COMPORTEMENT EN CAS D'ERREUR
+                    ============================================ -->
+                    <section id="gestion-erreur" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-exclamation-triangle"></i> 4. Comportement en cas d'erreur
+                        </h2>
+
+                        <p>Si Snowflake rencontre une erreur en scannant un fichier :</p>
+
+                        <ul>
+                            <li>le fichier est <strong>ignoré</strong></li>
+                            <li>la requête continue avec les fichiers suivants</li>
+                            <li>
+                                résultat <strong>partiel possible</strong> (si scan incomplet).
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: SCHÉMA SUR LECTURE
+                    ============================================ -->
+                    <section id="schema-on-read" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-table"></i> 5. Schéma sur lecture (schema-on-read)
+                        </h2>
+
+                        <p>
+                            Lorsque Snowflake lit des external tables, il applique un <strong>schema-on-read</strong>, 
+                            c'est-à-dire que :
+                        </p>
+
+                        <ul>
+                            <li>Snowflake lit les fichiers <em>tels quels</em></li>
+                            <li>la structure <strong>n'a pas besoin d'être connue à l'avance</strong></li>
+                        </ul>
+
+                        <p>Toutes les external tables incluent automatiquement :</p>
+
+                        <ul>
+                            <li>
+                                <code class="inline-code">VALUE</code> 
+                                (colonne VARIANT représentant une ligne du fichier)
+                            </li>
+                            <li><code class="inline-code">METADATA$FILENAME</code></li>
+                            <li>
+                                <code class="inline-code">METADATA$FILE_ROW_NUMBER</code>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <div class="warning-note">
+                            ⚠ <strong>Attention :</strong> un <code class="inline-code">SELECT *</code> 
+                            retourne toujours la colonne <code class="inline-code">VALUE</code>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </div>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 6: VIRTUAL COLUMNS
+                    ============================================ -->
+                    <section id="virtual-columns" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-columns"></i> 6. Virtual Columns
+                        </h2>
+
+                        <p>
+                            Si on connaît la structure des fichiers, on peut créer des <strong>colonnes virtuelles</strong> 
+                            dans l'external table, via des expressions appliquées sur :
+                        </p>
+
+                        <ul>
+                            <li><code class="inline-code">VALUE</code></li>
+                            <li><code class="inline-code">METADATA$FILENAME</code></li>
+                            <li>
+                                <code class="inline-code">METADATA$FILE_ROW_NUMBER</code>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>
+                            Snowflake impose un <strong>type checking strict</strong> : les types des colonnes virtuelles 
+                            doivent correspondre aux données dans les fichiers.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 7: QUAND UTILISER
+                    ============================================ -->
+                    <section id="quand-utiliser" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-lightbulb"></i> 7. Quand utiliser les external tables ?
+                        </h2>
+
+                        <div class="grid-2cols">
+                            <div class="usage-card">
+                                <h3>🔹 Utilisations idéales</h3>
+                                <ul>
+                                    <li>Interroger un <strong>data lake</strong> directement (S3/GCS/Azure Blob)</li>
+                                    <li>Joindre datasets externes <strong>sans ingestion préalable</strong></li>
+                                    <li>Utiliser Snowflake comme <strong>moteur SQL</strong> sur des fichiers non chargés</li>
+                                </ul>
+                            </div>
+
+                            <div class="usage-card">
+                                <h3>🔹 À éviter</h3>
+                                <p>Si vous avez besoin :</p>
+                                <ul>
+                                    <li>de <strong>DML</strong> (INSERT, UPDATE, DELETE)</li>
+                                    <li>
+                                        de <strong>performance élevée</strong> 
+                                        → préférer <strong>Snowflake tables</strong> ou <strong>Iceberg tables</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

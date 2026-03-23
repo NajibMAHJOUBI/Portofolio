@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Bonnes pratiques pour la conception de tables | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Bonnes pratiques pour la conception de tables</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#principes-generaux" class="active">
+                                <i class="fas fa-cubes"></i>1. Principes généraux de conception des tables
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#types-donnees">
+                                <i class="fas fa-database"></i>2. Types de données : recommandations essentielles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contraintes">
+                                <i class="fas fa-lock"></i>3. Contraintes (Constraints) dans Snowflake
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#modelisation">
+                                <i class="fas fa-chart-line"></i>4. Bonnes pratiques pour la modélisation
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Bonnes pratiques pour la conception de tables</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 15 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab fa-snowflake"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-table"></i>Table Design
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: PRINCIPES GÉNÉRAUX DE CONCEPTION DES TABLES
+                    ============================================ -->
+                    <section id="principes-generaux" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cubes"></i> ✅ 1. Principes généraux de conception des tables
+                        </h2>
+
+                        <p>
+                            La page "Table Design Considerations" présente les <b>bonnes pratiques</b> et <b>directives essentielles</b> 
+                            pour structurer efficacement les tables Snowflake. Elle couvre les points suivants :
+                        </p>
+
+                        <ul>
+                            <li>choix des types de données,</li>
+                            <li>utilisation des contraintes,</li>
+                            <li>implications pour les outils BI,</li>
+                            <li>bonnes pratiques de modélisation.</li>
+                        </ul>
+
+                        <p>
+                            Cette section est centrale pour l'examen SnowPro Core.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: TYPES DE DONNÉES - RECOMMANDATIONS ESSENTIELLES
+                    ============================================ -->
+                    <section id="types-donnees" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-database"></i> ✅ 2. Types de données : recommandations essentielles
+                        </h2>
+
+                        <h3>✔ Utiliser systématiquement des types DATE / TIMESTAMP</h3>
+
+                        <ul>
+                            <li>
+                                Snowflake recommande fortement d'utiliser DATE ou TIMESTAMP 
+                                plutôt que VARCHAR pour stocker des dates.
+                            </li>
+                            <li>
+                                Pourquoi ?
+                                <ul>
+                                    <li>stockage plus efficace,</li>
+                                    <li>
+                                        performances de requêtage améliorées.
+                                        <span class="reference">[docs.snowflake.com]</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>✔ Choisir la granularité adéquate</h3>
+
+                        <p>Exemples :</p>
+
+                        <ul>
+                            <li>DATE pour des données journalières,</li>
+                            <li>
+                                TIMESTAMP_NTZ/LTZ/TZ pour des données incluant fuseaux horaires.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: CONTRAINTES (CONSTRAINTS) DANS SNOWFLAKE
+                    ============================================ -->
+                    <section id="contraintes" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-lock"></i> ✅ 3. Contraintes (Constraints) dans Snowflake
+                        </h2>
+
+                        <h3>✔ NOT NULL est la seule contrainte réellement enforcée sur les tables standard</h3>
+
+                        <ul>
+                            <li>
+                                Dans les tables standard, les contraintes PK/FK sont informational only 
+                                → elles ne sont pas appliquées, mais stockées comme métadonnées.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>✔ Les contraintes sont enforcées uniquement sur les Hybrid Tables</h3>
+
+                        <ul>
+                            <li>
+                                Les primary keys, unique keys et foreign keys y sont appliquées strictement.
+                                (Info mentionnée dans le contexte des contraintes.)
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>✔ Valeur des contraintes même non-enforcées</h3>
+
+                        <p>Elles restent très utiles car :</p>
+
+                        <ul>
+                            <li>décrivent le modèle logique,</li>
+                            <li>aident les équipes BI à comprendre les relations,</li>
+                            <li>certains outils BI importent automatiquement les FKs et créent les jointures automatiquement,</li>
+                            <li>
+                                certains moteurs BI peuvent exploiter les PK/FK pour optimiser les requêtes (ex : join elimination).
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>✔ Déclaration des contraintes</h3>
+
+                        <p>Utiliser :</p>
+
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>CREATE TABLE ... CONSTRAINT ...
+ALTER TABLE ... ADD CONSTRAINT ...</code></pre>
+                        </div>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: BONNES PRATIQUES POUR LA MODÉLISATION
+                    ============================================ -->
+                    <section id="modelisation" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-line"></i> ✅ 4. Bonnes pratiques pour la modélisation
+                        </h2>
+
+                        <h3>✔ Utiliser les PK/FK pour clarifier la structure</h3>
+
+                        <p>Même si elles ne sont pas enforcées, les déclarer :</p>
+
+                        <ul>
+                            <li>améliore la qualité du modèle,</li>
+                            <li>évite les erreurs dans les outils BI,</li>
+                            <li>
+                                facilite le maintien des schémas.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>✔ Utiliser GET_DDL pour documenter les tables</h3>
+
+                        <ul>
+                            <li>
+                                Snowflake permet de récupérer un DDL complet, incluant les contraintes existantes.
+                            </li>
+                            <li>
+                                Utile pour documenter et versionner votre modèle.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
