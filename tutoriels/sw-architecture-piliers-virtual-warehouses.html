@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Virtual Warehouses | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Virtual Warehouses</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectifs" class="active">
+                            <i class="fas fa-bullseye"></i>Objectifs du tutoriel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition">
+                            <i class="fas fa-cube"></i>1. Définition d'un Virtual Warehouse
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-warehouses">
+                            <i class="fas fa-tags"></i>2. Types de Warehouses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tailles-warehouses">
+                            <i class="fas fa-chart-simple"></i>3. Tailles des Warehouses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#multi-cluster">
+                            <i class="fas fa-layer-group"></i>4. Multi‑Cluster Warehouses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#proprietes">
+                            <i class="fas fa-sliders-h"></i>5. Propriétés importantes d'un Warehouse
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#gen1-gen2">
+                            <i class="fas fa-rocket"></i>6. Gen1 vs Gen2 Warehouses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation">
+                            <i class="fas fa-coins"></i>7. Facturation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#query-acceleration">
+                            <i class="fas fa-bolt"></i>8. Query Acceleration Service (QAS)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-check-circle"></i>9. Bonnes pratiques
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Architecture Snowflake - Virtual Warehouses</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-gears"></i> Data Engineering
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: OBJECTIFS
+                ============================================ -->
+                <section id="objectifs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-book-reader"></i> Objectifs du tutoriel
+                    </h2>
+                    <p>
+                        Ce tutoriel présente les Virtual Warehouses Snowflake, leur fonctionnement,
+                        leurs types, tailles, propriétés et les bonnes pratiques pour optimiser 
+                        leurs coûts et performances.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION D'UN VIRTUAL WAREHOUSE
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cube"></i>1. Définition d'un Virtual Warehouse
+                    </h2>
+
+                    <p>Un Virtual Warehouse est un cluster de compute utilisé pour :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Exécuter des requêtes SQL (SELECT)</li>
+                        <li>Effectuer des opérations DML (INSERT, UPDATE, DELETE)</li>
+                        <li>Charger des données (COPY INTO)</li>
+                        <li>Décharger des données (COPY INTO)</li>
+                        <li>Il fournit CPU + RAM + stockage temporaire.</li>
+                        <li>Il doit être en cours d'exécution pour que la session puisse l'utiliser.</li>
+                        <li>Il consomme des crédits Snowflake tant qu'il est actif.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TYPES DE WAREHOUSES
+                ============================================ -->
+                <section id="types-warehouses" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tags"></i>2. Types de Warehouses
+                    </h2>
+
+                    <h3>1️⃣ Standard Warehouse</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Type par défaut.</li>
+                        <li>Optimisé pour la majorité des workloads analytiques.</li>
+                    </ul>
+
+                    <h3>2️⃣ Snowpark-Optimized Warehouse</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Optimisé pour :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Snowpark ML</li>
+                                <li>UDFs/UDTFs lourdes</li>
+                                <li>Workloads nécessitant beaucoup de CPU</li>
+                            </ul>
+                        </li>
+                        <li>Plus coûteux mais plus performant pour les workloads compute‑intensifs.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: TAILLES DES WAREHOUSES
+                ============================================ -->
+                <section id="tailles-warehouses" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i>3. Tailles des Warehouses
+                    </h2>
+
+                    <p>Snowflake propose plusieurs tailles :</p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th><strong>Taille</strong></th>
+                                <th><strong>Description</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>X-Small</strong></td>
+                                <td>Taille par défaut</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Small → 6X-Large</strong></td>
+                                <td>Augmentation progressive du compute</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Multi-cluster</strong></td>
+                                <td>Plusieurs clusters pour absorber la concurrence</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>La taille détermine la <b>puissance de calcul par cluster</b>.</li>
+                        <li>Les warehouses peuvent être <b>redimensionnés à chaud</b>, même en cours d'exécution.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: MULTI‑CLUSTER WAREHOUSES
+                ============================================ -->
+                <section id="multi-cluster" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i>4. Multi‑Cluster Warehouses
+                    </h2>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Permettent d'ajouter automatiquement des clusters supplémentaires 
+                            pour gérer la <b>concurrence élevée</b>.
+                        </li>
+                        <li>
+                            Modes :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li><b>Auto-scale</b> (min/max clusters)</li>
+                                <li><b>Maximiser la disponibilité</b> ou <b>minimiser les coûts</b></li>
+                            </ul>
+                        </li>
+                        <li>Snowflake démarre/arrête les clusters selon la charge.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: PROPRIÉTÉS IMPORTANTES D'UN WAREHOUSE
+                ============================================ -->
+                <section id="proprietes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sliders-h"></i>5. Propriétés importantes d'un Warehouse
+                    </h2>
+
+                    <h3>🛑 Auto-Suspend</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Arrête automatiquement le Warehouse après une période d'inactivité.</li>
+                        <li>Permet d'économiser des crédits.</li>
+                    </ul>
+
+                    <h3>▶️ Auto-Resume</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Redémarre automatiquement le Warehouse lorsqu'une requête arrive.</li>
+                    </ul>
+
+                    <h3>🔁 Scaling Policy</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>Standard</b> : équilibre entre performance et coût.</li>
+                        <li><b>Economy</b> : limite le scaling pour réduire les coûts.</li>
+                    </ul>
+
+                    <h3>🧹 Query Result Caching</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Les résultats mis en cache peuvent être renvoyés <b>sans consommer de compute</b>.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: GEN1 VS GEN2 WAREHOUSES
+                ============================================ -->
+                <section id="gen1-gen2" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-rocket"></i>6. Gen1 vs Gen2 Warehouses
+                    </h2>
+
+                    <p>Snowflake propose des Warehouses de nouvelle génération (Gen2) :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>meilleures performances,</li>
+                        <li>meilleure gestion des DELETE/UPDATE/MERGE,</li>
+                        <li>scans plus rapides.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: FACTURATION
+                ============================================ -->
+                <section id="facturation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i>7. Facturation
+                    </h2>
+
+                    <h3>🔹 Les crédits dépendent de :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>la taille du warehouse,</li>
+                        <li>le nombre de clusters (si multi‑cluster),</li>
+                        <li>le temps d'exécution.</li>
+                    </ul>
+
+                    <h3>🔹 Règles de facturation</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Minimum 60 secondes à chaque démarrage.</li>
+                        <li>Ensuite facturation à la seconde.</li>
+                        <li>
+                            Si un warehouse démarre, s'arrête puis redémarre sans dépasser 60s 
+                            → nouveau minimum de 60s.
+                        </li>
+                    </ul>
+
+                    <h3>🔹 Redimensionnement (resizing)</h3>
+                    <p>Changer la taille d'un Warehouse :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Provisionne des nouvelles ressources,</li>
+                        <li>entraîne un surcoût au moment du provisionnement.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: QUERY ACCELERATION SERVICE (QAS)
+                ============================================ -->
+                <section id="query-acceleration" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bolt"></i>8. Query Acceleration Service (QAS)
+                    </h2>
+
+                    <p>Service optionnel pour accélérer :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>les requêtes lentes ou atypiques,</li>
+                        <li>les charges analytiques irrégulières.</li>
+                    </ul>
+
+                    <p>QAS ajoute du compute supplémentaire sans redimensionner le Warehouse.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: BONNES PRATIQUES
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i>9. Bonnes pratiques
+                    </h2>
+
+                    <h3>✔ Ne pas se focaliser uniquement sur la taille</h3>
+                    <p>
+                        Avec la facturation à la seconde, utiliser un Warehouse large pendant peu de temps 
+                        peut être moins coûteux qu'un petit qui reste actif plus longtemps.
+                    </p>
+
+                    <h3>✔ Suspendre les warehouses inactifs</h3>
+                    <p>Toujours activer <b>AUTO-SUSPEND</b> et <b>AUTO-RESUME</b>.</p>
+
+                    <h3>✔ Tester les tailles pour déterminer le meilleur rapport coût/performance</h3>
+                    <p>Les workloads varient, donc Snowflake recommande de tester.</p>
+
+                    <h3>✔ Utiliser le multi‑cluster pour gérer la concurrence</h3>
+                    <p>Pour éviter que des requêtes restent en file d'attente.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

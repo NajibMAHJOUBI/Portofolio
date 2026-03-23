@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Storage Considerations | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Storage Considerations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#stockage-active-timetravel-failsafe" class="active">
+                                <i class="fas fa-database"></i>1. Stockage : Active, Time Travel, Fail-safe
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#impact-operations">
+                                <i class="fas fa-exchange-alt"></i>2. Impact des opérations INSERT/COPY/Snowpipe
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#analyse-stockage">
+                                <i class="fas fa-chart-pie"></i>3. Comment analyser et suivre le stockage
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#clonage-stockage">
+                                <i class="fas fa-copy"></i>4. Clonage et stockage
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#staged-files">
+                                <i class="fas fa-upload"></i>5. Stockage des fichiers mis en stage
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Snowflake - Storage Considerations</h1>
+
+                        <span class="level-badge">Niveau Intermédiaire</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 15 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab fa-snowflake"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-database"></i>Storage
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i> Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION 1: STOCKAGE ACTIVE, TIME TRAVEL, FAIL-SAFE
+                    ============================================ -->
+                    <section id="stockage-active-timetravel-failsafe" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-database"></i>1. Comprendre le stockage Snowflake : Active, Time Travel, Fail-safe
+                        </h2>
+
+                        <p>
+                            Les "Storage Considerations" expliquent comment Snowflake gère le stockage des données 
+                            et comment optimiser les coûts, notamment dans le cadre du <b>Continuous Data Protection 
+                            (CDP)</b> : Time Travel + Fail-safe.
+                        </p>
+
+                        <p>
+                            Snowflake facture le stockage <b>quelle que soit la phase du cycle de vie des données</b> :
+                        </p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>Active</b> : données actuelles.</li>
+                            <li><b>Time Travel</b> : anciennes versions conservées après un UPDATE / DELETE.</li>
+                            <li><b>Fail-Safe</b> : protection finale pour récupération gérée par Snowflake.</li>
+                        </ul>
+
+                        <p>
+                            ➡️ <b>Toutes ces phases sont facturées</b>, car Snowflake stocke les micro‑partitions 
+                            correspondant à chaque état.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <h3>Important :</h3>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>
+                                Le stockage Time Travel + Fail-safe peut devenir significatif 
+                                selon le volume de changements DML.
+                            </li>
+                            <li>
+                                Les éléments supprimés restent stockés jusqu'à sortie du Fail-safe.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: IMPACT DES OPÉRATIONS INSERT/COPY/SNOWPIPE
+                    ============================================ -->
+                    <section id="impact-operations" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-exchange-alt"></i>2. Impact des opérations INSERT / COPY / Snowpipe sur le stockage
+                        </h2>
+
+                        <p>
+                            Lors des chargements (INSERT, COPY, Snowpipe), Snowflake peut effectuer 
+                            une <b>défragmentation</b> des micro‑partitions :
+                        </p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>→ cela génère de <b>nouvelles micro‑partitions</b></li>
+                            <li>→ et place les anciennes dans Time Travel / Fail-safe</li>
+                        </ul>
+
+                        <p>
+                            ⇒ d'où une <b>augmentation temporaire du stockage facturé</b>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: COMMENT ANALYSER ET SUIVRE LE STOCKAGE
+                    ============================================ -->
+                    <section id="analyse-stockage" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-pie"></i>3. Comment analyser et suivre le stockage
+                        </h2>
+
+                        <p>Snowflake met à disposition plusieurs moyens :</p>
+
+                        <h3>A. Niveau compte</h3>
+                        <p>(Account admin uniquement)</p>
+                        <p>Via Snowsight :</p>
+                        <p><b>Admin → Cost Management → Consumption</b></p>
+                        <p>→ donne la consommation moyenne de stockage pour :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>bases,</li>
+                            <li>stages internes,</li>
+                            <li>
+                                données en Fail-safe.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>B. Niveau table</h3>
+                        <p>Trois méthodes :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>Snowsight → Catalog → Database Explorer → Tables</b></li>
+                            <li><b>SHOW TABLES</b></li>
+                            <li>
+                                <b>TABLE_STORAGE_METRICS</b> dans INFORMATION_SCHEMA ou ACCOUNT_USAGE
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <h3>Pourquoi TABLE_STORAGE_METRICS est le meilleur ?</h3>
+                        <p>Il fournit le détail en colonnes :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>ACTIVE_BYTES</b></li>
+                            <li><b>TIME_TRAVEL_BYTES</b></li>
+                            <li>
+                                <b>FAILSAFE_BYTES</b>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+
+                        <p>… ainsi que la distinction entre :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>Owned storage</b></li>
+                            <li>
+                                <b>Referenced storage</b> (ex : clones)
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: CLONAGE ET STOCKAGE
+                    ============================================ -->
+                    <section id="clonage-stockage" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-copy"></i>4. Clonage et stockage
+                        </h2>
+
+                        <p>Lorsqu'une table est clonée :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowflake <b>ne duplique pas les données</b> (zero‑copy).</li>
+                            <li>Le clone "référence" les micro‑partitions de la source → <b>referenced storage</b>.</li>
+                            <li>
+                                Le stockage augmente uniquement en cas de modifications ultérieures.
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 5: STOCKAGE DES FICHIERS MIS EN STAGE
+                    ============================================ -->
+                    <section id="staged-files" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-upload"></i>5. Stockage des fichiers mis en stage (staged file storage)
+                        </h2>
+
+                        <p>
+                            Pour supporter les chargements MASSIFS (COPY INTO, Snowpipe), 
+                            Snowflake utilise des stages où sont stockés les fichiers temporaires 
+                            avant ingestion.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+
+                        <p>Ces stages :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>font partie du stockage facturé,</b></li>
+                            <li>doivent être surveillés et nettoyés régulièrement pour éviter les coûts inutiles.</li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

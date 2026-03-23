@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Éditions Snowflake | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Éditions Snowflake</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#notions-base" class="active">
+                            <i class="fas fa-info-circle"></i>1. Notions de base sur les éditions Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#editions-officielles">
+                            <i class="fas fa-tags"></i>2. Les quatre éditions officielles de Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume">
+                            <i class="fas fa-chart-simple"></i>Résumé
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Éditions Snowflake</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-crown"></i>Éditions
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: NOTIONS DE BASE SUR LES ÉDITIONS SNOWFLAKE
+                ============================================ -->
+                <section id="notions-base" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i>1. Notions de base sur les éditions Snowflake
+                    </h2>
+
+                    <p>Snowflake propose plusieurs éditions pour répondre aux besoins variés des organisations.</p>
+
+                    <p>Chaque édition <b>ajoute de nouvelles fonctionnalités</b> par rapport à la précédente.</p>
+
+                    <p>Le choix de l'édition influence :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>les <b>fonctionnalités disponibles</b>,</li>
+                        <li>les <b>niveaux de sécurité</b>,</li>
+                        <li>
+                            les <b>coûts unitaires</b> des crédits et du stockage.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>🔹 Structure des éditions</h3>
+                    <p>Chaque édition est un superset de la précédente, ce qui signifie :</p>
+                    <p><b>Standard → Enterprise → Business Critical → VPS</b></p>
+
+                    <h3>🔹 Impact sur la tarification</h3>
+                    <p>Le coût dépend de :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>l'édition choisie,</li>
+                        <li>la région d'hébergement,</li>
+                        <li>
+                            le type de contrat : <b>On Demand</b> ou <b>Capacity</b>.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LES QUATRE ÉDITIONS OFFICIELLES DE SNOWFLAKE
+                ============================================ -->
+                <section id="editions-officielles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tags"></i>2. Les quatre éditions officielles de Snowflake
+                    </h2>
+
+                    <!-- Standard Edition -->
+                    <h3>1) Standard Edition</h3>
+                    <p>L'édition d'entrée de gamme.</p>
+
+                    <h4>Fonctionnalités clés :</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Accès complet à toutes les <b>fonctionnalités standard</b> Snowflake</li>
+                        <li>
+                            Bon équilibre entre coût et fonctionnalités
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h4>Pour qui ?</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Petites équipes</li>
+                        <li>Organisation commençant avec Snowflake</li>
+                    </ul>
+
+                    <!-- Enterprise Edition -->
+                    <h3>2) Enterprise Edition</h3>
+                    <p>Inclut toutes les fonctionnalités de Standard, plus des capacités avancées pour les grandes organisations.</p>
+
+                    <h4>Fonctionnalités supplémentaires :</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Fonctions et services conçus pour des besoins plus importants (performance, sécurité)</li>
+                        <li>
+                            Meilleure prise en charge des workloads d'entreprise
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h4>Pour qui ?</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Entreprises avec croissance</li>
+                        <li>Besoins en performance, gouvernance et SLA renforcés</li>
+                    </ul>
+
+                    <!-- Business Critical Edition -->
+                    <h3>3) Business Critical Edition</h3>
+                    <p>Anciennement appelée <b>Enterprise for Sensitive Data (ESD)</b>.</p>
+                    <p>Inclut Enterprise + des capacités avancées de conformité.</p>
+
+                    <h4>Fonctionnalités supplémentaires :</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>Sécurité renforcée</b></li>
+                        <li>Protection avancée pour données sensibles (dont <b>PHI</b>)</li>
+                        <li>Conforme <b>HIPAA, HITRUST CSF</b></li>
+                        <li>
+                            Support du <b>failover / failback</b> de comptes pour continuité d'activité
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <strong>Note importante :</strong> Une <b>BAA signée</b> est obligatoire avant de stocker des données PHI.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h4>Pour qui ?</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Santé, finance, secteurs réglementés</li>
+                        <li>Besoin de conformité stricte</li>
+                    </ul>
+
+                    <!-- Virtual Private Snowflake (VPS) -->
+                    <h3>4) Virtual Private Snowflake (VPS)</h3>
+                    <p>Le niveau le plus élevé, entièrement isolé.</p>
+
+                    <h4>Fonctionnalités clés :</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Environnement <b>complètement séparé</b> du reste des clients Snowflake</li>
+                        <li>Aucun partage de ressource avec d'autres comptes</li>
+                        <li>
+                            Sécurité maximale pour données ultra-sensibles
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h4>Pour qui ?</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Institutions financières</li>
+                        <li>Organisations avec exigences extrêmes de sécurité / isolement</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: RÉSUMÉ
+                ============================================ -->
+                <section id="resume" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i>Résumé
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Edition</th>
+                                <th>Public cible</th>
+                                <th>Fonctionnalités clés</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                <td><b>Standard</b></td>
+                                <td>PME, débutants</td>
+                                <td>Fonctionnalités standard, coûts équilibrés</td>
+                            </tr>
+                            <tr>
+                                <td><b>Enterprise</b></td>
+                                <td>Grandes entreprises</td>
+                                <td>Fonctions avancées & optimisation</td>
+                            </tr>
+                            <tr>
+                                <td><b>Business Critical</b></td>
+                                <td>Secteurs réglementés</td>
+                                <td>HIPAA, encryption renforcée, failover</td>
+                            </tr>
+                            <tr>
+                                <td><b>VPS</b></td>
+                                <td>Institutions ultra-sensibles</td>
+                                <td>Environnement isolé, sécurité maximale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Architecture Snowflake | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Architecture et Types de Tables</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#architecture-trois-couches" class="active">
+                            <i class="fas fa-layer-group"></i>Snowflake : Une structure en trois couches
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-tables">
+                            <i class="fas fa-table"></i>Snowflake : Les différents types de Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-vues">
+                            <i class="fas fa-eye"></i>Snowflake : Les différents types de Vues
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-check-circle"></i>Snowflake : Bonnes pratiques de conceptions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#editions-connections">
+                            <i class="fas fa-crown"></i>Snowflake : Editions et Connections
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Architecture Snowflake</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-layer-group"></i>Architecture
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWFLAKE : UNE STRUCTURE EN TROIS COUCHES
+                ============================================ -->
+                <section id="architecture-trois-couches" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i> Snowflake : Une structure en trois couches
+                    </h2>
+
+                    <p>
+                        L'architecture Snowflake repose sur trois couches distinctes et indépendantes, 
+                        permettant une scalabilité et une flexibilité optimales :
+                    </p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : Stockage -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-piliers-stockage.html'">
+                            <div class="item-number">Module 1 / 3</div>
+                            <h4><i class="fas fa-cloud-upload-alt"></i> Stockage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez comment Snowflake gère le stockage des données avec les micro-partitions.</p>
+                        </div>
+
+                        <!-- Module 2 : Compute -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-piliers-virtual-warehouses.html'">
+                            <div class="item-number">Module 2 / 3</div>
+                            <h4><i class="fas fa-microchip"></i> Compute</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Explorez les Virtual Warehouses et leur fonctionnement.</p>
+                        </div>
+
+                        <!-- Module 3 : Cloud Services -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-piliers-cloud.html'">
+                            <div class="item-number">Module 3 / 3</div>
+                            <h4><i class="fas fa-globe"></i> Cloud Services</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Comprenez la couche de services cloud et Snowgrid.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SNOWFLAKE : LES DIFFÉRENTS TYPES DE TABLES
+                ============================================ -->
+                <section id="types-tables" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> Snowflake : Les différents types de Tables
+                    </h2>
+
+                    <p>
+                        Snowflake propose plusieurs types de tables pour répondre à différents cas d'usage :
+                    </p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : Tables Snowflake -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-tables-snowflake.html'">
+                            <div class="item-number">Module 1 / 5</div>
+                            <h4><i class="fas fa-cubes"></i> Tables Snowflake</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Tables standard avec micro-partitions.</p>
+                        </div>
+
+                        <!-- Module 2 : Tables Temporaires et Transitoires -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-tables-temporaire-transitoire.html'">
+                            <div class="item-number">Module 2 / 5</div>
+                            <h4><i class="fas fa-hourglass-half"></i> Tables Temporaires et Transitoires</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Tables pour données temporaires et intermédiaires.</p>
+                        </div>
+
+                        <!-- Module 3 : Tables Externes -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-tables-external.html'">
+                            <div class="item-number">Module 3 / 5</div>
+                            <h4><i class="fas fa-cloud-upload-alt"></i> Tables Externes</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Interrogez des données stockées hors Snowflake.</p>
+                        </div>
+
+                        <!-- Module 4 : Tables Hybrides -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-tables-hybrid.html'">
+                            <div class="item-number">Module 4 / 5</div>
+                            <h4><i class="fas fa-exchange-alt"></i> Tables Hybrides</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Tables pour workloads transactionnels.</p>
+                        </div>
+
+                        <!-- Module 5 : Tables Apache Iceberg -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-tables-iceberg.html'">
+                            <div class="item-number">Module 5 / 5</div>
+                            <h4><i class="fas fa-ice-cream"></i> Tables Apache Iceberg</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Format ouvert pour data lakes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SNOWFLAKE : LES DIFFÉRENTS TYPES DE VUES
+                ============================================ -->
+                <section id="types-vues" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-eye"></i> Snowflake : Les différents types de Vues
+                    </h2>
+
+                    <p>
+                        Snowflake propose plusieurs types de vues pour différents besoins de sécurité et performance :
+                    </p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : Vues -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-views.html'">
+                            <div class="item-number">Module 1 / 3</div>
+                            <h4><i class="fas fa-eye"></i> Vues</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Vues classiques pour simplifier les requêtes.</p>
+                        </div>
+
+                        <!-- Module 2 : Vues Sécurisées -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-views-secure.html'">
+                            <div class="item-number">Module 2 / 3</div>
+                            <h4><i class="fas fa-shield-alt"></i> Vues Sécurisées</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Vues avec protection contre les fuites de données.</p>
+                        </div>
+
+                        <!-- Module 3 : Vues Matérialisées -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-views-materialized.html'">
+                            <div class="item-number">Module 3 / 3</div>
+                            <h4><i class="fas fa-chart-line"></i> Vues Matérialisées</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Vues pré-calculées pour accélérer les requêtes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWFLAKE : BONNES PRATIQUES DE CONCEPTIONS
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i> Snowflake : Bonnes pratiques de conceptions
+                    </h2>
+
+                    <p>
+                        Optimisez vos modèles de données avec ces bonnes pratiques :
+                    </p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : Tables -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-conception-table.html'">
+                            <div class="item-number">Module 1 / 3</div>
+                            <h4><i class="fas fa-table"></i> Tables</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Bonnes pratiques pour la conception des tables.</p>
+                        </div>
+
+                        <!-- Module 2 : Stockage -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-conception-stockage.html'">
+                            <div class="item-number">Module 2 / 3</div>
+                            <h4><i class="fas fa-database"></i> Stockage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Optimisation du stockage et des coûts.</p>
+                        </div>
+
+                        <!-- Module 3 : Clonage -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-conception-clonage.html'">
+                            <div class="item-number">Module 3 / 3</div>
+                            <h4><i class="fas fa-copy"></i> Clonage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Zero-Copy Cloning et ses bonnes pratiques.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: SNOWFLAKE : EDITIONS ET CONNECTIONS
+                ============================================ -->
+                <section id="editions-connections" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-crown"></i> Snowflake : Editions et Connections
+                    </h2>
+
+                    <p>
+                        Choisissez l'édition adaptée et connectez-vous à Snowflake :
+                    </p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : Les Editions Snowflake -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-autres-editions.html'">
+                            <div class="item-number">Module 1 / 2</div>
+                            <h4><i class="fas fa-crown"></i> Les Editions Snowflake</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les différentes éditions Snowflake.</p>
+                        </div>
+
+                        <!-- Module 2 : Les Moyens de Connexion à Snowflake -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-autres-interface-connection.html'">
+                            <div class="item-number">Module 2 / 2</div>
+                            <h4><i class="fas fa-plug"></i> Les interfaces de Connexion</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Explorez les différentes façons de se connecter à Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <style>
+  
+    </style>
+</body>
+</html>

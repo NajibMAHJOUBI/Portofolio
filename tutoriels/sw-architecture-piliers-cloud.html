@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tutoriel Snowflake - Architecture Cloud & Snowgrid | DataOps Learning</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../css/tutoriel.css">
+        <link rel="stylesheet" href="../css/icone-fabric.css">
+    </head>
+
+    <body>
+        <!-- ============================================
+             HEADER
+        ============================================ -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <i class="fas fa-cloud"></i>
+                        <span>DataOps Learning</span>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <nav id="mainNav">
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#tutorials">Tutoriels</a></li>
+                        <li><a href="index.html#about">À Propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ============================================
+             BREADCRUMB
+        ============================================ -->
+        <div class="breadcrumb">
+            <div class="container">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="#">Snowflake</a></li>
+                    <li class="current">Architecture Cloud & Snowgrid</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================
+             MAIN CONTENT
+        ============================================ -->
+        <div class="container">
+            <div class="tutorial-wrapper">
+                <!-- Table des matières - Sidebar -->
+                <aside class="toc-sidebar">
+                    <h3 class="toc-title">
+                        <i class="fas fa-list-ul"></i>
+                        Table des matières
+                    </h3>
+
+                    <ul class="toc-list">
+                        <li>
+                            <a href="#objectifs" class="active">
+                                <i class="fas fa-bullseye"></i>Objectifs du tutoriel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#principes-cloud">
+                                <i class="fas fa-cloud"></i>Principes clés d'hébergement Cloud
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#regions-cloud">
+                                <i class="fas fa-map-marker-alt"></i>Régions Cloud supportées
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#limitations-cloud">
+                                <i class="fas fa-exclamation-triangle"></i>Limitations selon Cloud Platform
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#definition-snowgrid">
+                                <i class="fas fa-globe"></i>1. Définition de Snowgrid
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#fonctionnalites-snowgrid">
+                                <i class="fas fa-cogs"></i>2. Fonctionnalités clés de Snowgrid
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#composants-snowgrid">
+                                <i class="fas fa-microchip"></i>3. Composants Snowgrid
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#cas-usage">
+                                <i class="fas fa-chart-line"></i>4. Cas d'usages typiques
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                        <p style="color: var(--gray); margin-bottom: 1rem;">
+                            <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                        </p>
+                        <p style="color: var(--gray);">
+                            <i class="fas fa-signal"></i> Niveau: Débutant
+                        </p>
+                    </div>
+                </aside>
+
+                <!-- Contenu principal -->
+                <main class="tutorial-content">
+                    <!-- En-tête du tutoriel -->
+                    <div class="tutorial-header">
+                        <h1>Architecture Snowflake - Services Cloud & Snowgrid</h1>
+
+                        <span class="level-badge">Niveau Débutant</span>
+
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                            </span>
+                            <span class="meta-item">
+                                <i class="far fa-clock"></i> Durée: 25 min
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                            </span>
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">
+                                <i class="fab fa-snowflake"></i>Snowflake
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-cloud"></i>Cloud Architecture
+                            </span>
+                            <span class="tech-tag">
+                                <i class="fas fa-globe"></i>Snowgrid
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================
+                         SECTION: OBJECTIFS
+                    ============================================ -->
+                    <section id="objectifs" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-book-reader"></i> Objectifs du tutoriel
+                        </h2>
+                        <p>
+                            Ce tutoriel présente l'architecture cloud de Snowflake et Snowgrid, 
+                            la couche de connectivité globale qui permet une expérience unifiée 
+                            sur toutes les régions et clouds.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION: PRINCIPES CLÉS D'HÉBERGEMENT CLOUD
+                    ============================================ -->
+                    <section id="principes-cloud" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cloud"></i> Principes clés concernant l'hébergement sur plateformes Cloud
+                        </h2>
+
+                        <h3>Snowflake fonctionne nativement et uniquement dans le cloud</h3>
+                        <p>
+                            Toutes les couches de l'architecture Snowflake (stockage, compute, cloud services) 
+                            sont déployées sur la plateforme cloud choisie.
+                        </p>
+
+                        <h3>Le choix du cloud est indépendant pour chaque compte Snowflake</h3>
+                        <p>Votre organisation peut :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>héberger différents comptes Snowflake sur différentes plateformes,</li>
+                            <li>choisir un cloud différent de ses autres services internes.</li>
+                        </ul>
+
+                        <h3>Le coût varie selon la région + plateforme</h3>
+                        <p>Les crédits et coûts de stockage dépendent de la région sélectionnée.</p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION: RÉGIONS CLOUD SUPPORTÉES
+                    ============================================ -->
+                    <section id="regions-cloud" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-map-marker-alt"></i> Régions Cloud supportées
+                        </h2>
+
+                        <p>
+                            Chaque plateforme propose plusieurs régions Snowflake, où les comptes peuvent être provisionnés.
+                            (Fournisseurs → Régions Snowflake disponibles)
+                        </p>
+
+                        <p>Autres points importants :</p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Une région = emplacement géographique physique défini par AWS, Azure ou GCP.</li>
+                            <li>
+                                Le choix de la région affecte :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                    <li>latence</li>
+                                    <li>conformité / légal</li>
+                                    <li>coûts</li>
+                                    <li>possibilité de réplication entre régions</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION: LIMITATIONS SELON CLOUD PLATFORM
+                    ============================================ -->
+                    <section id="limitations-cloud" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-exclamation-triangle"></i> Limitations selon Cloud Platform
+                        </h2>
+
+                        <h3>Google Cloud</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Support limité pour Private Service Connect.</li>
+                            <li>Certaines fonctions système non disponibles.</li>
+                        </ul>
+
+                        <h3>Azure</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Limitations sur Private Link dans certains cas.</li>
+                            <li>Format "account name URL" non supporté pour tous les clients en connectivité privée.</li>
+                        </ul>
+
+                        <h3>AWS</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Restrictions spécifiques dans les régions gouvernementales (ex. accès externe depuis UDF).</li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 1: DÉFINITION DE SNOWGRID
+                    ============================================ -->
+                    <section id="definition-snowgrid" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-globe"></i> 1. Définition
+                        </h2>
+
+                        <p>
+                            <b>Snowgrid</b> est la couche de connectivité globale de Snowflake qui permet :
+                        </p>
+
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Une <b>expérience unifiée</b> sur toutes les régions et clouds (AWS, Azure, GCP).</li>
+                            <li>La <b>mobilité des données</b> entre régions/clouds.</li>
+                            <li>La <b>collaboration sécurisée</b> à grande échelle.</li>
+                            <li>La résilience cross‑cloud (failover, réplication).</li>
+                        </ul>
+
+                        <p>
+                            C'est ce qui transforme Snowflake en un <b>Data Cloud global</b> 
+                            plutôt qu'une simple base de données dans un cloud.
+                        </p>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 2: FONCTIONNALITÉS CLÉS DE SNOWGRID
+                    ============================================ -->
+                    <section id="fonctionnalites-snowgrid" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-cogs"></i> 2. Fonctionnalités clés de Snowgrid
+                        </h2>
+
+                        <h3>✔ 1. Cross‑Cloud Business Continuity</h3>
+                        <p>Permet d'assurer la continuité d'activité grâce à :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>Replication</b> : copie des bases, warehouses, objets de compte vers une autre région/cloud.</li>
+                            <li><b>Failover / Failback</b> : bascule contrôlée vers une région secondaire en cas d'incident.</li>
+                            <li><b>Client Redirect</b> : redirection automatique des connexions vers la région de secours.</li>
+                        </ul>
+                        <p><b>Objectif</b> : réduire RTO/RPO et garantir la disponibilité mondiale.</p>
+
+                        <h3>✔ 2. Cross‑Cloud Data Governance</h3>
+                        <p>Snowgrid assure une gouvernance cohérente dans toutes les régions :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Politiques de sécurité uniformes</li>
+                            <li>Contrôles d'accès centralisés</li>
+                            <li>Traçabilité et audit global</li>
+                            <li>Respect des contraintes de résidence des données</li>
+                        </ul>
+
+                        <h3>✔ 3. Global Data Sharing</h3>
+                        <p>Grâce à Snowgrid, Snowflake permet :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><b>Secure Data Sharing</b> entre régions et clouds</li>
+                            <li><b>Listings globaux</b> sur le Marketplace</li>
+                            <li>Collaboration sans copie de données</li>
+                        </ul>
+                        <p>Les données restent dans leur région d'origine mais sont accessibles globalement.</p>
+
+                        <h3>✔ 4. Global Directory Services</h3>
+                        <p>Snowgrid maintient un <b>répertoire global</b> des comptes Snowflake :</p>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Permet de partager des données avec n'importe quel compte Snowflake dans le monde</li>
+                            <li>Gère les identités, les métadonnées et les autorisations de manière centralisée</li>
+                        </ul>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 3: COMPOSANTS SNOWGRID
+                    ============================================ -->
+                    <section id="composants-snowgrid" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-microchip"></i> 3. Composants Snowgrid
+                        </h2>
+
+                        <table class="tutorial-table">
+                            <thead>
+                                <tr>
+                                    <th>Composant</th>
+                                    <th>Rôle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><b>Replication</b></td>
+                                    <td>Copie des bases, objets, et métadonnées vers une autre région/cloud</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Failover / Failback</b></td>
+                                    <td>Bascule manuelle ou automatisée vers une région secondaire</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Client Redirect</b></td>
+                                    <td>Redirection automatique des connexions en cas de failover</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Global Services</b></td>
+                                    <td>Gouvernance, sécurité, identités, répertoire global</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Cross-Cloud Sharing</b></td>
+                                    <td>Partage de données sans copie entre clouds/régions</td>
+                                </tr>
+                                <tr>
+                                    <td><b>Marketplace Global</b></td>
+                                    <td>Accès mondial aux listings de données et apps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- ============================================
+                         SECTION 4: CAS D'USAGES TYPIQUES
+                    ============================================ -->
+                    <section id="cas-usage" class="tutorial-section">
+                        <h2>
+                            <i class="fas fa-chart-line"></i> 4. Cas d'usages typiques
+                        </h2>
+
+                        <h3>Multi‑cloud / Multi‑région</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Répondre aux exigences de résidence des données</li>
+                            <li>Réduire la dépendance à un seul cloud provider</li>
+                            <li>Optimiser les coûts selon les régions</li>
+                        </ul>
+
+                        <h3>Résilience & Disaster Recovery</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Réplication automatique</li>
+                            <li>Bascule rapide en cas d'incident</li>
+                            <li>Continuité d'activité mondiale</li>
+                        </ul>
+
+                        <h3>Collaboration globale</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Partage de données avec partenaires internationaux</li>
+                            <li>Marketplace mondial</li>
+                            <li>Clean Rooms multi‑cloud</li>
+                        </ul>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
