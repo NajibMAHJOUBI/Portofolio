@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Navigation Menu Snowsight | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Navigation Menu Snowsight</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif-menu" class="active">
+                            <i class="fas fa-bullseye"></i>1. Objectif du Snowsight Navigation Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#structure-menu">
+                            <i class="fas fa-sitemap"></i>2. Structure générale du nouveau menu Snowsight
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Navigation Menu Snowsight</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Snowsight
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: OBJECTIF DU SNOWSIGHT NAVIGATION MENU
+                ============================================ -->
+                <section id="objectif-menu" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i>1. Objectif du Snowsight Navigation Menu
+                    </h2>
+
+                    <p>
+                        Le menu Snowsight regroupe les fonctionnalités Snowflake par grandes familles d'usage, 
+                        afin de rendre la navigation plus intuitive.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: STRUCTURE GÉNÉRALE DU NOUVEAU MENU SNOWSIGHT
+                ============================================ -->
+                <section id="structure-menu" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sitemap"></i>2. Structure générale du nouveau menu Snowsight
+                    </h2>
+
+                    <p>Le menu Snowsight est organisé autour de catégories principales :</p>
+
+                    <!-- Section 1: Work with data -->
+                    <h3>1) Work with data</h3>
+                    <p>La zone de <b>développement et d'analyse des données</b>.</p>
+                    <p>Inclut :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Projects : Worksheets, Notebooks, Streamlit, Dashboards, Native Apps</li>
+                        <li>Ingestion : Connectors, Add Data, Openflow, migrations de données</li>
+                        <li>Transformation : Dynamic Tables, Tasks, jobs de transformation</li>
+                        <li>AI & ML : Snowflake Cortex AI, Snowflake ML pour traitement, modèles, agents</li>
+                        <li>Monitoring : Query history, job history, container services, logs/traces</li>
+                        <li>Marketplace : Explorer et consommer données, apps & agents tiers</li>
+                    </ul>
+
+                    <!-- Section 2: Horizon Catalog -->
+                    <h3>2) Horizon Catalog</h3>
+                    <p>Zone centrée <b>catalogue et partage</b>.</p>
+                    <p>Inclut :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Catalog : Explorer bases, objets, data products de l'organisation</li>
+                        <li>
+                            Data sharing :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Internal Marketplace</li>
+                                <li>Private Sharing</li>
+                                <li>Provider Studio</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- Section 3: Governance & security -->
+                    <h3>3) Governance & security</h3>
+                    <p>Pour gérer la <b>sécurité</b>, les <b>permissions</b> et la <b>gouvernance</b>.</p>
+                    <p>Inclut :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Gestion des permissions & rôles</li>
+                        <li>Contrôle des accès</li>
+                        <li>Politiques de sécurité (masquage, accès en ligne, tags)</li>
+                    </ul>
+
+                    <!-- Section 4: Manage -->
+                    <h3>4) Manage</h3>
+                    <p>Zone d'administration.</p>
+                    <p>Inclut :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>Compute</b> : Warehouses, Compute Pools</li>
+                        <li>
+                            <b>Admin</b> :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Billing,</li>
+                                <li>Contacts admin,</li>
+                                <li>Intégrations,</li>
+                                <li>Administration globale des comptes</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <span class="reference">[docs.snowflake.com]</span>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

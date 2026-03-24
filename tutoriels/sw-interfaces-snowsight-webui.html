@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowsight | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowsight</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#role-objectifs" class="active">
+                            <i class="fas fa-bullseye"></i>1. Rôle et objectifs de Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnalites">
+                            <i class="fas fa-cogs"></i>2. Principales fonctionnalités de Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#structure-interface">
+                            <i class="fas fa-layout"></i>3. Structure de l'interface Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#operations-admin">
+                            <i class="fas fa-shield-alt"></i>4. Opérations administratives possibles via Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-chart-line"></i>🧩 5. Cas d'usage typiques pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowsight</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Snowsight
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: RÔLE ET OBJECTIFS DE SNOWSIGHT
+                ============================================ -->
+                <section id="role-objectifs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i>1. Rôle et objectifs de Snowsight
+                    </h2>
+
+                    <p>
+                        Snowsight est l'interface Web de Snowflake, conçue pour offrir une <b>expérience unifiée</b>, 
+                        moderne et riche pour l'analyse, la gouvernance, le développement et l'administration.
+                    </p>
+
+                    <p>Snowsight permet de :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>travailler avec des données Snowflake en <b>SQL</b> ou <b>Python</b>,</li>
+                        <li>créer, exécuter et organiser des <b>worksheets</b>,</li>
+                        <li>développer des <b>Snowflake Notebooks</b>,</li>
+                        <li>utiliser <b>Snowflake Copilot</b> pour l'analyse assistée,</li>
+                        <li>exécuter du <b>Snowpark Python</b>,</li>
+                        <li>créer des <b>dashboards</b> et des visualisations,</li>
+                        <li>développer des <b>Streamlit apps</b> et des <b>Snowflake Native Apps</b>,</li>
+                        <li>partager données et applications (Marketplace, Data Sharing).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PRINCIPALES FONCTIONNALITÉS DE SNOWSIGHT
+                ============================================ -->
+                <section id="fonctionnalites" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i>2. Principales fonctionnalités de Snowsight
+                    </h2>
+
+                    <h3>SQL & Python Worksheets</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Écrire et exécuter du SQL.</li>
+                        <li>Écrire et exécuter du code Python Snowpark ou Notebooks.</li>
+                        <li>
+                            Organiser, classer, partager des worksheets.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Snowflake Copilot</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Assistant d'analyse intégré (suggestions SQL, explications, analyses).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Visualisation des données</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Visualisation directe des résultats de requêtes.</li>
+                        <li>
+                            Création de dashboards interactifs.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Développement d'applications</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Streamlit apps directement dans Snowsight.</li>
+                        <li>
+                            Snowflake Native Apps (développement, packaging, partage).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Gestion des objets</h3>
+                    <p>Snowsight permet de gérer :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>bases, schémas, tables, vues, warehouses, intégrations…</li>
+                        <li>
+                            tagging et gouvernance des données.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Administration & Opérations</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Monitoring des coûts (Cost Management).</li>
+                        <li>Gestion de la sécurité dans le Trust Center.</li>
+                        <li>Suivi de la consommation de crédits (budgets).</li>
+                        <li>Monitoring des tâches, pipelines, data loading.</li>
+                        <li>
+                            Gestion des utilisateurs, rôles et privilèges.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: STRUCTURE DE L'INTERFACE SNOWSIGHT
+                ============================================ -->
+                <section id="structure-interface" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layout"></i>3. Structure de l'interface Snowsight
+                    </h2>
+
+                    <h3>1. Navigation Menu (à gauche)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Accès aux apps, data, worksheets, notebooks, dashboards, warehouses…</li>
+                        <li>Point d'entrée principal pour créer et gérer les objets Snowflake.</li>
+                    </ul>
+
+                    <h3>2. Search</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Recherche globale : tables, vues, fonctions, notebooks, dashboards et data products.</li>
+                    </ul>
+
+                    <h3>3. Quick Actions</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Actions rapides selon votre rôle : créer un worksheet SQL, un projet, uploader des fichiers…</li>
+                    </ul>
+
+                    <h3>4. Recently Viewed</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Accès rapide aux derniers objets consultés : worksheets, notebooks, dashboards, projets.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: OPÉRATIONS ADMINISTRATIVES POSSIBLES VIA SNOWSIGHT
+                ============================================ -->
+                <section id="operations-admin" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i>4. Opérations administratives possibles via Snowsight
+                    </h2>
+
+                    <p>Snowsight permet d'administrer l'essentiel de votre compte Snowflake :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>création/gestion des utilisateurs et rôles,</li>
+                        <li>gestion des intégrations,</li>
+                        <li>gestion et suivi de la réplication inter‑comptes,</li>
+                        <li>gestion du profil utilisateur,</li>
+                        <li>
+                            dépôt de tickets auprès du support Snowflake.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CAS D'USAGE TYPIQUES POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>5. Cas d'usage typiques pour l'examen SnowPro Core
+                    </h2>
+
+                    <h3>EXÉCUTION DE REQUÊTES SQL</h3>
+                    <p>Worksheets avec exécution interactive, visualisation et historique des requêtes.</p>
+
+                    <h3>GOUVERNANCE & SÉCURITÉ</h3>
+                    <p>Trust Center, tagging, suivi des politiques de gouvernance.</p>
+
+                    <h3>COST MANAGEMENT</h3>
+                    <p>Surveiller les crédits, budgets et utilisation des warehouses.</p>
+
+                    <h3>INGESTION & TRANSFORMATION</h3>
+                    <p>Suivi des pipelines, tâches (task graphs), chargements de données.</p>
+
+                    <h3>COLLABORATION</h3>
+                    <p>Partage de dashboards, worksheets, apps et données entre comptes.</p>
+
+                    <h3>DÉVELOPPEMENT</h3>
+                    <p>Snowpark Python, Notebooks, Streamlit, Native Apps.</p>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Accès à Snowsight | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Accès à Snowsight</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#acceder-snowsight" class="active">
+                            <i class="fas fa-sign-in-alt"></i>1. Accéder à Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pre-requis">
+                            <i class="fas fa-check-circle"></i>2. Pré-requis pour utiliser Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#authentification-securite">
+                            <i class="fas fa-lock"></i>3. Authentification et sécurité
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Accès à Snowsight</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Snowsight
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: ACCÉDER À SNOWSIGHT
+                ============================================ -->
+                <section id="acceder-snowsight" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sign-in-alt"></i>1. Accéder à Snowsight
+                    </h2>
+
+                    <p>Snowsight est accessible via :</p>
+
+                    <h3>Internet public</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Naviguer vers https://app.snowflake.com.</li>
+                        <li>Fournir son account identifier ou sélectionner un compte déjà utilisé.</li>
+                        <li>
+                            Choisir la méthode d'authentification puis se connecter.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Connexion via Private Connectivity</h3>
+                    <p>Utilisée dans les environnements à forte exigence de sécurité.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PRÉ-REQUIS POUR UTILISER SNOWSIGHT
+                ============================================ -->
+                <section id="pre-requis" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i>2. Pré-requis pour utiliser Snowsight
+                    </h2>
+
+                    <h3>Warehouse requis pour certaines fonctionnalités</h3>
+                    <p>Certaines actions exécutent des requêtes (chargement, prévisualisation de données, Task Run History).</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Snowflake recommande un warehouse X-Small pour ces opérations.
+                        </li>
+                        <li>
+                            Toute requête exécutée via un warehouse consomme des crédits.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Optimisation des coûts</h3>
+                    <p>
+                        La documentation recommande d'appliquer des stratégies de réduction de coûts 
+                        (auto-suspend, sélection du warehouse approprié, bonnes pratiques).
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: AUTHENTIFICATION ET SÉCURITÉ
+                ============================================ -->
+                <section id="authentification-securite" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i>3. Authentification et sécurité
+                    </h2>
+
+                    <h3>MFA (Multi‑Factor Authentication)</h3>
+                    <p>Snowflake encourage fortement l'utilisation de MFA.</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Si un utilisateur n'a pas configuré MFA, Snowsight lui demande régulièrement (tous les 3 jours).
+                        </li>
+                        <li>
+                            Des notifications Trust Center persistent tant que MFA n'est pas activée.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p><b>Activation MFA :</b></p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Sélectionner son nom d'utilisateur</li>
+                        <li>Aller dans <b>My Profile</b>,</li>
+                        <li>
+                            Section <b>Multi-factor authentication → Enroll</b>, puis suivre les instructions.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Extension VS Code | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Extension VS Code</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#presentation-extension" class="active">
+                            <i class="fab fa-vs-code"></i>Extension Snowflake pour VS Code
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnalites-principales">
+                            <i class="fas fa-cogs"></i>1. Fonctionnalités principales de l'extension
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#installation-extension">
+                            <i class="fas fa-download"></i>2. Installation de l'extension
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#connexion-snowflake">
+                            <i class="fas fa-plug"></i>3. Connexion à Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fichier-configuration">
+                            <i class="fas fa-file-alt"></i>4. Fichier de configuration connections.toml
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interface-extension">
+                            <i class="fas fa-desktop"></i>5. Interface de l'extension
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#execution-requetes">
+                            <i class="fas fa-terminal"></i>6. Exécution des requêtes & historique
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#autres-fonctionnalites">
+                            <i class="fas fa-star"></i>7. Autres fonctionnalités importantes
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Extension VS Code</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-vs-code"></i>VS Code
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>Extension
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: PRÉSENTATION DE L'EXTENSION
+                ============================================ -->
+                <section id="presentation-extension" class="tutorial-section">
+                    <h2>
+                        <i class="fab fa-vs-code"></i> Extension Snowflake pour VS Code
+                    </h2>
+
+                    <p>
+                        L'extension <b>Snowflake pour Visual Studio Code</b> permet d'écrire, d'exécuter 
+                        et de gérer du SQL Snowflake directement depuis VS Code, tout en intégrant 
+                        Snowpark Python et les Native Apps. Elle constitue un outil important pour 
+                        les développeurs, data engineers et utilisateurs avancés.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: FONCTIONNALITÉS PRINCIPALES DE L'EXTENSION
+                ============================================ -->
+                <section id="fonctionnalites-principales" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i>1. Fonctionnalités principales de l'extension
+                    </h2>
+
+                    <h3>✔ Écriture et exécution de SQL Snowflake</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Exécuter des requêtes SQL directement dans VS Code.</li>
+                        <li>
+                            Résultats visibles dans un panneau dédié.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Support Snowpark Python</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Debugging</li>
+                        <li>Syntax highlighting</li>
+                        <li>
+                            Autocomplétion pour SQL dans le code Python Snowpark
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Développement Native Apps</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Création, déploiement, exécution et suppression d'applications Native Apps.</li>
+                        <li>
+                            Gestion des environnements et variables.
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Object Explorer</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Naviguer dans les bases, schémas, tables, vues, fonctions, etc.</li>
+                        <li>
+                            Copier rapidement des noms d'objets.
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ SnowConvert Migration Assistant</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Résolution d'erreurs de migration SQL avec aide IA.</li>
+                        <li>
+                            Intégré via panneaux, CodeLens ou chat interactif.
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Gestion multicomptes et sessions</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Connexion à plusieurs comptes Snowflake.</li>
+                        <li>
+                            Sélection du rôle, warehouse, base, schéma, secondary roles.
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: INSTALLATION DE L'EXTENSION
+                ============================================ -->
+                <section id="installation-extension" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i>2. Installation de l'extension
+                    </h2>
+
+                    <p>Deux méthodes sont disponibles :</p>
+
+                    <h3>🔹 A. Depuis le Visual Studio Marketplace</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>VS Code → Settings > Extensions</li>
+                        <li>Rechercher "Snowflake"</li>
+                        <li>Identifier l'extension via le badge Snowflake</li>
+                        <li>
+                            Sélectionner Install
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>🔹 B. Via un fichier .vsix</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Aller sur : https://marketplace.visualstudio.com/items?itemName=snowflake.snowflake-vsc</li>
+                        <li>Télécharger la version du .vsix depuis « Version History »</li>
+                        <li>VS Code → Extensions > More (…) > Install from VSIX</li>
+                        <li>
+                            Sélectionner le fichier téléchargé
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CONNEXION À SNOWFLAKE
+                ============================================ -->
+                <section id="connexion-snowflake" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plug"></i>3. Connexion à Snowflake
+                    </h2>
+
+                    <p>Avant toute exécution SQL ou Snowpark, une connexion Snowflake est requise.</p>
+
+                    <h3>Méthodes de connexion supportées :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Username / Password</li>
+                        <li>SSO / SAML</li>
+                        <li>Key-pair authentication</li>
+                        <li>OAuth via fichier connections.toml
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Première connexion :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>a. Cliquer sur l'icône Snowflake dans l'Activity Bar</li>
+                        <li>b. Saisir l'account identifier ou l'URL Snowflake</li>
+                        <li>
+                            c. Choisir la méthode d'authentification
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p>Après première connexion, l'account identifier peut ne plus être demandé.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: FICHIER DE CONFIGURATION CONNECTIONS.TOML
+                ============================================ -->
+                <section id="fichier-configuration" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-alt"></i>4. Fichier de configuration connections.toml
+                    </h2>
+
+                    <p>L'extension permet :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>d'ajouter et modifier des connexions,</li>
+                        <li>de gérer plusieurs environnements,</li>
+                        <li>
+                            de stocker les paramètres de connexion.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p>Méthode d'édition dans VS Code :</p>
+                    <p><b>Activity Bar → Account → Snowflake: Edit Connections File</b></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: INTERFACE DE L'EXTENSION
+                ============================================ -->
+                <section id="interface-extension" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-desktop"></i>5. Interface de l'extension (zones importantes)
+                    </h2>
+
+                    <p>D'après la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Zone</th>
+                                <th>Fonction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1. Sidebar</td><td>Contient Account, Native App, Object Explorer, Query History</td></tr>
+                            <tr><td>2. Native App Pane</td><td>Création/gestion Native Apps</td></tr>
+                            <tr><td>3. Query History Pane</td><td>Liste et détails des requêtes récentes</td></tr>
+                            <tr><td>4. Session Info</td><td>Rôle actuel, base, schéma, warehouse</td></tr>
+                            <tr><td>5. SQL Pane</td><td>Éditeur pour fichiers SQL</td></tr>
+                            <tr><td>6. Query Results Pane</td><td>Résultats des requêtes</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: EXÉCUTION DES REQUÊTES & HISTORIQUE
+                ============================================ -->
+                <section id="execution-requetes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i>6. Exécution des requêtes & historique
+                    </h2>
+
+                    <h3>✔ Exécution SQL</h3>
+                    <p>Une requête ou un bloc peut être exécuté via le panneau SQL. Résultats affichés dans le panneau « Query Results ».</p>
+
+                    <h3>✔ Query History</h3>
+                    <p>Historique complet, exécutions, tri, réouverture des requêtes.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: AUTRES FONCTIONNALITÉS IMPORTANTES
+                ============================================ -->
+                <section id="autres-fonctionnalites" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i>7. Autres fonctionnalités importantes
+                    </h2>
+
+                    <h3>✔ Intellisense & Auto-complétion</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Noms d'objets</li>
+                        <li>Fonctions Snowflake</li>
+                        <li>
+                            Mots‑clés SQL
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Stage Operations</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            PUT, GET, LIST pour les stages internes
+                            <span class="reference">[marketplace.visualstudio.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Open Data / Files</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Support des uploads via add data panel</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

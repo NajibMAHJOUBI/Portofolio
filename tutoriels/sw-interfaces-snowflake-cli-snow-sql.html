@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Commande snow sql | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Commande snow sql</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#presentation-snow-sql" class="active">
+                            <i class="fas fa-terminal"></i>Présentation de la commande snow sql
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#requete-ad-hoc">
+                            <i class="fas fa-code"></i>1. Exécuter une requête SQL ad‑hoc
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#executer-fichier">
+                            <i class="fas fa-file-alt"></i>2. Exécuter un fichier SQL
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#plusieurs-statements">
+                            <i class="fas fa-layer-group"></i>3. Exécuter plusieurs statements
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-scripting">
+                            <i class="fas fa-scroll"></i>4. Exécuter des blocs Snowflake Scripting
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#variables-templates">
+                            <i class="fas fa-code-branch"></i>5. Variables et templates SQL
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#execution-stdin">
+                            <i class="fas fa-pipe"></i>6. Exécution via STDIN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#options-importantes">
+                            <i class="fas fa-cogs"></i>7. Options importantes de snow sql
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#authentification-connexion">
+                            <i class="fas fa-lock"></i>8. Authentification & connexion
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Commande snow sql</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-terminal"></i>CLI
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>SQL
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: PRÉSENTATION DE LA COMMANDE SNOW SQL
+                ============================================ -->
+                <section id="presentation-snow-sql" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> 🧊 Présentation de la commande snow sql
+                    </h2>
+
+                    <p>
+                        Snowflake CLI fournit une commande puissante — <b>snow sql</b> — 
+                        permettant d'exécuter des requêtes SQL, des fichiers SQL, des blocs 
+                        Snowflake Scripting et des templates SQL avec variables.
+                    </p>
+
+                    <p>
+                        Cette fonctionnalité est essentielle pour automatiser, tester, développer
+                        et intégrer Snowflake dans des pipelines CI/CD.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: EXÉCUTER UNE REQUÊTE SQL AD‑HOC
+                ============================================ -->
+                <section id="requete-ad-hoc" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i>1. Exécuter une requête SQL ad‑hoc
+                    </h2>
+
+                    <p>Utiliser l'option <b>-q</b> (ou --query) :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow sql -q "SELECT * FROM FOO;"</code></pre>
+                    </div>
+
+                    <p>
+                        → Exécute la requête immédiatement et affiche les résultats.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: EXÉCUTER UN FICHIER SQL
+                ============================================ -->
+                <section id="executer-fichier" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-alt"></i>2. Exécuter un fichier SQL
+                    </h2>
+
+                    <p>Utiliser l'option <b>-f</b> :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow sql -f my_query.sql</code></pre>
+                    </div>
+
+                    <p>
+                        → Exécute tout le contenu du fichier.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: EXÉCUTER PLUSIEURS STATEMENTS
+                ============================================ -->
+                <section id="plusieurs-statements" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i>3. Exécuter plusieurs statements
+                    </h2>
+
+                    <p>
+                        <i>snow sql</i> supporte plusieurs instructions dans un même appel :
+                    </p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow sql -q "select 'a','b'; select 'c','d';"</code></pre>
+                    </div>
+
+                    <p>
+                        → Renvoie <b>plusieurs jeux de résultats</b>.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: EXÉCUTER DES BLOCS SNOWFLAKE SCRIPTING
+                ============================================ -->
+                <section id="snowflake-scripting" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-scroll"></i>4. Exécuter des blocs Snowflake Scripting
+                    </h2>
+
+                    <p>
+                        Snowflake CLI supporte <b>Snowflake Scripting</b>, mais attention au délimiteur $.
+                    </p>
+
+                    <p>Exemple :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>EXECUTE IMMEDIATE $
+DECLARE radius_of_circle FLOAT;
+area_of_circle FLOAT;
+BEGIN
+    radius_of_circle := 3;
+    area_of_circle := pi() * radius_of_circle * radius_of_circle;
+    RETURN area_of_circle;
+END;
+$;</code></pre>
+                    </div>
+
+                    <div class="warning-note">
+                        ⚠️ <b>Attention :</b> Certains systèmes interprètent $ comme PID → Solutions :
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>échapper les délimiteurs : \$\$</li>
+                            <li>
+                                ou placer le bloc dans un fichier et utiliser -f
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: VARIABLES ET TEMPLATES SQL
+                ============================================ -->
+                <section id="variables-templates" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i>5. Variables et templates SQL (Substitution côté client)
+                    </h2>
+
+                    <p>-D permet d'injecter des variables dans un template SQL :</p>
+
+                    <p>Variables dans la requête :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM <% database %>.logs</code></pre>
+                    </div>
+
+                    <p>Commande d'exécution :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow sql -q "select * from <% database %>.logs" -D "database=dev"</code></pre>
+                    </div>
+
+                    <p>Résultat envoyé à Snowflake :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>select * from dev.logs</code></pre>
+                    </div>
+
+                    <p>
+                        ✔ Snowflake recommande d'utiliser la syntaxe :
+                        <b><% variable_name %></b> plutôt que l'ancienne syntaxe SnowSQL &variable_name.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: EXÉCUTION VIA STDIN
+                ============================================ -->
+                <section id="execution-stdin" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-pipe"></i>6. Exécution via STDIN
+                    </h2>
+
+                    <p>--stdin permet d'exécuter une requête passée en pipe :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>cat my.sql | snow sql -i</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: OPTIONS IMPORTANTES DE SNOW SQL
+                ============================================ -->
+                <section id="options-importantes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i>7. Options importantes de snow sql (à connaître pour l'examen)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>-q / --query</td><td>Exécuter une requête ad-hoc</td></tr>
+                            <tr><td>-f / --filename</td><td>Exécuter un fichier SQL</td></tr>
+                            <tr><td>-i / --stdin</td><td>Lire depuis STDIN</td></tr>
+                            <tr><td>-D / --variable</td><td>Substitution de variables</td></tr>
+                            <tr><td>--single-transaction</td><td>Encapsule BEGIN/COMMIT autour des statements</td></tr>
+                            <tr><td>--retain-comments</td><td>Conserve les commentaires</td></tr>
+                            <tr><td>--enable-templating</td><td>Choix du moteur de templating (LEGACY/STANDARD/JINJA/ALL/NONE)</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: AUTHENTIFICATION & CONNEXION
+                ============================================ -->
+                <section id="authentification-connexion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> 8. Authentification & connexion (rappel CLI)
+                    </h2>
+
+                    <p>Toute commande snow sql accepte les paramètres :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>--account,
+--user,
+--password,
+--authenticator,
+--private-key-file,
+--role,
+--warehouse, etc.</code></pre>
+                    </div>
+
+                    <p>
+                        Cela permet d'exécuter des requêtes dans des environnements ou projets distincts.
+                    </p>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

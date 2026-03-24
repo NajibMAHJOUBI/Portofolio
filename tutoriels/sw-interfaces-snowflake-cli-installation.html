@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Installation Snowflake CLI | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Installation Snowflake CLI</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#presentation-generale" class="active">
+                            <i class="fas fa-info-circle"></i>1. Présentation générale
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pre-requis">
+                            <i class="fas fa-check-circle"></i>2. Pré‑requis avant installation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#installation-windows">
+                            <i class="fab fa-windows"></i>3. Installation avec l'installateur Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#commande-help">
+                            <i class="fas fa-terminal"></i>4. Contenu de la commande snow --help
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#verification-test">
+                            <i class="fas fa-vial"></i>5. Vérification & tests post‑installation
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Installation Snowflake CLI</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-terminal"></i>CLI
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-windows"></i>Windows
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PRÉSENTATION GÉNÉRALE
+                ============================================ -->
+                <section id="presentation-generale" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i>1. Présentation générale
+                    </h2>
+
+                    <p>Snowflake CLI est l'outil officiel en ligne de commande utilisé pour :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>exécuter des requêtes SQL,</li>
+                        <li>développer des apps Snowpark / Native Apps,</li>
+                        <li>gérer des objets Snowflake,</li>
+                        <li>automatiser des workflows DevOps.</li>
+                    </ul>
+
+                    <p>
+                        Snowflake recommande d'utiliser <b>des méthodes binaires</b>, 
+                        dont <b>l'installateur Windows</b>.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PRÉ‑REQUIS AVANT INSTALLATION
+                ============================================ -->
+                <section id="pre-requis" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i>2. Pré‑requis avant installation
+                    </h2>
+
+                    <p>Avant d'installer Snowflake CLI, vous devez :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>disposer <b>d'un compte Snowflake valide</b>,</li>
+                        <li>
+                            disposer des privilèges nécessaires si vous souhaitez utiliser :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li><b>Streamlit in Snowflake</b>,</li>
+                                <li>
+                                    <b>Snowpark Container Services</b>.
+                                    <span class="reference">[docs.snowflake.com]</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="warning-note">
+                        ⚠️ <b>Attention avec la MFA</b>
+                        <p>
+                            Si votre compte Snowflake impose la MFA, <b>chaque commande CLI nécessite une approbation</b>, 
+                            sauf si vous activez le mécanisme de cache MFA (valable 4 heures).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: INSTALLATION AVEC L'INSTALLATEUR WINDOWS
+                ============================================ -->
+                <section id="installation-windows" class="tutorial-section">
+                    <h2>
+                        <i class="fab fa-windows"></i>3. Installation avec l'installateur Windows
+                    </h2>
+
+                    <p>
+                        La documentation indique clairement qu'on peut installer Snowflake CLI via l'installateur Windows.
+                    </p>
+
+                    <p>Les étapes générales d'installation sont :</p>
+
+                    <h3>Étape 1 — Télécharger l'installateur Windows</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Depuis le dépôt officiel Snowflake CLI (Snowflake CLI repository).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>Étape 2 — Lancer l'installateur</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Exécuter le fichier .msi téléchargé.</li>
+                        <li>Suivre les étapes classiques (chemin d'installation, options, configuration).</li>
+                    </ul>
+
+                    <h3>Étape 3 — Vérifier l'installation</h3>
+                    <p>Une fois installé, vérifier avec la commande :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow --help</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CONTENU DE LA COMMANDE SNOW --HELP
+                ============================================ -->
+                <section id="commande-help" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i>4. Contenu de la commande snow --help
+                    </h2>
+
+                    <p>Les options générales du CLI (post‑installation) incluent notamment :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>--version</b> : afficher la version</li>
+                        <li><b>--info</b> : afficher les informations système du CLI</li>
+                        <li><b>--config-file</b> : spécifier un fichier de configuration</li>
+                        <li>
+                            <b>--install-completion</b> : installer l'autocomplétion du shell
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: VÉRIFICATION & TESTS POST‑INSTALLATION
+                ============================================ -->
+                <section id="verification-test" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-vial"></i>5. Vérification & tests post‑installation
+                    </h2>
+
+                    <p>Une installation réussie se confirme par :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow --help</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>snow --version</code></pre>
+                    </div>
+
+                    <p>Ces commandes permettent de valider que :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>le binaire est accessible,</li>
+                        <li>le PATH est correctement configuré.</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

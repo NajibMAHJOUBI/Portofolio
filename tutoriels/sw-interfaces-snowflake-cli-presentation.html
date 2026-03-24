@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowflake CLI | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowflake CLI</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition-cli" class="active">
+                            <i class="fas fa-terminal"></i>1. Qu'est-ce que Snowflake CLI ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#capacites-cli">
+                            <i class="fas fa-cogs"></i>2. Principales capacités du Snowflake CLI
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#configuration-cli">
+                            <i class="fas fa-sliders-h"></i>3. Points clés de la configuration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#commandes-cli">
+                            <i class="fas fa-code"></i>4. Commandes principales à connaître
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnalites-avancees">
+                            <i class="fas fa-rocket"></i>5. Fonctionnalités avancées
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowflake CLI</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-terminal"></i>CLI
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> DevOps
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE SNOWFLAKE CLI ?
+                ============================================ -->
+                <section id="definition-cli" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i>1. Qu'est-ce que Snowflake CLI ?
+                    </h2>
+
+                    <p>Le <b>Snowflake CLI</b> est l'outil officiel en ligne de commande pour :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>interagir avec Snowflake via terminal,</li>
+                        <li>automatiser les opérations,</li>
+                        <li>créer et gérer des objets,</li>
+                        <li>travailler avec Snowpark, Native Apps, Streamlit, packaging, etc.</li>
+                    </ul>
+
+                    <p>
+                        Il est destiné à remplacer <b>SnowSQL</b> dans le long terme et fournit une expérience 
+                        moderne de développement Snowflake.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PRINCIPALES CAPACITÉS DU SNOWFLAKE CLI
+                ============================================ -->
+                <section id="capacites-cli" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i>2. Principales capacités du Snowflake CLI
+                    </h2>
+
+                    <h3>1. Exécution de commandes SQL & Snowflake</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Exécuter des requêtes SQL.</li>
+                        <li>Gérer les comptes, utilisateurs, rôles, warehouses, objets.</li>
+                        <li>Exécuter des scripts, automatiser via CLI.</li>
+                    </ul>
+
+                    <h3>2. Gestion du développement Snowflake</h3>
+                    <p>Le Snowflake CLI est un outil central pour :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>Snowpark</b> (Python, Java, Scala),</li>
+                        <li><b>Snowflake Native Apps</b>,</li>
+                        <li><b>Streamlit apps</b> hébergées dans Snowflake,</li>
+                        <li><b>Projets Workspaces</b>.</li>
+                    </ul>
+
+                    <h3>3. Packaging, déploiement & CI/CD</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Build, package et déployer des applications Snowflake.</li>
+                        <li>Intégration avec Git.</li>
+                        <li>Support utilisé par les équipes DevOps / DataOps.</li>
+                    </ul>
+
+                    <h3>4. Support multi‑environnements</h3>
+                    <p>Permet d'utiliser :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>environnements locaux</li>
+                        <li>environnements cloud</li>
+                        <li>authentification OAuth, key-pair, username/password</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: POINTS CLÉS DE LA CONFIGURATION
+                ============================================ -->
+                <section id="configuration-cli" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sliders-h"></i>3. Points clés de la configuration
+                    </h2>
+
+                    <h3>Installer le CLI</h3>
+                    <p>Le CLI est distribué via :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>pip (Python)</li>
+                        <li>installateurs spécifiques</li>
+                        <li>conteneurs Docker</li>
+                    </ul>
+
+                    <h3>Création d'un fichier de configuration</h3>
+                    <p>Format YAML typique, contenant :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>account</li>
+                        <li>username</li>
+                        <li>authentification</li>
+                        <li>rôle</li>
+                        <li>entrepôt par défaut</li>
+                        <li>options de connexion</li>
+                    </ul>
+
+                    <h3>Authentification possible :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>mot de passe</li>
+                        <li>OAuth (recommandé)</li>
+                        <li>clé privée</li>
+                        <li>MFA / SSO</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMANDES PRINCIPALES À CONNAÎTRE
+                ============================================ -->
+                <section id="commandes-cli" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i>4. Commandes principales à connaître
+                    </h2>
+
+                    <p>Voici les familles de commandes à maîtriser :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><b>snow sql</b> : Exécuter une requête SQL depuis le terminal.</li>
+                        <li><b>snow app</b> : Créer, packager, valider et publier des Snowflake Native Apps.</li>
+                        <li><b>snow snowpark</b> : Outils pour développement Snowpark (Python, Java…).</li>
+                        <li><b>snow function</b> : Gérer les UDFs, Procedures et UDTFs</li>
+                        <li><b>snow stage</b> : Charger et gérer les objets stage.</li>
+                        <li><b>snow deploy</b> : Déployer des applications ou objets Snowflake.</li>
+                        <li><b>snow login, snow connection</b> : Gérer les connexions et tokens.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: FONCTIONNALITÉS AVANCÉES
+                ============================================ -->
+                <section id="fonctionnalites-avancees" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-rocket"></i> ✅ 5. Fonctionnalités avancées
+                    </h2>
+
+                    <h3>Gestion des secrets & credentials</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>stockage de secrets sécurisé</li>
+                        <li>support de vaults externes</li>
+                    </ul>
+
+                    <h3>Intégration Git</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>possibilité de synchroniser projets Snowflake</li>
+                        <li>support workflows CI/CD</li>
+                    </ul>
+
+                    <h3>Templates</h3>
+                    <p>Le CLI propose des modèles pour :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Snowpark</li>
+                        <li>Native Apps</li>
+                        <li>Streamlit</li>
+                        <li>Projets de données</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
