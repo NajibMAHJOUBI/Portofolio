@@ -1,0 +1,276 @@
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>🧊 Présentation de la commande snow sql 
+                    </h2>
+
+
+
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>Extension Snowflake pour VS Code </h2>
+
+<p>L’extension <b>Snowflake pour Visual Studio</b> Code permet d’écrire, d’exécuter 
+    et de gérer du SQL Snowflake directement depuis VS Code, tout en intégrant 
+    Snowpark Python et les Native Apps. Elle constitue un outil important pour 
+    les développeurs, data engineers et utilisateurs avancés. </p>
+
+ 
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 1. Fonctionnalités principales de l’extension 
+                    </h2>
+
+<h3>✔ Écriture et exécution de SQL Snowflake </h3>
+
+<ul>
+    <li>Exécuter des requêtes SQL directement dans VS Code.</li>
+    <li>Résultats visibles dans un panneau dédié. [docs.snowflake.com] </li>
+</ul>
+ 
+
+
+
+<h3>✔ Support Snowpark Python  </h3>
+
+<ul>
+    <li>Debugging</li>
+    <li>Syntax highlighting </li>
+    <li>Autocomplétion pour SQL dans le code Python Snowpark [docs.snowflake.com]</li>
+</ul>
+
+
+<h3>✔ Développement Native Apps  </h3>
+
+<ul>
+    <li>Création, déploiement, exécution et suppression d’applications Native Apps. 
+</li>
+    <li>Gestion des environnements et variables. [marketplac...studio.com] 
+</li>
+</ul>
+
+
+<h3>✔ Object Explorer  </h3>
+
+<ul>
+    <li>Naviguer dans les bases, schémas, tables, vues, fonctions, etc. 
+</li>
+    <li>Copier rapidement des noms d’objets. [marketplac...studio.com] 
+</li>
+</ul>
+
+
+<h3>✔ SnowConvert Migration Assistant  </h3>
+
+<ul>
+    <li>Résolution d’erreurs de migration SQL avec aide IA. 
+</li>
+    <li>Intégré via panneaux, CodeLens ou chat interactif. [marketplac...studio.com] 
+</li>
+</ul>
+
+
+<h3>✔ Gestion multicomptes et sessions  </h3>
+
+<ul>
+    <li>Connexion à plusieurs comptes Snowflake. 
+</li>
+    <li>Sélection du rôle, warehouse, base, schéma, secondary roles. [marketplac...studio.com] 
+</li>
+</ul>
+
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 2. Installation de l’extension 
+                    </h2>
+<p>Deux méthodes sont disponibles : </p>
+
+<h3>🔹 A. Depuis le Visual Studio Marketplace </h3>
+<ul>
+    <li>VS Code → Settings > Extensions 
+</li>
+    <li>Rechercher Snowflake 
+</li>
+    <li>Identifier l’extension via le badge Snowflake 
+</li>
+    <li>Sélectionner Install [docs.snowflake.com] 
+</li>
+</ul>
+
+
+
+
+<h3>🔹 B. Via un fichier .vsix </h3>
+
+<ul>
+    <li>Aller sur : https://marketplace.visualstudio.com/items?itemName=snowflake.snowflake-vsc 
+</li>
+    <li>Télécharger la version du .vsix depuis « Version History » 
+</li>
+    <li>VS Code → Extensions > More (…) > Install from VSIX 
+</li>
+    <li>Sélectionner le fichier téléchargé [docs.snowflake.com] 
+</li>
+</ul>
+
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 3. Connexion à Snowflake 
+                    </h2>
+
+<p>Avant toute exécution SQL ou Snowpark, une connexion Snowflake est requise. </p>
+
+<h3>Méthodes de connexion supportées : 
+</h3>
+
+<ul>
+    <li>✔ Username / Password </li>
+    <li>✔ SSO / SAML </li>
+    <li>✔ Key-pair authentication</li>
+    <li>✔ OAuth via fichier connections.toml [docs.snowflake.com] </li>
+</ul>
+
+
+
+
+
+ 
+
+
+
+<h3>Première connexion : </h3>
+<ul>
+    <li>a. Cliquer sur l’icône Snowflake dans l’Activity Bar </li>
+    <li>b. Saisir l’account identifier ou l’URL Snowflake </li>
+    <li>c. Choisir la méthode d’authentification [docs.snowflake.com] </li>
+</ul>
+
+
+
+
+
+
+<p>Après première connexion, l’account identifier peut ne plus être demandé. </p>
+
+ 
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 4. Fichier de configuration connections.toml 
+                    </h2>
+
+<p>L’extension permet : </p>
+
+<ul>
+    <li>d’ajouter et modifier des connexions,</li>
+    <li>de gérer plusieurs environnements, </li>
+    <li>de stocker les paramètres de connexion. [docs.snowflake.cn] </li>
+</ul>
+ 
+
+
+
+
+
+<p>Méthode d’édition dans VS Code : </p>
+
+<p><b>Activity Bar → Account → Snowflake: Edit Connections File </b></p>
+
+ 
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 5. Interface de l’extension (zones importantes) 
+                    </h2>
+
+D’après la documentation : [docs.snowflake.cn] 
+
+                        <table class="tutorial-table">
+                            <thead>
+                                <tr>
+                                    <th>Zone</th>
+                                    <th>Fonction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. Sidebar</td>
+                                    <td>Contient Account, Native App, Object Explorer, Query History </td>
+                                </tr>
+                                <tr>
+                                    <td>2. Native App Pane </td>
+                                    <td>Création/gestion Native Apps </td>
+                                </tr>
+                                <tr>
+                                    <td>3. Query History Pane </td>
+                                    <td>Liste et détails des requêtes récentes </td>
+                                </tr>
+                                <tr>
+                                    <td>4. Session Info </td>
+                                    <td>Rôle actuel, base, schéma, warehouse </td>
+                                </tr>
+                                <tr>
+                                    <td>5. SQL Pane </td>
+                                    <td>Éditeur pour fichiers SQL </td>
+                                </tr>
+                                <tr>
+                                    <td>6. Query Results Pane </td>
+                                    <td>Résultats des requêtes </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>✅ 6. Exécution des requêtes & historique 
+                    </h2>
+
+<h3>✔ Exécution SQL </h3>
+
+Une requête ou un bloc peut être exécuté via le panneau SQL. 
+
+Résultats affichés dans le panneau « Query Results ». [docs.snowflake.cn] 
+
+<h3>✔ Query History </h3>
+
+Historique complet, exécutions, tri, réouverture des requêtes. [marketplac...studio.com] 
+
+ 
+ 
+
+<section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>🧩 7. Autres fonctionnalités importantes 
+                    </h2>
+<h3>✔ Intellisense & Auto-complétion </h3> 
+<ul>
+    <li>Noms d’objets</li>
+    <li>Fonctions Snowflake</li>
+    <li>Mots‑clés SQL [marketplac...studio.com] </li>
+</ul>
+ 
+
+<h3>✔ Stage Operations  </h3>
+
+<ul>
+    <li>PUT, GET, LIST pour les stages internes [marketplac...studio.com] </li>
+</ul>
+
+
+<h3>✔ Open Data / Files  </h3>
+<ul>
+    <li>Support des uploads via add data panel </li>
+</ul>
+
+
+ 
+ 
+

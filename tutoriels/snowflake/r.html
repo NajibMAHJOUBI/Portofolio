@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Architecture en Trois Couches | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Architecture en Trois Couches</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#architecture-trois-couches" class="active">
+                            <i class="fas fa-layer-group"></i>Snowflake : Une structure en trois couches
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#module-stockage">
+                            <i class="fas fa-cloud-upload-alt"></i>Module 1 : Stockage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#module-compute">
+                            <i class="fas fa-microchip"></i>Module 2 : Compute
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#module-cloud">
+                            <i class="fas fa-globe"></i>Module 3 : Cloud Services
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Architecture Snowflake - Structure en Trois Couches</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-layer-group"></i>Architecture
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: SNOWFLAKE : UNE STRUCTURE EN TROIS COUCHES
+                ============================================ -->
+                <section id="architecture-trois-couches" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i> Snowflake : Une structure en trois couches
+                    </h2>
+
+                    <p>
+                        L'architecture Snowflake repose sur trois couches distinctes et indépendantes, 
+                        permettant une scalabilité et une flexibilité optimales :
+                    </p>
+
+                    <ul>
+                        <li><b>Couche de stockage</b> : Gestion des données persistantes</li>
+                        <li><b>Couche de calcul (Compute)</b> : Exécution des requêtes et traitement</li>
+                        <li><b>Couche Cloud Services</b> : Services de gestion et coordination</li>
+                    </ul>
+
+                    <div id="modulesView" class="items-grid">
+                        <!-- Module 1 : Stockage -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-stockage.html'">
+                            <div class="item-number">Module 1 / 3</div>
+                            <h4><i class="fas fa-cloud-upload-alt"></i> Stockage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez comment Snowflake gère le stockage des données avec les micro-partitions.</p>
+                        </div>
+
+                        <!-- Module 2 : Compute -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-virtual-warehouses.html'">
+                            <div class="item-number">Module 2 / 3</div>
+                            <h4><i class="fas fa-microchip"></i> Compute</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">Explorez les Virtual Warehouses et leur fonctionnement.</p>
+                        </div>
+
+                        <!-- Module 3 : Cloud Services -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-cloud.html'">
+                            <div class="item-number">Module 3 / 3</div>
+                            <h4><i class="fas fa-globe"></i> Cloud Services</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">Comprenez la couche de services cloud et Snowgrid.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION: MODULE STOCKAGE (DÉTAIL)
+                ============================================ -->
+                <section id="module-stockage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> Module 1 : Stockage
+                    </h2>
+
+                    <p>
+                        La couche de stockage de Snowflake est responsable de la persistance des données. 
+                        Elle utilise un format propriétaire optimisé avec des micro-partitions.
+                    </p>
+
+                    <h3>Points clés à retenir :</h3>
+                    <ul>
+                        <li>Stockage dans le cloud provider (AWS S3, Azure Blob, GCS)</li>
+                        <li>Micro-partitions : unités de stockage de 50 à 500 MB</li>
+                        <li>Compression automatique et optimisation</li>
+                        <li>Time Travel et Fail-safe intégrés</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Pour aller plus loin :</strong> Cliquez sur la carte "Stockage" ci-dessus pour accéder au tutoriel complet.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION: MODULE COMPUTE (DÉTAIL)
+                ============================================ -->
+                <section id="module-compute" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-microchip"></i> Module 2 : Compute
+                    </h2>
+
+                    <p>
+                        La couche de calcul est assurée par les Virtual Warehouses, des clusters de ressources 
+                        de calcul élastiques et indépendants du stockage.
+                    </p>
+
+                    <h3>Points clés à retenir :</h3>
+                    <ul>
+                        <li>Warehouses : clusters de calcul élastiques</li>
+                        <li>Facturation à la seconde (minimum 60 secondes)</li>
+                        <li>Auto-suspend / Auto-resume pour optimiser les coûts</li>
+                        <li>Multi-cluster pour gérer la concurrence</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Pour aller plus loin :</strong> Cliquez sur la carte "Compute" ci-dessus pour accéder au tutoriel complet.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION: MODULE CLOUD SERVICES (DÉTAIL)
+                ============================================ -->
+                <section id="module-cloud" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-globe"></i> Module 3 : Cloud Services
+                    </h2>
+
+                    <p>
+                        La couche Cloud Services coordonne toutes les opérations et offre des fonctionnalités 
+                        avancées de gestion et de gouvernance.
+                    </p>
+
+                    <h3>Points clés à retenir :</h3>
+                    <ul>
+                        <li>Gestion des métadonnées et optimisation des requêtes</li>
+                        <li>Snowgrid : connectivité globale entre clouds et régions</li>
+                        <li>Secure Data Sharing et Marketplace</li>
+                        <li>Gouvernance et sécurité centralisées</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Pour aller plus loin :</strong> Cliquez sur la carte "Cloud Services" ci-dessus pour accéder au tutoriel complet.
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        /* Styles supplémentaires pour améliorer l'affichage des cartes */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .grid-item {
+            background: var(--gray-50, #f8fafc);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200, #e2e8f0);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary, #1c6e8f);
+        }
+
+        .item-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary, #1c6e8f);
+            margin-bottom: 0.75rem;
+        }
+
+        .grid-item h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--gray-800, #1e293b);
+        }
+
+        .grid-item h4 i {
+            margin-right: 0.5rem;
+            color: var(--primary, #1c6e8f);
+        }
+
+        .item-details {
+            margin-bottom: 0.75rem;
+        }
+
+        .item-details span {
+            font-size: 0.875rem;
+            color: var(--gray-600, #475569);
+        }
+
+        .item-description {
+            font-size: 0.875rem;
+            color: var(--gray-600, #475569);
+            line-height: 1.4;
+        }
+
+        .info-note {
+            background: #eef2ff;
+            border-left: 4px solid var(--primary, #1c6e8f);
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .info-note i {
+            margin-right: 0.5rem;
+            color: var(--primary, #1c6e8f);
+        }
+    </style>
+</body>
+</html>
