@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Organizations | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Organizations</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-info-circle"></i>Introduction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#concepts-fondamentaux">
+                            <i class="fas fa-building"></i>1. Organizations : concepts fondamentaux
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#organization-account">
+                            <i class="fas fa-user-shield"></i>2. Organization Account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#roles-administration">
+                            <i class="fas fa-user-tag"></i>3. Rôles d'administration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#managing-accounts">
+                            <i class="fas fa-database"></i>4. Managing Accounts in an Organization
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#organization-users-groups">
+                            <i class="fas fa-users"></i>5. Organization Users et Organization Groups
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#premium-views">
+                            <i class="fas fa-chart-line"></i>6. Premium Views
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#account-identifiers">
+                            <i class="fas fa-id-card"></i>7. Account Identifiers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume">
+                            <i class="fas fa-table"></i>Résumé
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Organizations</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-building"></i>Organizations
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Governance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> Introduction
+                    </h2>
+
+                    <p>
+                        Snowflake introduit le concept d'Organization pour regrouper tous les comptes appartenant à une même entreprise. 
+                        Cela permet une gouvernance centralisée, une administration simplifiée et un suivi global des usages.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: ORGANIZATIONS : CONCEPTS FONDAMENTAUX
+                ============================================ -->
+                <section id="concepts-fondamentaux" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-building"></i>1. Organizations : concepts fondamentaux
+                    </h2>
+
+                    <p>Une Organization Snowflake est une entité logique regroupant l'ensemble des comptes Snowflake appartenant à une entreprise.</p>
+
+                    <p>Elle permet :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>de lister tous les comptes de l'entreprise,</li>
+                        <li>de gérer des objets organisationnels,</li>
+                        <li>de voir des données d'usage cross‑accounts,</li>
+                        <li>de gérer l'accès à des fonctionnalités globales (ex. Marketplace Terms),</li>
+                        <li>
+                            de faciliter le multi‑account strategy (Prod / Dev / QA / BU / Régions).
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ORGANIZATION ACCOUNT
+                ============================================ -->
+                <section id="organization-account" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-shield"></i>2. Organization Account (compte d'organisation)
+                    </h2>
+
+                    <p>Il existe un seul organization account par organisation.</p>
+                    <p>C'est un type spécial de compte réservé aux administrateurs organisationnels.</p>
+
+                    <h3>✔ Rôles clés du compte d'organisation</h3>
+                    <p>Les administrateurs peuvent :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>gérer le cycle de vie des comptes (création / suppression),</li>
+                        <li>voir les données d'usage organisationnelles (query history, consommation),</li>
+                        <li>créer et gérer organization users et organization groups,</li>
+                        <li>activer les Marketplace Terms pour toute l'organisation,</li>
+                        <li>activer la réplication cross‑region pour les comptes,</li>
+                        <li>
+                            utiliser les premium views dans ORGANIZATION_USAGE.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Organisation hybride (compliance)</h3>
+                    <p>Une organisation peut contenir des comptes dans des régions régulées et non régulées.</p>
+                    <p>
+                        Certaines fonctionnalités (premium views, objets organisationnels) 
+                        peuvent amener Snowflake à déplacer des métadonnées entre régions, 
+                        ce qui a un impact compliance.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: RÔLES D'ADMINISTRATION
+                ============================================ -->
+                <section id="roles-administration" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-tag"></i>3. Rôles d'administration : GLOBALORGADMIN vs ORGADMIN
+                    </h2>
+
+                    <p>Snowflake fournit deux rôles d'administration organisationnelle :</p>
+
+                    <h3>✔ GLOBALORGADMIN (modèle modernisé)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Rôle recommandé pour les organisations multi‑comptes.</li>
+                        <li>S'utilise uniquement dans l'organization account.</li>
+                        <li>
+                            Permet toutes les tâches organisationnelles : gestion comptes, organisation users, premium views.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ ORGADMIN (ancien modèle)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Rôle activable dans plusieurs comptes (limité par défaut à 8).</li>
+                        <li>En cours de dépréciation pour les organisations multi‑comptes.</li>
+                        <li>
+                            Snowflake préviendra 3 mois avant son retrait.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p>→ Pour SnowPro Core : retenir que le rôle moderne et recommandé est <b>GLOBALORGADMIN</b>.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: MANAGING ACCOUNTS IN AN ORGANIZATION
+                ============================================ -->
+                <section id="managing-accounts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i>4. Managing Accounts in an Organization
+                    </h2>
+
+                    <p>L'organisation permet une gestion complète des comptes Snowflake :</p>
+
+                    <h3>✔ Création / suppression de comptes</h3>
+                    <p>Les administrateurs peuvent :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>créer un compte via l'organization account,</li>
+                        <li>
+                            définir son édition Snowflake, région, rôle de démarrage, compute, etc.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Gestion globale</h3>
+                    <p>L'interface permet :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>lister les comptes</li>
+                        <li>modifier des paramètres d'édition</li>
+                        <li>activer des services (réplication, failover, marketplace terms)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: ORGANIZATION USERS ET ORGANIZATION GROUPS
+                ============================================ -->
+                <section id="organization-users-groups" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-users"></i>5. Organization Users et Organization Groups
+                    </h2>
+
+                    <p>Nouveauté importante des organisations modernes.</p>
+
+                    <h3>✔ Organization Users</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Un organization user peut accéder à plusieurs comptes Snowflake avec une seule identité.</li>
+                        <li>
+                            Permet une administration centralisée et réduit la duplication des utilisateurs.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Organization Groups</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Groupes d'utilisateurs organisationnels pour assigner des rôles dans plusieurs comptes.</li>
+                        <li>Facilite onboarding / offboarding.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: PREMIUM VIEWS
+                ============================================ -->
+                <section id="premium-views" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i>6. Premium Views (dans ORGANIZATION_USAGE)
+                    </h2>
+
+                    <p>Disponible uniquement dans l'organization account.</p>
+                    <p>Exemples :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            vues sur tags, masking policies, objects, usage croisé multi‑comptes.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                    <p>→ Ces vues offrent une visibilité centralisée non accessible via un compte standard.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: ACCOUNT IDENTIFIERS
+                ============================================ -->
+                <section id="account-identifiers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-id-card"></i>7. Account Identifiers
+                    </h2>
+
+                    <p>Pour se connecter à un compte, on utilise un account identifier.</p>
+
+                    <h3>Format général :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>orgname-account_name (Format 1 recommandé)</li>
+                        <li>
+                            Peut être utilisé dans Snowsight, drivers, SnowSQL, Snowflake CLI.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p>L'account identifier :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>identifie le compte au sein de l'organisation,</li>
+                        <li>dépend du cloud provider et de la région.</li>
+                    </ul>
+
+                    <h3>Formats existants (selon doc complète) :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Account name in organization</li>
+                        <li>Account locator</li>
+                        <li>URL-based identifier</li>
+                    </ul>
+
+                    <p>→ Snowflake recommande <b>Account name in organization</b> pour cohérence multi‑comptes.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ
+                ============================================ -->
+                <section id="resume" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i>Résumé
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Organization</td>
+                                <td>Ensemble de comptes d'une même entreprise</td>
+                            </tr>
+                            <tr>
+                                <td>Organization account</td>
+                                <td>Compte spécial pour administration centrale</td>
+                            </tr>
+                            <tr>
+                                <td>GLOBALORGADMIN</td>
+                                <td>Rôle moderne recommandé pour toute gestion org‑level</td>
+                            </tr>
+                            <tr>
+                                <td>ORGADMIN</td>
+                                <td>Ancien rôle en voie de dépréciation</td>
+                            </tr>
+                            <tr>
+                                <td>Premium views</td>
+                                <td>Vues organisationnelles avancées (usage, gouvernance)</td>
+                            </tr>
+                            <tr>
+                                <td>Organization users</td>
+                                <td>Identité unique pour accès multi‑comptes</td>
+                            </tr>
+                            <tr>
+                                <td>Account identifiers</td>
+                                <td>Identifiants propres à chaque compte</td>
+                            </tr>
+                        </tbody>
+                     </table>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

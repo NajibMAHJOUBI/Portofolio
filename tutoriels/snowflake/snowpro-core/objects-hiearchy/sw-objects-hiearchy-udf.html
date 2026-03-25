@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - User-Defined Functions (UDF) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">User-Defined Functions (UDF)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-calculator"></i>📌 User-Defined Functions (UDF) — Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-objectif">
+                            <i class="fas fa-info-circle"></i>1. Définition et objectif des UDFs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#variantes-udf">
+                            <i class="fas fa-code-branch"></i>2. Variantes de User-Defined Functions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#langages-supportes">
+                            <i class="fas fa-code"></i>3. Langages supportés pour les UDFs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#udf-vs-stored-procedure">
+                            <i class="fas fa-balance-scale"></i>4. UDF vs Stored Procedure — Différences importantes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#execution-udf">
+                            <i class="fas fa-play"></i>5. Comment les UDFs s'exécutent
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#outils-creation">
+                            <i class="fas fa-tools"></i>6. Outils pour créer et gérer des UDFs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples-typiques">
+                            <i class="fas fa-file-code"></i>7. Exemples typiques (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-lightbulb"></i>8. Cas d'usage recommandés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>🎯 9. À connaître absolument pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - User-Defined Functions (UDF)</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-calculator"></i>UDF
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-python"></i>Python
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-java"></i>Java
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calculator"></i> 🧊 User-Defined Functions (UDF) Overview
+                    </h2>
+
+                    <p>
+                        Les User‑Defined Functions (UDF) permettent d'étendre Snowflake en écrivant vos propres fonctions, dans des langages variés, pour exécuter des opérations non couvertes par les fonctions système. C'est un sujet important pour l'examen SnowPro Core, notamment pour les aspects gouvernance, sécurité, architecture et extensibilité.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION ET OBJECTIF DES UDFS
+                ============================================ -->
+                <section id="definition-objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Définition et objectif des UDFs
+                    </h2>
+
+                    <p>Une UDF :</p>
+                    <ul>
+                        <li>est une fonction personnalisée que vous créez dans Snowflake via SQL, Java, Python, or Scala</li>
+                        <li>retourne toujours une valeur (un scalaire ou un ensemble de lignes dans le cas des UDTFs) ;</li>
+                        <li>permet d'implémenter des calculs ou transformations non disponibles via les fonctions intégrées ;</li>
+                        <li>est réutilisable dans toutes vos requêtes comme une fonction native.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Les UDF sont idéales pour :</strong>
+                        <ul>
+                            <li>encapsuler des calculs complexes ;</li>
+                            <li>appliquer des règles métier propres à l'organisation ;</li>
+                            <li>enrichir la bibliothèque de fonctions Snowflake.</li>
+                        </ul>
+                        <p>Snowflake précise : <em>"A function always returns a value… good choice for calculating and returning a value."</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: VARIANTES DE USER-DEFINED FUNCTIONS
+                ============================================ -->
+                <section id="variantes-udf" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 2. Variantes de User-Defined Functions
+                    </h2>
+
+                    <p>Snowflake supporte plusieurs types d'UDFs : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 1. Scalar UDFs</h3>
+                    <ul>
+                        <li>aussi appelées UDF tout court ;</li>
+                        <li>retournent une valeur unique pour chaque ligne d'entrée.</li>
+                    </ul>
+
+                    <h3>✔ 2. UDAF — User-Defined Aggregate Functions</h3>
+                    <ul>
+                        <li>opèrent sur plusieurs lignes et retournent un seul résultat : SUM, AVG, MIN, MAX personnalisés ;</li>
+                        <li>peuvent implémenter des calculs statistiques avancés.</li>
+                    </ul>
+
+                    <h3>✔ 3. UDTF — User-Defined Table Functions</h3>
+                    <ul>
+                        <li>retournent un tableau (plusieurs lignes) pour chaque ligne d'entrée ;</li>
+                        <li>idéal pour exploser, transformer ou enrichir des données.</li>
+                    </ul>
+
+                    <h3>✔ 4. Vectorized UDFs / Vectorized UDTFs</h3>
+                    <ul>
+                        <li>fonctionnent sur des batches de données sous forme de Pandas DataFrames ;</li>
+                        <li>accélèrent les opérations à haute volumétrie.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: LANGAGES SUPPORTÉS POUR LES UDFS
+                ============================================ -->
+                <section id="langages-supportes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 3. Langages supportés pour les UDFs
+                    </h2>
+
+                    <p>Snowflake permet d'écrire la logique (handler) dans plusieurs langages : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Langage</th>
+                                <th>Types de fonctions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Java</td><td>UDF, UDTF</td></tr>
+                            <tr><td>JavaScript</td><td>UDF, UDTF</td></tr>
+                            <tr><td>Python</td><td>UDF, UDAF, UDTF, Vectorized UDF/UDTF</td></tr>
+                            <tr><td>Scala</td><td>UDF</td></tr>
+                            <tr><td>SQL</td><td>UDF, UDTF</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Tous les UDFs (quel que soit le langage) sont déclarés via SQL, même si leur logique est écrite en Python/Java/etc.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: UDF VS STORED PROCEDURE — DIFFÉRENCES IMPORTANTES
+                ============================================ -->
+                <section id="udf-vs-stored-procedure" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-balance-scale"></i> ✅ 4. UDF vs Stored Procedure — Différences importantes
+                    </h2>
+
+                    <p>Snowflake indique explicitement qu'une UDF ressemble à une procédure mais diffère sur plusieurs aspects clés : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ UDF</h4>
+                            <ul>
+                                <li>retourne une valeur directement ;</li>
+                                <li>utilisée dans des expressions SQL ;</li>
+                                <li>stateless, adaptée aux calculs.</li>
+                            </ul>
+                        </div>
+                        <div class="usage-card">
+                            <h4>✔ Stored Procedure</h4>
+                            <ul>
+                                <li>retourne 0 ou 1 valeur générique (souvent un VARIANT) ;</li>
+                                <li>peut exécuter des opérations DDL / DML complexes ;</li>
+                                <li>peut gérer des transactions, des erreurs, du branching.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>👉 SnowPro Core aime tester ces différences.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMMENT LES UDFS S'EXÉCUTENT
+                ============================================ -->
+                <section id="execution-udf" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-play"></i> ✅ 5. Comment les UDFs s'exécutent
+                    </h2>
+
+                    <ul>
+                        <li>L'utilisateur appelle la fonction dans une requête SQL.</li>
+                        <li>Snowflake appelle le handler (code Python/Java/etc.) avec les arguments.</li>
+                        <li>Le résultat est retourné à Snowflake puis au client.</li>
+                        <li>Les UDFs s'exécutent dans un environnement sécurisé et isolé.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: OUTILS POUR CRÉER ET GÉRER DES UDFS
+                ============================================ -->
+                <section id="outils-creation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tools"></i> ✅ 6. Outils pour créer et gérer des UDFs
+                    </h2>
+
+                    <p>Snowflake mentionne plusieurs façons : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>SQL (CREATE FUNCTION)</li>
+                        <li>Snowpark API (Java, Python, Scala)</li>
+                        <li>Snowsight</li>
+                        <li>Snowflake CLI</li>
+                        <li>VS Code Extension</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: EXEMPLES TYPIQUES (SNOWPRO CORE)
+                ============================================ -->
+                <section id="exemples-typiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-code"></i> ✅ 7. Exemples typiques (SnowPro Core)
+                    </h2>
+
+                    <p>(D'après la documentation — abstraction, pas de code copié)</p>
+
+                    <h3>❄ Exemple UDF SQL</h3>
+                    <p>Calcule une aire à partir d'un rayon (le doc l'illustre). <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>❄ Exemple UDF Python</h3>
+                    <p>Handler en Python avec <code class="inline-code">HANDLER = '&lt;function&gt;'</code>.</p>
+
+                    <h3>❄ Exemple UDTF</h3>
+                    <p>Retourne plusieurs lignes pour chaque ligne d'entrée.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: CAS D'USAGE RECOMMANDÉS
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 8. Cas d'usage recommandés
+                    </h2>
+
+                    <p>Snowflake indique que les UDFs sont un bon choix pour : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>étendre les fonctions intégrées,</li>
+                        <li>encapsuler des calculs organisationnels réutilisables,</li>
+                        <li>normaliser des transformations,</li>
+                        <li>réaliser masquage/logique métier personnalisée,</li>
+                        <li>traiter semi‑structuré via Python.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: À CONNAÎTRE ABSOLUMENT POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 9. À connaître absolument pour SnowPro Core
+                    </h2>
+
+                    <div class="warning-note">
+                        <ul>
+                            <li>✔ UDF = retourne toujours une valeur (scalaire ou table pour UDTF).</li>
+                            <li>✔ Les handlers peuvent être écrits en Python, Java, JavaScript, SQL, Scala.</li>
+                            <li>✔ Les UDAF opèrent sur plusieurs lignes.</li>
+                            <li>✔ Les vectorized UDFs utilisent Pandas DataFrames.</li>
+                            <li>✔ Les UDF sont créées avec <code class="inline-code">CREATE FUNCTION</code>.</li>
+                            <li>✔ Différence majeure : UDF ≠ Stored Procedure.</li>
+                            <li>✔ Les UDFs sont exécutées dans un runtime géré, sécurisé, isolé.</li>
+                            <li>✔ Les UDFs peuvent être appelées comme n'importe quelle fonction SQL intégrée.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

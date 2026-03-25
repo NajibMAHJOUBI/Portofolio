@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Micro-partitions & Table Design | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Micro-partitions & Table Design</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-info-circle"></i>📌 Micro‑partitions & Table Design Considerations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#micro-partitions-concept">
+                            <i class="fas fa-cubes"></i>1. Micro‑partitions — Concept clé de Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#table-design-considerations">
+                            <i class="fas fa-table"></i>2. Table Design Considerations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#relation-micro-tables">
+                            <i class="fas fa-link"></i>3. Relation entre Micro‑partitions et Design des Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#a-connaitre-absolument">
+                            <i class="fas fa-star"></i>4. À connaître absolument pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-chart-simple"></i>🎯 Résumé final pour examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Micro-partitions & Table Design</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cubes"></i>Micro-partitions
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-table"></i>Table Design
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> 📌 Micro‑partitions & Table Design Considerations
+                    </h2>
+
+                    <p>
+                        Voici une synthèse de révision complète, basée exclusivement sur la documentation Snowflake concernant :
+                    </p>
+                    <ul>
+                        <li>📌 Micro‑partitions</li>
+                        <li>📌 Tables – Design Considerations</li>
+                    </ul>
+
+                    <p>Sources officielles :</p>
+                    <ul>
+                        <li>Micro‑partitions : <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Table Design Considerations : <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note importante :</strong>
+                        <p>Cette thématique est cruciale pour la certification SnowPro Core, car elle touche directement les fondements de performance, stockage, clustering et gestion physique des données dans Snowflake.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: MICRO-PARTITIONS — CONCEPT CLÉ DE SNOWFLAKE
+                ============================================ -->
+                <section id="micro-partitions-concept" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 1. Micro‑partitions — Concept clé de Snowflake
+                    </h2>
+
+                    <h3>🔹 Définition</h3>
+                    <p>Snowflake stocke toutes les données des tables sous forme de micro‑partitions, qui sont :</p>
+                    <ul>
+                        <li>des unités de stockage contiguës,</li>
+                        <li>contenant 50 à 500 MB de données non compressées,</li>
+                        <li>organisées en format colonne.</li>
+                    </ul>
+                    <p>La taille réelle est plus petite car Snowflake stocke toujours les données compressées.</p>
+
+                    <h3>🔹 Caractéristiques</h3>
+                    <ul>
+                        <li>Chaque micro‑partition regroupe un ensemble de lignes mappées à la volée.</li>
+                        <li>Stocke des métadonnées riches : ranges de colonnes, NDV, min/max, etc.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Micro‑partitionnement automatique</h3>
+                    <ul>
+                        <li>Aucun partitionnement manuel n'est nécessaire.</li>
+                        <li>Snowflake crée les micro‑partitions selon l'ordre d'ingestion.</li>
+                        <li>Il n'existe pas de partition statique telle que dans les systèmes traditionnels (Hadoop, BigQuery ancestral, etc.).</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Bénéfices des micro‑partitions</h3>
+                    <ul>
+                        <li><strong>Pruning extrême</strong> : Snowflake peut éliminer des millions de micro‑partitions lors des scans grâce aux métadonnées min/max.</li>
+                        <li><strong>Prévention du skew</strong> : les micro‑partitions peuvent se recouper, limitant les déséquilibres de taille.</li>
+                        <li><strong>Stockage colonne</strong> : seules les colonnes nécessaires au query scan sont lues.</li>
+                        <li><strong>Performances élevées</strong> pour les requêtes filtrées, jointures, agrégations.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Clustering & Micro‑partitions</h3>
+                    <ul>
+                        <li>Les micro‑partitions constituent la base du clustering Snowflake.</li>
+                        <li>Snowflake organise automatiquement les données mais peut dériver si beaucoup de DML.</li>
+                        <li>Pour les tables multi‑téraoctets, on peut définir des clustering keys.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TABLE DESIGN CONSIDERATIONS
+                ============================================ -->
+                <section id="table-design-considerations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 2. Table Design Considerations
+                    </h2>
+
+                    <p>Source : Table design considerations. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 A. Choix des types de données</h3>
+
+                    <h4>✔ Utiliser les types DATE & TIMESTAMP</h4>
+                    <p>Snowflake recommande :</p>
+                    <ul>
+                        <li>DATE / TIMESTAMP plutôt que VARCHAR pour stocker des dates.</li>
+                        <li>Performances et stockage plus efficaces.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h4>✔ Référential integrity</h4>
+                    <ul>
+                        <li>PK / FK sont informations seulement (non appliquées), sauf pour Hybrid Tables.</li>
+                        <li>NOT NULL est réellement appliqué.</li>
+                        <li>PK/FK restent utiles pour :
+                            <ul>
+                                <li>BI tools (Power BI, Tableau) → génération auto de joins,</li>
+                                <li>join elimination.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 B. Importance des contraintes comme métadonnées</h3>
+                    <p>Les contraintes apportent :</p>
+                    <ul>
+                        <li>documentation du modèle,</li>
+                        <li>meilleure compréhension des relations,</li>
+                        <li>support des outils BI (import FK → joins),</li>
+                        <li>optimisation de certaines requêtes (join elimination).</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 C. GET_DDL pour documenter les objets</h3>
+                    <p>Snowflake permet d'extraire la définition d'un objet avec :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT GET_DDL('TABLE', 'MY_TABLE');</code></pre>
+                    </div>
+                    <p>Très utile pour :</p>
+                    <ul>
+                        <li>gouvernance,</li>
+                        <li>recréation d'objets,</li>
+                        <li>migration.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 D. Best practices générales</h3>
+                    <ul>
+                        <li>✔ Comprendre micro‑partitions & clustering → Optimiser les performances sur gros volumes.</li>
+                        <li>✔ Organiser proprement schemas & databases → Structure logique claire = maintenance facilitée.</li>
+                        <li>✔ Minimiser les colonnes VARCHAR → préférer types natifs → Impact sur compression + performances.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: RELATION ENTRE MICRO-PARTITIONS ET DESIGN DES TABLES
+                ============================================ -->
+                <section id="relation-micro-tables" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> ✅ 3. Relation entre Micro‑partitions et Design des Tables
+                    </h2>
+
+                    <p>Micro‑partitions influencent directement :</p>
+
+                    <h3>✔ 1. Le scan des données</h3>
+                    <p>Grâce aux métadonnées min/max → Snowflake ne lit que les micro‑partitions pertinentes.</p>
+
+                    <h3>✔ 2. Le clustering</h3>
+                    <p>Une bonne insertion ordonnée ou l'usage de clustering keys facilite le pruning.</p>
+
+                    <h3>✔ 3. La répartition physique des données</h3>
+                    <p>Snowflake réorganise automatiquement les micro‑partitions, mais cela peut se dégrader avec beaucoup de UPDATE/DELETE (tables volumineuses).</p>
+
+                    <h3>✔ 4. Time Travel & Fail-safe</h3>
+                    <p>Certaines opérations (ex: défragmentation micro‑partitions) créent de nouvelles micro‑partitions → augmentent temporairement le stockage Time Travel.</p>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: À CONNAÎTRE ABSOLUMENT POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="a-connaitre-absolument" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🧩 4. À connaître absolument pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔥 Micro‑partitions</h4>
+                            <ul>
+                                <li>Automatiques, 50–500MB uncompressed.</li>
+                                <li>Pruning très efficace (min/max metadata).</li>
+                                <li>Stockage colonne → scans plus rapides.</li>
+                                <li>Pas de partitionnement manuel.</li>
+                                <li>Base du clustering Snowflake.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔥 Table Design</h4>
+                            <ul>
+                                <li>DATE/TIMESTAMP > VARCHAR.</li>
+                                <li>PK/FK non enforce sauf hybrid tables (info only).</li>
+                                <li>NOT NULL enforce.</li>
+                                <li>Contrôles = métadonnées utiles pour BI et optimisation.</li>
+                                <li>GET_DDL indispensable pour documentation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RÉSUMÉ FINAL POUR EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 🎯 Résumé final pour examen SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Thème</th>
+                                <th>Ce qu'il faut retenir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Micro‑partitions</strong></td>
+                                <td>Unités physiques automatiques, métadonnées riches, pruning efficace, stockage colonne.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clustering</strong></td>
+                                <td>Automatique mais optimisable avec clustering keys pour très grosses tables.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Table design</strong></td>
+                                <td>Types natifs recommandés, contraintes informatives, importance des métadonnées.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Performance</strong></td>
+                                <td>Découle du micro‑partitionnement et d'un bon design de tables.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

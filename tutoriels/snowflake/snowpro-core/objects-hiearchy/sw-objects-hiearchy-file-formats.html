@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - File Formats | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">File Formats</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-file-alt"></i>📌 Snowflake File Formats
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#create-file-format">
+                            <i class="fas fa-plus-circle"></i>1. CREATE FILE FORMAT — Le DDL officiel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#formats-supportes">
+                            <i class="fas fa-table"></i>2. File formats supportés par Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#options-par-type">
+                            <i class="fas fa-sliders-h"></i>3. Options disponibles selon le type de fichier
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ou-definir-file-format">
+                            <i class="fas fa-location-dot"></i>4. Où peut-on définir un file format ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#named-file-formats">
+                            <i class="fas fa-tag"></i>5. File Formats et Named File Formats
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#compression">
+                            <i class="fas fa-compress-alt"></i>6. Compression — points clés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>7. Points clés SnowPro Core à mémoriser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-chart-simple"></i>📌 Résumé final SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - File Formats</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-alt"></i>File Formats
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>Data Loading
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-alt"></i> 🧊 Snowflake File Formats
+                    </h2>
+
+                    <p>
+                        Les file formats sont des objets Snowflake utilisés pour décrire la structure, le type et les propriétés des fichiers stockés dans des stages (internes ou externes). Ils sont essentiels pour les commandes <code class="inline-code">COPY INTO &lt;table&gt;</code> et <code class="inline-code">COPY INTO &lt;location&gt;</code>.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: CREATE FILE FORMAT — LE DDL OFFICIEL
+                ============================================ -->
+                <section id="create-file-format" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 1. CREATE FILE FORMAT — Le DDL officiel
+                    </h2>
+
+                    <p>La commande sert à créer un objet FILE FORMAT nommé, qui pourra ensuite être utilisé dans :</p>
+                    <ul>
+                        <li><code class="inline-code">COPY INTO &lt;table&gt;</code></li>
+                        <li><code class="inline-code">COPY INTO &lt;location&gt;</code></li>
+                        <li><code class="inline-code">CREATE STAGE</code> (association directe à un stage)</li>
+                        <li>D'autres objets manipulant des fichiers</li>
+                    </ul>
+
+                    <h3>➜ Syntaxe complète (simplifiée) :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE [ OR REPLACE ]
+    [ { TEMP | TEMPORARY | VOLATILE } ]
+    FILE FORMAT [ IF NOT EXISTS ] &lt;name&gt;
+    [ TYPE = { CSV | JSON | AVRO | ORC | PARQUET | XML | CUSTOM } [ formatTypeOptions ] ]
+    [ COMMENT = '&lt;string&gt;' ];</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: FILE FORMATS SUPPORTÉS PAR SNOWFLAKE
+                ============================================ -->
+                <section id="formats-supportes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 2. File formats supportés par Snowflake
+                    </h2>
+
+                    <p>Selon <em>Preparing to load data</em> : Snowflake supporte les formats suivants pour le chargement (<code class="inline-code">COPY INTO &lt;table&gt;</code>) : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Structured</h3>
+                    <ul>
+                        <li><strong>CSV / TSV / autres délimités</strong><br>→ Snowflake supporte toute valeur single-byte comme délimiteur.</li>
+                    </ul>
+
+                    <h3>🔹 Semi-structured</h3>
+                    <ul>
+                        <li>JSON</li>
+                        <li>Avro</li>
+                        <li>ORC</li>
+                        <li>Parquet</li>
+                        <li>XML</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Points importants SnowPro Core :</strong>
+                        <ul>
+                            <li>Snowflake détecte automatiquement les fichiers Avro/ORC/Parquet compressés.</li>
+                            <li>Parquet supporté uniquement en format writer v1 (v2 non supporté).</li>
+                            <li>JSON est chargé en mode NDJSON lors de l'unload.</li>
+                            <li>Semi-structured → chaque top-level object = une ligne distincte dans la table VARIANT.</li>
+                        </ul>
+                        <p><span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OPTIONS DISPONIBLES SELON LE TYPE DE FICHIER
+                ============================================ -->
+                <section id="options-par-type" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sliders-h"></i> ✅ 3. Options disponibles selon le type de fichier
+                    </h2>
+
+                    <p>Snowflake propose un large ensemble d'options paramétrables dans <code class="inline-code">CREATE FILE FORMAT</code>.</p>
+
+                    <h3>🔹 A. CSV — options principales</h3>
+                    <ul>
+                        <li><code class="inline-code">COMPRESSION = AUTO | GZIP | BZ2 | ZSTD | …</code></li>
+                        <li><code class="inline-code">RECORD_DELIMITER = '&lt;string&gt;'</code></li>
+                        <li><code class="inline-code">FIELD_DELIMITER = '&lt;string&gt;'</code></li>
+                        <li><code class="inline-code">PARSE_HEADER = TRUE/FALSE</code></li>
+                        <li><code class="inline-code">SKIP_HEADER = &lt;int&gt;</code></li>
+                        <li><code class="inline-code">SKIP_BLANK_LINES = TRUE/FALSE</code></li>
+                        <li><code class="inline-code">ESCAPE, ESCAPE_UNENCLOSED_FIELD</code></li>
+                        <li><code class="inline-code">NULL_IF = (‘&lt;string&gt;’, …)</code></li>
+                        <li><code class="inline-code">ERROR_ON_COLUMN_COUNT_MISMATCH = TRUE/FALSE</code></li>
+                        <li><code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY = '&lt;char&gt;'</code></li>
+                        <li><code class="inline-code">ENCODING = 'UTF8'</code> (par défaut)</li>
+                        <li><code class="inline-code">TRIM_SPACE = TRUE/FALSE</code></li>
+                    </ul>
+                    <p>➡️ Très important pour <code class="inline-code">COPY INTO</code> dans SnowPro Core. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 B. JSON — options principales</h3>
+                    <ul>
+                        <li><code class="inline-code">STRIP_OUTER_ARRAY = TRUE/FALSE</code></li>
+                        <li><code class="inline-code">IGNORE_UTF8_ERRORS</code></li>
+                        <li><code class="inline-code">ALLOW_DUPLICATE</code></li>
+                        <li><code class="inline-code">ENABLE_OCTAL</code></li>
+                        <li><code class="inline-code">MULTI_LINE</code></li>
+                        <li><code class="inline-code">DATE_FORMAT / TIME_FORMAT / TIMESTAMP_FORMAT</code></li>
+                        <li><code class="inline-code">REPLACE_INVALID_CHARACTERS</code></li>
+                    </ul>
+                    <p>JSON est nativement interprété → chargé généralement dans VARIANT. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 C. AVRO, ORC, PARQUET</h3>
+                    <ul>
+                        <li><strong>AVRO</strong> : COMPRESSION, NULL_IF</li>
+                        <li><strong>ORC</strong> : TRIM_SPACE, NULL_IF</li>
+                        <li><strong>PARQUET</strong> : COMPRESSION = AUTO | SNAPPY | LZO, BINARY_AS_TEXT, USE_LOGICAL_TYPE, USE_VECTORIZED_SCANNER</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 D. XML</h3>
+                    <ul>
+                        <li>Supporté pour chargement semi-structuré</li>
+                        <li>Chaque top-level element devient une ligne</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: OÙ PEUT-ON DÉFINIR UN FILE FORMAT ?
+                ============================================ -->
+                <section id="ou-definir-file-format" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-location-dot"></i> ✅ 4. Où peut‑on définir un file format ?
+                    </h2>
+
+                    <p>Selon la doc data-load-prepare : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>✔ Dans un <strong>named file format</strong> (via <code class="inline-code">CREATE FILE FORMAT</code>)</li>
+                        <li>✔ Dans un <strong>stage</strong> (via <code class="inline-code">CREATE STAGE … FILE_FORMAT = …</code>)</li>
+                        <li>✔ Directement dans la commande <code class="inline-code">COPY INTO &lt;table&gt;</code> :</li>
+                    </ul>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>COPY INTO my_table
+FROM @my_stage/file.csv
+FILE_FORMAT = (TYPE='CSV' FIELD_DELIMITER='|' SKIP_HEADER=1);</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: FILE FORMATS ET NAMED FILE FORMATS
+                ============================================ -->
+                <section id="named-file-formats" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tag"></i> ✅ 5. File Formats et Named File Formats
+                    </h2>
+
+                    <p>Snowflake recommande l'usage de <strong>named file formats</strong> lorsque :</p>
+                    <ul>
+                        <li>le chargement est récurrent,</li>
+                        <li>plusieurs tables partagent un même format,</li>
+                        <li>il faut standardiser les options.</li>
+                    </ul>
+
+                    <h3>Exemple officiel :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE FILE FORMAT my_csv
+    TYPE = 'CSV'
+    FIELD_DELIMITER = '|';</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: COMPRESSION — POINTS CLÉS
+                ============================================ -->
+                <section id="compression" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-compress-alt"></i> ✅ 6. Compression — points clés
+                    </h2>
+
+                    <p>Selon la documentation <em>Preparing to load data</em> : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>Snowflake recommande de compresser les fichiers pour les gros volumes.</li>
+                        <li>Snowflake détecte automatiquement : codec de compression et file type compression.</li>
+                        <li>La gestion du paramètre <code class="inline-code">COMPRESSION</code> peut se faire : dans <code class="inline-code">COPY INTO</code>, dans un <code class="inline-code">FILE FORMAT</code>, ou dans un <code class="inline-code">STAGE</code>.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: POINTS CLÉS SNOWPRO CORE À MÉMORISER
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 7. Points clés SnowPro Core à mémoriser
+                    </h2>
+
+                    <ul>
+                        <li>✔ 1. Formats supportés : CSV, JSON, AVRO, ORC, PARQUET, XML <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ 2. CREATE FILE FORMAT permet d'externaliser les options de parsing → Pas obligatoire mais recommandé.</li>
+                        <li>✔ 3. JSON est traité en NDJSON lors de l'unloading <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ 4. Parquet (writer v1 uniquement) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ 5. Semi‑structured → chargement dans VARIANT sans schéma préalable <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ 6. COPY INTO peut utiliser : un named file format, un format inline, ou un format de stage</li>
+                        <li>✔ 7. Chaque type file format → options spécifiques (CSV ≠ JSON ≠ Parquet)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ FINAL SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 📌 Résumé final SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Thème</th>
+                                <th>À retenir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CREATE FILE FORMAT</strong>\\
+                                <td>Crée un objet décrivant les options de parsing des fichiers\\
+                            </tr>
+                            <tr>
+                                <td><strong>Formats supportés</strong>\\
+                                <td>CSV, TSV, JSON, Avro, ORC, Parquet, XML\\
+                            </tr>
+                            <tr>
+                                <td><strong>Compression</strong>\\
+                                <td>Auto‑détection + options paramétrables\\
+                            </tr>
+                            <tr>
+                                <td><strong>Usage</strong>\\
+                                <td>COPY INTO, STAGE, unloading\\
+                            </tr>
+                            <tr>
+                                <td><strong>Semi‑structured</strong>\\
+                                <td>JSON, Avro, ORC, Parquet, XML chargés dans VARIANT\\
+                            </tr>
+                            <tr>
+                                <td><strong>Inline vs Named File Format</strong>\\
+                                <td>Named recommandé pour réutilisation\\
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

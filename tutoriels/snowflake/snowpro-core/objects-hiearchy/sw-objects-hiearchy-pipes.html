@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowpipe | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowpipe</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-cloud-upload-alt"></i>🧊 Snowpipe (Introduction)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition">
+                            <i class="fas fa-info-circle"></i>1. Qu'est-ce que Snowpipe ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#architecture">
+                            <i class="fas fa-project-diagram"></i>2. Architecture Snowpipe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#role-pipe">
+                            <i class="fas fa-pipe-valve"></i>3. Le rôle du PIPE (objet Snowflake)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mecanismes-detection">
+                            <i class="fas fa-bell"></i>4. Mécanismes de détection des fichiers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#plateformes-cloud">
+                            <i class="fas fa-cloud"></i>5. Plateformes Cloud supportées
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowpipe-vs-copy">
+                            <i class="fas fa-balance-scale"></i>6. Snowpipe vs Bulk COPY (différences essentielles)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#recommandations">
+                            <i class="fas fa-lightbulb"></i>7. Recommandations & limitations importantes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>8. Points à mémoriser pour la certification SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowpipe</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-pipe-valve"></i>Snowpipe
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>Continuous Loading
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> 🧊 Snowpipe (Introduction)
+                    </h2>
+
+                    <p>
+                        Snowpipe est le service Snowflake de chargement continu (continuous loading) permettant d'ingérer des fichiers dès qu'ils arrivent dans un stage, en micro‑lots, avec une latence de quelques minutes.
+                    </p>
+                    <p>
+                        Il remplace les pipelines batch basés sur COPY programmés et s'appuie sur un modèle serverless.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE SNOWPIPE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Qu'est-ce que Snowpipe ?
+                    </h2>
+
+                    <p>Selon la documentation :</p>
+                    <div class="info-note">
+                        Snowpipe permet de charger les données dès qu'elles sont disponibles dans un stage, en micro‑batches, avec disponibilité quasi‑immédiate pour les utilisateurs.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Ses caractéristiques essentielles :</p>
+                    <ul>
+                        <li>Chargement automatisé et continu</li>
+                        <li>Basé sur un pipe, objet Snowflake contenant un <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
+                        <li>Fonctionne via compute serverless fourni par Snowflake</li>
+                        <li>Supporte tous les types de données, incluant JSON, Avro, Parquet etc. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ARCHITECTURE SNOWPIPE
+                ============================================ -->
+                <section id="architecture" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-project-diagram"></i> ✅ 2. Architecture Snowpipe
+                    </h2>
+
+                    <p>Snowpipe charge les données :</p>
+                    <ul>
+                        <li>Dès que les fichiers sont détectés dans un stage (interne ou externe).</li>
+                        <li>En utilisant une instruction COPY définie dans un PIPE.</li>
+                        <li>Par des ressources compute Snowflake, sans warehouse à gérer. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>Les fichiers sont chargés par Snowflake immédiatement via :</p>
+                    <ul>
+                        <li>Notifications Cloud (Snowpipe automatisé)</li>
+                        <li>Snowpipe REST API (injection contrôlée par API)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: LE RÔLE DU PIPE (OBJET SNOWFLAKE)
+                ============================================ -->
+                <section id="role-pipe" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-pipe-valve"></i> ✅ 3. Le rôle du PIPE (objet Snowflake)
+                    </h2>
+
+                    <p>Un PIPE est un objet de première classe contenant une instruction COPY :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>COPY INTO target_table
+FROM @stage/path/
+FILE_FORMAT = ...</code></pre>
+                    </div>
+
+                    <p>Le pipe définit :</p>
+                    <ul>
+                        <li>la source (un stage)</li>
+                        <li>la cible (table Snowflake)</li>
+                        <li>les options de chargement <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>Snowpipe se base sur ce pipe et exécute automatiquement la logique COPY.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: MÉCANISMES DE DÉTECTION DES FICHIERS
+                ============================================ -->
+                <section id="mecanismes-detection" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bell"></i> ✅ 4. Mécanismes de détection des fichiers
+                    </h2>
+
+                    <p>Snowpipe supporte deux mécanismes :</p>
+
+                    <h3>🔹 A. Automated Snowpipe with Cloud Messaging</h3>
+                    <p>Snowflake est prévenu automatiquement de l'arrivée de nouveaux fichiers via :</p>
+                    <ul>
+                        <li>AWS S3 Event Notifications</li>
+                        <li>Azure Event Grid</li>
+                        <li>GCP Pub/Sub <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Snowpipe poll ensuite les notifications déposées dans une file (queue) et charge les fichiers correspondants.</p>
+                    <p>C'est la méthode la plus utilisée pour le near real-time.</p>
+
+                    <h3>🔹 B. Snowpipe REST API</h3>
+                    <p>Votre application appelle un endpoint Snowflake en fournissant :</p>
+                    <ul>
+                        <li>un nom de pipe</li>
+                        <li>une liste de fichiers</li>
+                    </ul>
+                    <p>Snowflake vérifie les fichiers dans le stage puis les ajoute à la file d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ Utile pour les systèmes ne supportant pas les notifications cloud.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: PLATEFORMES CLOUD SUPPORTÉES
+                ============================================ -->
+                <section id="plateformes-cloud" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud"></i> ✅ 5. Plateformes Cloud supportées
+                    </h2>
+
+                    <p>Snowpipe (auto & REST API) supporte les stockages suivants :</p>
+                    <ul>
+                        <li>Amazon S3</li>
+                        <li>Google Cloud Storage</li>
+                        <li>Azure Blob Storage</li>
+                        <li>Azure Data Lake Gen2 <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Chaque cloud provider supporte tous les modes quand le compte Snowflake est hébergé sur AWS, Azure ou GCP.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: SNOWPIPE VS BULK COPY (DIFFÉRENCES ESSENTIELLES)
+                ============================================ -->
+                <section id="snowpipe-vs-copy" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-balance-scale"></i> ✅ 6. Snowpipe vs Bulk COPY (différences essentielles)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Snowpipe</th>
+                                <th>COPY classique</th>
+                            </thead>
+                        <tbody>
+                            32<td>Continuous loading</td><td>Batch loading planifié</td>
+                            32<td>Serverless Snowflake compute</td><td>Nécessite un warehouse</td>
+                            32<td>Trigger basé sur notifications / REST</td><td>Exécution manuelle / cron</td>
+                            32<td>Micro‑batches</td><td>Gros volumes en un seul batch</td>
+                            32<td>Latence : minutes</td><td>Latence dépend du planning</td>
+                        </tbody>
+                    </table>
+
+                    <p>Snowpipe est conçu pour les cas quasi temps réel, COPY pour les charges volumétriques.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RECOMMANDATIONS & LIMITATIONS IMPORTANTES
+                ============================================ -->
+                <section id="recommandations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 7. Recommandations & limitations importantes
+                    </h2>
+
+                    <ul>
+                        <li>✔ Snowflake recommande d'activer le <strong>cloud event filtering</strong> pour réduire les coûts, améliorer la latence et éviter le bruit dans les notifications. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Utiliser un format cohérent dans les stages — Snowpipe prend en charge semi-structuré & compressé.</li>
+                        <li>✔ Snowpipe ne gère pas lui‑même les transformations complexes → Utiliser COPY transformations limitées ou un pipeline ELT.</li>
+                        <li>✔ Snowpipe ne garantit pas un chargement strictement en temps réel → Latence habituelle : quelques minutes.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: POINTS À MÉMORISER POUR LA CERTIFICATION SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 8. Points à mémoriser pour la certification SnowPro Core
+                    </h2>
+
+                    <div class="warning-note">
+                        <ul>
+                            <li>Snowpipe = chargement continu, serverless et déclenché automatiquement.</li>
+                            <li>Un PIPE contient l'instruction COPY responsable du chargement.</li>
+                            <li>Deux mécanismes : cloud notifications et REST API.</li>
+                            <li>Pas besoin de warehouse : compute Snowflake inclus.</li>
+                            <li>Fonctionne sur S3, GCS, Azure Blob, ADLS Gen2.</li>
+                            <li>Snowpipe traite des micro‑batches.</li>
+                            <li>Préférer COPY pour larges batchs planifiés.</li>
+                            <li>Recommandation : activer le cloud event filtering. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

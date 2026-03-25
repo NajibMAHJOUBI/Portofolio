@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Introduction aux Views | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Introduction aux Views</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-eye"></i>📌 Introduction aux vues (Views)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-view">
+                            <i class="fas fa-info-circle"></i>1. Définition d'une View
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#utilisation-views">
+                            <i class="fas fa-code"></i>2. Utilisation des Views
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#nommage-qualification">
+                            <i class="fas fa-tag"></i>3. Nommage et qualification
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-views">
+                            <i class="fas fa-table"></i>4. Types de Views
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#avantages-views">
+                            <i class="fas fa-star"></i>5. Avantages des Views
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-check-circle"></i>6. Bonnes pratiques SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#concepts-testes">
+                            <i class="fas fa-chart-simple"></i>7. Concepts fréquemment testés en SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-graduation-cap"></i>🎯 Résumé final
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Introduction aux Views</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-eye"></i>Views
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>SQL
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-eye"></i> 📌 Introduction aux vues (Views)
+                    </h2>
+
+                    <p>Source Snowflake : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>
+                        Les views (vues) sont un objet fondamental dans Snowflake. Elles permettent d'exposer le résultat d'une requête comme s'il s'agissait d'une table, tout en offrant des capacités de sécurisation, d'abstraction et de gestion logique des données — un sujet essentiel pour la certification SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION D'UNE VIEW
+                ============================================ -->
+                <section id="definition-view" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Définition d'une View
+                    </h2>
+
+                    <p>
+                        Une view est un objet Snowflake dont le contenu correspond au résultat d'une requête SQL définie dans une instruction CREATE VIEW.
+                    </p>
+                    <p>
+                        Elle peut être utilisée exactement comme une table : joins, sous‑requêtes, projections, etc.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+
+                    <h3>Objectifs principaux :</h3>
+                    <ul>
+                        <li>Combiner des données</li>
+                        <li>Ségréguer des données par profil métier</li>
+                        <li>Protéger des données sensibles</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-stethoscope"></i>
+                        <strong>Exemple canonique fourni :</strong>
+                        <ul>
+                            <li><b>doctor_view</b> : expose diagnosis & treatment</li>
+                            <li><b>accountant_view</b> : expose billing_address & cost</li>
+                        </ul>
+                        <p>→ Séparation logique selon les rôles d'utilisateurs. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: UTILISATION DES VIEWS
+                ============================================ -->
+                <section id="utilisation-views" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. Utilisation des Views
+                    </h2>
+
+                    <p>Une view peut être utilisée dans :</p>
+                    <ul>
+                        <li>JOINS</li>
+                        <li>sous‑requêtes</li>
+                        <li>analyses complexes</li>
+                    </ul>
+
+                    <h3>Exemples donnés dans la doc :</h3>
+                    <ul>
+                        <li>Extraire toutes les valeurs distinctes de diagnosis via doctor_view.</li>
+                        <li>Joindre doctor_view et accountant_view pour agréger coût et traitement sans révéler les informations personnelles.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: NOMMAGE ET QUALIFICATION
+                ============================================ -->
+                <section id="nommage-qualification" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tag"></i> ✅ 3. Nommage et qualification
+                    </h2>
+
+                    <p>Lors de la création d'une view :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE VIEW v1 AS SELECT ... FROM my_database.my_schema.my_table;</code></pre>
+                    </div>
+
+                    <p>Snowflake autorise :</p>
+                    <ul>
+                        <li>noms totalement qualifiés</li>
+                        <li>partiellement qualifiés</li>
+                        <li>non qualifiés</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Important :</strong>
+                        <p>Si le schéma n'est pas précisé dans la définition de la vue, Snowflake suppose que la table source se trouve dans le même schéma que la vue.</p>
+                        <p>→ Évite qu'une vue change de table source selon le schéma actif. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: TYPES DE VIEWS
+                ============================================ -->
+                <section id="types-views" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 4. Types de Views
+                    </h2>
+
+                    <h3>1. Non‑materialized views</h3>
+                    <ul>
+                        <li>Nom générique : views.</li>
+                        <li>Simple définition de requête</li>
+                        <li>Résultats recalculés à chaque exécution</li>
+                        <li>Pas de stockage physique supplémentaire</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>2. Materialized views</h3>
+                    <ul>
+                        <li>Mentionnées dans l'introduction (détails ailleurs).</li>
+                        <li>Stockent physiquement le résultat</li>
+                        <li>Améliorent les performances sur requêtes répétitives</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: AVANTAGES DES VIEWS
+                ============================================ -->
+                <section id="avantages-views" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Avantages des Views
+                    </h2>
+
+                    <h3>✔ Sécurité</h3>
+                    <p>Les vues cachent les colonnes non nécessaires, protégeant les données sensibles. (ex : PII masquée via un subset logique) <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Abstraction</h3>
+                    <p>Elles permettent de présenter une représentation métier indépendante du modèle physique.</p>
+
+                    <h3>✔ Maintenabilité</h3>
+                    <p>Les modifications sur la table source peuvent être transparentes pour les utilisateurs finaux.</p>
+
+                    <h3>✔ Lisibilité SQL</h3>
+                    <p>Elles factorisent des transformations complexes en un objet unique et documenté.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: BONNES PRATIQUES SNOWPRO CORE
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i> ✅ 6. Bonnes pratiques SnowPro Core
+                    </h2>
+
+                    <ul>
+                        <li>Toujours spécifier le schéma lors de la création des vues → évite les résolutions dynamiques et comportements imprévisibles. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Utiliser les vues pour limiter l'accès : sécurisation logique des données.</li>
+                        <li>Documenter les vues pour clarifier leur rôle métier.</li>
+                        <li>Éviter les cascades de vues trop profondes → complexité et pertes de performance potentielles.</li>
+                        <li>Utiliser une materialized view uniquement quand les performances le justifient.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CONCEPTS FRÉQUEMMENT TESTÉS EN SNOWPRO CORE
+                ============================================ -->
+                <section id="concepts-testes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 🧩 7. Concepts fréquemment testés en SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Point clé</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Définition</strong></td>
+                                <td>Une vue = requête stockée</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Types</strong></td>
+                                <td>Non‑materialized et materialized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sécurité</strong></td>
+                                <td>Très utilisée pour la gouvernance des données</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Utilisation</strong></td>
+                                <td>Presque comme une table</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Résolution schéma</strong></td>
+                                <td>Si non spécifié, même schéma que la vue</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Matérialisation</strong></td>
+                                <td>Pas dans les views standard</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ FINAL
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🎯 Résumé final
+                    </h2>
+
+                    <p>
+                        Les views dans Snowflake sont un outil essentiel pour structurer, sécuriser et simplifier l'accès aux données.
+                    </p>
+
+                    <p>Snowflake met l'accent sur :</p>
+                    <ul>
+                        <li>la <strong>flexibilité</strong> (comme une table),</li>
+                        <li>la <strong>sécurité logique</strong> (isoler les colonnes sensibles),</li>
+                        <li>la <strong>facilité d'usage</strong> (pas de stockage supplémentaire),</li>
+                        <li>la <strong>clarté du comportement</strong> (résolution de schéma déterministe).</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Ces concepts sont systématiquement testés dans la certification SnowPro Core.
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

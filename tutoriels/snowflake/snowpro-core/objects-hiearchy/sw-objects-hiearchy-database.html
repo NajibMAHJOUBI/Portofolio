@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Databases | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Databases</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-info-circle"></i>Synthèse SnowPro Core – Databases dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-role">
+                            <i class="fas fa-database"></i>1. Définition et rôle d'une Database
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-bases">
+                            <i class="fas fa-tags"></i>2. Types de bases dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#objets-contenus">
+                            <i class="fas fa-cubes"></i>3. Objets contenus dans une Database
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#operations">
+                            <i class="fas fa-code"></i>4. Opérations principales sur les databases
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#information-schema">
+                            <i class="fas fa-table"></i>5. Information Schema dans chaque Database
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés sur les databases Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#liens-concepts">
+                            <i class="fas fa-link"></i>7. Liens avec d'autres concepts (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#essentiels">
+                            <i class="fas fa-graduation-cap"></i>8. Points essentiels à mémoriser pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Databases</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Débutant
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>Databases
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i>Synthèse SnowPro Core – Databases dans Snowflake
+                    </h2>
+
+                    <p>
+                        Les bases de données (<strong>databases</strong>) constituent le <strong>niveau logique supérieur</strong> pour organiser les données dans un compte Snowflake. 
+                        Elles contiennent des schémas, eux‑mêmes contenant des objets tels que des tables, des vues, des fonctions, des file formats, etc.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION ET RÔLE D'UNE DATABASE
+                ============================================ -->
+                <section id="definition-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i>1. Définition et rôle d'une Database
+                    </h2>
+
+                    <p><strong>Toutes les données Snowflake sont stockées dans des databases.</strong></p>
+                    <p>Une database contient un ou plusieurs schemas, qui regroupent les objets de données (tables, vues, UDFs…).</p>
+                    <p>
+                        Il n'existe <strong>aucune limite</strong> concernant le nombre de bases, de schémas ou d'objets qu'un utilisateur peut créer.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Importance pour SnowPro Core :</strong>
+                        <p>La database est la racine de l'organisation logique des données d'un compte Snowflake. Elle détermine la structure de tous les objets enfants.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TYPES DE BASES DANS SNOWFLAKE
+                ============================================ -->
+                <section id="types-bases" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tags"></i>2. Types de bases dans Snowflake
+                    </h2>
+
+                    <p>Même si la page principale traite surtout du concept général de database, Snowflake inclut également :</p>
+
+                    <h3>✔ Databases utilisateur</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Bases créées par les utilisateurs ou applications.</li>
+                        <li>Peuvent contenir n'importe quels objets Snowflake.</li>
+                    </ul>
+
+                    <h3>✔ SNOWFLAKE database (system‑defined)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>
+                            Base fournie par Snowflake contenant des métadonnées et vues système comme ACCOUNT_USAGE, ORGANIZATION_USAGE, etc.
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Bases clonées</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Grâce au <strong>zero‑copy cloning</strong>, une database peut être clonée instantanément sans duplication physique de données.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OBJETS CONTENUS DANS UNE DATABASE
+                ============================================ -->
+                <section id="objets-contenus" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i>3. Objets contenus dans une Database
+                    </h2>
+
+                    <p>Dans Snowflake, une database peut contenir :</p>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Schemas</li>
+                        <li>Tables (permanent, transient, temporary)</li>
+                        <li>External tables</li>
+                        <li>Hybrid tables</li>
+                        <li>Iceberg tables</li>
+                        <li>Views (standard, secure, materialized)</li>
+                        <li>File formats</li>
+                        <li>Sequences</li>
+                        <li>Stages</li>
+                        <li>
+                            Functions, UDFs, UDTFs
+                            <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+
+                    <p>→ Les databases servent donc de "conteneur parent" pour toute la structure d'objets Snowflake.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: OPÉRATIONS PRINCIPALES SUR LES DATABASES
+                ============================================ -->
+                <section id="operations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i>4. Opérations principales sur les databases
+                    </h2>
+
+                    <p>Les opérations typiques incluent :</p>
+
+                    <h3>✔ CREATE DATABASE</h3>
+                    <p>Créer une nouvelle base :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DATABASE my_db;</code></pre>
+                    </div>
+
+                    <h3>✔ USE DATABASE</h3>
+                    <p>Sélectionner la base active :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>USE DATABASE my_db;</code></pre>
+                    </div>
+
+                    <h3>✔ CLONE</h3>
+                    <p>Créer un clone zéro‑copie :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DATABASE my_db_clone CLONE my_db;</code></pre>
+                    </div>
+                    <p>→ Le clonage fait partie des bonnes pratiques Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ DROP DATABASE</h3>
+                    <p>Supprimer une base et tout son contenu.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: INFORMATION SCHEMA DANS CHAQUE DATABASE
+                ============================================ -->
+                <section id="information-schema" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i>5. Information Schema dans chaque Database
+                    </h2>
+
+                    <p>
+                        Chaque database contient automatiquement un schema INFORMATION_SCHEMA, contenant :
+                    </p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>des vues sur les objets de la base,</li>
+                        <li>des vues sur certains objets du compte,</li>
+                        <li>des table functions autour de l'historique et de l'usage.</li>
+                    </ul>
+                    <p>
+                        → Très utile pour l'audit, l'observabilité et la gouvernance.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS SUR LES DATABASES SNOWFLAKE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i>6. Points clés sur les databases Snowflake
+                    </h2>
+
+                    <h3>✔ Pas de limite sur le nombre de bases, schémas ou objets</h3>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Stockage indépendant du compute</h3>
+                    <p>Les databases bénéficient de l'architecture Snowflake (compute & storage séparés).</p>
+
+                    <h3>✔ Database = unité de réplication</h3>
+                    <p>Les bases peuvent être répliquées entre régions / plateformes cloud.</p>
+
+                    <h3>✔ Database = unité de partage (Secure Data Sharing)</h3>
+                    <p>On peut partager une database ou un de ses schémas via shares.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: LIENS AVEC D'AUTRES CONCEPTS
+                ============================================ -->
+                <section id="liens-concepts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i>7. Liens avec d'autres concepts (SnowPro Core)
+                    </h2>
+
+                    <p>La compréhension des databases est essentielle pour ces thèmes :</p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Lien direct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Schemas</strong></td><td>résident dans une database</td></tr>
+                            <tr><td><strong>Tables & Views</strong></td><td>créées dans un schema d'une database</td></tr>
+                            <tr><td><strong>Shares</strong></td><td>on peut partager une database entière ou un schéma</td></tr>
+                            <tr><td><strong>Schemas</strong></td><td>résident dans une database</td></tr>
+                            <tr><td><strong>Cloning</strong></td><td>les databases supportent le zero‑copy clone</td></tr>
+                            <tr><td><strong>Time Travel & Fail‑safe</strong></td><td>s'appliquent aux données stockées dans une database</td></tr>
+                            <tr><td><strong>Information Schema</strong></td><td>activé automatiquement dans chaque database</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: POINTS ESSENTIELS À MÉMORISER
+                ============================================ -->
+                <section id="essentiels" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i>8. Points essentiels à mémoriser pour SnowPro Core
+                    </h2>
+
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Database = conteneur logique principal dans Snowflake.</li>
+                        <li>Toute database contient au moins un INFORMATION_SCHEMA.</li>
+                        <li>Aucune limite sur le nombre de databases ou objets créés.</li>
+                        <li>Supporte nativement cloning, replication, secure sharing.</li>
+                        <li>Une database peut contenir n'importe quel type d'objet Snowflake (tables, vues, UDFs, file formats…).</li>
+                        <li>La SNOWFLAKE database expose des vues système essentielles (ACCOUNT_USAGE, etc.).</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

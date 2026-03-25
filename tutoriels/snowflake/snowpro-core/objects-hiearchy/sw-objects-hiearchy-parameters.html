@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Account Management & Parameters | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Account Management & Parameters</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-building"></i>🧊 Account Management & Parameters
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#account-management">
+                            <i class="fas fa-user-cog"></i>1. Account Management – Concepts clés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#parameter-hierarchy-types">
+                            <i class="fas fa-sliders-h"></i>2. Parameter Hierarchy & Types
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#hierarchie-parametres">
+                            <i class="fas fa-sitemap"></i>3. Hiérarchie des paramètres (ordre de priorité)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#show-parameters">
+                            <i class="fas fa-search"></i>4. SHOW PARAMETERS — Navigation et diagnostic
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points essentiels à mémoriser pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-chart-simple"></i>🎯 Résumé final
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Account Management & Parameters</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-user-cog"></i>Account Management
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-sliders-h"></i>Parameters
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-building"></i> 🧊 Account Management & Parameters
+                    </h2>
+
+                    <p>
+                        Cette synthèse regroupe les points essentiels pour comprendre l'administration de compte dans Snowflake et la gestion hiérarchique des paramètres — deux sujets fréquemment évalués à la certification SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: ACCOUNT MANAGEMENT – CONCEPTS CLÉS
+                ============================================ -->
+                <section id="account-management" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-cog"></i> ✅ 1. Account Management – Concepts clés
+                    </h2>
+
+                    <p>
+                        La page officielle <em>Managing Your Snowflake Account</em> regroupe les opérations d'administration essentielles du compte.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+
+                    <p>Ces tâches concernent principalement les rôles :</p>
+                    <ul>
+                        <li>ACCOUNTADMIN</li>
+                        <li>SYSADMIN</li>
+                        <li>SECURITYADMIN</li>
+                    </ul>
+
+                    <h3>🔹 Les composants clés de la gestion de compte</h3>
+                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Composant</th><th>Description</th>
+                        </thead>
+                        <tbody>
+                            32<td><strong>Account identifiers</strong></td><td>Identifiants uniques du compte, utilisés pour les connexions multi‑comptes.</td>
+                            32<td><strong>Trial accounts</strong></td><td>Activation, ajout de carte bancaire, annulation.</td>
+                            32<td><strong>Parameter management</strong></td><td>Gestion des paramètres au niveau account/session/object.</td>
+                            32<td><strong>User management</strong></td><td>Création utilisateurs, gestion des mots de passe, MFA, etc.</td>
+                            32<td><strong>Behavior change management</strong></td><td>Activer/désactiver les nouvelles releases de comportements Snowflake.</td>
+                            32<td><strong>Securing Snowflake (via SECURITYADMIN)</strong></td><td>Contrôle des accès, network policies, MFA, etc.</td>
+                        </tbody>
+                      </table>
+
+                    <h3>🔹 Rôles d'administration (implicites dans la doc)</h3>
+                    <ul>
+                        <li><strong>ACCOUNTADMIN</strong> → Super‑administrateur du compte</li>
+                        <li><strong>SECURITYADMIN</strong> → Gestion sécurité, grants, policies</li>
+                        <li><strong>USERADMIN</strong> → Gestion utilisateurs & rôles (documenté dans les sections liées)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PARAMETER HIERARCHY & TYPES
+                ============================================ -->
+                <section id="parameter-hierarchy-types" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sliders-h"></i> ✅ 2. Parameter Hierarchy & Types
+                    </h2>
+
+                    <p>Snowflake documente trois types de paramètres : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 1. Account parameters</h3>
+                    <ul>
+                        <li>Définis via : <code class="inline-code">ALTER ACCOUNT</code>.</li>
+                        <li>Affectent tout le compte.</li>
+                        <li>Seuls les rôles autorisés (ACCOUNTADMIN) peuvent les modifier.</li>
+                        <li>
+                            Exemples fournis dans la documentation :
+                            <ul>
+                                <li>ALLOW_BIND_VALUES_ACCESS</li>
+                                <li>ENABLE_INTERNAL_STAGES_PRIVATELINK</li>
+                                <li>DISABLE_USER_PRIVILEGE_GRANTS</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ 2. Session parameters</h3>
+                    <ul>
+                        <li>Peuvent être définis au niveau : session, user, account</li>
+                        <li>Définition via : <code class="inline-code">ALTER SESSION</code>, <code class="inline-code">ALTER USER</code>, ou <code class="inline-code">ALTER ACCOUNT</code>.</li>
+                        <li>Affectent uniquement la session active (si définis dans celle-ci). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 3. Object parameters</h3>
+                    <ul>
+                        <li>Définis pour les objets Snowflake : warehouses, databases, schemas, tasks, tables/views</li>
+                        <li>Définis via leur commande ALTER propre : <code class="inline-code">ALTER WAREHOUSE</code>, <code class="inline-code">ALTER SCHEMA</code>, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: HIÉRARCHIE DES PARAMÈTRES (ORDRE DE PRIORITÉ)
+                ============================================ -->
+                <section id="hierarchie-parametres" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sitemap"></i> ✅ 3. Hiérarchie des paramètres (ordre de priorité)
+                    </h2>
+
+                    <p>La documentation précise que les paramètres suivent une hiérarchie de surcharge : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <strong>🎯 Ordre général de résolution</strong>
+                        <ol>
+                            <li><strong>Session level</strong> (le plus prioritaire si explicitement défini)</li>
+                            <li><strong>Object level</strong> (pour les objets concernés)</li>
+                            <li><strong>User level</strong> (défauts appliqués à chaque login)</li>
+                            <li><strong>Account level</strong> (valeur par défaut si rien n'est explicitement défini)</li>
+                        </ol>
+                        <p>Cela signifie :</p>
+                        <ul>
+                            <li>Une valeur définie dans une session écrase toutes les autres.</li>
+                            <li>Une valeur account agit comme default global.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SHOW PARAMETERS — NAVIGATION ET DIAGNOSTIC
+                ============================================ -->
+                <section id="show-parameters" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 4. SHOW PARAMETERS — Navigation et diagnostic
+                    </h2>
+
+                    <p>La commande <code class="inline-code">SHOW PARAMETERS</code> permet de visualiser les paramètres :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SHOW PARAMETERS;
+SHOW PARAMETERS IN ACCOUNT;
+SHOW PARAMETERS FOR USER myuser;
+SHOW PARAMETERS FOR WAREHOUSE mywh;</code></pre>
+                    </div>
+
+                    <p>Selon la documentation :</p>
+                    <ul>
+                        <li>Elle affiche la valeur courante et la valeur par défaut.</li>
+                        <li>Elle précise où le paramètre a été défini (session, user, object ou account).</li>
+                        <li>Elle ne nécessite pas de warehouse actif. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS ESSENTIELS À MÉMORISER POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 5. Points essentiels à mémoriser pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Account Management</h4>
+                            <ul>
+                                <li>L'administration du compte couvre : users, roles, paramètres, comportement, sécurité. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>ACCOUNTADMIN est le rôle maître.</li>
+                                <li>Les identifiants de compte sont essentiels dans les environnements multi‑comptes.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Parameters</h4>
+                            <ul>
+                                <li>Trois types : account, session, object.</li>
+                                <li>Les paramètres ont des valeurs par défaut mais peuvent être surchargés.</li>
+                                <li>La hiérarchie détermine la priorité → session > object > user > account. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Objet SHOW PARAMETERS indispensable pour troubleshooting. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>✔ Modifications</h3>
+                    <ul>
+                        <li><code class="inline-code">ALTER ACCOUNT</code> → paramètres globaux</li>
+                        <li><code class="inline-code">ALTER SESSION</code> → spécifiques session</li>
+                        <li><code class="inline-code">ALTER USER</code> → defaults session utilisateur</li>
+                        <li><code class="inline-code">ALTER &lt;object&gt;</code> → paramétrage objet (warehouse, database, schema, table, task)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: RÉSUMÉ FINAL
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 🎯 Résumé final
+                    </h2>
+
+                    <div class="info-note">
+                        <p>Snowflake offre une architecture d'administration robuste, basée sur :</p>
+                        <ul>
+                            <li>une <strong>hiérarchie claire de paramètres</strong>, permettant un contrôle précis du comportement du système ;</li>
+                            <li>un <strong>modèle RBAC puissant</strong>, centré sur ACCOUNTADMIN / SECURITYADMIN / USERADMIN ;</li>
+                            <li>des <strong>commandes simples mais structurantes</strong> pour gérer account, sessions et objets.</li>
+                        </ul>
+                        <p>La maîtrise de ces concepts est indispensable pour réussir la SnowPro Core Certification.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Stages et Chargement de Données | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Stages et Chargement de Données</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-database"></i>🧊 Snowflake Stages et Chargement de Données
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#internal-stages">
+                            <i class="fas fa-server"></i>1. Internal Stages (Stages internes)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#external-stages">
+                            <i class="fas fa-cloud-upload-alt"></i>2. External Stages (Stages externes)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#local-file-upload">
+                            <i class="fas fa-laptop"></i>3. Local File System Upload (via Snowsight)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-organisationnelle">
+                            <i class="fas fa-chart-simple"></i>4. Synthèse organisationnelle SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés à mémoriser pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Stages et Chargement de Données</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Stages
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>Data Loading
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> 🧊 Snowflake Stages et Chargement de Données
+                    </h2>
+
+                    <p>
+                        Les stages dans Snowflake représentent des emplacements intermédiaires servant à stocker des fichiers avant le chargement ou après l'export.
+                    </p>
+
+                    <p>Il existe trois familles :</p>
+                    <ul>
+                        <li><strong>Internal Stages</strong> (hébergés dans Snowflake)</li>
+                        <li><strong>External Stages</strong> (hébergés dans des services externes : S3, GCS, Azure Blob)</li>
+                        <li><strong>Local File Upload</strong> (chargement direct via Snowsight)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: INTERNAL STAGES (STAGES INTERNES)
+                ============================================ -->
+                <section id="internal-stages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-server"></i> ✅ 1. Internal Stages (Stages internes)
+                    </h2>
+
+                    <p>
+                        Les internal stages sont des zones de stockage gérées par Snowflake et hébergées dans le compte Snowflake.
+                        Ils sont utilisés pour charger des données dans les tables ou pour stocker temporairement des fichiers.
+                    </p>
+
+                    <p>
+                        Selon la documentation : Snowflake permet de charger des données depuis plusieurs types de sources, incluant internal (Snowflake) locations.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+
+                    <h3>🔹 Types d'Internal Stages</h3>
+
+                    <h4>✔ 1. User Stage (@~)</h4>
+                    <ul>
+                        <li>Chaque utilisateur possède un stage interne dédié.</li>
+                        <li>Utilisation simple pour tester des chargements.</li>
+                    </ul>
+
+                    <h4>✔ 2. Table Stage</h4>
+                    <ul>
+                        <li>Chaque table possède un stage interne associé.</li>
+                        <li>Accessible via <code class="inline-code">@%table_name</code>.</li>
+                    </ul>
+
+                    <h4>✔ 3. Named Internal Stage</h4>
+                    <ul>
+                        <li>Créé explicitement :</li>
+                    </ul>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STAGE my_internal_stage;</code></pre>
+                    </div>
+                    <ul>
+                        <li>Peut contenir des options : file format, encryption, directory tables.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Avantages</strong>
+                        <ul>
+                            <li>Pas besoin de configurer de credentials cloud.</li>
+                            <li>Sécurisé et complètement géré par Snowflake.</li>
+                            <li>Architecture simple pour les petits workflows ETL/ELT.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: EXTERNAL STAGES (STAGES EXTERNES)
+                ============================================ -->
+                <section id="external-stages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 2. External Stages (Stages externes)
+                    </h2>
+
+                    <p>
+                        Les external stages permettent de charger / décharger des données depuis un service de stockage cloud :
+                    </p>
+                    <ul>
+                        <li>Amazon S3</li>
+                        <li>Google Cloud Storage (GCS)</li>
+                        <li>Microsoft Azure Blob Storage</li>
+                    </ul>
+                    <p>Documentation : Snowflake supporte le chargement depuis external cloud locations. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Définition</h3>
+                    <p>Un external stage référencie un emplacement externe :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STAGE my_ext_stage
+    URL='s3://my-bucket/path/'
+    CREDENTIALS=(AWS_KEY_ID='...' AWS_SECRET_KEY='...');</code></pre>
+                    </div>
+
+                    <h3>🔹 Caractéristiques clés</h3>
+                    <ul>
+                        <li>Doit inclure des informations d'authentification (IAM role, token, clés).</li>
+                        <li>Peut utiliser des file formats et directory tables.</li>
+                        <li>Souvent utilisé pour des pipelines automatisés ou ingestion continue (Snowpipe).</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Points importants pour SnowPro Core</strong>
+                        <ul>
+                            <li>Snowflake automatically detects compression for Avro/ORC/Parquet files situés dans un external stage. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>External stages sont indispensables pour Snowpipe en mode auto-ingest.</li>
+                            <li>Permet de traiter de très gros volumes et s'intègre dans des architectures data lake.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: LOCAL FILE SYSTEM UPLOAD (VIA SNOWSIGHT)
+                ============================================ -->
+                <section id="local-file-upload" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-laptop"></i> ✅ 3. Local File System Upload (via Snowsight)
+                    </h2>
+
+                    <p>
+                        En plus des internal/external stages, Snowflake permet d'importer des fichiers directement depuis son ordinateur.
+                        La fonctionnalité d'upload est mentionnée dans la documentation :
+                    </p>
+                    <p>
+                        → Snowsight permet d'upload des fichiers directement vers des tables via l'UI et de gérer l'ingestion à partir du local.
+                        <span class="reference">[dataengine.academy.com]</span>
+                    </p>
+
+                    <h3>🔹 Fonctionnement général</h3>
+                    <ul>
+                        <li>Dans Snowsight : Add Data ou Load Data</li>
+                        <li>L'utilisateur sélectionne un fichier local (CSV, JSON, Parquet, etc.)</li>
+                        <li>
+                            L'interface :
+                            <ul>
+                                <li>crée un temporary stage interne</li>
+                                <li>copie le fichier dedans</li>
+                                <li>lance un <code class="inline-code">COPY INTO &lt;table&gt;</code> automatiquement</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>🔹 Avantages</h3>
+                    <ul>
+                        <li>Très simple pour petits fichiers et tests rapides.</li>
+                        <li>Pas besoin de configurer de stage ni de credentials.</li>
+                        <li>Idéal pour environnement dev ou QA.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Limitations</strong>
+                        <ul>
+                            <li>Pas adapté aux gros volumes (préférer internal/external stages).</li>
+                            <li>Pas automatisable hors UI.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SYNTHÈSE ORGANISATIONNELLE SNOWPRO CORE
+                ============================================ -->
+                <section id="synthese-organisationnelle" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 🎯 4. Synthèse organisationnelle SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Type de stage</th>
+                                <th>Localisation</th>
+                                <th>Usage typique</th>
+                                <th>Notes certification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                <td><strong>Internal Stage</strong></td>
+                                <td>Dans Snowflake</td>
+                                <td>Chargement facile, staging interne</td>
+                                <td>Pas de credentials externes</td>
+                             </tr>
+                             <tr>
+                                <td><strong>External Stage</strong></td>
+                                <td>S3 / Azure / GCS</td>
+                                <td>Pipelines, ingestion massive, Snowpipe</td>
+                                <td>Credentials obligatoires</td>
+                             </tr>
+                             <tr>
+                                <td><strong>Local File Upload</strong></td>
+                                <td>Poste utilisateur</td>
+                                <td>Tests, POC, chargement manuel</td>
+                                <td>Snowsight uniquement</td>
+                             </tr>
+                        </tbody>
+                     </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS À MÉMORISER POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 5. Points clés à mémoriser pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>✔ Snowflake supporte le chargement depuis : internal stages, external stages, local filesystem via UI.</li>
+                            <li>✔ Internal stages n'ont pas besoin d'authentification externe.</li>
+                            <li>✔ External stages nécessitent des credentials cloud.</li>
+                            <li>✔ Snowflake détecte automatiquement la compression des fichiers semi‑structurés. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>✔ Snowsight upload = copie automatique du fichier vers un stage temporaire puis COPY INTO. <span class="reference">[dataengine.academy.com]</span></li>
+                            <li>✔ Les external stages sont utilisés pour Snowpipe et ingestion d'événements.</li>
+                            <li>✔ Internal stages : user stage, table stage, named stage.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

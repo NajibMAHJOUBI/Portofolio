@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Stored Procedures | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Stored Procedures</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-cogs"></i>🧊 Stored Procedures Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition">
+                            <i class="fas fa-info-circle"></i>1. Définition d'une Stored Procedure
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-lightbulb"></i>2. Cas d'usage typiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#owner-rights">
+                            <i class="fas fa-user-shield"></i>3. "Owner's Rights" : exécution avec les privilèges du propriétaire
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#procedure-vs-udf">
+                            <i class="fas fa-balance-scale"></i>4. Stored Procedure vs UDF : différences essentielles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#langages-supportes">
+                            <i class="fas fa-code"></i>5. Langages supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#outils-creation">
+                            <i class="fas fa-tools"></i>6. Outils utilisables pour créer/administrer des Stored Procedures
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnement">
+                            <i class="fas fa-play"></i>7. Fonctionnement d'une Stored Procedure
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#avantages">
+                            <i class="fas fa-star"></i>8. Avantages des Stored Procedures
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-graduation-cap"></i>9. À connaître absolument pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#conclusion">
+                            <i class="fas fa-check-circle"></i>10. Conclusion rapide
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Stored Procedures</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cogs"></i>Stored Procedures
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>SQL
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> 🧊 Stored Procedures Overview
+                    </h2>
+
+                    <p>
+                        Les Stored Procedures permettent d'exécuter du code procédural dans Snowflake. Elles sont essentielles pour automatiser des opérations répétitives et encapsuler de la logique métier ou administrative trop complexe pour de simples requêtes SQL.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION D'UNE STORED PROCEDURE
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Définition d'une Stored Procedure
+                    </h2>
+
+                    <p>Une stored procedure est un objet Snowflake contenant du code procédural qui peut :</p>
+                    <ul>
+                        <li>exécuter des instructions SQL,</li>
+                        <li>utiliser des structures de contrôle (boucles, conditions…),</li>
+                        <li>organiser plusieurs opérations en un seul appel,</li>
+                        <li>être réutilisée par différents utilisateurs ou processus.</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Snowflake précise qu'une procédure est utile pour automatiser des tâches nécessitant plusieurs opérations SQL, comme un nettoyage de tables.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CAS D'USAGE TYPIQUES
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 2. Cas d'usage typiques
+                    </h2>
+
+                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>✔ Automatiser des tâches répétées (purge, maintenance, traitement de lots)</li>
+                        <li>✔ Générer et exécuter du SQL dynamique</li>
+                        <li>✔ Cacher des opérations complexes derrière un appel simple</li>
+                        <li>✔ Donner accès à des fonctions sensibles grâce au modèle "owner's rights" (voir ci‑dessous)</li>
+                    </ul>
+                    <p>Exemple donné dans la doc : un nettoyage de tables basé sur une date passée en paramètre. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: "OWNER'S RIGHTS" — EXÉCUTION AVEC LES PRIVILÈGES DU PROPRIÉTAIRE
+                ============================================ -->
+                <section id="owner-rights" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-shield"></i> ✅ 3. "Owner's Rights" : exécution avec les privilèges du propriétaire
+                    </h2>
+
+                    <p>Particularité clé :</p>
+                    <div class="warning-note">
+                        <p>Une stored procedure s'exécute avec les privilèges du rôle qui la possède, pas du rôle qui la lance.</p>
+                        <p><span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+
+                    <ul>
+                        <li>Cela permet de déléguer des tâches sensibles (ex. DELETE, DDL) à des utilisateurs qui n'ont pas ces privilèges directement.</li>
+                        <li>⚠ Il existe cependant des limitations aux owner's rights (documentées dans les sections annexes Snowflake).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: STORED PROCEDURE VS UDF : DIFFÉRENCES ESSENTIELLES
+                ============================================ -->
+                <section id="procedure-vs-udf" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-balance-scale"></i> ✅ 4. Stored Procedure vs UDF : différences essentielles
+                    </h2>
+
+                    <p>La documentation insiste sur les différences : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <tr>
+                                <th>Stored Procedure</th>
+                                <th>UDF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Peut exécuter plusieurs SQL statements</td>
+                                <td>Doit retourner un résultat direct</td>
+                            </tr>
+                             <tr>
+                                <td>Peut effectuer du DDL/DML, gérer des transactions</td>
+                                <td>Ne peut pas exécuter de DDL/DML</td>
+                             </tr>
+                             <tr>
+                                <td>Peut retourner une valeur ou rien</td>
+                                <td>Doit toujours renvoyer 1 valeur (ou un tableau via UDTF)</td>
+                             </tr>
+                             <tr>
+                                <td>Utilise CALL</td>
+                                <td>Utilisée dans une expression SQL</td>
+                             </tr>
+                        </tbody>
+                     </table>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Stocker cette distinction est indispensable pour SnowPro Core.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: LANGAGES SUPPORTÉS
+                ============================================ -->
+                <section id="langages-supportes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 5. Langages supportés
+                    </h2>
+
+                    <p>Vous écrivez la logique (handler) dans l'un des langages suivants : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Langage</th><th>Support</th>
+                        </thead>
+                        <tbody>
+                            32<td>Java</td><td>Oui</td>
+                            32<td>JavaScript</td><td>Oui</td>
+                            32<td>Python</td><td>Oui</td>
+                            32<td>Scala</td><td>Oui</td>
+                            32<td>SQL Scripting</td><td>Oui (bloc SQL procédural)</td>
+                        </tbody>
+                     </table>
+
+                    <p>Tous les handlers sont encapsulés dans une définition SQL via <code class="inline-code">CREATE PROCEDURE</code>.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: OUTILS UTILISABLES POUR CRÉER/ADMINISTRER DES STORED PROCEDURES
+                ============================================ -->
+                <section id="outils-creation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tools"></i> ✅ 6. Outils utilisables pour créer/administrer des Stored Procedures
+                    </h2>
+
+                    <p>Snowflake documente plusieurs possibilités : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>SQL direct (Snowsight, SnowSQL, worksheets)</li>
+                        <li>Snowpark API (Java / Python / Scala)</li>
+                        <li>Snowflake CLI</li>
+                        <li>Snowflake Python API</li>
+                        <li>Snowflake REST API</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: FONCTIONNEMENT D'UNE STORED PROCEDURE
+                ============================================ -->
+                <section id="fonctionnement" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-play"></i> ✅ 7. Fonctionnement d'une Stored Procedure
+                    </h2>
+
+                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>L'utilisateur exécute <code class="inline-code">CALL my_proc(...)</code></li>
+                        <li>Snowflake invoque le handler (Java/Python/JS…) en lui passant les arguments</li>
+                        <li>Le handler exécute la logique</li>
+                        <li>Le résultat (ou rien) est renvoyé</li>
+                    </ul>
+                    <p>Certaines procédures peuvent également retourner un résultat tabulaire selon le langage.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: AVANTAGES DES STORED PROCEDURES
+                ============================================ -->
+                <section id="avantages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Avantages des Stored Procedures
+                    </h2>
+
+                    <ul>
+                        <li>✔ <strong>Automatisation</strong> — idéal pour les pipelines ETL/ELT avancés</li>
+                        <li>✔ <strong>Réutilisation</strong> — logique centralisée dans un objet maintenable</li>
+                        <li>✔ <strong>Encapsulation</strong> — masque la complexité aux utilisateurs finaux</li>
+                        <li>✔ <strong>Sécurité</strong> — owner's rights pour limiter les privilèges directs <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: À CONNAÎTRE ABSOLUMENT POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🎯 9. À connaître absolument pour SnowPro Core
+                    </h2>
+
+                    <div class="warning-note">
+                        <ul>
+                            <li>Une Stored Procedure peut exécuter plusieurs statements SQL.</li>
+                            <li>Elle peut inclure boucles, conditions, SQL dynamique.</li>
+                            <li>Elle s'exécute avec les privilèges du propriétaire, pas de l'appelant.</li>
+                            <li>À créer avec <code class="inline-code">CREATE PROCEDURE</code>, à exécuter avec <code class="inline-code">CALL</code>.</li>
+                            <li>Langages supportés : Java, JavaScript, Python, Scala, SQL Scripting. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Une stored procedure ≠ UDF (logique, permissions, usage).</li>
+                            <li>Peut renvoyer une valeur ou aucun résultat.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: CONCLUSION RAPIDE
+                ============================================ -->
+                <section id="conclusion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i> 🧩 10. Conclusion rapide
+                    </h2>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Les stored procedures dans Snowflake sont un outil puissant pour automatiser, orchestrer et sécuriser l'exécution de tâches complexes. Comprendre leurs caractéristiques, leurs différences avec les UDF et leur modèle de privilèges est essentiel pour réussir la certification SnowPro Core.
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
