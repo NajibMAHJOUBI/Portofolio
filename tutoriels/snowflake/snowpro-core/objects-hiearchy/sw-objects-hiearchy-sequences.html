@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Querying Sequences | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-sort-numeric-up"></i>🧊 Querying Sequences
+                            <i class="fas fa-sort-numeric-up"></i>Querying Sequences
                         </a>
                     </li>
                     <li>
@@ -159,7 +159,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sort-numeric-up"></i> 🧊 Querying Sequences
+                        <i class="fas fa-sort-numeric-up"></i>Querying Sequences
                     </h2>
 
                     <p>
@@ -172,7 +172,7 @@
                 ============================================ -->
                 <section id="role-caracteristiques" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i> ✅ 1. Rôle et caractéristiques principales des sequences
+                        <i class="fas fa-info-circle"></i>1. Rôle et caractéristiques principales des sequences
                     </h2>
 
                     <p>Selon la documentation :</p>
@@ -189,7 +189,7 @@
                     <h3>✔ Exécution parallèle</h3>
                     <p>Snowflake réserve des plages de valeurs pour optimiser l'exécution concurrente.</p>
                     <p>Exemples :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Step = 2 → réservera 100 et 101</li>
                         <li>Step = 10 → réservera 100 à 109 <span class="reference">[docs.snowflake.com]</span></li>
                     </ul>
@@ -201,7 +201,7 @@
                 ============================================ -->
                 <section id="semantiques-sequences" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 2. Semantics détaillées des sequences
+                        <i class="fas fa-chart-line"></i>2. Semantics détaillées des sequences
                     </h2>
 
                     <p>La documentation insiste sur les points suivants :</p>
@@ -223,11 +223,11 @@
                 ============================================ -->
                 <section id="obtenir-valeurs" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code"></i> ✅ 3. Comment obtenir des valeurs de sequence ?
+                        <i class="fas fa-code"></i>3. Comment obtenir des valeurs de sequence ?
                     </h2>
 
                     <p>On utilise les pseudo‑colonnes :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">my_seq.NEXTVAL</code> → génère la prochaine valeur</li>
                         <li><code class="inline-code">my_seq.CURRVAL</code> → retourne la dernière valeur utilisée dans la session</li>
                     </ul>
@@ -246,11 +246,11 @@ INSERT INTO t VALUES (my_seq.NEXTVAL, ...);</code></pre>
                 ============================================ -->
                 <section id="order-vs-noorder" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sort-amount-up"></i> ✅ 4. Propriétés ORDER vs NOORDER
+                        <i class="fas fa-sort-amount-up"></i>4. Propriétés ORDER vs NOORDER
                     </h2>
 
                     <p>Par défaut, les séquences optimisent la performance :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>ORDER</strong> : garantit que les valeurs augmentent (ou diminuent) selon l'intervalle.</li>
                         <li><strong>NOORDER</strong> : performance supérieure, mais aucune garantie d'ordre, surtout en cas d'inserts concurrentiels.</li>
                     </ul>
@@ -262,10 +262,10 @@ INSERT INTO t VALUES (my_seq.NEXTVAL, ...);</code></pre>
                 ============================================ -->
                 <section id="garanties-snowflake" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-shield-alt"></i> ✅ 5. Garanties Snowflake
+                        <i class="fas fa-shield-alt"></i>5. Garanties Snowflake
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>✔ Unicité (tant que le signe ne change pas)</li>
                         <li>✔ Pas de contiguïté</li>
                         <li>✔ Pas d'ordre garanti sans ORDER</li>
@@ -280,15 +280,15 @@ INSERT INTO t VALUES (my_seq.NEXTVAL, ...);</code></pre>
                 ============================================ -->
                 <section id="limites-pieges" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exclamation-triangle"></i> ✅ 6. Limites / pièges importants pour SnowPro Core
+                        <i class="fas fa-exclamation-triangle"></i>6. Limites / pièges importants pour SnowPro Core
                     </h2>
 
                     <div class="warning-note">
-                        <ul>
-                            <li>❗ Snowflake ne garantit JAMAIS des séquences sans trous → Exam piège très fréquent. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>❗ Changer l'INCREMENT peut produire des valeurs déjà générées → en inversant le signe (+ → -). <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>❗ L'ordre d'arrivée n'est pas garanti en cas de parallélisme ou en NOORDER</li>
-                            <li>❗ Pas d'assurance que NEXTVAL = valeur précédente + step → en raison de la réservation interne de plages. <span class="reference">[docs.snowflake.com]</span></li>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowflake ne garantit JAMAIS des séquences sans trous → Exam piège très fréquent. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Changer l'INCREMENT peut produire des valeurs déjà générées → en inversant le signe (+ → -). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>L'ordre d'arrivée n'est pas garanti en cas de parallélisme ou en NOORDER</li>
+                            <li>Pas d'assurance que NEXTVAL = valeur précédente + step → en raison de la réservation interne de plages. <span class="reference">[docs.snowflake.com]</span></li>
                         </ul>
                     </div>
                 </section>
@@ -298,7 +298,7 @@ INSERT INTO t VALUES (my_seq.NEXTVAL, ...);</code></pre>
                 ============================================ -->
                 <section id="exemples-testables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code-branch"></i> ✅ 7. Exemples testables SnowPro Core
+                        <i class="fas fa-code-branch"></i>7. Exemples testables SnowPro Core
                     </h2>
 
                     <h3>✔ Générer plusieurs valeurs</h3>
@@ -326,21 +326,21 @@ DESC SEQUENCE myseq;</code></pre>
                 ============================================ -->
                 <section id="resume-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> 🎯 8. Résumé clé pour l'examen
+                        <i class="fas fa-chart-simple"></i>8. Résumé clé pour l'examen
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Concept</th><th>À retenir absolument</th>
+                            <th>Concept</th><th>À retenir absolument</th>
                         </thead>
                         <tbody>
-                            32<td><strong>Unicité</strong></td><td>Garantie unique si step ne change pas de signe</td>
-                            32<td><strong>Gaps</strong></td><td>Normaux et attendus → jamais garantis sans trous</td>
-                            32<td><strong>NOORDER</strong></td><td>Pas d'ordre strict, utile en écriture parallèle</td>
-                            32<td><strong>Réservation</strong></td><td>Snowflake réserve des plages → crée des gaps</td>
-                            32<td><strong>ALTER SEQUENCE</strong></td><td>Peut ne pas s'appliquer immédiatement</td>
-                            32<td><strong>Changement de signe</strong></td><td>Peut générer des duplicats</td>
-                            32<td><strong>Parallélisme</strong></td><td>Valeurs non ordonnées, mais uniques</td>
+                            <tr><td><strong>Unicité</strong></td><td>Garantie unique si step ne change pas de signe</td></tr>
+                            <tr><td><strong>Gaps</strong></td><td>Normaux et attendus → jamais garantis sans trous</td></tr>
+                            <tr><td><strong>NOORDER</strong></td><td>Pas d'ordre strict, utile en écriture parallèle</td></tr>
+                            <tr><td><strong>Réservation</strong></td><td>Snowflake réserve des plages → crée des gaps</td></tr>
+                            <tr><td><strong>ALTER SEQUENCE</strong></td><td>Peut ne pas s'appliquer immédiatement</td></tr>
+                            <tr><td><strong>Changement de signe</strong></td><td>Peut générer des duplicats</td></tr>
+                            <tr><td><strong>Parallélisme</strong></td><td>Valeurs non ordonnées, mais uniques</td></tr>
                         </tbody>
                     </table>
                 </section>

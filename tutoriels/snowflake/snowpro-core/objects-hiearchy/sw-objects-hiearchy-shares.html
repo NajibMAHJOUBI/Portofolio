@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Data Sharing (Provider) | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-share-alt"></i>🧊 Data Sharing (Provider)
+                            <i class="fas fa-share-alt"></i>Data Sharing (Provider)
                         </a>
                     </li>
                     <li>
@@ -102,11 +102,6 @@
                     <li>
                         <a href="#ce-que-consumer-voit">
                             <i class="fas fa-eye"></i>7. Ce que le consumer voit
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#points-cles">
-                            <i class="fas fa-star"></i>8. À mémoriser pour SnowPro Core
                         </a>
                     </li>
                 </ul>
@@ -159,7 +154,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-share-alt"></i> 🧊 Data Sharing (Provider)
+                        <i class="fas fa-share-alt"></i>Data Sharing (Provider)
                     </h2>
 
                     <p>
@@ -172,7 +167,7 @@
                 ============================================ -->
                 <section id="definition-provider" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-building"></i> ✅ 1. Qu'est‑ce qu'un Provider Snowflake ?
+                        <i class="fas fa-building"></i>1. Qu'est‑ce qu'un Provider Snowflake ?
                     </h2>
 
                     <p>Un provider est un compte Snowflake qui décide de partager une partie de ses données avec d'autres comptes (consumers).</p>
@@ -189,12 +184,12 @@
                 ============================================ -->
                 <section id="concept-share" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-share-square"></i> ✅ 2. Le concept de SHARE (objet de partage)
+                        <i class="fas fa-share-square"></i>2. Le concept de SHARE (objet de partage)
                     </h2>
 
                     <p>Un share est un objet Snowflake contenant les objets et privilèges que vous rendez accessibles.</p>
                     <p>Un share peut contenir :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>plusieurs objets d'un même database,</li>
                         <li>ou des objets provenant de différents databases. <span class="reference">[docs.snowflake.com]</span></li>
                     </ul>
@@ -205,7 +200,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Important :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les lignes nouvellement modifiées ou ajoutées deviennent immédiatement visibles.</li>
                             <li>Un objet recréé (DROP + CREATE) n'est pas automatiquement resharé même s'il porte le même nom. <span class="reference">[docs.snowflake.com]</span></li>
                         </ul>
@@ -217,13 +212,13 @@
                 ============================================ -->
                 <section id="types-partage" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code-branch"></i> ✅ 3. Types de partage : direct share, listings, cross‑cloud
+                        <i class="fas fa-code-branch"></i>3. Types de partage : direct share, listings, cross‑cloud
                     </h2>
 
                     <p>Selon la documentation :</p>
 
                     <h3>✔ Partage direct (Secure Data Sharing)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Partage dans la même région</li>
                         <li>Lecture seule</li>
                         <li>Zero‑copy</li>
@@ -242,7 +237,7 @@
                 ============================================ -->
                 <section id="processus-creation" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-plus-circle"></i> ✅ 4. Processus pour créer un share (Provider)
+                        <i class="fas fa-plus-circle"></i>4. Processus pour créer un share (Provider)
                     </h2>
 
                     <p>Étapes décrites par Snowflake : <span class="reference">[docs.snowflake.com]</span></p>
@@ -255,7 +250,7 @@
 
                     <h3>2. Ajouter des privilèges sur les objets</h3>
                     <p>Deux approches possibles :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>via database roles</li>
                         <li>ou via <code class="inline-code">GRANT ... TO SHARE</code></li>
                     </ul>
@@ -273,7 +268,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                     </div>
 
                     <h3>4. Maintenance</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ajouter/enlever objets</li>
                         <li>Ajouter/enlever comptes</li>
                         <li>Rafraîchir autorisations si objets recréés</li>
@@ -285,7 +280,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                 ============================================ -->
                 <section id="points-conformite-securite" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-shield-alt"></i> ✅ 5. Points de conformité et sécurité
+                        <i class="fas fa-shield-alt"></i>5. Points de conformité et sécurité
                     </h2>
 
                     <p>Snowflake indique :</p>
@@ -295,7 +290,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                     </div>
 
                     <p>Recommandations Snowflake pour comptes Business Critical :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ne pas partager de données sensibles avec des comptes non‑BC</li>
                         <li>Créer un second compte non-BC pour données moins sensibles</li>
                         <li>Attention à Tri‑Secret Secure → accès KMS peut être déclenché via le partage <span class="reference">[docs.snowflake.com]</span></li>
@@ -307,16 +302,16 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                 ============================================ -->
                 <section id="particularites-fonctionnelles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i> ✅ 6. Particularités fonctionnelles à connaître (Exam)
+                        <i class="fas fa-cogs"></i>6. Particularités fonctionnelles à connaître (Exam)
                     </h2>
 
-                    <ul>
-                        <li>✔ Un share est <strong>lecture seule</strong> — Les consumers ne peuvent pas modifier les données.</li>
-                        <li>✔ <strong>Zero‑copy sharing</strong> — Pas de duplication de données → coûts de stockage uniquement chez le provider.</li>
-                        <li>✔ Les <strong>modifications sont immédiatement visibles</strong> → Les consumers voient l'évolution en temps réel. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ Les objets recréés doivent être <strong>ré‑autorisés</strong> dans le share — Important dans les questions pièges de l'examen. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ On peut partager des données de <strong>plusieurs databases</strong> dans un même share <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ Partage <strong>cross‑région / cross‑cloud</strong> supporté <span class="reference">[docs.snowflake.com]</span></li>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Un share est <strong>lecture seule</strong> — Les consumers ne peuvent pas modifier les données.</li>
+                        <li><strong>Zero‑copy sharing</strong> — Pas de duplication de données → coûts de stockage uniquement chez le provider.</li>
+                        <li>Les <strong>modifications sont immédiatement visibles</strong> → Les consumers voient l'évolution en temps réel. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les objets recréés doivent être <strong>ré‑autorisés</strong> dans le share — Important dans les questions pièges de l'examen. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>On peut partager des données de <strong>plusieurs databases</strong> dans un même share <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Partage <strong>cross‑région / cross‑cloud</strong> supporté <span class="reference">[docs.snowflake.com]</span></li>
                     </ul>
                 </section>
 
@@ -325,7 +320,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                 ============================================ -->
                 <section id="ce-que-consumer-voit" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-eye"></i> ✅ 7. Ce que le consumer voit
+                        <i class="fas fa-eye"></i>7. Ce que le consumer voit
                     </h2>
 
                     <p>Un consumer crée une database locale "virtuelle" :</p>
@@ -335,33 +330,14 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                     </div>
 
                     <p>Une fois créée :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Il peut requêter les données</li>
                         <li>Aucun stockage n'est consommé dans son compte (sauf cache)</li>
                         <li>Il paie uniquement son compute</li>
                     </ul>
                 </section>
 
-                <!-- ============================================
-                     SECTION 8: À MÉMORISER POUR SNOWPRO CORE
-                ============================================ -->
-                <section id="points-cles" class="tutorial-section">
-                    <h2>
-                        <i class="fas fa-star"></i> 🎯 8. À mémoriser pour SnowPro Core
-                    </h2>
 
-                    <div class="info-note">
-                        <ul>
-                            <li>Un provider crée un share → y ajoute objets/privilèges → y ajoute des comptes. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Les consumers voient immédiatement les nouvelles lignes/updates.</li>
-                            <li>Un objet recréé doit être ré‑ajouté au share.</li>
-                            <li>Partage multi‑région / multi‑cloud possible.</li>
-                            <li>Sécurité : HIPAA/HITRUST non gérés par Snowflake → responsabilité du provider. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Zero‑copy data sharing → stockage uniquement chez provider.</li>
-                            <li>Concurrent possible via Marketplace (listings).</li>
-                        </ul>
-                    </div>
-                </section>
             </main>
         </div>
     </div>
