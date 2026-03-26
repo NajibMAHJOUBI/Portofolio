@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowflake ML | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowflake ML</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#snowflake-ml-overview" class="active">
+                            <i class="fas fa-brain"></i>1. Snowflake ML – Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ml-functions">
+                            <i class="fas fa-chart-line"></i>2. ML Functions – Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sql-ddl-models">
+                            <i class="fas fa-database"></i>3. SQL DDL pour les modèles ML
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#model-registry">
+                            <i class="fas fa-cubes"></i>4. Snowflake ML – Model Registry (Overview)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-graduation-cap"></i>5. Résumé final pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowflake ML</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-brain"></i>Machine Learning
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>ML Functions
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWFLAKE ML – OVERVIEW
+                ============================================ -->
+                <section id="snowflake-ml-overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-brain"></i> ✅ 1. Snowflake ML – Overview
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake ML est la suite d'outils permettant :</p>
+
+                    <h3>✔ Construire ses propres modèles ML dans Snowflake</h3>
+                    <p>Snowflake ML inclut :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>des classes de développement de modèles (basées sur des frameworks ML populaires),</li>
+                        <li>un Feature Store,</li>
+                        <li>un Model Registry pour suivre versions et artefacts,</li>
+                        <li>des connecteurs vers frameworks,</li>
+                        <li>des snapshots immuables pour la traçabilité ML. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Exécuter du ML sans écrire de code (ML Functions)</h3>
+                    <p>Les ML Functions permettent de :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>entraîner rapidement des modèles sur données structurées,</li>
+                        <li>réaliser : forecasting, anomaly detection, classification, top insights. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Garanties Snowflake</strong>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><strong>Sécurité</strong> : les modèles tournent dans le périmètre Snowflake.</li>
+                            <li><strong>Data privacy</strong> : les données clients ne sont jamais utilisées pour entraîner les modèles d'autres utilisateurs.</li>
+                            <li><strong>Contrôle via RBAC</strong>. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ML FUNCTIONS – OVERVIEW
+                ============================================ -->
+                <section id="ml-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. ML Functions – Overview
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Les ML Functions sont des fonctions SQL "clé en main" pour les non‑experts ML.</p>
+
+                    <h3>✔ Catégories principales</h3>
+
+                    <h4>(A) Time-Series Functions</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><strong>Forecasting</strong> : prédiction d'une métrique sur la base de séries temporelles.</li>
+                        <li><strong>Anomaly Detection</strong> : détection des valeurs atypiques. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h4>(B) Autres fonctions analytiques</h4>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><strong>Classification</strong> : prédiction d'une classe.</li>
+                        <li><strong>Top Insights</strong> : identification automatique des dimensions ayant un impact significatif sur la métrique. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Coûts et stockage</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Chaque modèle entraîne un stockage de l'instance du modèle (visible dans ACCOUNT_USAGE.TABLES / STAGES mais sans DB/schema).</li>
+                        <li>Les coûts dépendent : quantité de données, complexité, durée d'entraînement.</li>
+                        <li>Pour réduire coûts : supprimer les modèles obsolètes. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Limitations importantes</strong>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>AUTOCOMMIT doit être actif.</li>
+                            <li>Incompatibilité : Snowpark session.call ne peut pas invoquer directement des modèles ML Functions → utiliser <code class="inline-code">session.sql("CALL model!FORECAST(...)")</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SQL DDL POUR LES MODÈLES ML
+                ============================================ -->
+                <section id="sql-ddl-models" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 3. SQL DDL pour les modèles ML (CREATE MODEL, ALTER MODEL, DROP MODEL)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ CREATE MODEL</h3>
+                    <p>Permet d'entraîner un modèle ML à partir d'une source de données structurée :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE MODEL my_model
+    PREDICT (target_col)
+    USING (
+        SELECT * FROM my_table
+    );</code></pre>
+                    </div>
+                    <p>Effet : crée une instance de modèle ML stockée par Snowflake, accessible ensuite via model_name!METHOD(...) (ex: !FORECAST).</p>
+
+                    <h3>✔ ALTER MODEL</h3>
+                    <p>Utilisé pour :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>ajouter un tag,</li>
+                        <li>ajouter un commentaire,</li>
+                        <li>gérer la rétention,</li>
+                        <li>rafraîchir ou cloner une version.</li>
+                    </ul>
+
+                    <h3>✔ DROP MODEL</h3>
+                    <p>Supprime le modèle et libère les ressources associées (artefacts, stockage d'instance).</p>
+
+                    <h3>✔ Méthodes du modèle</h3>
+                    <p>Les modèles ML functions exposent des méthodes comme :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><code class="inline-code">!FORECAST</code></li>
+                        <li><code class="inline-code">!DETECT_ANOMALIES</code></li>
+                        <li><code class="inline-code">!CLASSIFY</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Appel direct :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CALL my_model!FORECAST(
+    INPUT_DATA => (SELECT date, metric FROM ts_table)
+);</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWFLAKE ML – MODEL REGISTRY
+                ============================================ -->
+                <section id="model-registry" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 4. Snowflake ML – Model Registry (Overview)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Le Model Registry est le composant dédié au cycle de vie des modèles.</p>
+
+                    <h3>✔ Objectifs du Model Registry</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Gestion centralisée des versions de modèles</li>
+                        <li>Stockage des artefacts (model objects, metadata)</li>
+                        <li>Gouvernance & traçabilité (RBAC, lineage)</li>
+                        <li>Support multi‑frameworks (Snowpark ML, modèles personnalisés)</li>
+                        <li>Intégration MLOps : déploiement, suivi, audit</li>
+                    </ul>
+
+                    <h3>✔ Briques offertes par le Model Registry</h3>
+                    <p>Snowpark ML Overview décrit les composants inclus :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Model registry pour conserver version, état, artefacts. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Compatibilité avec les pipelines ML Snowflake.</li>
+                        <li>Support pour le développement + déploiement dans Snowflake même.</li>
+                    </ul>
+
+                    <h3>✔ Flux type ML avec Model Registry</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Entraîner un modèle avec Snowpark ML ou ML Functions</li>
+                        <li>Enregistrer le modèle dans le Model Registry</li>
+                        <li>Versionner et annoter</li>
+                        <li>Déployer (UDF/UDTF/Stored Proc ou service)</li>
+                        <li>Surveiller et réentraîner</li>
+                    </ul>
+                    <p>Le Model Registry sert aussi d'ancrage pour la production ML dans Snowflake, en s'intégrant avec feature store, stages, UDFs, tasks et Snowpark.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RÉSUMÉ FINAL POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🧊 5. Résumé final pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Snowflake ML =</h4>
+                            <p>ML Functions (no‑code) + Snowpark ML (full ML) + Model Registry + MLOps.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ ML Functions =</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Forecasting / Anomalies / Classification / Top Insights</li>
+                                <li>Stockage → des objets d'instance dans account usage</li>
+                                <li>Méthodes appelées via model!method</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ DDL du modèle =</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>CREATE MODEL, ALTER MODEL, DROP MODEL</li>
+                                <li>Appels via CALL model_name!METHOD(...)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Model Registry =</h4>
+                            <p>Versioning, gouvernance, déploiement, traçabilité</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

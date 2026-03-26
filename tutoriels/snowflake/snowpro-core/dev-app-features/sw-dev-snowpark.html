@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowpark | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowpark</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-snowplow"></i>🧊 Snowpark (Overview & Developer Guides)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quest-ce-que-snowpark">
+                            <i class="fas fa-info-circle"></i>1. Qu'est‑ce que Snowpark ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#langages-supportes">
+                            <i class="fas fa-code"></i>2. Langages supportés et Developer Guides
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnalites-cles">
+                            <i class="fas fa-cogs"></i>3. Fonctionnalités clés de Snowpark
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowpark-vs-spark">
+                            <i class="fas fa-chart-line"></i>4. Snowpark vs Spark Connector (bénéfices)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#principes-developpement">
+                            <i class="fas fa-code-branch"></i>5. Principes de développement Snowpark
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#possibilites-par-langage">
+                            <i class="fas fa-language"></i>6. Possibilités Snowpark par langage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-graduation-cap"></i>🧠 Résumé final
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowpark</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-snowplow"></i>Snowpark
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-python"></i>Python
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-java"></i>Java
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>Scala
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-snowplow"></i> 🧊 Snowpark (Overview & Developer Guides)
+                    </h2>
+
+                    <p>
+                        Snowpark est un thème clé pour SnowPro Core, particulièrement dans les sections portant sur :
+                    </p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>architecture du traitement de données dans Snowflake,</li>
+                        <li>API Snowpark pour manipuler les DataFrames,</li>
+                        <li>différences entre Snowpark et Spark Connector,</li>
+                        <li>possibilités de développer pipelines / UDFs / UDTFs / Stored Procedures dans Snowflake.</li>
+                    </ul>
+                    <p>Cette synthèse reprend les points essentiels à retenir.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE SNOWPARK ?
+                ============================================ -->
+                <section id="quest-ce-que-snowpark" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Qu'est‑ce que Snowpark ? (Snowpark Overview)
+                    </h2>
+
+                    <p>Selon la documentation Snowflake :</p>
+                    <div class="info-note">
+                        <em>Le Snowpark API fournit une librairie intuitive pour interroger et transformer des données à grande échelle dans Snowflake, sans déplacer les données hors de Snowflake.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Objectif principal</h3>
+                    <p>Snowpark permet de développer du code (Python / Java / Scala) qui s'exécute à l'intérieur du moteur Snowflake, en profitant :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>du compute Snowflake,</li>
+                        <li>du pushdown automatique,</li>
+                        <li>du modèle serverless / scalable.</li>
+                    </ul>
+                    <p>L'application ne récupère pas les données localement : toutes les opérations sont poussées dans Snowflake.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LANGAGES SUPPORTÉS ET DEVELOPER GUIDES
+                ============================================ -->
+                <section id="langages-supportes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. Langages supportés et Developer Guides
+                    </h2>
+
+                    <p>La documentation liste trois Snowpark Developer Guides, selon les langages supportés : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            <th>Langage</th><th>Developer Guide</th><th>API Reference</th>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Java</strong>
+                                <td>Snowpark Developer Guide for Java
+                                <td>Snowpark Library for Java</tr>           
+                            <tr><td><strong>Python</strong>
+                                <td>Snowpark Developer Guide for Python
+                                <td>Snowpark Library for Python</tr>      
+                            <tr>                                <td><strong>Scala</strong>
+                                <td>Snowpark Developer Guide for Scala
+                                <td>Snowpark Library for Scala</tr>
+                        </tbody>
+                    
+
+                    <p>Chaque guide couvre :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>la configuration du développement,</li>
+                        <li>la création d'une session Snowpark,</li>
+                        <li>l'utilisation des DataFrames,</li>
+                        <li>la création de UDF/UDTF/Stored Procedures,</li>
+                        <li>les meilleures pratiques de performance.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: FONCTIONNALITÉS CLÉS DE SNOWPARK
+                ============================================ -->
+                <section id="fonctionnalites-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 3. Fonctionnalités clés de Snowpark
+                    </h2>
+
+                    <p>La documentation met en avant plusieurs points différenciants : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ a) Pushdown intégral vers Snowflake</h3>
+                    <p>Snowpark pousse toutes les opérations vers Snowflake, y compris les UDFs. Cela garantit performance et scalabilité, sans cluster externe.</p>
+
+                    <h3>✔ b) Aucun cluster externe requis</h3>
+                    <p>Toutes les opérations sont exécutées dans Snowflake. Aucun cluster Spark ou compute externe n'est nécessaire. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ c) API DataFrame unifiée</h3>
+                    <p>Snowpark fournit une API permettant :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>de manipuler les données via DataFrame et Column objects ;</li>
+                        <li>de générer du SQL via des constructeurs natifs du langage ;</li>
+                        <li>tout en bénéficiant du type checking et de l'auto‑complétion.</li>
+                    </ul>
+
+                    <h3>✔ d) Intégration complète Snowflake</h3>
+                    <p>Snowpark permet de créer :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>UDF,</li>
+                        <li>UDTF,</li>
+                        <li>Stored Procedures,</li>
+                        <li>Data Pipelines orchestrés via Tasks,</li>
+                        <li>ML models (notamment Snowpark Python).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWPARK VS SPARK CONNECTOR (BÉNÉFICES)
+                ============================================ -->
+                <section id="snowpark-vs-spark" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. Snowpark vs Spark Connector (bénéfices)
+                    </h2>
+
+                    <p>Selon la documentation :</p>
+                    <p>Par rapport au Spark Connector, Snowpark offre : <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>un support natif pour manipuler les données dans Snowflake,</li>
+                        <li>un pushdown systématique,</li>
+                        <li>l'absence d'infrastructure Spark externe,</li>
+                        <li>une simplification du code (pas de SQL string, utilisation d'API natives),</li>
+                        <li>gestion automatique du scale & compute par Snowflake.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: PRINCIPES DE DÉVELOPPEMENT SNOWPARK
+                ============================================ -->
+                <section id="principes-developpement" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 5. Principes de développement Snowpark (général)
+                    </h2>
+
+                    <p>D'après la documentation Snowpark Developer Guides : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Créer une session</h3>
+                    <p>Tout code Snowpark commence par une session dans laquelle on configure :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>le compte Snowflake,</li>
+                        <li>l'utilisateur,</li>
+                        <li>le rôle,</li>
+                        <li>le warehouse,</li>
+                        <li>la database + schema.</li>
+                    </ul>
+
+                    <h3>✔ Manipuler les données via DataFrames</h3>
+                    <p>Snowpark permet :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>de charger des tables (<code class="inline-code">session.table(...)</code>)</li>
+                        <li>de créer des DataFrames (<code class="inline-code">session.create_dataframe(...)</code>)</li>
+                        <li>d'utiliser transformations : filter, select, groupBy, join, etc.</li>
+                        <li>toutes les opérations sont compilées en SQL et exécutées dans Snowflake.</li>
+                    </ul>
+
+                    <h3>✔ UDF / UDTF / Stored Procedures</h3>
+                    <p>Snowpark permet de créer et déployer :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>UDFs (User‑Defined Functions)</li>
+                        <li>UDTFs (User‑Defined Table Functions)</li>
+                        <li>Stored Procedures</li>
+                    </ul>
+                    <p>pour encapsuler de la logique métier au sein du moteur Snowflake.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POSSIBILITÉS SNOWPARK PAR LANGAGE
+                ============================================ -->
+                <section id="possibilites-par-langage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-language"></i> ✅ 6. Possibilités Snowpark par langage
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Snowpark Python</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Data engineering ETL/ELT</li>
+                                <li>Snowpark pandas</li>
+                                <li>Machine learning (training + inference avec UDFs)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Snowpark Java / Scala</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Pipelines backend</li>
+                                <li>Transformations industrielles</li>
+                                <li>Intégration avec applications JVM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ FINAL
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🧠 Résumé final (point de révision rapide)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Snowpark est l'API Snowflake permettant d'exécuter du code (Python/Java/Scala) directement dans Snowflake.</li>
+                            <li>Il utilise un pushdown complet, sans déplacer les données.</li>
+                            <li>Les Developer Guides existent pour Java, Python, Scala.</li>
+                            <li>Snowpark permet : DataFrames, UDF/UDTF, Stored Procedures, pipelines ML, automatisations.</li>
+                            <li>Il remplace avantageusement Spark Connector dans la plupart des cas (pas de cluster, meilleures performances).</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

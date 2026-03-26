@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Streamlit in Snowflake | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Streamlit in Snowflake</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-chart-line"></i>🧊 Streamlit in Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#concepts-cles">
+                            <i class="fas fa-info-circle"></i>1. Streamlit in Snowflake — Concepts clés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#architecture-billing">
+                            <i class="fas fa-microchip"></i>2. Architecture & Billing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prerequis-permissions">
+                            <i class="fas fa-lock"></i>3. Prérequis & Permissions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#creer-application">
+                            <i class="fas fa-plus-circle"></i>4. Créer une application Streamlit (Snowsight UI)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modifier-executer">
+                            <i class="fas fa-edit"></i>5. Modifier & Exécuter des apps Streamlit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>🧠 Résumé express (10 secondes)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Streamlit in Snowflake</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Streamlit
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-python"></i>Python
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> 🧊 Streamlit in Snowflake
+                    </h2>
+
+                    <p>
+                        Les questions SnowPro Core peuvent porter sur :
+                    </p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>ce qu'est Streamlit dans Snowflake,</li>
+                        <li>son fonctionnement (compute, stockage, sécurité),</li>
+                        <li>comment créer/déployer une app Streamlit,</li>
+                        <li>les permissions nécessaires,</li>
+                        <li>l'architecture d'exécution (warehouse vs container runtime).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: STREAMLIT IN SNOWFLAKE — CONCEPTS CLÉS
+                ============================================ -->
+                <section id="concepts-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Streamlit in Snowflake — Concepts clés
+                    </h2>
+
+                    <p>Selon Snowflake :</p>
+                    <div class="info-note">
+                        <em>Streamlit est une librairie Python open‑source permettant de créer facilement des web apps data/ML.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Objectif (dans Snowflake)</h3>
+                    <p>Streamlit in Snowflake permet de développer, déployer et partager des applications interactives directement dans le Data Cloud, sans déplacer les données ni le code vers une infrastructure externe. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Avantages principaux</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Snowflake gère le compute et le stockage des apps Streamlit. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le code est stocké dans un objet Streamlit gouverné par RBAC. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Intégration native : Snowpark, UDFs, Stored Procedures, Native Apps. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Développement facile dans Snowsight (éditeur + preview côte‑à‑côte). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Modes d'exécution</h3>
+                    <p>Deux runtimes disponibles :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><strong>Warehouse Runtime</strong> : exécute Python + SQL via un warehouse Snowflake.</li>
+                        <li><strong>Container Runtime (Preview)</strong> : exécute l'app dans un compute pool. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ARCHITECTURE & BILLING
+                ============================================ -->
+                <section id="architecture-billing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-microchip"></i> ✅ 2. Architecture & Billing (Très important SnowPro Core)
+                    </h2>
+
+                    <h3>✔ Compute utilisé</h3>
+                    <p>Selon la documentation :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Un warehouse Snowflake est requis pour exécuter l'application Streamlit et les requêtes SQL. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le même warehouse exécute Streamlit + SQL queries.</li>
+                        <li>La session reste active tant que la connexion WebSocket reste ouverte (~15 min après la dernière activité). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Consommation de crédits</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Tant qu'un utilisateur a l'onglet ouvert → warehouse actif → crédits consommés.</li>
+                        <li>Fermer la page ou suspendre le warehouse → arrêt de consommation. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: PRÉREQUIS & PERMISSIONS
+                ============================================ -->
+                <section id="prerequis-permissions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 3. Prérequis & Permissions
+                    </h2>
+
+                    <p>Avant de créer une app, il faut que l'admin Snowflake configure les autorisations.</p>
+
+                    <h3>Privilèges nécessaires :</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>USAGE sur la database</li>
+                        <li>USAGE, CREATE STREAMLIT sur le schema</li>
+                        <li>USAGE sur le warehouse</li>
+                        <li>USAGE sur le compute pool (uniquement pour container runtime) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CRÉER UNE APPLICATION STREAMLIT (SNOWSIGHT UI)
+                ============================================ -->
+                <section id="creer-application" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 4. Créer une application Streamlit (Snowsight UI)
+                    </h2>
+
+                    <p>Étapes décrites dans la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Étape 1 – Créer une nouvelle app</h3>
+                    <p>Dans Snowsight :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Projects → Streamlit</li>
+                        <li>+ Streamlit App</li>
+                        <li>Nommer l'app</li>
+                        <li>Choisir database + schema</li>
+                        <li>
+                            Sélectionner le runtime :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Run on warehouse → choisir un warehouse</li>
+                                <li>Run on container (Preview) → choisir un compute pool</li>
+                            </ul>
+                        </li>
+                        <li>Créer l'application</li>
+                    </ul>
+                    <p>Snowflake fournit automatiquement un template / code de démarrage. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: MODIFIER & EXÉCUTER DES APPS STREAMLIT
+                ============================================ -->
+                <section id="modifier-executer" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-edit"></i> ✅ 5. Modifier & Exécuter des apps Streamlit
+                    </h2>
+
+                    <p>Via Snowsight :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Ouvrir l'app → Edit</li>
+                        <li>
+                            L'éditeur comprend 3 panneaux :
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Files (source Python)</li>
+                                <li>Code Editor</li>
+                                <li>Preview de l'app <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Exécution :</h3>
+                    <p>Cliquer sur Run pour rafraîchir l'application. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Upload de fichiers (assets)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Taille max = 250 MB par fichier</li>
+                        <li>Upload dans l'internal stage de l'app <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 6. Points clés SnowPro Core (à mémoriser absolument)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Concept / Architecture</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Streamlit in Snowflake = app Python hébergée comme un objet Snowflake.</li>
+                                <li>Appelle Snowpark & SQL sans sortir du Data Cloud.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Compute</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Streamlit Runtime = 1 seul Warehouse sélectionné pour toute l'app.</li>
+                                <li>(Compute pool uniquement en Container Runtime – Preview)</li>
+                                <li>WebSocket → Warehouse actif tant que l'app est ouverte.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Sécurité</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Accès via RBAC → permissions sur DB/Schema/Warehouse.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Déploiement</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Création via Snowsight UI, SQL ou Snowflake CLI.</li>
+                                <li>Template généré automatiquement si aucun fichier n'est fourni.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Fichiers / stockage</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Code et assets stockés dans l'internal stage du Streamlit object.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Limitations</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Multi‑file editing non supporté si l'app utilise ROOT_LOCATION. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ EXPRESS
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🧠 Résumé express (10 secondes)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Streamlit in Snowflake = web apps Python hébergées nativement dans Snowflake.</li>
+                            <li>Nécessite permissions sur DB/Schema/Warehouse.</li>
+                            <li>App tourne sur un Warehouse unique, restant actif tant que la session Streamlit est ouverte.</li>
+                            <li>Création simple via Snowsight, avec éditeur + preview intégrés.</li>
+                            <li>Stockage du code + fichiers dans l'internal stage de l'app.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Développement et Applications | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Développement et Applications</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#snowflake-notebooks" class="active">
+                            <i class="fas fa-book"></i>Snowflake Notebooks
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-streamlit">
+                            <i class="fas fa-chart-line"></i>Snowflake Streamlit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowpark">
+                            <i class="fas fa-snowplow"></i>Snowpark
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-cortex">
+                            <i class="fas fa-brain"></i>Snowflake Cortex
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-ml">
+                            <i class="fas fa-chart-line"></i>Snowflake ML
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Développement et Applications</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>Développement
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWFLAKE NOTEBOOKS
+                ============================================ -->
+                <section id="snowflake-notebooks" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-book"></i> Snowflake Notebooks
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='dev-app-features/sw-dev-snowflake-notebooks.html'">
+                            <h4><i class="fas fa-book"></i> Snowflake Notebooks</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les notebooks interactifs combinant SQL, Python et Markdown dans Snowsight.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SNOWFLAKE STREAMLIT
+                ============================================ -->
+                <section id="snowflake-streamlit" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> Snowflake Streamlit
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='dev-app-features/sw-dev-snowflake-streamlit.html'">
+                            <h4><i class="fas fa-chart-line"></i> Snowflake Streamlit</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Créez et déployez des applications web Python interactives directement dans Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SNOWPARK
+                ============================================ -->
+                <section id="snowpark" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-snowplow"></i> Snowpark
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='dev-app-features/sw-dev-snowpark.html'">
+                            <h4><i class="fas fa-snowplow"></i> Snowpark</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Développez des pipelines de données avec les API Python, Java et Scala dans Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWFLAKE CORTEX
+                ============================================ -->
+                <section id="snowflake-cortex" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-brain"></i> Snowflake Cortex
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='dev-app-features/sw-dev-snowflake-cortex.html'">
+                            <h4><i class="fas fa-brain"></i> Snowflake Cortex</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Exploitez les fonctionnalités IA/LLM avec Cortex AI Functions, Analyst et Search.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: SNOWFLAKE ML
+                ============================================ -->
+                <section id="snowflake-ml" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> Snowflake ML
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='dev-app-features/sw-dev-snowflake-ml.html'">
+                            <h4><i class="fas fa-chart-line"></i> Snowflake ML</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les ML Functions, le Model Registry et les outils MLOps de Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+
+</body>
+</html>
