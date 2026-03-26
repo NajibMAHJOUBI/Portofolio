@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Multi-Cluster Warehouses | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Multi-Cluster Warehouses</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-layer-group"></i>🧊 Multi‑Cluster Warehouses & Scaling Policies
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition">
+                            <i class="fas fa-info-circle"></i>1. Qu'est‑ce qu'un Multi‑Cluster Warehouse ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#limites-clusters">
+                            <i class="fas fa-chart-bar"></i>2. Limites de clusters (par taille de warehouse)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#modes-fonctionnement">
+                            <i class="fas fa-toggle-on"></i>3. Modes de fonctionnement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#scaling-policies">
+                            <i class="fas fa-chart-line"></i>4. Scaling Policies (Standard vs Economy)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ajout-retrait-clusters">
+                            <i class="fas fa-chart-simple"></i>5. Comment Snowflake décide d'ajouter ou retirer des clusters ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnalites-partagees">
+                            <i class="fas fa-share-alt"></i>6. Fonctionnalités partagées avec les single‑cluster warehouses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>7. Points clés pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Multi-Cluster Warehouses</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-layer-group"></i>Multi-Cluster
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Scaling
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i> 🧊 Multi‑Cluster Warehouses & Scaling Policies
+                    </h2>
+
+                    <p>
+                        Les entrepôts multi‑clusters (multi‑cluster warehouses) sont une fonctionnalité Enterprise Edition permettant d'augmenter la capacité de traitement horizontalement, en ajoutant dynamiquement des clusters pour gérer les pics de concurrence.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QU'UN MULTI-CLUSTER WAREHOUSE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Qu'est‑ce qu'un Multi‑Cluster Warehouse ?
+                    </h2>
+
+                    <p>Sans multi‑cluster, un warehouse Snowflake est composé d'un seul cluster.</p>
+                    <p>Quand plusieurs requêtes arrivent simultanément :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>si suffisamment de ressources → exécution immédiate</li>
+                        <li>sinon → requêtes mises en file d'attente <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>Avec les multi‑cluster warehouses, Snowflake peut provisionner plusieurs clusters pour absorber la concurrence, de façon statique ou dynamique. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Un multi‑cluster se définit par :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><code class="inline-code">MIN_CLUSTER_COUNT</code></li>
+                        <li><code class="inline-code">MAX_CLUSTER_COUNT</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Les clusters supplémentaires fournissent une capacité parallèle supplémentaire, pas plus de mémoire par requête.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LIMITES DE CLUSTERS (PAR TAILLE DE WAREHOUSE)
+                ============================================ -->
+                <section id="limites-clusters" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i> ✅ 2. Limites de clusters (par taille de warehouse)
+                    </h2>
+
+                    <p>La limite dépend de la taille du warehouse : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Taille</th><th>Max clusters</th>
+                        </thead>
+                        <tbody>
+                            32<td>X‑Small → Medium</td><td>300</td>
+                            32<td>Large</td><td>160</td>
+                            32<td>X‑Large</td><td>80</td>
+                            32<td>2XL</td><td>40</td>
+                            32<td>3XL</td><td>20</td>
+                            32<td>4XL</td><td>10</td>
+                            32<td>5XL</td><td>10</td>
+                            32<td>6XL</td><td>10</td>
+                        </tbody>
+                     </table>
+
+                    <p>(La valeur par défaut est 10 quel que soit la taille.)</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: MODES DE FONCTIONNEMENT
+                ============================================ -->
+                <section id="modes-fonctionnement" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-toggle-on"></i> ✅ 3. Modes de fonctionnement
+                    </h2>
+
+                    <h3>✔ Maximized mode</h3>
+                    <p>Quand MIN = MAX, par exemple :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>MIN_CLUSTER_COUNT = 4
+MAX_CLUSTER_COUNT = 4</code></pre>
+                    </div>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>➡ Snowflake démarre tous les clusters immédiatement et les maintient actifs tant que le warehouse tourne. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Avantage</strong> : capacité maximale constante.</li>
+                        <li><strong>Inconvénient</strong> : coût plus élevé.</li>
+                    </ul>
+
+                    <h3>✔ Auto‑Scale mode</h3>
+                    <p>Quand MIN &lt; MAX, Snowflake ajuste automatiquement le nombre de clusters selon la charge. <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li><strong>Avantage</strong> : équilibre coût/performance.</li>
+                        <li><strong>Inconvénient</strong> : latence possible si un cluster doit être provisionné.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SCALING POLICIES (STANDARD VS ECONOMY)
+                ============================================ -->
+                <section id="scaling-policies" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. Scaling Policies (Standard vs Economy)
+                    </h2>
+
+                    <p>La section dédiée se trouve dans la documentation du multi‑cluster warehouse : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Les scaling policies déterminent comment Snowflake ajoute ou retire des clusters.</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Standard Scaling Policy</h4>
+                            <p><strong>Politique par défaut.</strong></p>
+                            <p><strong>Comportement :</strong></p>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Démarre rapidement un nouveau cluster dès que des requêtes sont en file d'attente.</li>
+                                <li>Arrête les clusters quand la charge reste faible. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                            <p><strong>Objectif :</strong> ➡ Réduire la latence, maintenir une haute réactivité.</p>
+                            <p><strong>Cas d'usage :</strong></p>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Dashboards BI</li>
+                                <li>Workloads avec trafic instable</li>
+                                <li>Nombreux utilisateurs concurrents</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Economy Scaling Policy</h4>
+                            <p><strong>Alternative plus orientée coût.</strong></p>
+                            <p><strong>Comportement :</strong></p>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Les clusters ne démarrent que si Snowflake estime qu'un cluster supplémentaire sera pleinement utilisé.</li>
+                                <li>Snowflake peut laisser des requêtes en file d'attente plus longtemps. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                            <p><strong>Objectif :</strong> ➡ Réduire la consommation de crédits.</p>
+                            <p><strong>Cas d'usage :</strong></p>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>ETL batch</li>
+                                <li>Workloads prévisibles</li>
+                                <li>Jobs non interactifs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMMENT SNOWFLAKE DÉCIDE D'AJOUTER OU RETIRER DES CLUSTERS ?
+                ============================================ -->
+                <section id="ajout-retrait-clusters" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 5. Comment Snowflake décide d'ajouter ou retirer des clusters ?
+                    </h2>
+
+                    <p>D'après la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>Démarrage d'un cluster</h3>
+                    <p>Snowflake démarre un cluster supplémentaire lorsque :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>les requêtes s'accumulent en file d'attente</li>
+                        <li>les ressources manquent dans les clusters en cours</li>
+                    </ul>
+
+                    <h3>Arrêt d'un cluster</h3>
+                    <p>Snowflake arrête un cluster quand :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>la charge baisse durablement</li>
+                        <li>les requêtes du cluster sont terminées</li>
+                    </ul>
+                    <p>Les décisions sont également influencées par la scaling policy (Standard ou Economy).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: FONCTIONNALITÉS PARTAGÉES AVEC LES SINGLE-CLUSTER WAREHOUSES
+                ============================================ -->
+                <section id="fonctionnalites-partagees" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-share-alt"></i> ✅ 6. Fonctionnalités partagées avec les single‑cluster warehouses
+                    </h2>
+
+                    <p>Les multi‑cluster offrent les mêmes capacités qu'un warehouse classique :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Peut être redimensionné à chaud</li>
+                        <li>Auto‑Suspend s'applique à l'ensemble du warehouse (pas cluster par cluster)</li>
+                        <li>Auto‑Resume dès qu'une requête arrive <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: POINTS CLÉS POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 7. Points clés pour SnowPro Core
+                    </h2>
+
+                    <div class="warning-note">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li>Multi‑cluster = solution Snowflake aux pics de concurrence, pas aux ralentissements de requêtes individuelles.</li>
+                            <li>MIN = MAX → <strong>Maximized mode</strong> (tous les clusters actifs).</li>
+                            <li>MIN &lt; MAX → <strong>Auto‑scale mode</strong>.</li>
+                            <li>Standard scaling → rapidité.</li>
+                            <li>Economy scaling → économies.</li>
+                            <li>Facturation = taille × nombre de clusters × durée.</li>
+                            <li>Fonctionnalité Enterprise Edition.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

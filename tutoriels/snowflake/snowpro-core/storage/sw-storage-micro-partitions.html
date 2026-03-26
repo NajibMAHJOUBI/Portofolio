@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Micro-Partitions | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Micro-Partitions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-cubes"></i>🧊 Micro‑Partitions & Their Impact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#what-are-micro-partitions">
+                            <i class="fas fa-info-circle"></i>1. What are Micro‑Partitions ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#benefits-micro-partitions">
+                            <i class="fas fa-star"></i>2. Benefits of Micro‑Partitions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#impact-micro-partitions">
+                            <i class="fas fa-chart-line"></i>3. Impact of Micro‑Partitions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-graduation-cap"></i>4. Points clés pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-chart-simple"></i>🧠 Résumé final (10 secondes)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Micro-Partitions</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cubes"></i>Micro-Partitions
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> 🧊 Micro‑Partitions & Their Impact
+                    </h2>
+
+                    <p>
+                        Les micro‑partitions sont un concept fondamental de Snowflake. Elles influencent directement les performances des requêtes, la compression, le pruning, le clustering et les bonnes pratiques de design de tables. Les questions SnowPro Core portent régulièrement sur leur fonctionnement, leurs caractéristiques et leurs impacts.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: WHAT ARE MICRO-PARTITIONS ?
+                ============================================ -->
+                <section id="what-are-micro-partitions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. What are Micro‑Partitions ?
+                    </h2>
+
+                    <p>Selon la documentation Snowflake :</p>
+                    <div class="info-note">
+                        <em>All data in Snowflake tables is automatically divided into micro‑partitions, which are contiguous units of storage.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Caractéristiques essentielles</h3>
+
+                    <h4>Taille :</h4>
+                    <p>Chaque micro‑partition contient <strong>50 à 500 MB de données non compressées</strong> (stockage réel plus petit car compressé). <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h4>Structure colonne (columnar)</h4>
+                    <p>Les lignes du tableau sont réorganisées par colonne dans chaque micro‑partition.<br>
+                    ➜ Permet de ne scanner que les colonnes utiles. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h4>Création automatique</h4>
+                    <p>Pas besoin de définir des partitions manuellement.<br>
+                    Snowflake partitionne transparently selon l'ordre d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h4>Métadonnées riches stockées par micro‑partition :</h4>
+                    <ul>
+                        <li>Plage de valeurs (min/max) par colonne</li>
+                        <li>Nombre de valeurs distinctes</li>
+                        <li>Autres statistiques (pour optimisation et query processing) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h4>Nombre élevé</h4>
+                    <p>Un tableau peut contenir des millions de micro‑partitions. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h4>Immuabilité</h4>
+                    <p>Une micro‑partition est immuable :<br>
+                    → toute mise à jour crée de nouvelles micro‑partitions.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: BENEFITS OF MICRO-PARTITIONS
+                ============================================ -->
+                <section id="benefits-micro-partitions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 2. Benefits of Micro‑Partitions
+                    </h2>
+
+                    <p>La documentation met en avant plusieurs avantages clés : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Automatisation complète</h3>
+                    <p>Contrairement au partitionnement statique traditionnel,<br>
+                    ➜ pas de définition, pas de maintenance.</p>
+
+                    <h3>✔ Granularité fine (50–500 MB)</h3>
+                    <ul>
+                        <li>➜ Permet un pruning très efficace</li>
+                        <li>➜ Réduit les lectures inutiles</li>
+                        <li>➜ Accélère fortement les requêtes filtrées.</li>
+                    </ul>
+
+                    <h3>✔ Métadonnées = moteur de performance</h3>
+                    <p>Snowflake utilise min/max par colonne → accélère la détection des partitions pertinentes.</p>
+
+                    <h3>✔ Prévention du skew</h3>
+                    <p>Les micro‑partitions peuvent chevaucher leurs plages de valeurs, ce qui limite le risque de partitions disproportionnées (problème courant des partitions statiques).<br>
+                    ➜ meilleur équilibrage des opérations.</p>
+
+                    <h3>✔ Stockage colonne + compression</h3>
+                    <ul>
+                        <li>chaque colonne est stockée séparément</li>
+                        <li>compression optimisée<br>
+                        ➜ moins de données lues, meilleure performance.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: IMPACT OF MICRO-PARTITIONS
+                ============================================ -->
+                <section id="impact-micro-partitions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 3. Impact of Micro‑Partitions
+                    </h2>
+
+                    <p>La section Impact of Micro‑Partitions décrit comment elles influencent performance, pruning, clustering et coût.</p>
+
+                    <h3>✔ 1. Query Pruning (impact majeur)</h3>
+                    <p>Grâce aux métadonnées (ranges min/max), Snowflake peut ignorer complètement les micro‑partitions qui ne contiennent pas de données pertinentes.</p>
+                    <ul>
+                        <li>➜ réduction importante du volume scanné</li>
+                        <li>➜ impact direct sur la performance.</li>
+                    </ul>
+                    <p><strong>Exemple implicite :</strong><br>
+                    Une requête filtrée sur <code class="inline-code">WHERE date BETWEEN '2025-01-01' AND '2025-01-31'</code> lit uniquement les micro‑partitions dont la plage de dates intersecte cet intervalle.</p>
+
+                    <h3>✔ 2. DML Efficiency (INSERT/DELETE/MERGE)</h3>
+                    <p>Comme les micro‑partitions sont immuables, les opérations DML créent de nouvelles micro‑partitions.</p>
+                    <ul>
+                        <li>→ Cela peut fragmenter physiquement les données.</li>
+                        <li>→ Le clustering automatique peut réorganiser les micro‑partitions.</li>
+                    </ul>
+
+                    <h3>✔ 3. Influence du chargement (Load Order Impact)</h3>
+                    <p>Snowflake note que les partitions sont créées selon l'ordre d'insertion.</p>
+                    <ul>
+                        <li>➜ Un chargement désordonné peut nuire au pruning.</li>
+                        <li>➜ Un chargement trié peut améliorer naturellement le clustering. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 4. Foundation of Clustering</h3>
+                    <p>Le clustering (naturel ou avec clustering key) repose entièrement sur les micro‑partitions.</p>
+                    <ul>
+                        <li>Sans clustering key → "natural clustering" basé sur l'ordre d'insertion.</li>
+                        <li>Avec clustering key → Snowflake réorganise les micro‑partitions pour optimiser prune.<br>
+                        ➜ Moins de partitions scannées, donc meilleures performances.</li>
+                    </ul>
+
+                    <h3>✔ 5. Scalability</h3>
+                    <p>De très grandes tables (multi‑To) restent performantes grâce à :</p>
+                    <ul>
+                        <li>micro‑partitions petites, nombreuses, indépendantes</li>
+                        <li>parallélisme du MPP Snowflake</li>
+                        <li>métadonnées micro‑partitionnées pour les accès sélectifs</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POINTS CLÉS POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 🎯 4. Points clés pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Concept</th><th>À maîtriser absolument</th>
+                        </thead>
+                        <tbody>
+                            32<td><strong>Taille</strong></td><td>50–500 MB non compressés par micro‑partition. <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Automatisation</strong></td><td>Créées automatiquement → pas de partitionnement manuel. <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Métadonnées</strong></td><td>min/max, NDV, statistiques utilisées pour pruning. <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Pruning</strong></td><td>Snowflake ignore les micro‑partitions non pertinentes (impact énorme).</td>
+                            32<td><strong>Clustering</strong></td><td>Dépend directement de la distribution des données dans les micro‑partitions.</td>
+                            32<td><strong>Immuabilité</strong></td><td>Toute modification DML régénère de nouvelles micro‑partitions.</td>
+                            32<td><strong>Overlap</strong></td><td>Les micro‑partitions peuvent se chevaucher → moins de skew. <span class="reference">[docs.snowflake.com]</span></td>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RÉSUMÉ FINAL
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> 🧠 Résumé final (10 secondes)
+                    </h2>
+
+                    <div class="info-note">
+                        <p>
+                            Les micro‑partitions sont de petits blocs de stockage (50–500 MB), créés automatiquement, contenant des métadonnées détaillées permettant à Snowflake de pratiquer un pruning extrêmement efficace. Elles rendent les requêtes plus rapides, améliorent la compression, évitent le skew, et constituent le socle du clustering.
+                        </p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

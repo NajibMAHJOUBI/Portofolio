@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Warehouse Tasks & Monitoring | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Warehouse Tasks & Monitoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-microchip"></i>🧊 Warehouse Tasks, CREATE/ALTER WAREHOUSE, Monitoring
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#warehouse-tasks">
+                            <i class="fas fa-tasks"></i>1. Warehouse Tasks (Working with Warehouses)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#create-warehouse">
+                            <i class="fas fa-plus-circle"></i>2. CREATE WAREHOUSE — Syntaxe et options clés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#alter-warehouse">
+                            <i class="fas fa-edit"></i>3. ALTER WAREHOUSE — Gestion & modification
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#monitoring-load">
+                            <i class="fas fa-chart-line"></i>4. Monitoring Warehouse Load
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Warehouse Tasks & Monitoring</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-microchip"></i>Warehouses
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Monitoring
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-microchip"></i> 🧊 Synthèse SnowPro Core — Warehouse Tasks, CREATE/ALTER WAREHOUSE, Monitoring
+                    </h2>
+
+                    <p>
+                        Cette fiche couvre les éléments essentiels pour maîtriser les opérations sur les virtual warehouses, un thème fortement évalué en certification SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: WAREHOUSE TASKS (WORKING WITH WAREHOUSES)
+                ============================================ -->
+                <section id="warehouse-tasks" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tasks"></i> ✅ 1. Warehouse Tasks (Working with Warehouses)
+                    </h2>
+
+                    <p>La documentation décrit les opérations principales : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Créer un warehouse</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>via Snowsight, SQL ou Python</li>
+                        <li>peut être créé en Started ou Suspended</li>
+                        <li>Si créé en "Started", il consomme des crédits dès que les ressources sont provisionnées</li>
+                    </ul>
+
+                    <h3>✔ Démarrer / reprendre un warehouse</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; RESUME;</code></pre>
+                    </div>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>démarrage généralement en quelques secondes (mais peut prendre plus longtemps en cas de reprovisionnement)</li>
+                    </ul>
+
+                    <h3>✔ Suspension automatique et consommation</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Warehouse consomme des crédits uniquement lorsqu'il est en cours d'exécution</li>
+                        <li>Facturation = par seconde, avec un minimum de 60 secondes à chaque démarrage</li>
+                        <li>Si des ressources échouent à se provisionner, Snowflake facture seulement les ressources provisionnées</li>
+                    </ul>
+
+                    <h3>✔ Exécution des requêtes</h3>
+                    <p>Snowflake n'exécute pas les requêtes tant que toutes les ressources ne sont pas provisionnées, sauf si certaines ressources échouent → démarrage partiel à ≥50% <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CREATE WAREHOUSE — SYNTAXE ET OPTIONS CLÉS
+                ============================================ -->
+                <section id="create-warehouse" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 2. CREATE WAREHOUSE — Syntaxe et options clés
+                    </h2>
+
+                    <p>Snowflake permet la création d'un warehouse via :</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE [ OR REPLACE ] WAREHOUSE [ IF NOT EXISTS ] &lt;name&gt;
+    WITH
+        WAREHOUSE_TYPE = STANDARD | 'SNOWPARK-OPTIMIZED'
+        WAREHOUSE_SIZE = XSMALL | SMALL | MEDIUM | LARGE | ...
+        GENERATION = '1' | '2'
+        RESOURCE_CONSTRAINT = &lt;constraint&gt;
+        MAX_CLUSTER_COUNT = &lt;num&gt;
+        MIN_CLUSTER_COUNT = &lt;num&gt;
+        SCALING_POLICY = STANDARD | ECONOMY
+        AUTO_SUSPEND = &lt;seconds&gt; | NULL
+        AUTO_RESUME = TRUE | FALSE
+        INITIALLY_SUSPENDED = TRUE | FALSE
+        RESOURCE_MONITOR = &lt;monitor&gt;
+        ENABLE_QUERY_ACCELERATION = TRUE | FALSE
+        QUERY_ACCELERATION_MAX_SCALE_FACTOR = &lt;num&gt;;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Points essentiels pour l'examen :</strong>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <li><code class="inline-code">WAREHOUSE_TYPE</code> : Standard ou Snowpark-Optimized</li>
+                            <li><code class="inline-code">GENERATION</code> : contrôle Gen1 / Gen2 pour les Standard warehouses</li>
+                            <li><code class="inline-code">(MIN|MAX)_CLUSTER_COUNT</code> : indispensable pour Multi‑Cluster Warehouse</li>
+                            <li><code class="inline-code">SCALING_POLICY</code> : Standard = performance, Economy = réduction coûts</li>
+                            <li><code class="inline-code">AUTO_SUSPEND / AUTO_RESUME</code> : très important pour la gestion des crédits</li>
+                            <li><code class="inline-code">INITIALLY_SUSPENDED</code> : permet de créer le warehouse sans coût initial</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: ALTER WAREHOUSE — GESTION & MODIFICATION
+                ============================================ -->
+                <section id="alter-warehouse" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-edit"></i> ✅ 3. ALTER WAREHOUSE — Gestion & modification
+                    </h2>
+
+                    <p>Syntaxe principale : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Suspendre ou reprendre</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; SUSPEND;
+ALTER WAREHOUSE &lt;name&gt; RESUME;</code></pre>
+                    </div>
+
+                    <h3>✔ Abandonner toutes les requêtes</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; ABORT ALL QUERIES;</code></pre>
+                    </div>
+
+                    <h3>✔ Renommer</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; RENAME TO new_name;</code></pre>
+                    </div>
+
+                    <h3>✔ Modifier les propriétés</h3>
+                    <p>Toutes les propriétés modifiables apparaissent dans la section SET :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>WAREHOUSE_SIZE</li>
+                        <li>MAX_CLUSTER_COUNT / MIN_CLUSTER_COUNT</li>
+                        <li>SCALING_POLICY</li>
+                        <li>AUTO_SUSPEND, AUTO_RESUME</li>
+                        <li>RESOURCE_MONITOR</li>
+                        <li>COMMENT</li>
+                        <li>RESOURCE_CONSTRAINT, GENERATION, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Réinitialiser des propriétés (UNSET)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; UNSET AUTO_SUSPEND;</code></pre>
+                    </div>
+
+                    <h3>✔ Ajouter / retirer des tables dans un contexte de per‑table warehouses (fonctionnalité avancée)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE &lt;name&gt; ADD TABLES (...);
+ALTER WAREHOUSE &lt;name&gt; DROP TABLES (...);</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: MONITORING WAREHOUSE LOAD
+                ============================================ -->
+                <section id="monitoring-load" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. Monitoring Warehouse Load
+                    </h2>
+
+                    <p>La documentation décrit comment Snowflake mesure et visualise la charge d'un warehouse. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Accès au monitoring</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Nécessite le privilège MONITOR sur le warehouse.</li>
+                        <li>Dans Snowsight : Compute → Warehouses → &lt;warehouse_name&gt;</li>
+                    </ul>
+
+                    <h3>✔ Load Monitoring Chart</h3>
+                    <p>Affiche :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>les requêtes Running</li>
+                        <li>les requêtes Queued (Provisioning)</li>
+                        <li>les requêtes Blocked</li>
+                        <li>les requêtes Queued (Overload)</li>
+                    </ul>
+                    <p>Fenêtres d'analyse : de 1 heure à 2 semaines, granularité automatique (1 minute à 1 jour)</p>
+
+                    <h3>✔ Calcul du query load</h3>
+                    <p>Snowflake calcule la charge : somme des temps d'exécution / durée totale de l'intervalle <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Exemple donné (5 minutes = 300 sec) :</p>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>Load Running = 0.92</li>
+                        <li>Load Queued = 0.08</li>
+                        <li>Total load = 1.00</li>
+                    </ul>
+
+                    <h3>✔ Pour analyses plus avancées :</h3>
+                    <p>Utiliser ACCOUNT_USAGE.QUERY_HISTORY <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> 🎯 5. Points clés SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Warehouse Tasks</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Création possible en état Started → attention aux coûts</li>
+                                <li>Warehouse exécute des requêtes seulement après provisionnement complet des ressources</li>
+                                <li>Billing par seconde après un minimum de 60 secondes</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>CREATE WAREHOUSE</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Paramètres cruciaux : type, taille, génération, multi-cluster, scaling policy</li>
+                                <li>AUTO_SUSPEND & AUTO_RESUME = optimisation des crédits</li>
+                                <li>standard vs snowpark-optimized : selon workload</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>ALTER WAREHOUSE</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Peut suspendre, reprendre, renommer, changer taille/cluster</li>
+                                <li>MAX/MIN_CLUSTER_COUNT = fonction multi-cluster</li>
+                                <li>SCALING_POLICY = STANDARD ou ECONOMY</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Monitoring Load</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <li>Connaître les 4 statuts : Running / Queued (Provisioning) / Queued (Overload) / Blocked</li>
+                                <li>Interpréter le "Warehouse Load" (proche de 1 = limite de capacité)</li>
+                                <li>Outil essentiel pour identifier la nécessité de Scaling Up vs Scaling Out</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
