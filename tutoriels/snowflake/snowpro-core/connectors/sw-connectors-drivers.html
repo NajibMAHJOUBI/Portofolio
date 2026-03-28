@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Drivers | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Drivers</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-plug"></i>📘 SnowPro Core Thème : Snowflake Drivers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#categories-drivers">
+                            <i class="fas fa-code-branch"></i>1. Catégories de drivers et interfaces Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clients-associes">
+                            <i class="fas fa-terminal"></i>2. Snowflake Clients associés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#telechargement">
+                            <i class="fas fa-download"></i>3. Téléchargement des drivers & clients
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-chart-line"></i>4. Cas d'usage des drivers Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés pour la certification SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>6. Résumé Express (Flashcards)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Drivers</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-plug"></i>Drivers
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>APIs
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plug"></i> 📘 SnowPro Core Thème : Snowflake Drivers (Clients & API Interfaces)
+                    </h2>
+
+                    <p>
+                        Les drivers Snowflake sont des composants logiciels permettant aux applications, services et outils d'accéder à Snowflake via des protocoles standardisés. Ils constituent un élément fondamental de l'écosystème Snowflake et sont essentiels à connaître pour l'examen SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: CATÉGORIES DE DRIVERS ET INTERFACES SNOWFLAKE
+                ============================================ -->
+                <section id="categories-drivers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 1. Catégories de drivers et interfaces Snowflake
+                    </h2>
+
+                    <p>Source : <em>Ecosystem overview (clients, drivers & connectors)</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ ODBC Driver</h4>
+                            <ul>
+                                <li>Permet la connectivité basée sur la norme Open Database Connectivity.</li>
+                                <li>Compatible avec de nombreux outils BI / ETL.</li>
+                                <li>Téléchargement via Snowflake Developer Center.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ JDBC Driver</h4>
+                            <ul>
+                                <li>Connexion standard Java Database Connectivity pour applications Java.</li>
+                                <li>Très utilisé avec outils ETL/BI, frameworks Java et middlewares.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Python Connector</h4>
+                            <ul>
+                                <li>Interface Python native pour exécuter SQL, gérer les résultats, interagir avec Snowpark.</li>
+                                <li>Conforme DB API 2.0.</li>
+                                <li>Distribué via PyPI (snowflake-connector-python). <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Node.js Driver</h4>
+                            <ul>
+                                <li>Permet aux applications JavaScript d'interagir directement avec Snowflake.</li>
+                                <li>Aligné avec l'écosystème Node et frameworks backend.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ .NET Driver</h4>
+                            <ul>
+                                <li>Connexion Snowflake pour l'écosystème Microsoft (.NET Framework & .NET Core).</li>
+                                <li>Supporte .NET 6, 7, 8, 9 et Framework 4.6.2 → 4.8.1. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Go, Rust, Scala (via Snowpark)</h4>
+                            <ul>
+                                <li>Exposés via Snowpark APIs et drivers associés.</li>
+                                <li>Idéal pour la logique applicative proche des données.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SNOWFLAKE CLIENTS ASSOCIÉS
+                ============================================ -->
+                <section id="clients-associes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> ✅ 2. Snowflake Clients associés
+                    </h2>
+
+                    <p>Ces clients font partie de la section Drivers & Clients dans l'écosystème Snowflake : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <ul>
+                        <li><strong>SnowSQL</strong> : Interface CLI pour exécuter SQL, gérer les objets Snowflake.</li>
+                        <li><strong>Snowflake CLI</strong> (nouvelle génération) : Automatisation, gestion d'intégrations, développement Snowflake Native Apps.</li>
+                        <li><strong>SnowCD / Snowpark Library / APIs</strong> : Utilisés pour développement applicatif ou machine learning.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: TÉLÉCHARGEMENT DES DRIVERS & CLIENTS
+                ============================================ -->
+                <section id="telechargement" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 3. Téléchargement des drivers & clients
+                    </h2>
+
+                    <p>Source : <em>Downloading Clients, Drivers & Libraries</em> <span class="reference">[community.snowflake.com]</span></p>
+
+                    <p>Snowflake fournit l'ensemble de ses drivers et bibliothèques via :</p>
+                    <ul>
+                        <li><strong>Snowflake Developer Center</strong> (ODBC, JDBC, Python, Snowpark, CLI)</li>
+                        <li><strong>Snowflake Client Repository</strong> : accès direct via HTTP / scripts (wget, curl)<br>→ Exemple : ODBC, SnowSQL, Snowpark</li>
+                    </ul>
+                    <p>Les drivers sont disponibles indépendamment du cloud provider utilisé par votre compte Snowflake. <span class="reference">[community.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CAS D'USAGE DES DRIVERS SNOWFLAKE
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. Cas d'usage des drivers Snowflake
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ ODBC / JDBC</h4>
+                            <p>→ Connexions pour outils BI (Tableau, Power BI, Qlik), ETL (Informatica, Talend), applications Java & outils SQL.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Python / Node.js / .NET</h4>
+                            <p>→ Développement applicatif, pipelines custom, intégration dans microservices, orchestration.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Snowpark (Python / Java / Scala)</h4>
+                            <p>→ Développement de logique de transformation poussée directement dans Snowflake, traitement réparti.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS POUR LA CERTIFICATION SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés pour la certification SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 1. Connaître les drivers disponibles</h4>
+                            <p>ODBC, JDBC, Python, Node.js, .NET + Snowpark. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 2. Savoir où les télécharger</h4>
+                            <p>→ Developer Center & Client Repository. <span class="reference">[community.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 3. Connaître les usages typiques</h4>
+                            <ul>
+                                <li>ODBC/JDBC : BI & ETL</li>
+                                <li>Python/Node/.NET : apps et scripts</li>
+                                <li>Snowpark : data engineering & ML</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 4. Savoir que le Python Connector est conforme DB API 2.0</h4>
+                            <p><span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 5. Comprendre que Snowflake fournit son propre écosystème de clients/SDK</h4>
+                            <p>→ = partie intégrante du "Snowflake Ecosystem". <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: RÉSUMÉ EXPRESS (FLASHCARDS)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 6. Résumé Express (Flashcards)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Drivers principaux</strong>
+                                <td>ODBC, JDBC, Python, Node.js, .NET
+                            
+                            32
+                                <td><strong>Snowpark</strong>
+                                一道道Java, Scala, Python pour exécuter du code près des données
+                            
+                            32
+                                <td><strong>Téléchargement</strong>
+                                一道一道Developer Center + Client Repository
+                            
+                            32
+                                <td><strong>Python connector</strong>
+                                一道一道Conforme DB API 2.0 <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>Écosystème</strong>
+                                一道道Large support BI/ETL/ML via drivers & partenaires
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Connectors & Ecosystem | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Connectors & Ecosystem</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#connectors-overview" class="active">
+                            <i class="fas fa-plug"></i>1. Snowflake Connectors – Vue d'ensemble
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#typologie-connecteurs">
+                            <i class="fas fa-categories"></i>2. Typologie des Connecteurs Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ecosysteme">
+                            <i class="fas fa-globe"></i>3. Connecteurs dans l'Écosystème Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clients-drivers">
+                            <i class="fas fa-code"></i>4. Snowflake-provided Clients & Drivers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#importance">
+                            <i class="fas fa-chart-line"></i>5. Pourquoi les Connecteurs & l'Écosystème sont importants
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés SnowPro Core à mémoriser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>7. Résumé Express (Flashcard)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Connectors & Ecosystem</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-plug"></i>Connectors
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-globe"></i>Ecosystem
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWFLAKE CONNECTORS – VUE D'ENSEMBLE
+                ============================================ -->
+                <section id="connectors-overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plug"></i> ✅ 1. Snowflake Connectors – Vue d'ensemble
+                    </h2>
+
+                    <p>Source : <em>Snowflake Connectors</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Les Snowflake Connectors sont des intégrations natives permettant de connecter Snowflake à diverses applications, services et systèmes de bases de données.</p>
+                    <p>Ils offrent :</p>
+                    <ul>
+                        <li>Accès instantané aux données sans développement d'intégration personnalisé</li>
+                        <li>Ingestion automatique avec rafraîchissement selon votre fréquence</li>
+                        <li>Support de l'historique + des modifications incrémentales</li>
+                    </ul>
+
+                    <h3>✔ Catégories principales de connecteurs fournis :</h3>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Connecteurs d'applications</h4>
+                            <ul>
+                                <li><strong>Google Analytics GA4 – Aggregate</strong> : ingestion automatique des données agrégées GA4 (via Reporting API)</li>
+                                <li><strong>Google Analytics GA4 – Raw</strong> : ingestion automatique des événements GA4 bruts</li>
+                                <li><strong>Google Looker Studio</strong> : connecteur Snowflake permettant la visualisation directe dans Looker Studio</li>
+                                <li><strong>ServiceNow</strong> : ingestion des données ServiceNow dans Snowflake</li>
+                                <li><strong>SharePoint Online</strong> : ingestion de fichiers + permissions SharePoint, création automatique d'un service Cortex Search pour l'analyse avec AI Assistants</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Connecteurs de bases de données</h4>
+                            <ul>
+                                <li><strong>MySQL Connector</strong> : ingestion + réplication CDC MySQL vers Snowflake</li>
+                                <li><strong>PostgreSQL Connector</strong> : ingestion + CDC PostgreSQL vers Snowflake</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TYPOLOGIE DES CONNECTEURS SNOWFLAKE
+                ============================================ -->
+                <section id="typologie-connecteurs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-categories"></i> ✅ 2. Typologie des Connecteurs Snowflake
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 1. Connecteurs applicatifs</h4>
+                            <p>(GA4, Looker Studio, ServiceNow, SharePoint)</p>
+                            <p>→ Permettent un accès natif aux APIs sources, une ingestion orchestrée par Snowflake et un rafraîchissement automatique. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2. Connecteurs de bases relationnelles</h4>
+                            <p>(MySQL, PostgreSQL)</p>
+                            <p>→ Supportent ingestion + CDC (Change Data Capture) pour maintenir une copie synchronisée dans Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3. Connecteurs via plateformes tierces</h4>
+                            <p>Exemples issus de l'écosystème (Airbyte, AWS Glue, Azure Data Factory, etc.).</p>
+                            <p>→ Ces outils offrent des connecteurs natifs validés par Snowflake Ready Program. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CONNECTEURS DANS L'ÉCOSYSTÈME SNOWFLAKE
+                ============================================ -->
+                <section id="ecosysteme" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-globe"></i> ✅ 3. Connecteurs dans l'Écosystème Snowflake
+                    </h2>
+
+                    <p>Source : <em>Ecosystem Overview</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake dispose d'un écosystème large regroupant :</p>
+                    <ul>
+                        <li>Connecteurs développés par Snowflake</li>
+                        <li>Connecteurs développés par des partenaires certifiés</li>
+                        <li>Outils tiers validés pour fonctionner avec Snowflake</li>
+                    </ul>
+
+                    <h3>✔ Catégories de l'écosystème (vue officielle)</h3>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Data Integration (ETL / ELT)</h4>
+                            <p>Exemples : Airbyte, AWS Glue, Amazon Kinesis Firehose, Azure Data Factory, Alteryx, Boomi, Ascend.io…<br>→ Tous disposent d'un connecteur Snowflake ou d'une compatibilité native. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Business Intelligence (BI)</h4>
+                            <p>Tableau, Power BI, Looker, Qlik, Sigma…<br>→ Généralement via ODBC / JDBC / connecteurs directs.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Machine Learning & Data Science</h4>
+                            <p>Snowpark (Python, Java, Scala), Dataiku, H2O.ai, Databricks (via connecteurs), etc.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Security / Governance / Observability</h4>
+                            <p>Outils IAM, monitoring, audit, catalogage, lineage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>SQL Development & Management</h4>
+                            <p>Clients SQL compatibles (DBeaver, DataGrip, VSCode extensions).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Native Programmatic Interfaces</h4>
+                            <p>Drivers & clients Snowflake pour Python, Node.js, Java, .NET, JDBC, ODBC, SnowSQL, CLI, Snowpark.<br>→ Tout cela fait partie intégrante de l'écosystème officiel Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWFLAKE-PROVIDED CLIENTS & DRIVERS
+                ============================================ -->
+                <section id="clients-drivers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 4. Snowflake-provided Clients & Drivers (faisant partie de l'écosystème)
+                    </h2>
+
+                    <p>Source : <em>Ecosystem Overview</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>✔ Clients et drivers fournis par Snowflake :</p>
+                    <ul>
+                        <li>SnowSQL (CLI)</li>
+                        <li>Snowflake CLI</li>
+                        <li>Connecteurs programmatiques : Python, Java, Spark</li>
+                        <li>Drivers : Node.js, JDBC, ODBC</li>
+                    </ul>
+                    <p>Ces éléments servent d'interfaces standard pour se connecter à Snowflake depuis des applications, outils et pipelines.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POURQUOI LES CONNECTEURS & L'ÉCOSYSTÈME SONT IMPORTANTS
+                ============================================ -->
+                <section id="importance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 5. Pourquoi les Connecteurs & l'Écosystème sont importants (SnowPro Core)
+                    </h2>
+
+                    <ul>
+                        <li>✔ <strong>Intégration transparente avec systèmes sources</strong><br>→ Snowflake s'intègre nativement avec d'innombrables outils grâce à un large éventail de connecteurs. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ <strong>Réduction du coût d'ingestion</strong><br>→ Les connecteurs automatisent l'extraction, la transformation légère et la synchronisation. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ <strong>Écosystème robuste selon les cas d'usage :</strong>
+                            <ul>
+                                <li>ELT / Data Engineering</li>
+                                <li>BI & Analytics</li>
+                                <li>ML / AI workloads</li>
+                                <li>Gouvernance et observabilité</li>
+                            </ul>
+                        </li>
+                        <li>✔ <strong>Interopérabilité forte avec ODBC/JDBC</strong><br>→ Couverture quasi universelle dans les outils du marché.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS SNOWPRO CORE À MÉMORISER
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés SnowPro Core à mémoriser
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 1. Catégories de connecteurs officiels Snowflake</h4>
+                            <ul>
+                                <li>GA4 (Aggregate + Raw)</li>
+                                <li>MySQL & PostgreSQL</li>
+                                <li>Looker Studio</li>
+                                <li>ServiceNow</li>
+                                <li>SharePoint</li>
+                            </ul>
+                            <p>→ Tous nativement intégrés. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 2. Le rôle central de l'écosystème</h4>
+                            <p>Snowflake fonctionne avec :</p>
+                            <ul>
+                                <li>Solutions de Data Integration</li>
+                                <li>Outils BI majeurs</li>
+                                <li>Data Science & ML</li>
+                                <li>Connecteurs programmatiques (Python, JDBC, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 3. Les connecteurs garantissent :</h4>
+                            <ul>
+                                <li>Ingestion automatisée</li>
+                                <li>Rafraîchissement incrémental</li>
+                                <li>Compatibilité multi-API / multi-plateforme <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 4. Snowflake Ready Technology Validation Program</h4>
+                            <p>Certifie les connecteurs partenaires (ex : Airbyte, Alteryx). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ EXPRESS (FLASHCARD)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 7. Résumé Express (Flashcard)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Domaine</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Connecteurs Snowflake</strong>
+                                <td>Intégrations natives pour GA4, ServiceNow, Looker Studio, SharePoint, MySQL, PostgreSQL
+                            
+                            32
+                                <td><strong>Rafraîchissement</strong>
+                                <td>Historique + incrémental, fréquences configurables
+                            
+                            32
+                                <td><strong>Ecosystème</strong>
+                                <td>Large réseau : ETL, BI, ML, Sécurité, DevTools
+                            
+                            32
+                                <td><strong>Outils Snowflake</strong>
+                                <td>SnowSQL, Snowflake CLI, drivers Python/Java/JDBC/ODBC
+                            
+                            32
+                                <td><strong>Connecteurs Tierce-partie</strong>
+                                一道道Airbyte, AWS Glue, ADF, Boomi, Ascend.io (validés Snowflake Ready)
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

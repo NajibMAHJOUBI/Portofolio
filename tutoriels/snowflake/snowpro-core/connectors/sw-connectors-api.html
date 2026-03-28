@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - API Integrations | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">API Integrations</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-plug"></i>📘 API Integrations (CREATE API INTEGRATION)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-role">
+                            <i class="fas fa-info-circle"></i>1. Définition et rôle d'une API Integration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#syntaxe-parametres">
+                            <i class="fas fa-code"></i>2. Syntaxe et paramètres importants
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples-definitions">
+                            <i class="fas fa-code-branch"></i>3. Exemples de définitions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-git-repository">
+                            <i class="fab fa-git-alt"></i>4. Cas Git Repository
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#utilisation-snowflake">
+                            <i class="fas fa-cogs"></i>5. Utilisation dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#securite-bonnes-pratiques">
+                            <i class="fas fa-shield-alt"></i>6. Sécurité et bonnes pratiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>7. Points clés pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - API Integrations</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-plug"></i>API Integrations
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i>External Functions
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plug"></i> 📘 API Integrations (CREATE API INTEGRATION)
+                    </h2>
+
+                    <p>
+                        Une API Integration est un objet Snowflake permettant à Snowflake d'appeler de manière sécurisée un service externe via HTTPS (AWS API Gateway, Azure API Management, Google API Gateway, Git repository APIs, etc.).
+                    </p>
+                    <p>
+                        Ces intégrations sont principalement utilisées pour :
+                    </p>
+                    <ul>
+                        <li>Les external functions,</li>
+                        <li>Les services externes nécessitant une authentification IAM,</li>
+                        <li>Les API REST privées exposées par une organisation.</li>
+                    </ul>
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION ET RÔLE D'UNE API INTEGRATION
+                ============================================ -->
+                <section id="definition-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Définition et rôle d'une API Integration
+                    </h2>
+
+                    <p>Une API integration Snowflake :</p>
+                    <ul>
+                        <li>Contient les informations d'identité et d'accès permettant à Snowflake d'appeler une API externe (ex. rôle AWS, OAuth GitHub, audience Google…).</li>
+                        <li>Définit les endpoints autorisés ou bloqués (<code class="inline-code">API_ALLOWED_PREFIXES</code>, <code class="inline-code">API_BLOCKED_PREFIXES</code>).</li>
+                        <li>Sert à sécuriser la communication entre Snowflake et un proxy HTTPS externe (par ex. AWS API Gateway). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Elle est notamment utilisée par :</p>
+                    <ul>
+                        <li><code class="inline-code">CREATE EXTERNAL FUNCTION</code> (pour appeler une API depuis SQL). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SYNTAXE ET PARAMÈTRES IMPORTANTS
+                ============================================ -->
+                <section id="syntaxe-parametres" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. Syntaxe et paramètres importants
+                    </h2>
+
+                    <p>La syntaxe dépend du fournisseur de l'API (AWS, Azure, GCP, Git).</p>
+                    <p>Voici les paramètres communs :</p>
+
+                    <h3>✔ API_PROVIDER</h3>
+                    <p>Définit le fournisseur :</p>
+                    <ul>
+                        <li>aws_api_gateway, aws_private_api_gateway, aws_gov_api_gateway, aws_gov_private_api_gateway</li>
+                        <li>azure_api_management</li>
+                        <li>google_api_gateway <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Identité & credentials</h3>
+                    <p>Selon le type d'API :</p>
+                    <ul>
+                        <li><strong>AWS</strong> : API_AWS_ROLE_ARN + éventuellement API_KEY</li>
+                        <li><strong>Azure</strong> : AZURE_TENANT_ID, AZURE_AD_APPLICATION_ID, API_KEY optionnel</li>
+                        <li><strong>GCP</strong> : GOOGLE_AUDIENCE</li>
+                        <li><strong>Git repository</strong> : Personal Access Token ou OAuth (support GA pour GitHub, preview pour autres providers) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ API_ALLOWED_PREFIXES / API_BLOCKED_PREFIXES</h3>
+                    <p>Liste des URLs autorisées ou interdites comme préfixes de requêtes.</p>
+                    <p>Permet d'appliquer un filtrage strict des endpoints accessibles. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ ENABLED = TRUE|FALSE</h3>
+                    <p>Active ou désactive l'intégration. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: EXEMPLES DE DÉFINITIONS
+                ============================================ -->
+                <section id="exemples-definitions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 3. Exemples de définitions
+                    </h2>
+
+                    <h3>🔹 AWS API Gateway</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE API INTEGRATION my_api_int
+    API_PROVIDER = aws_api_gateway
+    API_AWS_ROLE_ARN = 'arn:aws:iam::12345:role/sf_api_role'
+    API_ALLOWED_PREFIXES = ('https://abc123.execute-api.us-east-1.amazonaws.com/prod/')
+    ENABLED = TRUE;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Azure API Management</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE API INTEGRATION my_api_int
+    API_PROVIDER = azure_api_management
+    AZURE_TENANT_ID = 'xxxx-xxxx'
+    AZURE_AD_APPLICATION_ID = 'yyyy-yyyy'
+    API_ALLOWED_PREFIXES = ('https://myapi.azure-api.net/v1/')
+    ENABLED = TRUE;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>🔹 Google Cloud API Gateway</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE API INTEGRATION my_api_int
+    API_PROVIDER = google_api_gateway
+    GOOGLE_AUDIENCE = 'https://my-gateway-service'
+    API_ALLOWED_PREFIXES = ('https://my-gateway-123.gateway.dev/')
+    ENABLED = TRUE;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CAS GIT REPOSITORY
+                ============================================ -->
+                <section id="cas-git-repository" class="tutorial-section">
+                    <h2>
+                        <i class="fab fa-git-alt"></i> ✅ 4. Cas Git Repository (GitHub, GitLab…)
+                    </h2>
+
+                    <ul>
+                        <li>Support GA pour GitHub (OAuth).</li>
+                        <li>Support preview pour les autres providers Git.</li>
+                        <li>Permet d'utiliser un token ou l'OAuth pour accéder à une API Git. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: UTILISATION DANS SNOWFLAKE
+                ============================================ -->
+                <section id="utilisation-snowflake" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 5. Utilisation dans Snowflake
+                    </h2>
+
+                    <h3>✔ 1. Création de l'intégration</h3>
+                    <p>→ via <code class="inline-code">CREATE API INTEGRATION</code> (objet de sécurité géré par ACCOUNTADMIN). <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 2. Contrôle des endpoints autorisés</h3>
+                    <p>→ grâce à <code class="inline-code">API_ALLOWED_PREFIXES</code>. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 3. Consommation via External Functions</h3>
+                    <p>Exemple pour utiliser l'intégration dans une fonction externe :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE EXTERNAL FUNCTION get_weather(city STRING)
+RETURNS VARCHAR
+API_INTEGRATION = my_api_int
+URL = 'https://my-api/weather'
+HEADERS = ('X-Custom-Key' = 'value');</code></pre>
+                    </div>
+                    <p>(Les external functions ne sont citées que par référence dans la documentation API Integration) <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 4. Monitoring</h3>
+                    <p>→ <code class="inline-code">SHOW API INTEGRATIONS</code> <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: SÉCURITÉ ET BONNES PRATIQUES
+                ============================================ -->
+                <section id="securite-bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 6. Sécurité et bonnes pratiques
+                    </h2>
+
+                    <ul>
+                        <li>Utiliser <code class="inline-code">API_ALLOWED_PREFIXES</code> comme périmètre minimal de sécurité.</li>
+                        <li>Ne jamais autoriser un préfixe trop large.</li>
+                        <li>Activer/désactiver via <code class="inline-code">ENABLED = TRUE|FALSE</code>.</li>
+                        <li>Pour AWS : utiliser un IAM Role dédié et limiter les actions. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: POINTS CLÉS POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Points clés pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Une API Integration permet à Snowflake d'appeler une API HTTPS externe en toute sécurité.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Les identifiants d'accès (ARN, tenant ID, audience…) sont stockés dans l'intégration.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ La configuration impose un filtrage strict via <code class="inline-code">API_ALLOWED_PREFIXES</code>.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ L'intégration est utilisée principalement par les external functions.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Providers supportés : AWS API Gateway, Azure API Management, Google API Gateway, Git repos APIs.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Commandes associées :</h4>
+                            <ul>
+                                <li>CREATE API INTEGRATION</li>
+                                <li>ALTER API INTEGRATION</li>
+                                <li>DROP INTEGRATION</li>
+                                <li>SHOW INTEGRATIONS <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
