@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Sharing (Snowsight, SQL, Privileges) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Sharing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#private-sharing-snowsight" class="active">
+                            <i class="fas fa-chart-line"></i>1. Private Sharing dans Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#provider-sql">
+                            <i class="fas fa-code"></i>2. Data Sharing côté Provider (Using SQL with Data Shares)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privileges-shares">
+                            <i class="fas fa-lock"></i>3. Sécurité et privilèges liés aux Shares
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#consumer-sql">
+                            <i class="fas fa-database"></i>4. Le mécanisme côté Consumer (SQL)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#flashcards">
+                            <i class="fas fa-graduation-cap"></i>6. Mini‑Flashcards de révision
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Sharing</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-share-alt"></i>Data Sharing
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-lock"></i>Privileges
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PRIVATE SHARING DANS SNOWSIGHT
+                ============================================ -->
+                <section id="private-sharing-snowsight" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 1. Private Sharing dans Snowsight
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowsight permet d'explorer et gérer les bases partagées (shared databases) provenant d'un partage direct ou d'un listing.</p>
+
+                    <div class="info-note">
+                        <strong>Ce qu'un utilisateur peut faire dans Snowsight :</strong>
+                        <ul>
+                            <li>Visualiser si la base est issue d'un share.</li>
+                            <li>Voir le provider, le type de partage, le nom du share ou listing.</li>
+                            <li>Supprimer (DROP) la base consommée (cela ne supprime pas le share dans le compte du provider). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Gérer les privilèges locaux sur la base consommée (RBAC classique).</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-note">
+                        <strong>Ce qui est important pour SnowPro :</strong>
+                        <ul>
+                            <li>Snowsight indique clairement la provenance : direct share, Marketplace listing, data exchange, listing privé.</li>
+                            <li>Une shared database est toujours en <strong>lecture seule</strong> côté consumer.</li>
+                            <li>La suppression de la base côté consumer ne supprime pas le share chez le provider.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: DATA SHARING CÔTÉ PROVIDER (USING SQL WITH DATA SHARES)
+                ============================================ -->
+                <section id="provider-sql" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. Data Sharing côté Provider (Using SQL with Data Shares)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>This topic describes the tasks for a data provider creating and configuring shares, adding consumer accounts, and maintaining shares.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ 1. Création du SHARE</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE SHARE my_share;</code></pre>
+                    </div>
+
+                    <h3>✔ 2. Ajout d'objets au share via GRANT TO SHARE</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>GRANT USAGE ON DATABASE mydb TO SHARE my_share;
+GRANT USAGE ON SCHEMA mydb.public TO SHARE my_share;
+GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
+                    </div>
+                    <div class="info-note">
+                        <em>Granting privileges effectively adds the objects to the share.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ 3. Ajout des consumer accounts</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER SHARE my_share ADD ACCOUNT = &lt;account_identifier&gt;;</code></pre>
+                    </div>
+                    <div class="info-note">
+                        <em>A share is available immediately to a consumer when you add that consumer's account.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="info-note">
+                        <strong>✔ Notes importantes</strong>
+                        <ul>
+                            <li>Un share peut contenir des objets provenant de plusieurs bases, si elles sont toutes dans le même compte.<br>
+                            <em>A share can include data from multiple databases.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Le partage est temps réel : <em>New and modified rows are available immediately to consumers.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Attention : recréer un objet (DROP puis CREATE) fait qu'il n'est plus automatiquement dans le share.<br>
+                            <em>A new object created or recreated is not automatically available.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SÉCURITÉ ET PRIVILÈGES LIÉS AUX SHARES
+                ============================================ -->
+                <section id="privileges-shares" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 3. Sécurité et privilèges liés aux Shares
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>GRANT … TO SHARE grants access privileges for supported objects; this effectively adds the objects to the share.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Privilèges utilisables avec TO SHARE</h3>
+                    <ul>
+                        <li><strong>DATABASE</strong> : USAGE, REFERENCE_USAGE (REFERENCE_USAGE requis pour les vues sécurisées multi-databases).</li>
+                        <li><strong>SCHEMA</strong> : USAGE</li>
+                        <li><strong>TABLE / VIEW / EXTERNAL TABLE / ICEBERG TABLE / DYNAMIC TABLE</strong> : SELECT</li>
+                        <li><strong>SECURE VIEW</strong> : SELECT (impossible sur vue non sécurisée)<br>
+                        <em>The SELECT privilege on views can only be granted on secure views.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>UDF secure</strong> : USAGE (pas possible sur UDF non‑secure)<br>
+                        <em>USAGE privilege can only be granted on secure UDFs.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>TAG</strong> : READ</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <strong>✔ Règles importantes pour SnowPro :</strong>
+                        <ul>
+                            <li>Un share ne peut recevoir USAGE que d'une seule database.<br>
+                            <em>The USAGE privilege on only a single database can be granted to a share.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Pour partager toutes les tables d'un schéma :<br>
+                            <code class="inline-code">GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code><br>
+                            <em>Using an ALL clause, you can grant SELECT on all tables.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Les vues non‑secure ne peuvent pas être partagées.</li>
+                            <li>Les UDF non‑secure ne peuvent pas être partagées.</li>
+                            <li>Les UDF ne peuvent pas référencer des objets d'autres databases.<br>
+                            <em>Sharing a UDF that references objects from another database is not supported.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: LE MÉCANISME CÔTÉ CONSUMER (SQL)
+                ============================================ -->
+                <section id="consumer-sql" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 4. Le mécanisme côté Consumer (SQL)
+                    </h2>
+
+                    <p>Le consumer crée une base depuis un share :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DATABASE shared_db FROM SHARE provider_account.my_share;</code></pre>
+                    </div>
+                    <p>Snowsight affichera ensuite : le nom du share, le provider, la provenance (direct share, listing).</p>
+                    <div class="info-note">
+                        La base est <strong>lecture seule</strong>.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 PRIVATE SHARING via Snowsight</h4>
+                            <ul>
+                                <li>Snowsight permet de voir toutes les shared databases et leur provenance.</li>
+                                <li>Les consumers gèrent uniquement le catalogue local de la shared database (nom, commentaire, suppression locale).</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 SHARING VIA SQL (Provider)</h4>
+                            <ul>
+                                <li>CREATE SHARE → GRANT … TO SHARE → ALTER SHARE ADD ACCOUNT.</li>
+                                <li>Share = conteneur de métadonnées (zero-copy).</li>
+                                <li>Partage immédiat une fois le compte ajouté.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 PRIVILÈGES SUR LES SHARES</h4>
+                            <ul>
+                                <li>USAGE DB, USAGE schema, SELECT table/view.</li>
+                                <li>Secure views obligatoires pour partager des vues.</li>
+                                <li>UDF doivent être secure et ne pas référencer une autre DB.</li>
+                                <li>REFERENCE_USAGE requis pour vues sécurisées multi‑databases.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 LIMITATIONS</h4>
+                            <ul>
+                                <li>Recréer un objet (DROP/CREATE) ⇒ il sort automatiquement du share.</li>
+                                <li>Un share ne contient qu'une seule database ayant le privilège USAGE.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: MINI‑FLASHCARDS DE RÉVISION
+                ============================================ -->
+                <section id="flashcards" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 6. Mini‑Flashcards de révision
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À mémoriser</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Snowsight</strong>
+                                卷第Indique la provenance d'une shared DB ; gestion lecture seule ; DROP local possible.
+                            
+                            32
+                                <td><strong>Provider SQL</strong>
+                                卷第CREATE SHARE → GRANT TO SHARE → ADD ACCOUNT.
+                            
+                            32
+                                <td><strong>Secure Views</strong>
+                                卷第Obligatoires pour partage (SELECT uniquement).
+                            
+                            32
+                                <td><strong>UDF partagées</strong>
+                                卷第Doivent être secure et ne référencer qu'une seule DB.
+                            
+                            32
+                                <td><strong>Zero-copy</strong>
+                                卷第Aucune copie physique ; accès immédiat.
+                            
+                            32
+                                <td><strong>Mise à jour</strong>
+                                卷第Lignes modifiées visibles immédiatement par les consumers.
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

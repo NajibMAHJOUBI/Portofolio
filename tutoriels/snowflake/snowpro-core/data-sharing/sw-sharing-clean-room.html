@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Clean Rooms | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Clean Rooms</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-door-open"></i>1. Définition et objectifs d'une Clean Room
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#acces-modeles">
+                            <i class="fas fa-users"></i>2. Accès et modèle de collaboration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#installation">
+                            <i class="fas fa-download"></i>3. Installation de l'environnement Clean Room
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#structure-configuration">
+                            <i class="fas fa-cogs"></i>4. Structure et configuration d'une Clean Room
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#fonctionnement-analytique">
+                            <i class="fas fa-chart-line"></i>5. Fonctionnement analytique dans une clean room
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#portee-regionalisation">
+                            <i class="fas fa-globe"></i>6. Portée et régionalisation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interface">
+                            <i class="fas fa-desktop"></i>7. Interface utilisateur (UI) et API
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-rapide">
+                            <i class="fas fa-star"></i>8. Résumé rapide (Flashcards SnowPro)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Clean Rooms</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-door-open"></i>Clean Rooms
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Privacy
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION ET OBJECTIFS D'UNE CLEAN ROOM
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-door-open"></i> ✅ 1. Définition et objectifs d'une Clean Room
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>Data clean rooms are configurable, isolated Snowflake environments where collaborators can import data, specify what queries can be run, and configure data protection settings such as differential privacy.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Elles permettent d'obtenir des insights tout en protégeant les données sous-jacentes. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Points clés :</h3>
+                    <ul>
+                        <li>Environnement <strong>isolé</strong>, contrôlé par le provider.</li>
+                        <li>Collaboration multi‑parties <strong>sans partage des données en clair</strong>.</li>
+                        <li>Contrôle strict des analyses autorisées (templates).</li>
+                        <li>
+                            Application automatique de techniques de protection :
+                            <ul>
+                                <li>Differential privacy</li>
+                                <li>Colonnes joignables, projetables (définies par le provider).</li>
+                            </ul>
+                        </li>
+                        <li>Aucune fonctionnalité de monétisation.<br>
+                        <em>Clean rooms don't support monetization.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ACCÈS ET MODÈLE DE COLLABORATION
+                ============================================ -->
+                <section id="acces-modeles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-users"></i> ✅ 2. Accès et modèle de collaboration
+                    </h2>
+
+                    <p>Deux rôles principaux, similaires au modèle Provider/Consumer de Secure Sharing :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Provider</h4>
+                            <div class="info-note">
+                                <em>Creates a clean room, adds data, configures allowed analyses, and shares the clean room with consumers.</em>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Consumer</h4>
+                            <div class="info-note">
+                                <em>Installs the clean room, adds datasets, and performs analyses including joining provider data with their own data.</em>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-note">
+                        <strong>Informations essentielles :</strong>
+                        <ul>
+                            <li>Accès uniquement sur invitation.<br>
+                            <em>Access is by invitation only.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Un compte peut être provider dans une clean room et consumer dans une autre.</li>
+                            <li>Possibilité d'inclure des collaborateurs non-Snowflake via des "managed accounts". <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: INSTALLATION DE L'ENVIRONNEMENT CLEAN ROOM
+                ============================================ -->
+                <section id="installation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 3. Installation de l'environnement Clean Room
+                    </h2>
+
+                    <div class="info-note">
+                        <em>The environment is installed once per Snowflake account by someone with ACCOUNTADMIN privileges.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>L'administrateur configure :</p>
+                    <ul>
+                        <li>Quels utilisateurs peuvent créer et utiliser les clean rooms.</li>
+                        <li>Quels comptes peuvent être invités à collaborer.</li>
+                        <li>Quels jeux de données peuvent être importés dans les clean rooms.</li>
+                        <li>Quels services tiers peuvent exporter les résultats. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <strong>À retenir pour l'examen :</strong>
+                        <ul>
+                            <li>L'installation se fait <strong>une seule fois par compte</strong>.</li>
+                            <li>Nécessite <strong>ACCOUNTADMIN</strong>.</li>
+                            <li>Sans installation préalable → aucun utilisateur ne peut utiliser la fonctionnalité.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: STRUCTURE ET CONFIGURATION D'UNE CLEAN ROOM
+                ============================================ -->
+                <section id="structure-configuration" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 4. Structure et configuration d'une Clean Room
+                    </h2>
+
+                    <p>Dans chaque clean room, le provider peut :</p>
+
+                    <h3>✔ Importer des datasets autorisés</h3>
+                    <div class="info-note">
+                        <em>Specify what data a clean room creator can import.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Définir les règles de protection</h3>
+                    <ul>
+                        <li>Colonnes joignables</li>
+                        <li>Colonnes projetables</li>
+                        <li>Paramètres de confidentialité différentielle</li>
+                    </ul>
+
+                    <h3>✔ Définir les requêtes autorisées</h3>
+                    <p>La collaboration se fait via des <strong>analysis templates</strong>, préconfigurés par le provider.</p>
+                    <div class="info-note">
+                        <em>The collaborator who is sharing their data can define what analyses are available to the others.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Contrôler tout accès et usage</h3>
+                    <p>Les consumers ne peuvent pas exécuter de SQL libre sur les données brutes.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: FONCTIONNEMENT ANALYTIQUE DANS UNE CLEAN ROOM
+                ============================================ -->
+                <section id="fonctionnement-analytique" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 5. Fonctionnement analytique dans une clean room
+                    </h2>
+
+                    <div class="info-note">
+                        <em>All analyses are conducted within the secure environment; collaborators receive only aggregated results.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Important :</h3>
+                    <ul>
+                        <li>Aucun accès aux données brutes.</li>
+                        <li>Les résultats sont <strong>agrégés</strong>, soumis aux contraintes du provider.</li>
+                        <li>Peut inclure du JOIN entre données provider et consumer.<br>
+                        <em>Consumer can join their own data with provider data.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Facturation :</h3>
+                    <ul>
+                        <li><strong>Provider</strong> : paie les processus internes nécessaires.</li>
+                        <li><strong>Consumer</strong> : paie pour le compute utilisé lors de ses analyses.<br>
+                        <em>Provider billed for background processes; consumer billed standard compute/data usage.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: PORTÉE ET RÉGIONALISATION
+                ============================================ -->
+                <section id="portee-regionalisation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-globe"></i> ✅ 6. Portée et régionalisation
+                    </h2>
+
+                    <div class="info-note">
+                        <em>By default, you can share clean rooms only with accounts in the same web hosting region.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <p>L'administrateur peut toutefois étendre le partage à d'autres régions Snowflake.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: INTERFACE UTILISATEUR (UI) ET API
+                ============================================ -->
+                <section id="interface" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-desktop"></i> ✅ 7. Interface utilisateur (UI) et API
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Collaborators can use either the Clean Rooms UI (business-friendly) or the API (developer-focused).</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ UI Clean Rooms</h3>
+                    <ul>
+                        <li>Accessible aux profils non techniques.</li>
+                        <li>Exécution d'analyses basées sur des templates.</li>
+                    </ul>
+
+                    <h3>✔ API Clean Rooms</h3>
+                    <ul>
+                        <li>Permet l'automatisation et les intégrations.</li>
+                        <li>Nécessite un rôle API spécifique (ex. SAMOOHA_APP_ROLE). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ RAPIDE (FLASHCARDS SNOWPRO)
+                ============================================ -->
+                <section id="resume-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Résumé rapide (Flashcards SnowPro)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Nature</strong>
+                                卷第Environnement Snowflake isolé pour collaboration multi‑parties
+                            
+                            32
+                                <td><strong>Accès</strong>
+                                卷第Sur invitation uniquement
+                            
+                            32
+                                <td><strong>Installation</strong>
+                                卷第1 fois par compte, via ACCOUNTADMIN
+                            
+                            32
+                                <td><strong>Données</strong>
+                                卷第Jamais visibles en clair par les consumers
+                            
+                            32
+                                <td><strong>Requêtes</strong>
+                                卷第Basées sur des templates contrôlés par le provider
+                            
+                            32
+                                <td><strong>Protection</strong>
+                                卷第Differential privacy, colonnes joignables/projetables
+                            
+                            32
+                                <td><strong>Facturation</strong>
+                                卷第Provider = processus internes ; Consumer = compute
+                            
+                            32
+                                <td><strong>UI / API</strong>
+                                卷第UI pour business users, API pour développeurs
+                            
+                            32
+                                <td><strong>Région</strong>
+                                卷第Partage région‑locale sauf configuration explicite
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

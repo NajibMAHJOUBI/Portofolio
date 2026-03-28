@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Direct Share & Getting Started | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Direct Share & Getting Started</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#principes-fondamentaux" class="active">
+                            <i class="fas fa-shield-alt"></i>1. Principes fondamentaux du Secure Data Sharing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#direct-share">
+                            <i class="fas fa-share-alt"></i>2. Direct Share — Fonctionnement et caractéristiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#getting-started">
+                            <i class="fas fa-rocket"></i>3. Data Sharing – Getting Started
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#behavior-important">
+                            <i class="fas fa-sync-alt"></i>4. Behavior important du partage Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#workflow-sql">
+                            <i class="fas fa-code"></i>5. Workflow SQL simplifié (provider → consumer)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés SnowPro Core à retenir
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Direct Share & Getting Started</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-share-alt"></i>Data Sharing
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-share-square"></i>Direct Share
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PRINCIPES FONDAMENTAUX DU SECURE DATA SHARING
+                ============================================ -->
+                <section id="principes-fondamentaux" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 1. Principes fondamentaux du Secure Data Sharing
+                    </h2>
+
+                    <div class="info-note">
+                        <strong>Ce que dit la documentation officielle :</strong>
+                        <ul>
+                            <li>Snowflake permet le partage <strong>sans copie</strong>, entièrement basé sur la couche de services et le métastore : aucune donnée n'est physiquement copiée vers le compte consumer. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Tous les objets partagés sont en <strong>lecture seule</strong> pour les consumers. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Les consumers ne paient que pour leur compute, <strong>jamais pour le stockage</strong> associé aux données partagées. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: DIRECT SHARE — FONCTIONNEMENT ET CARACTÉRISTIQUES
+                ============================================ -->
+                <section id="direct-share" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-share-alt"></i> ✅ 2. Direct Share — Fonctionnement et caractéristiques
+                    </h2>
+
+                    <p>Source : <em>Snowflake Sharing Overview → section direct share</em> <span class="reference">[sql.info]</span></p>
+
+                    <div class="info-note">
+                        <em>Un direct share permet de partager des données avec un ou plusieurs comptes dans la même région Snowflake.</em>
+                        <span class="reference">[sql.info]</span>
+                    </div>
+
+                    <h3>⭐ Caractéristiques clés d'un Direct Share</h3>
+                    <ul>
+                        <li><strong>Même région</strong> : pas de partage cross‑region ou cross‑cloud.<br>
+                        <em>Direct share = “one or more accounts in your region”</em> <span class="reference">[sql.info]</span></li>
+                        <li><strong>Zero-copy</strong>, identique aux autres types de sharing.</li>
+                        <li>Pas de monétisation possible (contrairement aux listings Marketplace).<br>
+                        <em>Direct share → “Optionally charge? No / Public? No / Metrics? No”</em> <span class="reference">[sql.info]</span></li>
+                        <li>Pas de metadata enrichie (contrairement aux listings Marketplace).</li>
+                        <li>Processus simple : Provider crée un share → l'associe à des comptes Snowflake de la même région.</li>
+                    </ul>
+
+                    <h3>⭐ Quand utiliser un direct share ?</h3>
+                    <ul>
+                        <li>Collaboration interne dans une même région Snowflake.</li>
+                        <li>Partage bilatéral simple, rapide et sans besoins cross‑région / marketplace.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: DATA SHARING – GETTING STARTED
+                ============================================ -->
+                <section id="getting-started" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-rocket"></i> ✅ 3. Data Sharing – Getting Started (data-sharing-gs)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>3.1. Ajouter des objets à un share</h3>
+                    <p>La documentation explique que deux méthodes existent :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Option 1 — Accorder des database roles à un share</h4>
+                            <div class="info-note">
+                                <em>Segment the securable objects… by creating multiple database roles … grant each database role to the share.</em>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </div>
+                            <p>Permet une segmentation fine de l'accès côté consumer.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Option 2 — Accorder des privilèges directement au share</h4>
+                            <div class="info-note">
+                                <em>Grant privileges on specific objects directly to a share… allows including data from multiple databases in a share.</em>
+                                <span class="reference">[docs.snowflake.com]</span>
+                            </div>
+                            <p>Méthode classique via <code class="inline-code">GRANT … TO SHARE</code>.</p>
+                        </div>
+                    </div>
+
+                    <h3>3.2. Cas où utiliser chaque option</h3>
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Option 1 (Database Roles → Share)</h4>
+                            <p><strong>Utile lorsque :</strong></p>
+                            <ul>
+                                <li>Vous voulez segmenter les droits dans un même share.</li>
+                                <li>Le consumer doit gérer des permissions détaillées via les database roles partagés.</li>
+                            </ul>
+                            <div class="warning-note">
+                                <strong>Limites :</strong> Impossible pour des objets provenant de plusieurs databases, car REFERENCE_USAGE n'est pas compatible avec les database roles.<br>
+                                <em>You cannot use this option if sharing data from multiple databases.</em> <span class="reference">[docs.snowflake.com]</span>
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Option 2 (GRANT direct)</h4>
+                            <p><strong>Utile pour :</strong></p>
+                            <ul>
+                                <li>Partager des objets provenant de plusieurs databases d'un même compte.</li>
+                                <li>Faire du sharing simple et direct.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>3.3. Fonctionnement côté consumer</h3>
+                    <ul>
+                        <li>Après création d'une database à partir d'un share, les consumers peuvent accorder le privilège <code class="inline-code">IMPORTED PRIVILEGES</code> à des rôles locaux. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Cela donne accès en lecture à tous les objets partagés.</li>
+                        <li>Sans database roles, ce modèle est tout ou rien pour un share unique.<br>
+                        <em>This all-or-nothing approach requires multiple shares to grant subsets of objects.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: BEHAVIOR IMPORTANT DU PARTAGE SNOWFLAKE
+                ============================================ -->
+                <section id="behavior-important" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 4. Behavior important du partage Snowflake
+                    </h2>
+
+                    <ul>
+                        <li><strong>✔ Partage instantané</strong><br>
+                        Dès qu'un provider ajoute un consumer à un share, ce dernier y a accès immédiatement. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>✔ Mises à jour visibles en temps réel</strong><br>
+                        <em>New and modified rows are available immediately to consumers…</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>✔ Les objets recréés ne sont pas automatiquement re‑partagés</strong><br>
+                        <em>A new object created or recreated … is not automatically available.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: WORKFLOW SQL SIMPLIFIÉ (PROVIDER → CONSUMER)
+                ============================================ -->
+                <section id="workflow-sql" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 5. Workflow SQL simplifié (provider → consumer)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Provider</h4>
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre><code>CREATE SHARE my_share;
+
+GRANT USAGE ON DATABASE mydb TO SHARE my_share;
+GRANT USAGE ON SCHEMA mydb.public TO SHARE my_share;
+GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;
+
+ALTER SHARE my_share ADD ACCOUNT = '&lt;consumer_account&gt;';</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Consumer</h4>
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre><code>CREATE DATABASE shared_sales
+FROM SHARE provider_account.my_share;</code></pre>
+                            </div>
+                            <p>Ensuite, consumer peut :</p>
+                            <div class="code-block">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre><code>GRANT IMPORTED PRIVILEGES ON DATABASE shared_sales TO ROLE analyst;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS SNOWPRO CORE À RETENIR
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés SnowPro Core à retenir
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Direct Share</h4>
+                            <ul>
+                                <li>Même région uniquement. ✔</li>
+                                <li>Zero‑copy. ✔</li>
+                                <li>Pas de cross‑cloud / cross‑region. ✔</li>
+                                <li>Pas de monétisation ni de usage metrics. ✔</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Data Sharing Getting Started</h4>
+                            <ul>
+                                <li>Deux méthodes : database roles OU GRANT direct.</li>
+                                <li>Database roles = segmentation fine mais pas multi‑database.</li>
+                                <li>GRANT direct = le plus flexible.</li>
+                                <li>Consumer crée database depuis share + utilise IMPORTED PRIVILEGES.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Généralités</h4>
+                            <ul>
+                                <li>Tout est en lecture seule côté consumer.</li>
+                                <li>Mises à jour visibles immédiatement.</li>
+                                <li>Objets recréés → doivent être ré‑ajoutés au share.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

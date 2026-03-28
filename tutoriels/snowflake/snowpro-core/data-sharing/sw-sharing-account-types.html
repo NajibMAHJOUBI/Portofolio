@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Secure Data Sharing | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Secure Data Sharing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-share-alt"></i>1. Introduction au Data Sharing Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#providers-consumers">
+                            <i class="fas fa-exchange-alt"></i>2. Data Providers & Data Consumers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reader-accounts">
+                            <i class="fas fa-users"></i>3. Reader Accounts (lecture seule pour non‑clients Snowflake)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#objets-partageables">
+                            <i class="fas fa-cubes"></i>4. Objets pouvant être partagés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#securite">
+                            <i class="fas fa-lock"></i>5. Sécurité du Data Sharing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privileges">
+                            <i class="fas fa-key"></i>6. Gouvernance & privilèges
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#billing">
+                            <i class="fas fa-coins"></i>7. Billing / Facturation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparaison-consumer-reader">
+                            <i class="fas fa-chart-simple"></i>8. Comparaison : Consumer classique vs Reader Account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#processus-partage">
+                            <i class="fas fa-cogs"></i>9. Processus standard de partage (vue d'ensemble)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>10. Points clés SnowPro Core à maîtriser
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Secure Data Sharing</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-share-alt"></i>Data Sharing
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-users"></i>Reader Accounts
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: INTRODUCTION AU DATA SHARING SNOWFLAKE
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-share-alt"></i> ✅ 1. Introduction au Data Sharing Snowflake
+                    </h2>
+
+                    <p>Snowflake permet le partage de données sécurisé, <strong>sans copie</strong>, entre comptes Snowflake ou même avec des utilisateurs n'ayant pas de compte Snowflake.</p>
+
+                    <h3>✔ Concepts fondamentaux :</h3>
+                    <ul>
+                        <li><strong>Zero-copy</strong> : les consommateurs accèdent aux données via un partage, sans duplication physique.</li>
+                        <li>Le partage fonctionne en générant un <strong>share</strong>, qui regroupe les objets partagés (tables, views sécurisées, UDFs sécurisées, etc.).</li>
+                        <li>Les consommateurs utilisent ces données comme des objets locaux (en <strong>lecture seule</strong>).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: DATA PROVIDERS & DATA CONSUMERS
+                ============================================ -->
+                <section id="providers-consumers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 2. Data Providers & Data Consumers
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Les objets répliqués ou partagés vers un autre compte sont accessibles en lecture seule.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Provider (fournisseur)</h3>
+                    <ul>
+                        <li>Crée un <strong>share</strong>.</li>
+                        <li>Y ajoute les objets (tables, vues, UDF sécurisées).</li>
+                        <li>
+                            Donne accès soit :
+                            <ul>
+                                <li>à un consumer Snowflake existant,</li>
+                                <li>à un reader account (si le client n'a pas de compte Snowflake).</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Consumer (consommateur)</h3>
+                    <ul>
+                        <li>Peut consulter les données du share sous forme de database partagée.</li>
+                        <li>Ne peut pas modifier les objets sources → <strong>lecture seule</strong>.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: READER ACCOUNTS
+                ============================================ -->
+                <section id="reader-accounts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-users"></i> ✅ 3. Reader Accounts (lecture seule pour non‑clients Snowflake)
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <p>Les Reader Accounts sont des comptes Snowflake <strong>gérés par le fournisseur</strong>, créés spécialement pour des consommateurs ne disposant pas de Snowflake.</p>
+
+                    <div class="info-note">
+                        <em>Client Redirect permet de rediriger des connexions via un objet de connexion, et les consommateurs peuvent se connecter sans modifier la configuration. Ceci confirme que Snowflake peut exposer un accès à plusieurs comptes, concept utilisé dans Reader Accounts.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Caractéristiques clés</h3>
+                    <ul>
+                        <li>Les Reader Accounts sont créés depuis le compte provider.</li>
+                        <li>Le <strong>provider paye pour le compute</strong> consommé par les readers.</li>
+                        <li>
+                            Le consumer via reader account consulte les données via :
+                            <ul>
+                                <li>une database partagée,</li>
+                                <li>uniquement en lecture (pas de DML/DDL).</li>
+                            </ul>
+                        </li>
+                        <li>Le provider gère l'administration du compte reader (users, roles, warehouses).</li>
+                    </ul>
+
+                    <h3>✔ Utilisations typiques</h3>
+                    <ul>
+                        <li>Partage avec des partenaires n'ayant pas de Snowflake.</li>
+                        <li>Diffusion de données à des clients externes.</li>
+                        <li>Cas d'usage BI/analytics simple.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: OBJETS POUVANT ÊTRE PARTAGÉS
+                ============================================ -->
+                <section id="objets-partageables" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 4. Objets pouvant être partagés
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Les objets répliqués offrent un accès en lecture via des bases de données secondaires.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Par analogie directe avec Secure Data Sharing, les objets partageables comprennent :</p>
+                    <ul>
+                        <li>Tables</li>
+                        <li>Views sécurisées</li>
+                        <li>UDF sécurisées</li>
+                        <li>Sequences</li>
+                        <li>File formats (selon contexte)</li>
+                        <li>Listings (Marketplace)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: SÉCURITÉ DU DATA SHARING
+                ============================================ -->
+                <section id="securite" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 5. Sécurité du Data Sharing
+                    </h2>
+
+                    <ul>
+                        <li>Snowflake ne copie jamais les données : le consumer lit une vue référencée dans le provider.</li>
+                        <li>Isolation via <strong>RBAC</strong>.</li>
+                        <li>Le provider reste propriétaire des données.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: GOUVERNANCE & PRIVILÈGES
+                ============================================ -->
+                <section id="privileges" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> ✅ 6. Gouvernance & privilèges
+                    </h2>
+
+                    <p><strong>Pour créer un share :</strong></p>
+                    <ul>
+                        <li>Privilèges nécessaires sur les objets partagés.</li>
+                        <li>Rôle système permettant <code class="inline-code">CREATE SHARE</code>.</li>
+                    </ul>
+
+                    <p><strong>Pour accéder à un share consommé :</strong></p>
+                    <ul>
+                        <li><code class="inline-code">CREATE DATABASE FROM SHARE</code></li>
+                        <li>Usage limité au compte spécifié.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: BILLING / FACTURATION
+                ============================================ -->
+                <section id="billing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 7. Billing / Facturation
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Snowflake-managed serverless compute billing applies.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Ce principe est similaire pour les Reader Accounts : <strong>le provider paye pour les warehouses utilisés par les readers</strong>.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: COMPARAISON : CONSUMER CLASSIQUE VS READER ACCOUNT
+                ============================================ -->
+                <section id="comparaison-consumer-reader" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 8. Comparaison : Consumer classique vs Reader Account
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Critère</th><th>Consumer Account</th><th>Reader Account</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Possède un compte Snowflake</strong>
+                                卷第✔ Oui
+                                卷第❌ Non (créé par le provider)
+                            
+                            32
+                                <td><strong>Payer pour le compute</strong>
+                                卷第Consumer
+                                卷第Provider
+                            
+                            32
+                                <td><strong>Administration</strong>
+                                卷第Le consumer gère son compte
+                                卷第Le provider gère le reader
+                            
+                            32
+                                <td><strong>Droits sur les objets</strong>
+                                卷第Lecture seule
+                                卷第Lecture seule
+                            
+                            32
+                                <td><strong>Connexion</strong>
+                                卷第Connection string Snowflake
+                                卷第Connexion dédiée fournie par le provider
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: PROCESSUS STANDARD DE PARTAGE
+                ============================================ -->
+                <section id="processus-partage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 9. Processus standard de partage (vue d'ensemble)
+                    </h2>
+
+                    <ol>
+                        <li>Provider crée un <strong>SHARE</strong>.</li>
+                        <li>Il ajoute objets (tables, views…) dans le SHARE.</li>
+                        <li>Il assigne le share à :
+                            <ul>
+                                <li>un compte consumer existant ou</li>
+                                <li>un reader account.</li>
+                            </ul>
+                        </li>
+                        <li>Consumer crée une database depuis le share.</li>
+                        <li>Il peut interroger les objets en lecture seule.</li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: POINTS CLÉS SNOWPRO CORE À MAÎTRISER
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 10. Points clés SnowPro Core à maîtriser
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p>✔ Le partage Snowflake est <strong>zero-copy</strong>.</p>
+                            <p>✔ Les données partagées sont toujours en <strong>lecture seule</strong> côté consumer.</p>
+                            <p>✔ Le <strong>provider contrôle totalement</strong> le partage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ <strong>Reader Accounts</strong> = Snowflake pour non‑clients, <strong>payé par le provider</strong>.</p>
+                            <p>✔ <strong>Provider/Consumer</strong> = modèle central du sharing.</p>
+                            <p>✔ Partager ≠ Répliquer : la réplication crée des copies synchronisées ; le sharing donne un accès aux objets source.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
