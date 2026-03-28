@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Serverless Credit Usage | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Serverless Credit Usage</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif" class="active">
+                            <i class="fas fa-bullseye"></i>🎯 Objectif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-serverless">
+                            <i class="fas fa-cloud-upload-alt"></i>1. Qu'est‑ce que le Serverless Compute dans Snowflake ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation-serverless">
+                            <i class="fas fa-coins"></i>2. Comment Snowflake facture le Serverless Compute ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cloud-services-serverless">
+                            <i class="fas fa-cloud"></i>3. Cloud Services Compute et Serverless
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#calcul-credits-serverless">
+                            <i class="fas fa-calculator"></i>4. Comment Snowflake calcule les crédits serverless ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#risques-attention">
+                            <i class="fas fa-exclamation-triangle"></i>5. Risques et points d'attention pour la certification
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés à mémoriser pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Serverless Credit Usage</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Serverless
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-coins"></i>Cost Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: OBJECTIF
+                ============================================ -->
+                <section id="objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i> 🎯 Objectif
+                    </h2>
+                    <p>
+                        Comprendre comment Snowflake facture les fonctionnalités serverless, ce qui est essentiel pour maîtriser l'optimisation des coûts dans le cadre de la certification SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE LE SERVERLESS COMPUTE DANS SNOWFLAKE ?
+                ============================================ -->
+                <section id="definition-serverless" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 1. Qu'est‑ce que le Serverless Compute dans Snowflake ?
+                    </h2>
+
+                    <p>Snowflake propose deux formes de compute :</p>
+                    <ul>
+                        <li><strong>Virtual Warehouses</strong> — gérés par l'utilisateur.</li>
+                        <li><strong>Serverless Compute</strong> — géré automatiquement par Snowflake, sans intervention sur la taille, le provisioning ou le scaling. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>Les fonctionnalités serverless incluent notamment :</p>
+                    <ul>
+                        <li>Search Optimization Service</li>
+                        <li>Materialized Views refresh</li>
+                        <li>Automatic Clustering</li>
+                        <li>Snowpipe (serverless variant)</li>
+                        <li>Query Acceleration Service</li>
+                        <li>Data Quality Monitoring</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COMMENT SNOWFLAKE FACTURE LE SERVERLESS COMPUTE ?
+                ============================================ -->
+                <section id="facturation-serverless" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 2. Comment Snowflake facture le Serverless Compute ?
+                    </h2>
+
+                    <h3>📌 2.1 Unité de facturation : le compute‑hour</h3>
+                    <p>
+                        Snowflake mesure la consommation serverless en <strong>compute‑hours</strong>, une unité comparable aux ressources d'un warehouse XS fonctionnant pendant une heure.
+                    </p>
+
+                    <div class="info-note">
+                        <i class="fas fa-calculator"></i>
+                        <strong>🔎 Exemple :</strong><br>
+                        Si Snowflake doit exécuter l'opération avec une capacité équivalente à un warehouse XL, alors :<br>
+                        XL = 16× XS<br>
+                        → consommation = 16 compute‑hours / heure, donc <strong>16 crédits pour une heure</strong>.
+                    </div>
+
+                    <h3>📌 2.2 Facturation automatique selon les ressources internes</h3>
+                    <ul>
+                        <li>L'utilisateur <strong>ne choisit pas</strong> la taille du compute.</li>
+                        <li>Snowflake sélectionne dynamiquement la capacité nécessaire.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-fire"></i>
+                        <strong>🔥 À retenir pour la certification :</strong><br>
+                        La consommation serverless augmente proportionnellement avec les ressources nécessaires, même si cela n'est pas visible pour l'utilisateur.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CLOUD SERVICES COMPUTE ET SERVERLESS
+                ============================================ -->
+                <section id="cloud-services-serverless" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud"></i> ✅ 3. Cloud Services Compute et Serverless
+                    </h2>
+
+                    <p>Snowflake sépare le compute en trois grandes catégories :</p>
+                    <ul>
+                        <li>Virtual Warehouses</li>
+                        <li>Serverless Compute</li>
+                        <li>Cloud Services</li>
+                    </ul>
+
+                    <h3>📌 3.1 Cloud Services : conditions de facturation</h3>
+                    <ul>
+                        <li>Les Cloud Services (authentification, optimisation, compilation des requêtes…) sont facturés <strong>4.4 crédits / heure</strong>,</li>
+                        <li>mais seulement si leur consommation dépasse <strong>10% de la consommation quotidienne en warehouses</strong>.</li>
+                    </ul>
+                    <p>Cette règle vaut aussi pour les fonctionnalités serverless car elles utilisent la couche Cloud Services.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMENT SNOWFLAKE CALCULE LES CRÉDITS SERVERLESS ?
+                ============================================ -->
+                <section id="calcul-credits-serverless" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calculator"></i> ✅ 4. Comment Snowflake calcule les crédits serverless ?
+                    </h2>
+
+                    <h3>📌 4.1 Règles de facturation</h3>
+                    <p>La consommation est calculée <strong>à la seconde</strong> et arrondie à la seconde la plus proche.</p>
+
+                    <h3>📌 4.2 Déclenchement de la consommation</h3>
+                    <p>→ Les crédits serverless sont consommés uniquement quand une fonctionnalité est réellement en action.</p>
+                    <p>Exemples d'actions déclenchantes :</p>
+                    <ul>
+                        <li>Recherche d'index interne pour Search Optimization</li>
+                        <li>Rafraîchissement d'une Materialized View</li>
+                        <li>Clustering automatique</li>
+                        <li>Chargement automatique via Snowpipe</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RISQUES ET POINTS D'ATTENTION POUR LA CERTIFICATION
+                ============================================ -->
+                <section id="risques-attention" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 5. Risques et points d'attention pour la certification
+                    </h2>
+
+                    <h3>⚠️ 5.1 Risque d'explosion des coûts</h3>
+                    <p>Les fonctionnalités serverless peuvent devenir coûteuses si :</p>
+                    <ul>
+                        <li>le volume des données est très important,</li>
+                        <li>les opérations se déclenchent fréquemment,</li>
+                        <li>le fonctionnement n'est pas suivi dans les dashboards de consommation.</li>
+                    </ul>
+
+                    <h3>⚠️ 5.2 Absence de contrôle direct du compute</h3>
+                    <ul>
+                        <li>→ Impossible de choisir la taille du compute serverless.</li>
+                        <li>→ Snowflake peut utiliser un niveau de capacité très élevé → hausse des crédits.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS À MÉMORISER POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés à mémoriser pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Serverless = compute entièrement géré par Snowflake</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Facturation basée sur les compute‑hours, équivalent XS warehouse</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Snowflake peut utiliser plus de capacité (ex. XL → 16 crédits/h)</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Mesure au plus fin : facturée à la seconde</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Cloud Services facturés seulement au‑delà de 10% de la consommation quotidienne de warehouses</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Fonctionnalités concernées : Materialized Views, Auto Clustering, Search Optimization, Snowpipe, etc.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Risque : coûts imprévisibles si absence de surveillance</h4>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

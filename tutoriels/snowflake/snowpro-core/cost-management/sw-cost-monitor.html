@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Cost Controlling, Resource Monitors, Budgets | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Cost Controlling & Budgets</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#controlling-cost" class="active">
+                            <i class="fas fa-chart-line"></i>1. Controlling Cost (Contrôle des coûts)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resource-monitors">
+                            <i class="fas fa-tachometer-alt"></i>2. Resource Monitors – Détail
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#budgets">
+                            <i class="fas fa-chart-pie"></i>3. Budgets – Détail
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cost-controls">
+                            <i class="fas fa-shield-alt"></i>4. Cost Controlling Controls
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés à retenir pour la certification SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Cost Controlling, Resource Monitors, Budgets</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Cost Management
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-pie"></i>Budgets
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: CONTROLLING COST (CONTRÔLE DES COÛTS)
+                ============================================ -->
+                <section id="controlling-cost" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 1. Controlling Cost (Contrôle des coûts)
+                    </h2>
+
+                    <p>Snowflake propose plusieurs mécanismes pour éviter les dépassements de crédit et contrôler la consommation.</p>
+
+                    <h3>✔ 1.1. Budgets</h3>
+                    <p>Les budgets permettent de définir une limite mensuelle de crédit appliquée :</p>
+                    <ul>
+                        <li>à l'ensemble du compte,</li>
+                        <li>ou à un groupe d'objets (custom budgets). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Fonctionnalités essentielles :</p>
+                    <ul>
+                        <li>Surveillance du crédit consommé par warehouses et fonctionnalités serverless.</li>
+                        <li>Alertes si la consommation risque de dépasser la limite.</li>
+                        <li>Notifications configurables : email, SNS, Event Grid, Pub/Sub, webhook (Slack, Teams…). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.2. Resource Monitors</h3>
+                    <p>Les resource monitors permettent de définir des quotas de crédits pour les warehouses, avec :</p>
+                    <ul>
+                        <li>Notification par email à certains seuils (jusqu'à 5 seuils),</li>
+                        <li>Suspension automatique d'un warehouse lorsque le seuil est atteint,</li>
+                        <li>Suspension immédiate (abort des requêtes en cours) si configuré. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Ils servent uniquement pour les <strong>warehouses gérés par l'utilisateur</strong> (pas le serverless).
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ 1.3. Cost Controls for Warehouses (Best Practices)</h3>
+                    <p>Snowflake fournit des bonnes pratiques pour réduire les coûts des warehouses :</p>
+                    <ul>
+                        <li>Utiliser <strong>AUTO-SUSPEND</strong> et <strong>AUTO-RESUME</strong>,</li>
+                        <li>Dimensionner correctement les warehouses,</li>
+                        <li>Éviter les exécutions prolongées ou inutiles. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: RESOURCE MONITORS – DÉTAIL
+                ============================================ -->
+                <section id="resource-monitors" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tachometer-alt"></i> ✅ 2. Resource Monitors – Détail (Working with Resource Monitors)
+                    </h2>
+
+                    <h3>✔ 2.1 Objectif des Resource Monitors</h3>
+                    <p>Ils permettent de :</p>
+                    <ul>
+                        <li>suivre la consommation des crédits,</li>
+                        <li>agir automatiquement pour éviter les dérives (notifications, suspension).</li>
+                    </ul>
+
+                    <h3>✔ 2.2 Actions possibles</h3>
+                    <p>Lorsqu'un seuil est atteint :</p>
+                    <ul>
+                        <li>Notification par email,</li>
+                        <li>Suspendre le warehouse après la fin des requêtes,</li>
+                        <li>Suspendre immédiatement + abort des requêtes.</li>
+                    </ul>
+
+                    <h3>✔ 2.3 Configuration</h3>
+                    <p>Paramètres requis :</p>
+                    <ul>
+                        <li>Nom du monitor,</li>
+                        <li>Quota de crédits,</li>
+                        <li>Type : Account ou Warehouse,</li>
+                        <li>Warehouses associés (si mode Warehouse),</li>
+                        <li>Schedule (daily / monthly / yearly / never),</li>
+                        <li>Actions à exécuter aux seuils.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: BUDGETS – DÉTAIL
+                ============================================ -->
+                <section id="budgets" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-pie"></i> ✅ 3. Budgets – Détail (user-guide/budgets & cost)
+                    </h2>
+
+                    <p>Les budgets permettent de mesurer et alerter le dépassement potentiel de crédits, mais leur utilisation a elle-même un coût.</p>
+
+                    <h3>✔ 3.1 Coûts liés aux Budgets</h3>
+                    <p>Deux types de coûts :</p>
+
+                    <h4>1. Compute Costs</h4>
+                    <ul>
+                        <li>Snowflake exécute des tâches serverless comme <code class="inline-code">_MEASUREMENT_TASK</code> et <code class="inline-code">_BACKFILL_TASK</code>,</li>
+                        <li>Ces tâches consomment des crédits. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h4>2. Storage Costs</h4>
+                    <ul>
+                        <li>Le stockage du metadata des budgets dans plusieurs tables internes (ex. <code class="inline-code">_CONFIGURATION_TABLE</code>, <code class="inline-code">_MEASUREMENT_TABLE</code>…). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 3.2 Analyser ces coûts</h3>
+                    <p>Exemples de requêtes fournies par Snowflake :</p>
+                    <ul>
+                        <li>Pour calculer la consommation totale des tâches serverless (<code class="inline-code">_MEASUREMENT_TASK</code>) sur 28 jours,</li>
+                        <li>Pour obtenir le coût par budget. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COST CONTROLLING CONTROLS
+                ============================================ -->
+                <section id="cost-controls" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 4. Cost Controlling Controls (Cost Controls)
+                    </h2>
+
+                    <p>Les "cost controls" sont des outils permettant d'éviter des dépenses involontaires.</p>
+
+                    <h3>✔ Resource Monitors</h3>
+                    <p>→ Contrôle des warehouses, suspension automatique. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Budgets</h3>
+                    <p>→ Définition d'un plafond mensuel, alertes proactives. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Best Practices pour les Warehouses</h3>
+                    <p>→ Auto-suspend, tailles adaptées, monitoring des requêtes. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS À RETENIR POUR LA CERTIFICATION SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés à retenir pour la certification SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>⭐ BUDGETS</h4>
+                            <ul>
+                                <li>Limites mensuelles, notifications, monitorent warehouses + serverless features.</li>
+                                <li>Peuvent envoyer des alertes via email, SNS, Pub/Sub, webhooks.</li>
+                                <li>Le système de budgets consomme des crédits et de la storage. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>⭐ RESOURCE MONITORS</h4>
+                            <ul>
+                                <li>Limitent la consommation des <strong>warehouses seulement</strong>.</li>
+                                <li>Seuils configurables (jusqu'à 5).</li>
+                                <li>Peuvent suspendre automatiquement un warehouse. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>⭐ COST CONTROLS FOR WAREHOUSES</h4>
+                            <ul>
+                                <li>Auto-suspend indispensable.</li>
+                                <li>Right-sizing des warehouses. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>⭐ CHOIX ENTRE BUDGETS & RESOURCE MONITORS</h4>
+                            <ul>
+                                <li>Budgets = global + serverless + objets variés (plus large).</li>
+                                <li>Resource monitors = warehouses uniquement.</li>
+                                <li>→ Les deux sont <strong>complémentaires</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

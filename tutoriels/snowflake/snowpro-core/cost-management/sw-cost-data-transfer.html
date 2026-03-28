@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Transfer Cost | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Transfer Cost</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif" class="active">
+                            <i class="fas fa-bullseye"></i>🎯 Objectif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#definition-data-transfer">
+                            <i class="fas fa-exchange-alt"></i>1. Définition : qu'est‑ce que le Data Transfer ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quand-frais-appliquent">
+                            <i class="fas fa-question-circle"></i>2. Quand les frais de Data Transfer s'appliquent‑ils ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#operations-declencheuses">
+                            <i class="fas fa-cogs"></i>3. Opérations qui déclenchent des coûts de Data Transfer
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation-egress">
+                            <i class="fas fa-coins"></i>4. Comment Snowflake facture l'egress ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#analyser-couts">
+                            <i class="fas fa-chart-line"></i>5. Comment analyser les coûts de Data Transfer ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés à retenir pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Transfer Cost</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-exchange-alt"></i>Data Transfer
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-coins"></i>Cost Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: OBJECTIF
+                ============================================ -->
+                <section id="objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i> 🎯 Objectif
+                    </h2>
+                    <p>
+                        Comprendre comment Snowflake facture les transferts de données (data transfer), un élément-clé de la certification SnowPro Core.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION : QU'EST-CE QUE LE DATA TRANSFER ?
+                ============================================ -->
+                <section id="definition-data-transfer" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 1. Définition : qu'est‑ce que le Data Transfer ?
+                    </h2>
+
+                    <p>Le data transfer correspond au mouvement des données <strong>vers</strong> Snowflake (ingress) ou <strong>depuis</strong> Snowflake (egress).</p>
+                    <ul>
+                        <li><strong>Ingress</strong> = gratuit pour Snowflake.</li>
+                        <li><strong>Egress</strong> = payant sous certaines conditions. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Exception :</strong> votre fournisseur cloud peut facturer ses propres egress fees même si Snowflake ne le fait pas.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: QUAND LES FRAIS DE DATA TRANSFER S'APPLIQUENT-ILS ?
+                ============================================ -->
+                <section id="quand-frais-appliquent" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 2. Quand les frais de Data Transfer s'appliquent‑ils ?
+                    </h2>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>📌 2.1 Règle clé</strong><br>
+                        Les coûts apparaissent uniquement lors de l'<strong>egress</strong>, c'est‑à‑dire lorsque les données <strong>sortent</strong> de Snowflake vers une autre région ou vers un autre cloud provider.<br>
+                        <strong>Transfert dans la même région = gratuit.</strong>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OPÉRATIONS QUI DÉCLENCHENT DES COÛTS DE DATA TRANSFER
+                ============================================ -->
+                <section id="operations-declencheuses" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 3. Opérations qui déclenchent des coûts de Data Transfer
+                    </h2>
+
+                    <p>Snowflake liste explicitement les actions suivantes comme génératrices de frais en cas de transfert cross‑region / cross‑cloud :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Unloading Data</h4>
+                            <p>Exemple : <code class="inline-code">COPY INTO &lt;location&gt;</code> vers un bucket S3 / GCS / Azure situé dans une autre région ou un autre cloud. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Database Replication</h4>
+                            <p>Réplication initiale + synchronisations régulières entre régions ou clouds. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ External Network Access</h4>
+                            <p>Appels externes depuis un UDF ou une procédure Snowpark via External Access. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Copy Files entre Stages</h4>
+                            <p>Copier des fichiers entre stages situés dans des régions / clouds différents. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ External Functions</h4>
+                            <p>Transfert de données vers AWS / Azure / GCP via fonctions externes. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Cross‑Cloud Auto‑Fulfillment</h4>
+                            <p>Diffusion de listings Marketplace Snowflake vers d'autres régions cloud. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ FileOperation.put via Snowpark</h4>
+                            <p>PUT vers un stage externe situé hors région. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>⛔ Important :</strong> Les requêtes SQL récupérant des résultats à travers régions ne génèrent pas de frais d'egress selon les bonnes pratiques externes.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMENT SNOWFLAKE FACTURE L'EGRESS ?
+                ============================================ -->
+                <section id="facturation-egress" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 4. Comment Snowflake facture l'egress ?
+                    </h2>
+
+                    <h3>📌 4.1 Facturation à l'octet</h3>
+                    <p>Snowflake facture un <strong>prix par octet transféré en egress</strong>.</p>
+                    <p>Le tarif dépend du cloud provider et de la région où est hébergé le compte Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Pour le détail des prix → <strong>Snowflake Pricing Guide</strong></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMMENT ANALYSER LES COÛTS DE DATA TRANSFER ?
+                ============================================ -->
+                <section id="analyser-couts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 5. Comment analyser les coûts de Data Transfer ?
+                    </h2>
+
+                    <h3>5.1 Via Snowsight</h3>
+                    <p>Snowflake permet de visualiser l'historique des transferts :</p>
+                    <ul>
+                        <li>Menu : <strong>Admin → Cost Management → Consumption → Data Transfer</strong></li>
+                        <li>Unité : bytes transférés dans la plage temporelle sélectionnée. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>5.2 Via les vues ACCOUNT_USAGE / ORGANIZATION_USAGE</h3>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Vue</th><th>Description</th><th>Schéma</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>DATA_TRANSFER_DAILY_HISTORY</strong>
+                                <td>Volume journalier transféré.
+                                <td>ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>DATA_TRANSFER_HISTORY</strong>
+                                <td>Détail complet : source, destination, type de transfert.
+                                <td>ACCOUNT_USAGE / ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>DATABASE_REPLICATION_USAGE_HISTORY</strong>
+                                <td>Octets transférés + crédits consommés lors des réplications.
+                                <td>ACCOUNT_USAGE <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>USAGE_IN_CURRENCY_DAILY</strong>
+                                <td>Conversion du volume transféré en montant facturé.
+                                <td>ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS À RETENIR POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés à retenir pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Snowflake ne facture pas l'ingestion (ingress)</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Data egress = payant uniquement lorsque les données quittent la région ou le cloud d'origine</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Exemples d'actions facturées : unloading, replication, external functions, cross‑cloud Marketplace, etc.</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Même si Snowflake ne facture pas l'ingress, le cloud provider peut facturer l'egress sortant de son stockage</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Analyse des coûts via :
+                                <ul>
+                                    <li>Snowsight (dashboard Cost Management)</li>
+                                    <li>vues ACCOUNT_USAGE / ORGANIZATION_USAGE</li>
+                                </ul>
+                            </h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Les requêtes SQL récupérant des résultats cross‑region ne génèrent pas de frais d'egress</h4>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - ACCOUNT_USAGE | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">ACCOUNT_USAGE</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-database"></i>1. Qu'est‑ce que ACCOUNT_USAGE ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#account-usage-vs-info-schema">
+                            <i class="fas fa-chart-line"></i>2. ACCOUNT_USAGE vs INFORMATION_SCHEMA
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#objectif-schemas">
+                            <i class="fas fa-bullseye"></i>3. OBJECTIF des schémas ACCOUNT_USAGE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contenu-vues">
+                            <i class="fas fa-table"></i>4. Contenu des vues ACCOUNT_USAGE (Catégories principales)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#details-importants">
+                            <i class="fas fa-info-circle"></i>5. Détails importants pour la certification SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#usages-typiques">
+                            <i class="fas fa-chart-pie"></i>6. Usages typiques dans les entreprises
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-essentiel">
+                            <i class="fas fa-star"></i>7. Résumé essentiel pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - ACCOUNT_USAGE</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>ACCOUNT_USAGE
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Observability
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE ACCOUNT_USAGE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 1. Qu'est‑ce que ACCOUNT_USAGE ?
+                    </h2>
+
+                    <p>Les schémas <code class="inline-code">ACCOUNT_USAGE</code> et <code class="inline-code">READER_ACCOUNT_USAGE</code> sont disponibles dans la base <strong>SNOWFLAKE</strong> et permettent de :</p>
+                    <ul>
+                        <li>interroger les métadonnées d'objets,</li>
+                        <li>analyser l'historique de l'usage et de la consommation,</li>
+                        <li>suivre les ressources du compte et des éventuels reader accounts. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Ils fournissent une vue analytique complète, indispensable pour la gouvernance, la facturation interne et la surveillance de la plateforme.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ACCOUNT_USAGE VS INFORMATION_SCHEMA
+                ============================================ -->
+                <section id="account-usage-vs-info-schema" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. ACCOUNT_USAGE vs INFORMATION_SCHEMA
+                    </h2>
+
+                    <p>Même si les deux référentiels partagent des structures similaires, ACCOUNT_USAGE présente trois différences majeures à mémoriser pour SnowPro Core :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 2.1 Inclusion des objets supprimés</h4>
+                            <p>Les vues ACCOUNT_USAGE incluent les objets supprimés, avec :</p>
+                            <ul>
+                                <li>une colonne DELETED (timestamp),</li>
+                                <li>des informations nulles pour les noms et parents si l'objet est supprimé. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2.2 Latence des données</h4>
+                            <p><strong>45 minutes à 3 heures</strong> selon les vues.</p>
+                            <p>Information key : ACCOUNT_USAGE n'est <strong>pas en temps réel</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2.3 Rétention des données</h4>
+                            <p>Historique conservé <strong>1 an</strong> dans ACCOUNT_USAGE.</p>
+                            <p>Contre 7 jours à 6 mois dans Information Schema (selon les vues). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OBJECTIF DES SCHÉMAS ACCOUNT_USAGE
+                ============================================ -->
+                <section id="objectif-schemas" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i> ✅ 3. OBJECTIF des schémas ACCOUNT_USAGE
+                    </h2>
+
+                    <h3>✔ 3.1 ACCOUNT_USAGE (principal)</h3>
+                    <p>Fournit :</p>
+                    <ul>
+                        <li>des vues de métadonnées d'objets (tables, rôles, utilisateurs, warehouses…),</li>
+                        <li>des vues d'usage historique : requêtes, stockage, compute, crédits consommés, data transfer, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Ces vues sont essentielles pour :</p>
+                    <ul>
+                        <li>audits,</li>
+                        <li>analyse de performances,</li>
+                        <li>supervision des coûts,</li>
+                        <li>gouvernance des accès,</li>
+                        <li>FinOps Snowflake.</li>
+                    </ul>
+
+                    <h3>✔ 3.2 READER_ACCOUNT_USAGE</h3>
+                    <p>Uniquement si vous êtes provider d'un reader account (Secure Data Sharing).</p>
+                    <p>Chaque vue contient en plus une colonne : <code class="inline-code">READER_ACCOUNT_NAME</code> (pour filtrage multi‑comptes). <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CONTENU DES VUES ACCOUNT_USAGE
+                ============================================ -->
+                <section id="contenu-vues" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 4. Contenu des vues ACCOUNT_USAGE (Catégories principales)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>4.1. Métadonnées sur les objets :</h4>
+                            <ul>
+                                <li>DATABASES, SCHEMAS, TABLES, VIEWS</li>
+                                <li>PIPES, STAGES, STREAMS</li>
+                                <li>USERS, ROLES, GRANTS <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>4.2. Usage Compute et Warehouses</h4>
+                            <ul>
+                                <li>WAREHOUSE_METERING_HISTORY : crédits consommés par warehouse</li>
+                                <li>QUERY_HISTORY : métadonnées et statistiques des requêtes</li>
+                                <li>AUTOMATIC_CLUSTERING_HISTORY</li>
+                                <li>MATERIALIZED_VIEW_REFRESH_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>4.3. Storage & Data Transfer</h4>
+                            <ul>
+                                <li>STORAGE_USAGE</li>
+                                <li>TABLE_STORAGE_METRICS</li>
+                                <li>STAGE_STORAGE_HISTORY</li>
+                                <li>DATA_TRANSFER_HISTORY / DATA_TRANSFER_DAILY_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>4.4. Serverless & Cloud Services</h4>
+                            <ul>
+                                <li>SERVERLESS_TASK_HISTORY</li>
+                                <li>AUTOMATIC_CLONING_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>4.5. Sécurité et gouvernance</h4>
+                            <ul>
+                                <li>LOGIN_HISTORY</li>
+                                <li>ACCESS_HISTORY (si activé)</li>
+                                <li>GRANTS_TO_USERS / GRANTS_TO_ROLES <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: DÉTAILS IMPORTANTS POUR LA CERTIFICATION
+                ============================================ -->
+                <section id="details-importants" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 5. Détails importants pour la certification SnowPro Core
+                    </h2>
+
+                    <ul>
+                        <li>✔ Les vues ACCOUNT_USAGE sont accessibles via <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Le contenu inclut les <strong>objets supprimés</strong>, avec leurs timestamps et IDs uniques.<br>→ Permet de tracer l'historique même après suppression. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ <strong>Rétention longue : 1 an</strong> → utile pour analyses temporelles. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Attention à la <strong>latence (45 min à 3h)</strong>.<br>→ À connaître pour troubleshooting & monitoring. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Certaines vues READER_ACCOUNT_USAGE ne sont pas peuplées si aucun reader n'existe. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: USAGES TYPIQUES DANS LES ENTREPRISES
+                ============================================ -->
+                <section id="usages-typiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-pie"></i> ✅ 6. Usages typiques dans les entreprises
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ FinOps / Optimisation des coûts</h4>
+                            <p>Analyse des crédits consommés, des charges entre entrepôts, serverless, data transfer.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Sécurité & conformité</h4>
+                            <p>Historique des connexions, des rôles, des accès.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Analyse des performances</h4>
+                            <p>Query profiling via QUERY_HISTORY.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Monitoring & alerting</h4>
+                            <p>Intégration avec budgets, resource monitors ou outils externes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ ESSENTIEL POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-essentiel" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Résumé essentiel pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Thème</th><th>À retenir absolument</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Nature du schéma</strong>
+                                <td>Vues d'usage & métadonnées historiques au niveau compte.
+                            
+                            32
+                                <td><strong>Différences avec Information Schema</strong>
+                                <td>Dropped objects inclus, rétention 1 an, latence 45 min–3h.
+                            
+                            32
+                                <td><strong>READER_ACCOUNT_USAGE</strong>
+                                <td>Vues équivalentes mais dédiées aux reader accounts, avec colonne READER_ACCOUNT_NAME.
+                            
+                            32
+                                <td><strong>Vues clés</strong>
+                                                                                                         .*QUERY_HISTORY, WAREHOUSE_METERING_HISTORY, STORAGE_USAGE, DATA_TRANSFER_HISTORY.
+                            
+                            32
+                                <td><strong>Utilisations clés</strong>
+                                                                                                         .*FinOps, audit, diagnostic performance, gouvernance.
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

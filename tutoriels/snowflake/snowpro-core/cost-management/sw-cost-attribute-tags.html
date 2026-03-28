@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Attribution des coûts | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Attribution des coûts</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif" class="active">
+                            <i class="fas fa-bullseye"></i>1. Objectif de l'attribution des coûts
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mecanismes">
+                            <i class="fas fa-tags"></i>2. Les mécanismes utilisés : Object Tags & Query Tags
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#scenarios-attribution">
+                            <i class="fas fa-chart-line"></i>3. Scénarios d'attribution courants
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#creation-gestion-tags">
+                            <i class="fas fa-cog"></i>4. Création et gestion des tags
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#importance-attribution">
+                            <i class="fas fa-chart-pie"></i>5. Pourquoi l'attribution des coûts est indispensable ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-check-circle"></i>6. Bonnes pratiques pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Attribution des coûts</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-tags"></i>Tags
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-pie"></i>Cost Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: OBJECTIF DE L'ATTRIBUTION DES COÛTS
+                ============================================ -->
+                <section id="objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i> ✅ 1. Objectif de l'attribution des coûts
+                    </h2>
+
+                    <p>L'attribution des coûts permet à une organisation de ventiler l'usage Snowflake vers des unités logiques internes :</p>
+                    <ul>
+                        <li>départements</li>
+                        <li>environnements</li>
+                        <li>projets <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Ce mécanisme sert au <strong>showback / chargeback</strong>, facilitant :</p>
+                    <ul>
+                        <li>la comptabilité interne,</li>
+                        <li>l'identification des sources de coûts,</li>
+                        <li>la mise en place d'optimisations pertinentes. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LES MÉCANISMES UTILISÉS : OBJECT TAGS & QUERY TAGS
+                ============================================ -->
+                <section id="mecanismes" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tags"></i> ✅ 2. Les mécanismes utilisés : Object Tags & Query Tags
+                    </h2>
+
+                    <h3>✔ 2.1 Object Tags (Balises d'objet)</h3>
+                    <p>Ils permettent d'associer :</p>
+                    <ul>
+                        <li>des ressources Snowflake (ex. warehouses, bases, users)</li>
+                        <li>à des groupes logiques (departments, projects…). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p><strong>Usage recommandé :</strong> Associer un warehouse à un département → le coût total du warehouse est attribué au département. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 2.2 Query Tags (Balises de requête)</h3>
+                    <p>Indispensables lorsque :</p>
+                    <ul>
+                        <li>une application exécute des requêtes pour plusieurs équipes,</li>
+                        <li>des utilisateurs de multiples départements partagent les mêmes ressources. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Chaque requête reçoit un tag identifiant :<br>
+                    ➡️ l'équipe / département / cost center. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SCÉNARIOS D'ATTRIBUTION COURANTS
+                ============================================ -->
+                <section id="scenarios-attribution" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 3. Scénarios d'attribution courants
+                    </h2>
+
+                    <p>La documentation Snowflake décrit trois scénarios types :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Scenario 1 : Ressource utilisée par un seul département</h4>
+                            <p>Exemple : un warehouse dédié.</p>
+                            <ul>
+                                <li>✔ On attribue des object tags au warehouse.</li>
+                                <li>✔ 100% du coût est imputé au département. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Scenario 2 : Ressource partagée par plusieurs départements</h4>
+                            <p>Exemple : un warehouse utilisé par divers utilisateurs.</p>
+                            <ul>
+                                <li>✔ On attribue un object tag à chaque utilisateur.</li>
+                                <li>✔ Le coût est attribué en fonction des requêtes exécutées par utilisateur. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Scenario 3 : Application / workflow partagé</h4>
+                            <p>Exemple : requêtes exécutées par une application pour des utilisateurs variés.</p>
+                            <ul>
+                                <li>✔ On utilise les query tags pour associer chaque requête au bon département. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CRÉATION ET GESTION DES TAGS
+                ============================================ -->
+                <section id="creation-gestion-tags" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cog"></i> ✅ 4. Création et gestion des tags
+                    </h2>
+
+                    <h3>✔ 4.1 Scope des tags (compte unique vs organisation)</h3>
+                    <p>Lorsque vous configurez des tags, vous devez choisir s'ils s'appliquent à :</p>
+                    <ul>
+                        <li>un seul compte Snowflake,</li>
+                        <li>plusieurs comptes au sein d'une organisation Snowflake. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Règle clé :</strong>
+                        <ul>
+                            <li>Si les ressources d'un département sont dans un seul compte, créez les tags dans ce compte.</li>
+                            <li>Si elles sont réparties sur plusieurs comptes, créez les tags dans un compte "central" et répliquez-les. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POURQUOI L'ATTRIBUTION DES COÛTS EST INDISPENSABLE ?
+                ============================================ -->
+                <section id="importance-attribution" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-pie"></i> ✅ 5. Pourquoi l'attribution des coûts est indispensable ?
+                    </h2>
+
+                    <p>Selon Snowflake, l'attribution des coûts améliore la visibilité :</p>
+                    <ul>
+                        <li>Quel département consomme le plus de crédits ?</li>
+                        <li>Quelle équipe génère les requêtes les plus coûteuses ?</li>
+                        <li>Quels workloads nécessitent optimisation ? <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Elle s'intègre dans la démarche globale de <strong>Cost Management</strong> (Visibilité → Contrôle → Optimisation). <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: BONNES PRATIQUES POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i> ✅ 6. Bonnes pratiques pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Utiliser systématiquement object tags pour les ressources</h4>
+                            <p>(depuis les warehouses jusqu'aux utilisateurs).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Utiliser les query tags pour tracer les pipelines, workflows et applications</h4>
+                            <p>(Utile lorsque plusieurs équipes partagent les mêmes ressources).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Choisir le bon périmètre de création des tags</h4>
+                            <p>un compte ou plusieurs comptes (organisation).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Bien comprendre les trois scénarios d'attribution</h4>
+                            <p>ressource exclusive, ressource partagée, application multi-départements</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Maîtriser le rôle des tags dans la ventilation réelle des coûts Snowflake</h4>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

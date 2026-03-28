@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Cloud Services Credit Usage | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Cloud Services Credit Usage</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#cloud-services-definition" class="active">
+                            <i class="fas fa-cloud"></i>1. Qu'est‑ce que le Cloud Services Compute ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation-cloud-services">
+                            <i class="fas fa-chart-line"></i>2. Comment Snowflake facture Cloud Services ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemple-calcul">
+                            <i class="fas fa-calculator"></i>3. Exemple de calcul (source officielle)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ce-que-consomme-cloud-services">
+                            <i class="fas fa-cogs"></i>4. Que consomme des Cloud Services credits ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#relation-autres-compute">
+                            <i class="fas fa-chart-simple"></i>5. Relation avec les autres types de compute
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pourquoi-10-pourcent">
+                            <i class="fas fa-question-circle"></i>6. Pourquoi cette règle des 10 % ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-charges-cloud-services">
+                            <i class="fas fa-exclamation-triangle"></i>7. Cas où des charges Cloud Services apparaissent
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>8. Points clés SnowPro Core à mémoriser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>📌 Résumé express (1 minute)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Cloud Services Credit Usage</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i>Cloud Services
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-coins"></i>Cost Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE LE CLOUD SERVICES COMPUTE ?
+                ============================================ -->
+                <section id="cloud-services-definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud"></i> ✅ 1. Qu'est‑ce que le Cloud Services Compute ?
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Le Cloud Services layer est une couche de l'architecture Snowflake qui orchestre toutes les opérations nécessaires pour exécuter, optimiser, et sécuriser les requêtes :</p>
+                    <ul>
+                        <li>Authentification & gestion des sessions</li>
+                        <li>Metadata management</li>
+                        <li>Optimisation & compilation des requêtes</li>
+                        <li>Access control</li>
+                        <li>Gestion des transactions</li>
+                        <li>Coordination avec les warehouses</li>
+                    </ul>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Snowflake indique que ce sont des <strong>compute resources gérées intégralement par Snowflake</strong>.
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COMMENT SNOWFLAKE FACTURE CLOUD SERVICES ?
+                ============================================ -->
+                <section id="facturation-cloud-services" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. Comment Snowflake facture Cloud Services ?
+                    </h2>
+
+                    <p>C'est l'un des points clés à connaître pour SnowPro Core.</p>
+
+                    <h3>✔ 2.1. Principe général</h3>
+                    <p>Le Cloud Services consomme des Snowflake credits, tout comme un warehouse classique.</p>
+                    <p>MAIS Snowflake applique une règle spécifique :</p>
+                    <div class="warning-note">
+                        <strong>Les crédits Cloud Services ne sont facturés que si leur consommation quotidienne dépasse 10 % de la consommation quotidienne des warehouses.</strong>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <p>Cela signifie :</p>
+                    <ul>
+                        <li>Tant que Cloud Services Usage ≤ 10 % de l'usage warehouse → <strong>0 crédit facturé</strong></li>
+                        <li>La partie au‑delà de 10 % → crédits facturés</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Points importants :</strong>
+                        <ul>
+                            <li>Le calcul est effectué <strong>quotidiennement (UTC)</strong>.</li>
+                            <li>Le serverless compute <strong>n'entre pas</strong> dans le calcul des 10 %.</li>
+                            <li>L'ajustement mensuel est la somme des ajustements quotidiens.</li>
+                        </ul>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: EXEMPLE DE CALCUL (SOURCE OFFICIELLE)
+                ============================================ -->
+                <section id="exemple-calcul" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calculator"></i> ✅ 3. Exemple de calcul (source officielle)
+                    </h2>
+
+                    <p>Exemple tiré de la documentation Snowflake :</p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Date</th><th>Compute Credits (Warehouses)</th><th>Cloud Services Credits</th><th>Credit Adjustment (moins élevé des deux)</th><th>Credits Billed</th>
+                        </thead>
+                        <tbody>
+                            32<td>Nov 1</td><td>100</td><td>20</td><td>-10</td><td>110</td>
+                            32<td>Nov 2</td><td>120</td><td>10</td><td>-10</td><td>120</td>
+                            32<td>Nov 3</td><td>80</td><td>5</td><td>-5</td><td>80</td>
+                            32<td>Nov 4</td><td>100</td><td>13</td><td>-10</td><td>103</td>
+                            32<td><strong>Total</strong></td><td><strong>400</strong></td><td><strong>48</strong></td><td><strong>-35</strong></td><td><strong>413</strong></td>
+                        </tbody>
+                    </table>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p>➡ <strong>Interprétation :</strong> Sur la période, 48 crédits Cloud Services ont été consommés, mais seulement 35 ont été facturés (les 13 restants ont été absorbés par la règle des 10 %).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: QUE CONSOMME DES CLOUD SERVICES CREDITS ?
+                ============================================ -->
+                <section id="ce-que-consomme-cloud-services" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 4. Que consomme des Cloud Services credits ?
+                    </h2>
+
+                    <p>Selon la documentation Snowflake, le Cloud Services layer couvre :</p>
+                    <ul>
+                        <li>authentification des utilisateurs</li>
+                        <li>traitement des métadonnées</li>
+                        <li>analyse et planification des requêtes</li>
+                        <li>accès aux données</li>
+                        <li>gestion de l'état global (distributed metadata store)</li>
+                        <li>services transverses (caching, coordination des warehouses)</li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Pour SnowPro Core :</strong> l'essentiel est de retenir que <strong>Cloud Services = "overhead de gestion et d'orchestration Snowflake"</strong>.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RELATION AVEC LES AUTRES TYPES DE COMPUTE
+                ============================================ -->
+                <section id="relation-autres-compute" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 5. Relation avec les autres types de compute
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Type compute</th><th>Géré par</th><th>Facturé comment ?</th><th>Particularité</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Virtual Warehouses</strong>
+                                <td>Client
+                                <td>Crédits par seconde (min 60 sec au démarrage)
+                                <td>Principal poste de coût
+                            
+                            32
+                                <td><strong>Serverless Compute</strong>
+                                <td>Snowflake
+                                <td>Crédits selon workload (compute-hours)
+                                <td>Autoscaling automatique
+                            
+                            32
+                                <td><strong>Cloud Services</strong>
+                                <td>Snowflake
+                                <td>Crédits MAIS seulement si >10% de l'usage warehouses
+                                <td>Pas toujours facturé
+                            
+                        </tbody>
+                    </table>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POURQUOI CETTE RÈGLE DES 10 % ?
+                ============================================ -->
+                <section id="pourquoi-10-pourcent" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 6. Pourquoi cette règle des 10 % ?
+                    </h2>
+
+                    <p>Snowflake explique que :</p>
+                    <ul>
+                        <li>Le Cloud Services sert au <strong>fonctionnement global de la plateforme</strong>.</li>
+                        <li>Il est normalement <strong>minoritaire</strong> par rapport aux warehouses.</li>
+                        <li>Cette règle évite une facturation excessive en offrant un "crédit" quotidien équivalent à 10 % de l'usage warehouses.</li>
+                    </ul>
+                    <p>Cette politique est un <strong>point fondamental à connaître pour l'examen</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CAS OÙ DES CHARGES CLOUD SERVICES APPARAISSENT
+                ============================================ -->
+                <section id="cas-charges-cloud-services" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 7. Cas où des charges Cloud Services apparaissent
+                    </h2>
+
+                    <p>On peut s'attendre à voir du Cloud Services facturé si :</p>
+                    <ul>
+                        <li>Très faible usage warehouse mais forte activité metadata</li>
+                        <li>Fort usage de requêtes DDL / SHOW / INFORMATION_SCHEMA</li>
+                        <li>Nombreux utilisateurs concurrents se connectant / se déconnectant</li>
+                        <li>Usage lourd de catalogues / introspection d'objets</li>
+                        <li>Organisation complexe avec beaucoup d'opérations administratives</li>
+                    </ul>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Principe à retenir :</strong> Pas de facturation si ces usages ne dépassent pas 10% de la consommation warehouse quotidienne.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: POINTS CLÉS SNOWPRO CORE À MÉMORISER
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Points clés SnowPro Core à mémoriser
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Cloud Services fait partie du compute</h4>
+                            <p>→ donc consommateur de credits. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Règle de facturation</h4>
+                            <p>Cloud Services Credits > 10 % des Warehouse Credits (par jour) <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Calcul effectué par jour (UTC)</h4>
+                            <p>La facturation Cloud Services réinitialise chaque jour.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Serverless non inclus</h4>
+                            <p>Le serverless compute ne compte pas dans le calcul des 10 %.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Cloud Services inclut</h4>
+                            <p>authentification, metadata, optimisation de requêtes, orchestration interne <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Géré par Snowflake</h4>
+                            <p>Le Cloud Services layer est entièrement géré par Snowflake → l'utilisateur ne peut pas le dimensionner.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: RÉSUMÉ EXPRESS
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> 📌 Résumé express (1 minute)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>Snowflake facture le compute selon <strong>Warehouses + Serverless + Cloud Services</strong>.</li>
+                            <li><strong>Cloud Services</strong> = compute administratif de Snowflake.</li>
+                            <li>Chaque jour, Snowflake compare : crédits Cloud Services et <strong>10 % des crédits Warehouse</strong>.</li>
+                            <li>Pas de facturation si Cloud Services ≤ 10 % des Warehouse.</li>
+                            <li>Facturation seulement pour la partie excédant ces 10 %. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
