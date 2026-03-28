@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Time Travel | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Time Travel</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-clock"></i>1. Time Travel – Définition & objectifs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#retention">
+                            <i class="fas fa-calendar-alt"></i>2. Période de rétention Time Travel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#querying">
+                            <i class="fas fa-search"></i>3. Interroger des données historiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#restoring">
+                            <i class="fas fa-undo-alt"></i>4. Restaurer des objets (UNDELETE)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cloning">
+                            <i class="fas fa-copy"></i>5. Time Travel + Cloning
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#limitations">
+                            <i class="fas fa-exclamation-triangle"></i>6. Limitations importantes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#vs-failsafe">
+                            <i class="fas fa-chart-simple"></i>7. Time Travel vs Fail-safe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-rapide">
+                            <i class="fas fa-star"></i>8. Résumé rapide (Flashcards)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Time Travel</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-clock"></i>Time Travel
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-undo-alt"></i>Data Recovery
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: TIME TRAVEL – DÉFINITION & OBJECTIFS
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 1. Time Travel – Définition & objectifs
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake Time Travel permet :</p>
+                    <ul>
+                        <li>De consulter des données historiques (tables, schémas, bases) à un point du passé.</li>
+                        <li>De restaurer des tables, schémas ou bases supprimés ou modifiés, dans les limites de la période de rétention.</li>
+                        <li>De cloner un objet à un instant historique (Zero-Copy cloning + Time Travel).</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <em>Time Travel allows viewing and restoring historical data (tables, schemas, and databases) for a defined retention period.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PÉRIODE DE RÉTENTION TIME TRAVEL
+                ============================================ -->
+                <section id="retention" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calendar-alt"></i> ✅ 2. Période de rétention Time Travel : DATA_RETENTION_TIME_IN_DAYS
+                    </h2>
+
+                    <p>La durée durant laquelle Snowflake conserve les versions historiques est contrôlée par le paramètre :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>DATA_RETENTION_TIME_IN_DAYS</code></pre>
+                    </div>
+
+                    <div class="info-note">
+                        <em>Data retention is based on the number of days Snowflake retains historical data for Time Travel.</em>
+                        <span class="reference">[thinketl.com]</span>
+                    </div>
+
+                    <h3>✔ Valeurs :</h3>
+                    <ul>
+                        <li><strong>Standard Edition</strong> → jusqu'à <strong>1 jour</strong>.</li>
+                        <li><strong>Enterprise & supérieures</strong> → jusqu'à <strong>90 jours</strong>.</li>
+                        <li>Peut être défini au niveau compte, base, schéma, table.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <strong>Impact :</strong>
+                        <ul>
+                            <li>Plus la rétention est longue → plus la fonctionnalité Time Travel couvre un historique large.</li>
+                            <li>La rétention s'applique aussi aux objets supprimés (possibilité de restauration).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: INTERROGER DES DONNÉES HISTORIQUES
+                ============================================ -->
+                <section id="querying" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 3. Interroger des données historiques
+                    </h2>
+
+                    <p>Snowflake permet d'interroger des données anciennes via les clauses :</p>
+
+                    <h3>✔ AT</h3>
+                    <p>Pour une date/heure exacte.</p>
+
+                    <h3>✔ BEFORE</h3>
+                    <p>Pour interroger avant un événement (timestamp, statement ID, offset).</p>
+
+                    <div class="info-note">
+                        <em>The AT | BEFORE clause accepts TIMESTAMP, OFFSET, or STATEMENT to query historical data.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+
+                    <h3>✔ Exemples :</h3>
+
+                    <p><strong>A) Interroger une table comme elle était à un timestamp</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM sales
+AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
+                    </div>
+
+                    <p><strong>B) Utiliser un offset (ex : 5 heures dans le passé)</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM sales
+BEFORE (OFFSET => -56060);</code></pre>
+                    </div>
+
+                    <p><strong>C) Restaurer une vue d'un statement précédent</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM sales BEFORE (STATEMENT => '01ad…');</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: RESTAURER DES OBJETS (UNDELETE)
+                ============================================ -->
+                <section id="restoring" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-undo-alt"></i> ✅ 4. Restaurer des objets (UNDELETE)
+                    </h2>
+
+                    <p>Time Travel permet de restaurer plusieurs types d'objets pendant la rétention :</p>
+                    <ul>
+                        <li>Tables</li>
+                        <li>Schémas</li>
+                        <li>Bases</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <em>Time Travel supports restoring dropped tables, schemas, and databases during the data retention period.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Commandes typiques :</h3>
+
+                    <p><strong>A) Restaurer une table supprimée</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>UNDROP TABLE my_table;</code></pre>
+                    </div>
+
+                    <p><strong>B) Restaurer un schéma</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>UNDROP SCHEMA my_schema;</code></pre>
+                    </div>
+
+                    <p><strong>C) Restaurer une base</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>UNDROP DATABASE my_db;</code></pre>
+                    </div>
+
+                    <p><strong>D) Restaurer l'état passé d'un objet via un clone Time Travel</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE TABLE my_table_restored CLONE my_table
+AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
+                    </div>
+                    <p><span class="reference">[learn.microsoft.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: TIME TRAVEL + CLONING
+                ============================================ -->
+                <section id="cloning" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-copy"></i> ✅ 5. Time Travel + Cloning
+                    </h2>
+
+                    <p>Snowflake combine Time Travel et Zero-Copy Cloning pour permettre :</p>
+                    <ul>
+                        <li>Le clonage d'un objet à un instant historique, même s'il est supprimé.</li>
+                        <li>Des environnements dev/test sur des états passés.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <em>CREATE … CLONE supports AT | BEFORE to clone using Time Travel for databases, schemas, and tables.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: LIMITATIONS IMPORTANTES
+                ============================================ -->
+                <section id="limitations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 6. Limitations importantes
+                    </h2>
+
+                    <div class="warning-note">
+                        <ul>
+                            <li>❌ Tables <strong>TEMPORARY</strong> et <strong>EXTERNAL</strong> ne supportent pas Time Travel. (Confirmé implicitement dans CREATE TABLE / CLONE restrictions.)</li>
+                            <li>❌ Les données purgées du Time Travel sont <strong>perdues</strong>. Même avec l'UNDROP, si la période DATA_RETENTION_TIME_IN_DAYS est dépassée → impossible de restaurer.</li>
+                            <li>❌ Rétention <strong>limitée selon l'édition</strong>. Examen SnowPro : très souvent testé.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: TIME TRAVEL VS FAIL-SAFE
+                ============================================ -->
+                <section id="vs-failsafe" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 7. Time Travel vs Fail-safe
+                    </h2>
+
+                    <p>Bien que non inclus dans vos liens, SnowPro teste souvent la distinction :</p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Fonction</th><th>Time Travel</th><th>Fail-safe</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Objectif</strong>
+                                卷第Restauration logique
+                                卷第Récupération interne par Snowflake
+                            
+                            32
+                                <td><strong>Durée</strong>
+                                卷第1 à 90 jours
+                                卷第7 jours (fixe)
+                            
+                            32
+                                <td><strong>Accessible à l'utilisateur ?</strong>
+                                卷第✔ Oui (SQL)
+                                卷第❌ Non
+                            
+                            32
+                                <td><strong>Utilisé pour un DROP ?</strong>
+                                卷第✔ Oui (UNDROP)
+                                卷第❌ Non
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ RAPIDE (FLASHCARDS)
+                ============================================ -->
+                <section id="resume-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Résumé rapide (Flashcards)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Time Travel = Query + Clone + Undrop</h4>
+                            <p>dans la période de rétention.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ DATA_RETENTION_TIME_IN_DAYS</h4>
+                            <p>définit la durée de Time Travel.<br>→ 1 jour (Standard), jusqu'à 90 jours (Enterprise+).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ AT / BEFORE</h4>
+                            <p>timestamp, offset, statement.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ UNDROP</h4>
+                            <p>restore table/schema/database.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Time Travel + Clone</h4>
+                            <p>restaurer des objets à n'importe quel point historique.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Limitations</h4>
+                            <p>pas pour tables temporaires ; dépend fortement de la rétention.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

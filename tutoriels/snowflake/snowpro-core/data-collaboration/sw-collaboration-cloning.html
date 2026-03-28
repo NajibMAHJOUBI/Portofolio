@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Zero-Copy Cloning | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Zero-Copy Cloning</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-copy"></i>1. Qu'est‑ce que le Zero‑Copy Cloning ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#objets-clonables">
+                            <i class="fas fa-cubes"></i>2. Objets clonables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#syntaxe">
+                            <i class="fas fa-code"></i>3. Syntaxe essentielle (SnowPro Must‑Know)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clonage-time-travel">
+                            <i class="fas fa-clock"></i>4. Clonage et Time Travel
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privileges">
+                            <i class="fas fa-lock"></i>5. Comportement des privilèges
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#considerations">
+                            <i class="fas fa-exclamation-triangle"></i>6. Considérations de clonage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-particuliers">
+                            <i class="fas fa-info-circle"></i>7. Cas particuliers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#benefices">
+                            <i class="fas fa-star"></i>8. Bénéfices du clonage Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples-pratiques">
+                            <i class="fas fa-code-branch"></i>9. Exemples pratiques à retenir
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#questions-examen">
+                            <i class="fas fa-question-circle"></i>10. Questions potentielles à l'examen SnowPro
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Zero-Copy Cloning</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-copy"></i>Zero-Copy Cloning
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-clock"></i>Time Travel
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE LE ZERO-COPY CLONING ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-copy"></i> ✅ 1. Qu'est‑ce que le Zero‑Copy Cloning ?
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>CREATE … CLONE creates a copy of an existing object… primarily used for zero‑copy clones of databases, schemas, and tables.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Points clés :</h3>
+                    <ul>
+                        <li><strong>Aucun stockage supplémentaire</strong> au moment du clonage.</li>
+                        <li>Le clone partage les micro‑partitions avec l'objet source.</li>
+                        <li>Le stockage supplémentaire n'est consommé que lorsque l'un des deux objets est modifié (<strong>copy-on-write</strong>).</li>
+                        <li>Le clone est <strong>instantané</strong> et peut être utilisé pour dev/test, sandbox, analyses, "point‑in‑time copy".</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: OBJETS CLONABLES
+                ============================================ -->
+                <section id="objets-clonables" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 2. Objets clonables
+                    </h2>
+
+                    <h3>✔ Objets principaux (zero‑copy)</h3>
+                    <ul>
+                        <li>Databases</li>
+                        <li>Schemas</li>
+                        <li>Tables (y compris tables dynamiques, event tables, Iceberg tables) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Autres objets de schéma clonables</h3>
+                    <div class="info-note">
+                        <em>You can also clone external stages, file formats, sequences, database roles, alerts, streams, tasks, etc.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <ul>
+                        <li>FILE FORMAT</li>
+                        <li>SEQUENCE</li>
+                        <li>STAGE</li>
+                        <li>STREAM</li>
+                        <li>TASK</li>
+                        <li>ALERT</li>
+                        <li>DATABASE ROLE</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SYNTAXE ESSENTIELLE
+                ============================================ -->
+                <section id="syntaxe" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 3. Syntaxe essentielle (SnowPro Must‑Know)
+                    </h2>
+
+                    <h3>A) Cloner une base / un schéma</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DATABASE my_clone CLONE my_db;</code></pre>
+                    </div>
+                    <p>ou avec Time Travel :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DATABASE my_clone CLONE my_db
+    AT (TIMESTAMP => '2025-01-01 12:00:00');</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>B) Cloner une table</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE TABLE t_clone CLONE my_table;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>C) Cloner en "point‑in‑time"</h3>
+                    <p>Snowflake supporte :</p>
+                    <ul>
+                        <li><code class="inline-code">TIMESTAMP => &lt;timestamp&gt;</code></li>
+                        <li><code class="inline-code">OFFSET => &lt;interval&gt;</code></li>
+                        <li><code class="inline-code">STATEMENT => &lt;query_id&gt;</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>D) Paramètres Time Travel utiles</h3>
+                    <ul>
+                        <li><code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code></li>
+                        <li><code class="inline-code">IGNORE HYBRID TABLES</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CLONAGE ET TIME TRAVEL
+                ============================================ -->
+                <section id="clonage-time-travel" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 4. Clonage et Time Travel
+                    </h2>
+
+                    <div class="info-note">
+                        <em>CLONE supports an AT | BEFORE clause for cloning using Time Travel for databases, schemas, and non‑temporary tables.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="warning-note">
+                        <strong>❗ Important :</strong>
+                        <ul>
+                            <li>Les tables temporaires <strong>ne peuvent pas</strong> être clonées avec Time Travel.</li>
+                            <li>Les données purgées (ex : transient tables avec 1 jour de rétention) peuvent être ignorées via <code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code>.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMPORTEMENT DES PRIVILÈGES
+                ============================================ -->
+                <section id="privileges" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 5. Comportement des privilèges (point très testé SnowPro)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>The clone inherits privileges of child objects, but not the privileges granted on the container itself.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Résumé :</h3>
+                    <ul>
+                        <li><strong>Pour bases & schémas :</strong>
+                            <ul>
+                                <li>Les objets internes (tables, views…) conservent leurs privilèges d'origine (sur les clones respectifs).</li>
+                                <li>Le schéma / la base clonée elle‑même <strong>n'hérite PAS</strong> des privilèges du conteneur source.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pour les autres objets :</strong>
+                            <ul>
+                                <li>Par défaut, les privilèges ne sont pas copiés.</li>
+                                <li>Si l'objet supporte la clause <code class="inline-code">COPY GRANTS</code> : les privilèges (sauf OWNERSHIP) peuvent être copiés.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Exemple :</strong> <code class="inline-code">CREATE TABLE … CLONE … COPY GRANTS</code> <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: CONSIDÉRATIONS DE CLONAGE
+                ============================================ -->
+                <section id="considerations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 6. Considérations de clonage (au sens large)
+                    </h2>
+
+                    <ul>
+                        <li><strong>DDL/DML et Time Travel :</strong> <em>DDL/DML transactions, Time Travel, and retention periods can affect the object clone.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Object parameters :</strong> Les paramètres explicitement définis sur un objet sont hérités par le clone. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Séquences et valeurs par défaut :</strong> <em>A cloned table referencing a sequence may reference the cloned sequence or the source sequence depending on scope.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Managed access schemas :</strong> Le clonage d'un schéma en "managed access" a des exigences de privilèges particulières. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CAS PARTICULIERS
+                ============================================ -->
+                <section id="cas-particuliers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 7. Cas particuliers / objets qui ne sont pas clonés identiquement
+                    </h2>
+
+                    <p>Bien que non explicitement listé ici, la documentation précise des exceptions :</p>
+                    <ul>
+                        <li>Certains objets comme les <strong>pipes</strong> donnent OWNERSHIP au rôle créateur lors du clonage. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: BÉNÉFICES DU CLONAGE SNOWFLAKE
+                ============================================ -->
+                <section id="benefices" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Bénéfices du clonage Snowflake (pour SnowPro)
+                    </h2>
+
+                    <ul>
+                        <li>Création <strong>instantanée</strong> (aucune copie physique initiale).</li>
+                        <li>Environnements dev/test isolés sans surcoût majeur.</li>
+                        <li>Réduction des coûts de stockage (<strong>copy‑on‑write</strong>).</li>
+                        <li>Reconstruction d'un état antérieur via Time Travel.</li>
+                        <li>Possibilité de cloner au niveau base / schéma / table.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: EXEMPLES PRATIQUES À RETENIR
+                ============================================ -->
+                <section id="exemples-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 9. Exemples pratiques à retenir
+                    </h2>
+
+                    <h3>Cloner un schéma entier</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE SCHEMA analytics_clone CLONE analytics;</code></pre>
+                    </div>
+
+                    <h3>Cloner un objet dans un état passé</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE TABLE orders_old CLONE orders
+    BEFORE (STATEMENT => '01ae3b2b-0602-4ac2');</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>Cloner une Dynamic Table</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE DYNAMIC TABLE dt_clone
+    CLONE my_dynamic_table
+    TARGET_LAG = '5 minutes'
+    WAREHOUSE = my_wh;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: QUESTIONS POTENTIELLES À L'EXAMEN SNOWPRO
+                ============================================ -->
+                <section id="questions-examen" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 10. Questions potentielles à l'examen SnowPro
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>❓ Le clone consomme‑t‑il du stockage immédiatement ?</h4>
+                            <p>→ <strong>Non</strong>, uniquement lorsque des modifications surviennent (<strong>copy‑on‑write</strong>).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Les privilèges du schéma source sont‑ils automatiquement transférés ?</h4>
+                            <p>→ <strong>Non</strong>, le schéma clone n'hérite pas des privilèges du schéma source. Les objets internes, oui. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Peut‑on cloner via Time Travel ?</h4>
+                            <p>→ <strong>Oui</strong>, avec <code class="inline-code">AT</code> ou <code class="inline-code">BEFORE</code>. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Peut‑on cloner un stage ou un file format ?</h4>
+                            <p>→ <strong>Oui</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ COPY GRANTS copie‑t‑il OWNERSHIP ?</h4>
+                            <p>→ <strong>Non</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

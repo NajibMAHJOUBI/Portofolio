@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Fail-safe | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Fail-safe</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-shield-alt"></i>1. Définition et rôle du Fail‑safe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ce-que-failsafe-nest-pas">
+                            <i class="fas fa-ban"></i>2. Ce que Fail‑safe n'est PAS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quand-utilise">
+                            <i class="fas fa-exclamation-triangle"></i>3. Quand Fail‑safe est‑il utilisé ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interaction-time-travel">
+                            <i class="fas fa-clock"></i>4. Interaction Time Travel → Fail‑safe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#stockage-visibilite">
+                            <i class="fas fa-database"></i>5. Stockage Fail‑safe & visibilité
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation">
+                            <i class="fas fa-coins"></i>6. Facturation Fail‑safe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#limitations">
+                            <i class="fas fa-exclamation-triangle"></i>7. Limitations (important pour l'examen)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparatif">
+                            <i class="fas fa-chart-simple"></i>8. Résumé comparatif Time Travel vs Fail‑safe
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>9. Points clés à mémoriser pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Fail-safe</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Fail-safe
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-clock"></i>Time Travel
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION ET RÔLE DU FAIL‑SAFE
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 1. Définition et rôle du Fail‑safe
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>Separate and distinct from Time Travel, Fail-safe ensures historical data is protected in the event of a system failure or security breach.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="info-note">
+                        <em>Fail-safe provides a (non-configurable) 7-day period during which historical data may be recoverable by Snowflake.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p><strong>✔ Points essentiels :</strong></p>
+                    <ul>
+                        <li>Durée <strong>fixe : 7 jours</strong>, non configurable.</li>
+                        <li>Commence immédiatement après la fin du Time Travel.</li>
+                        <li>Sert uniquement en cas de <strong>défaillance système grave</strong>, non pour requêter des données anciennes.</li>
+                        <li>Le Fail-safe est géré <strong>exclusivement par Snowflake</strong>.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CE QUE FAIL‑SAFE N'EST PAS
+                ============================================ -->
+                <section id="ce-que-failsafe-nest-pas" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-ban"></i> ✅ 2. Ce que Fail‑safe n'est PAS
+                    </h2>
+
+                    <div class="warning-note">
+                        <em>Fail-safe is not provided as a means for accessing historical data after the Time Travel retention period has ended.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p><strong>❌ Vous ne pouvez PAS :</strong></p>
+                    <ul>
+                        <li>Faire des requêtes SQL sur des données en Fail-safe.</li>
+                        <li>Restaurer vous‑même une table depuis Fail-safe.</li>
+                        <li>Utiliser Fail-safe comme alternative à Time Travel.</li>
+                    </ul>
+                    <p>Il ne s'agit pas d'une fonctionnalité utilisateur mais d'un service de récupération interne.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: QUAND FAIL‑SAFE EST-IL UTILISÉ ?
+                ============================================ -->
+                <section id="quand-utilise" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 3. Quand Fail‑safe est‑il utilisé ?
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Fail-safe is intended only for use when all other recovery options have been attempted.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p><strong>Cas typiques :</strong></p>
+                    <ul>
+                        <li>Défaillance profonde d'infrastructure.</li>
+                        <li>Corruption de micro‑partitions côté Snowflake.</li>
+                        <li>Scénarios rares de sécurité / brèche.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <strong>Data recovery via Fail-safe peut nécessiter :</strong>
+                        <p><em>several hours to several days.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: INTERACTION TIME TRAVEL → FAIL‑SAFE
+                ============================================ -->
+                <section id="interaction-time-travel" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 4. Interaction Time Travel → Fail‑safe
+                    </h2>
+
+                    <p>Le cycle de vie des données est :</p>
+                    <p><strong>Data active → Time Travel (1‑90 jours) → Fail‑safe (7 jours) → purge définitive</strong></p>
+
+                    <div class="info-note">
+                        <em>Fail-safe period starts when Time Travel retention expires.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="warning-note">
+                        <strong>Important SnowPro :</strong>
+                        <p><em>A long-running Time Travel query will delay moving data into Fail-safe until the query completes.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: STOCKAGE FAIL‑SAFE & VISIBILITÉ
+                ============================================ -->
+                <section id="stockage-visibilite" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 5. Stockage Fail‑safe & visibilité
+                    </h2>
+
+                    <p>Snowflake affiche la quantité de données présentes en Fail-safe :</p>
+                    <div class="info-note">
+                        <em>You can view the historical data storage in Fail-safe (ACCOUNTADMIN only).</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <ul>
+                        <li>Snowsight › Admin › Cost management › Consumption › Storage. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les types de stockage sont visibles via les barres colorées (Storage Breakdown).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: FACTURATION FAIL‑SAFE
+                ============================================ -->
+                <section id="facturation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 6. Facturation Fail‑safe
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Fail-safe uses Snowflake-managed serverless compute. Standard serverless compute billing applies.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Il ne s'agit pas d'un service gratuit : des crédits sont consommés lors d'opérations de récupération effectuées par Snowflake.</p>
+
+                    <p><strong>Pour vérifier les coûts :</strong></p>
+                    <ul>
+                        <li><code class="inline-code">METERING_DAILY_HISTORY</code></li>
+                        <li><code class="inline-code">METERING_HISTORY</code></li>
+                        <li>Filtrer par : <code class="inline-code">service_type = 'FAILSAFE_RECOVERY'</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: LIMITATIONS (IMPORTANT POUR L'EXAMEN)
+                ============================================ -->
+                <section id="limitations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 7. Limitations (important pour l'examen)
+                    </h2>
+
+                    <div class="warning-note">
+                        <strong>❌ Fail-safe et Snowpipe Streaming Classic</strong>
+                        <p><em>Fail-safe doesn't support tables that contain data ingested by Snowpipe Streaming Classic.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>⚠️ Une récupération Fail-safe sur ces tables échouera complètement.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ COMPARATIF TIME TRAVEL VS FAIL‑SAFE
+                ============================================ -->
+                <section id="comparatif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 8. Résumé comparatif Time Travel vs Fail‑safe
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Critère</th><th>Time Travel</th><th>Fail‑safe</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Durée</strong>
+                                卷第1–90 jours selon édition
+                                卷第7 jours fixes
+                            
+                            32
+                                <td><strong>Accès utilisateur</strong>
+                                卷第✔ SQL (AT, BEFORE, OFFSET)
+                                卷第❌ aucun accès
+                            
+                            32
+                                <td><strong>Type de restauration</strong>
+                                卷第UNDROP, SELECT historique, CLONE
+                                卷第Récupération interne Snowflake
+                            
+                            32
+                                <td><strong>Usage principal</strong>
+                                卷第Correction erreurs, restauration logique
+                                卷第Catastrophes système
+                            
+                            32
+                                <td><strong>Coût</strong>
+                                卷第Stockage Time Travel
+                                卷第Compute serverless lors de la récupération
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: POINTS CLÉS À MÉMORISER POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 9. Points clés à mémoriser pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p>✔ Fail-safe = <strong>7 jours</strong> → non configurable.</p>
+                            <p>✔ Accessible <strong>uniquement par Snowflake</strong> (service interne).</p>
+                            <p>✔ <strong>Pas un mécanisme de requête</strong>, contrairement au Time Travel.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Commence <strong>après expiration du Time Travel</strong>.</p>
+                            <p>✔ Rétention Fail-safe visible dans Snowsight.</p>
+                            <p>✔ La récupération Fail-safe peut prendre <strong>plusieurs heures/jours</strong>.</p>
+                            <p>✔ <strong>Incompatible</strong> avec Snowpipe Streaming Classic.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
