@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Query Acceleration Service (QAS) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Query Acceleration Service (QAS)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-bolt"></i>1. Qu'est‑ce que le Query Acceleration Service ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-chart-line"></i>2. Cas d'usage typiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#commandes-compatibles">
+                            <i class="fas fa-terminal"></i>3. SQL commandes compatibles avec QAS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#activation">
+                            <i class="fas fa-toggle-on"></i>4. Comment activer le Query Acceleration Service ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#couts">
+                            <i class="fas fa-coins"></i>5. Coûts associés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>6. Bonnes pratiques (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-rapide">
+                            <i class="fas fa-star"></i>7. Résumé rapide pour l'examen
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#conclusion">
+                            <i class="fas fa-graduation-cap"></i>8. Conclusion
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Query Acceleration Service (QAS)</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-bolt"></i>QAS
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QUE LE QUERY ACCELERATION SERVICE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bolt"></i> ✅ 1. Qu'est‑ce que le Query Acceleration Service ?
+                    </h2>
+
+                    <p>Source officielle : <em>Using the Query Acceleration Service (QAS)</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Le Query Acceleration Service (QAS) est une fonctionnalité <strong>Enterprise Edition (ou +)</strong> permettant d'accélérer certaines requêtes en offloadant une partie du traitement vers des ressources serverless supplémentaires. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Objectif :</h3>
+                    <p>Accélérer les requêtes « outliers » – celles qui consomment anormalement plus de ressources que la majorité des requêtes d'un même warehouse.</p>
+
+                    <h3>✔ Comment ?</h3>
+                    <ul>
+                        <li>Le QAS ajoute dynamiquement du compute supplémentaire.</li>
+                        <li>Il traite en parallèle des étapes coûteuses : scanning, filtering, traitements intensifs. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Bénéfices</h3>
+                    <ul>
+                        <li>Réduit le temps mur (wall‑clock) des scans.</li>
+                        <li>Améliore la stabilité et les performances globales du warehouse.</li>
+                        <li>Limite l'impact négatif des requêtes lourdes sur les autres utilisateurs.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CAS D'USAGE TYPIQUES
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. Cas d'usage typiques
+                    </h2>
+
+                    <p>Le QAS est particulièrement utile pour les workloads suivants :</p>
+                    <ul>
+                        <li>Ad-hoc analytics (requêtes imprévisibles)</li>
+                        <li>Requêtes avec volumes de données variables et imprévisibles</li>
+                        <li>Requêtes avec gros scans + filtres sélectifs <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="info-note">
+                        Ces workloads génèrent souvent des situations où une seule requête bloque ou ralentit toutes les autres : QAS évite cela.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SQL COMMANDES COMPATIBLES AVEC QAS
+                ============================================ -->
+                <section id="commandes-compatibles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> ✅ 3. SQL commandes compatibles avec QAS
+                    </h2>
+
+                    <p>Le service peut accélérer les commandes :</p>
+                    <ul>
+                        <li>SELECT</li>
+                        <li>INSERT</li>
+                        <li>CREATE TABLE AS SELECT (CTAS)</li>
+                        <li>COPY INTO &lt;table&gt; <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="warning-note">
+                        ⚠️ Le QAS peut accélérer l'intégralité d'une requête, ou uniquement un sous‑ensemble (subqueries, clauses), selon l'éligibilité.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMENT ACTIVER LE QUERY ACCELERATION SERVICE ?
+                ============================================ -->
+                <section id="activation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-toggle-on"></i> ✅ 4. Comment activer le Query Acceleration Service ?
+                    </h2>
+
+                    <h3>📌 Activer lors de la création du warehouse</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE WAREHOUSE my_wh
+    WITH ENABLE_QUERY_ACCELERATION = true;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>📌 Activer sur un warehouse existant</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER WAREHOUSE my_wh
+    SET ENABLE_QUERY_ACCELERATION = true;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>📌 Vérifier l'état du QAS</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SHOW WAREHOUSES LIKE 'my_wh'
+->> SELECT "name", "enable_query_acceleration", "query_acceleration_max_scale_factor"
+FROM $1;</code></pre>
+                    </div>
+                    <p>Résultat typique :</p>
+                    <ul>
+                        <li><code class="inline-code">enable_query_acceleration = TRUE</code></li>
+                        <li><code class="inline-code">query_acceleration_max_scale_factor = 8</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="info-note">
+                        Note importante : Le QAS dépend de la disponibilité du serveur → l'accélération peut varier. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COÛTS ASSOCIÉS
+                ============================================ -->
+                <section id="couts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 5. Coûts associés
+                    </h2>
+
+                    <p>L'utilisation du QAS augmente le taux de consommation de crédits. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Pourquoi ?</h3>
+                    <p>Parce que Snowflake mobilise des ressources serverless additionnelles, facturées en plus du warehouse.</p>
+
+                    <h3>✔ Comment mesurer le coût du QAS ?</h3>
+                    <p>→ Via <code class="inline-code">QUERY_ATTRIBUTION_HISTORY</code> (colonne <code class="inline-code">credits_used_query_acceleration</code>) dans ACCOUNT_USAGE.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: BONNES PRATIQUES (SNOWPRO CORE)
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 6. Bonnes pratiques (SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ QAS ≠ remplacer le tuning SQL</h4>
+                            <p>Il accélère la performance ponctuelle mais ne corrige pas :</p>
+                            <ul>
+                                <li>des prédicats inefficaces,</li>
+                                <li>un mauvais modèle de données,</li>
+                                <li>des requêtes non optimisées.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Préférer QAS lorsque :</h4>
+                            <ul>
+                                <li>Très peu de requêtes lourdes mais importantes</li>
+                                <li>L'augmentation de taille du warehouse serait trop coûteuse</li>
+                                <li>L'activité est très variable (bursty)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Ne pas activer QAS si :</h4>
+                            <ul>
+                                <li>Le warehouse est déjà trop petit → mieux l'augmenter d'abord</li>
+                                <li>La lenteur vient du réseau, de jointures non optimisées, ou du modèle de tables</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ RAPIDE POUR L'EXAMEN
+                ============================================ -->
+                <section id="resume-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Résumé rapide pour l'examen
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Élément</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Fonction</strong>
+                                一道一道Offload compute serverless pour accélérer requêtes lourdes
+                            
+                            32
+                                <td><strong>Édition requise</strong>
+                                一道一道❗ Enterprise Edition ou +
+                            
+                            32
+                                <td><strong>Activation</strong>
+                                一道一道ENABLE_QUERY_ACCELERATION = TRUE
+                            
+                            32
+                                <td><strong>Workloads éligibles</strong>
+                                一道道Gros scans, filtres sélectifs, ad-hoc analytics
+                            
+                            32
+                                <td><strong>Commandes supportées</strong>
+                                一道道SELECT, INSERT, CTAS, COPY INTO
+                            
+                            32
+                                <td><strong>Coût</strong>
+                                一道道Augmentation crédits → serverless compute
+                            
+                            32
+                                <td><strong>Contrôle</strong>
+                                一道道SHOW WAREHOUSES, colonne query_acceleration_max_scale_factor
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: CONCLUSION
+                ============================================ -->
+                <section id="conclusion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 8. Conclusion
+                    </h2>
+
+                    <p>Le Query Acceleration Service est un outil puissant dans Snowflake pour accélérer ponctuellement les requêtes gourmandes sans redimensionner un warehouse.</p>
+                    <p>Cela permet une performance stable, une réduction des outliers, et une meilleure gestion des workloads imprévisibles.</p>
+                    <div class="info-note">
+                        C'est un sujet régulièrement questionné dans SnowPro Core dans les sections :
+                        <ul>
+                            <li>Performance</li>
+                            <li>Warehouses</li>
+                            <li>Charge & Concurrency</li>
+                            <li>Coûts</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

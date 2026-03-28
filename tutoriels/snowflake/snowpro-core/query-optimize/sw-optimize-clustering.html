@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Clustering & Reclustering | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Clustering & Reclustering</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#micro-partitions-clustering" class="active">
+                            <i class="fas fa-cubes"></i>1. Micro-partitions & Data Clustering
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clustering-keys">
+                            <i class="fas fa-key"></i>2. Clustering Keys (Cluster By)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#automatic-reclustering">
+                            <i class="fas fa-sync-alt"></i>3. Automatic Reclustering
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#vision-ensemble">
+                            <i class="fas fa-chart-simple"></i>4. Comment ces trois concepts fonctionnent ensemble
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés à retenir pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mini-faq">
+                            <i class="fas fa-question-circle"></i>6. Mini‑FAQ typique des questions d'examen
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Clustering & Reclustering</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cubes"></i>Micro-partitions
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Clustering
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: MICRO-PARTITIONS & DATA CLUSTERING
+                ============================================ -->
+                <section id="micro-partitions-clustering" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 1. Micro-partitions & Data Clustering
+                    </h2>
+
+                    <p>Source : <em>Micro-partitions & Data Clustering</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Qu'est‑ce qu'une micro-partition ?</h3>
+                    <ul>
+                        <li>Unité de stockage fondamentale dans Snowflake : <strong>50 à 500 MB non compressés</strong>.</li>
+                        <li>Organisée en format columnar, immuable, et générée automatiquement lors du chargement des données. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Quel lien avec le clustering ?</h3>
+                    <ul>
+                        <li>Lors de l'ingestion, les données sont naturellement ordonnées selon l'ordre d'insertion → <strong>natural clustering</strong>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowflake stocke pour chaque micro-partition des métadonnées : min/max, distinct count, informations de filtrage.</li>
+                        <li>Ces métadonnées permettent le <strong>pruning</strong> : ignorer les micro-partitions non pertinentes. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Enjeux du data clustering</strong>
+                        <p>Le clustering permet :</p>
+                        <ul>
+                            <li>de conserver une organisation logique des valeurs,</li>
+                            <li>de maximiser l'efficacité du pruning,</li>
+                            <li>d'optimiser les performances sur tables volumineuses.</li>
+                        </ul>
+                        <p>Lorsque le clustering naturel se dégrade (notamment via DML sur de grandes tables), les requêtes deviennent plus lentes → nécessité d'un clustering key.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CLUSTERING KEYS (CLUSTER BY)
+                ============================================ -->
+                <section id="clustering-keys" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> ✅ 2. Clustering Keys (Cluster By)
+                    </h2>
+
+                    <p>Source : <em>Clustering Keys & Clustered Tables</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Définition</h3>
+                    <p>Un clustering key est un ensemble de colonnes ou expressions utilisées pour co‑localiser les données dans les micro-partitions.</p>
+
+                    <h3>✔ Quand en définir un ?</h3>
+                    <p>Indicateurs :</p>
+                    <ul>
+                        <li>Les requêtes sur la table deviennent plus lentes.</li>
+                        <li>Le clustering depth du tableau est élevé. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Bénéfices</h3>
+                    <p>Pour les très grandes tables (>1 To ou plusieurs milliards de lignes) :</p>
+                    <ul>
+                        <li>Meilleur pruning, donc scans plus courts.</li>
+                        <li>Meilleure compression des colonnes. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Définition / modification</h3>
+                    <p>À la création :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE TABLE t (...) CLUSTER BY (col1, col2);</code></pre>
+                    </div>
+                    <p>Après création :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER TABLE t CLUSTER BY (col1, col2);</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ Attention (SnowPro piège classique)</strong>
+                        <p>Snowflake insiste : les clustering keys ne sont pas toujours recommandés. Ils sont adaptés uniquement si :</p>
+                        <ul>
+                            <li>la table est très volumineuse,</li>
+                            <li>les requêtes filtrent souvent sur les mêmes colonnes,</li>
+                            <li>les gains de performance > coûts de maintenance. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: AUTOMATIC RECLUSTERING
+                ============================================ -->
+                <section id="automatic-reclustering" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 3. Automatic Reclustering
+                    </h2>
+
+                    <p>Source : <em>Automatic Clustering Service</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Qu'est‑ce que l'Automatic Reclustering ?</h3>
+                    <p>Un service Snowflake qui gère automatiquement et continuellement le reclustering des tables ayant un clustering key. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Avantages</h3>
+                    <ul>
+                        <li><strong>Zéro maintenance :</strong> Vous n'avez plus à surveiller manuellement l'état du clustering.</li>
+                        <li>Snowflake reclustre uniquement si nécessaire.</li>
+                        <li>Pas de warehouse à spécifier → effectué via compute serverless. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Contrôle total</h3>
+                    <p>Pause / reprise :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER TABLE t SUSPEND RECLUSTER;
+ALTER TABLE t RESUME RECLUSTER;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Supprimer le clustering key : → Arrête toute activité de reclustering.</p>
+
+                    <h3>✔ Non‑blocking</h3>
+                    <p>Le reclustering n'interrompt pas les DML. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Comment est‑il déclenché ?</h3>
+                    <p>Snowflake ne reclustre que si cela apporte un bénéfice concret → pas de compute inutile. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Activateur implicite</h3>
+                    <p>Définir un clustering key suffit à activer Automatic Clustering.</p>
+                    <div class="warning-note">
+                        ⚠️ Exception : si le tableau est issu d'un CLONE, l'auto‑reclustering est désactivé par défaut. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMENT CES TROIS CONCEPTS FONCTIONNENT ENSEMBLE
+                ============================================ -->
+                <section id="vision-ensemble" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 4. Comment ces trois concepts fonctionnent ensemble (vision SnowPro Core)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Concept</th><th>Rôle</th><th>Impact</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Micro-partitions</strong>
+                                <td>Unité physique de stockage avec métadonnées
+                                <td>Permet le pruning
+                            
+                            32
+                                <td><strong>Clustering</strong>
+                                <td>Organisation logique des micro-partitions
+                                <td>Améliore le pruning et la performance
+                            
+                            32
+                                <td><strong>Automatic Reclustering</strong>
+                                一道一道Maintien automatique du clustering
+                                一道一道Réduit la dette de maintenance mais implique un coût serverless
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS À RETENIR POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés à retenir pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Micro-partitions</h4>
+                            <ul>
+                                <li>Automatiques, petites, colonaires, immuables.</li>
+                                <li>Métadonnées → pruning.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Clustering Keys</h4>
+                            <ul>
+                                <li>Optimisation pour très grandes tables.</li>
+                                <li>Améliorent le pruning mais coûtent cher si DML fréquent.</li>
+                                <li>À utiliser sélectivement.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Automatic Reclustering</h4>
+                            <ul>
+                                <li>Gère le clustering en continu.</li>
+                                <li>Ne bloque pas les DML.</li>
+                                <li>Coûts en credits via serverless compute.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: MINI-FAQ TYPIQUE DES QUESTIONS D'EXAMEN
+                ============================================ -->
+                <section id="mini-faq" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 6. Mini‑FAQ typique des questions d'examen
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>❓ Faut-il définir un clustering key pour toutes les tables ?</h4>
+                            <p>→ Non. Seulement pour les tables volumineuses avec des patterns de filtrage stables. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Automatic Clustering bloque‑t‑il les requêtes ?</h4>
+                            <p>→ Jamais. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Le clustering améliore‑t‑il le JOIN ?</h4>
+                            <p>→ Indirectement : en améliorant le pruning des tables filtrées.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❓ Le reclustering commence‑t‑il immédiatement après un CLUSTER BY ?</h4>
+                            <p>→ Parfois non : Snowflake l'exécute uniquement si nécessaire. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

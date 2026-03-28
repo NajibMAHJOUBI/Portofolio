@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Materialized Views | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Materialized Views</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-table"></i>1. Qu'est‑ce qu'une vue matérialisée ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quand-creer">
+                            <i class="fas fa-question-circle"></i>2. Quand créer une vue matérialisée ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#avantages">
+                            <i class="fas fa-star"></i>3. Avantages des vues matérialisées
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#limites">
+                            <i class="fas fa-exclamation-triangle"></i>4. Limites importantes (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#creation">
+                            <i class="fas fa-plus-circle"></i>5. Création d'une vue matérialisée – Syntaxe essentielle
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#maintenance">
+                            <i class="fas fa-sync-alt"></i>6. Maintenance & Actualisation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparaison">
+                            <i class="fas fa-chart-simple"></i>7. Comparaison MV vs View vs Dynamic Table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#administration">
+                            <i class="fas fa-cogs"></i>8. Administration & Monitoring
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>9. Bonnes pratiques SnowPro
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-graduation-cap"></i>10. Résumé final pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Materialized Views</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-table"></i>Materialized Views
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QU'UNE VUE MATÉRIALISÉE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 1. Qu'est‑ce qu'une vue matérialisée ?
+                    </h2>
+
+                    <p>Source : <em>Working with Materialized Views</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Une vue matérialisée est un ensemble de données pré‑calculé à partir d'une requête SQL, stocké physiquement par Snowflake.</p>
+                    <p>Elle se comporte comme une table optimisée pour des requêtes répétitives. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Points clés</h3>
+                    <ul>
+                        <li>Les données sont pré‑calculées puis stockées.</li>
+                        <li>Les requêtes sur une MV sont plus rapides que celles sur la table source.</li>
+                        <li>Particulièrement efficace pour agrégations, projections, sélections lourdes.</li>
+                        <li>Les données sont toujours à jour (maintenance automatique). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: QUAND CRÉER UNE VUE MATÉRIALISÉE ?
+                ============================================ -->
+                <section id="quand-creer" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 2. Quand créer une vue matérialisée ?
+                    </h2>
+
+                    <p>Snowflake recommande de créer une MV lorsque : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Situations optimales</h3>
+                    <ul>
+                        <li>Le résultat contient peu de lignes/colonnes vs la table de base.</li>
+                        <li>
+                            Le résultat nécessite :
+                            <ul>
+                                <li>Analyse de données semi‑structurées,</li>
+                                <li>Calculs d'agrégats coûteux.</li>
+                            </ul>
+                        </li>
+                        <li>La requête cible une external table (moins performante).</li>
+                        <li>La table source ne change pas trop fréquemment.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>❗ Risque important</strong>
+                        <p>Les MVs génèrent des coûts de maintenance → toujours évaluer si les gains de performance compensent les coûts. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: AVANTAGES DES VUES MATÉRIALISÉES
+                ============================================ -->
+                <section id="avantages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 3. Avantages des vues matérialisées
+                    </h2>
+
+                    <p>Snowflake apporte des avantages significatifs : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Performance</h3>
+                    <ul>
+                        <li>Accélère les requêtes répétitives ou complexes.</li>
+                        <li>Requêtes plus rapides que sur la table source.</li>
+                    </ul>
+
+                    <h3>✔ Maintenance automatique</h3>
+                    <ul>
+                        <li>Processus de mise à jour transparent après chaque DML (INSERT/UPDATE/DELETE) sur la table source.</li>
+                        <li>
+                            Snowflake décide automatiquement de compléter ou combiner :
+                            <ul>
+                                <li>Parties à jour de la MV</li>
+                                <li>Dernières données de la table source si nécessaire</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Données toujours synchronisées</h3>
+                    <p>Aucune opération manuelle nécessaire.</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>⚠ Coûts</strong>
+                        <ul>
+                            <li>La maintenance consomme des credits compute.</li>
+                            <li>Nécessite Enterprise Edition. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: LIMITES IMPORTANTES (SNOWPRO CORE)
+                ============================================ -->
+                <section id="limites" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 4. Limites importantes (SnowPro Core)
+                    </h2>
+
+                    <p>Certaines limitations sont dans la section détaillée mais non affichées dans l'extrait ; cependant la doc les signale dans la page (limitations des SELECT, etc.) via "Limitations on the select_statement". <span class="reference">[docs.snowflake.com]</span></p>
+                    <ul>
+                        <li>Certaines expressions SQL ne sont pas autorisées dans la requête de définition.</li>
+                        <li>Les MVs ne supportent pas les JOIN complexes (selon la version).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CRÉATION D'UNE VUE MATÉRIALISÉE – SYNTAXE ESSENTIELLE
+                ============================================ -->
+                <section id="creation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 5. Création d'une vue matérialisée – Syntaxe essentielle
+                    </h2>
+
+                    <p>Source : <em>CREATE MATERIALIZED VIEW</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Syntaxe générale</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE MATERIALIZED VIEW mv_name
+AS
+SELECT ...
+FROM base_table;</code></pre>
+                    </div>
+
+                    <h3>✔ Points importants</h3>
+                    <p>La commande accepte :</p>
+                    <ul>
+                        <li>SECURE (vue sécurisée)</li>
+                        <li>CLUSTER BY (obligatoire si column_list fourni)</li>
+                        <li>COPY GRANTS</li>
+                        <li>Masquage (MASKING POLICY), Row Access Policy, etc.</li>
+                        <li>AGGREGATION POLICY <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: MAINTENANCE & ACTUALISATION
+                ============================================ -->
+                <section id="maintenance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 6. Maintenance & Actualisation
+                    </h2>
+
+                    <p>Snowflake maintient automatiquement les MVs : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Fonctionnement</h3>
+                    <p>Si la MV n'est pas complètement à jour au moment de la requête :</p>
+                    <ul>
+                        <li>→ Snowflake met à jour la MV</li>
+                        <li>→ Ou combine parts up-to-date + données de la base</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Impacts coûts</strong>
+                        <p>Maintenance = compute serverless ⇒ facturation à chaque mise à jour.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: COMPARAISON MV VS VIEW VS DYNAMIC TABLE
+                ============================================ -->
+                <section id="comparaison" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 7. Comparaison MV vs View vs Dynamic Table
+                    </h2>
+
+                    <p>Source : <em>Views, materialized views, and dynamic tables</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Type</th><th>Avantages</th><th>Inconvénients</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>View</strong>
+                                卷第Simple, pas de stockage
+                                卷第Ré-exécution de la requête ⇒ compute à chaque fois
+                            
+                            32
+                                <td><strong>Materialized View</strong>
+                                卷第Lecture très rapide, maintien automatique
+                                卷第Coût stockage + compute maintenance
+                            
+                            32
+                                <td><strong>Dynamic Table</strong>
+                                卷第Très flexible, transformation automatique
+                                卷第Coût plus élevé, réglages plus complexes
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: ADMINISTRATION & MONITORING
+                ============================================ -->
+                <section id="administration" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 8. Administration & Monitoring
+                    </h2>
+
+                    <h3>✔ Voir les vues matérialisées</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SHOW MATERIALIZED VIEWS;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Modifier / supprimer</h3>
+                    <ul>
+                        <li>ALTER MATERIALIZED VIEW</li>
+                        <li>DROP MATERIALIZED VIEW</li>
+                        <li>DESCRIBE MATERIALIZED VIEW</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: BONNES PRATIQUES SNOWPRO
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 9. Bonnes pratiques SnowPro
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ À FAIRE</h4>
+                            <ul>
+                                <li>Utiliser pour requêtes répétitives sur grosses tables.</li>
+                                <li>Utiliser si les résultats sont petits ou complexes à calculer.</li>
+                                <li>Évaluer volume de DML sur la table source.</li>
+                                <li>Utiliser SYSTEM$ESTIMATE_QUERY_ACCELERATION ou Query Profile pour analyser les gains.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>❗ À ÉVITER</h4>
+                            <ul>
+                                <li>MV sur tables avec haut taux de changements (maintenance très coûteuse).</li>
+                                <li>MV pour petites tables (pas de gain).</li>
+                                <li>MV sur queries peu ré-utilisées.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: RÉSUMÉ FINAL POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 10. Résumé final pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Concept</th><th>Essentiel à retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Définition</strong>
+                                一道一道Résultats pré-calculés, stockés physiquement
+                            
+                            32
+                                <td><strong>Objectif</strong>
+                                一道一道Accélérer requêtes lourdes & répétitives
+                            
+                            32
+                                <td><strong>Rafraîchissement</strong>
+                                一道道Automatique, transparent
+                            
+                            32
+                                <td><strong>Coût</strong>
+                                一道道Compute + stockage
+                            
+                            32
+                                <td><strong>Limitations</strong>
+                                一道道Certaines expressions non permises dans SELECT
+                            
+                            32
+                                <td><strong>Meilleur usage</strong>
+                                一道道Agrégations répétées, filtres sélectifs, semi-structuré, external tables
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

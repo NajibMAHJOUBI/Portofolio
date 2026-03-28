@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Optimizing Performance | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Optimizing Performance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#overview-performance" class="active">
+                            <i class="fas fa-chart-line"></i>1. Vue d'ensemble des thèmes Performance Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exploring-execution-times">
+                            <i class="fas fa-clock"></i>2. Exploring Execution Times
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#optimizing-query-performance">
+                            <i class="fas fa-code"></i>3. Optimizing Query Performance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#optimizing-warehouses">
+                            <i class="fas fa-microchip"></i>4. Optimizing Warehouses for Performance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#optimizing-storage">
+                            <i class="fas fa-database"></i>5. Optimizing Storage for Performance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#performance-explorer">
+                            <i class="fas fa-chart-simple"></i>6. Analyzing Query Workloads with Performance Explorer
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-optima">
+                            <i class="fas fa-robot"></i>7. Snowflake Optima
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#managing-cost">
+                            <i class="fas fa-coins"></i>8. Managing Cost in Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-essentiel">
+                            <i class="fas fa-star"></i>9. Résumé essentiel pour réussir SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#conclusion">
+                            <i class="fas fa-graduation-cap"></i>10. Conclusion
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Optimizing Performance</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-microchip"></i>Optimization
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: VUE D'ENSEMBLE DES THÈMES PERFORMANCE SNOWFLAKE
+                ============================================ -->
+                <section id="overview-performance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 1. Vue d'ensemble des thèmes Performance Snowflake
+                    </h2>
+
+                    <p>La page Performance Optimization – Guides Overview regroupe l'ensemble des documents essentiels pour comprendre comment optimiser les performances dans Snowflake.</p>
+                    <p>Snowflake regroupe plusieurs axes d'optimisation :</p>
+                    <ul>
+                        <li>Analyse des exécutions passées</li>
+                        <li>Optimisation des requêtes</li>
+                        <li>Optimisation des warehouses</li>
+                        <li>Optimisation du stockage</li>
+                        <li>Analyse de charges (workloads)</li>
+                        <li>Automatisation avec Snowflake Optima <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: EXPLORING EXECUTION TIMES
+                ============================================ -->
+                <section id="exploring-execution-times" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 2. Exploring Execution Times
+                    </h2>
+
+                    <p>Permet d'obtenir des informations sur les performances historiques des requêtes.</p>
+
+                    <h3>✔ Deux méthodes :</h3>
+                    <ul>
+                        <li>Via Snowsight (Query History, Query Profile)</li>
+                        <li>Via SQL sur ACCOUNT_USAGE (ex. QUERY_HISTORY) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Exemples d'usage :</h3>
+                    <ul>
+                        <li>Identifier les requêtes les plus lentes</li>
+                        <li>Suivre l'évolution des performances dans le temps</li>
+                        <li>Vérifier l'impact d'une optimisation (clustering, SO, warehouse size…)</li>
+                    </ul>
+                    <div class="info-note">
+                        Ce thème est très fréquent en SnowPro Core, car il valide votre capacité à diagnostiquer la performance.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OPTIMIZING QUERY PERFORMANCE
+                ============================================ -->
+                <section id="optimizing-query-performance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 3. Optimizing Query Performance
+                    </h2>
+
+                    <h3>✔ Les options d'optimisation comprennent :</h3>
+                    <ul>
+                        <li>Réécriture du SQL</li>
+                        <li>Utilisation de prédicats efficaces (SARGables)</li>
+                        <li>Pruning grâce aux micropartitions</li>
+                        <li>Matérialisation (materialized views)</li>
+                        <li>Search Optimization (service optionnel) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ Points classiques dans l'examen :</strong>
+                        <ul>
+                            <li>Comment réduire les bytes scanned ? → via pruning, partitions logiques, filtrage efficace.</li>
+                            <li>Quand utiliser SO ? → lorsque les recherches sont très sélectives mais que les données ne sont pas bien corrélées.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: OPTIMIZING WAREHOUSES FOR PERFORMANCE
+                ============================================ -->
+                <section id="optimizing-warehouses" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-microchip"></i> ✅ 4. Optimizing Warehouses for Performance
+                    </h2>
+
+                    <h3>✔ Concepts clés :</h3>
+                    <ul>
+                        <li><strong>Taille du warehouse</strong> = parallélisme = vitesse potentielle</li>
+                        <li><strong>Multi‑cluster warehouse</strong> = améliore la concurrency</li>
+                        <li><strong>Query Acceleration Service (QAS)</strong> = accélération ciblée pour certaines requêtes <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ À connaître pour SnowPro Core :</strong>
+                        <ul>
+                            <li>Quand augmenter la taille ? → tâches lourdes : scans massifs, large joins</li>
+                            <li>Quand activer multi-cluster ? → file d'attente (queued), haute concurrence</li>
+                            <li>QAS = utile pour charge irrégulière et requêtes bloquantes</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: OPTIMIZING STORAGE FOR PERFORMANCE
+                ============================================ -->
+                <section id="optimizing-storage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 5. Optimizing Storage for Performance
+                    </h2>
+
+                    <h3>✔ Trois axes principaux :</h3>
+                    <ul>
+                        <li>Regrouper les données similaires</li>
+                        <li>Structures optimisées (clustering keys éventuelles pour tables larges)</li>
+                        <li>
+                            Choisir entre :
+                            <ul>
+                                <li>Automatic Clustering</li>
+                                <li>Search Optimization Service</li>
+                                <li>Materialized Views <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ Ce qu'on attend de vous en SnowPro Core :</strong>
+                        <ul>
+                            <li>Comprendre quand utiliser chacune de ces fonctionnalités</li>
+                            <li>Savoir que Snowflake optimise déjà le stockage automatiquement (micropartitions, colonnes, compression)</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: PERFORMANCE EXPLORER
+                ============================================ -->
+                <section id="performance-explorer" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 6. Analyzing Query Workloads with Performance Explorer
+                    </h2>
+
+                    <h3>✔ Dans Snowsight :</h3>
+                    <p>Performance Explorer permet :</p>
+                    <ul>
+                        <li>De visualiser les métriques SQL en temps réel</li>
+                        <li>De suivre les tendances (latence, concurrency, bytes scanned, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Ce que vous devez savoir :</h3>
+                    <ul>
+                        <li>Très utile pour corréler performance & workload</li>
+                        <li>Permet d'identifier des pics d'activité ou des requêtes coûteuses</li>
+                        <li>Peut remplacer l'utilisation d'ACCOUNT_USAGE pour des analyses plus visuelles</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: SNOWFLAKE OPTIMA
+                ============================================ -->
+                <section id="snowflake-optima" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-robot"></i> ✅ 7. Snowflake Optima
+                    </h2>
+
+                    <p>Fonctionnalité d'optimisation automatisée.</p>
+
+                    <h3>✔ Ce que fait Optima :</h3>
+                    <ul>
+                        <li>Analyse continue des patterns de workload</li>
+                        <li>Applique automatiquement les stratégies les plus efficaces <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ Pourquoi c'est important pour SnowPro Core :</strong>
+                        <ul>
+                            <li>Snowflake met en avant l'idée "performance by default"</li>
+                            <li>Optima réduit la nécessité de tuning manuel complexe</li>
+                            <li>Vous devez connaître les bénéfices, mais pas les détails internes</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: MANAGING COST IN SNOWFLAKE
+                ============================================ -->
+                <section id="managing-cost" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 8. Managing Cost in Snowflake
+                    </h2>
+
+                    <p>Inclus dans la page car performance et coûts sont liés.</p>
+
+                    <h3>✔ Concepts clés :</h3>
+                    <ul>
+                        <li>Optimisation warehouse = impact direct sur l'usage de crédits</li>
+                        <li>Réduction des scans = moins de compute</li>
+                        <li>Meilleur clustering = réduction des coûts de recherche optimisée <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: RÉSUMÉ ESSENTIEL POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-essentiel" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 9. Résumé essentiel pour réussir SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Domaine</th><th>Ce qu'il faut maîtriser</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Execution Times</strong>
+                                一道一道Lire les métriques, Query History, Query Profile
+                            
+                            32
+                                <td><strong>Query Performance</strong>
+                                一道道Pruning, SARGables, bytes scanned
+                            
+                            32
+                                <td><strong>Warehouses</strong>
+                                一道道Taille, multi‑cluster, QAS
+                            
+                            32
+                                <td><strong>Storage</strong>
+                                一道一道Clustering auto, SO service, MV
+                            
+                            32
+                                <td><strong>Workload analysis</strong>
+                                一道道Performance Explorer
+                            
+                            32
+                                <td><strong>Automatisation</strong>
+                                一道道Snowflake Optima
+                            
+                            32
+                                <td><strong>Coût</strong>
+                                一道道Impact compute et scans
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: CONCLUSION
+                ============================================ -->
+                <section id="conclusion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 10. Conclusion
+                    </h2>
+
+                    <p>La page Guides Overview – Performance synthétise tout ce que Snowflake attend d'un SnowPro Core sur la performance, un thème très fréquent dans les questions d'examen.</p>
+                    <p>Elle couvre :</p>
+                    <ul>
+                        <li>la compréhension de l'exécution des requêtes,</li>
+                        <li>l'optimisation SQL,</li>
+                        <li>l'optimisation warehouse,</li>
+                        <li>l'optimisation du stockage,</li>
+                        <li>l'analyse workload,</li>
+                        <li>et les optimisations automatiques.</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
