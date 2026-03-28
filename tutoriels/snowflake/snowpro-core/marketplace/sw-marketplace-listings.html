@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Listings (Marketplace, Organizational, Auto-Fulfillment) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Listings</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition-listings" class="active">
+                            <i class="fas fa-tag"></i>1. Que sont les Listings dans Snowflake ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-listings">
+                            <i class="fas fa-code-branch"></i>2. Les deux types principaux de listings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#structure-listing">
+                            <i class="fas fa-cube"></i>3. Structure d'un Listing : Data Product
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#auto-fulfillment">
+                            <i class="fas fa-sync-alt"></i>4. Cross-Cloud Auto-Fulfillment
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparatif">
+                            <i class="fas fa-chart-simple"></i>5. Résumé comparatif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés à maîtriser pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Listings</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-tag"></i>Listings
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-globe"></i>Marketplace
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QUE SONT LES LISTINGS DANS SNOWFLAKE ?
+                ============================================ -->
+                <section id="definition-listings" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tag"></i> ✅ 1. Que sont les Listings dans Snowflake ?
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>A listing is an enhanced method of Secure Data Sharing… providers can publish data or apps privately or on the Snowflake Marketplace.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Les listings permettent au provider :</p>
+                    <ul>
+                        <li>De publier des données publiquement (Marketplace) ou privatement.</li>
+                        <li>D'ajouter metadata enrichis : titre, description, queries exemples, informations provider. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>De monétiser leur data product (Marketplace). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>De suivre l'usage et l'intérêt (usage metrics). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>Les consumers peuvent :</p>
+                    <ul>
+                        <li>Accéder aux données via Marketplace ou via un partage privé.</li>
+                        <li>Créer une database depuis le listing.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LES DEUX TYPES PRINCIPAUX DE LISTINGS
+                ============================================ -->
+                <section id="types-listings" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 2. Les deux types principaux de listings
+                    </h2>
+
+                    <h3>✔ 1. Marketplace Listings (public or private)</h3>
+                    <p>Permettent de partager avec tout compte Snowflake, dans toute région cloud.</p>
+                    <p><strong>Fonctionnalités clés :</strong></p>
+                    <ul>
+                        <li>Visibles sur le Snowflake Marketplace.</li>
+                        <li>Possibilité de rendre le listing public.</li>
+                        <li>Possibilité de facturer l'accès.<br>
+                        <em>Offer a share publicly… charge consumers… monitor usage.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Auto-fulfillment disponible (voir section 4).</li>
+                    </ul>
+
+                    <h3>✔ 2. Organizational Listings (Internal Marketplace)</h3>
+                    <div class="info-note">
+                        <em>Allow you to share data products securely within your organization.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <p>Il s'agit d'un Marketplace interne qui centralise les data products uniquement pour les comptes d'une organisation Snowflake.</p>
+
+                    <p><strong>Différences clés :</strong></p>
+                    <ul>
+                        <li>Accessible uniquement dans l'organisation (Internal Marketplace).</li>
+                        <li>Contrôlé via RBAC et account targeting. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pas de visibilité publique.</li>
+                        <li>Objectif : catalogue interne de données fiables.</li>
+                    </ul>
+
+                    <p><strong>Avantages :</strong></p>
+                    <ul>
+                        <li>Découverte plus simple des datasets internes.</li>
+                        <li>Cohérence & gouvernance renforcée.</li>
+                        <li>Multiples équipes peuvent publier / consommer.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <strong>Notes :</strong> Les providers créent/gèrent les listings via Snowsight (Provider Studio) ou API. Fonctionne dans les régions commerciales ; certaines options disponibles en régimes gouvernementaux (preview).
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: STRUCTURE D'UN LISTING : DATA PRODUCT
+                ============================================ -->
+                <section id="structure-listing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cube"></i> ✅ 3. Structure d'un Listing : Data Product
+                    </h2>
+
+                    <p>Dans un listing, le data product représente soit :</p>
+                    <ul>
+                        <li>un share Snowflake,</li>
+                        <li>un Snowflake Native App.</li>
+                    </ul>
+                    <div class="info-note">
+                        <em>A data product is the share or the app attached to a listing.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CROSS-CLOUD AUTO-FULFILLMENT
+                ============================================ -->
+                <section id="auto-fulfillment" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 4. Cross-Cloud Auto-Fulfillment (Auto-réplication des listings)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Auto-fulfillment automatically replicates your data product to other Snowflake regions as needed.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Pourquoi c'est important ?</h3>
+                    <ul>
+                        <li>Sans auto-fulfillment, un provider doit manuellement répliquer ses données dans les régions où se trouvent ses consumers → fastidieux, lent.</li>
+                        <li>
+                            Avec auto-fulfillment :
+                            <ul>
+                                <li>Snowflake réplique automatiquement les données vers les régions cibles.</li>
+                                <li>Le consumer accède au listing dans sa propre région, ce qui réduit la latence.</li>
+                                <li>Fonctionne pour shares et application packages.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Contraintes :</h3>
+                    <ul>
+                        <li>Pas disponible sur les comptes trial. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le provider doit avoir activé le Global Data Sharing :<br>
+                        <code class="inline-code">SELECT SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT('&lt;account&gt;');</code></li>
+                    </ul>
+
+                    <h3>✔ Cas d'utilisation :</h3>
+                    <ul>
+                        <li>Paid listings → auto-fulfillment obligatoire. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Private listings cross-region → auto-fulfillment activé automatiquement.<br>
+                        <em>Snowsight automatically detects whether the consumer is in another region and enables auto-fulfillment.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Fonctionnement technique :</h3>
+                    <p>Snowflake crée et gère une <strong>Secure Share Area (SSA)</strong> pour stocker les données répliquées.<br>
+                    <em>When auto-fulfillment is set up, Snowflake provisions a Secure Share Area and fulfills data to remote regions.</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="warning-note">
+                        <strong>Impact sur les coûts :</strong> Les providers sont facturés selon l'utilisation réelle.<br>
+                        <em>When you make a data product available in other regions, you incur additional costs.</em> <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RÉSUMÉ COMPARATIF
+                ============================================ -->
+                <section id="comparatif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 5. Résumé comparatif (important pour SnowPro Core)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Critère</th><th>Marketplace Listing</th><th>Organizational Listing</th><th>Direct Share (référence)</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Portée</strong>
+                                卷第Tous comptes Snowflake (globale)
+                                卷第Comptes internes de l'organisation
+                                卷第Comptes même région
+                            
+                            32
+                                <td><strong>Monétisation</strong>
+                                卷第✔ Oui
+                                卷第❌ Non
+                                卷第❌ Non
+                            
+                            32
+                                <td><strong>Auto-fulfillment</strong>
+                                卷第✔ Oui (obligatoire pour paid)
+                                卷第✔ Oui (même en régimes gouvernementaux)
+                                卷第❌ Non
+                            
+                            32
+                                <td><strong>Controlled metadata</strong>
+                                卷第✔ Titre, description, queries exemple
+                                卷第✔ Curation interne
+                                卷第❌ Minime
+                            
+                            32
+                                <td><strong>Multi-Région</strong>
+                                卷第✔ Support natif cross-cloud
+                                卷第✔ via auto-fulfillment
+                                卷第❌ non supporté
+                            
+                            32
+                                <td><strong>RBAC granulaire</strong>
+                                卷第✔
+                                卷第✔ interne
+                                卷第✔ classique
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS À MAÎTRISER POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés à maîtriser pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p>✔ Un listing = version enrichie de Secure Data Sharing.</p>
+                            <p>✔ Un data product = un share ou une application Snowflake Native.</p>
+                            <p>✔ Marketplace listings : publics, privés, monétisables.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Organizational listings : Internal Marketplace, sécurisation interne, RBAC.</p>
+                            <p>✔ Auto-fulfillment : Snowflake réplique automatiquement les données dans d'autres régions.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Auto-fulfillment obligatoire pour les paid listings.</p>
+                            <p>✔ Non disponible pour trial accounts.</p>
+                            <p>✔ Activé par ORGADMIN via <code class="inline-code">SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT</code>. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

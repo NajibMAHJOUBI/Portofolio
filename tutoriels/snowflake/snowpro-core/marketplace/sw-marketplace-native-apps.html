@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Native Apps | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Native Apps</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-mobile-alt"></i>1. Qu'est‑ce qu'une Snowflake Native App ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#architecture">
+                            <i class="fas fa-exchange-alt"></i>2. Architecture : Provider vs Consumer
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#application-package">
+                            <i class="fas fa-cube"></i>3. Application Package (côté Provider)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#publier-app">
+                            <i class="fas fa-cloud-upload-alt"></i>4. Publier une Snowflake Native App (Provider)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#partager-dans-app">
+                            <i class="fas fa-share-alt"></i>5. Ce qu'un Provider peut partager dans une Native App
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#installer-app">
+                            <i class="fas fa-download"></i>6. Installer et utiliser une Native App (Consumer)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trial-listings">
+                            <i class="fas fa-flask"></i>7. Cas particulier : Trial Listings (Essai)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#atouts">
+                            <i class="fas fa-star"></i>8. Atouts majeurs des Snowflake Native Apps
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#flashcards">
+                            <i class="fas fa-graduation-cap"></i>9. Flashcards SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Native Apps</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-mobile-alt"></i>Native Apps
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code"></i>App Development
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QU'UNE SNOWFLAKE NATIVE APP ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-mobile-alt"></i> ✅ 1. Qu'est‑ce qu'une Snowflake Native App ?
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>The Snowflake Native App Framework allows you to create data applications that leverage core Snowflake functionality and share them with other Snowflake accounts.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Les Snowflake Native Apps sont des applications exécutées directement dans le compte du consumer, permettant au provider :</p>
+                    <ul>
+                        <li>d'embarquer logique applicative (Snowpark, SQL, JavaScript, Streamlit),</li>
+                        <li>de partager données + business logic de façon sécurisée,</li>
+                        <li>de distribuer et monétiser ces apps via Snowflake Marketplace ou via des listings privés.</li>
+                    </ul>
+
+                    <h3>✔ Objectifs du framework :</h3>
+                    <ul>
+                        <li>Permettre la création d'apps collaboratives sans déplacer les données.</li>
+                        <li>Offrir un cadre de développement moderne (versionning, release channels, logs).</li>
+                        <li>Exécuter l'app au plus près des données du client, répondant à des exigences fortes de sécurité.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ARCHITECTURE : PROVIDER VS CONSUMER
+                ============================================ -->
+                <section id="architecture" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 2. Architecture : Provider vs Consumer
+                    </h2>
+
+                    <div class="info-note">
+                        <em>The framework is built around the provider and consumer model.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Provider</h4>
+                            <ul>
+                                <li>Crée une application package</li>
+                                <li>Emballe des données, scripts, logique</li>
+                                <li>Publie via listing (privé ou Marketplace)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Consumer</h4>
+                            <ul>
+                                <li>Installe l'app dans son propre compte</li>
+                                <li>Configure les accès demandés</li>
+                                <li>Exécute l'application et ses composants (SQL, Streamlit, UDF, SP…)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: APPLICATION PACKAGE (CÔTÉ PROVIDER)
+                ============================================ -->
+                <section id="application-package" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cube"></i> ✅ 3. Application Package (côté Provider)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Providers create an application package that encapsulates data content, business logic, metadata, and setup script.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Un application package contient :</p>
+                    <ul>
+                        <li>Données partagées</li>
+                        <li>Logique applicative (SP, UDF, Snowpark…)</li>
+                        <li>Streamlit UI (optionnel)</li>
+                        <li>Manifest.yml (métadonnées)</li>
+                        <li>Setup script SQL (exécuté à l'installation côté consumer)</li>
+                        <li>Versions + patches (release channels)</li>
+                    </ul>
+                    <p>Il s'agit d'un conteneur distribué ensuite via un listing.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: PUBLIER UNE SNOWFLAKE NATIVE APP (PROVIDER)
+                ============================================ -->
+                <section id="publier-app" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 4. Publier une Snowflake Native App (Provider)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>You publish the app to consumers using listings. The application package becomes the data product of a listing.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Workflow de publication :</h3>
+                    <ol>
+                        <li>Créer et tester l'application package<br>
+                        <em>Ensure roles and privileges are set properly before publishing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Devenir Provider de listings<br>
+                        <em>Becoming a provider of listings… see Use listings as a provider.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Définir les release directives (quelle version de l'app pour quels clients)</li>
+                        <li>Sécurité : lancer un automated security scan<br>
+                        <em>Initiate the automated security scan.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            Créer un listing
+                            <ul>
+                                <li>Peut être gratuit, privé, ou public</li>
+                                <li>Peut inclure un plan tarifaire pour monétiser<br>
+                                <em>Optional: Add a pricing plan to get paid.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>Soumettre pour approbation (nécessaire pour le Marketplace public)</li>
+                    </ol>
+
+                    <div class="warning-note">
+                        <strong>✔ Prérequis de rôle :</strong>
+                        <ul>
+                            <li>Le rôle publiant doit posséder l'application package<br>
+                            <em>The role must be the same role that created the application package.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>CREATE LISTING privilège global</li>
+                            <li>Pour l'auto-fulfillment : configuration par ORGADMIN</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CE QU'UN PROVIDER PEUT PARTAGER DANS UNE NATIVE APP
+                ============================================ -->
+                <section id="partager-dans-app" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-share-alt"></i> ✅ 5. Ce qu'un Provider peut partager dans une Native App
+                    </h2>
+
+                    <div class="info-note">
+                        <em>The business logic of an application can include Streamlit app, stored procedures, functions (Snowpark, JavaScript, SQL).</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="info-note">
+                        <em>Providers can also add shared data content to an app — schemas, tables, external or Iceberg tables, views.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="warning-note">
+                        <strong>✔ Restrictions importantes :</strong>
+                        <ul>
+                            <li>Pas de tables temporaires, volatiles ou transient.<br>
+                            <em>Shared tables cannot be temporary, volatile, or transient tables.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Pas de virtual columns / policies avec code Python/JS.<br>
+                            <em>Tables cannot have virtual columns; view definitions cannot contain Java/Python/JS.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Shared data non versionné : toutes versions de l'app utilisent les mêmes données.<br>
+                            <em>Shared data content is not versioned.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: INSTALLER ET UTILISER UNE NATIVE APP (CONSUMER)
+                ============================================ -->
+                <section id="installer-app" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 6. Installer et utiliser une Native App (Consumer)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Consumers can discover and install apps published to the Marketplace or via private listings.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Workflow côté consumer :</h3>
+                    <ol>
+                        <li>Installer l'app depuis un listing<br>
+                        <em>Install an app from a listing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            Examiner les demandes d'accès
+                            <ul>
+                                <li>L'app peut demander : privilèges sur objets, références pour accéder à d'autres bases / objets</li>
+                            </ul>
+                            <em>Review access requests… including privileges and references required by the app.</em> <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>(Optionnel) Activer l'event table pour les logs<br>
+                        <em>Set up an event table to enable logging and event sharing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            Utiliser l'app
+                            <ul>
+                                <li>via SQL Worksheets</li>
+                                <li>via Streamlit UI<br>
+                                <em>Use the app… view Streamlit apps created by the provider.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>Gérer les privilèges sur l'objet application<br>
+                        Le consumer peut accorder des droits aux autres utilisateurs.</li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CAS PARTICULIER : TRIAL LISTINGS (ESSAI)
+                ============================================ -->
+                <section id="trial-listings" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-flask"></i> ✅ 7. Cas particulier : Trial Listings (Essai)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Apps installed from trial listings are suspended when the trial ends unless converted to a full listing.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="warning-note">
+                        <strong>Important pour examen :</strong>
+                        <ul>
+                            <li>Suspension automatique après période d'essai.</li>
+                            <li>Les données internes à l'app sont conservées si l'app n'est pas supprimée.</li>
+                            <li>S'il existe des objets créés hors de l'app : le consumer doit transférer ownership avant de désinstaller.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: ATOUTS MAJEURS DES SNOWFLAKE NATIVE APPS
+                ============================================ -->
+                <section id="atouts" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Atouts majeurs des Snowflake Native Apps (à citer pour l'examen)
+                    </h2>
+
+                    <ul>
+                        <li>Les apps s'exécutent dans le compte du consumer : <strong>zéro exposition de données</strong>.</li>
+                        <li>Forte intégration avec Snowpark, Streamlit, SQL, collaboration.</li>
+                        <li>Distribution via Listings (privés ou Marketplace).</li>
+                        <li>Monétisation possible.</li>
+                        <li>Gestion des versions via release channels.</li>
+                        <li>Event logging & monitoring intégrés.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: FLASHCARDS SNOWPRO CORE
+                ============================================ -->
+                <section id="flashcards" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 9. Flashcards SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Native App</strong>
+                                卷第App tournant dans le compte du consumer, sécurité maximale
+                            
+                            32
+                                <td><strong>Application package</strong>
+                                卷第Contient données + logique + manifest + setup script
+                            
+                            32
+                                <td><strong>Distribution</strong>
+                                卷第Marketplace ou listings privés
+                            
+                            32
+                                <td><strong>Partage de données</strong>
+                                卷第Tables/views non transient, non virtual columns
+                            
+                            32
+                                <td><strong>Sécurité</strong>
+                                卷第Automated security scan requis
+                            
+                            32
+                                <td><strong>Consumer</strong>
+                                卷第Installer → accorder privilèges → utiliser
+                            
+                            32
+                                <td><strong>Trial apps</strong>
+                                卷第Suspension automatique à fin d'essai
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
