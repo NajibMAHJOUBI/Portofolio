@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Views, Materialized Views & Secure Views | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-eye"></i>🧊 Views, Materialized Views & Secure Views
+                            <i class="fas fa-eye"></i>Views, Materialized Views & Secure Views
                         </a>
                     </li>
                     <li>
@@ -144,7 +144,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-eye"></i> 🧊 Views, Materialized Views & Secure Views
+                        <i class="fas fa-eye"></i>Views, Materialized Views & Secure Views
                     </h2>
 
                     <p>
@@ -157,7 +157,7 @@
                 ============================================ -->
                 <section id="what-is-a-view" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i> ✅ 1. What is a View ? (Vue non matérialisée)
+                        <i class="fas fa-info-circle"></i>1. What is a View ? (Vue non matérialisée)
                     </h2>
 
                     <p>Selon la documentation :</p>
@@ -194,7 +194,7 @@
                 ============================================ -->
                 <section id="materialized-views" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 2. Materialized Views (Vues matérialisées)
+                        <i class="fas fa-chart-line"></i>2. Materialized Views (Vues matérialisées)
                     </h2>
 
                     <p>Selon la documentation :</p>
@@ -244,7 +244,7 @@
                 ============================================ -->
                 <section id="secure-views" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-shield-alt"></i> ✅ 3. Secure Views (Vues sécurisées)
+                        <i class="fas fa-shield-alt"></i>3. Secure Views (Vues sécurisées)
                     </h2>
 
                     <p>Selon la documentation :</p>
@@ -294,59 +294,40 @@
                 ============================================ -->
                 <section id="comparatif" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> 🎯 4. Comparatif (utile pour SnowPro Core)
+                        <i class="fas fa-chart-simple"></i>4. Comparatif
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type de vue</th><th>Stockage ?</th><th>Performance</th><th>Sécurité</th><th>Usage recommandé</th>
+                            <th>Type de vue</th><th>Stockage ?</th><th>Performance</th><th>Sécurité</th><th>Usage recommandé</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>View</strong>
+                                <tr><td><strong>View</strong>
                                 <td>❌ Non
                                 <td>Recalcul à chaque requête
                                 <td>Faible
-                                <td>Simplification logique des requêtes
+                                <td>Simplification logique des requêtes</tr>
+                                
                             
-                            32
-                                <td><strong>Materialized View</strong>
+                                <tr><td><strong>Materialized View</strong>
                                 <td>✔ Oui
                                 <td>Très rapide (pré‑calcul)
                                 <td>Standard
-                                <td>Accélération requêtes fréquentes/complexes
+                                <td>Accélération requêtes fréquentes/complexes</tr>
+                                
                             
-                            32
-                                <td><strong>Secure View</strong>
+                                <tr><td><strong>Secure View</strong>
                                 <td>❌ Non
                                 <td>Parfois plus lente
                                 <td>Très élevée
-                                <td>Protection données sensibles, Data Sharing
+                                <td>Protection données sensibles, Data Sharing</tr>
+                                
                             
                         </tbody>
-                    划
+                    
                 </section>
 
-                <!-- ============================================
-                     SECTION 5: POINTS CLÉS À MÉMORISER POUR SNOWPRO CORE
-                ============================================ -->
-                <section id="points-cles" class="tutorial-section">
-                    <h2>
-                        <i class="fas fa-star"></i> 🎯 5. Points clés à mémoriser pour SnowPro Core
-                    </h2>
 
-                    <div class="info-note">
-                        <ul>
-                            <li>Une vue = requête enregistrée, aucun stockage. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Une materialized view = résultats pré‑calculés, consommant compute & storage. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Snowflake maintient automatiquement les materialized views. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Secure views = protection contre exposition indirecte des données et masquage du SQL. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Secure views = utile pour sécurité, PII, data sharing.</li>
-                            <li>Materialized Views ne supportent pas les JOIN (limitation importante).</li>
-                            <li>Secure views désactivent certaines optimisations, donc performance &lt; standard views.</li>
-                        </ul>
-                    </div>
-                </section>
             </main>
         </div>
     </div>
