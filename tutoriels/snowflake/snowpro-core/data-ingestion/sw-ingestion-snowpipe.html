@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Snowpipe & Snowpipe Streaming | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Snowpipe & Snowpipe Streaming</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#snowpipe-introduction" class="active">
+                            <i class="fas fa-cloud-upload-alt"></i>1. Snowpipe – Introduction
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowpipe-gestion">
+                            <i class="fas fa-cogs"></i>2. Snowpipe – Gestion & Administration
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pipe-commands">
+                            <i class="fas fa-terminal"></i>3. Commandes SQL : PIPE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowpipe-streaming">
+                            <i class="fas fa-bolt"></i>4. Snowpipe Streaming – Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparatif">
+                            <i class="fas fa-chart-simple"></i>5. Snowpipe vs Snowpipe Streaming – Points clés pour examen
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Snowpipe & Snowpipe Streaming</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Snowpipe
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-bolt"></i>Streaming
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWPIPE – INTRODUCTION
+                ============================================ -->
+                <section id="snowpipe-introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 1. Snowpipe – Introduction (Continuous File-Based Ingestion)
+                    </h2>
+
+                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Définition</h3>
+                    <p>Snowpipe est le service Snowflake de chargement continu des données dès que des fichiers apparaissent dans un stage. Il ingère les données en micro-batchs, garantissant une disponibilité rapide sans lancer manuellement un COPY.</p>
+
+                    <h3>✔ Principe de fonctionnement</h3>
+                    <p>Snowpipe repose sur un objet <strong>PIPE</strong>, qui contient l'instruction <code class="inline-code">COPY INTO &lt;table&gt;</code> définissant :</p>
+                    <ul>
+                        <li>La source (stage)</li>
+                        <li>La table cible <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Détection des fichiers</h3>
+                    <p>Snowpipe peut être déclenché par :</p>
+                    <ul>
+                        <li>
+                            <strong>Cloud Messaging (événementiel)</strong>
+                            <ul>
+                                <li>Utilise S3/SNS/SQS, Azure Event Grid, GCP Pub/Sub</li>
+                                <li>Snowpipe lit les événements et charge automatiquement les fichiers <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Snowpipe REST API</strong>
+                            <ul>
+                                <li>Le client appelle une API Snowflake et fournit la liste des fichiers <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Support Cloud</h3>
+                    <p>Snowpipe supporte :</p>
+                    <ul>
+                        <li>S3</li>
+                        <li>GCS</li>
+                        <li>Azure Blob & ADLS Gen2 <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SNOWPIPE – GESTION & ADMINISTRATION
+                ============================================ -->
+                <section id="snowpipe-gestion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 2. Snowpipe – Gestion & Administration
+                    </h2>
+
+                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Suppression des fichiers source</h3>
+                    <ul>
+                        <li>Snowpipe ne supporte pas <code class="inline-code">PURGE</code>.</li>
+                        <li>Il ne supprime pas automatiquement les fichiers du stage.</li>
+                        <li>Il faut utiliser <code class="inline-code">REMOVE</code>, ou configurer la politique de cycle de vie du cloud. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Chargement de données historiques</h3>
+                    <ul>
+                        <li>Snowpipe via événements ne charge que les fichiers des 7 derniers jours (avec <code class="inline-code">ALTER PIPE … REFRESH</code>).</li>
+                        <li>
+                            Pour des fichiers plus anciens :
+                            <ul>
+                                <li>Charger manuellement via <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
+                                <li>Reconfigurer Snowpipe pour l'ingestion automatique</li>
+                                <li>Utiliser <code class="inline-code">ALTER PIPE … REFRESH</code> pour éviter les doublons <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Recréation de pipes (modification)</h3>
+                    <p>Étapes recommandées :</p>
+                    <ol>
+                        <li>Pause du pipe (<code class="inline-code">ALTER PIPE … SET PIPE_EXECUTION_PAUSED = TRUE</code>)</li>
+                        <li>Vérifier via <code class="inline-code">SYSTEM$PIPE_STATUS</code></li>
+                        <li>Recréer le pipe (<code class="inline-code">CREATE OR REPLACE PIPE</code>)</li>
+                        <li>Vérifier la configuration cloud (SNS/SQS, Event Grid…)</li>
+                        <li>Reprendre le pipe <span class="reference">[docs.snowflake.com]</span></li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: COMMANDES SQL : PIPE
+                ============================================ -->
+                <section id="pipe-commands" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> ✅ 3. Commandes SQL : PIPE (CREATE / ALTER / SHOW / DESC)
+                    </h2>
+
+                    <p>Sources : Snowflake Documentation</p>
+
+                    <h3>✔ CREATE PIPE</h3>
+                    <p>Exemple générique :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE PIPE mypipe
+AUTO_INGEST = TRUE
+AS COPY INTO mytable
+FROM @mystage/path
+FILE_FORMAT = (TYPE = 'CSV');</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Points clés :</strong></p>
+                    <ul>
+                        <li><code class="inline-code">AUTO_INGEST = TRUE</code> active les notifications pour ingestion automatique</li>
+                        <li><code class="inline-code">copy_statement</code> est l'instruction COPY INTO utilisée par Snowpipe</li>
+                        <li>
+                            Supporte deux types de sources :
+                            <ul>
+                                <li>Fichiers en stage</li>
+                                <li>Source de streaming (<code class="inline-code">DATA_SOURCE(TYPE => 'STREAMING')</code>) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="warning-note">
+                        ⚠ <strong>Recommandations :</strong> Ne pas utiliser CURRENT_DATE, CURRENT_TIMESTAMP, etc. dans un COPY Snowpipe <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ DESCRIBE PIPE</h3>
+                    <p>Permet de consulter :</p>
+                    <ul>
+                        <li>Définition COPY</li>
+                        <li>Canal de notification</li>
+                        <li>Propriétaire</li>
+                        <li>Type de pipe (manuel ou auto-généré par Snowpipe Streaming HP) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ SHOW PIPES</h3>
+                    <p>Liste tous les pipes accessibles, avec filtre possible via LIKE. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SNOWPIPE STREAMING – OVERVIEW
+                ============================================ -->
+                <section id="snowpipe-streaming" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bolt"></i> ✅ 4. Snowpipe Streaming – Overview
+                    </h2>
+
+                    <p>Sources : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Principe</h3>
+                    <p>Snowpipe Streaming permet l'ingestion ligne par ligne en quasi temps réel, sans utiliser de stage fichier → flux direct dans Snowflake.</p>
+
+                    <h3>✔ Avantages</h3>
+                    <ul>
+                        <li>Latence extrêmement faible</li>
+                        <li>Pas de fichiers compressés intermédiaires</li>
+                        <li>Pipelines simplifiés</li>
+                        <li>Serverless et auto‑scalable <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Deux architectures</h3>
+
+                    <h4>1. Snowpipe Streaming – Architecture Hautes Performances</h4>
+                    <ul>
+                        <li>Utilise le snowpipe‑streaming SDK</li>
+                        <li>Prix basé sur le débit (GB non compressé)</li>
+                        <li>S'appuie sur un objet PIPE, contre lequel sont ouverts les "channels"</li>
+                        <li>Ingestion via REST API</li>
+                        <li>Validation de schéma côté serveur <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h4>2. Snowpipe Streaming – Architecture Classique</h4>
+                    <ul>
+                        <li>Utilise le snowflake-ingest SDK</li>
+                        <li>Pas d'objet PIPE dédié (chaîne opératoire différente)</li>
+                        <li>Fonctionne avec Java 8+ et nécessite JCE</li>
+                        <li>Peut ingérer dans des tables standards et Iceberg</li>
+                        <li>
+                            Gestion d'erreurs configurable :
+                            <ul>
+                                <li>CONTINUE</li>
+                                <li>SKIP_BATCH</li>
+                                <li>ABORT (défaut) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: SNOWPIPE VS SNOWPIPE STREAMING – POINTS CLÉS POUR EXAMEN
+                ============================================ -->
+                <section id="comparatif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 5. Snowpipe vs Snowpipe Streaming – Points clés pour examen
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Snowpipe (fichiers)</h4>
+                            <ul>
+                                <li>Fichiers dans un stage</li>
+                                <li>Détection par notifications cloud</li>
+                                <li>Latence en minutes</li>
+                                <li>Appending only (pas d'UPSERT)</li>
+                                <li>Nécessite CREATE PIPE <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Snowpipe Streaming (événements / lignes)</h4>
+                            <ul>
+                                <li>Données streamées directement (pas de stage fichier)</li>
+                                <li>Ingestion quasi-immédiate</li>
+                                <li>Utilise un PIPE (HP) ou un channel (classique)</li>
+                                <li>Basé sur SDK (Java/Python) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

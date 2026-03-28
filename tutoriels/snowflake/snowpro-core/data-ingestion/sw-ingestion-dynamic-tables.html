@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Dynamic Tables | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Dynamic Tables</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-table"></i>1. Qu'est‑ce qu'une Dynamic Table ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#target-lag">
+                            <i class="fas fa-clock"></i>2. TARGET_LAG – Fraîcheur de données
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#refresh">
+                            <i class="fas fa-sync-alt"></i>3. Refresh : fonctionnement, modes et initialisation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#prerequis">
+                            <i class="fas fa-check-circle"></i>4. Prérequis techniques & bonnes pratiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#commandes-sql">
+                            <i class="fas fa-terminal"></i>5. Commandes SQL pour Dynamic Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés à retenir pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Dynamic Tables</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-table"></i>Dynamic Tables
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-sync-alt"></i>ELT
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QU'UNE DYNAMIC TABLE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 1. Qu'est‑ce qu'une Dynamic Table ?
+                    </h2>
+
+                    <p>Source : Documentation Snowflake sur les Dynamic Tables <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Définition</h3>
+                    <p>Une <strong>Dynamic Table</strong> est une table gérée automatiquement par Snowflake, alimentée par une requête SQL déclarative.</p>
+                    <p>Elle :</p>
+                    <ul>
+                        <li>se met à jour automatiquement selon un délai de fraîcheur (<code class="inline-code">TARGET_LAG</code>),</li>
+                        <li>reflète les modifications des objets sources (tables, Iceberg, etc.) sans planification manuelle,</li>
+                        <li>simplifie le pipeline ELT sans Streams ni Tasks.</li>
+                    </ul>
+
+                    <h3>✔ Fonctionnement</h3>
+                    <ul>
+                        <li>Lors de la création, la requête passée dans <code class="inline-code">AS &lt;query&gt;</code> définit le contenu de la Dynamic Table.</li>
+                        <li>Snowflake détecte les changements dans les objets sources et applique un rafraîchissement automatique. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Comparaison rapide :</strong>
+                        <ul>
+                            <li><strong>Vs Vue</strong> : la Dynamic Table matérialise les données automatiquement.</li>
+                            <li><strong>Vs Materialized View</strong> : supporte des transformations complexes (JOIN, UNION…).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TARGET_LAG – FRAÎCHEUR DE DONNÉES
+                ============================================ -->
+                <section id="target-lag" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 2. TARGET_LAG – Fraîcheur de données
+                    </h2>
+
+                    <p>Source : Snowflake Dynamic Tables overview <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Rôle</h3>
+                    <p><code class="inline-code">TARGET_LAG</code> fixe l'écart maximal autorisé entre la Dynamic Table et les données sources.</p>
+                    <p>Ex. : <code class="inline-code">TARGET_LAG = '5 minutes'</code> → la table a au plus 5 min de retard.</p>
+
+                    <h3>✔ Impact</h3>
+                    <ul>
+                        <li>Contrôle la fréquence de rafraîchissement.</li>
+                        <li>Impacte le coût compute : plus la fréquence est élevée, plus l'usage est important. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: REFRESH : FONCTIONNEMENT, MODES ET INITIALISATION
+                ============================================ -->
+                <section id="refresh" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 3. Refresh : fonctionnement, modes et initialisation
+                    </h2>
+
+                    <p>Sources : Dynamic tables refresh <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Initialisation</h3>
+                    <p>Lors de la création d'une Dynamic Table :</p>
+                    <ul>
+                        <li><code class="inline-code">INITIALIZE = ON_CREATE</code> → rafraîchissement initial immédiat. (par défaut)</li>
+                        <li><code class="inline-code">INITIALIZE = ON_SCHEDULE</code> → initialisation selon le target lag. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Modes de Refresh</h3>
+                    <p>Une Dynamic Table peut être rafraîchie selon différents modes :</p>
+                    <ul>
+                        <li><strong>INCREMENTAL</strong> : ne traite que les données modifiées (optimisé performance).</li>
+                        <li><strong>FULL</strong> : recalcul complet.</li>
+                        <li><strong>AUTO</strong> : Snowflake choisit automatiquement (recommandé en développement). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Rafraîchissement manuel</h3>
+                    <p>Commande SQL :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
+                    </div>
+                    <div class="warning-note">
+                        ⚠ À utiliser avec parcimonie : trop de refresh manuel peut perturber les rafraîchissements planifiés. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Rafraîchissement via TASK</h3>
+                    <p>Pour un contrôle total :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE TASK my_dt_refresh
+    WAREHOUSE = my_wh
+    SCHEDULE = 'USING CRON 0 0 * * * UTC'
+AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: PRÉREQUIS TECHNIQUES & BONNES PRATIQUES
+                ============================================ -->
+                <section id="prerequis" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-circle"></i> ✅ 4. Prérequis techniques & bonnes pratiques
+                    </h2>
+
+                    <p>Source : Create dynamic tables <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Change Tracking obligatoire</h3>
+                    <p>Pour qu'une Dynamic Table fonctionne en mode incrémental :</p>
+                    <ul>
+                        <li>Le change tracking doit être activé sur toutes les tables sources,</li>
+                        <li>Avec un Time Travel non nul,</li>
+                        <li>Snowflake tente de l'activer automatiquement (sauf en FULL refresh mode).</li>
+                    </ul>
+
+                    <h3>✔ Objets sources supportés</h3>
+                    <ul>
+                        <li>Tables Snowflake</li>
+                        <li>Tables Iceberg Snowflake-managed</li>
+                        <li>Tables Iceberg externes <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Conseils d'architecture</h3>
+                    <ul>
+                        <li>Découper les Dynamic Tables complexes en plusieurs étapes.</li>
+                        <li>Optimiser les requêtes pour tirer avantage du refresh incrémental. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMMANDES SQL POUR DYNAMIC TABLES
+                ============================================ -->
+                <section id="commandes-sql" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> ✅ 5. Commandes SQL pour Dynamic Tables (CREATE / ALTER / DESCRIBE)
+                    </h2>
+
+                    <p>Source : CREATE DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ CREATE DYNAMIC TABLE</h3>
+                    <p>Exemple complet :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE DYNAMIC TABLE my_dt (
+    col1 STRING,
+    col2 NUMBER
+)
+TARGET_LAG = '20 minutes'
+WAREHOUSE = my_wh
+REFRESH_MODE = AUTO
+INITIALIZE = ON_CREATE
+AS
+SELECT col1, col2 FROM staging_table;</code></pre>
+                    </div>
+                    <p><strong>Paramètres importants :</strong></p>
+                    <ul>
+                        <li><code class="inline-code">TARGET_LAG = '&lt;interval&gt;' | DOWNSTREAM</code></li>
+                        <li><code class="inline-code">WAREHOUSE = &lt;name&gt;</code></li>
+                        <li><code class="inline-code">REFRESH_MODE = AUTO | FULL | INCREMENTAL</code></li>
+                        <li><code class="inline-code">INITIALIZE = ON_CREATE | ON_SCHEDULE</code></li>
+                        <li><code class="inline-code">IMMUTABLE WHERE (&lt;expr&gt;)</code> → empêcher la mise à jour de certaines lignes</li>
+                        <li><code class="inline-code">CLUSTER BY (...)</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ ALTER DYNAMIC TABLE</h3>
+                    <p>Source : ALTER DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet de modifier :</p>
+                    <ul>
+                        <li>TARGET_LAG</li>
+                        <li>WAREHOUSE</li>
+                        <li>INITIALIZATION_WAREHOUSE</li>
+                        <li>Politiques (masking, row access, tags…)</li>
+                        <li>Commentaire</li>
+                        <li>Suspension / reprise</li>
+                    </ul>
+                    <p>Refresh manuel :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER DYNAMIC TABLE my_dt REFRESH;</code></pre>
+                    </div>
+
+                    <h3>✔ DESCRIBE DYNAMIC TABLE</h3>
+                    <p>Source : DESC DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Utilisation :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>DESC DYNAMIC TABLE my_dynamic_table;</code></pre>
+                    </div>
+                    <p>Montre : Colonnes, Définitions, Métadonnées (exige privilège MONITOR).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS À RETENIR POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés à retenir pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Dynamic Tables = pipeline ELT déclaratif</h4>
+                            <p>→ Snowflake orchestre automatiquement.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 TARGET_LAG contrôle la fraîcheur</h4>
+                            <p>→ Plus il est petit, plus la table se rafraîchit souvent (coût compute ↑).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Change tracking obligatoire en mode incrémental</h4>
+                            <p>→ Active automatiquement sauf en FULL refresh mode.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Trois modes de refresh : INCREMENTAL / FULL / AUTO</h4>
+                            <p>→ AUTO recommandé seulement en développement.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Rafraîchissement manuel possible mais à limiter</h4>
+                            <p>→ Risque de perturber le planificateur automatique.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Commandes essentielles :</h4>
+                            <ul>
+                                <li>CREATE DYNAMIC TABLE</li>
+                                <li>ALTER DYNAMIC TABLE</li>
+                                <li>DESCRIBE DYNAMIC TABLE</li>
+                                <li>SHOW DYNAMIC TABLES</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

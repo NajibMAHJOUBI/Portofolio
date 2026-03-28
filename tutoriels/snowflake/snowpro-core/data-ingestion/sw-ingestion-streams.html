@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Streams (CDC) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Streams (CDC)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-stream"></i>1. Introduction aux Streams Snowflake (CDC)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#offsets-consommation">
+                            <i class="fas fa-chart-line"></i>2. Comprendre les offsets et la consommation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contenu-stream">
+                            <i class="fas fa-table"></i>3. Contenu d'un Stream : structure CDC
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#create-stream">
+                            <i class="fas fa-plus-circle"></i>4. Commande SQL : CREATE STREAM & options
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#commandes-associees">
+                            <i class="fas fa-terminal"></i>5. Commandes associées aux streams
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#principes-bonne-comprehension">
+                            <i class="fas fa-lightbulb"></i>6. Principes de bonne compréhension – SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples">
+                            <i class="fas fa-code"></i>7. Exemples simples
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Streams (CDC)</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-stream"></i>Streams
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>CDC
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: INTRODUCTION AUX STREAMS SNOWFLAKE (CDC)
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-stream"></i> ✅ 1. Introduction aux Streams Snowflake (CDC)
+                    </h2>
+
+                    <p>Source : <em>Introduction to streams</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Définition</h3>
+                    <p>Un stream est un objet Snowflake qui enregistre les modifications DML (INSERT, UPDATE, DELETE) effectuées sur un objet source (table, vue, table externe, table Iceberg, table dynamique…). Il fournit une <strong>Change Data Capture (CDC) interne</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Objectif</h3>
+                    <p>Fournir une "change table" permettant d'identifier ce qui a changé entre deux versions transactionnelles d'un objet. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Fonctionnement général</h3>
+                    <ul>
+                        <li>Lors de la création d'un stream, Snowflake capture un offset initial : un instantané logique du contenu de la table.</li>
+                        <li>Ensuite, Snowflake enregistre tous les changements intervenus après cet offset.</li>
+                        <li>Les données restituées incluent des métadonnées sur chaque événement de changement (old/new values, type de changement). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Important : les streams ne stockent pas de données</strong>
+                        <p>Un stream ne contient pas les lignes : il stocke uniquement l'offset et s'appuie sur l'historique de versioning du tableau.</p>
+                        <p>Quand un stream est créé, Snowflake ajoute des colonnes cachées au tableau pour suivre les modifications. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+
+                    <h3>✔ Types d'objets pouvant avoir un stream</h3>
+                    <ul>
+                        <li>Tables standard (y compris partagées)</li>
+                        <li>Vues (avec change tracking activé)</li>
+                        <li>Tables externes</li>
+                        <li>Tables dynamiques</li>
+                        <li>Tables Iceberg (avec limitations) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COMPRENDRE LES OFFSETS ET LA CONSOMMATION
+                ============================================ -->
+                <section id="offsets-consommation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. Comprendre les offsets et la consommation
+                    </h2>
+
+                    <p>Source : <em>CDC usage details</em> <span class="reference">[select.dev]</span></p>
+
+                    <h3>✔ Offset (position temporelle du stream)</h3>
+                    <ul>
+                        <li>Le stream retourne les modifications depuis le dernier offset consommé.</li>
+                        <li>
+                            L'offset n'est avancé que lorsqu'une requête DML consomme les données du stream :
+                            <ul>
+                                <li>INSERT</li>
+                                <li>UPDATE</li>
+                                <li>DELETE</li>
+                                <li>MERGE</li>
+                                <li>CTAS <span class="reference">[select.dev]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Consommation vs simple lecture</h3>
+                    <ul>
+                        <li>Un <code class="inline-code">SELECT</code> n'avance pas l'offset : on peut inspecter les données sans les consommer.</li>
+                        <li>Une opération DML consomme la modification → ces changements ne seront plus renvoyés lors de la prochaine requête. <span class="reference">[select.dev]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CONTENU D'UN STREAM : STRUCTURE CDC
+                ============================================ -->
+                <section id="contenu-stream" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 3. Contenu d'un Stream : structure CDC
+                    </h2>
+
+                    <p>Source : <em>Introduction to streams</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Chaque ligne de CDC contient :</p>
+                    <ul>
+                        <li>Les colonnes de la table d'origine</li>
+                        <li>
+                            Des méta-informations sur le changement :
+                            <ul>
+                                <li>Type (INSERT/UPDATE/DELETE)</li>
+                                <li>Valeurs avant / après</li>
+                                <li>Métadonnées transactionnelles</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="warning-note">
+                        ⚠️ Les streams utilisent le schéma courant de la table mais peuvent échouer si des modifications du schéma sont incompatibles avec des données supprimées (Time Travel). <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMANDE SQL : CREATE STREAM & OPTIONS
+                ============================================ -->
+                <section id="create-stream" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 4. Commande SQL : CREATE STREAM & options
+                    </h2>
+
+                    <p>Source : <em>SQL CREATE STREAM reference</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Syntaxe générale (table)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE [ OR REPLACE ] STREAM [ IF NOT EXISTS ] &lt;name&gt;
+    ON TABLE &lt;table_name&gt;
+    [ APPEND_ONLY = TRUE | FALSE ]
+    [ SHOW_INITIAL_ROWS = TRUE | FALSE ]
+    [ COMMENT = '&lt;text&gt;' ];</code></pre>
+                    </div>
+
+                    <h3>✔ Options importantes</h3>
+                    <ul>
+                        <li><code class="inline-code">APPEND_ONLY = TRUE</code> : suit uniquement les INSERT (utile pour éviter updates/deletes).</li>
+                        <li><code class="inline-code">SHOW_INITIAL_ROWS = TRUE</code> : renvoie les lignes existantes de la table lors de la création (sinon stream vide).</li>
+                        <li>Modes temporels : <code class="inline-code">AT / BEFORE TIMESTAMP, OFFSET, STATEMENT</code> → permettre de créer un stream sur un état passé. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Variants disponibles</h3>
+                    <ul>
+                        <li>Sur une table externe (option INSERT_ONLY)</li>
+                        <li>Sur une vue</li>
+                        <li>Sur une table Iceberg</li>
+                        <li>Sur une dynamic table</li>
+                        <li>Sur une directory table (ON STAGE) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Clone</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STREAM &lt;name&gt; CLONE &lt;source_stream&gt;;</code></pre>
+                    </div>
+                    <p>→ Reprend le même offset que l'original. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMMANDES ASSOCIÉES AUX STREAMS
+                ============================================ -->
+                <section id="commandes-associees" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-terminal"></i> ✅ 5. Commandes associées aux streams
+                    </h2>
+
+                    <p>Source : <em>SQL Reference Streams commands</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ SHOW STREAMS</h3>
+                    <p>Liste les streams du schéma / compte.</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SHOW STREAMS;</code></pre>
+                    </div>
+
+                    <h3>✔ DESCRIBE STREAM</h3>
+                    <p>Affiche la définition du stream, son offset, ses options.</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>DESCRIBE STREAM my_stream;</code></pre>
+                    </div>
+
+                    <h3>✔ ALTER STREAM</h3>
+                    <p>Pour modifier certaines propriétés.</p>
+
+                    <h3>✔ DROP STREAM</h3>
+                    <p>Supprime un stream (ne supprime pas la table source).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: PRINCIPES DE BONNE COMPRÉHENSION – SNOWPRO CORE
+                ============================================ -->
+                <section id="principes-bonne-comprehension" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 6. Principes de bonne compréhension – SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 1. Un stream = un "bookmark" CDC</h4>
+                            <p>→ Enregistre à partir de un point dans le temps ; n'est pas un stockage de données. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 2. Consommation unique des données</h4>
+                            <p>→ Une fois consommées via DML, les données disparaissent du stream. <span class="reference">[select.dev]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 3. Un stream par use case</h4>
+                            <p>→ Pour que chaque pipeline lise indépendamment les changements.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 4. Interaction avec Tasks</h4>
+                            <p>Les tasks peuvent automatiser le traitement des changements (e.g. MERGE sur une table cible). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 5. Hidden metadata columns</h4>
+                            <p>→ Ajoutées à la table source dès la création du premier stream. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: EXEMPLES SIMPLES
+                ============================================ -->
+                <section id="exemples" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 7. Exemples simples
+                    </h2>
+
+                    <h3>✔ Création d'un stream :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STREAM my_stream ON TABLE my_table;</code></pre>
+                    </div>
+                    <p><span class="reference">[linkedin.com]</span></p>
+
+                    <h3>✔ Consommation via MERGE :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>MERGE INTO target t
+USING (SELECT * FROM my_stream) s
+ON t.id = s.id
+WHEN MATCHED THEN UPDATE SET ...
+WHEN NOT MATCHED THEN INSERT (...);</code></pre>
+                    </div>
+                    <p><span class="reference">[linkedin.com]</span></p>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
