@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data File Compression & File Sizing | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data File Compression & File Sizing</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#compression" class="active">
+                            <i class="fas fa-compress-alt"></i>1. Data File Compression
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#file-sizing">
+                            <i class="fas fa-chart-bar"></i>2. File Sizing Best Practices & Limitations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>3. Points critiques pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 15 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data File Compression & File Sizing</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 15 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-compress-alt"></i>Compression
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-bar"></i>File Sizing
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DATA FILE COMPRESSION
+                ============================================ -->
+                <section id="compression" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-compress-alt"></i> ✅ 1. Data File Compression
+                    </h2>
+
+                    <p>Source : <em>Preparing to load data — Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>🎯 Objectif</strong><br>
+                        Optimiser la vitesse de chargement, les coûts de stockage et les performances du COPY en exploitant la compression des fichiers.
+                    </div>
+
+                    <h3>📌 Points essentiels à retenir</h3>
+
+                    <ul>
+                        <li>✔ Snowflake <strong>recommande de compresser les fichiers</strong> pour les chargements volumineux <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            ✔ Snowflake détecte automatiquement :
+                            <ul>
+                                <li>Le format du fichier compressé</li>
+                                <li>Le codec de compression utilisé <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            ✔ Déclaration de la compression via l'option <code class="inline-code">COMPRESSION</code> :
+                            <ul>
+                                <li>Peut être définie :</li>
+                                <ul>
+                                    <li>Dans le <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
+                                    <li>Ou dans un named file format ou named stage utilisé dans le COPY <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </ul>
+                        </li>
+                        <li>
+                            ✔ <strong>Compatibilité et formats pris en charge (avec compression automatique) :</strong><br>
+                            Avro, ORC, Parquet → Snowflake gère automatiquement la détection et le traitement des fichiers compressés <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: FILE SIZING BEST PRACTICES & LIMITATIONS
+                ============================================ -->
+                <section id="file-sizing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i> ✅ 2. File Sizing Best Practices & Limitations
+                    </h2>
+
+                    <p>Source : <em>Preparing your data files — Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>🎯 Objectif</strong><br>
+                        Optimiser le parallélisme, les performances et éviter les erreurs ou interruptions lors du chargement.
+                    </div>
+
+                    <h3>⭐ Recommandations générales de taille des fichiers</h3>
+
+                    <ul>
+                        <li>
+                            ✔ <strong>Taille recommandée des fichiers : 100–250 MB (compressés)</strong><br>
+                            → Permet de maximiser le parallélisme et l'efficacité du warehouse. <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>
+                            ✔ <strong>Pourquoi ?</strong>
+                            <ul>
+                                <li>Le nombre d'opérations en parallèle est limité par le nombre de fichiers disponibles</li>
+                                <li>Plus de fichiers → Plus de parallélisme → Temps de chargement plus court <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>❌ À éviter</h3>
+                    <div class="warning-note">
+                        <strong>❌ Fichiers très volumineux (> 100 GB)</strong>
+                        <ul>
+                            <li>Peu recommandé</li>
+                            <li>Si nécessaire, vérifier attentivement <code class="inline-code">ON_ERROR</code></li>
+                            <li>Risque : abandon du chargement si durée > 24 heures (aucune partie du fichier n'est committée) <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+
+                    <h3>🔧 Stratégies pour optimiser les fichiers</h3>
+
+                    <ul>
+                        <li>
+                            ✔ <strong>Agréger les petits fichiers</strong><br>
+                            → Réduit le surcoût de traitement par fichier <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>
+                            ✔ <strong>Fractionner les gros fichiers</strong><br>
+                            → Meilleure répartition de la charge entre les clusters Snowflake <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>
+                            ✔ <strong>Fractionner par lignes, pas par octets</strong><br>
+                            → Évite que des enregistrements soient coupés entre deux fichiers <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>
+                            ✔ <strong>Outils recommandés pour le splitting</strong>
+                            <ul>
+                                <li>Sous Linux/macOS : <code class="inline-code">split</code></li>
+                                <li>Exemple : <code class="inline-code">split -l 100000 pagecounts-20151201.csv pages</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Sous Windows → Utiliser des utilitaires tiers (pas d'outil natif) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>⚠ Limites particulières : Objets > 16 MB</strong>
+                        <p>Snowflake recommande de réduire les objets dépassant 16 MB avant chargement.</p>
+                        <p>Cette fonctionnalité nécessite le bundle 2024_08 activé (activé par défaut). <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: POINTS CRITIQUES POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 3. Points critiques pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Compression</h4>
+                            <ul>
+                                <li>Comprendre que Snowflake <strong>détecte automatiquement</strong> la compression</li>
+                                <li>Comprendre comment paramétrer <code class="inline-code">COMPRESSION</code> dans un file format ou dans COPY INTO</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Taille des fichiers</h4>
+                            <ul>
+                                <li>Retenir la <strong>règle d'or 100–250 MB</strong></li>
+                                <li>Savoir éviter les fichiers trop gros (>100 GB)</li>
+                                <li>Importance du <strong>parallélisme</strong> dépendant du nombre de fichiers</li>
+                                <li>Comprendre les risques d'interruption après 24h</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Manipulation</h4>
+                            <ul>
+                                <li>Savoir quand <strong>agréger / fractionner</strong></li>
+                                <li>Savoir utiliser <code class="inline-code">split</code></li>
+                                <li>Savoir gérer les limites des objets > 16 MB</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

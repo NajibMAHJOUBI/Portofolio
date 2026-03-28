@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - COPY INTO Options & VALIDATE Function | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">COPY INTO Options & VALIDATE</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#copy-options" class="active">
+                            <i class="fas fa-cog"></i>1. COPY INTO — COPY_OPTIONS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#validation-mode">
+                            <i class="fas fa-check-double"></i>2. COPY INTO – VALIDATION_MODE (rappel)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#validate-function">
+                            <i class="fas fa-chart-line"></i>3. Fonction de table VALIDATE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>4. Points clés à retenir pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - COPY INTO Options & VALIDATE Function</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>COPY INTO
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>VALIDATE
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: COPY INTO — COPY_OPTIONS
+                ============================================ -->
+                <section id="copy-options" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cog"></i> ✅ 1. COPY INTO — COPY_OPTIONS
+                    </h2>
+
+                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>La commande <code class="inline-code">COPY INTO &lt;table&gt;</code> permet de charger des fichiers depuis un stage interne/externe vers une table Snowflake. Les <strong>COPY_OPTIONS</strong> permettent de contrôler finement le comportement du chargement.</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        ⭐ <strong>COPY_OPTIONS les plus importants à connaître</strong><br>
+                        <span class="reference">[thinketl.com]</span>
+                    </div>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 1. SIZE_LIMIT</h4>
+                            <p>Limite la taille totale des données chargées.</p>
+                            <p>→ Utile pour restreindre un chargement massif involontaire.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 2. PURGE</h4>
+                            <p><code class="inline-code">PURGE = TRUE</code> supprime les fichiers source du stage après un chargement réussi.</p>
+                            <p>→ Pratique pour éviter la relecture des fichiers.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 3. FORCE</h4>
+                            <p><code class="inline-code">FORCE = TRUE</code> recharge les fichiers même s'ils ont déjà été chargés.</p>
+                            <p>→ À utiliser lors de modifications dans les données sources.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 4. TRUNCATECOLUMNS</h4>
+                            <p>TRUE = tronque silencieusement les valeurs trop longues.</p>
+                            <div class="warning-note" style="margin-top: 0.5rem;">
+                                ⚠️ Risque de perte de données. Attention en examen !
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 5. ENFORCE_LENGTH</h4>
+                            <p>TRUE = Snowflake génère une erreur si la valeur dépasse la longueur déclarée.</p>
+                            <p>→ Plus strict que TRUNCATECOLUMNS.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 6. MATCH_BY_COLUMN_NAME</h4>
+                            <p>Gère comment les colonnes du fichier se mappent aux colonnes de la table.</p>
+                            <p>Inclut : COLUMN MATCH CRITERIA, LOAD CRITERIA, gestion des colonnes non correspondantes, limitations <span class="reference">[thinketl.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 7. INCLUDE_METADATA</h4>
+                            <p>Inclut des colonnes système décrivant le fichier source (ex : nom du fichier).</p>
+                            <p>→ Utile pour traçabilité.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COPY INTO – VALIDATION_MODE (RAPPEL)
+                ============================================ -->
+                <section id="validation-mode" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-double"></i> ✅ 2. COPY INTO – VALIDATION_MODE (rappel)
+                    </h2>
+
+                    <p>(Paramètre du COPY INTO)</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>VALIDATION_MODE = RETURN_ERRORS | RETURN_ALL_ERRORS | RETURN_n_ROWS</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet de vérifier les problèmes avant un chargement réel.</p>
+                    <p>Très utile pour les examens SnowPro.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: FONCTION DE TABLE VALIDATE
+                ============================================ -->
+                <section id="validate-function" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 3. Fonction de table VALIDATE
+                    </h2>
+
+                    <p>Source officielle Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>La fonction <code class="inline-code">VALIDATE</code> permet d'analyser les erreurs d'un chargement COPY INTO déjà exécuté.</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>🎯 Objectif</strong><br>
+                        Obtenir toutes les erreurs associées à un chargement COPY INTO donné, et non seulement la première.
+                    </div>
+
+                    <h3>🔧 Syntaxe</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT *
+FROM TABLE(VALIDATE(
+    &lt;table_name&gt;,
+    JOB_ID => '&lt;query_id&gt;' | '_last'
+));</code></pre>
+                    </div>
+
+                    <h3>📌 Paramètres importants</h3>
+                    <ul>
+                        <li><strong><code class="inline-code">table_name</code></strong> : Nom complet de la table cible du COPY.</li>
+                        <li><strong><code class="inline-code">JOB_ID</code></strong> : Un query_id provenant de l'historique des requêtes Snowflake, ou <code class="inline-code">_last</code> pour le dernier COPY du même user / même session.</li>
+                    </ul>
+
+                    <h3>ℹ Notes d'utilisation essentielles</h3>
+                    <ul>
+                        <li>Ne retourne rien si le COPY utilisait <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (par défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            Échec si :
+                            <ul>
+                                <li>Le COPY incluait un SELECT transformant les données</li>
+                                <li>L'utilisateur n'a pas les droits sur la table</li>
+                                <li>Les métadonnées du COPY ont expiré</li>
+                                <li>Le query_id appartient à un autre utilisateur et l'accès n'est pas autorisé <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>Nouveaux fichiers ajoutés au stage après l'exécution → ignorés</li>
+                        <li>Fichiers supprimés après coup → signalés comme manquants</li>
+                    </ul>
+
+                    <h3>📚 Exemples</h3>
+
+                    <h4>👉 Valider le dernier COPY exécuté</h4>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM TABLE(VALIDATE(t1, JOB_ID => '_last'));</code></pre>
+                    </div>
+
+                    <h4>👉 Valider un COPY spécifique</h4>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT *
+FROM TABLE(VALIDATE(t1, JOB_ID => '5415fa1e-59c9-4dda-b652-533de02fdcf1'));</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POINTS CLÉS À RETENIR POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 4. Points clés à retenir pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ COPY_OPTIONS</h4>
+                            <ul>
+                                <li>Comprendre <strong>PURGE, FORCE, TRUNCATECOLUMNS, ENFORCE_LENGTH, MATCH_BY_COLUMN_NAME</strong></li>
+                                <li>Savoir quand FORCER le reload et gérer les colonnes dynamiques.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ VALIDATION_MODE vs VALIDATE()</h4>
+                            <ul>
+                                <li><strong>VALIDATION_MODE</strong> : préchargement.</li>
+                                <li><strong>VALIDATE()</strong> : post‑chargement, analyse d'un job déjà exécuté.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ VALIDATE</h4>
+                            <ul>
+                                <li>Très utile pour comprendre les erreurs de format de fichier.</li>
+                                <li>Ne fonctionne pas lorsque <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (retour vide).</li>
+                                <li>Identifier les fichiers manquants / ignorés.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

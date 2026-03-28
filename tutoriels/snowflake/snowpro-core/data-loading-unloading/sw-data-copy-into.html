@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - COPY INTO & Data Loading | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">COPY INTO & Data Loading</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#copy-into-loading" class="active">
+                            <i class="fas fa-upload"></i>1. COPY INTO — Chargement en table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#copy-into-unloading">
+                            <i class="fas fa-download"></i>2. COPY INTO — Déchargement/export
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#local-file-system">
+                            <i class="fas fa-laptop"></i>3. Chargement depuis un système de fichiers local
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#web-ui">
+                            <i class="fas fa-desktop"></i>4. Chargement via l'interface Web (Snowsight)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-essentielle">
+                            <i class="fas fa-star"></i>5. Synthèse essentielle SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - COPY INTO & Data Loading</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>COPY INTO
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-laptop"></i>Data Loading
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: COPY INTO — CHARGEMENT EN TABLE
+                ============================================ -->
+                <section id="copy-into-loading" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-upload"></i> ✅ 1. COPY INTO — Chargement en table
+                    </h2>
+
+                    <p>La commande <code class="inline-code">COPY INTO &lt;table&gt;</code> charge des fichiers vers une table Snowflake existante.</p>
+
+                    <h3>✔ Sources de fichiers autorisées</h3>
+                    <ul>
+                        <li><strong>Internal stages</strong> : user (@~), table (@%table), named stage (@mystage)</li>
+                        <li><strong>External stages</strong> : S3, GCS, Azure</li>
+                        <li><strong>External location directement</strong> (s3://, gcs://, azure://) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        ⚠️ <strong>Limite :</strong> fichiers dans archival storage classes (S3 Glacier, Azure Archive) non accessibles. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Syntaxe (simplifiée)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>COPY INTO mytable
+FROM @mystage/path/
+FILE_FORMAT = (FORMAT_NAME='myformat')
+PATTERN='.*.csv'
+ON_ERROR='CONTINUE';</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Options essentielles</h3>
+                    <ul>
+                        <li><strong><code class="inline-code">FILES = ('f1', 'f2')</code></strong> : charger fichiers spécifiques. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong><code class="inline-code">PATTERN</code></strong> (regex) : filtrer les fichiers. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong><code class="inline-code">FILE_FORMAT</code></strong> : FORMAT_NAME ou TYPE = CSV/JSON/AVRO/ORC/PARQUET/XML. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            <strong><code class="inline-code">VALIDATION_MODE</code></strong> :
+                            <ul>
+                                <li>RETURN_ERRORS</li>
+                                <li>RETURN_ALL_ERRORS</li>
+                                <li>RETURN__ROWS</li>
+                            </ul>
+                            Permet de tester et valider avant chargement réel. <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li><strong>Transformations</strong> : COPY peut s'appuyer sur un SELECT pour transformer les colonnes en entrée. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Bonnes pratiques :</strong>
+                        <ul>
+                            <li>Préparer un file format séparé.</li>
+                            <li>Utiliser PATTERN pour limiter les fichiers.</li>
+                            <li>Utiliser VALIDATION_MODE pour valider avant ingestion.</li>
+                            <li>Suivre l'historique de loads via LOAD_HISTORY et Snowsight. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COPY INTO — DÉCHARGEMENT/EXPORT
+                ============================================ -->
+                <section id="copy-into-unloading" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 2. COPY INTO — Déchargement/export
+                    </h2>
+
+                    <p>La commande <code class="inline-code">COPY INTO &lt;location&gt;</code> exporte des données d'une table ou requête vers :</p>
+                    <ul>
+                        <li>internal stage</li>
+                        <li>external stage</li>
+                        <li>external location (S3, GCS, Azure) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Syntaxe (simplifiée)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>COPY INTO @mystage/export/
+FROM mytable
+FILE_FORMAT = (TYPE = CSV COMPRESSION='GZIP');</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Points clés</h3>
+                    <ul>
+                        <li>Export vers fichiers parallélisés par défaut.</li>
+                        <li><strong><code class="inline-code">SINGLE=TRUE</code></strong> permet un fichier unique (sinon Snowflake produit plusieurs fichiers).</li>
+                        <li>Supporte seulement <strong>CSV, JSON, PARQUET</strong> pour FILE_FORMAT en déchargement. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Option <code class="inline-code">PARTITION BY</code> pour partitionner l'export. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Résultats téléchargeables via <code class="inline-code">GET</code> si export vers internal stage. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CHARGEMENT DEPUIS UN SYSTÈME DE FICHIERS LOCAL
+                ============================================ -->
+                <section id="local-file-system" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-laptop"></i> ✅ 3. Chargement depuis un système de fichiers local
+                    </h2>
+
+                    <p>Documentation Snowflake : <em>Bulk loading from a local file system</em>.</p>
+                    <p>Chargement local se fait en 2 étapes :</p>
+                    <ol>
+                        <li><strong>PUT</strong> → uploader fichier(s) local(aux) vers internal stage.</li>
+                        <li><strong>COPY INTO &lt;table&gt;</strong> → charger depuis le stage vers la table. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ol>
+
+                    <h3>✔ Étape 1 — PUT</h3>
+                    <p>Permet d'envoyer un fichier local à un stage interne :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>PUT file:///data/data.csv @mystage/path/;</code></pre>
+                    </div>
+                    <p>Supporte user stage (@~), table stage (@%table), named stage (@mystage).</p>
+                    <p>Fichiers uploadés sont automatiquement encryptés.</p>
+
+                    <h3>✔ Étape 2 — COPY INTO</h3>
+                    <p>Comme décrit dans la section 1.</p>
+
+                    <h3>✔ Listing des fichiers uploadés</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>LIST @~;
+LIST @%mytable;
+LIST @mystage;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CHARGEMENT VIA L'INTERFACE WEB (SNOWSIGHT)
+                ============================================ -->
+                <section id="web-ui" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-desktop"></i> ✅ 4. Chargement via l'interface Web (Snowsight)
+                    </h2>
+
+                    <p>Snowflake permet de charger des données directement via l'UI (Snowsight).</p>
+
+                    <h3>✔ Formats supportés</h3>
+                    <ul>
+                        <li><strong>Structurés</strong> : CSV, TSV</li>
+                        <li><strong>Semi‑structurés</strong> : JSON, Avro, ORC, Parquet, XML <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Sources d'import possibles</h3>
+                    <ul>
+                        <li>Local machine</li>
+                        <li>Stages internes ou externes</li>
+                        <li>Cloud storage non encore déclaré comme external stage (Classic Console) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Limitations :</strong>
+                        <ul>
+                            <li>Jusqu'à 250 fichiers par upload</li>
+                            <li>Taille max 250 MB par fichier <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>Pour plus volumineux → utiliser PUT + COPY INTO.</p>
+                    </div>
+
+                    <h3>✔ Fonctionnement</h3>
+                    <ul>
+                        <li>Snowsight peut créer automatiquement une table à partir d'un fichier (sauf XML & Iceberg). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les chargements UI exécutent une transaction explicite.</li>
+                        <li>
+                            Nécessite privilèges :
+                            <ul>
+                                <li>DB: USAGE</li>
+                                <li>SCHÉMA: CREATE TABLE</li>
+                                <li>STAGE: USAGE</li>
+                                <li>TABLE : OWNERSHIP (si chargement dans table existante) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Étapes</h3>
+                    <ol>
+                        <li>Snowsight → Create → Table → From file</li>
+                        <li>Sélection du ou des fichiers (drag & drop ou depuis stage)</li>
+                        <li>Aperçu des données + mapping colonnes</li>
+                        <li>Création table + chargement</li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: SYNTHÈSE ESSENTIELLE SNOWPRO CORE
+                ============================================ -->
+                <section id="synthese-essentielle" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Synthèse essentielle SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>Points clés</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>COPY INTO &lt;table&gt;</strong>
+                                <td>Chargement depuis stages externes/internes + external locations ; supporte transformations via SELECT ; FILE_FORMAT & PATTERN essentiels ; VALIDATION_MODE.
+                            
+                            32
+                                <td><strong>COPY INTO &lt;location&gt;</strong>
+                                <td>Déchargement vers stage ou cloud ; formats CSV/JSON/Parquet ; SINGLE=TRUE pour fichier unique.
+                            
+                            32
+                                <td><strong>Local File System</strong>
+                                <td>PUT → upload vers internal stage (encrypté automatiquement) ; puis COPY INTO table ; LIST pour vérifier.
+                            
+                            32
+                                <td><strong>Web UI (Snowsight)</strong>
+                                一道道Méthode simple ; limite 250 MB/fichier ; supporte CSV/JSON/Parquet etc. ; peut créer table automatiquement ; pratique pour petits chargements.
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

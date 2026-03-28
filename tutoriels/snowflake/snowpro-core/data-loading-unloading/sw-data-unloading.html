@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Unload | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Unload</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#overview" class="active">
+                            <i class="fas fa-download"></i>1. Overview of Data Unloading
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#considerations">
+                            <i class="fas fa-exclamation-triangle"></i>2. Data Unloading Considerations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#preparing">
+                            <i class="fas fa-tools"></i>3. Preparing to Unload Data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>4. Points clés à maîtriser pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Unload</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-download"></i>Data Unload
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-export"></i>Export
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: OVERVIEW OF DATA UNLOADING
+                ============================================ -->
+                <section id="overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 1. Overview of Data Unloading
+                    </h2>
+
+                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Principe général</h3>
+                    <p>Snowflake permet l'export (unload) de données vers des fichiers plats (CSV, TSV, JSON…) de façon similaire au chargement, mais en sens inverse.</p>
+                    <p>Le mécanisme principal repose sur :</p>
+                    <ul>
+                        <li><strong>COPY INTO</strong> : écrit les données de la table vers un internal ou external stage.</li>
+                        <li><strong>GET</strong> : télécharge les fichiers depuis le stage (ou via interfaces cloud : S3, Azure, GCS). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Unloading via SELECT</h3>
+                    <p>Au lieu d'exporter une table complète, Snowflake permet :</p>
+                    <ul>
+                        <li>d'utiliser une requête <code class="inline-code">SELECT</code> dans <code class="inline-code">COPY INTO &lt;location&gt;</code></li>
+                        <li>d'inclure des JOIN, des filtres, etc.<br>→ Le résultat est exporté sous forme de fichiers. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Unloading en un ou plusieurs fichiers</h3>
+                    <p>Option COPY importante :</p>
+                    <ul>
+                        <li><code class="inline-code">SINGLE = TRUE</code> → un fichier unique</li>
+                        <li><code class="inline-code">SINGLE = FALSE</code> (défaut) → plusieurs fichiers générés en parallèle</li>
+                        <li>Fichiers nommés automatiquement avec préfixe (ex: data_...).</li>
+                        <li><code class="inline-code">MAX_FILE_SIZE</code> permet de limiter la taille maximum par fichier. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Partitionnement lors de l'unload</h3>
+                    <p>Copy option : <code class="inline-code">PARTITION BY</code></p>
+                    <ul>
+                        <li>Permet de diviser les lignes en plusieurs fichiers organisés par répertoires, utile pour les data lakes.</li>
+                        <li>Très efficace pour ingestion en aval par des outils tiers. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: DATA UNLOADING CONSIDERATIONS
+                ============================================ -->
+                <section id="considerations" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 2. Data Unloading Considerations
+                    </h2>
+
+                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-bullseye"></i>
+                        <strong>🎯 Objectif</strong><br>
+                        Éviter les erreurs courantes dans les fichiers exportés, en particulier sur les chaînes vides, les NULLs et le comportement des formats de fichier.
+                    </div>
+
+                    <h3>✔ Empty strings vs NULL values</h3>
+                    <p><strong>🔹 Distinction importante (surtout dans les formats CSV)</strong></p>
+                    <ul>
+                        <li><strong>NULL</strong> → deux délimiteurs successifs (ex: ,,)</li>
+                        <li><strong>Empty string</strong> → généralement '' (chaîne vide entre quotes)</li>
+                    </ul>
+
+                    <p>Snowflake fournit plusieurs options pour contrôler cela :</p>
+
+                    <h4>🔹 FIELD_OPTIONALLY_ENCLOSED_BY</h4>
+                    <ul>
+                        <li>Permet d'envelopper les valeurs chaines dans un caractère (', ").</li>
+                        <li>Recommandé pour distinguer NULL et empty string.</li>
+                        <li>Peut être NONE (défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h4>🔹 EMPTY_FIELD_AS_NULL</h4>
+                    <ul>
+                        <li><code class="inline-code">TRUE</code> (défaut) → empty string devient NULL</li>
+                        <li><code class="inline-code">FALSE</code> → empty string reste une chaîne vide</li>
+                    </ul>
+                    <div class="warning-note">
+                        ⚠ interdit d'utiliser <code class="inline-code">EMPTY_FIELD_AS_NULL=TRUE</code> avec certains comportements ; cela peut rendre NULL et empty string indistinguables. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h4>🔹 NULL_IF</h4>
+                    <ul>
+                        <li>Indique la représentation textuelle qui doit être interprétée comme NULL.</li>
+                        <li>Important lorsque <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY = NONE</code> et <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>✔ Bonnes pratiques recommandées :</strong>
+                        <ul>
+                            <li>Préféré : utiliser <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY</code> pour entourer les chaînes.</li>
+                            <li>Si pas d'enclosure :
+                                <ul>
+                                    <li>mettre <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code></li>
+                                    <li>définir <code class="inline-code">NULL_IF</code> pour différencier NULL et chaînes vides <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: PREPARING TO UNLOAD DATA
+                ============================================ -->
+                <section id="preparing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tools"></i> ✅ 3. Preparing to Unload Data
+                    </h2>
+
+                    <p>Source : Snowflake Documentation (via Data Unloading Overview + Unload processes) <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake fournit des instructions précises pour préparer l'unload, notamment :</p>
+
+                    <h3>✔ Étapes du processus d'unload</h3>
+                    <ol>
+                        <li><code class="inline-code">COPY INTO @stage/path</code> vers un internal named stage, un user stage, ou un external stage (S3, Azure, GCS)</li>
+                        <li><code class="inline-code">GET @stage/path</code> pour récupérer les fichiers localement si besoin <span class="reference">[docs.snowflake.com]</span></li>
+                    </ol>
+
+                    <h3>✔ Préparation du stage</h3>
+                    <p>Un stage peut être :</p>
+                    <ul>
+                        <li><strong>Internal Stage</strong> → plus flexible, géré par Snowflake</li>
+                        <li><strong>External Stage</strong> → pointe vers S3 / Azure / GCS via credentials</li>
+                    </ul>
+                    <p>Exemple interne :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE STAGE my_unload_stage
+    FILE_FORMAT = my_csv_unload_format;</code></pre>
+                    </div>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Unloading vers un internal stage</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>COPY INTO @mystage/unload/
+FROM mytable;</code></pre>
+                    </div>
+                    <ul>
+                        <li>Le préfixe <code class="inline-code">unload/</code> organise les fichiers dans un sous-dossier.</li>
+                        <li>Pas besoin de préciser de FILE_FORMAT si défini au niveau du stage. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Téléchargement local via Snowsql</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>GET @mystage file://local/path/</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POINTS CLÉS À MAÎTRISER POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 4. Points clés à maîtriser pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 COPY INTO</h4>
+                            <ul>
+                                <li>Peut utiliser une table ou une requête SELECT</li>
+                                <li>Peut partitionner les sorties (<code class="inline-code">PARTITION BY</code>)</li>
+                                <li>Peut gérer <code class="inline-code">SINGLE=TRUE</code> pour un fichier unique</li>
+                                <li>Utilise <code class="inline-code">MAX_FILE_SIZE</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Gestion des formats (CSV surtout)</h4>
+                            <ul>
+                                <li>Distinction <strong>NULL vs empty string</strong></li>
+                                <li>Options : <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY</code>, <code class="inline-code">EMPTY_FIELD_AS_NULL</code>, <code class="inline-code">NULL_IF</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Stages</h4>
+                            <ul>
+                                <li>Internal stage</li>
+                                <li>External stage (S3 / Azure / GCS)</li>
+                                <li><code class="inline-code">GET</code> pour récupérer les fichiers</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Performance & organisation</h4>
+                            <ul>
+                                <li>Partitionnement pour data lakes</li>
+                                <li>Nommage automatique des fichiers en parallèle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

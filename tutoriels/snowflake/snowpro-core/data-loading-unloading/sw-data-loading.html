@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Loading Data | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Loading Data</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif" class="active">
+                            <i class="fas fa-bullseye"></i>🎯 Objectif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#overview-data-loading">
+                            <i class="fas fa-cloud-upload-alt"></i>1. Vue d'ensemble du Data Loading dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#stages">
+                            <i class="fas fa-layer-group"></i>2. Les Stages — Point central du chargement
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#methodes-chargement">
+                            <i class="fas fa-tasks"></i>3. Méthodes de chargement des données
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#preparation-transformation">
+                            <i class="fas fa-cogs"></i>4. Préparation et transformation des données
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#querying-staged-files">
+                            <i class="fas fa-search"></i>5. Querying staged files
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#considerations-cles">
+                            <i class="fas fa-lightbulb"></i>6. Data Loading Considerations — Points-clés pour l'examen
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-essentiel">
+                            <i class="fas fa-star"></i>7. Résumé essentiel pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Loading Data</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-upload"></i>Data Loading
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>COPY INTO
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: OBJECTIF
+                ============================================ -->
+                <section id="objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bullseye"></i> 🎯 Objectif
+                    </h2>
+                    <p>
+                        Comprendre les différentes méthodes de chargement de données dans Snowflake, les concepts clés (stages, COPY INTO, Snowpipe, formats…), et les bonnes pratiques essentielles pour le passage de l'examen.
+                    </p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: VUE D'ENSEMBLE DU DATA LOADING DANS SNOWFLAKE
+                ============================================ -->
+                <section id="overview-data-loading" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 1. Vue d'ensemble du Data Loading dans Snowflake
+                    </h2>
+
+                    <p>
+                        Snowflake propose plusieurs façons de charger des données, avec des outils, tâches, et approches différentes selon les besoins (batch, temps réel, semi-structuré, via interface ou via API). <span class="reference">[docs.snowflake.com]</span>
+                    </p>
+
+                    <p>Les principales rubriques couvertes par l'overview sont :</p>
+                    <ul>
+                        <li>Options de chargement</li>
+                        <li>Fonctionnalités COPY INTO</li>
+                        <li>Tutoriels étape‑par‑étape</li>
+                        <li>Considérations & bonnes pratiques</li>
+                        <li>Snowpipe & Snowpipe Streaming</li>
+                        <li>Transformation à l'ingestion</li>
+                        <li>Querying staged files <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LES STAGES — POINT CENTRAL DU CHARGEMENT
+                ============================================ -->
+                <section id="stages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i> ✅ 2. Les Stages — Point central du chargement
+                    </h2>
+
+                    <p>Toutes les méthodes de chargement passent par un stage, qui sert de zone d'atterrissage des fichiers. Deux types : external ou internal.</p>
+
+                    <h3>✔ 2.1 Internal Stages</h3>
+                    <p>Snowflake met à disposition :</p>
+                    <ul>
+                        <li><strong>User stage</strong> : stage individuel par utilisateur</li>
+                        <li><strong>Table stage</strong> : un stage implicite lié à chaque table</li>
+                        <li><strong>Named internal stage</strong> : objet explicite créé dans un schéma <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 2.2 External Stages</h3>
+                    <p>Utilisent un stockage cloud externe :</p>
+                    <ul>
+                        <li>AWS S3</li>
+                        <li>Google Cloud Storage</li>
+                        <li>Azure Blob Storage <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>❗ Limite importante :</strong> les stockages d'archive type S3 Glacier ou Azure Archive ne sont pas supportés pour un chargement direct. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>❗ Attention à la facturation :</strong> du data transfer peut être facturé si le stockage externe est dans une autre région. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: MÉTHODES DE CHARGEMENT DES DONNÉES
+                ============================================ -->
+                <section id="methodes-chargement" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tasks"></i> ✅ 3. Méthodes de chargement des données
+                    </h2>
+
+                    <p>Snowflake supporte plusieurs modes de data ingestion :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 3.1 Bulk Loading — COPY INTO</h4>
+                            <p>C'est la méthode standard et la plus utilisée pour ingérer des volumes importants.</p>
+                            <p>COPY INTO supporte :</p>
+                            <ul>
+                                <li>fichiers situés dans internal ou external stages</li>
+                                <li>transformations légères</li>
+                                <li>file formats variés (CSV, JSON, Parquet, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3.2 Snowpipe — Chargement continu</h4>
+                            <p>Pour le chargement quasi temps réel, Snowpipe :</p>
+                            <ul>
+                                <li>surveille l'arrivée des fichiers,</li>
+                                <li>charge automatiquement les données,</li>
+                                <li>retourne un statut d'ingestion,</li>
+                                <li>facture selon l'utilisation de compute serverless. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3.3 Snowpipe Streaming</h4>
+                            <p>Solution pour ingestion streaming haute performance, intégrée à Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3.4 Snowsight — Chargement manuel pour petits volumes</h4>
+                            <p>Permet d'uploader des fichiers locaux via l'interface web. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3.5 Connecteurs / Intégrations</h4>
+                            <p>Snowflake propose de multiples connecteurs pour charger des données depuis :</p>
+                            <ul>
+                                <li>Google Cloud</li>
+                                <li>Azure</li>
+                                <li>Salesforce</li>
+                                <li>API & outils ETL (Fivetran, Informatica…) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: PRÉPARATION ET TRANSFORMATION DES DONNÉES
+                ============================================ -->
+                <section id="preparation-transformation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 4. Préparation et transformation des données
+                    </h2>
+
+                    <h3>✔ 4.1 File Formats</h3>
+                    <p>Les files formats décrivent le mode de lecture des fichiers :</p>
+                    <ul>
+                        <li>CSV</li>
+                        <li>JSON</li>
+                        <li>Parquet</li>
+                        <li>AVRO</li>
+                        <li>etc. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 4.2 Transformations pendant le chargement</h3>
+                    <p>Le COPY INTO peut effectuer des transformations simples :</p>
+                    <ul>
+                        <li>parsing</li>
+                        <li>colonnes dérivées</li>
+                        <li>gestion d'erreurs <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: QUERYING STAGED FILES
+                ============================================ -->
+                <section id="querying-staged-files" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 5. Querying staged files
+                    </h2>
+
+                    <p>Snowflake permet de lire les fichiers directement dans les stages avant ingestion :</p>
+                    <ul>
+                        <li>utile pour pré-validation</li>
+                        <li>via des commandes SQL (SELECT FROM @stage …) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Deux thématiques associées :</p>
+                    <ul>
+                        <li>Query data in staged files</li>
+                        <li>Query metadata for staged files <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: DATA LOADING CONSIDERATIONS — POINTS-CLÉS POUR L'EXAMEN
+                ============================================ -->
+                <section id="considerations-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 6. Data Loading Considerations — Points-clés pour l'examen
+                    </h2>
+
+                    <p>La documentation signale plusieurs bonnes pratiques essentielles :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Préparer correctement les fichiers</h4>
+                            <ul>
+                                <li>assurer cohérence du format</li>
+                                <li>éviter les erreurs dans les en‑têtes, séparateurs</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Optimiser la taille des fichiers</h4>
+                            <ul>
+                                <li>fichiers trop petits = surcharge</li>
+                                <li>fichiers trop gros = latence accrue</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Gérer les permissions des stages</h4>
+                            <p>OWNERSHIP nécessaire pour table stage <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Utiliser les row timestamps</h4>
+                            <p>Pour mesurer précisément la latence d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Comprendre la facturation liée au chargement</h4>
+                            <ul>
+                                <li>compute (COPY, Snowpipe)</li>
+                                <li>data transfer si stockage distant <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ ESSENTIEL POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-essentiel" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Résumé essentiel pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Stages</strong>
+                                <td>Internal (user, table, named) & External (S3/GCS/Azure).
+                            
+                            32
+                                <td><strong>Méthodes de chargement</strong>
+                                <td>COPY INTO, Snowpipe, Snowpipe Streaming, Snowsight.
+                            
+                            32
+                                <td><strong>Formats</strong>
+                                <td>CSV, JSON, Parquet, AVRO, ORC.
+                            
+                            32
+                                <td><strong>Snowpipe</strong>
+                                <td>Chargement continu, serverless billing.
+                            
+                            32
+                                <td><strong>COPY INTO</strong>
+                                <td>Bulk loading, transformations légères, file formats.
+                            
+                            32
+                                <td><strong>Limitations</strong>
+                                <td>Pas d'accès depuis stockage archive type Glacier.
+                            
+                            32
+                                <td><strong>Monitoring & validation</strong>
+                                <td>Query staged data, metadata, ingestion logs.
+                            
+                            32
+                                <td><strong>Best practices</strong>
+                                <td>Tailles de fichiers, row timestamps, accès stages, coûts.
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

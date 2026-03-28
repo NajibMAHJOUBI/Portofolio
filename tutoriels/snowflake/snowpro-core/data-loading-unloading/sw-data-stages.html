@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Stages, Directory Tables & Unstructured Data | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Stages & Unstructured Data</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#external-stages" class="active">
+                            <i class="fas fa-cloud-upload-alt"></i>1. External Stages (stages externes)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#internal-stages">
+                            <i class="fas fa-server"></i>2. Internal Stages (stages internes)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#directory-tables">
+                            <i class="fas fa-table"></i>3. Directory Tables (dirtables)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#unstructured-data">
+                            <i class="fas fa-file-image"></i>4. Unstructured Data & Server‑side Encryption
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#organizing-data">
+                            <i class="fas fa-folder-tree"></i>5. Organizing Data by Path
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#create-stage">
+                            <i class="fas fa-plus-circle"></i>6. CREATE STAGE — Points clés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#put-command">
+                            <i class="fas fa-upload"></i>7. PUT — Upload de fichiers dans un stage interne
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#get-command">
+                            <i class="fas fa-download"></i>8. GET — Télécharger des fichiers depuis un internal stage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#list-command">
+                            <i class="fas fa-list"></i>9. LIST — Lister les fichiers d'un stage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-essentielle">
+                            <i class="fas fa-star"></i>10. Synthèse essentielle pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Stages, Directory Tables & Unstructured Data</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Stages
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-image"></i>Unstructured Data
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: EXTERNAL STAGES
+                ============================================ -->
+                <section id="external-stages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 1. External Stages (stages externes)
+                    </h2>
+
+                    <p>Un external stage référence un stockage cloud externe (S3, GCS, Azure) et sert de point d'accès aux fichiers utilisés pour le chargement Snowflake.</p>
+
+                    <div class="info-note">
+                        <strong>Points essentiels :</strong>
+                        <ul>
+                            <li>Snowflake supporte Amazon S3, Google Cloud Storage, Azure Blob/ADLS. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Les données dans les classes archival (ex. S3 Glacier, Azure Archive) ne sont pas accessibles. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Un external stage est un objet de base de données stockant : URL du bucket, Credentials ou Storage Integration, File format éventuel. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Création via <code class="inline-code">CREATE STAGE</code> (avec paramètres spécifiques selon le cloud). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Possibilité d'associer un directory table (métadonnées des fichiers). <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: INTERNAL STAGES
+                ============================================ -->
+                <section id="internal-stages" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-server"></i> ✅ 2. Internal Stages (stages internes)
+                    </h2>
+
+                    <p>Snowflake maintient automatiquement plusieurs types de stages internes :</p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>User stage (@~)</h4>
+                            <p>Dédié à chaque utilisateur, accessible uniquement par celui-ci ; ne peut pas être modifié ou supprimé. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Table stage (@%table_name)</h4>
+                            <p>Lié à une table Snowflake, pour charger des fichiers uniquement dans cette table. Ne peut pas être supprimé. Le propriétaire de la table doit disposer de OWNERSHIP pour manipuler ses fichiers. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Named internal stage</h4>
+                            <p>Objet explicite créé via <code class="inline-code">CREATE STAGE</code>. Peut servir à charger plusieurs tables, est partageable entre utilisateurs. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+
+                    <p>Chaque stage interne est stocké au sein de Snowflake (storage internal Snowflake).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: DIRECTORY TABLES
+                ============================================ -->
+                <section id="directory-tables" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 3. Directory Tables (dirtables)
+                    </h2>
+
+                    <p>Un directory table est une couche ajoutée à un stage pour cataloguer les fichiers.</p>
+
+                    <div class="info-note">
+                        <strong>Principes :</strong>
+                        <ul>
+                            <li>Ce n'est pas un objet indépendant : c'est une couche liée au stage. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Fonctionne comme une « external table » (métadonnées : taille, last_modified, file_url...).</li>
+                            <li>Peut être activé lors de <code class="inline-code">CREATE STAGE DIRECTORY = (ENABLE=TRUE)</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>
+                                Utilisations :
+                                <ul>
+                                    <li>Lister tous les fichiers d'un stage</li>
+                                    <li>Construire des pipelines de traitement de fichiers</li>
+                                    <li>Joindre fichiers + métadonnées <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                Rafraîchissement nécessaire :
+                                <ul>
+                                    <li>Automatique via events cloud</li>
+                                    <li>Manuel via <code class="inline-code">ALTER STAGE … REFRESH</code> (peut être coûteux) <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </li>
+                            <li>Requêtage via : <code class="inline-code">SELECT * FROM DIRECTORY(@stage_name);</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: UNSTRUCTURED DATA & SERVER-SIDE ENCRYPTION
+                ============================================ -->
+                <section id="unstructured-data" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-image"></i> ✅ 4. Unstructured Data & Server‑side Encryption
+                    </h2>
+
+                    <p>Snowflake prend en charge l'accès sécurisé aux fichiers non structurés (images, vidéos, PDF, audio).</p>
+
+                    <div class="info-note">
+                        <strong>Points clés :</strong>
+                        <ul>
+                            <li>Supporté dans internal et external stages. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>
+                                Types d'URL pour accéder aux fichiers :
+                                <ul>
+                                    <li><strong>Scoped URL</strong> (accès temporaire sécurisé, recommandé)</li>
+                                    <li><strong>File URL</strong> (permanent, nécessite privilèges sur le stage)</li>
+                                    <li><strong>Pre-signed URL</strong> (pour applications externes, avec expiration configurable) <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </li>
+                            <li>
+                                Server-side encryption :
+                                <ul>
+                                    <li>Pour éviter corruption lors de GET → vérifier <code class="inline-code">ENCRYPTION='SNOWFLAKE_SSE'</code> sur le stage. <span class="reference">[docs.snowflake.com]</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: ORGANIZING DATA BY PATH
+                ============================================ -->
+                <section id="organizing-data" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-folder-tree"></i> ✅ 5. Organizing Data by Path
+                    </h2>
+
+                    <p>Lorsque les fichiers sont organisés dans des sous‑répertoires au sein d'un stage, ceci permet :</p>
+                    <ul>
+                        <li>d'améliorer la lisibilité et le partitionnement logique,</li>
+                        <li>d'utiliser <code class="inline-code">PATTERN</code> dans COPY INTO,</li>
+                        <li>d'optimiser les refresh de directory tables via <code class="inline-code">SUBPATH</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>L'organisation par chemins est une bonne pratique mentionnée dans les considérations de staging. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: CREATE STAGE — POINTS CLÉS
+                ============================================ -->
+                <section id="create-stage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 6. CREATE STAGE — Points clés
+                    </h2>
+
+                    <p>La commande <code class="inline-code">CREATE STAGE</code> crée un stage interne ou externe.</p>
+
+                    <h3>Internal stage (extrait simplifié)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STAGE my_int_stage
+    ENCRYPTION = (TYPE='SNOWFLAKE_SSE')
+    DIRECTORY = (ENABLE=TRUE)
+    FILE_FORMAT = (TYPE=CSV);</code></pre>
+                    </div>
+
+                    <h3>External stage (exemple S3)</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE STAGE my_ext_stage
+    URL='s3://bucket/path/'
+    STORAGE_INTEGRATION = my_int
+    DIRECTORY = (ENABLE=TRUE);</code></pre>
+                    </div>
+
+                    <div class="info-note">
+                        <strong>Points importants :</strong>
+                        <ul>
+                            <li><code class="inline-code">FILE_FORMAT</code> peut être défini directement dans le stage.</li>
+                            <li><code class="inline-code">DIRECTORY</code> table peut être activée.</li>
+                            <li>Encrypted external stages peuvent utiliser AWS_SSE_S3, AWS_SSE_KMS, ou NONE. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: PUT COMMAND
+                ============================================ -->
+                <section id="put-command" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-upload"></i> ✅ 7. PUT — Upload de fichiers dans un stage interne
+                    </h2>
+
+                    <p><code class="inline-code">PUT</code> permet d'envoyer des fichiers locaux → internal stages.</p>
+
+                    <div class="info-note">
+                        <strong>Caractéristiques :</strong>
+                        <ul>
+                            <li>Upload possible uniquement vers internal stages (user, table, named).</li>
+                            <li>Fichiers automatiquement encryptés AES‑128 ou 256 lors de l'upload.</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>PUT file:///local/path/file.csv @my_int_stage AUTO_COMPRESS=TRUE;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: GET COMMAND
+                ============================================ -->
+                <section id="get-command" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-download"></i> ✅ 8. GET — Télécharger des fichiers depuis un internal stage
+                    </h2>
+
+                    <p><code class="inline-code">GET</code> permet de rapatrier des fichiers locaux depuis un internal stage.</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>GET @my_int_stage file:///local/download/;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: LIST COMMAND
+                ============================================ -->
+                <section id="list-command" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-list"></i> ✅ 9. LIST — Lister les fichiers d'un stage
+                    </h2>
+
+                    <p>Commande fondamentale pour tout stage (interne ou externe).</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>LIST @my_stage;</code></pre>
+                    </div>
+
+                    <p>Permet de visualiser : nom du fichier, taille, date de modification.</p>
+                    <p>Ces sorties peuvent être utilisées :</p>
+                    <ul>
+                        <li>via le pipe operator <code class="inline-code">-&gt;&gt;</code></li>
+                        <li>via <code class="inline-code">TABLE(RESULT_SCAN(LAST_QUERY_ID()))</code></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: SYNTHÈSE ESSENTIELLE POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="synthese-essentielle" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 10. Synthèse essentielle pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Thème</th><th>Points clés</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>External Stages</strong>
+                                <td>S3, GCS, Azure ; stockage externe ; pas d'archive ; Credentials/Integration nécessaires.
+                            
+                            32
+                                <td><strong>Internal Stages</strong>
+                                <td>User (~), Table (%), Named ; stockés dans Snowflake ; utilisés pour PUT/GET.
+                            
+                            32
+                                <td><strong>Directory Tables</strong>
+                                <td>Métadonnées fichiers ; activées via DIRECTORY=TRUE ; se requêtent via DIRECTORY(@stage).
+                            
+                            32
+                                <td><strong>Unstructured Data</strong>
+                                <td>Accès via scoped/file/pre-signed URLs ; encryption SNOWFLAKE_SSE recommandée.
+                            
+                            32
+                                <td><strong>Organisation par Path</strong>
+                                <td>Utiliser sous-répertoires ; utile pour COPY PATTERN et refresh sélectifs.
+                            
+                            32
+                                <td><strong>CREATE STAGE</strong>
+                                <td>Paramètres selon cloud ; FILE_FORMAT possible ; ENCRYPTION et DIRECTORY optionnels.
+                            
+                            32
+                                <td><strong>PUT</strong>
+                                <td>Upload local → internal stage ; encryption automatique.
+                            
+                            32
+                                <td><strong>GET</strong>
+                                一道道Téléchargement depuis internal stage vers local.
+                            
+                            32
+                                <td><strong>LIST</strong>
+                                一道道Lister le contenu d'un stage ; compatible avec RESULT_SCAN.
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
