@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Review Query Profile | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Review Query Profile</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#acceder-query-profile" class="active">
+                            <i class="fas fa-chart-line"></i>1. Accéder au Query Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contenu-query-profile">
+                            <i class="fas fa-info-circle"></i>2. Ce que montre le Query Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pourquoi-utiliser">
+                            <i class="fas fa-lightbulb"></i>3. Pourquoi utiliser Query Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#navigation">
+                            <i class="fas fa-sitemap"></i>4. Navigation dans le Query Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#permissions">
+                            <i class="fas fa-lock"></i>5. Accès et permissions nécessaires
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#terminologie">
+                            <i class="fas fa-glossary"></i>6. Notions clés et terminologie
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>7. Ce qu'il faut retenir pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Review Query Profile</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Query Profile
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-simple"></i>Performance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: ACCÉDER AU QUERY PROFILE
+                ============================================ -->
+                <section id="acceder-query-profile" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 1. Accéder au Query Profile
+                    </h2>
+
+                    <p>Dans Snowsight, le Query Profile est accessible depuis :</p>
+                    <ul>
+                        <li>Les résultats d'une requête exécutée dans un worksheet</li>
+                        <li>La page Query History, en sélectionnant une requête</li>
+                        <li>Les pages "Grouped Queries" ou "Individual Queries" <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Il permet d'examiner en détail l'exécution d'une requête Snowflake, notamment les étapes, les scans, les agrégations, les transferts de données, et les performances associées.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CE QUE MONTRE LE QUERY PROFILE
+                ============================================ -->
+                <section id="contenu-query-profile" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 2. Ce que montre le Query Profile
+                    </h2>
+
+                    <p>Le Query Profile permet :</p>
+                    <ul>
+                        <li>D'explorer chaque étape d'une requête exécutée, à travers un <strong>graphe visuel de l'exécution</strong> (operators / nodes, liens de données). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            D'obtenir des informations détaillées par étape :
+                            <ul>
+                                <li>Rows processed</li>
+                                <li>Data scanned</li>
+                                <li>Time spent</li>
+                                <li>Pruning, filtering, join methods</li>
+                            </ul>
+                            (détails présentés dans le profil visuel)
+                        </li>
+                        <li>Comprendre le plan d'exécution réel produit par Snowflake : Snowflake génère automatiquement un plan d'exécution (DAG d'opérateurs), qui peut différer de l'ordre logique du SQL.</li>
+                        <li>
+                            Diagnostiquer les problèmes de performance :
+                            <ul>
+                                <li>Étapes lentes</li>
+                                <li>Surconsommation de compute</li>
+                                <li>Goulots d'étranglement de tri, jointure ou agrégation</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: POURQUOI UTILISER QUERY PROFILE
+                ============================================ -->
+                <section id="pourquoi-utiliser" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 3. Pourquoi utiliser Query Profile
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Identifier les opérations lourdes</h4>
+                            <p>Le Query Profile permet de savoir quelle étape coûte le plus en temps ou en ressources.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Comprendre pourquoi une requête ne renvoie pas les résultats attendus</h4>
+                            <p>Le plan peut révéler des filtres inattendus, un mauvais ordre de jointure ou un mauvais choix d'indexation logique.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Identifier les raisons d'une exécution longue ou bloquée</h4>
+                            <p>Chaque node du plan montre où la requête passe le plus de temps.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Aide au support / debugging</h4>
+                            <p>Le Query ID peut être partagé avec Snowflake Support pour faciliter le diagnostic.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: NAVIGATION DANS LE QUERY PROFILE
+                ============================================ -->
+                <section id="navigation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sitemap"></i> ✅ 4. Navigation dans le Query Profile
+                    </h2>
+
+                    <h3>✔ Accès aux étapes ("nodes")</h3>
+                    <p>Les étapes du plan (table scan, join, aggregate, sort, etc.) sont affichées sous forme de graphe.</p>
+
+                    <h3>✔ Inspecter chaque étape</h3>
+                    <p>Un clic sur un node montre :</p>
+                    <ul>
+                        <li>Le temps d'exécution</li>
+                        <li>Les lignes lues / écrites</li>
+                        <li>Les données scannées</li>
+                        <li>Le volume retourné à l'étape suivante</li>
+                    </ul>
+
+                    <h3>✔ Parcours chronologique</h3>
+                    <p>Représentation visuelle du flow de données entre les étapes (links).</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: ACCÈS ET PERMISSIONS NÉCESSAIRES
+                ============================================ -->
+                <section id="permissions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 5. Accès et permissions nécessaires
+                    </h2>
+
+                    <ul>
+                        <li>✔ Vous pouvez toujours voir vos propres requêtes — L'historique est accessible nativement pour vos exécutions. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            ✔ Voir les requêtes d'autres utilisateurs dépend de votre rôle :
+                            <ul>
+                                <li><strong>ACCOUNTADMIN</strong> : accès complet</li>
+                                <li>Rôle avec privilège MONITOR ou OPERATE sur un warehouse → voir les requêtes des utilisateurs de ce warehouse</li>
+                                <li><strong>GOVERNANCE_VIEWER</strong> : accès aux grouped queries, mais pas aux individual queries <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: NOTIONS CLÉS ET TERMINOLOGIE
+                ============================================ -->
+                <section id="terminologie" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-glossary"></i> ✅ 6. Notions clés et terminologie (utile pour l'examen)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Terme</th><th>Description</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Node / operator</strong>
+                                <td>Une étape d'exécution (scan, join, sort, aggregate…) dans le plan Snowflake
+                            
+                            32
+                                <td><strong>Link</strong>
+                                <td>Flux de données entre les nodes
+                            
+                            32
+                                <td><strong>Query Plan</strong>
+                                一道道Plan d'exécution généré automatiquement par Snowflake
+                            
+                            32
+                                <td><strong>Query Profile</strong>
+                                一道道Vue graphique + statistiques de l'exécution réelle
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CE QU'IL FAUT RETENIR POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Ce qu'il faut retenir pour SnowPro Core
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>Le <strong>Query Profile</strong> est l'outil clé pour analyser les performances d'une requête.</li>
+                            <li>Il montre les étapes de traitement (plan d'exécution), les métriques de performance, et les flux de données.</li>
+                            <li>Il est disponible depuis Query History, Query Results, ou Query ID via l'URL.</li>
+                            <li>Les permissions varient selon les rôles Snowflake.</li>
+                            <li>Indispensable pour diagnostiquer lenteurs, surconsommation, ou erreurs dans un pipeline SQL.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Query Insights & Performance | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Query Insights & Performance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#query-insights" class="active">
+                            <i class="fas fa-chart-line"></i>1. Query Insights – Comprendre et analyser les performances
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#queries-too-large">
+                            <i class="fas fa-memory"></i>2. Queries too large to fit in memory
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clustering-pruning">
+                            <i class="fas fa-cubes"></i>3. Clustering, Micro-partitions & Query Pruning
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#warehouse-queueing">
+                            <i class="fas fa-clock"></i>4. Warehouse Queueing : Query queuing & Concurrency
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#explain">
+                            <i class="fas fa-code"></i>5. EXPLAIN : Obtenir le plan d'exécution optimisé
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-general">
+                            <i class="fas fa-star"></i>6. Résumé général pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Query Insights & Performance</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-simple"></i>Query Insights
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QUERY INSIGHTS – COMPRENDRE ET ANALYSER LES PERFORMANCES
+                ============================================ -->
+                <section id="query-insights" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 1. Query Insights – Comprendre et analyser les performances
+                    </h2>
+
+                    <p>Snowsight fournit plusieurs vues pour analyser les performances des requêtes :</p>
+
+                    <h3>✔ Query History</h3>
+                    <p>Permet :</p>
+                    <ul>
+                        <li>De surveiller les requêtes individuelles ou groupées.</li>
+                        <li>D'accéder aux métriques d'exécution (durée, warehouse utilisé, scans, etc.).</li>
+                        <li>D'accéder au Query Profile, qui permet de visualiser chaque étape du plan d'exécution. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Query Profile (rappel essentiel SnowPro)</h3>
+                    <ul>
+                        <li>Visualisation DAG des opérateurs (TableScan, Join, Filter, Aggregate…).</li>
+                        <li>Analyse des étapes lentes et des volumes traités.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: QUERIES TOO LARGE TO FIT IN MEMORY
+                ============================================ -->
+                <section id="queries-too-large" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-memory"></i> ✅ 2. Queries too large to fit in memory
+                    </h2>
+
+                    <h3>✔ Symptômes (connu dans Snowsight)</h3>
+                    <ul>
+                        <li>Message indiquant que la requête dépasse la mémoire disponible sur le cluster.</li>
+                        <li>Résultats non affichables dans Snowsight ou nécessitant un résultat limité.</li>
+                    </ul>
+
+                    <h3>✔ Causes fréquentes</h3>
+                    <ul>
+                        <li>Requêtes retournant des ensembles de données massifs.</li>
+                        <li>Joints ou agrégations produisant des résultats intermédiaires très volumineux.</li>
+                        <li>Absence de filtrage ou d'application de LIMIT.</li>
+                    </ul>
+
+                    <h3>✔ Solutions recommandées</h3>
+                    <ul>
+                        <li>Ajouter des filtres plus sélectifs.</li>
+                        <li>Utiliser LIMIT dans Snowsight.</li>
+                        <li>Matérialiser des résultats intermédiaires dans une table.</li>
+                        <li>Revoir le design (cluster key / partitionnement logique).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CLUSTERING, MICRO-PARTITIONS & QUERY PRUNING
+                ============================================ -->
+                <section id="clustering-pruning" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 3. Clustering, Micro-partitions & Query Pruning
+                    </h2>
+
+                    <h3>✔ Snowflake Micro-partitions</h3>
+                    <p>Snowflake stocke les données en micropartitions columstore de ~50–500 MB compressés chacune.</p>
+                    <p>Chaque micropartition contient des metadata ranges par colonne, permettant de déterminer si elle contient potentiellement les valeurs recherchées.</p>
+
+                    <h3>✔ Query Pruning (pruning efficace)</h3>
+                    <p>Le moteur Snowflake identifie quelles micropartitions sont non pertinentes et les ignore.</p>
+                    <p>Cela réduit la quantité de données scannées, et accélère les requêtes. (explication via Query Plan & TableScan)</p>
+
+                    <h3>✔ Inefficient Pruning (détection Snowsight)</h3>
+                    <p>Snowsight signale qu'une requête a un pruning inefficace lorsque :</p>
+                    <ul>
+                        <li>Les filtres ne sont pas sélectifs</li>
+                        <li>Les prédicats ne peuvent pas utiliser les ranges de micropartitions</li>
+                        <li>Les colonnes filtrées ne sont pas corrélées au tri des micropartitions <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Causes possibles d'inefficient pruning</h3>
+                    <ul>
+                        <li>Filtre sur une expression (ex: <code class="inline-code">WHERE DATE(timestamp_col) = ...</code>)</li>
+                        <li>Filtre sur colonne sans corrélation logique avec l'ordre d'insertion</li>
+                        <li>Données fortement skew (valeurs similaires, absence de distribution)</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ Solutions clés (tested SnowPro patterns)</strong>
+                        <ul>
+                            <li>Utiliser des prédicats SARGables : <code class="inline-code">timestamp_col >= '2025-01-01' AND timestamp_col < '2025-01-02'</code></li>
+                            <li>Créer un clustering manuel si nécessaire.</li>
+                            <li>Chercher à réduire le nombre de micropartitions touchées.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: WAREHOUSE QUEUEING
+                ============================================ -->
+                <section id="warehouse-queueing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-clock"></i> ✅ 4. Warehouse Queueing : Query queuing & Concurrency
+                    </h2>
+
+                    <p>Queueing se produit lorsque :</p>
+
+                    <h3>✔ Congestion du warehouse</h3>
+                    <p>Un warehouse est saturé si :</p>
+                    <ul>
+                        <li>Le nombre de requêtes simultanées dépasse sa capacité.</li>
+                        <li>Des tâches lourdes monopolisent les clusters.</li>
+                    </ul>
+
+                    <h3>✔ Résultats visibles</h3>
+                    <ul>
+                        <li>Requêtes en attente dans Snowsight, affichées comme "Queued".</li>
+                        <li>Délai avant exécution.</li>
+                    </ul>
+
+                    <h3>✔ Solutions</h3>
+                    <ul>
+                        <li>Augmenter la taille du warehouse (implique plus de compute).</li>
+                        <li>Activer multi-cluster pour élasticité.</li>
+                        <li>Utiliser des warehouses séparés selon les workloads.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: EXPLAIN
+                ============================================ -->
+                <section id="explain" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 5. EXPLAIN : Obtenir le plan d'exécution optimisé
+                    </h2>
+
+                    <h3>✔ Syntaxe</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>EXPLAIN USING TEXT &lt;query&gt;;</code></pre>
+                    </div>
+
+                    <h3>✔ Ce qu'affiche EXPLAIN</h3>
+                    <ul>
+                        <li>Le plan logique optimisé, pas l'exécution réelle.</li>
+                        <li>Operators : TableScan, Filter, Join, Aggregate, Sort, Result.</li>
+                        <li>
+                            Informations sur :
+                            <ul>
+                                <li>L'ordre d'exécution</li>
+                                <li>Les stratégies de join</li>
+                                <li>Les filtres utilisés</li>
+                                <li>L'élimination possible via pruning</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Différence EXPLAIN vs Query Profile</h3>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Outil</th><th>Étape</th><th>Type d'information</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>EXPLAIN</strong>
+                                <td>Avant exécution
+                                <td>Plan optimisé
+                            
+                            32
+                                <td><strong>Query Profile</strong>
+                                <td>Après exécution
+                                <td>Plan + statistiques & temps réel
+                            
+                        </tbody>
+                    划
+
+                    <div class="info-note">
+                        <i class="fas fa-graduation-cap"></i>
+                        <strong>✔ Utilisation SnowPro</strong>
+                        <p>On demande souvent :</p>
+                        <ul>
+                            <li>À quoi sert EXPLAIN ?</li>
+                            <li>Quelle est sa différence avec Query Profile ?</li>
+                            <li>Comment EXPLAIN aide-t-il à détecter des scans inutiles ?</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: RÉSUMÉ GÉNÉRAL POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="resume-general" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Résumé général pour l'examen SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Thème</th><th>Points clés</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Query Insights</strong>
+                                <td>Trouver les requêtes lentes, analyser l'historique et les plans
+                            
+                            32
+                                <td><strong>Query Profile</strong>
+                                一道一道Comprendre étapes, temps, scans, opérateurs
+                            
+                            32
+                                <td><strong>Queries too large</strong>
+                                一道一道Indique surcharge mémoire, nécessitant filtres/optimisation
+                            
+                            32
+                                <td><strong>Query Pruning</strong>
+                                一道一道Snowflake évite de lire des micropartitions inutiles
+                            
+                            32
+                                <td><strong>Inefficient Pruning</strong>
+                                一道一道Filtres non sargables ou mauvaise corrélation avec clustering
+                            
+                            32
+                                <td><strong>Warehouse Queueing</strong>
+                                一道一道Concurrency max atteinte → recours taille ou multi-cluster
+                            
+                            32
+                                <td><strong>EXPLAIN</strong>
+                                一道一道Plan optimisé avant exécution, complément du profile
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
