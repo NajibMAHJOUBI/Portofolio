@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Understanding & Exploring Cost | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Understanding & Exploring Cost</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#understanding-cost" class="active">
+                            <i class="fas fa-chart-pie"></i>1. Understanding Overall Cost
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exploring-cost">
+                            <i class="fas fa-chart-line"></i>2. Exploring Overall Cost
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#liens-comprendre-explorer">
+                            <i class="fas fa-link"></i>3. Liens entre "Understanding Cost" et "Exploring Cost"
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>4. Points clés à mémoriser pour l'examen SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Understanding & Exploring Cost</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-pie"></i>Cost Management
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-coins"></i>Billing
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: UNDERSTANDING OVERALL COST
+                ============================================ -->
+                <section id="understanding-cost" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-pie"></i> ✅ 1. Understanding Overall Cost
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake facture selon trois catégories principales :</p>
+
+                    <h3>✔ 1.1. Compute Cost</h3>
+                    <p>Les ressources compute consomment des crédits Snowflake.</p>
+                    <p>Il existe trois types de compute :</p>
+
+                    <h4>🔹 Virtual Warehouse Compute</h4>
+                    <ul>
+                        <li>Ressource compute gérée par l'utilisateur.</li>
+                        <li>Facturation à la seconde, minimum 60 secondes à chaque démarrage.</li>
+                        <li>
+                            Utilisé pour :
+                            <ul>
+                                <li>exécuter requêtes SQL</li>
+                                <li>charger des données</li>
+                                <li>transformations (DML)</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>🔹 Serverless Compute</h4>
+                    <ul>
+                        <li>Ressources compute gérées automatiquement par Snowflake (ex. : Snowpipe, Search Optimization).</li>
+                        <li>Snowflake ajuste la taille et le scaling automatiquement pour réduire le coût.</li>
+                    </ul>
+
+                    <h4>🔹 Cloud Services Compute</h4>
+                    <ul>
+                        <li>Utilisé pour : authentification, metadata, optimisation, accès, etc.</li>
+                        <li>Gratuit tant que son usage ≤ 10% du coût compute quotidien.</li>
+                        <li>Au-delà : facturation en crédits. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.2. Storage Cost</h3>
+                    <ul>
+                        <li>Coût mensuel calculé selon un tarif fixe par téraoctet stocké.</li>
+                        <li>
+                            Tarif différent selon :
+                            <ul>
+                                <li>Type de compte (Capacity vs On Demand)</li>
+                                <li>Région</li>
+                            </ul>
+                        </li>
+                        <li>Calcul basé sur la moyenne quotidienne de stockage. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.3. Data Transfer Cost</h3>
+                    <ul>
+                        <li>Pas de coût pour l'ingestion (data ingress).</li>
+                        <li>
+                            Coût pour data egress :
+                            <ul>
+                                <li>transfert vers autre région</li>
+                                <li>transfert vers autre cloud provider</li>
+                                <li>tarif variable selon région / cloud <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ 1.4. Rappel (SnowPro Core)</strong>
+                        <ul>
+                            <li>➡ Le coût Snowflake = Compute + Storage + Data Transfer.</li>
+                            <li>➡ Compute = principal poste de dépense.</li>
+                            <li>➡ Cloud Services compute est facturé seulement au‑delà de 10% de l'usage compute quotidien.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: EXPLORING OVERALL COST
+                ============================================ -->
+                <section id="exploring-cost" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. Exploring Overall Cost
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>L'exploration des coûts Snowflake se fait via deux approches :</p>
+
+                    <h3>⭐ 2.1. Explorer les coûts dans Snowsight</h3>
+                    <p>Snowsight propose une interface graphique pour analyser les coûts :</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Informations importantes</strong>
+                        <ul>
+                            <li>Il peut y avoir un délai jusqu'à 72h avant l'affichage des coûts.</li>
+                            <li>L'information est affichée en UTC, pas dans le fuseau horaire local. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+
+                    <h4>✔ A. Organization Overview</h4>
+                    <p>Affiche :</p>
+                    <ul>
+                        <li>Dépense totale depuis le début du contrat</li>
+                        <li>Solde restant</li>
+                        <li>Dépenses mensuelles</li>
+                        <li>Contribution de chaque compte de l'organisation <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Indisponible si :</p>
+                    <ul>
+                        <li>l'organisation utilise des comptes On Demand</li>
+                        <li>contrat via reseller <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Pour y accéder :</p>
+                    <ul>
+                        <li>Se connecter au compte organisation (ou rôle ORGADMIN activé)</li>
+                        <li>Admin → Cost Management</li>
+                        <li>Choisir un warehouse XS recommandé</li>
+                        <li>Cliquer Organization Overview</li>
+                    </ul>
+
+                    <h4>✔ B. Account Overview</h4>
+                    <p>Affiche les coûts au niveau du compte :</p>
+                    <ul>
+                        <li>consommation de crédits</li>
+                        <li>répartition par type (compute, storage, data transfer, cloud services)</li>
+                        <li>tendances dans le temps <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Attention :</strong> Les ACCOUNTADMIN ne voient pas les coûts en monnaie sans le rôle ORGADMIN. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h4>✔ C. Drilling Down into Costs</h4>
+                    <p>Snowsight permet d'explorer les coûts par :</p>
+                    <ul>
+                        <li>warehouse</li>
+                        <li>type d'usage</li>
+                        <li>période</li>
+                        <li>tags (pour répartition par BU, projet, environnement…)</li>
+                    </ul>
+
+                    <h3>⭐ 2.2. Explorer les coûts via SQL (ACCOUNT_USAGE et ORGANIZATION_USAGE)</h3>
+                    <p>Pour les analyses avancées :</p>
+                    <ul>
+                        <li>METERING_HISTORY</li>
+                        <li>METERING_DAILY_HISTORY</li>
+                        <li>WAREHOUSE_METERING_HISTORY</li>
+                        <li>CREDIT_USAGE_DAILY (selon édition/région)</li>
+                    </ul>
+                    <p>Ces vues permettent :</p>
+                    <ul>
+                        <li>analyses personnalisées</li>
+                        <li>export vers BI</li>
+                        <li>attribution des coûts par équipe / type d'usage</li>
+                        <li>création de dashboards internes <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: LIENS ENTRE "UNDERSTANDING COST" ET "EXPLORING COST"
+                ============================================ -->
+                <section id="liens-comprendre-explorer" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> ✅ 3. Liens entre "Understanding Cost" et "Exploring Cost"
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Concept</th><th>Understanding Overall Cost</th><th>Exploring Overall Cost</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>But</strong>
+                                <td>Comprendre comment Snowflake génère des coûts
+                                <td>Comprendre où et combien vous dépensez
+                            
+                            32
+                                <td><strong>Type d'information</strong>
+                                <td>Théorique (compute / storage / egress)
+                                <td>Pratique (visualisation & audit)
+                            
+                            32
+                                <td><strong>Outil</strong>
+                                <td>Documentation
+                                <td>Snowsight + SQL
+                            
+                            32
+                                <td><strong>Pour SnowPro</strong>
+                                <td>Fondamental
+                                <td>Pratique / gouvernance
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POINTS CLÉS À MÉMORISER POUR L'EXAMEN SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 4. Points clés à mémoriser pour l'examen SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 Compute</h4>
+                            <ul>
+                                <li>principal composant de coût (warehouse + serverless + cloud services) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Cloud Services compute facturé uniquement au‑delà de 10% de l'usage compute quotidien <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Storage</h4>
+                            <ul>
+                                <li>coût mensuel basé sur l'usage moyen quotidien <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Data egress</h4>
+                            <ul>
+                                <li>coût lors de transferts multi‑régions ou multi‑cloud <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Snowsight donne accès :</h4>
+                            <ul>
+                                <li>Organisation Overview</li>
+                                <li>Account Overview</li>
+                                <li>Drilldown par warehouse, usage type <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Délais et fuseaux</h4>
+                            <ul>
+                                <li>Coûts affichés en UTC et jusqu'à 72h de délai <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 Rôle nécessaire</h4>
+                            <ul>
+                                <li>Le rôle ORGADMIN est nécessaire pour voir les coûts en devise <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
