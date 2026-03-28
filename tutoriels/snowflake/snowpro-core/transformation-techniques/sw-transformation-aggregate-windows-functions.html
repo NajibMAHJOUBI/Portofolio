@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Aggregate & Window Functions | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Aggregate & Window Functions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#aggregate-functions" class="active">
+                            <i class="fas fa-chart-bar"></i>1. Fonctions d'agrégation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#window-functions">
+                            <i class="fas fa-chart-line"></i>2. Fonctions fenêtre
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#over-syntax">
+                            <i class="fas fa-code"></i>3. Syntaxe OVER() — Composants essentiels
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-window-functions">
+                            <i class="fas fa-table"></i>4. Types de fonctions fenêtre
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-importants">
+                            <i class="fas fa-star"></i>5. Points importants SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-rapide">
+                            <i class="fas fa-graduation-cap"></i>6. Résumé ultra‑rapide (Flashcards)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Aggregate & Window Functions</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-bar"></i>Aggregation
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Window Functions
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: FONCTIONS D'AGRÉGATION
+                ============================================ -->
+                <section id="aggregate-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i> ✅ 1. Fonctions d'agrégation (Aggregation Functions)
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <p>Une fonction d'agrégation opère sur plusieurs lignes et retourne une seule valeur.</p>
+                    <div class="info-note">
+                        <em>“Aggregate functions operate on values across rows … and always return exactly one row, even when the input contains zero rows.”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Catégories principales</h3>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>1. Agrégation générale</h4>
+                            <p>Inclut les fonctions usuelles :</p>
+                            <ul>
+                                <li>SUM, AVG, COUNT, COUNT_IF</li>
+                                <li>MIN, MAX, MEDIAN, MODE</li>
+                                <li>LISTAGG (concaténation)</li>
+                                <li>CORR, COVAR_POP, COVAR_SAMP, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>2. Agrégations avancées</h4>
+                            <ul>
+                                <li><strong>Bitwise</strong> : BITAND_AGG, BITOR_AGG, BITXOR_AGG</li>
+                                <li><strong>Booléennes</strong> : BOOLAND_AGG, BOOLOR_AGG, BOOLXOR_AGG</li>
+                                <li><strong>Semi‑structuré</strong> : ARRAY_AGG, OBJECT_AGG <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>3. Statistiques & Probabilités</h4>
+                            <ul>
+                                <li>KURTOSIS</li>
+                                <li>SKEW <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>4. Estimation (HyperLogLog, MinHash, t‑Digest)</h4>
+                            <p>Important dans SnowPro Core :</p>
+                            <ul>
+                                <li>APPROX_COUNT_DISTINCT (alias de HLL)</li>
+                                <li>DATASKETCHES_HLL_*</li>
+                                <li>APPROX_PERCENTILE, APPROX_TOP_K <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Particularités Snowflake (attention examen)</strong>
+                        <ul>
+                            <li>Certaines fonctions ont une syntaxe spéciale : <code class="inline-code">PERCENTILE_CONT</code>, <code class="inline-code">PERCENTILE_DISC</code> utilisent <code class="inline-code">WITHIN GROUP</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Beaucoup d'alias existent (VAR_POP = VARIANCE_POP).</li>
+                            <li>Entrée vide = généralement NULL, mais pas toujours (ex : COUNT(*) retourne 0).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: FONCTIONS FENÊTRE
+                ============================================ -->
+                <section id="window-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 2. Fonctions fenêtre (Window / Analytic Functions)
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <div class="info-note">
+                        <em>“Window functions are analytic functions used for running totals, moving averages, rankings…”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <ul>
+                        <li>Elles retournent une valeur par ligne, contrairement aux agrégations classiques.</li>
+                        <li>
+                            Elles nécessitent ou peuvent inclure :
+                            <ul>
+                                <li>OVER ( … )</li>
+                                <li>PARTITION BY</li>
+                                <li>ORDER BY</li>
+                                <li>Un window frame (ex : ROWS BETWEEN …). <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SYNTAXE OVER() — COMPOSANTS ESSENTIELS
+                ============================================ -->
+                <section id="over-syntax" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 3. Syntaxe OVER() — Composants essentiels
+                    </h2>
+
+                    <p>Source : <em>Window Function Syntax</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>&lt;function&gt;([args]) OVER (
+    [PARTITION BY expr1, …]
+    [ORDER BY expr2 [ASC|DESC] [NULLS FIRST|LAST], …]
+    [window frame]
+)</code></pre>
+                    </div>
+
+                    <h3>✔ PARTITION BY</h3>
+                    <ul>
+                        <li>Définit des groupes logiques (ex : par client, par jour).</li>
+                        <li>Optionnel → une seule partition si absent. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ ORDER BY</h3>
+                    <ul>
+                        <li>Indispensable pour les fonctions de ranking.</li>
+                        <li>Indépendant du ORDER BY final de la requête. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Fenêtre (window frame)</h3>
+                    <p>Exemples :</p>
+                    <ul>
+                        <li><code class="inline-code">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code></li>
+                        <li><code class="inline-code">ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <div class="warning-note">
+                        ⚠️ Note : Snowflake ne supporte pas les positions ordinales dans OVER (ex : OVER (ORDER BY 1) interdit). <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: TYPES DE FONCTIONS FENÊTRE
+                ============================================ -->
+                <section id="types-window-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 4. Types de fonctions fenêtre
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 1. Fenêtres générales</h4>
+                            <p>Incluent des fonctions qui existent aussi en agrégation :</p>
+                            <ul>
+                                <li>SUM, AVG, COUNT, MIN, MAX</li>
+                                <li>LISTAGG (avec WITHIN GROUP)</li>
+                                <li>CORR, COVAR_POP/SAMP <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                            <p>La différence :</p>
+                            <ul>
+                                <li>Agrégat → une seule ligne</li>
+                                <li>Window → une sortie par ligne <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2. Fonctions de ranking</h4>
+                            <ul>
+                                <li>ROW_NUMBER</li>
+                                <li>RANK</li>
+                                <li>DENSE_RANK</li>
+                                <li>NTILE</li>
+                                <li>PERCENT_RANK (limitation : supporte uniquement RANGE BETWEEN sans offset) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3. Fonctions de navigation (window navigation)</h4>
+                            <ul>
+                                <li>LAG</li>
+                                <li>LEAD</li>
+                                <li>FIRST_VALUE</li>
+                                <li>LAST_VALUE</li>
+                                <li>NTH_VALUE <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                            <p>Ces fonctions obligent un ORDER BY dans OVER.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 4. Fonctions statistiques avancées</h4>
+                            <ul>
+                                <li>KURTOSIS</li>
+                                <li>REGR_* (régression linéaire) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 5. Fonctions semi‑structurées & bitwise</h4>
+                            <p>Certaines fonctions agrégées sont aussi compatibles sous forme fenêtre :</p>
+                            <ul>
+                                <li>ARRAY_AGG, OBJECT_AGG</li>
+                                <li>BITAND_AGG, BOOLAND_AGG <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS IMPORTANTS SNOWPRO CORE
+                ============================================ -->
+                <section id="points-importants" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points importants SnowPro Core
+                    </h2>
+
+                    <h3>✔ Différence fondamentale</h3>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Fonction</th><th>Entrée</th><th>Sortie</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Agrégation</strong>
+                                卷第Plusieurs lignes
+                                卷第1 ligne
+                            
+                            32
+                                <td><strong>Window</strong>
+                                卷第Plusieurs lignes
+                                卷第1 ligne par ligne d'entrée <span class="reference">[docs.snowflake.com]</span>
+                            
+                        </tbody>
+                    划
+
+                    <h3>✔ QUALIFY</h3>
+                    <p>Même si non demandé, essentiel pour SnowPro :<br>
+                    QUALIFY filtre sur les résultats de fonctions fenêtre, comme HAVING filtre les agrégations. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Particularités Snowflake</strong>
+                        <ul>
+                            <li>Beaucoup d'agrégations → version fenêtre avec OVER()</li>
+                            <li>Certaines fonctions changent de comportement entre agrégat et window (ex. SUM)</li>
+                            <li>DISTINCT interdit dans les window functions (ex : AVG(DISTINCT col) OVER() provoque erreur) <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: RÉSUMÉ ULTRA‑RAPIDE (FLASHCARDS)
+                ============================================ -->
+                <section id="resume-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 6. Résumé ultra‑rapide (Flashcards SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Agrégations</h4>
+                            <ul>
+                                <li>Toujours un seul résultat</li>
+                                <li>Catégories : standard, booléenne, bitwise, semi‑structurée, estimation</li>
+                                <li>Syntaxe spéciale : LISTAGG … WITHIN GROUP, PERCENTILE_CONT</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Window</h4>
+                            <ul>
+                                <li>Syntaxe obligatoire : OVER()</li>
+                                <li>Composants : PARTITION BY, ORDER BY, Window Frame</li>
+                                <li>Types : navigation, ranking, statistiques, agrégations fenêtre</li>
+                                <li>DISTINCT interdit dans une window function</li>
+                                <li>ORDER BY dans OVER ≠ ORDER BY final</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

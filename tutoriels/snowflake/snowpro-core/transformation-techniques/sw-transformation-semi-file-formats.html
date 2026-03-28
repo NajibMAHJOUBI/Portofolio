@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Données semi-structurées | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Données semi-structurées</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#types-semi-structures" class="active">
+                            <i class="fas fa-code-branch"></i>1. Les types semi‑structurés dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#stockage-architecture">
+                            <i class="fas fa-database"></i>2. Stockage & architecture des données semi‑structurées
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interroger-donnees">
+                            <i class="fas fa-search"></i>3. Interroger des données semi‑structurées
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#flatten">
+                            <i class="fas fa-table"></i>4. FLATTEN() : Fonction centrale pour le semi‑structuré
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#aggregations-semi-structurees">
+                            <i class="fas fa-chart-bar"></i>5. Types semi‑structurés & Agrégations
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles-performance">
+                            <i class="fas fa-chart-line"></i>6. Points clés de performance (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#questions-typiques">
+                            <i class="fas fa-question-circle"></i>7. Questions typiques SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-star"></i>8. Résumé final (Flashcards)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Données semi-structurées</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code-branch"></i>Semi-structured
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-json"></i>JSON
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: LES TYPES SEMI‑STRUCTURÉS DANS SNOWFLAKE
+                ============================================ -->
+                <section id="types-semi-structures" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 1. Les types semi‑structurés dans Snowflake
+                    </h2>
+
+                    <p>Source : <em>Data Types Semi‑structured</em> <span class="reference">[booleandata.ai]</span></p>
+
+                    <p>Snowflake supporte nativement plusieurs types semi‑structurés, optimisés pour manipuler des formats comme JSON, Avro, ORC, Parquet, XML.</p>
+
+                    <h3>✔ Types disponibles</h3>
+                    <ul>
+                        <li><strong>VARIANT</strong> : type générique capable de contenir n'importe quel contenu semi‑structuré.</li>
+                        <li><strong>OBJECT</strong> : équivalent JSON à un dictionnaire (clé → valeur).</li>
+                        <li><strong>ARRAY</strong> : liste ordonnée de valeurs.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        Ces types sont stockés dans des micro‑partitions en format columnar, ce qui favorise un traitement performant, même dans les structures imbriquées. Snowflake stocke également des métadonnées détaillées dans chaque micro‑partition, incluant les valeurs min/max et d'autres statistiques utiles pour le pruning. <span class="reference">[booleandata.ai]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: STOCKAGE & ARCHITECTURE DES DONNÉES SEMI‑STRUCTURÉES
+                ============================================ -->
+                <section id="stockage-architecture" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 2. Stockage & architecture des données semi‑structurées
+                    </h2>
+
+                    <p>Source : <em>Micro‑partitions & Data Clustering</em> <span class="reference">[booleandata.ai]</span></p>
+
+                    <h3>✔ Les points essentiels à retenir pour l'examen</h3>
+                    <ul>
+                        <li>Toutes les données semi‑structurées sont stockées dans des micro‑partitions entre 50MB et 500MB, compressées et en colonnes.</li>
+                        <li>Les colonnes semi‑structurées bénéficient des mêmes mécanismes de pruning que les types classiques grâce à la capture de métadonnées (min/max, distinct count…).</li>
+                        <li>Le stockage est automatique : aucun partitionnement manuel n'est nécessaire.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: INTERROGER DES DONNÉES SEMI‑STRUCTURÉES
+                ============================================ -->
+                <section id="interroger-donnees" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 3. Interroger des données semi‑structurées
+                    </h2>
+
+                    <p>Source : <em>Querying Semi‑structured Data</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>La documentation décrit comment interroger des données hiérarchiques stockées dans un type VARIANT.</p>
+
+                    <h3>✔ Syntaxe clé pour naviguer dans une colonne VARIANT</h3>
+                    <ul>
+                        <li><code class="inline-code">:</code> → pour accéder aux champs d'objets</li>
+                        <li><code class="inline-code">[]</code> → pour accéder aux indices de tableau</li>
+                    </ul>
+
+                    <p><strong>Exemples classiques :</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT v:customer.name FROM raw_table;
+SELECT v:items[0].price FROM raw_table;</code></pre>
+                    </div>
+
+                    <h3>✔ Opérations supportées</h3>
+                    <ul>
+                        <li>Accès aux champs imbriqués</li>
+                        <li>Flattening via la fonction TABLE FLATTEN()</li>
+                        <li>Conversion via TO_VARIANT, TO_OBJECT, TO_ARRAY</li>
+                        <li>Cast explicite pour convertir un champ en type SQL classique (ex → ::string, ::number)</li>
+                    </ul>
+                    <p>La documentation rappelle que Snowflake inclut des opérateurs et fonctions spécifiques pour exploiter les formats semi‑structurés. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: FLATTEN() : FONCTION CENTRALE POUR LE SEMI‑STRUCTURÉ
+                ============================================ -->
+                <section id="flatten" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 4. FLATTEN() : Fonction centrale pour le semi‑structuré
+                    </h2>
+
+                    <p>Bien que non explicitement incluse dans les extraits renvoyés, FLATTEN est un point attendu en SnowPro Core :</p>
+                    <p>→ C'est une table function qui transforme un ARRAY ou OBJECT en lignes tabulaires.</p>
+
+                    <p><strong>Exemple type :</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT
+    f.value:productName,
+    f.value:price
+FROM raw t,
+LATERAL FLATTEN(input => t.items) f;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: TYPES SEMI‑STRUCTURÉS & AGRÉGATIONS
+                ============================================ -->
+                <section id="aggregations-semi-structurees" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i> ✅ 5. Types semi‑structurés & Agrégations
+                    </h2>
+
+                    <p>Les types semi‑structurés sont inclus dans certaines fonctions d'agrégation comme :</p>
+                    <ul>
+                        <li>ARRAY_AGG</li>
+                        <li>OBJECT_AGG</li>
+                    </ul>
+                    <p>Ce point apparaît dans la liste officielle des fonctions d'agrégation. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Cela permet de regrouper des objets JSON, par exemple pour reconstruire un document.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS DE PERFORMANCE (SNOWPRO CORE)
+                ============================================ -->
+                <section id="points-cles-performance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 6. Points clés de performance (SnowPro Core)
+                    </h2>
+
+                    <h3>✔ Micro‑partitions et pruning</h3>
+                    <p>Les métadonnées minimales/maximales de colonnes VARIANT permettent du pruning très efficace. <span class="reference">[booleandata.ai]</span></p>
+
+                    <h3>✔ Coût structurel</h3>
+                    <p>Les formats semi‑structurés étant colonaires + compressés, Snowflake peut lire uniquement les champs demandés.</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>✔ Bonnes pratiques</strong>
+                        <ul>
+                            <li>Préférer le cast explicite (::string, ::number) pour faciliter les filtres.</li>
+                            <li>Utiliser FLATTEN() plutôt que des parcours imbriqués complexes.</li>
+                            <li>Charger les données semi‑structurées via COPY/ Snowpipe dans une colonne VARIANT pour bénéficier de l'optimisation native.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: QUESTIONS TYPIQUES SNOWPRO CORE
+                ============================================ -->
+                <section id="questions-typiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 7. Questions typiques SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Thème</th><th>Question fréquente</th><th>Réponse</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Stockage</strong>
+                                卷第Snowflake stocke-t-il JSON tel quel ?
+                                卷第❌ Non, il stocke en colonnes, compressé, avec métadonnées, dans des micro‑partitions <span class="reference">[booleandata.ai]</span>
+                            
+                            32
+                                <td><strong>Navigation</strong>
+                                卷第Comment accéder à un champ JSON ?
+                                卷第Avec <code class="inline-code">:</code> et <code class="inline-code">[]</code>
+                            
+                            32
+                                <td><strong>Performance</strong>
+                                卷第Le semi‑structuré supporte-t-il le pruning ?
+                                卷第✔ Oui, grâce aux métadonnées des micro‑partitions <span class="reference">[booleandata.ai]</span>
+                            
+                            32
+                                <td><strong>Flatten</strong>
+                                卷第Pourquoi utiliser FLATTEN ?
+                                卷第Pour transformer ARRAY/OBJECT en lignes tabulaires
+                            
+                            32
+                                <td><strong>Cast</strong>
+                                卷第Pourquoi caster un champ VARIANT ?
+                                卷第Pour faciliter filtres, comparaisons, agrégations
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ FINAL (FLASHCARDS)
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Résumé final (Flashcards)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Types semi‑structurés :</h4>
+                            <p>VARIANT, OBJECT, ARRAY</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Stockés dans micro‑partitions columnaires (50–500MB)</h4>
+                            <p><span class="reference">[booleandata.ai]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Navigation via <code class="inline-code">:</code> et <code class="inline-code">[]</code></h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Manipulation : FLATTEN(), cast explicite, fonctions dédiées</h4>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Pruning & performance : pleinement supporté</h4>
+                            <p><span class="reference">[booleandata.ai]</span></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

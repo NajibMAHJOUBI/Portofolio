@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Operators & Functions | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Operators & Functions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#operators-functions-overview" class="active">
+                            <i class="fas fa-calculator"></i>1. Operators & Functions – Vue d'ensemble
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#system-functions">
+                            <i class="fas fa-cog"></i>2. System Functions (Fonctions système)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#table-functions">
+                            <i class="fas fa-table"></i>3. Table Functions (Fonctions de table)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#external-functions">
+                            <i class="fas fa-cloud-upload-alt"></i>4. External Functions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#udfs">
+                            <i class="fas fa-code"></i>5. UDFs (User‑Defined Functions)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interaction-cache">
+                            <i class="fas fa-database"></i>6. Interaction des fonctions avec le cache
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-snowpro">
+                            <i class="fas fa-star"></i>7. Synthèse pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-ultra-rapide">
+                            <i class="fas fa-graduation-cap"></i>8. Résumé ultra‑rapide (Flashcard)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Operators & Functions</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-calculator"></i>Functions
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-database"></i>Performance
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: OPERATORS & FUNCTIONS – VUE D'ENSEMBLE
+                ============================================ -->
+                <section id="operators-functions-overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calculator"></i> ✅ 1. Operators & Functions – Vue d'ensemble
+                    </h2>
+
+                    <p>La documentation Snowflake organise toutes les fonctions en grandes familles, dont :</p>
+                    <ul>
+                        <li>Fonctions système (SYSTEM$…),</li>
+                        <li>Fonctions de table (TABLE(…)),</li>
+                        <li>Fonctions SQL standards,</li>
+                        <li>Fonctions externes,</li>
+                        <li>UDFs (User-Defined Functions).</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Point clé performance :</strong> Certaines fonctions empêchent l'utilisation du cache : <code class="inline-code">CURRENT_TIMESTAMP</code>, <code class="inline-code">RANDOM</code>, <code class="inline-code">UUID_STRING</code>, etc. <span class="reference">[booleandata.ai]</span>
+                        <p>Cela signifie que TOUTES les fonctions ne sont pas équivalentes en termes de performance, ce qui est un point important pour SnowPro.</p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SYSTEM FUNCTIONS (FONCTIONS SYSTÈME)
+                ============================================ -->
+                <section id="system-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cog"></i> ✅ 2. System Functions (Fonctions système)
+                    </h2>
+
+                    <p>Les fonctions système Snowflake (préfixe <code class="inline-code">SYSTEM$</code>) sont utilisées pour :</p>
+                    <ul>
+                        <li>Vérifier l'état d'objets,</li>
+                        <li>Diagnostiquer la performance,</li>
+                        <li>Interroger le clustering (ex. <code class="inline-code">SYSTEM$CLUSTERING_INFORMATION</code>),</li>
+                        <li>Accéder aux résultats d'une requête.</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Impact cache :</strong> Les fonctions évaluées à l'exécution (ex. <code class="inline-code">CURRENT_TIMESTAMP</code>) empêchent la réutilisation du Persisted Result Cache <span class="reference">[booleandata.ai]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: TABLE FUNCTIONS (FONCTIONS DE TABLE)
+                ============================================ -->
+                <section id="table-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 3. Table Functions (Fonctions de table)
+                    </h2>
+
+                    <p>Les table functions retournent un result set et doivent être appelées via :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT … FROM TABLE(function_name(…));</code></pre>
+                    </div>
+
+                    <h3>✔ RESULT_SCAN() – Fonction clé</h3>
+                    <p>Permet de récupérer explicitement les résultats d'une requête précédente :</p>
+                    <ul>
+                        <li>Permet d'utiliser un jeu de résultats sans réexécuter la requête <span class="reference">[theinfotrust.com]</span></li>
+                        <li>Fonction utile même lorsque les conditions du persisted result cache ne sont plus remplies <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p><strong>Exemple :</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT * FROM TABLE(RESULT_SCAN(last_query_id()));</code></pre>
+                    </div>
+
+                    <div class="info-note">
+                        <i class="fas fa-lightbulb"></i>
+                        Cette fonction est importante pour SnowPro Core car elle montre comment manipuler les jeux de résultats et contourner le système de cache standard.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: EXTERNAL FUNCTIONS
+                ============================================ -->
+                <section id="external-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 4. External Functions
+                    </h2>
+
+                    <p>Une external function appelle un service externe via API.</p>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ Point clé :</strong> Le recours à une external function empêche la réutilisation du cache des résultats <span class="reference">[booleandata.ai]</span>
+                    </div>
+
+                    <p>C'est un point très testé dans SnowPro Core :</p>
+                    <ul>
+                        <li>Les résultats persistés ne sont pas réutilisés si la requête contient une external function.</li>
+                        <li>
+                            Cela implique :
+                            <ul>
+                                <li>Un coût plus élevé (requête entièrement réévaluée),</li>
+                                <li>Une latence potentiellement plus importante,</li>
+                                <li>Une nécessité de surveiller les performances si l'on utilise des extensions API.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: UDFS (USER‑DEFINED FUNCTIONS)
+                ============================================ -->
+                <section id="udfs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 5. UDFs (User‑Defined Functions)
+                    </h2>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ Impact cache :</strong> Un UDF empêche le persisted result cache. Snowflake considère les UDFs comme du code évalué à l'exécution → pas de réutilisation du cache <span class="reference">[booleandata.ai]</span>
+                    </div>
+
+                    <p>Les UDFs Snowflake peuvent être écrites en :</p>
+                    <ul>
+                        <li>SQL</li>
+                        <li>JavaScript</li>
+                        <li>Python (via Snowpark)</li>
+                        <li>Java (Snowpark container services)</li>
+                    </ul>
+
+                    <h3>✔ Rôle des UDFs</h3>
+                    <p>Les UDFs permettent :</p>
+                    <ul>
+                        <li>D'encapsuler la logique métier,</li>
+                        <li>De créer des transformations réutilisables,</li>
+                        <li>D'étendre SQL sans recourir aux external functions.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Contraintes importantes SnowPro Core</strong>
+                        <ul>
+                            <li>Les UDFs tournent dans l'environnement Snowflake → stateless</li>
+                            <li>Ils peuvent avoir un impact performance important</li>
+                            <li>Ils cassent le cache des résultats persistés <span class="reference">[booleandata.ai]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: INTERACTION DES FONCTIONS AVEC LE CACHE
+                ============================================ -->
+                <section id="interaction-cache" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-database"></i> ✅ 6. Interaction des fonctions avec le cache (examen très fréquent)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Type de fonction</th><th>Impact sur Persisted Results Cache</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Fonction système</strong>
+                                卷第Peut casser le cache si évaluée runtime (ex. CURRENT_TIMESTAMP) <span class="reference">[booleandata.ai]</span>
+                            
+                            32
+                                <td><strong>Table function</strong>
+                                卷第Peut réutiliser RESULT_SCAN mais ne déclenche pas automatiquement la réutilisation du cache
+                            
+                            32
+                                <td><strong>External function</strong>
+                                卷第Désactive la réutilisation du persisted result cache <span class="reference">[booleandata.ai]</span>
+                            
+                            32
+                                <td><strong>UDF</strong>
+                                卷第Désactive également la réutilisation du persisted result cache <span class="reference">[booleandata.ai]</span>
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: SYNTHÈSE POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="synthese-snowpro" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Synthèse pour SnowPro Core
+                    </h2>
+
+                    <h3>✔ À connaître absolument</h3>
+                    <ul>
+                        <li>Les opérateurs & fonctions Snowflake sont organisés par catégories (système, table, external, UDF).</li>
+                        <li>Certaines fonctions empêchent la réutilisation des résultats persistés → impact majeur sur la performance.</li>
+                        <li><code class="inline-code">RESULT_SCAN()</code> est une fonction de table clé.</li>
+                        <li>Les external functions servent à appeler des API → cassent le cache.</li>
+                        <li>Les UDFs permettent d'étendre SQL → cassent aussi le cache.</li>
+                    </ul>
+
+                    <h3>✔ Rôle dans la performance (thématique SnowPro majeure)</h3>
+                    <p>Comprendre :</p>
+                    <ul>
+                        <li>quelles fonctions se réévaluent,</li>
+                        <li>lesquelles sont compatibles avec le cache,</li>
+                        <li>comment analyser les plans d'exécution.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ ULTRA‑RAPIDE (FLASHCARD)
+                ============================================ -->
+                <section id="resume-ultra-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 8. Résumé ultra‑rapide (Flashcard)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>À retenir</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Operators & Functions</strong>
+                                卷第Familles de fonctions Snowflake (system, table, external, UDF)
+                            
+                            32
+                                <td><strong>System Functions</strong>
+                                卷第Souvent SYSTEM$ ; certaines empêchent le persisted result cache
+                            
+                            32
+                                <td><strong>Table Functions</strong>
+                                卷第Ex. RESULT_SCAN() ; retournent un jeu de résultats tabulaire
+                            
+                            32
+                                <td><strong>External Functions</strong>
+                                卷第Appellent un service externe ; désactivent le cached result
+                            
+                            32
+                                <td><strong>UDFs</strong>
+                                卷第Fonctions personnalisées SQL/JS/Python ; désactivent le cached result
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

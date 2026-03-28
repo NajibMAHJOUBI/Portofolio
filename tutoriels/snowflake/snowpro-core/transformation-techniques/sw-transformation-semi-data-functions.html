@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Fonctions semi-structurées | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Fonctions semi-structurées</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#parsing" class="active">
+                            <i class="fas fa-code"></i>1. Parsing : transformation du texte JSON/XML → VARIANT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#array-functions">
+                            <i class="fas fa-brackets-curly"></i>2. Création & manipulation d'ARRAY (ARRAY_*)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#object-functions">
+                            <i class="fas fa-cube"></i>3. Création & manipulation d'OBJECT (OBJECT_*)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#map-functions">
+                            <i class="fas fa-map"></i>4. Fonctions de MAP (structured MAP)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#extraction">
+                            <i class="fas fa-search"></i>5. Extraction & navigation dans VARIANT / OBJECT / ARRAY
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#higher-order">
+                            <i class="fas fa-lambda"></i>6. Higher‑order functions (lambda)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#conversion">
+                            <i class="fas fa-exchange-alt"></i>7. Fonctions de conversion / cast
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#type-predicates">
+                            <i class="fas fa-check-double"></i>8. "Type predicates" (détecter le type d'un VARIANT)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-snowpro">
+                            <i class="fas fa-star"></i>9. Synthèse SnowPro Core — À retenir absolument
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mini-nuggets">
+                            <i class="fas fa-graduation-cap"></i>10. Mini‑nuggets (flashcards rapides)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Fonctions semi-structurées</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code-branch"></i>Semi-structured
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-json"></i>JSON
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PARSING
+                ============================================ -->
+                <section id="parsing" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 1. Parsing : transformation du texte JSON/XML → VARIANT
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Fonctions principales</h3>
+                    <ul>
+                        <li><code class="inline-code">PARSE_JSON</code> — convertit une chaîne JSON en VARIANT</li>
+                        <li><code class="inline-code">CHECK_JSON</code> — valide qu'une chaîne est un JSON correct</li>
+                        <li><code class="inline-code">JSON_EXTRACT_PATH_TEXT</code> — extraire un élément textuel via un chemin JSON</li>
+                        <li><code class="inline-code">PARSE_XML</code>, <code class="inline-code">CHECK_XML</code> — équivalents pour XML</li>
+                        <li><code class="inline-code">STRIP_NULL_VALUE</code> — nettoie les valeurs nulles JSON/XML <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Points clés pour SnowPro Core :</strong>
+                        <ul>
+                            <li><code class="inline-code">PARSE_JSON()</code> → renvoie toujours un VARIANT.</li>
+                            <li>Si JSON invalide : échec ; pour tolérance aux erreurs → <code class="inline-code">TRY_PARSE_JSON()</code></li>
+                            <li>JSON NULL ≠ SQL NULL (dans VARIANT).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ARRAY FUNCTIONS
+                ============================================ -->
+                <section id="array-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-brackets-curly"></i> ✅ 2. Création & manipulation d'ARRAY (ARRAY_*)
+                    </h2>
+
+                    <h3>✔ Fonctions essentielles</h3>
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <ul>
+                                <li><code class="inline-code">ARRAY_CONSTRUCT</code>, <code class="inline-code">ARRAY_CONSTRUCT_COMPACT</code></li>
+                                <li><code class="inline-code">ARRAY_APPEND</code> / <code class="inline-code">ARRAY_PREPEND</code></li>
+                                <li><code class="inline-code">ARRAY_CAT</code> — concaténer deux ARRAY</li>
+                                <li><code class="inline-code">ARRAY_COMPACT</code> — supprimer NULL</li>
+                                <li><code class="inline-code">ARRAY_CONTAINS</code> — vérifier présence d'un élément</li>
+                            </ul>
+                        </div>
+                        <div class="usage-card">
+                            <ul>
+                                <li><code class="inline-code">ARRAY_DISTINCT</code> — valeurs uniques</li>
+                                <li><code class="inline-code">ARRAY_FLATTEN</code> — réduire profondeur</li>
+                                <li><code class="inline-code">ARRAY_GENERATE_RANGE</code> — générer une séquence numérique</li>
+                                <li><code class="inline-code">ARRAY_SIZE</code>, <code class="inline-code">ARRAY_SLICE</code>, <code class="inline-code">ARRAY_SORT</code></li>
+                                <li><code class="inline-code">ARRAY_TO_STRING</code> — transformer ARRAY en chaîne</li>
+                                <li><code class="inline-code">ARRAY_UNION_AGG</code>, <code class="inline-code">ARRAY_UNIQUE_AGG</code> — agrégations ARRAY <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: OBJECT FUNCTIONS
+                ============================================ -->
+                <section id="object-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cube"></i> ✅ 3. Création & manipulation d'OBJECT (OBJECT_*)
+                    </h2>
+
+                    <h3>✔ Fonctions clés</h3>
+                    <ul>
+                        <li><code class="inline-code">OBJECT_CONSTRUCT</code> — construire un OBJECT à partir de paires clé/valeur</li>
+                        <li><code class="inline-code">OBJECT_CONSTRUCT_KEEP_NULL</code> — version conservant les nulls</li>
+                        <li><code class="inline-code">OBJECT_DELETE</code>, <code class="inline-code">OBJECT_INSERT</code>, <code class="inline-code">OBJECT_PICK</code></li>
+                        <li><code class="inline-code">OBJECT_AGG</code> — agrégation en OBJECT</li>
+                        <li><code class="inline-code">OBJECT_KEYS</code> — lister les clés d'un OBJECT <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: MAP FUNCTIONS
+                ============================================ -->
+                <section id="map-functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-map"></i> ✅ 4. Fonctions de MAP (structured MAP)
+                    </h2>
+
+                    <ul>
+                        <li><code class="inline-code">MAP_CAT</code> — concaténer deux MAP</li>
+                        <li><code class="inline-code">MAP_CONTAINS_KEY</code></li>
+                        <li><code class="inline-code">MAP_DELETE</code>, <code class="inline-code">MAP_INSERT</code></li>
+                        <li><code class="inline-code">MAP_KEYS</code>, <code class="inline-code">MAP_PICK</code></li>
+                        <li><code class="inline-code">MAP_SIZE</code> <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: EXTRACTION & NAVIGATION
+                ============================================ -->
+                <section id="extraction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 5. Extraction & navigation dans VARIANT / OBJECT / ARRAY
+                    </h2>
+
+                    <h3>✔ Fonctions principales</h3>
+                    <ul>
+                        <li><code class="inline-code">FLATTEN</code> — table function → exploser ARRAY/OBJECT en lignes <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">GET</code> — accéder à une clé/une position</li>
+                        <li><code class="inline-code">GET_PATH</code> — extraction par chemin JSON</li>
+                        <li><code class="inline-code">GET_IGNORE_CASE</code> — accès insensible à la casse</li>
+                        <li><code class="inline-code">:</code> — opérateur JSON (ex. col:key)</li>
+                        <li><code class="inline-code">OBJECT_KEYS</code> — retourner liste des clés <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p><strong>Exemple conceptuel :</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT
+    data:get.path.to.value,
+    data:items[0]
+FROM table;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: HIGHER-ORDER FUNCTIONS
+                ============================================ -->
+                <section id="higher-order" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lambda"></i> ✅ 6. Higher‑order functions (lambda)
+                    </h2>
+
+                    <p>Snowflake supporte des opérations fonctionnelles sur VARIANT/ARRAY :</p>
+                    <ul>
+                        <li><code class="inline-code">FILTER</code> — filtrer un ARRAY</li>
+                        <li><code class="inline-code">TRANSFORM</code> — transformation élément par élément</li>
+                        <li><code class="inline-code">REDUCE</code> — réduction (fold)</li>
+                    </ul>
+                    <div class="info-note">
+                        <em>“See also Use lambda functions on data with Snowflake higher-order functions.”</em> <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: CONVERSION / CAST
+                ============================================ -->
+                <section id="conversion" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 7. Fonctions de conversion / cast
+                    </h2>
+
+                    <ul>
+                        <li>Conversion ARRAY ↔ STRING</li>
+                        <li>Conversions vers OBJECT, ARRAY</li>
+                        <li>CAST explicites via <code class="inline-code">::type</code> (ex. <code class="inline-code">data:key::number</code>) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: TYPE PREDICATES
+                ============================================ -->
+                <section id="type-predicates" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-check-double"></i> ✅ 8. "Type predicates" (détecter le type d'un VARIANT)
+                    </h2>
+
+                    <ul>
+                        <li><code class="inline-code">IS_ARRAY</code></li>
+                        <li><code class="inline-code">IS_OBJECT</code></li>
+                        <li><code class="inline-code">IS_VARCHAR</code></li>
+                        <li><code class="inline-code">IS_NUMBER</code></li>
+                    </ul>
+                    <p>Ces fonctions sont essentielles pour écrire du SQL robuste sur VARIANT.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: SYNTHÈSE SNOWPRO CORE
+                ============================================ -->
+                <section id="synthese-snowpro" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 9. Synthèse SnowPro Core — À retenir absolument
+                    </h2>
+
+                    <h3>✔ Catégories à mémoriser</h3>
+                    <ul>
+                        <li>Parsing JSON/XML</li>
+                        <li>Manipulation ARRAY</li>
+                        <li>Manipulation OBJECT</li>
+                        <li>Manipulation MAP</li>
+                        <li>Extraction (GET, GET_PATH, FLATTEN, OBJECT_KEYS)</li>
+                        <li>Higher‑order functions (FILTER, TRANSFORM, REDUCE)</li>
+                    </ul>
+
+                    <h3>✔ Questions fréquentes à l'examen</h3>
+                    <ul>
+                        <li><strong>Quelle est la différence entre ARRAY_CONSTRUCT et ARRAY_CONSTRUCT_COMPACT ?</strong></li>
+                        <li><strong>Comment extraire la liste des clés d'un OBJECT ?</strong> → <code class="inline-code">OBJECT_KEYS()</code></li>
+                        <li><strong>Quelle fonction exploser un tableau JSON en lignes ?</strong> → <code class="inline-code">FLATTEN()</code></li>
+                        <li><strong>Comment fusionner deux ARRAY ?</strong> → <code class="inline-code">ARRAY_CAT()</code></li>
+                        <li><strong>Comment vérifier si un ARRAY contient une valeur ?</strong> → <code class="inline-code">ARRAY_CONTAINS()</code></li>
+                        <li><strong>Quelle fonction transforme une chaîne JSON en VARIANT ?</strong> → <code class="inline-code">PARSE_JSON()</code></li>
+                        <li><strong>Différence OBJECT vs MAP ?</strong> → MAP = type structuré, OBJECT = semi‑structuré non typé</li>
+                        <li><strong>Comment aplatir un OBJECT en lignes ?</strong> → <code class="inline-code">FLATTEN(input=>object)</code></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: MINI-NUGGETS (FLASHCARDS)
+                ============================================ -->
+                <section id="mini-nuggets" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 10. Mini‑nuggets (flashcards rapides)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p><code class="inline-code">PARSE_JSON()</code> → VARIANT</p>
+                            <p><code class="inline-code">FLATTEN()</code> → explose ARRAY/OBJECT en lignes</p>
+                            <p><code class="inline-code">OBJECT_KEYS()</code> → liste des clés</p>
+                        </div>
+                        <div class="usage-card">
+                            <p><code class="inline-code">ARRAY_CAT()</code> → concaténation</p>
+                            <p><code class="inline-code">ARRAY_SIZE()</code> → taille du tableau</p>
+                            <p><code class="inline-code">GET_PATH()</code> → extraction de chemin JSON</p>
+                        </div>
+                        <div class="usage-card">
+                            <p>Higher‑order (FILTER, TRANSFORM) → manipulation avancée d'ARRAY</p>
+                            <p>MAP functions → opérations structurées clé/valeur typées</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

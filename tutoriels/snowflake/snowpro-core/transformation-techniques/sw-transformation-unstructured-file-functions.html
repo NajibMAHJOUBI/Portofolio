@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Unstructured Data SQL Functions | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Unstructured Data SQL Functions</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#contexte" class="active">
+                            <i class="fas fa-file-alt"></i>1. Contexte : travailler avec des fichiers non structurés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#file-type">
+                            <i class="fas fa-file-code"></i>2. Le type SQL FILE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#functions">
+                            <i class="fas fa-calculator"></i>3. Fonctions SQL associées au FILE type
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#url-types">
+                            <i class="fas fa-link"></i>4. Types d'URL pour accéder aux fichiers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#integration-udf">
+                            <i class="fas fa-code"></i>5. Intégration avec UDF/Procedures
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>6. Bonnes pratiques SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-rapide">
+                            <i class="fas fa-star"></i>7. Résumé ultra‑rapide (flashcards)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Unstructured Data SQL Functions</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-alt"></i>Unstructured Data
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-code"></i>FILE Type
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: CONTEXTE : TRAVAILLER AVEC DES FICHIERS NON STRUCTURÉS
+                ============================================ -->
+                <section id="contexte" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-alt"></i> ✅ 1. Contexte : travailler avec des fichiers non structurés
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>Unstructured data includes text-heavy content (documents), images, video, audio, and specialized industry file types.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Les fichiers doivent être dans un stage interne ou externe, puis manipulés en SQL via :</p>
+                    <ul>
+                        <li>URL de fichier (Scoped / Stage File URL)</li>
+                        <li>FILE objects (via <code class="inline-code">TO_FILE</code> / <code class="inline-code">TRY_TO_FILE</code>) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: LE TYPE SQL FILE
+                ============================================ -->
+                <section id="file-type" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-code"></i> ✅ 2. Le type SQL FILE (central pour les fonctions unstructured)
+                    </h2>
+
+                    <div class="info-note">
+                        <em>A FILE value represents a file stored in an internal or external stage… It stores metadata such as size, type, etag, last modified timestamp.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <p>Le FILE contient notamment :</p>
+                    <ul>
+                        <li>STAGE</li>
+                        <li>RELATIVE_PATH</li>
+                        <li>STAGE_FILE_URL</li>
+                        <li>SCOPED_FILE_URL</li>
+                        <li>CONTENT_TYPE (MIME)</li>
+                        <li>SIZE</li>
+                        <li>ETAG</li>
+                        <li>LAST_MODIFIED</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: FONCTIONS SQL ASSOCIÉES AU FILE TYPE
+                ============================================ -->
+                <section id="functions" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-calculator"></i> ✅ 3. Fonctions SQL associées au FILE type
+                    </h2>
+
+                    <p>Source : <em>FILE functions</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ A. Fonctions Constructeurs</h3>
+                    <p>Permettent de créer un objet FILE :</p>
+                    <ul>
+                        <li><code class="inline-code">TO_FILE</code> — Crée un FILE à partir d'une URL, d'un stage + chemin, ou d'un objet metadata</li>
+                        <li><code class="inline-code">TRY_TO_FILE</code> — Même logique mais renvoie NULL en cas de problème</li>
+                    </ul>
+                    <div class="info-note">
+                        <em>You can create a file by passing a scoped file URL, a stage and path, or a metadata object.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ B. Fonctions Accessors (lecture des métadonnées file-level)</h3>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Fonction</th><th>Rôle</th>
+                        </thead>
+                        <tbody>
+                            32<td>FL_GET_CONTENT_TYPE</td><td>retourne le MIME type</td>
+                            32<td>FL_GET_ETAG</td><td>retourne le hash du fichier</td>
+                            32<td>FL_GET_FILE_TYPE</td><td>retourne le type de fichier</td>
+                            32<td>FL_GET_LAST_MODIFIED</td><td>timestamp de dernière modification</td>
+                            32<td>FL_GET_RELATIVE_PATH</td><td>chemin relatif dans le stage</td>
+                            32<td>FL_GET_SCOPED_FILE_URL</td><td>scoped URL utilisable dans UDF / external apps</td>
+                            32<td>FL_GET_SIZE</td><td>taille en bytes</td>
+                            32<td>FL_GET_STAGE</td><td>stage source</td>
+                            32<td>FL_GET_STAGE_FILE_URL</td><td>URL du fichier dans le stage <span class="reference">[docs.snowflake.com]</span></td>
+                        </tbody>
+                    划
+
+                    <h3>✔ C. Fonctions Utilitaires (détection du type de fichier)</h3>
+                    <p>Ces fonctions retournent TRUE/FALSE selon le type détecté :</p>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Fonction</th><th>Description</th>
+                        </thead>
+                        <tbody>
+                            32<td>FL_IS_AUDIO</td><td>Fichier audio ?</td>
+                            32<td>FL_IS_COMPRESSED</td><td>Archive / compressé ?</td>
+                            32<td>FL_IS_DOCUMENT</td><td>Document (PDF, doc, text…) ?</td>
+                            32<td>FL_IS_IMAGE</td><td>Image ?</td>
+                            32<td>FL_IS_VIDEO</td><td>Vidéo ?</td>
+                        </tbody>
+                    划
+                    <div class="info-note">
+                        <em>Utility functions include FL_IS_AUDIO, FL_IS_COMPRESSED, FL_IS_DOCUMENT, FL_IS_IMAGE, FL_IS_VIDEO.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: TYPES D'URL POUR ACCÉDER AUX FICHIERS
+                ============================================ -->
+                <section id="url-types" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> ✅ 4. Types d'URL pour accéder aux fichiers
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Type</th><th>Description</th><th>Usage</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Scoped URL</strong>
+                                卷第URL encodée donnant accès temporaire
+                                卷第Accès sécurisé limité, recommandé
+                            
+                            32
+                                <td><strong>File URL</strong>
+                                卷第URL permanente du fichier dans le stage
+                                卷第Requêtes SQL, API Snowflake
+                            
+                            32
+                                <td><strong>Pre‑signed URL</strong>
+                                卷第URL HTTP signée
+                                卷第Applications externes, téléchargements
+                            
+                        </tbody>
+                    划
+                    <div class="info-note">
+                        <em>Scoped URL… expires after the persisted result period (24h).<br>
+                        Pre-signed URL… access through HTTPS with token.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: INTÉGRATION AVEC UDF/PROCEDURES
+                ============================================ -->
+                <section id="integration-udf" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 5. Intégration avec UDF/Procedures pour lire un fichier
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Use a scoped URL when passing a file's location to a UDF.</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                    <p>Très souvent testé en SnowPro : toujours utiliser <strong>Scoped URL</strong> dans un UDF pour éviter les attaques de type file-injection.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: BONNES PRATIQUES SNOWPRO CORE
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 6. Bonnes pratiques SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Toujours utiliser un Scoped URL</h4>
+                            <p>→ sécurité + limite temporelle <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Utiliser TO_FILE/TRY_TO_FILE pour manipuler un fichier dans SQL</h4>
+                            <p>→ transformation du fichier en FILE object</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Utiliser les fonctions FL_* pour inspecter les métadonnées</h4>
+                            <p>→ utile pour ETL ingestion, cataloging d'images/vidéos/documents</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ FILE n'est qu'un descripteur, pas le contenu</h4>
+                            <p><em>FILE values do not store the file data itself.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Les FILE values ne se mettent pas à jour automatiquement si le fichier change</h4>
+                            <p><em>FILE values may become inconsistent with the underlying staged files.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ ULTRA‑RAPIDE (FLASHCARDS)
+                ============================================ -->
+                <section id="resume-rapide" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 7. Résumé ultra‑rapide (flashcards)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>Unstructured data manipulée en SQL</h4>
+                            <p>via le <strong>FILE data type</strong></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Création</h4>
+                            <p><code class="inline-code">TO_FILE</code>, <code class="inline-code">TRY_TO_FILE</code></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Lecture des métadonnées</h4>
+                            <p><code class="inline-code">FL_GET_*</code></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Détection de type</h4>
+                            <p><code class="inline-code">FL_IS_*</code></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>Accès recommandé</h4>
+                            <p><strong>Scoped URL</strong> (24h)</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>FILE = référence, pas contenu</h4>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

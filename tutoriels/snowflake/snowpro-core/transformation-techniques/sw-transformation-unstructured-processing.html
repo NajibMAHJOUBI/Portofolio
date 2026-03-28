@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Unstructured Data with UDF & Procedures | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Unstructured Data with UDF & Procedures</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#objectif" class="active">
+                            <i class="fas fa-file-alt"></i>1. Objectif : lire & traiter des fichiers non structurés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#securite-scoped-url">
+                            <i class="fas fa-lock"></i>2. Sécurité : utiliser impérativement une Scoped URL
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#acces-fichier">
+                            <i class="fas fa-folder-open"></i>3. Accès au fichier dans les handlers UDF / Procedures
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemple-pdf">
+                            <i class="fas fa-file-pdf"></i>4. Exemple de traitement d'un PDF
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#stages-necessaires">
+                            <i class="fas fa-cloud-upload-alt"></i>5. Création des stages nécessaires
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#udf-vs-procedures">
+                            <i class="fas fa-code-branch"></i>6. Différences clés UDF VS Procedures pour unstructured data
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#support-multilangage">
+                            <i class="fas fa-code"></i>7. Support multi-langage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>8. Bonnes pratiques (exigées pour SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-flashcards">
+                            <i class="fas fa-star"></i>9. Résumé en flashcards
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Unstructured Data with UDF & Procedures</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-alt"></i>Unstructured Data
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-java"></i>Java
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: OBJECTIF : LIRE & TRAITER DES FICHIERS NON STRUCTURÉS
+                ============================================ -->
+                <section id="objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-alt"></i> ✅ 1. Objectif : lire & traiter des fichiers non structurés depuis Snowflake
+                    </h2>
+
+                    <p>Source : <span class="reference">[y42.com]</span></p>
+
+                    <p>Snowflake permet de :</p>
+                    <ul>
+                        <li>Lire des fichiers non structurés (PDF, images, texte…) stockés sur un stage.</li>
+                        <li>Appeler du code Java / Python / Scala via UDF, UDTF ou procédures pour analyser, transformer ou extraire du contenu.</li>
+                        <li>S'appuyer sur les mécanismes sécurisés d'accès (Scoped URLs).</li>
+                    </ul>
+
+                    <div class="info-note">
+                        <em>This topic provides examples of reading and processing unstructured data in staged files with handler code written in Java UDFs, UDTFs, and procedures.</em>
+                        <span class="reference">[y42.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SÉCURITÉ : UTILISER IMPÉRATIVEMENT UNE SCOPED URL
+                ============================================ -->
+                <section id="securite-scoped-url" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 2. Sécurité : utiliser impérativement une Scoped URL
+                    </h2>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Point MAJEUR pour SnowPro Core :</strong>
+                        <p><em>To make your code resilient to file injection attacks, always use a scoped URL when passing a file's location to a UDF.</em> <span class="reference">[y42.com]</span></p>
+                    </div>
+
+                    <h3>✔ Pourquoi ?</h3>
+                    <ul>
+                        <li>Empêche l'utilisateur d'injecter des chemins non autorisés.</li>
+                        <li>Limite l'accès au fichier au périmètre autorisé.</li>
+                        <li>Les scoped URLs expirent automatiquement (24h).</li>
+                        <li>Elles ne donnent pas de privilèges sur le stage.</li>
+                    </ul>
+
+                    <div class="info-note">
+                        ⚠️ Les Scoped URLs doivent être générées via : <code class="inline-code">BUILD_SCOPED_FILE_URL()</code> (cité comme référence dans la page).
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: ACCÈS AU FICHIER DANS LES HANDLERS UDF / PROCEDURES
+                ============================================ -->
+                <section id="acces-fichier" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-folder-open"></i> ✅ 3. Accès au fichier dans les handlers UDF / Procedures
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Dans un UDF Java</h4>
+                            <div class="info-note">
+                                <em>The UDF handler reads the file using a Java InputStream.</em>
+                                <span class="reference">[y42.com]</span>
+                            </div>
+                            <p>➡️ Le fichier est lu via InputStream fourni par Snowflake.</p>
+                            <p>➡️ Les UDF sont conçues pour renvoyer un résultat directement via SQL.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Dans une procedure Java</h4>
+                            <div class="info-note">
+                                <em>The handler reads the file using a SnowflakeFile.</em>
+                                <span class="reference">[y42.com]</span>
+                            </div>
+                            <p>➡️ SnowflakeFile expose un accès plus riche (métadonnées, taille, etc.)</p>
+                            <p>➡️ Adapté aux traitements complets ou multi‑étapes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: EXEMPLE DE TRAITEMENT D'UN PDF
+                ============================================ -->
+                <section id="exemple-pdf" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file-pdf"></i> ✅ 4. Exemple de traitement d'un PDF (donné dans la doc)
+                    </h2>
+
+                    <p>Snowflake montre un cas utilisant la bibliothèque Apache PDFBox :</p>
+                    <div class="info-note">
+                        <em>Both handlers extract the contents of a specified PDF file using the Apache PDFBox library.</em>
+                        <span class="reference">[y42.com]</span>
+                    </div>
+
+                    <p>Le workflow présenté suit ces étapes :</p>
+                    <ol>
+                        <li>Télécharger la librairie PDFBox.</li>
+                        <li>L'uploader sur un stage interne.</li>
+                        <li>
+                            Écrire une UDF Java qui :
+                            <ul>
+                                <li>prend en entrée une scoped URL ;</li>
+                                <li>lit le PDF via InputStream ;</li>
+                                <li>extrait le texte.</li>
+                            </ul>
+                        </li>
+                        <li>Écrire une procédure Java similaire utilisant SnowflakeFile.</li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CRÉATION DES STAGES NÉCESSAIRES
+                ============================================ -->
+                <section id="stages-necessaires" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 5. Création des stages nécessaires
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Create stages… to keep your handler code's dependencies and the data file.</em>
+                        <span class="reference">[y42.com]</span>
+                    </div>
+
+                    <p>Exemples fournis :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE STAGE jars_stage;
+CREATE OR REPLACE STAGE data_stage DIRECTORY = (ENABLE = TRUE);</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: DIFFÉRENCES CLÉS UDF VS PROCEDURES
+                ============================================ -->
+                <section id="udf-vs-procedures" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 6. Différences clés UDF VS Procedures pour unstructured data
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Critère</th><th>UDF</th><th>Procedure</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Accès fichier</strong>
+                                卷第InputStream
+                                卷第SnowflakeFile
+                            
+                            32
+                                <td><strong>Usage</strong>
+                                卷第Retourner une valeur (texte, métrique…)
+                                卷第Traitements avancés, transformations complexes
+                            
+                            32
+                                <td><strong>Code</strong>
+                                卷第souvent plus simple
+                                卷第manipulation de fichiers plus riche
+                            
+                            32
+                                <td><strong>Idéal pour</strong>
+                                卷第extraction de features, OCR simple
+                                卷第ingestion massive, parsing, transformation pipeline
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: SUPPORT MULTI-LANGAGE
+                ============================================ -->
+                <section id="support-multilangage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 7. Support multi-langage
+                    </h2>
+
+                    <div class="info-note">
+                        <em>Handlers written in Python or Scala (UDFs, UDTFs, procedures).</em>
+                        <span class="reference">[y42.com]</span>
+                    </div>
+                    <p>Ce n'est pas limité à Java.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: BONNES PRATIQUES (EXIGÉES POUR SNOWPRO CORE)
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 8. Bonnes pratiques (exigées pour SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Toujours passer une Scoped URL au handler</h4>
+                            <p>➡ Sécurité la plus importante. <span class="reference">[y42.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Stocker les dépendances (JAR / libs) dans un stage dédié</h4>
+                            <p>➡ Les UDF doivent IMPORT les fichiers depuis ce stage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Utiliser des stages différents :</h4>
+                            <ul>
+                                <li>un pour les librairies</li>
+                                <li>un pour les données <span class="reference">[y42.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Préférer SnowflakeFile pour des opérations complexes</h4>
+                            <p>➡ plus de métadonnées ; meilleures performances.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Vérifier le type MIME avant traitement</h4>
+                            <p>➡ utile pour éviter les erreurs (PDF, image, audio…).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: RÉSUMÉ EN FLASHCARDS
+                ============================================ -->
+                <section id="resume-flashcards" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 9. Résumé en flashcards
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p>✔ <strong>UDF</strong> = InputStream ; <strong>Procedure</strong> = SnowflakeFile.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Toujours utiliser <code class="inline-code">BUILD_SCOPED_FILE_URL</code> pour l'accès fichier.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Bibliothèques externes → stockées dans un stage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Unstructured data = accessible uniquement depuis un stage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Snowflake supporte Java, Python, Scala pour l'unstructured processing.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

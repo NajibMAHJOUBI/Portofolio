@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Types d'URL pour fichiers non structurés | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Types d'URL pour fichiers non structurés</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#introduction" class="active">
+                            <i class="fas fa-link"></i>📘 Types d'URL pour accéder aux fichiers non structurés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#scoped-url">
+                            <i class="fas fa-lock"></i>1. Scoped URL
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#file-url">
+                            <i class="fas fa-file"></i>2. File URL (Stage File URL)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pre-signed-url">
+                            <i class="fas fa-shield-alt"></i>3. Pre-signed URL
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tableau-recapitulatif">
+                            <i class="fas fa-chart-simple"></i>4. Tableau récapitulatif (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés à mémoriser pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#mini-qcm">
+                            <i class="fas fa-question-circle"></i>6. Mini‑QCM d'entraînement
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Types d'URL pour fichiers non structurés</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-link"></i>URLs
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-file-alt"></i>Unstructured Data
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION: INTRODUCTION
+                ============================================ -->
+                <section id="introduction" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> 📘 Types d'URL pour accéder aux fichiers non structurés dans Snowflake
+                    </h2>
+
+                    <p>Source officielle : <em>Introduction to unstructured data</em> <span class="reference">[learn.microsoft.com]</span></p>
+
+                    <p>Snowflake propose trois types d'URL pour accéder à des fichiers stockés sur un stage interne ou externe. Elles sont utilisées dans les requêtes SQL, les UDF/procedures, les applications externes, et les workflows de data loading/processing.</p>
+
+                    <div class="info-note">
+                        La documentation souligne que ces URL offrent des niveaux différents de sécurité, de portée et d'usage. <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 1: SCOPED URL
+                ============================================ -->
+                <section id="scoped-url" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 1. Scoped URL
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <div class="info-note">
+                        <em>Encoded URL that permits temporary access to a staged file without granting privileges to the stage.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                    <p>Une Scoped URL donne un accès temporaire aux fichiers, sans transmettre les privilèges du stage sous-jacent. Elle est cryptée et limitée à un contexte de sécurité spécifique.</p>
+
+                    <h3>✔ Expiration</h3>
+                    <div class="info-note">
+                        <em>The URL expires when the persisted query result period ends (24 hours).</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                    <p>Durée : <strong>24 heures</strong>, liée au résultat persistant de Snowflake.</p>
+
+                    <h3>✔ Cas d'usage recommandé</h3>
+                    <ul>
+                        <li>Accorder un accès contrôlé à un fichier au sein du même compte Snowflake, par des rôles spécifiques.</li>
+                        <li>Construire des vues sécurisées qui exposent des URLs aux consommateurs internes.</li>
+                        <li>Sécuriser les UDF/UDTF (Snowflake recommande explicitement de passer uniquement des Scoped URLs aux UDF pour éviter l'injection de fichiers).</li>
+                    </ul>
+
+                    <h3>✔ Particularités</h3>
+                    <p>Snowflake journalise dans l'history qui accède au fichier via une scoped URL. <span class="reference">[learn.microsoft.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: FILE URL (STAGE FILE URL)
+                ============================================ -->
+                <section id="file-url" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-file"></i> ✅ 2. File URL (Stage File URL)
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <div class="info-note">
+                        <em>URL that identifies the database, schema, stage, and file path.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                    <p>Il s'agit de l'URL native et permanente d'un fichier situé sur un stage Snowflake.</p>
+
+                    <h3>✔ Cas d'usage recommandé</h3>
+                    <p>Pour usage interne Snowflake, dans :</p>
+                    <ul>
+                        <li>des pipelines SQL</li>
+                        <li>des requêtes techniques</li>
+                        <li>des opérations de partage via des vues</li>
+                        <li>Document AI ou d'autres processing SQL</li>
+                    </ul>
+                    <div class="info-note">
+                        <em>Ideal for custom applications… or for downloading/analyzing unstructured data in Snowsight.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+
+                    <h3>✔ Conditions d'accès</h3>
+                    <p>L'utilisateur doit avoir les privilèges sur le stage (USAGE + READ). <span class="reference">[learn.microsoft.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: PRE-SIGNED URL
+                ============================================ -->
+                <section id="pre-signed-url" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 3. Pre-signed URL
+                    </h2>
+
+                    <h3>✔ Définition</h3>
+                    <div class="info-note">
+                        <em>A simple HTTPS URL used to access a file via a web browser… using a pre-signed access token.</em>
+                        <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                    <p>C'est une URL HTTP(S) visant à exposer un fichier Snowflake à un utilisateur ou une application hors de Snowflake, via un token d'accès temporaire.</p>
+
+                    <h3>✔ Expiration</h3>
+                    <p>L'expiration du token est configurable. <span class="reference">[learn.microsoft.com]</span></p>
+
+                    <h3>✔ Cas d'usage recommandé</h3>
+                    <p>Scénarios externes :</p>
+                    <ul>
+                        <li>Applications web ou mobiles</li>
+                        <li>Téléchargements de fichiers pour analyse offline</li>
+                        <li>Partenaires ou clients externes ne disposant pas d'accès Snowflake</li>
+                    </ul>
+
+                    <h3>✔ Utilisation typique</h3>
+                    <ul>
+                        <li>Transmission à des systèmes externes via HTTPS</li>
+                        <li>Automatisation avec API REST Snowflake (GET sur la pre-signed URL)</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: TABLEAU RÉCAPITULATIF
+                ============================================ -->
+                <section id="tableau-recapitulatif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 4. Tableau récapitulatif (SnowPro Core)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Type d'URL</th><th>Durée</th><th>Sécurité</th><th>Usage interne/externe</th><th>Cas d'usage typiques</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Scoped URL</strong>
+                                卷第24h
+                                卷第Très élevée (restreinte au contexte + journalisation)
+                                卷第Interne
+                                卷第UDF, vues sécurisées, partage restreint
+                            
+                            32
+                                <td><strong>File URL</strong>
+                                卷第Permanente
+                                卷第Dépend des privilèges du stage
+                                卷第Interne
+                                卷第SQL pipelines, Snowsight, partages internes
+                            
+                            32
+                                <td><strong>Pre-signed URL</strong>
+                                卷第Configurable
+                                卷第Token HTTP(S)
+                                卷第Externe
+                                卷第Téléchargements, web apps, partenaires
+                            
+                        </tbody>
+                    划
+                    <p>Sources : <span class="reference">[learn.microsoft.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS À MÉMORISER
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés à mémoriser pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔹 1. Le type le plus sécurisé pour les UDF</h4>
+                            <p>= <strong>Scoped URL</strong><br>→ Empêche l'accès non autorisé au stage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 2. Les File URLs nécessitent des privilèges sur le stage</h4>
+                            <p>→ Pas d'accès sinon. <span class="reference">[learn.microsoft.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 3. Les Pre‑signed URLs sont destinées aux applications externes</h4>
+                            <p>→ Via navigateur ou API HTTP. <span class="reference">[learn.microsoft.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 4. Scoped URLs sont limitées à 24h et sont journalisées</h4>
+                            <p>→ Important pour audit & compliance. <span class="reference">[learn.microsoft.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔹 5. Les pré-signed URLs ont une expiration configurable</h4>
+                            <p>→ Permettent de gérer les besoins de sécurité.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: MINI-QCM D'ENTRAÎNEMENT
+                ============================================ -->
+                <section id="mini-qcm" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-question-circle"></i> ✅ 6. Mini‑QCM d'entraînement (3 questions)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>1️⃣ Quel type d'URL est recommandé pour passer un fichier à une UDF ?</h4>
+                            <p>➡️ <strong>Scoped URL</strong> (sécurisée & limitée)</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>2️⃣ Quel type d'URL permet un accès depuis un navigateur web ?</h4>
+                            <p>➡️ <strong>Pre-signed URL</strong></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>3️⃣ Quel type d'URL identifie directement &lt;db&gt;.&lt;schema&gt;.&lt;stage&gt;/&lt;path&gt; ?</h4>
+                            <p>➡️ <strong>File URL</strong></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

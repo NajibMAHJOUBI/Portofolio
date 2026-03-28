@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Directory Tables (Dirtables) | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Directory Tables</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-table"></i>1. Qu'est‑ce qu'une Directory Table ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pourquoi-utiliser">
+                            <i class="fas fa-lightbulb"></i>2. Pourquoi utiliser une Directory Table ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#activation">
+                            <i class="fas fa-toggle-on"></i>3. Activation d'une Directory Table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#interroger">
+                            <i class="fas fa-search"></i>4. Comment interroger une Directory Table ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#rafraichir">
+                            <i class="fas fa-sync-alt"></i>5. Rafraîchir les Directory Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#auto-refresh">
+                            <i class="fas fa-cloud-upload-alt"></i>6. Auto‑refresh (selon cloud provider)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#facturation-monitoring">
+                            <i class="fas fa-coins"></i>7. Facturation & Monitoring
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privileges">
+                            <i class="fas fa-lock"></i>8. Privileges nécessaires
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-usage">
+                            <i class="fas fa-chart-line"></i>9. Cas d'usage typiques (SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-finale">
+                            <i class="fas fa-star"></i>10. Synthèse finale (Flashcards SnowPro)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Directory Tables (Dirtables)</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-table"></i>Directory Tables
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud-upload-alt"></i>Data Loading
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: QU'EST-CE QU'UNE DIRECTORY TABLE ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 1. Qu'est‑ce qu'une Directory Table ?
+                    </h2>
+
+                    <p>Source : <em>Directory Tables – Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <em>“A directory table is an implicit object layered on a stage… conceptually similar to an external table because it stores file‑level metadata about the data files in the stage.”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Caractéristiques clés :</h3>
+                    <ul>
+                        <li>Ce n'est pas un objet de base de données : <strong>pas de privilèges propres</strong>.</li>
+                        <li>Associée directement à un stage (interne ou externe).</li>
+                        <li>
+                            Fournit liste et métadonnées des fichiers :
+                            <ul>
+                                <li>nom du fichier</li>
+                                <li>taille</li>
+                                <li>timestamp dernière modification</li>
+                                <li>URL Snowflake du fichier <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Comparable à :</strong> Une external table, mais sans schéma SQL, juste les métadonnées de fichiers.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: POURQUOI UTILISER UNE DIRECTORY TABLE ?
+                ============================================ -->
+                <section id="pourquoi-utiliser" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 2. Pourquoi utiliser une Directory Table ?
+                    </h2>
+
+                    <p>Snowflake liste trois usages centraux : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 1. Lister tous les fichiers d'un stage</h4>
+                            <p>Accès SQL direct aux fichiers stockés dans un stage.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2. Créer des vues logiques sur des fichiers</h4>
+                            <p>Permet par exemple de joindre une directory table à une table contenant des métadonnées supplémentaires (ex : catalogues, tags, tables de contrôle).</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3. Construire des pipelines de traitement de fichiers</h4>
+                            <p>Utilisable avec : Snowpark, External Functions<br>➡️ pour traiter les fichiers stockés (images, logs, PDF, etc.)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: ACTIVATION D'UNE DIRECTORY TABLE
+                ============================================ -->
+                <section id="activation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-toggle-on"></i> ✅ 3. Activation d'une Directory Table
+                    </h2>
+
+                    <p>On peut l'activer :</p>
+                    <ul>
+                        <li>À la création du stage → via <code class="inline-code">CREATE STAGE</code></li>
+                        <li>Après coup → via <code class="inline-code">ALTER STAGE</code></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <em>“You can add a directory table to a stage when you create a stage or later using ALTER STAGE.”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Exemple (documentation ThinkETL basée sur Snowflake)</h3>
+                    <p>Le paramètre <code class="inline-code">DIRECTORY</code> doit être activé :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE OR REPLACE STAGE my_stage
+    DIRECTORY = (ENABLE = TRUE);</code></pre>
+                    </div>
+                    <p><span class="reference">[thinketl.com]</span></p>
+
+                    <h3>✔ Activation sur stage existant :</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>ALTER STAGE my_stage SET DIRECTORY = (ENABLE = TRUE);</code></pre>
+                    </div>
+                    <p><span class="reference">[thinketl.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: COMMENT INTERROGER UNE DIRECTORY TABLE ?
+                ============================================ -->
+                <section id="interroger" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 4. Comment interroger une Directory Table ?
+                    </h2>
+
+                    <p>La Directory Table devient disponible automatiquement sous forme d'un view‑like object associé au stage.</p>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT *
+FROM DIRECTORY(@my_stage);</code></pre>
+                    </div>
+                    <p><span class="reference">[thinketl.com]</span></p>
+
+                    <p>Cela retourne des colonnes comme :</p>
+                    <ul>
+                        <li>RELATIVE_PATH</li>
+                        <li>SIZE</li>
+                        <li>LAST_MODIFIED</li>
+                        <li>FILE_URL</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RAFRAÎCHIR LES DIRECTORY TABLES
+                ============================================ -->
+                <section id="rafraichir" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-sync-alt"></i> ✅ 5. Rafraîchir les Directory Tables
+                    </h2>
+
+                    <p>La directory table ne se met pas automatiquement à jour sauf si l'auto-refresh est activé (selon le cloud).</p>
+                    <p>Sans auto‑refresh : ➡️ Il faut utiliser <code class="inline-code">ALTER STAGE … REFRESH</code>.</p>
+
+                    <div class="info-note">
+                        <em>“You can refresh the directory table metadata manually using ALTER STAGE … REFRESH.”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Coûts :</h3>
+                    <ul>
+                        <li>Le rafraîchissement automatique via notifications cloud → facturé comme <strong>Snowpipe</strong> (car Snowpipe gère les event notifications) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le rafraîchissement manuel → facturé en <strong>Cloud Services</strong> "standard" (n'apparaît pas dans PIPE_USAGE_HISTORY) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: AUTO-REFRESH
+                ============================================ -->
+                <section id="auto-refresh" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud-upload-alt"></i> ✅ 6. Auto‑refresh (selon cloud provider)
+                    </h2>
+
+                    <p>Snowflake fournit des guides spécifiques selon le cloud (Azure Event Grid, AWS S3 notifications, GCP Pub/Sub).</p>
+                    <p>Exemple Azure : L'auto‑refresh dépend d'événements blob : BlobCreated, BlobDeleted… <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <strong>Points clés :</strong>
+                        <ul>
+                            <li>L'auto‑refresh permet d'ajouter/supprimer automatiquement les fichiers dans la directory table.</li>
+                            <li>Certains événements (rename) ne déclenchent pas l'actualisation.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: FACTURATION & MONITORING
+                ============================================ -->
+                <section id="facturation-monitoring" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-coins"></i> ✅ 7. Facturation & Monitoring
+                    </h2>
+
+                    <div class="info-note">
+                        <em>“Overhead to manage event notifications … appears as Snowpipe charges.”</em>
+                        <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+
+                    <h3>✔ Mesurer les coûts :</h3>
+                    <ul>
+                        <li><code class="inline-code">PIPE_USAGE_HISTORY</code> (Snowpipe events)</li>
+                        <li><code class="inline-code">AUTO_REFRESH_REGISTRATION_HISTORY</code> (historique des fichiers et coûts associés) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: PRIVILEGES NÉCESSAIRES
+                ============================================ -->
+                <section id="privileges" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 8. Privileges nécessaires
+                    </h2>
+
+                    <p>Une directory table hérite des privilèges du stage. Elle n'a pas ses propres privilèges.</p>
+                    <p>Via ThinkETL (confirmant la doc Snowflake) :</p>
+                    <ul>
+                        <li>Pour interroger → <code class="inline-code">READ</code> ou <code class="inline-code">USAGE</code> selon stage interne/externe</li>
+                        <li>Pour rafraîchir → <code class="inline-code">WRITE</code> / <code class="inline-code">ALTER STAGE</code> <span class="reference">[thinketl.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: CAS D'USAGE TYPIQUES (SNOWPRO CORE)
+                ============================================ -->
+                <section id="cas-usage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 9. Cas d'usage typiques (SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Inventaire des fichiers d'un data lake</h4>
+                            <p>Lister les nouveaux fichiers avant ingestion.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Pipelines unstructured data (images, logs, PDF)</h4>
+                            <p>Utilisation avec Snowpark pour charger/processer chaque fichier.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Contrôle de complétude / qualité d'ingestion</h4>
+                            <p>Comparer les fichiers attendus vs ceux réellement présents.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Superviser l'évolution d'un répertoire cloud</h4>
+                            <p>Grâce aux métadonnées (last modified, taille…).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: SYNTHÈSE FINALE (FLASHCARDS SNOWPRO)
+                ============================================ -->
+                <section id="synthese-finale" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 10. Synthèse finale (Flashcards SnowPro)
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Point clé</th><th>À retenir pour l'examen</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Nature</strong>
+                                卷第Objet implicite sur un stage (pas une table SQL) <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>Fonction</strong>
+                                卷第Liste + métadonnées des fichiers dans le stage
+                            
+                            32
+                                <td><strong>Activation</strong>
+                                卷第DIRECTORY = (ENABLE = TRUE)
+                            
+                            32
+                                <td><strong>Refresh</strong>
+                                卷第Manuel (ALTER STAGE … REFRESH) ou automatique (notifications cloud) <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>Coûts</strong>
+                                卷第Auto‑refresh → Snowpipe billing ; manuel → Cloud Services billing
+                            
+                            32
+                                <td><strong>Privileges</strong>
+                                卷第Hérite du stage (READ/WRITE/USAGE) <span class="reference">[thinketl.com]</span>
+                            
+                            32
+                                <td><strong>Monitoring</strong>
+                                卷第PIPE_USAGE_HISTORY, AUTO_REFRESH_REGISTRATION_HISTORY <span class="reference">[docs.snowflake.com]</span>
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

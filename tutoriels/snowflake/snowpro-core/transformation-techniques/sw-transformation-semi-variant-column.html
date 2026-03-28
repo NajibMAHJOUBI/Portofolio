@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Données semi-structurées & PARSE_JSON | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Semi-structured Data & PARSE_JSON</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#principes-limites" class="active">
+                            <i class="fas fa-info-circle"></i>1. Principes & limites — données semi‑structurées dans VARIANT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#parse-json">
+                            <i class="fas fa-code"></i>2. PARSE_JSON — conversion d'une chaîne JSON en VARIANT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>3. Bonnes pratiques & pièges fréquents
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples">
+                            <i class="fas fa-code-branch"></i>4. Exemples "type SnowPro"
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#checklist-examen">
+                            <i class="fas fa-star"></i>5. Check‑list d'examen (à mémoriser)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Données semi-structurées & PARSE_JSON</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code-branch"></i>VARIANT
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-json"></i>JSON
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PRINCIPES & LIMITES — DONNÉES SEMI-STRUCTURÉES DANS VARIANT
+                ============================================ -->
+                <section id="principes-limites" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Principes & limites — données semi‑structurées dans VARIANT
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Taille maximale d'une valeur VARIANT</h3>
+                    <p>Jusqu'à <strong>128 MB non compressés</strong> (en pratique un peu moins à cause des surcharges internes et selon l'objet stocké). <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Quand stocker en VARIANT vs. aplatir ?</h3>
+                    <ul>
+                        <li>Si vos cas d'usage ne sont pas encore connus, Snowflake recommande de stocker d'abord dans VARIANT.</li>
+                        <li>Pour des données "régulières" (ex. JSON avec chaînes/entiers), les besoins de stockage et la performance sont proches du relationnel. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>
+                            Pour améliorer le pruning et réduire le stockage, <strong>aplatir</strong> (via colonnes relationnelles) si vos documents contiennent :
+                            <ul>
+                                <li>dates/timestamps (notamment non‑ISO 8601) représentés en chaînes</li>
+                                <li>nombres encodés en chaînes</li>
+                                <li>tableaux</li>
+                            </ul>
+                        </li>
+                        <li>Les valeurs non natives (dates dans JSON) stockées comme string dans VARIANT sont plus lentes à traiter et prennent plus d'espace que des colonnes typées. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Approche de validation</h3>
+                    <p>Charger un échantillon dans VARIANT, FLATTEN les clés ciblées dans une table relationnelle, puis comparer les performances de vos requêtes typiques. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Deux types de NULL dans le semi‑structuré :</strong>
+                        <ul>
+                            <li><strong>SQL NULL</strong> : valeur manquante/inconnue (comme pour les types structurés).</li>
+                            <li><strong>JSON null</strong> (dit "VARIANT NULL") : stocké comme chaîne contenant "null" pour le distinguer de SQL NULL. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: PARSE_JSON — CONVERSION D'UNE CHAÎNE JSON EN VARIANT
+                ============================================ -->
+                <section id="parse-json" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. PARSE_JSON — conversion d'une chaîne JSON en VARIANT
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p><strong>But :</strong> interprète une chaîne d'entrée comme un document JSON et retourne un VARIANT (OBJECT/ARRAY au besoin). Pratique pour insérer du JSON inline ou transformer une colonne texte en JSON navigable. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Syntaxe & paramètres</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>PARSE_JSON(&lt;expr&gt; [, '&lt;parameter&gt;'])</code></pre>
+                    </div>
+                    <ul>
+                        <li><code class="inline-code">&lt;expr&gt;</code> : chaîne contenant un JSON valide.</li>
+                        <li>
+                            <code class="inline-code">'&lt;parameter&gt;'</code> : contrôle notamment la gestion des clés dupliquées :
+                            <ul>
+                                <li><code class="inline-code">'d'</code> = autoriser les clés dupliquées (la dernière valeur l'emporte)</li>
+                                <li><code class="inline-code">'s'</code> = strict (refus des doublons, par défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ Comportements importants</h3>
+                    <ul>
+                        <li>Retourne VARIANT ; NULL en entrée → NULL en sortie. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Chaîne vide ou espaces uniquement → retourne NULL (pas d'erreur), pour laisser continuer le traitement. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La chaîne <code class="inline-code">'null'</code> (littéral) devient un JSON null dans VARIANT (≠ SQL NULL). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Précision numérique : tente de préserver l'exactitude des décimaux (ex. 123.45 → NUMBER(5,2)), mais notation scientifique ou incompatibilités d'échelle → DOUBLE. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Types non natifs en JSON (DATE/TIME/TIMESTAMP/BINARY) doivent être représentés en chaînes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Taille max de l'entrée : <strong>64 MB compressés</strong> pour l'expression de PARSE_JSON. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Variante tolérante :</strong> <code class="inline-code">TRY_PARSE_JSON(&lt;expr&gt; [, '&lt;parameter&gt;'])</code> → retourne NULL si parsing en erreur (utile en ingestion "best‑effort"). <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: BONNES PRATIQUES & PIÈGES FRÉQUENTS
+                ============================================ -->
+                <section id="bonnes-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 3. Bonnes pratiques & pièges fréquents (SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>📌 Modéliser selon l'usage</h4>
+                            <p>Si vos analyses ciblent dates, champs numériques, filtres sur éléments d'ARRAY, envisagez un aplatissage sélectif pour les colonnes critiques → meilleur pruning et coûts moindres. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>📌 Gérer les NULL correctement</h4>
+                            <p>Faites la différence entre SQL NULL et JSON null (dans VARIANT) → impacts sur filtres, agrégations et jointures. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>📌 Encodage des dates/nombres</h4>
+                            <p>Dates/Timestamps en JSON = strings → préférez cast explicite à la lecture (et/ou colonnes relationnelles si réusage intensif). Chiffres encodés en chaînes = performance moindre ; privilégiez des nombres natifs ou des colonnes numériques. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>📌 Clés dupliquées</h4>
+                            <p>Par défaut, PARSE_JSON est strict ('s') : une clé dupliquée lève une erreur ; vous pouvez autoriser via 'd' (la dernière valeur est conservée). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>📌 Tolérance à l'erreur</h4>
+                            <p>En flux hétérogène (APIs, logs), préférez TRY_PARSE_JSON pour éviter l'échec de la requête en cas de JSON malformé. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>📌 Taille & performance</h4>
+                            <p>Surveillez la taille de vos documents (VARIANT ≤ 128 MB non compressés) et l'entrée de PARSE_JSON (≤ 64 MB compressés). Les gros objets sont plus coûteux et limitent certaines opérations. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: EXEMPLES "TYPE SNOWPRO"
+                ============================================ -->
+                <section id="exemples" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code-branch"></i> ✅ 4. Exemples "type SnowPro"
+                    </h2>
+
+                    <h3>A. Ingestion simple & navigation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>-- Table avec une colonne VARIANT
+CREATE OR REPLACE TABLE events (payload VARIANT);
+
+-- Insertion à partir de JSON texte
+INSERT INTO events VALUES
+    (PARSE_JSON('{"user":{"id":101,"name":"Ana"},"ts":"2025-10-01T08:00:00Z","items":[{"sku":"A1","qty":2},{"sku":"B2","qty":1}]}'));
+
+-- Lecture : accès par chemins + cast explicites
+SELECT
+    payload:user:id::NUMBER       AS user_id,
+    payload:user:name::STRING     AS user_name,
+    payload:ts::TIMESTAMP_TZ      AS ts_utc
+FROM events;</code></pre>
+                    </div>
+                    <p>PARSE_JSON → VARIANT ; accès par <code class="inline-code">:</code> et casts explicites. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>B. Aplatir un tableau (FLATTEN) pour analyses</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>-- Extraire les items en lignes
+SELECT
+    e.payload:user:id::NUMBER       AS user_id,
+    f.value:sku::STRING             AS sku,
+    f.value:qty::NUMBER             AS qty
+FROM events e,
+LATERAL FLATTEN(input => e.payload:items) f;</code></pre>
+                    </div>
+                    <p>Stratégie recommandée quand les ARRAY sont souvent parcourus : aplatir pour gagner en lisibilité et en performance selon les cas d'usage. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>C. Résilience face aux "JSON imparfaits"</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>-- Tolérer des erreurs de parsing (ligne invalide => NULL)
+SELECT TRY_PARSE_JSON(raw_line) AS parsed
+FROM external_feed;</code></pre>
+                    </div>
+                    <p>TRY_PARSE_JSON évite l'arrêt de pipeline en cas de malformation ponctuelle. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>D. Gestion des clés dupliquées</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>-- Strict (défaut) : lève une erreur si un objet a des clés dupliquées
+SELECT PARSE_JSON('{"k":1,"k":2}');   -- ERREUR (mode 's')
+
+-- Permissif : conserve la dernière valeur
+SELECT PARSE_JSON('{"k":1,"k":2}', 'd');   -- {"k":2}</code></pre>
+                    </div>
+                    <p>Paramètre 'd' = duplicate keys allowed ; 's' = strict (défaut). <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CHECK-LIST D'EXAMEN (À MÉMORISER)
+                ============================================ -->
+                <section id="checklist-examen" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Check‑list d'examen (à mémoriser)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <p>✔ VARIANT ≤ 128 MB non compressés ; PARSE_JSON ≤ 64 MB compressés. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Stocker vs Aplatir : si beaucoup de dates/nombres/arrays, envisager aplatissage pour meilleur pruning et moins de stockage. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ NULL : distinguer SQL NULL et JSON null (VARIANT). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ PARSE_JSON : strict par défaut ('s'), 'd' tolère les clés dupliquées (dernière valeur). <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Numériques : décimaux préservés (ex. NUMBER(5,2)), scientifique → DOUBLE. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ Dates en JSON ⇒ strings ; cas d'usage intensifs ⇒ colonnes typées. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+
+                        <div class="usage-card">
+                            <p>✔ TRY_PARSE_JSON pour l'ingestion robuste. <span class="reference">[docs.snowflake.com]</span></p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

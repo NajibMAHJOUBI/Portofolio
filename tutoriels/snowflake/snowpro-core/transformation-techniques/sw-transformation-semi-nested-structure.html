@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - FLATTEN & LATERAL FLATTEN | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">FLATTEN & LATERAL FLATTEN</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#flatten-role" class="active">
+                            <i class="fas fa-table"></i>1. FLATTEN : rôle, fonctionnement, usage
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#syntaxe-flatten">
+                            <i class="fas fa-code"></i>2. Syntaxe FLATTEN (générale)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#flatten-lateral">
+                            <i class="fas fa-link"></i>3. FLATTEN + LATERAL : extraction dynamique
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#performance-flatten">
+                            <i class="fas fa-chart-line"></i>4. FLATTEN et performance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#json-parsing-flatten">
+                            <i class="fab fa-json"></i>5. JSON parsing + FLATTEN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cas-pratiques">
+                            <i class="fas fa-lightbulb"></i>6. Cas pratiques (à connaître pour SnowPro Core)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-vigilance">
+                            <i class="fas fa-exclamation-triangle"></i>7. Points de vigilance pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-final">
+                            <i class="fas fa-star"></i>8. Résumé final (Flashcard révision)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - FLATTEN & LATERAL FLATTEN</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-table"></i>FLATTEN
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fab fa-json"></i>JSON
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: FLATTEN : RÔLE, FONCTIONNEMENT, USAGE
+                ============================================ -->
+                <section id="flatten-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table"></i> ✅ 1. FLATTEN : rôle, fonctionnement, usage
+                    </h2>
+
+                    <p>Source : Snowflake Community <span class="reference">[learn.microsoft.com]</span></p>
+
+                    <p>Snowflake utilise FLATTEN pour transformer un <strong>ARRAY</strong> ou <strong>OBJECT</strong> contenu dans un champ VARIANT en un jeu de lignes relationnel.</p>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        FLATTEN permet d'exploser un ARRAY JSON ou une structure imbriquée pour extraire dynamiquement des données semi‑structurées. <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+
+                    <h3>✔ Principe</h3>
+                    <p>FLATTEN retourne une table virtuelle contenant pour chaque élément :</p>
+                    <ul>
+                        <li><strong>VALUE</strong> — la valeur extraite</li>
+                        <li><strong>INDEX</strong> — position dans un tableau</li>
+                        <li><strong>KEY</strong> — nom de clé si OBJECT</li>
+                        <li><strong>PATH</strong> — chemin JSON</li>
+                        <li><strong>SEQUENCE</strong> — ordre interne de traitement</li>
+                    </ul>
+                    <p>Ces colonnes sont essentielles aux transformations.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SYNTAXE FLATTEN (GÉNÉRALE)
+                ============================================ -->
+                <section id="syntaxe-flatten" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-code"></i> ✅ 2. Syntaxe FLATTEN (générale)
+                    </h2>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT ...
+FROM TABLE(FLATTEN(
+    INPUT => &lt;expression_variant&gt;,
+    PATH => '&lt;json_path_optional&gt;',
+    MODE => 'ARRAY|OBJECT|BOTH',
+    OUTER => TRUE|FALSE,
+    RECURSIVE => TRUE|FALSE
+));</code></pre>
+                    </div>
+
+                    <h3>✔ Paramètres (références indirectes)</h3>
+                    <ul>
+                        <li><code class="inline-code">INPUT</code> : l'expression VARIANT à traiter (obligatoire)</li>
+                        <li><code class="inline-code">PATH</code> : chemin JSON optionnel pour cibler un sous-élément</li>
+                        <li><code class="inline-code">MODE</code> : 'ARRAY', 'OBJECT', ou 'BOTH'</li>
+                        <li><code class="inline-code">OUTER</code> : TRUE pour conserver les lignes même si INPUT est NULL</li>
+                        <li><code class="inline-code">RECURSIVE</code> : TRUE pour explorer récursivement les structures imbriquées</li>
+                    </ul>
+
+                    <div class="info-note">
+                        Snowflake permet d'extraire dynamiquement des objets JSON à l'aide de FLATTEN combiné à LATERAL. <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: FLATTEN + LATERAL : EXTRACTION DYNAMIQUE
+                ============================================ -->
+                <section id="flatten-lateral" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> ✅ 3. FLATTEN + LATERAL : extraction dynamique
+                    </h2>
+
+                    <p>La ressource Snowflake Community décrit spécifiquement l'usage réel pour "dynamically extracting JSON using LATERAL FLATTEN".</p>
+
+                    <h3>✔ L'accès aux champs imbriqués</h3>
+                    <p>La combinaison de LATERAL et FLATTEN permet d'accéder dynamiquement aux valeurs d'objets JSON, y compris lorsqu'on ne connaît pas les clés en avance. <span class="reference">[learn.microsoft.com]</span></p>
+
+                    <h3>✔ Approche 1 : extraction simple</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT
+    f.value
+FROM my_table t,
+LATERAL FLATTEN(input => t.json_column) f;</code></pre>
+                    </div>
+
+                    <h3>✔ Approche 2 : extraction profonde (hiérarchie)</h3>
+                    <p>FLATTEN peut être utilisé plusieurs fois (multi‑FLATTEN) pour naviguer dans des structures JSON hiérarchiques complexes. <span class="reference">[learn.microsoft.com]</span></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT
+    child.value
+FROM my_table t,
+LATERAL FLATTEN(input => t.json_column:parent_array) parent,
+LATERAL FLATTEN(input => parent.value:child_array) child;</code></pre>
+                    </div>
+
+                    <h3>✔ Approche 3 : extraction dynamique des clés</h3>
+                    <p>FLATTEN retourne KEY, VALUE, PATH, ce qui permet d'extraire dynamiquement des colonnes sans connaître les noms des clés JSON à l'avance. <span class="reference">[learn.microsoft.com]</span></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT
+    f.key,
+    f.value
+FROM my_table t,
+LATERAL FLATTEN(input => t.json_column) f;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: FLATTEN ET PERFORMANCE
+                ============================================ -->
+                <section id="performance-flatten" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. FLATTEN et performance (SnowPro Core)
+                    </h2>
+
+                    <ul>
+                        <li>✔ FLATTEN = opération <strong>coûteuse</strong> si utilisé massivement (car traverse potentiellement un tableau très large).</li>
+                        <li>✔ FLATTEN + LATERAL permet un accès structuré → meilleur que <code class="inline-code">:path</code> en cas de structure variable.</li>
+                        <li>✔ Toujours éviter <code class="inline-code">RECURSIVE => TRUE</code> sauf nécessité → Peut provoquer une explosion combinatoire.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: JSON PARSING + FLATTEN
+                ============================================ -->
+                <section id="json-parsing-flatten" class="tutorial-section">
+                    <h2>
+                        <i class="fab fa-json"></i> ✅ 5. JSON parsing + FLATTEN
+                    </h2>
+
+                    <p>Dans la communauté, l'article rappelle que du JSON peut être chargé via <code class="inline-code">PARSE_JSON()</code> et ensuite "flattened" :</p>
+
+                    <div class="info-note">
+                        La fonction PARSE_JSON peut être utilisée pour transformer des chaînes JSON avant de les traiter avec FLATTEN. <span class="reference">[learn.microsoft.com]</span>
+                    </div>
+
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT f.value
+FROM (SELECT PARSE_JSON(raw_json) AS v FROM src),
+LATERAL FLATTEN(input => v.items) f;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: CAS PRATIQUES (À CONNAÎTRE POUR SNOWPRO CORE)
+                ============================================ -->
+                <section id="cas-pratiques" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lightbulb"></i> ✅ 6. Cas pratiques (à connaître pour SnowPro Core)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ 1. Exploser un tableau JSON</h4>
+                            <div class="code-block" style="margin-top: 0.5rem;">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre><code>SELECT
+    f.index,
+    f.value
+FROM events,
+LATERAL FLATTEN(input => events.payload:items) f;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 2. Extraire toutes les clé/valeurs</h4>
+                            <div class="code-block" style="margin-top: 0.5rem;">
+                                <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                                <pre><code>SELECT
+    f.key,
+    f.value
+FROM logs,
+LATERAL FLATTEN(input => logs.json_event) f;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 3. Extraction dynamique (schémas inconnus)</h4>
+                            <p>Important pour les API NoSQL / telemetry.</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ 4. Multi‑FLATTEN (hiérarchie profonde)</h4>
+                            <p>Pour logs complexes ou événements IoT.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: POINTS DE VIGILANCE POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-vigilance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exclamation-triangle"></i> ✅ 7. Points de vigilance pour SnowPro Core
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Sujet</th><th>Importance</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>LATERAL indispensable</strong>
+                                卷第Permet d'accéder aux colonnes du parent dans une table function
+                            
+                            32
+                                <td><strong>FLATTEN renvoie une table (clé, valeur, index, path)</strong>
+                                卷第Très utile pour inspecter du JSON
+                            
+                            32
+                                <td><strong>VALUE = contenu réel</strong>
+                                卷第Souvent un VARIANT
+                            
+                            32
+                                <td><strong>Champ JSON null ≠ SQL NULL</strong>
+                                卷第Important pour filtres et agrégations
+                            
+                            32
+                                <td><strong>FLATTEN sur ARRAY vs OBJECT</strong>
+                                卷第INDEX vs KEY utiles selon le cas
+                            
+                            32
+                                <td><strong>Multi‑FLATTEN possible</strong>
+                                卷第Pour naviguer dans des JSON imbriqués
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: RÉSUMÉ FINAL (FLASHCARD RÉVISION)
+                ============================================ -->
+                <section id="resume-final" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Résumé final (Flashcard révision)
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ FLATTEN</h4>
+                            <p>transforme un ARRAY/OBJECT VARIANT en lignes</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ LATERAL FLATTEN</h4>
+                            <p>extraction dynamique & navigation profonde</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Colonnes retournées</h4>
+                            <p>KEY, VALUE, INDEX, PATH</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Fonction idéale pour</h4>
+                            <p>JSON complexe ou inconnu</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Compatible avec</h4>
+                            <p>PARSE_JSON() pour ingestion à la volée</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
