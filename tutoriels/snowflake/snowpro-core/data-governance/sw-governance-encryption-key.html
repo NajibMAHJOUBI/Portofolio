@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Encryption & Key Management | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Encryption & Key Management</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#encryption-overview" class="active">
+                            <i class="fas fa-lock"></i>1. Encryption in Snowflake – Vue d'ensemble
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#client-side-encryption">
+                            <i class="fas fa-key"></i>2. Client‑Side Encryption (CSE)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-managed-encryption">
+                            <i class="fas fa-cloud"></i>3. Snowflake‑Managed Encryption (par défaut)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tri-secret-secure">
+                            <i class="fas fa-shield-alt"></i>4. Tri‑Secret Secure (TSS)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comparatif">
+                            <i class="fas fa-chart-simple"></i>5. Comparatif : CSE vs TSS vs Encryption par défaut
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés à retenir pour SnowPro Core
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>7. Résumé express (à mémoriser rapidement)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Encryption & Key Management</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-lock"></i>Encryption
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-key"></i>Key Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: ENCRYPTION IN SNOWFLAKE – VUE D'ENSEMBLE
+                ============================================ -->
+                <section id="encryption-overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 1. Encryption in Snowflake – Vue d'ensemble
+                    </h2>
+
+                    <p>Snowflake applique une stratégie de chiffrement systématique (<strong>always‑on encryption</strong>). Toutes les données — en transit et au repos — sont chiffrées par défaut, sans intervention de l'utilisateur.</p>
+
+                    <p>Le thème couvre deux mécanismes clés pour le SnowPro Core :</p>
+                    <ul>
+                        <li><strong>Client‑Side Encryption (CSE)</strong> et gestion des clés côté client</li>
+                        <li><strong>Tri‑Secret Secure (TSS)</strong> : modèle de chiffrement avancé combinant clés Snowflake + clés client</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: CLIENT‑SIDE ENCRYPTION (CSE)
+                ============================================ -->
+                <section id="client-side-encryption" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> ✅ 2. Client‑Side Encryption (CSE)
+                    </h2>
+
+                    <p><em>(Security → Encryption → Client‑managed keys)</em></p>
+
+                    <h3>✔ 2.1. Principe</h3>
+                    <ul>
+                        <li>Avec le client‑side encryption, les données sont chiffrées <strong>avant</strong> d'entrer dans Snowflake.</li>
+                        <li>Cela permet aux clients de contrôler leur propre clé de chiffrement externe.</li>
+                        <li>
+                            La gestion est entièrement côté client :
+                            <ul>
+                                <li>Le client génère les clés,</li>
+                                <li>Le client chiffre les données localement,</li>
+                                <li>Snowflake ne voit jamais la donnée en clair ni la clé de chiffrement.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ 2.2. Cas d'usage</h3>
+                    <ul>
+                        <li>Conformité stricte (finance, santé…)</li>
+                        <li>Besoin de contrôler totalement la chaîne cryptographique</li>
+                        <li>Protection contre fuite accidentelle de données même si un objet Snowflake est compromis</li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ 2.3. Limitations</strong>
+                        <ul>
+                            <li>Snowflake ne peut pas opérer sur la donnée en clair (pas de recherche, tri, agrégation…).</li>
+                            <li>
+                                Le client doit gérer :
+                                <ul>
+                                    <li>rotation des clés,</li>
+                                    <li>stockage sécurisé,</li>
+                                    <li>gestion de la disponibilité des clés.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SNOWFLAKE‑MANAGED ENCRYPTION (PAR DÉFAUT)
+                ============================================ -->
+                <section id="snowflake-managed-encryption" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cloud"></i> ✅ 3. Snowflake‑Managed Encryption (par défaut)
+                    </h2>
+
+                    <p>Même sans CSE ou TSS, Snowflake applique :</p>
+
+                    <h3>✔ Chiffrement en transit</h3>
+                    <ul>
+                        <li>TLS 1.2 ou supérieur</li>
+                        <li>Communications entre compute, storage et clients sécurisées</li>
+                    </ul>
+
+                    <h3>✔ Chiffrement au repos</h3>
+                    <ul>
+                        <li>Toutes les données sont chiffrées automatiquement dans le cloud storage sous‑jacent</li>
+                        <li>Snowflake utilise des keys per object avec rotation automatique</li>
+                    </ul>
+
+                    <h3>✔ Hiérarchie de clés Snowflake (KMS interne)</h3>
+                    <p>Snowflake applique une encryption key hierarchy en trois niveaux :</p>
+                    <ul>
+                        <li>Master Key</li>
+                        <li>Database Key / Table Key / Stage Key</li>
+                        <li>File Key</li>
+                    </ul>
+                    <p>Chaque couche protège la clé de la couche inférieure.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: TRI‑SECRET SECURE (TSS)
+                ============================================ -->
+                <section id="tri-secret-secure" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 4. Tri‑Secret Secure (TSS)
+                    </h2>
+
+                    <p><em>(Thème principal de la certification SnowPro Core)</em></p>
+
+                    <h3>✔ 4.1. Définition</h3>
+                    <p>Tri‑Secret Secure est le mécanisme Snowflake permettant au client de contrôler une partie du chiffrement tout en conservant l'élasticité du service Snowflake.</p>
+                    <p>Il combine :</p>
+                    <ul>
+                        <li>Une clé Snowflake</li>
+                        <li>Une clé client stockée sur un service KMS externe (AWS KMS, Azure Key Vault, GCP KMS)</li>
+                        <li>La donnée n'est lisible que lorsque les deux clés sont disponibles.</li>
+                    </ul>
+
+                    <h3>✔ 4.2. Mécanisme à « trois secrets »</h3>
+                    <ul>
+                        <li><strong>Secret 1</strong> : la clé maître Snowflake (rotée automatiquement)</li>
+                        <li><strong>Secret 2</strong> : la clé client (Customer‑Managed Key)</li>
+                        <li><strong>Secret 3</strong> : la combinaison cryptographique (Wrapped DEK) utilisée pour chiffrer les données</li>
+                    </ul>
+                    <p>→ D'où le nom « Tri‑Secret ».</p>
+
+                    <h3>✔ 4.3. Avantages</h3>
+                    <ul>
+                        <li>Contrôle accru : votre clé = votre contrôle</li>
+                        <li>Snowflake ne peut pas déchiffrer les données si la clé client est invalidée</li>
+                        <li>Rotation synchronisée des clés</li>
+                        <li>Conformité renforcée</li>
+                        <li>Fonctionne sans impacter les performances (Snowflake interagit avec la clé via KMS)</li>
+                    </ul>
+
+                    <h3>✔ 4.4. Fonctionnement</h3>
+                    <ol>
+                        <li>Snowflake chiffre la donnée avec une DEK (Data Encryption Key)</li>
+                        <li>La DEK est chiffrée avec la clé Snowflake ET la clé du client</li>
+                        <li>
+                            Pour déchiffrer la donnée, Snowflake doit :
+                            <ul>
+                                <li>présenter sa clé,</li>
+                                <li>demander l'accès à la clé du client via KMS,</li>
+                                <li>reconstruire la DEK,</li>
+                                <li>déchiffrer la donnée.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        Si le client désactive sa clé → Snowflake ne peut plus lire les données.<br>
+                        C'est un mécanisme de <strong>cryptographic kill switch</strong>.
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: COMPARATIF : CSE VS TSS VS ENCRYPTION PAR DÉFAUT
+                ============================================ -->
+                <section id="comparatif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 5. Comparatif : CSE vs TSS vs Encryption par défaut
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Fonction</th><th>Encryption par défaut</th><th>CSE (Client-Side Encryption)</th><th>TSS (Tri-Secret Secure)</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Qui gère la clé ?</strong>
+                                <td>Snowflake
+                                <td>Client
+                                <td>Snowflake + Client
+                            
+                            32
+                                <td><strong>Données visibles en clair par Snowflake ?</strong>
+                                <td>Oui
+                                <td>Non
+                                <td>Oui, mais seulement si la clé client est valide
+                            
+                            32
+                                <td><strong>Opérations SQL possibles</strong>
+                                <td>Toutes
+                                <td>Très limitées
+                                <td>Toutes
+                            
+                            32
+                                <td><strong>Cas d'usage</strong>
+                                <td>Standard
+                                <td>Conformité stricte extrême
+                                <td>Conformité avancée, kill switch
+                            
+                            32
+                                <td><strong>Sécurité maximale</strong>
+                                <td>⭐
+                                <td>⭐⭐⭐
+                                <td>⭐⭐⭐⭐
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS À RETENIR POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés à retenir pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔐 1. Tout est chiffré par défaut dans Snowflake</h4>
+                            <p>(tant en transit qu'au repos)</p>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 2. Le client peut activer :</h4>
+                            <ul>
+                                <li>CSE pour chiffrer AVANT Snowflake</li>
+                                <li>TSS pour co‑gérer les clés avec Snowflake</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 3. Tri‑Secret Secure</h4>
+                            <ul>
+                                <li>Combine trois secrets cryptographiques</li>
+                                <li>Nécessite un KMS externe</li>
+                                <li>Permet un kill switch via la clé client</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 4. Conséquences opérationnelles</h4>
+                            <ul>
+                                <li>Pas d'impact sur les performances avec TSS</li>
+                                <li>Impact majeur avec CSE (SQL limité)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ EXPRESS (À MÉMORISER RAPIDEMENT)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 7. Résumé express (à mémoriser rapidement)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>Snowflake chiffre tout en natif.</li>
+                            <li><strong>Client‑Side Encryption</strong> : data chiffrée avant Snowflake, opérations SQL limitées.</li>
+                            <li><strong>Tri‑Secret Secure</strong> : clé Snowflake + clé client → contrôle total + SQL full.</li>
+                            <li>Snowflake utilise une key hierarchy interne avec rotation automatique.</li>
+                            <li>Le client peut désactiver sa clé pour bloquer l'accès → <strong>kill switch</strong>.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

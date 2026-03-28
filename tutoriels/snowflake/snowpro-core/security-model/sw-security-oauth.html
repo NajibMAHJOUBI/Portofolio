@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - OAuth et Key‑Pair Authentication | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">OAuth et Key‑Pair Authentication</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#oauth-intro" class="active">
+                            <i class="fas fa-lock-open"></i>1. Introduction à OAuth
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-types">
+                            <i class="fas fa-code-branch"></i>1.1. Deux types d'OAuth supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-fonctionnement">
+                            <i class="fas fa-cogs"></i>1.2. Fonctionnement général
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-audit">
+                            <i class="fas fa-chart-line"></i>1.3. Audit OAuth
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#snowflake-oauth">
+                            <i class="fas fa-snowflake"></i>2. Snowflake OAuth Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-clients">
+                            <i class="fas fa-laptop"></i>2.1. Clients supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-auth-code-flow">
+                            <i class="fas fa-exchange-alt"></i>2.2. OAuth Authorization Code Flow
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-roles-bloques">
+                            <i class="fas fa-ban"></i>2.3. Rôles privilégiés bloqués par défaut
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#oauth-tokens">
+                            <i class="fas fa-key"></i>2.4. Tokens
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#keypair-auth">
+                            <i class="fas fa-key"></i>3. Key‑pair Authentication & Rotation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#keypair-principe">
+                            <i class="fas fa-info-circle"></i>3.1. Principe général
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#keypair-avantages">
+                            <i class="fas fa-check-circle"></i>3.2. Avantages
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#keypair-clients">
+                            <i class="fas fa-plug"></i>3.3. Clients supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#keypair-bonnes-pratiques">
+                            <i class="fas fa-lightbulb"></i>3.4. Bonnes pratiques
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-comparative">
+                            <i class="fas fa-chart-simple"></i>4. Synthèse SnowPro Core – Comparatif
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>5. Points clés pour SnowPro Core
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - OAuth et Key‑Pair Authentication</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-lock"></i>Authentication
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-key"></i>OAuth
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: INTRODUCTION À OAUTH
+                ============================================ -->
+                <section id="oauth-intro" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock-open"></i> ✅ 1. Introduction à OAuth (OAuth Intro)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake supporte OAuth 2.0 comme mécanisme d'authentification/autorisation via des security integrations.</p>
+
+                    <section id="oauth-types" class="tutorial-subsection">
+                        <h3>✔ 1.1. Deux types d'OAuth supportés</h3>
+                        <ul>
+                            <li><strong>Snowflake OAuth</strong> (OAuth interne Snowflake)</li>
+                            <li><strong>External OAuth</strong> (IdP / OAuth server externe) <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+
+                        <table class="tutorial-table">
+                            <thead>
+                                32<th>Caractéristique</th><th>Snowflake OAuth</th><th>External OAuth</th>
+                            </thead>
+                            <tbody>
+                                32
+                                    <td>Nécessite modification client
+                                    <td>Oui
+                                    <td>Oui
+                                
+                                32
+                                    <td>Accès via navigateur
+                                    <td>Oui
+                                    <td>Non requis
+                                
+                                32
+                                    <td>Idéal pour
+                                    <td>Clients interactifs
+                                    <td>Clients programmatiques
+                                
+                                32
+                                    <td>Syntaxe
+                                    <td>CREATE SECURITY INTEGRATION TYPE = OAUTH
+                                    <td>TYPE = EXTERNAL_OAUTH
+                                
+                            </tbody>
+                        划
+                    </section>
+
+                    <section id="oauth-fonctionnement" class="tutorial-subsection">
+                        <h3>✔ 1.2. Fonctionnement général</h3>
+                        <ul>
+                            <li>Le client redirige vers une page d'autorisation.</li>
+                            <li>Snowflake génère un access token (et optionnellement un refresh token). <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="oauth-audit" class="tutorial-subsection">
+                        <h3>✔ 1.3. Audit OAuth</h3>
+                        <p>Lorsqu'un utilisateur s'authentifie en OAuth, la colonne <code class="inline-code">FIRST_AUTHENTICATION_FACTOR = 'OAUTH_ACCESS_TOKEN'</code> apparaît dans :</p>
+                        <ul>
+                            <li>LOGIN_HISTORY</li>
+                            <li>LOGIN_HISTORY_BY_USER <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: SNOWFLAKE OAUTH OVERVIEW
+                ============================================ -->
+                <section id="snowflake-oauth" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-snowflake"></i> ✅ 2. Snowflake OAuth Overview
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake OAuth utilise le service OAuth natif de Snowflake comme authorization server et resource server.</p>
+
+                    <section id="oauth-clients" class="tutorial-subsection">
+                        <h3>✔ 2.1. Clients supportés</h3>
+                        <ul>
+                            <li>Tableau Desktop & Tableau Cloud</li>
+                            <li>Looker</li>
+                            <li>ThoughtSpot</li>
+                            <li>Alation</li>
+                            <li>Clients personnalisés <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="oauth-auth-code-flow" class="tutorial-subsection">
+                        <h3>✔ 2.2. OAuth Authorization Code Flow (Flow principal)</h3>
+                        <ol>
+                            <li>L'utilisateur démarre la connexion OAuth.</li>
+                            <li>Snowflake affiche une page d'authentification + page de consentement pour choisir un rôle.</li>
+                            <li>Le client reçoit un authorization code.</li>
+                            <li>Le client échange ce code contre un access token (+ refresh token si activé).</li>
+                            <li>Le client envoie le token au Snowflake Resource Server.</li>
+                            <li>Snowflake ouvre une session avec le rôle lié au token. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ol>
+                    </section>
+
+                    <section id="oauth-roles-bloques" class="tutorial-subsection">
+                        <h3>✔ 2.3. Rôles privilégiés bloqués par défaut</h3>
+                        <p>Les rôles suivants ne peuvent pas être utilisés avec OAuth sauf configuration explicite :</p>
+                        <ul>
+                            <li>ACCOUNTADMIN</li>
+                            <li>SECURITYADMIN</li>
+                            <li>ORGADMIN</li>
+                            <li>GLOBALORGADMIN <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>Paramètre pour lever le blocage :</p>
+                        <div class="code-block">
+                            <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                            <pre><code>ALTER ACCOUNT SET OAUTH_ADD_PRIVILEGED_ROLES_TO_BLOCKED_LIST = FALSE;</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="oauth-tokens" class="tutorial-subsection">
+                        <h3>✔ 2.4. Tokens</h3>
+                        <ul>
+                            <li><strong>Access tokens</strong> : durée courte (~10 minutes).</li>
+                            <li><strong>Refresh tokens</strong> : permettent d'obtenir de nouveaux access tokens.</li>
+                            <li>Single‑use refresh tokens disponibles pour réduire les risques de vol. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: KEY‑PAIR AUTHENTICATION & ROTATION
+                ============================================ -->
+                <section id="keypair-auth" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> ✅ 3. Key‑pair Authentication & Rotation
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>L'authentification par paire de clés est une alternative plus sécurisée que le mot de passe.</p>
+
+                    <section id="keypair-principe" class="tutorial-subsection">
+                        <h3>✔ 3.1. Principe général</h3>
+                        <ul>
+                            <li>L'utilisateur génère une paire RSA ≥ 2048 bits ou ECDSA (ES256/ES384/ES512).</li>
+                            <li>Le public key est enregistré dans Snowflake via <code class="inline-code">ALTER USER</code>.</li>
+                            <li>Le client signe un JWT avec la private key et Snowflake l'utilise pour l'authentifier. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="keypair-avantages" class="tutorial-subsection">
+                        <h3>✔ 3.2. Avantages</h3>
+                        <ul>
+                            <li>Aucun mot de passe stocké.</li>
+                            <li>Authentification forte.</li>
+                            <li>Rotation des clés supportée nativement. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="keypair-clients" class="tutorial-subsection">
+                        <h3>✔ 3.3. Clients supportés pour key‑pair authentication</h3>
+                        <p>Tous les principaux drivers Snowflake supportent cette méthode :</p>
+                        <ul>
+                            <li>SnowSQL, Snowflake CLI</li>
+                            <li>Python, Spark, Kafka</li>
+                            <li>JDBC, ODBC</li>
+                            <li>Node.js, .NET, PHP, Go <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <section id="keypair-bonnes-pratiques" class="tutorial-subsection">
+                        <h3>✔ 3.4. Bonnes pratiques</h3>
+                        <ul>
+                            <li>Générer des clés chiffrées (recommandation Snowflake).</li>
+                            <li>Protéger la private key avec une passphrase.</li>
+                            <li>Effectuer la rotation régulièrement. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SYNTHÈSE COMPARATIVE
+                ============================================ -->
+                <section id="synthese-comparative" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 4. Synthèse SnowPro Core – Comparatif des trois méthodes
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Critère</th><th>OAuth</th><th>External OAuth</th><th>Key‑pair Auth</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td>Nécessite un IdP externe
+                                <td>❌
+                                <td>✔
+                                <td>❌
+                            
+                            32
+                                <td>Authentification utilisateur
+                                <td>Tokens OAuth
+                                <td>Tokens OAuth externes
+                                <td>JWT signé
+                            
+                            32
+                                <td>Pour accès programmatique
+                                <td>Moyen (browser requis souvent)
+                                <td>✔ Excellent
+                                <td>✔ Excellent
+                            
+                            32
+                                <td>Sécurité
+                                <td>Haute
+                                <td>Très haute (politiques IdP)
+                                <td>Très haute
+                            
+                            32
+                                <td>Cas d'usage typiques
+                                <td>Apps BI / Clients interactifs
+                                <td>SSO programmatique / API
+                                <td>Jobs automatisés / scripts
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: POINTS CLÉS POUR SNOWPRO CORE
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 5. Points clés pour SnowPro Core
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🔐 Snowflake OAuth</h4>
+                            <ul>
+                                <li>Authorization server intégré, adapté aux clients interactifs. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Bloque les rôles privilégiés par défaut. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 External OAuth</h4>
+                            <ul>
+                                <li>Délégation complète à un serveur OAuth externe, idéal pour les systèmes distribués.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 Key‑pair Auth</h4>
+                            <ul>
+                                <li>Méthode recommandée pour sécurité maximale dans les automations. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🔐 Audit</h4>
+                            <ul>
+                                <li>Les audit logs OAuth apparaissent dans LOGIN_HISTORY. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

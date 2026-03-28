@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Governance | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Governance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition-objectif" class="active">
+                            <i class="fas fa-shield-alt"></i>1. Définition & Objectif de la Data Governance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#composants">
+                            <i class="fas fa-cubes"></i>2. Composants de la Data Governance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#data-quality-monitoring">
+                            <i class="fas fa-chart-line"></i>2.1. Data Quality Monitoring & Data Metric Functions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#column-level-security">
+                            <i class="fas fa-columns"></i>2.2. Column‑Level Security
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#row-level-security">
+                            <i class="fas fa-table-rows"></i>2.3. Row‑Level Security
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#object-tagging">
+                            <i class="fas fa-tags"></i>2.4. Object Tagging
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tag-based-masking">
+                            <i class="fas fa-tag"></i>2.5. Tag‑Based Masking Policies
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sensitive-data-classification">
+                            <i class="fas fa-eye"></i>2.6. Sensitive Data Classification
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#access-history">
+                            <i class="fas fa-history"></i>2.7. Access History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#object-dependencies">
+                            <i class="fas fa-project-diagram"></i>2.8. Object Dependencies
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#governance-area">
+                            <i class="fas fa-dashboard"></i>2.9. Governance Area in Snowsight
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#domaines-principaux">
+                            <i class="fas fa-chart-simple"></i>3. Domaines principaux de la gouvernance Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#importance-certification">
+                            <i class="fas fa-star"></i>4. Pourquoi c'est important pour SnowPro Core ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>5. Résumé express (à mémoriser)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Governance</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Governance
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-lock"></i>Sécurité
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION & OBJECTIF DE LA DATA GOVERNANCE
+                ============================================ -->
+                <section id="definition-objectif" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 1. Définition & Objectif de la Data Governance dans Snowflake
+                    </h2>
+
+                    <p>Source officielle : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Snowflake fournit un ensemble de fonctionnalités visant à assurer :</p>
+                    <ul>
+                        <li>la gouvernance des données,</li>
+                        <li>la sécurité,</li>
+                        <li>la conformité réglementaire,</li>
+                        <li>la traçabilité,</li>
+                        <li>la transparence. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p>La gouvernance s'applique :</p>
+                    <ul>
+                        <li>à l'accès aux données,</li>
+                        <li>à la qualité des données,</li>
+                        <li>à la classification des données sensibles,</li>
+                        <li>aux politiques de sécurité,</li>
+                        <li>à la visibilité sur les dépendances et usages.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COMPOSANTS DE LA DATA GOVERNANCE
+                ============================================ -->
+                <section id="composants" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cubes"></i> ✅ 2. Composants de la Data Governance dans Snowflake
+                    </h2>
+
+                    <!-- 2.1 Data Quality Monitoring -->
+                    <section id="data-quality-monitoring" class="tutorial-subsection">
+                        <h3>✔ 2.1. Data Quality Monitoring & Data Metric Functions</h3>
+                        <p>Permet de surveiller l'état et l'intégrité des données à l'aide :</p>
+                        <ul>
+                            <li>des system data metric functions,</li>
+                            <li>et des user‑defined metric functions. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>Cela permet de :</p>
+                        <ul>
+                            <li>mesurer fraîcheur, doublons, nulls, anomalies, etc.</li>
+                            <li>automatiser les contrôles qualité.</li>
+                        </ul>
+                    </section>
+
+                    <!-- 2.2 Column-Level Security -->
+                    <section id="column-level-security" class="tutorial-subsection">
+                        <h3>✔ 2.2. Column‑Level Security</h3>
+                        <p>Snowflake permet d'appliquer une <strong>masking policy</strong> sur une ou plusieurs colonnes. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>→ Très utilisé pour protéger les données sensibles (ex : PII, PCI).</p>
+                    </section>
+
+                    <!-- 2.3 Row-Level Security -->
+                    <section id="row-level-security" class="tutorial-subsection">
+                        <h3>✔ 2.3. Row‑Level Security</h3>
+                        <p>Basée sur les <strong>Row Access Policies</strong>, permettant de filtrer dynamiquement les lignes visibles. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>➜ Exemple d'usage : restreindre les données par région, par utilisateur, par équipe.</p>
+                    </section>
+
+                    <!-- 2.4 Object Tagging -->
+                    <section id="object-tagging" class="tutorial-subsection">
+                        <h3>✔ 2.4. Object Tagging</h3>
+                        <p>Les tags sont utilisés pour :</p>
+                        <ul>
+                            <li>suivre les données sensibles,</li>
+                            <li>catégoriser les objets,</li>
+                            <li>gérer conformité et audits. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <!-- 2.5 Tag-Based Masking Policies -->
+                    <section id="tag-based-masking" class="tutorial-subsection">
+                        <h3>✔ 2.5. Tag‑Based Masking Policies</h3>
+                        <p>Une fonctionnalité avancée où :</p>
+                        <ul>
+                            <li>un tag porte une masking policy,</li>
+                            <li>et cette politique s'applique automatiquement à tout objet tagué. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>→ Simplifie et centralise la gouvernance des colonnes sensibles.</p>
+                    </section>
+
+                    <!-- 2.6 Sensitive Data Classification -->
+                    <section id="sensitive-data-classification" class="tutorial-subsection">
+                        <h3>✔ 2.6. Sensitive Data Classification</h3>
+                        <p>Snowflake propose une classification automatique :</p>
+                        <ul>
+                            <li>identification des données sensibles, personnelles ou confidentielles,</li>
+                            <li>support conformité (GDPR, HIPAA…). <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </section>
+
+                    <!-- 2.7 Access History -->
+                    <section id="access-history" class="tutorial-subsection">
+                        <h3>✔ 2.7. Access History</h3>
+                        <p>Snowflake fournit une vue <code class="inline-code">ACCESS_HISTORY</code> permettant d'auditer :</p>
+                        <ul>
+                            <li>qui a consulté quelles données,</li>
+                            <li>comment,</li>
+                            <li>à quel moment. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>→ Indispensable pour les audits et examens de sécurité.</p>
+                    </section>
+
+                    <!-- 2.8 Object Dependencies -->
+                    <section id="object-dependencies" class="tutorial-subsection">
+                        <h3>✔ 2.8. Object Dependencies</h3>
+                        <p>La vue <code class="inline-code">OBJECT_DEPENDENCIES</code> permet d'auditer les dépendances :</p>
+                        <ul>
+                            <li>vues → tables,</li>
+                            <li>UDF → objets,</li>
+                            <li>streaming / pipelines → tables. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>➜ Utile pour l'analyse d'impacts d'une modification.</p>
+                    </section>
+
+                    <!-- 2.9 Governance Area in Snowsight -->
+                    <section id="governance-area" class="tutorial-subsection">
+                        <h3>✔ 2.9. Governance Area in Snowsight</h3>
+                        <p>Snowflake fournit une interface dédiée dans Snowsight :</p>
+                        <ul>
+                            <li>monitoring des tags,</li>
+                            <li>monitoring des masking policies,</li>
+                            <li>vues combinées Dashboard / Tagged Objects. <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                        <p>C'est particulièrement utile pour les équipes non techniques.</p>
+                    </section>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: DOMAINES PRINCIPAUX DE LA GOUVERNANCE SNOWFLAKE
+                ============================================ -->
+                <section id="domaines-principaux" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-simple"></i> ✅ 3. Domaines principaux de la gouvernance Snowflake
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Domaine</th><th>Fonctionnalité Snowflake associée</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>Sécurité & accès</strong>
+                                <td>RBAC, RLS, CLS, masking policies
+                            
+                            32
+                                <td><strong>Sensibilité des données</strong>
+                                <td>Sensitive Data Classification, tagging
+                            
+                            32
+                                <td><strong>Audits & traçabilité</strong>
+                                <td>ACCESS_HISTORY, OBJECT_DEPENDENCIES
+                            
+                            32
+                                <td><strong>Data Quality</strong>
+                                <td>Data Metric Functions
+                            
+                            32
+                                <td><strong>Centralisation gouvernance</strong>
+                                <td>Snowsight Governance Area
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POURQUOI C'EST IMPORTANT POUR SNOWPRO CORE ?
+                ============================================ -->
+                <section id="importance-certification" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 4. Pourquoi c'est important pour SnowPro Core ?
+                    </h2>
+
+                    <p>La certification SnowPro Core attend que tu :</p>
+                    <ul>
+                        <li>✔ comprennes les capacités de gouvernance intégrées</li>
+                        <li>✔ saches différencier RLS / CLS / Tagging / Masking</li>
+                        <li>✔ connaisses les vues d'audit (ACCESS_HISTORY, OBJECT_DEPENDENCIES)</li>
+                        <li>✔ identifies quand utiliser Tag‑Based Policy vs Column Policy</li>
+                        <li>✔ comprennes comment Snowflake facilite conformité & sécurité</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: RÉSUMÉ EXPRESS (À MÉMORISER)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 5. Résumé express (à mémoriser)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>Snowflake offre un portfolio complet de gouvernance native.</li>
+                            <li>Les quatre piliers sont : <strong>sécurité, qualité, classification, audit</strong>.</li>
+                            <li>Les masking policies peuvent être appliquées directement ou via tags.</li>
+                            <li>La classification sensible identifie automatiquement les colonnes critiques.</li>
+                            <li>Les vues <code class="inline-code">ACCESS_HISTORY</code> et <code class="inline-code">OBJECT_DEPENDENCIES</code> sont clés pour les audits.</li>
+                            <li>L'interface Snowsight Governance centralise le monitoring.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

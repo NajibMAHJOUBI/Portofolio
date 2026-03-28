@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Trust Center | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Trust Center</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#trust-center-overview" class="active">
+                            <i class="fas fa-shield-alt"></i>1. Trust Center — Overview
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trust-center-interface">
+                            <i class="fas fa-desktop"></i>2. Trust Center — Interface et onglets
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trust-center-getting-started">
+                            <i class="fas fa-rocket"></i>3. Trust Center — Getting Started
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exemples-utilisation">
+                            <i class="fas fa-chart-line"></i>4. Exemples d'utilisation dans Getting Started
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#exigences-roles">
+                            <i class="fas fa-user-tag"></i>5. Exigences de rôles dans Getting Started
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>6. Points clés pour SnowPro Core — À retenir absolument
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>7. Résumé express (à mémoriser)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Trust Center</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Sécurité
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Observabilité
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: TRUST CENTER — OVERVIEW
+                ============================================ -->
+                <section id="trust-center-overview" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> ✅ 1. Trust Center — Overview
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Le Trust Center est une interface Snowsight permettant d'évaluer, surveiller et réduire les risques de sécurité dans un compte Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 1.1. Fonctionnement général</h3>
+                    <ul>
+                        <li>Le Trust Center exécute des scanners (liés à des packages de scanners) pour analyser votre compte Snowflake.</li>
+                        <li>Chaque exécution de scanner produit des findings (détections ou violations), ou rien si aucun problème n'est détecté. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.2. Types de résultats</h3>
+                    <p>Les findings sont classés en deux catégories :</p>
+                    <ul>
+                        <li><strong>Detections</strong> : alertes informatives (ex : accès anormal).</li>
+                        <li><strong>Violations</strong> : non‑conformités identifiées par rapport aux bonnes pratiques (ex : MFA non activée). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.3. Cas d'usage courants</h3>
+                    <p>Le Trust Center aide notamment à :</p>
+                    <ul>
+                        <li>vérifier que la MFA est activée pour les utilisateurs humains,</li>
+                        <li>identifier des rôles sur‑privilégiés,</li>
+                        <li>détecter les utilisateurs inactifs depuis 90 jours,</li>
+                        <li>identifier les utilisateurs à risque,</li>
+                        <li>détecter des anomalies d'accès. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.4. Notifications proactives</h3>
+                    <p>Le Trust Center permet de configurer des alertes de sécurité pour suivre des risques sans surveillance manuelle constante. <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ 1.5. Limitations</strong>
+                        <p>Reader accounts non supportés. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+
+                    <h3>✔ 1.6. Rôles nécessaires</h3>
+                    <p>Un utilisateur doit obtenir un rôle d'application :</p>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Action</th><th>Rôle minimal requis</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td>Voir les detections
+                                <td>SNOWFLAKE.TRUST_CENTER_VIEWER
+                            
+                            32
+                                <td>Voir les violations
+                                <td>SNOWFLAKE.TRUST_CENTER_VIEWER
+                            
+                            32
+                                <td>Gérer les violations
+                                <td>SNOWFLAKE.TRUST_CENTER_ADMIN
+                            
+                            32
+                                <td>Gérer les scanners
+                                <td>SNOWFLAKE.TRUST_CENTER_ADMIN
+                            
+                        </tbody>
+                    划
+                    <p>Dans un organization account, l'octroi doit être effectué via GLOBALORGADMIN. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: TRUST CENTER — INTERFACE ET ONGLETS
+                ============================================ -->
+                <section id="trust-center-interface" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-desktop"></i> ✅ 2. Trust Center — Interface et onglets
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Le Trust Center comprend plusieurs onglets clés :</p>
+                    <ul>
+                        <li><strong>Overview</strong> : vue d'ensemble de la posture de sécurité du compte.</li>
+                        <li><strong>Violations</strong> : analyse détaillée, remédiation et cycle de vie des violations.</li>
+                        <li><strong>Detections</strong> : résultats des scanners informatifs.</li>
+                        <li><strong>Manage Scanners</strong> : gestion des packages (CIS Benchmarks, Threat Intelligence…).</li>
+                        <li><strong>Organization</strong> : visibilité trans‑comptes (uniquement org-level + avec rôle adéquat).</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: TRUST CENTER — GETTING STARTED
+                ============================================ -->
+                <section id="trust-center-getting-started" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-rocket"></i> ✅ 3. Trust Center — Getting Started
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 3.1. Activer les packages de scanners</h3>
+
+                    <h4>🔹 CIS Benchmarks Scanner Package</h4>
+                    <ol>
+                        <li>Se connecter à Snowsight.</li>
+                        <li>Utiliser un rôle avec SNOWFLAKE.TRUST_CENTER_ADMIN.</li>
+                        <li>Navigation : Governance & security → Trust Center.</li>
+                        <li>Sélectionner un warehouse.</li>
+                        <li>Aller dans Scanner Packages → CIS Benchmarks.</li>
+                        <li>Cliquer sur Enable. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ol>
+
+                    <h4>🔹 Threat Intelligence Scanner Package</h4>
+                    <p>Procédure similaire :</p>
+                    <ul>
+                        <li>Governance → Trust Center → Warehouse → Scanner Packages → Threat Intelligence → Enable. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                    <p>Les scanners de ces packages peuvent ensuite être :</p>
+                    <ul>
+                        <li>activés / désactivés individuellement,</li>
+                        <li>programmés avec un planning personnalisé. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: EXEMPLES D'UTILISATION DANS GETTING STARTED
+                ============================================ -->
+                <section id="exemples-utilisation" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-chart-line"></i> ✅ 4. Exemples d'utilisation dans Getting Started
+                    </h2>
+
+                    <h3>✔ 4.1. Vérifier que la MFA est activée</h3>
+                    <ol>
+                        <li>Avoir activé le package CIS Benchmarks.</li>
+                        <li>Aller dans Violations.</li>
+                        <li>Rechercher « multi-factor authentication ».</li>
+                        <li>Sélectionner la violation <em>Ensure MFA is turned on for human users</em>.</li>
+                        <li>Suivre les recommandations de remédiation. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ol>
+
+                    <h3>✔ 4.2. Identifier les rôles sur‑privilégiés</h3>
+                    <p>Rechercher la violation :</p>
+                    <ul>
+                        <li><em>Ensure that Snowflake tasks do not run with ACCOUNTADMIN or SECURITYADMIN</em>. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: EXIGENCES DE RÔLES DANS GETTING STARTED
+                ============================================ -->
+                <section id="exigences-roles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-tag"></i> ✅ 5. Exigences de rôles dans Getting Started
+                    </h2>
+
+                    <ul>
+                        <li>Les tâches d'activation et de gestion exigent : <strong>SNOWFLAKE.TRUST_CENTER_ADMIN</strong></li>
+                        <li>La visualisation : <strong>SNOWFLAKE.TRUST_CENTER_VIEWER</strong></li>
+                        <li>En mode organisation : <strong>GLOBALORGADMIN</strong> pour accorder les privilèges. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: POINTS CLÉS POUR SNOWPRO CORE — À RETENIR ABSOLUMENT
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 6. Points clés pour SnowPro Core — À retenir absolument
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🎯 Fonctionnement du Trust Center</h4>
+                            <ul>
+                                <li>Analyse automatisée via scanners.</li>
+                                <li>Fournit detections, violations, remédiation.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🎯 Packages de scanners</h4>
+                            <ul>
+                                <li><strong>CIS Benchmarks</strong> : posture de sécurité standard.</li>
+                                <li><strong>Threat Intelligence</strong> : détection proactive des risques.</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🎯 Rôles & sécurité</h4>
+                            <ul>
+                                <li>TRUST_CENTER_VIEWER → lecture</li>
+                                <li>TRUST_CENTER_ADMIN → configuration complète</li>
+                                <li>Reader accounts → non supportés</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🎯 Exemples classiques d'audit</h4>
+                            <ul>
+                                <li>MFA non activée</li>
+                                <li>Rôles trop puissants</li>
+                                <li>Comptes dormants</li>
+                                <li>Accès anormaux</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: RÉSUMÉ EXPRESS (À MÉMORISER)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 7. Résumé express (à mémoriser)
+                    </h2>
+
+                    <div class="info-note">
+                        <ul>
+                            <li>Le Trust Center sert à analyser automatiquement la sécurité du compte Snowflake via des scanners et expose les violations + detections. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>L'activation du Trust Center repose sur les <strong>Scanner Packages</strong> (CIS Benchmarks, Threat Intelligence). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Les rôles essentiels sont <strong>TRUST_CENTER_ADMIN</strong> et <strong>TRUST_CENTER_VIEWER</strong>.</li>
+                            <li>Le Trust Center permet de détecter des problèmes comme : MFA absente, comptes inactifs, rôles sur-privilégiés, accès anormaux.</li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

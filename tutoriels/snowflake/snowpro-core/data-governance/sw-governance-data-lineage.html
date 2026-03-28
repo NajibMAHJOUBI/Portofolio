@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Lineage & Access History | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Lineage & Access History</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#data-lineage" class="active">
+                            <i class="fas fa-project-diagram"></i>1. Data Lineage dans Snowsight (UI)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#access-history">
+                            <i class="fas fa-history"></i>2. Access History – Vue d'Audit des Accès
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#relation-lineage-access">
+                            <i class="fas fa-link"></i>3. Relation entre Lineage et Access History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>4. Points clés SnowPro Core – à retenir absolument
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Lineage & Access History</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-project-diagram"></i>Lineage
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-history"></i>Access History
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DATA LINEAGE DANS SNOWSIGHT (UI)
+                ============================================ -->
+                <section id="data-lineage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-project-diagram"></i> ✅ 1. Data Lineage dans Snowsight (UI)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>La data lineage est une fonctionnalité <strong>Enterprise Edition</strong> permettant de visualiser comment les données circulent entre les objets Snowflake (tables, vues, stages, materialized views, etc.).</p>
+
+                    <p>Elle permet de comprendre :</p>
+                    <ul>
+                        <li>d'où viennent les données (upstream)</li>
+                        <li>où elles vont (downstream)</li>
+                        <li>comment elles sont transformées</li>
+                        <li>quelles colonnes proviennent de quelles sources</li>
+                        <li>quelles dépendances doivent être analysées en cas de changement</li>
+                    </ul>
+
+                    <h3>✔ 1.1. Ce que Snowflake capture comme lineage</h3>
+                    <p>Snowflake enregistre automatiquement deux types de relations :</p>
+                    <ul>
+                        <li>
+                            <strong>Data movement (avec matérialisation)</strong> :
+                            <ul>
+                                <li>CTAS (CREATE TABLE AS SELECT)</li>
+                                <li>INSERT, MERGE, COPY INTO, etc.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Object dependencies (sans copie de données)</strong> :
+                            <ul>
+                                <li>vues</li>
+                                <li>materialized views</li>
+                                <li>objets qui référencent d'autres objets</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ 1.2. Avantages du Data Lineage</h3>
+                    <p>Selon la documentation, cela permet :</p>
+                    <ul>
+                        <li><strong>Impact analysis</strong> : comprendre les impacts de changement d'un objet</li>
+                        <li><strong>Monitoring & troubleshooting</strong> : analyser les flux de données et leurs origines</li>
+                        <li><strong>Compliance</strong> : suivre le mouvement des données sensibles</li>
+                        <li><strong>Travail avec tags & masking policies</strong> : propagation de sensibilité via lineage</li>
+                        <li><strong>Confiance dans les données</strong> : comprendre source → transformation → destination <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.3. Upstream / Downstream</h3>
+                    <ul>
+                        <li>Un objet <strong>upstream</strong> est la source (ex : table1).</li>
+                        <li>Un objet <strong>downstream</strong> est la cible (ex : table2).</li>
+                        <li>Snowsight permet d'explorer les relations pas à pas dans les deux directions. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 1.4. Accès dans Snowsight</h3>
+                    <p>Pour utiliser le lineage dans l'UI :</p>
+                    <ol>
+                        <li>Ouvrir Snowsight</li>
+                        <li>Aller dans Catalog → Database Explorer</li>
+                        <li>Sélectionner un objet supporté (table/view/dynamic table…)</li>
+                        <li>Ouvrir l'onglet Lineage</li>
+                        <li>
+                            Options dans l'interface :
+                            <ul>
+                                <li>zoom +/-</li>
+                                <li>explorer upstream/downstream</li>
+                                <li>afficher détails des colonnes/tags <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ACCESS HISTORY – VUE D'AUDIT DES ACCÈS
+                ============================================ -->
+                <section id="access-history" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-history"></i> ✅ 2. Access History – Vue d'Audit des Accès
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>L'Access History est une fonctionnalité <strong>Enterprise Edition</strong> permettant d'auditer :</p>
+                    <ul>
+                        <li>qui a accédé à quelle donnée</li>
+                        <li>quoi a été lu ou modifié</li>
+                        <li>quand</li>
+                        <li>comment (quelles colonnes utilisées directement / indirectement)</li>
+                    </ul>
+
+                    <p>Elle est accessible via :</p>
+                    <ul>
+                        <li><code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY</code></li>
+                        <li><code class="inline-code">SNOWFLAKE.ORGANIZATION_USAGE.ACCESS_HISTORY</code></li>
+                    </ul>
+
+                    <h3>✔ 2.1. Ce que contient chaque ligne d'Access History</h3>
+                    <p>Chaque ligne correspond à une requête SQL exécutée dans le compte.</p>
+                    <p>Elle inclut :</p>
+                    <ul>
+                        <li>
+                            <strong>🔹 Colonnes source auxquelles un utilisateur a accédé</strong>
+                            <ul>
+                                <li>Directement</li>
+                                <li>Indirectement (via une vue, une jointure…) <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>🔹 Colonnes projetées dans le résultat</strong>
+                            <ul>
+                                <li>→ liste dans <code class="inline-code">direct_objects_accessed</code> <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>🔹 Colonnes utilisées mais non projetées</strong>
+                            <ul>
+                                <li>(ex : colonnes de WHERE, JOIN, FILTER)</li>
+                                <li>→ enregistrées dans <code class="inline-code">base_objects_accessed</code> <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>🔹 Objets modifiés par la requête</strong>
+                            <ul>
+                                <li>→ INSERT, UPDATE, MERGE, DELETE, COPY</li>
+                                <li>→ enregistrés dans <code class="inline-code">objects_modified</code> <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3>✔ 2.2. Exemples documentés</h3>
+                    <p><strong>Exemple 1 – Vue simple</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE VIEW v1(vc1, vc2) AS
+SELECT c1, c2 FROM t WHERE t.c3 > 0;</code></pre>
+                    </div>
+                    <ul>
+                        <li>C1 et C2 : colonnes sources directes (base_objects_accessed)</li>
+                        <li>C3 : colonne utilisée pour filtrer (base_objects_accessed)</li>
+                        <li>VC1 et VC2 : colonnes projetées (direct_objects_accessed) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <p><strong>Exemple 2 – Jointure</strong></p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>SELECT bt.c1, bt.c2, jt.c1
+FROM bt, jt
+WHERE bt.c3 = jt.c1;</code></pre>
+                    </div>
+                    <ul>
+                        <li>→ Access History enregistre :
+                            <ul>
+                                <li>colonnes de bt (C1, C2, C3)</li>
+                                <li>colonnes de jt (C1)</li>
+                            </ul>
+                        </li>
+                        <li>→ dans base_objects_accessed <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ 2.3. Cas d'usage de l'Access History</h3>
+                    <p>Selon la doc, cette vue sert à :</p>
+                    <ul>
+                        <li>audit de conformité (GDPR / HIPAA…)</li>
+                        <li>identifier quelles données sont réellement utilisées</li>
+                        <li>déterminer quelles colonnes sont les plus consultées</li>
+                        <li>sécuriser l'usage (détection d'accès anormaux)</li>
+                        <li>analyses d'impact et optimisation des pipelines <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ 2.4. Précisions importantes</strong>
+                        <ul>
+                            <li>Disponible uniquement en Enterprise Edition ou plus <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Retention : 365 jours</li>
+                            <li>Certaines requêtes ne créent pas d'entrée dans Access History selon leur structure <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: RELATION ENTRE LINEAGE ET ACCESS HISTORY
+                ============================================ -->
+                <section id="relation-lineage-access" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-link"></i> ✅ 3. Relation entre Lineage et Access History
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Lineage = graphique des flux & dépendances</h4>
+                            <ul>
+                                <li>Montre la circulation des données entre objets (ETL, vues, etc.)</li>
+                                <li>Utilisée pour l'analyse d'impact et la gouvernance</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Access History = audit détaillé des accès au niveau utilisateur/colonne</h4>
+                            <ul>
+                                <li>Qui a lu quoi ?</li>
+                                <li>Quelles colonnes ont été projetées, filtrées, joinées ?</li>
+                                <li>Quel objet a été modifié ?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>Les deux ensemble permettent une <strong>traçabilité complète</strong> des données Snowflake.</p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: POINTS CLÉS SNOWPRO CORE – À RETENIR ABSOLUMENT
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 4. Points clés SnowPro Core – à retenir absolument
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>🎯 Data Lineage (Snowsight)</h4>
+                            <ul>
+                                <li>Affiche upstream/downstream</li>
+                                <li>Montre data movement + object dependencies</li>
+                                <li>Inclut lineage au niveau colonne</li>
+                                <li>Utilisé pour impact analysis, troubleshooting, compliance</li>
+                                <li>Accessible dans Snowsight → Catalog → Lineage <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>🎯 Access History</h4>
+                            <ul>
+                                <li>Table d'audit des accès (lecture, écriture)</li>
+                                <li>Fourni par ACCOUNT_USAGE / ORGANIZATION_USAGE</li>
+                                <li>Identifie colonnes utilisées, projetées, filtrées</li>
+                                <li>Utilisé pour conformité, sécurité, analyse d'usage <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

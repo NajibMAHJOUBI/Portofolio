@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Federated Authentication & SSO | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Federated Authentication & SSO</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#definition" class="active">
+                            <i class="fas fa-info-circle"></i>1. Définition : Qu'est‑ce qu'un environnement fédéré ?
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#identity-providers">
+                            <i class="fas fa-id-card"></i>2. Identity Providers supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#multi-idp">
+                            <i class="fas fa-layer-group"></i>3. Utilisation de plusieurs IdP
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#workflows-sso">
+                            <i class="fas fa-exchange-alt"></i>4. Workflows SSO supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#configuration-technique">
+                            <i class="fas fa-cogs"></i>5. Configuration technique (vue d'ensemble)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#gestion-utilisateurs">
+                            <i class="fas fa-users"></i>6. Gestion des utilisateurs avec fédération
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#desactivation-utilisateurs">
+                            <i class="fas fa-user-slash"></i>7. Désactivation / suppression d'utilisateurs fédérés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#points-cles">
+                            <i class="fas fa-star"></i>8. Points clés SnowPro Core – à mémoriser absolument
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#resume-express">
+                            <i class="fas fa-graduation-cap"></i>9. Résumé express (10 secondes)
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 20 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Federated Authentication & SSO</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 20 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-id-card"></i>SSO
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Sécurité
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: DÉFINITION : QU'EST-CE QU'UN ENVIRONNEMENT FÉDÉRÉ ?
+                ============================================ -->
+                <section id="definition" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-info-circle"></i> ✅ 1. Définition : Qu'est‑ce qu'un environnement fédéré ?
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <p>Un environnement d'authentification fédérée sépare :</p>
+                    <ul>
+                        <li>L'<strong>authentification</strong> (faite par un fournisseur externe, l'IdP)</li>
+                        <li>L'<strong>accès au service</strong> (Snowflake), via SSO</li>
+                    </ul>
+                    <p>L'IdP authentifie l'utilisateur. Snowflake reçoit la preuve d'authentification et ouvre la session → SSO.</p>
+
+                    <h3>🔑 Composants d'un environnement fédéré :</h3>
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Composant</th><th>Rôle</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>SP (Service Provider)</strong>
+                                <td>Snowflake agit en tant que Service Provider. <span class="reference">[docs.snowflake.com]</span>
+                            
+                            32
+                                <td><strong>IdP (Identity Provider)</strong>
+                                <td>Authentifie l'utilisateur, maintient les credentials. Fournit les assertions SAML à Snowflake. <span class="reference">[docs.snowflake.com]</span>
+                            
+                        </tbody>
+                    划
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: IDENTITY PROVIDERS SUPPORTÉS
+                ============================================ -->
+                <section id="identity-providers" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-id-card"></i> ✅ 2. Identity Providers supportés
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Support natif Snowflake :</h3>
+                    <ul>
+                        <li>Okta</li>
+                        <li>Microsoft Entra ID (anciennement Azure AD)</li>
+                    </ul>
+
+                    <h3>✔ Autres IdP SAML 2.0 compatibles :</h3>
+                    <ul>
+                        <li>Google G Suite</li>
+                        <li>OneLogin</li>
+                        <li>Ping Identity / PingOne</li>
+                    </ul>
+                    <p>Pour les IdP non natifs, il faut créer une <strong>custom SAML application</strong> dans l'IdP. <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: UTILISATION DE PLUSIEURS IDP
+                ============================================ -->
+                <section id="multi-idp" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i> ✅ 3. Utilisation de plusieurs IdP
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake peut être configuré pour utiliser plusieurs IdP simultanément.</p>
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Limitation :</strong> seuls certains drivers supportent multi‑IdP (JDBC, ODBC, Python).
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: WORKFLOWS SSO SUPPORTÉS
+                ============================================ -->
+                <section id="workflows-sso" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 4. Workflows SSO supportés
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake supporte les workflows suivants :</p>
+
+                    <h3>✔ SSO Login</h3>
+                    <ul>
+                        <li>
+                            <strong>Snowflake‑initiated login</strong><br>
+                            L'utilisateur se connecte depuis la page Snowflake<br>
+                            Peut être configuré pour être redirigé automatiquement vers l'IdP (sans afficher la page Snowflake) <span class="reference">[docs.snowflake.com]</span>
+                        </li>
+                        <li>
+                            <strong>IdP‑initiated login</strong><br>
+                            L'utilisateur se connecte dans l'IdP<br>
+                            Sélectionne l'application Snowflake<br>
+                            L'IdP envoie une assertion SAML à Snowflake
+                        </li>
+                    </ul>
+
+                    <h3>✔ SSO Logout</h3>
+                    <p>Prise en charge du logout initié par Snowflake ou IdP. Le comportement dépend de l'initiateur (Snowflake ou IdP) <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Timeout (session inactivité)</h3>
+                    <p>Fonctionne en conformité avec la session côté Snowflake et IdP <span class="reference">[docs.snowflake.com]</span></p>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: CONFIGURATION TECHNIQUE (VUE D'ENSEMBLE)
+                ============================================ -->
+                <section id="configuration-technique" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-cogs"></i> ✅ 5. Configuration technique (vue d'ensemble)
+                    </h2>
+
+                    <p>(Les détails complets sont dans la page Configuring Snowflake for Federated Auth, mais les concepts viennent de l'Overview.)</p>
+
+                    <h3>✔ Utilisation d'une SAML2 Security Integration</h3>
+                    <ul>
+                        <li>Nécessaire pour connecter Snowflake à l'IdP</li>
+                        <li>À remplacer l'ancien paramètre : SAML_IDENTITY_PROVIDER (migration recommandée) <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Points importants lors de la configuration :</h3>
+                    <ul>
+                        <li>Le Snowflake ACS URL doit correspondre exactement au format attendu par l'IdP</li>
+                        <li>Certificats SAML / metadata doivent être fournis</li>
+                        <li>Snowflake peut signer les requêtes SAML et chiffrer les assertions SAML <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: GESTION DES UTILISATEURS AVEC FÉDÉRATION
+                ============================================ -->
+                <section id="gestion-utilisateurs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-users"></i> ✅ 6. Gestion des utilisateurs avec fédération
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Même en mode fédéré :</p>
+                    <ul>
+                        <li>Snowflake permet encore de conserver des mots de passe Snowflake pour des utilisateurs humains.<br>
+                        ➜ Mais Snowflake ne le recommande pas. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pour rendre un utilisateur strictement fédéré, il faut retirer son mot de passe Snowflake (<code class="inline-code">ALTER USER</code>).</li>
+                        <li>L'administrateur doit cependant impérativement garder au moins un compte admin avec mot de passe Snowflake pour résoudre les problèmes d'IdP. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Limitation :</strong> Le flag <code class="inline-code">MUST_CHANGE_PASSWORD</code> ne s'applique pas quand la fédération est active. <span class="reference">[docs.snowflake.com]</span>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: DÉSACTIVATION / SUPPRESSION D'UTILISATEURS FÉDÉRÉS
+                ============================================ -->
+                <section id="desactivation-utilisateurs" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-slash"></i> ✅ 7. Désactivation / suppression d'utilisateurs fédérés
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Si un utilisateur est supprimé ou désactivé dans Snowflake :</p>
+                    <ul>
+                        <li>Il peut toujours se connecter à son IdP</li>
+                        <li>Mais Snowflake refuse la session</li>
+                        <li>Il doit être recréé ou réactivé dans Snowflake pour restaurer l'accès</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: POINTS CLÉS SNOWPRO CORE – À MÉMORISER ABSOLUMENT
+                ============================================ -->
+                <section id="points-cles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 8. Points clés SnowPro Core – à mémoriser absolument
+                    </h2>
+
+                    <div class="grid-2cols">
+                        <div class="usage-card">
+                            <h4>✔ Concepts fondamentaux</h4>
+                            <ul>
+                                <li>Snowflake = Service Provider (SP)</li>
+                                <li>IdP authentifie = fournit SAML assertion à Snowflake</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ IdP supportés</h4>
+                            <ul>
+                                <li>Okta & Entra ID (support natif)</li>
+                                <li>Tous IdP SAML 2.0 (via custom app)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Modes de login</h4>
+                            <ul>
+                                <li>Snowflake‑initiated</li>
+                                <li>IdP‑initiated</li>
+                                <li>Redirection automatique possible</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Multi‑IdP</h4>
+                            <ul>
+                                <li>Supporté (limité par les drivers)</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ Recommandation sécurité</h4>
+                            <ul>
+                                <li>Éviter les mots de passe Snowflake pour les utilisateurs humains</li>
+                                <li>Mais garder au moins un admin local pour l'urgence</li>
+                            </ul>
+                        </div>
+
+                        <div class="usage-card">
+                            <h4>✔ SAML2 Security Integration</h4>
+                            <ul>
+                                <li>Objet indispensable à tout SSO</li>
+                                <li>Gère certificat, metadata, URLs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: RÉSUMÉ EXPRESS (10 SECONDES)
+                ============================================ -->
+                <section id="resume-express" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-graduation-cap"></i> ✅ 9. Résumé express (10 secondes)
+                    </h2>
+
+                    <div class="info-note">
+                        <p>
+                            Snowflake utilise un modèle SSO fédéré basé sur SAML2 : un IdP authentifie l'utilisateur, Snowflake l'accepte en tant que SP. Snowflake‑initiated ou IdP‑initiated login sont tous deux supportés. Okta & Entra ID ont un support natif. Le SSO est configuré via une SAML2 Security Integration et Snowflake recommande de ne plus stocker de mots de passe pour les utilisateurs humains — sauf un compte admin d'urgence.
+                        </p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Configuration du contrôle d'accès | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/tutoriel.css">
+    <link rel="stylesheet" href="../css/icone-fabric.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Configuration du contrôle d'accès</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#access-control-config" class="active">
+                            <i class="fas fa-lock"></i>1. Configuration du contrôle d'accès
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#user-management">
+                            <i class="fas fa-users"></i>2. User Management
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#create-role">
+                            <i class="fas fa-plus-circle"></i>3. CREATE ROLE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#grant-role">
+                            <i class="fas fa-user-tag"></i>4. GRANT ROLE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#grant-privilege">
+                            <i class="fas fa-key"></i>5. GRANT PRIVILEGE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#show-grants">
+                            <i class="fas fa-search"></i>6. SHOW GRANTS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#revoke-role">
+                            <i class="fas fa-user-minus"></i>7. REVOKE ROLE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#revoke-privilege">
+                            <i class="fas fa-lock-open"></i>8. REVOKE PRIVILEGE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#use-secondary-roles">
+                            <i class="fas fa-exchange-alt"></i>9. USE SECONDARY ROLES
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#synthese-finale">
+                            <i class="fas fa-star"></i>10. Synthèse finale — SnowPro Core « must‑know »
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Configuration du contrôle d'accès</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-lock"></i>RBAC
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-users"></i>User Management
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: CONFIGURATION DU CONTRÔLE D'ACCÈS
+                ============================================ -->
+                <section id="access-control-config" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> ✅ 1. Configuration du contrôle d'accès
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake utilise un modèle d'accès hybride RBAC + DAC + UBAC, mais RBAC est le modèle recommandé pour toutes les implémentations.</p>
+
+                    <h3>✔ Principes essentiels</h3>
+                    <ul>
+                        <li>Les privilèges sont accordés à des rôles, non directement aux utilisateurs (sauf exceptions). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les utilisateurs activent un primary role, et peuvent activer d'autres privilèges via les secondary roles. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les owners (privilège OWNERSHIP) gèrent la sécurité de leurs objets (DAC). <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+
+                    <h3>✔ Étapes de configuration générale</h3>
+                    <ol>
+                        <li>Créer les utilisateurs (USERADMIN).</li>
+                        <li>Créer des rôles personnalisés (USERADMIN).</li>
+                        <li>Créer la hiérarchie des rôles (USERADMIN/SECURITYADMIN).</li>
+                        <li>Attribuer les privilèges aux rôles (SECURITYADMIN).</li>
+                        <li>Attribuer les rôles aux utilisateurs (USERADMIN/SECURITYADMIN).</li>
+                        <li>Activer le rôle approprié dans la session (<code class="inline-code">USE ROLE ...</code>).</li>
+                    </ol>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: USER MANAGEMENT
+                ============================================ -->
+                <section id="user-management" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-users"></i> ✅ 2. User Management (Admin — User Management)
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+
+                    <h3>✔ Rôles impliqués dans la gestion utilisateur</h3>
+                    <ul>
+                        <li><strong>USERADMIN</strong> : création gestion des USERS et ROLES.</li>
+                        <li><strong>SECURITYADMIN</strong> : gestion des privilèges et GRANTS.</li>
+                    </ul>
+
+                    <h3>✔ Gestion des USERS</h3>
+                    <ul>
+                        <li>Création via SnowSight, SQL (<code class="inline-code">CREATE USER</code>) ou SCIM (provisionnement IdP).</li>
+                        <li>Les utilisateurs ont un primary role défini dans DEFAULT_ROLE.</li>
+                        <li>Ils peuvent avoir plusieurs rôles attribués.</li>
+                        <li>Par défaut, tous les utilisateurs héritent aussi du rôle PUBLIC. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: CREATE ROLE
+                ============================================ -->
+                <section id="create-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-plus-circle"></i> ✅ 3. CREATE ROLE
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Créer un rôle personnalisé :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>CREATE ROLE analyst;</code></pre>
+                    </div>
+                    <ul>
+                        <li>Nécessite un rôle ayant privilège CREATE ROLE (souvent USERADMIN).</li>
+                        <li>Les rôles peuvent être assignés à d'autres rôles, créant une hiérarchie. <span class="reference">[docs.snowflake.com]</span></li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: GRANT ROLE
+                ============================================ -->
+                <section id="grant-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-tag"></i> ✅ 4. GRANT ROLE
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Attribuer un rôle à un utilisateur ou un autre rôle :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>GRANT ROLE analyst TO USER alice;
+GRANT ROLE analyst TO ROLE finance_team;</code></pre>
+                    </div>
+
+                    <h3>✔ Points essentiels</h3>
+                    <ul>
+                        <li>L'héritage s'applique : un rôle "parent" hérite des privilèges des rôles enfants. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le rôle ACTIVÉ par l'utilisateur détermine les privilèges disponibles dans la session.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: GRANT PRIVILEGE
+                ============================================ -->
+                <section id="grant-privilege" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> ✅ 5. GRANT PRIVILEGE
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Attribuer des privilèges à un rôle :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>GRANT SELECT ON TABLE sales TO ROLE analyst;
+GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
+                    </div>
+
+                    <h3>✔ Privilèges clés</h3>
+                    <ul>
+                        <li>Les privilèges dépendent du type d'objet (warehouse/table/schema/etc.)</li>
+                        <li>
+                            Exemples :
+                            <ul>
+                                <li>USAGE (db, schema, warehouse)</li>
+                                <li>SELECT, INSERT, UPDATE, DELETE (tables)</li>
+                                <li>CREATE TABLE, CREATE VIEW (schema)</li>
+                                <li>OWNERSHIP (objet complet) — non héritable. <span class="reference">[docs.snowflake.com]</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="info-note">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>✔ Règle d'accès fondamentale</strong>
+                        <p>Pour accéder à un objet :</p>
+                        <ul>
+                            <li>USAGE on DATABASE</li>
+                            <li>+ USAGE on SCHEMA</li>
+                            <li>+ privilege on OBJECT <span class="reference">[docs.snowflake.com]</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: SHOW GRANTS
+                ============================================ -->
+                <section id="show-grants" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-search"></i> ✅ 6. SHOW GRANTS
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet d'auditer les privilèges.</p>
+
+                    <h3>✔ Exemples</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>-- Lister les privilèges d'un utilisateur
+SHOW GRANTS TO USER alice;
+
+-- Lister les privilèges attribués à un rôle
+SHOW GRANTS TO ROLE analyst;
+
+-- Lister les roles attribués à un user
+SHOW GRANTS OF ROLE analyst;
+
+-- Lister les privilèges sur un objet
+SHOW GRANTS ON TABLE sales;</code></pre>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: REVOKE ROLE
+                ============================================ -->
+                <section id="revoke-role" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-user-minus"></i> ✅ 7. REVOKE ROLE
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Révoquer un rôle d'un user ou d'un autre rôle :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>REVOKE ROLE analyst FROM USER alice;
+REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
+                    </div>
+                    <ul>
+                        <li>Le rôle doit avoir été préalablement accordé.</li>
+                        <li>La révocation coupe immédiatement l'accès via ce rôle.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: REVOKE PRIVILEGE
+                ============================================ -->
+                <section id="revoke-privilege" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock-open"></i> ✅ 8. REVOKE PRIVILEGE
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Retirer un privilège d'un rôle :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>REVOKE SELECT ON TABLE sales FROM ROLE analyst;</code></pre>
+                    </div>
+
+                    <h3>✔ Détails importants</h3>
+                    <ul>
+                        <li>Snowflake interdit la suppression du privilège OWNERSHIP sans transfert d'ownership.</li>
+                        <li>Les privilèges hérités via un "role parent" doivent être révoqués au niveau du rôle parent.</li>
+                    </ul>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: USE SECONDARY ROLES
+                ============================================ -->
+                <section id="use-secondary-roles" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-exchange-alt"></i> ✅ 9. USE SECONDARY ROLES
+                    </h2>
+
+                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Contrôle l'utilisation des privilèges attribués directement aux users (UBAC).</p>
+
+                    <h3>✔ Activation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>USE SECONDARY ROLES ALL;</code></pre>
+                    </div>
+                    <p>✔ Active tous les rôles secondaires et les privilèges directs. ✔ Utile pour un accès UBAC temporaire (ex. dépannage).</p>
+
+                    <h3>✔ Désactivation</h3>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>USE SECONDARY ROLES NONE;</code></pre>
+                    </div>
+
+                    <div class="warning-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>✔ Rappel important</strong>
+                        <p>Sans <code class="inline-code">USE SECONDARY ROLES ALL</code>, les privilèges accordés directement à un user ne sont pas considérés. <span class="reference">[docs.snowflake.com]</span></p>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 10: SYNTHÈSE FINALE — SNOWPRO CORE « MUST‑KNOW »
+                ============================================ -->
+                <section id="synthese-finale" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-star"></i> ✅ 10. Synthèse finale — SnowPro Core « must‑know »
+                    </h2>
+
+                    <table class="tutorial-table">
+                        <thead>
+                            32<th>Concept</th><th>Essentiel SnowPro Core</th>
+                        </thead>
+                        <tbody>
+                            32
+                                <td><strong>RBAC</strong>
+                                <td>Modèle principal : privilèges → rôle → user
+                            
+                            32
+                                <td><strong>DAC</strong>
+                                一道一道L'OWNERSHIP contrôle l'objet (non héritable)
+                            
+                            32
+                                <td><strong>CREATE ROLE</strong>
+                                一道一道Permet de structurer l'organisation
+                            
+                            32
+                                <td><strong>GRANT ROLE</strong>
+                                一道一道Assignation des rôles aux users/rôles
+                            
+                            32
+                                <td><strong>GRANT PRIVILEGE</strong>
+                                一道一道Droit d'accéder ou modifier un objet
+                            
+                            32
+                                <td><strong>Accès minimal</strong>
+                                一道一道USAGE(DB) + USAGE(SCHEMA) + SELECT/…
+                            
+                            32
+                                <td><strong>SHOW GRANTS</strong>
+                                一道一道Audit central des accès
+                            
+                            32
+                                <td><strong>REVOKE</strong>
+                                一道一道Suppression du rôle ou privilège
+                            
+                            32
+                                <td><strong>Secondary roles</strong>
+                                一道一道Activation explicite pour UBAC
+                            
+                        </tbody>
+                    划
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
