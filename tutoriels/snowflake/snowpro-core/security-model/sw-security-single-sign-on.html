@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - IdP et SSO Workflows | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -106,7 +106,7 @@
                     </li>
                     <li>
                         <a href="#points-cles">
-                            <i class="fas fa-star"></i>🎯 Points clés SnowPro Core à retenir
+                            <i class="fas fa-star"></i>Synthèse
                         </a>
                     </li>
                 </ul>
@@ -159,7 +159,7 @@
                 ============================================ -->
                 <section id="identity-providers" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-id-card"></i> ✅ 1. Supported Identity Providers (IdP)
+                        <i class="fas fa-id-card"></i>1. Supported Identity Providers (IdP)
                     </h2>
 
                     
@@ -169,7 +169,7 @@
                     <section id="idp-natif" class="tutorial-subsection">
                         <h3>✔ 1.1. IdP avec support natif Snowflake</h3>
                         <p>Les fournisseurs suivants disposent d'une intégration native avec Snowflake, simplifiant la configuration SSO :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Okta (cloud)</li>
                             <li>Microsoft Entra ID (ancien Azure Active Directory) </li>
                         </ul>
@@ -179,14 +179,14 @@
                     <section id="idp-compatibles" class="tutorial-subsection">
                         <h3>✔ 1.2. IdP SAML 2.0 compatibles (configuration personnalisée nécessaire)</h3>
                         <p>Snowflake supporte (via SAML2) la majorité des fournisseurs identitaires du marché :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Google G Suite</li>
                             <li>OneLogin</li>
                             <li>Ping Identity</li>
                             <li>PingOne</li>
                             <li>Tout autre IdP SAML 2.0‑compliant </li>
                         </ul>
-                        <p>👉 Pour ceux-ci, il faut créer une <strong>application personnalisée Snowflake</strong> dans l'IdP. </p>
+                        <p>-> Pour ceux-ci, il faut créer une <strong>application personnalisée Snowflake</strong> dans l'IdP. </p>
                     </section>
 
                     <!-- 1.3 Multi-Identity Providers -->
@@ -196,7 +196,7 @@
                         <div class="warning-note">
                             <i class="fas fa-exclamation-triangle"></i>
                             <strong>Limitation importante :</strong> Seuls certains drivers supportent Multi‑IdP :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>JDBC</li>
                                 <li>ODBC</li>
                                 <li>Python </li>
@@ -210,7 +210,7 @@
                 ============================================ -->
                 <section id="sso-workflows" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exchange-alt"></i> ✅ 2. Supported SSO Workflows (Workflows d'authentification SSO supportés)
+                        <i class="fas fa-exchange-alt"></i>2. Supported SSO Workflows (Workflows d'authentification SSO supportés)
                     </h2>
 
                     
@@ -221,15 +221,15 @@
                         <h3>✔ 2.1. Login workflows</h3>
 
                         <h4>🔹 Snowflake‑Initiated Login</h4>
-                        <ol>
+                        <ol style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>L'utilisateur accède à Snowflake (ex : https://.snowflakecomputing.com).</li>
                             <li>Snowflake redirige l'utilisateur vers l'IdP pour authentification.</li>
                             <li>L'IdP renvoie une assertion SAML valide → ouverture de session Snowflake. </li>
                         </ol>
-                        <p>💡 Une configuration permet de rediriger automatiquement l'utilisateur vers l'IdP sans afficher la page de login Snowflake. </p>
+                        <p>-> Une configuration permet de rediriger automatiquement l'utilisateur vers l'IdP sans afficher la page de login Snowflake. </p>
 
                         <h4>🔹 IdP‑Initiated Login</h4>
-                        <ol>
+                        <ol style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>L'utilisateur ouvre son portail IdP (Okta, Entra ID…).</li>
                             <li>Clique sur l'application Snowflake.</li>
                             <li>L'IdP envoie directement une assertion SAML à Snowflake → session ouverte. </li>
@@ -248,7 +248,7 @@
                     <section id="timeout-workflows" class="tutorial-subsection">
                         <h3>✔ 2.3. Session timeout workflows</h3>
                         <p>Lorsqu'une session Snowflake expire pour inactivité, les actions dépendent encore une fois :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>de qui initie la fin de session (Snowflake ou IdP),</li>
                             <li>et de la manière dont l'IdP gère les sessions persistantes. </li>
                         </ul>
@@ -256,17 +256,17 @@
                 </section>
 
                 <!-- ============================================
-                     SECTION 3: POINTS CLÉS SNOWPRO CORE À RETENIR
+                     SECTION 3: SYNTHÈSE
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> 🎯 Points clés SnowPro Core à retenir
+                        <i class="fas fa-star"></i> Synthèse
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔐 Identity Providers</h4>
-                            <ul>
+                            <h4>✔ Identity Providers</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Snowflake = Service Provider</li>
                                 <li>Support natif : Okta, Microsoft Entra ID</li>
                                 <li>Autres IdP SAML2 possibles via configuration custom</li>
@@ -275,11 +275,11 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔐 SSO Workflows</h4>
-                            <ul>
+                            <h4>✔ SSO Workflows</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>
                                     Deux types de login :
-                                    <ul>
+                                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                         <li>Snowflake‑initiated</li>
                                         <li>IdP‑initiated</li>
                                     </ul>
@@ -289,8 +289,8 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔐 Importance pour l'examen</h4>
-                            <ul>
+                            <h4>✔ Importance pour l'examen</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Comprendre que Snowflake ne gère pas les mots de passe IdP</li>
                                 <li>Comprendre le mécanisme SAML2 et rôle SP/IdP</li>
                                 <li>Savoir reconnaître les workflows SSO supportés</li>
