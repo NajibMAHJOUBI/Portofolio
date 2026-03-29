@@ -167,7 +167,7 @@
                         <i class="fas fa-lock"></i> ✅ 1. Configuration du contrôle d'accès
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Snowflake utilise un modèle d'accès hybride RBAC + DAC + UBAC, mais RBAC est le modèle recommandé pour toutes les implémentations.</p>
 
                     <h3>✔ Principes essentiels</h3>
@@ -196,7 +196,7 @@
                         <i class="fas fa-users"></i> ✅ 2. User Management (Admin — User Management)
                     </h2>
 
-                    <p>Source : </p>
+                    
 
                     <h3>✔ Rôles impliqués dans la gestion utilisateur</h3>
                     <ul>
@@ -221,7 +221,7 @@
                         <i class="fas fa-plus-circle"></i> ✅ 3. CREATE ROLE
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Créer un rôle personnalisé :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -241,7 +241,7 @@
                         <i class="fas fa-user-tag"></i> ✅ 4. GRANT ROLE
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Attribuer un rôle à un utilisateur ou un autre rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -264,7 +264,7 @@ GRANT ROLE analyst TO ROLE finance_team;</code></pre>
                         <i class="fas fa-key"></i> ✅ 5. GRANT PRIVILEGE
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Attribuer des privilèges à un rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -306,7 +306,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                         <i class="fas fa-search"></i> ✅ 6. SHOW GRANTS
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Permet d'auditer les privilèges.</p>
 
                     <h3>✔ Exemples</h3>
@@ -334,7 +334,7 @@ SHOW GRANTS ON TABLE sales;</code></pre>
                         <i class="fas fa-user-minus"></i> ✅ 7. REVOKE ROLE
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Révoquer un rôle d'un user ou d'un autre rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -355,7 +355,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                         <i class="fas fa-lock-open"></i> ✅ 8. REVOKE PRIVILEGE
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Retirer un privilège d'un rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -377,7 +377,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                         <i class="fas fa-exchange-alt"></i> ✅ 9. USE SECONDARY ROLES
                     </h2>
 
-                    <p>Source : </p>
+                    
                     <p>Contrôle l'utilisation des privilèges attribués directement aux users (UBAC).</p>
 
                     <h3>✔ Activation</h3>
