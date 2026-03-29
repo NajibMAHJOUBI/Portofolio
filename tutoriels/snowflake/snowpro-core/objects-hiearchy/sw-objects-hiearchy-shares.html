@@ -175,7 +175,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         Snowflake précise que la fonctionnalité provider sharing n'est pas active pour tous les comptes, selon édition/paramétrage.<br>
-                        → Si non activée, contacter Snowflake Support. <span class="reference">[docs.snowflake.com]</span>
+                        → Si non activée, contacter Snowflake Support. 
                     </div>
                 </section>
 
@@ -191,7 +191,7 @@
                     <p>Un share peut contenir :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>plusieurs objets d'un même database,</li>
-                        <li>ou des objets provenant de différents databases. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>ou des objets provenant de différents databases. </li>
                     </ul>
 
                     <p>Une fois un consumer ajouté :</p>
@@ -202,7 +202,7 @@
                         <strong>Important :</strong>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les lignes nouvellement modifiées ou ajoutées deviennent immédiatement visibles.</li>
-                            <li>Un objet recréé (DROP + CREATE) n'est pas automatiquement resharé même s'il porte le même nom. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Un objet recréé (DROP + CREATE) n'est pas automatiquement resharé même s'il porte le même nom. </li>
                         </ul>
                     </div>
                 </section>
@@ -222,14 +222,14 @@
                         <li>Partage dans la même région</li>
                         <li>Lecture seule</li>
                         <li>Zero‑copy</li>
-                        <li>Simple et rapide <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Simple et rapide </li>
                     </ul>
 
                     <h3>✔ Partage multi‑cloud / multi‑région</h3>
-                    <p>Vous pouvez partager des données à travers différentes régions et plateformes cloud, en laissant Snowflake gérer la réplication si nécessaire. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Vous pouvez partager des données à travers différentes régions et plateformes cloud, en laissant Snowflake gérer la réplication si nécessaire. </p>
 
                     <h3>✔ Snowflake Marketplace & Listings</h3>
-                    <p>Permet d'offrir des datasets publiquement ou à des comptes cibles avec plus de métadonnées (titre, description, exemples). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet d'offrir des datasets publiquement ou à des comptes cibles avec plus de métadonnées (titre, description, exemples). </p>
                 </section>
 
                 <!-- ============================================
@@ -240,7 +240,7 @@
                         <i class="fas fa-plus-circle"></i>4. Processus pour créer un share (Provider)
                     </h2>
 
-                    <p>Étapes décrites par Snowflake : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Étapes décrites par Snowflake : </p>
 
                     <h3>1. Créer un share</h3>
                     <div class="code-block">
@@ -286,14 +286,14 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                     <p>Snowflake indique :</p>
                     <div class="warning-note">
                         Snowflake n'est pas responsable de la conformité HIPAA/HITRUST entre comptes.<br>
-                        C'est au provider de vérifier qu'un Business Critical ne partage pas des données sensibles avec non‑Business Critical. <span class="reference">[docs.snowflake.com]</span>
+                        C'est au provider de vérifier qu'un Business Critical ne partage pas des données sensibles avec non‑Business Critical. 
                     </div>
 
                     <p>Recommandations Snowflake pour comptes Business Critical :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ne pas partager de données sensibles avec des comptes non‑BC</li>
                         <li>Créer un second compte non-BC pour données moins sensibles</li>
-                        <li>Attention à Tri‑Secret Secure → accès KMS peut être déclenché via le partage <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Attention à Tri‑Secret Secure → accès KMS peut être déclenché via le partage </li>
                     </ul>
                 </section>
 
@@ -308,10 +308,10 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un share est <strong>lecture seule</strong> — Les consumers ne peuvent pas modifier les données.</li>
                         <li><strong>Zero‑copy sharing</strong> — Pas de duplication de données → coûts de stockage uniquement chez le provider.</li>
-                        <li>Les <strong>modifications sont immédiatement visibles</strong> → Les consumers voient l'évolution en temps réel. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Les objets recréés doivent être <strong>ré‑autorisés</strong> dans le share — Important dans les questions pièges de l'examen. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>On peut partager des données de <strong>plusieurs databases</strong> dans un même share <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Partage <strong>cross‑région / cross‑cloud</strong> supporté <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les <strong>modifications sont immédiatement visibles</strong> → Les consumers voient l'évolution en temps réel. </li>
+                        <li>Les objets recréés doivent être <strong>ré‑autorisés</strong> dans le share — Important dans les questions pièges de l'examen. </li>
+                        <li>On peut partager des données de <strong>plusieurs databases</strong> dans un même share </li>
+                        <li>Partage <strong>cross‑région / cross‑cloud</strong> supporté </li>
                     </ul>
                 </section>
 

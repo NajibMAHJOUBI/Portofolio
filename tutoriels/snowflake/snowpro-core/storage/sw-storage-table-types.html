@@ -173,7 +173,7 @@
                         <li>Existent uniquement pour la durée de la session.</li>
                         <li>Automatiquement supprimées à la fin de la session.</li>
                         <li>Stockage dans Snowflake avec Time Travel = 0 jours (pas de Fail-safe).</li>
-                        <li>Très utilisées pour transformations intermédiaires et processing temporaire. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Très utilisées pour transformations intermédiaires et processing temporaire. </li>
                     </ul>
 
                     <h3>✔ Transient Tables</h3>
@@ -181,7 +181,7 @@
                         <li>Persistantes entre sessions, contrairement aux temporary.</li>
                         <li>Time Travel limité (0 ou 1 jour), et pas de Fail-safe.</li>
                         <li>Coût de stockage inférieur car sans fail-safe.</li>
-                        <li>Utilisées pour staging longue durée ou tables intermédiaires non critiques. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Utilisées pour staging longue durée ou tables intermédiaires non critiques. </li>
                     </ul>
 
                     <div class="info-note">
@@ -225,7 +225,7 @@
                     <ul>
                         <li>AWS S3</li>
                         <li>Azure Blob</li>
-                        <li>Google Cloud Storage <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Google Cloud Storage </li>
                     </ul>
                     <p>Les données restent dans le data lake, Snowflake ne stocke que des métadonnées.</p>
 
@@ -233,7 +233,7 @@
                     <ul>
                         <li>Snowflake construit des metadata files pour décrire la structure.</li>
                         <li>Les données en elles-mêmes sont lues directement depuis le cloud storage.</li>
-                        <li>Supporte les formats semi-structurés (JSON, Parquet, Avro, ORC…). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Supporte les formats semi-structurés (JSON, Parquet, Avro, ORC…). </li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
@@ -262,7 +262,7 @@
                     </h2>
 
                     <h3>✔ Définition</h3>
-                    <p>Snowflake permet de créer des Iceberg Tables : ce sont des tables compatibles Apache Iceberg, stockées dans des data lakes, mais consultables et manipulables depuis Snowflake comme des tables Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake permet de créer des Iceberg Tables : ce sont des tables compatibles Apache Iceberg, stockées dans des data lakes, mais consultables et manipulables depuis Snowflake comme des tables Snowflake. </p>
 
                     <h3>✔ Caractéristiques</h3>
                     <ul>
@@ -297,7 +297,7 @@
 
                     <h3>✔ Définition</h3>
                     <p>Une dynamic table est un objet Snowflake qui maintient automatiquement le résultat d'une requête SQL en fonction d'un target lag.</p>
-                    <p>→ à mi‑chemin entre une materialized view et un pipeline ELT automatisé. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ à mi‑chemin entre une materialized view et un pipeline ELT automatisé. </p>
 
                     <h3>✔ Fonctionnement</h3>
                     <p>Vous définissez une table dynamique avec :</p>

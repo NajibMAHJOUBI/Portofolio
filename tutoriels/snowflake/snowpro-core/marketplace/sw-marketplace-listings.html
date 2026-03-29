@@ -147,19 +147,19 @@
                         <i class="fas fa-tag"></i> ✅ 1. Que sont les Listings dans Snowflake ?
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>A listing is an enhanced method of Secure Data Sharing… providers can publish data or apps privately or on the Snowflake Marketplace.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Les listings permettent au provider :</p>
                     <ul>
                         <li>De publier des données publiquement (Marketplace) ou privatement.</li>
-                        <li>D'ajouter metadata enrichis : titre, description, queries exemples, informations provider. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>De monétiser leur data product (Marketplace). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>De suivre l'usage et l'intérêt (usage metrics). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>D'ajouter metadata enrichis : titre, description, queries exemples, informations provider. </li>
+                        <li>De monétiser leur data product (Marketplace). </li>
+                        <li>De suivre l'usage et l'intérêt (usage metrics). </li>
                     </ul>
 
                     <p>Les consumers peuvent :</p>
@@ -184,21 +184,21 @@
                         <li>Visibles sur le Snowflake Marketplace.</li>
                         <li>Possibilité de rendre le listing public.</li>
                         <li>Possibilité de facturer l'accès.<br>
-                        <em>Offer a share publicly… charge consumers… monitor usage.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Offer a share publicly… charge consumers… monitor usage.</em> </li>
                         <li>Auto-fulfillment disponible (voir section 4).</li>
                     </ul>
 
                     <h3>✔ 2. Organizational Listings (Internal Marketplace)</h3>
                     <div class="info-note">
                         <em>Allow you to share data products securely within your organization.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <p>Il s'agit d'un Marketplace interne qui centralise les data products uniquement pour les comptes d'une organisation Snowflake.</p>
 
                     <p><strong>Différences clés :</strong></p>
                     <ul>
                         <li>Accessible uniquement dans l'organisation (Internal Marketplace).</li>
-                        <li>Contrôlé via RBAC et account targeting. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Contrôlé via RBAC et account targeting. </li>
                         <li>Pas de visibilité publique.</li>
                         <li>Objectif : catalogue interne de données fiables.</li>
                     </ul>
@@ -230,7 +230,7 @@
                     </ul>
                     <div class="info-note">
                         <em>A data product is the share or the app attached to a listing.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -244,7 +244,7 @@
 
                     <div class="info-note">
                         <em>Auto-fulfillment automatically replicates your data product to other Snowflake regions as needed.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Pourquoi c'est important ?</h3>
@@ -262,25 +262,25 @@
 
                     <h3>✔ Contraintes :</h3>
                     <ul>
-                        <li>Pas disponible sur les comptes trial. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pas disponible sur les comptes trial. </li>
                         <li>Le provider doit avoir activé le Global Data Sharing :<br>
                         <code class="inline-code">SELECT SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT('&lt;account&gt;');</code></li>
                     </ul>
 
                     <h3>✔ Cas d'utilisation :</h3>
                     <ul>
-                        <li>Paid listings → auto-fulfillment obligatoire. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Paid listings → auto-fulfillment obligatoire. </li>
                         <li>Private listings cross-region → auto-fulfillment activé automatiquement.<br>
-                        <em>Snowsight automatically detects whether the consumer is in another region and enables auto-fulfillment.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Snowsight automatically detects whether the consumer is in another region and enables auto-fulfillment.</em> </li>
                     </ul>
 
                     <h3>✔ Fonctionnement technique :</h3>
                     <p>Snowflake crée et gère une <strong>Secure Share Area (SSA)</strong> pour stocker les données répliquées.<br>
-                    <em>When auto-fulfillment is set up, Snowflake provisions a Secure Share Area and fulfills data to remote regions.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <em>When auto-fulfillment is set up, Snowflake provisions a Secure Share Area and fulfills data to remote regions.</em> </p>
 
                     <div class="warning-note">
                         <strong>Impact sur les coûts :</strong> Les providers sont facturés selon l'utilisation réelle.<br>
-                        <em>When you make a data product available in other regions, you incur additional costs.</em> <span class="reference">[docs.snowflake.com]</span>
+                        <em>When you make a data product available in other regions, you incur additional costs.</em> 
                     </div>
                 </section>
 
@@ -360,7 +360,7 @@
                         <div class="usage-card">
                             <p>✔ Auto-fulfillment obligatoire pour les paid listings.</p>
                             <p>✔ Non disponible pour trial accounts.</p>
-                            <p>✔ Activé par ORGADMIN via <code class="inline-code">SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT</code>. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ Activé par ORGADMIN via <code class="inline-code">SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT</code>. </p>
                         </div>
                     </div>
                 </section>

@@ -142,27 +142,27 @@
                         <i class="fas fa-lock"></i> ✅ 1. Access Control Framework
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake utilise un modèle hybride de contrôle d'accès, combinant :</p>
 
                     <h3>✔ RBAC – Role-Based Access Control (modèle principal)</h3>
                     <ul>
                         <li>Les privilèges sont attribués à des rôles, pas à des utilisateurs.</li>
                         <li>Les utilisateurs se voient ensuite attribuer un ou plusieurs rôles.</li>
-                        <li>C'est le modèle recommandé car il est scalable et maintenable. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>C'est le modèle recommandé car il est scalable et maintenable. </li>
                     </ul>
 
                     <h3>✔ DAC – Discretionary Access Control</h3>
                     <ul>
                         <li>Chaque objet Snowflake a un OWNER (un rôle).</li>
-                        <li>L'owner d'un objet peut accorder, révoquer des privilèges, et transférer l'OWNERSHIP. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>L'owner d'un objet peut accorder, révoquer des privilèges, et transférer l'OWNERSHIP. </li>
                     </ul>
 
                     <h3>✔ UBAC – User-Based Access Control (secondaire)</h3>
                     <ul>
                         <li>Snowflake permet d'accorder des privilèges directement à un utilisateur.</li>
                         <li>Ces privilèges ne sont pris en compte que si <code class="inline-code">USE SECONDARY ROLES = ALL</code>.</li>
-                        <li>Ce mécanisme doit rester exceptionnel. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Ce mécanisme doit rester exceptionnel. </li>
                     </ul>
 
                     <h3>✔ Concepts fondamentaux :</h3>
@@ -173,19 +173,19 @@
                         <tbody>
                             32
                                 <td><strong>User</strong>
-                                <td>Identité Snowflake (humain ou service). <span class="reference">[docs.snowflake.com]</span>
+                                <td>Identité Snowflake (humain ou service). 
                             
                             32
                                 <td><strong>Role</strong>
-                                <td>Conteneur de privilèges. Peut être attribué à un utilisateur ou à un autre rôle. <span class="reference">[docs.snowflake.com]</span>
+                                <td>Conteneur de privilèges. Peut être attribué à un utilisateur ou à un autre rôle. 
                             
                             32
                                 <td><strong>Privilege</strong>
-                                <td>Droit d'exécuter une action sur un objet. <span class="reference">[docs.snowflake.com]</span>
+                                <td>Droit d'exécuter une action sur un objet. 
                             
                             32
                                 <td><strong>Securable Object</strong>
-                                <td>Objet auquel un privilège peut être accordé. <span class="reference">[docs.snowflake.com]</span>
+                                <td>Objet auquel un privilège peut être accordé. 
                             
                         </tbody>
                     划
@@ -199,9 +199,9 @@
                         <i class="fas fa-cubes"></i> ✅ 2. Securable Objects (Objets Sécurisables)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Tous les objets sécurisables sont organisés dans une hiérarchie logique :</p>
-                    <p><strong>Organization → Account → Database → Schema → Object</strong> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Organization → Account → Database → Schema → Object</strong> </p>
 
                     <h3>✔ Types d'objets sécurisables</h3>
                     <p>Exemples :</p>
@@ -211,7 +211,7 @@
                         <li>Table, View, Stream, Stage</li>
                         <li>Warehouse</li>
                         <li>File Format, Sequence</li>
-                        <li>Functions / Procedures <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Functions / Procedures </li>
                     </ul>
 
                     <div class="info-note">
@@ -221,7 +221,7 @@
                         <ul>
                             <li>USAGE sur la Database</li>
                             <li>USAGE sur le Schema</li>
-                            <li>Le privilège spécifique (ex : SELECT, INSERT, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Le privilège spécifique (ex : SELECT, INSERT, etc.) </li>
                         </ul>
                     </div>
                 </section>
@@ -234,20 +234,20 @@
                         <i class="fas fa-sitemap"></i> ✅ 3. Role Hierarchy & Privilege Inheritance
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Dans Snowflake, les rôles peuvent être imbriqués :</p>
 
                     <h3>✔ Héritage</h3>
                     <ul>
                         <li>Un rôle A peut être attribué à un rôle B.</li>
                         <li>B hérite automatiquement de tous les privilèges de A.</li>
-                        <li>Cette hiérarchie permet une gestion flexible et granulaire. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Cette hiérarchie permet une gestion flexible et granulaire. </li>
                     </ul>
 
                     <h3>✔ Rôle principal vs rôles secondaires</h3>
                     <ul>
                         <li>Un utilisateur active un primary role dans sa session.</li>
-                        <li>Les privilèges basés sur UBAC ne sont actifs que si les secondary roles sont activés avec : <code class="inline-code">USE SECONDARY ROLES ALL;</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les privilèges basés sur UBAC ne sont actifs que si les secondary roles sont activés avec : <code class="inline-code">USE SECONDARY ROLES ALL;</code> </li>
                     </ul>
 
                     <div class="warning-note">
@@ -255,7 +255,7 @@
                         <strong>OWNERSHIP et héritage</strong>
                         <ul>
                             <li>Le privilège OWNERSHIP n'est pas héritable et ne peut pas être partagé.</li>
-                            <li>OWNERSHIP = privilège absolu → transférable seulement via <code class="inline-code">GRANT OWNERSHIP</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>OWNERSHIP = privilège absolu → transférable seulement via <code class="inline-code">GRANT OWNERSHIP</code>. </li>
                         </ul>
                     </div>
                 </section>
@@ -268,7 +268,7 @@
                         <i class="fas fa-key"></i> ✅ 4. Privileges (Privilèges d'Accès)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Un privilège est une autorisation permettant d'effectuer une action spécifique sur un objet.</p>
 
                     <h3>✔ Catégories de privilèges</h3>
@@ -309,7 +309,7 @@
                         <ul>
                             <li><strong>OWNERSHIP</strong> : donne contrôle total sur l'objet.</li>
                             <li>Permet de transférer l'ownership.</li>
-                            <li>Implique automatiquement TOUS les autres privilèges. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Implique automatiquement TOUS les autres privilèges. </li>
                         </ul>
                     </div>
 

@@ -212,14 +212,14 @@
                         <i class="fas fa-tags"></i> ✅ 1. Object Tagging — Introduction
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <section id="tag-definition" class="tutorial-subsection">
                         <h3>✔ 1.1. Qu'est‑ce qu'un tag ?</h3>
                         <ul>
                             <li>Un tag est un objet de schéma pouvant être associé à d'autres objets Snowflake.</li>
                             <li>Il fonctionne comme une <strong>clé–valeur (key-value pair)</strong>.</li>
-                            <li>La clé = nom du tag, la valeur = une chaîne de caractères définie lors de l'assignation. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>La clé = nom du tag, la valeur = une chaîne de caractères définie lors de l'assignation. </li>
                         </ul>
                     </section>
 
@@ -235,7 +235,7 @@
                                     <li>gouvernance,</li>
                                     <li>audit,</li>
                                     <li>classification de données sensibles,</li>
-                                    <li>analyses d'usage. <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>analyses d'usage. </li>
                                 </ul>
                             </li>
                         </ul>
@@ -244,7 +244,7 @@
                     <section id="tag-inheritance" class="tutorial-subsection">
                         <h3>✔ 1.3. Tag Inheritance (Héritage)</h3>
                         <p>Les tags sont hérités par les objets situés plus bas dans la hiérarchie.<br>
-                        ➜ Exemple : un tag défini sur une table est hérité par toutes ses colonnes. <span class="reference">[docs.snowflake.com]</span></p>
+                        ➜ Exemple : un tag défini sur une table est hérité par toutes ses colonnes. </p>
                     </section>
 
                     <section id="tag-propagation" class="tutorial-subsection">
@@ -253,7 +253,7 @@
                         <ul>
                             <li><strong>ON_DEPENDENCY</strong> : lors d'une dépendance d'objet,</li>
                             <li><strong>ON_DATA_MOVEMENT</strong> : lors de déplacement de données,</li>
-                            <li><strong>ON_DEPENDENCY_AND_DATA_MOVEMENT</strong> : les deux. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><strong>ON_DEPENDENCY_AND_DATA_MOVEMENT</strong> : les deux. </li>
                         </ul>
                     </section>
 
@@ -261,7 +261,7 @@
                         <h3>✔ 1.5. Tag Replication & Cloning</h3>
                         <ul>
                             <li>Les tags et leurs assignations sont répliqués vers les comptes secondaires.</li>
-                            <li>Le cloning conserve les tags appliqués aux objets clonés. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Le cloning conserve les tags appliqués aux objets clonés. </li>
                         </ul>
                     </section>
 
@@ -271,7 +271,7 @@
                         <ul>
                             <li>d'identifier les objets contenant des informations sensibles (PII…),</li>
                             <li>d'auditer les objets tagués,</li>
-                            <li>de coupler les tags avec des masking policies pour une gouvernance avancée. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>de coupler les tags avec des masking policies pour une gouvernance avancée. </li>
                         </ul>
                     </section>
                 </section>
@@ -284,17 +284,17 @@
                         <i class="fas fa-eye"></i> ✅ 2. Sensitive Data Classification — Introduction
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <section id="classification-objectif" class="tutorial-subsection">
                         <h3>✔ 2.1. Objectif</h3>
                         <ul>
                             <li>Identifier automatiquement les colonnes contenant des données sensibles.</li>
                             <li>Supporter la conformité : GDPR, HIPAA, PCI…</li>
-                            <li>Faciliter les actions de gouvernance (tagging, masquage, filtrage). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Faciliter les actions de gouvernance (tagging, masquage, filtrage). </li>
                         </ul>
                         <div class="warning-note">
-                            ❗ Disponible uniquement en <strong>Enterprise Edition ou plus</strong>. <span class="reference">[docs.snowflake.com]</span>
+                            ❗ Disponible uniquement en <strong>Enterprise Edition ou plus</strong>. 
                         </div>
                     </section>
 
@@ -305,7 +305,7 @@
                             <li>scanne les noms de colonnes et échantillons de données,</li>
                             <li>identifie les informations sensibles,</li>
                             <li>applique des tags système automatiquement,</li>
-                            <li>peut être automatisée via un classification profile. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>peut être automatisée via un classification profile. </li>
                         </ul>
                     </section>
                 </section>
@@ -326,7 +326,7 @@
                             <li>Exemples : NAME, ADDRESS, etc.</li>
                             <li>Décrit le type d'attribut personnel.</li>
                             <li>Snowflake fournit des catégories natives.</li>
-                            <li>Possibilité de créer des catégories custom. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Possibilité de créer des catégories custom. </li>
                         </ul>
                     </section>
 
@@ -336,7 +336,7 @@
                         <ul>
                             <li><strong>IDENTIFIER</strong></li>
                             <li><strong>QUASI_IDENTIFIER</strong></li>
-                            <li><strong>SENSITIVE</strong> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><strong>SENSITIVE</strong> </li>
                         </ul>
                     </section>
 
@@ -345,7 +345,7 @@
                         <p>Snowflake utilise deux tags système pour annoter automatiquement les colonnes :</p>
                         <ul>
                             <li><code class="inline-code">SNOWFLAKE.CORE.SEMANTIC_CATEGORY</code></li>
-                            <li><code class="inline-code">SNOWFLAKE.CORE.PRIVACY_CATEGORY</code> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><code class="inline-code">SNOWFLAKE.CORE.PRIVACY_CATEGORY</code> </li>
                         </ul>
                         <p>Ces tags peuvent être mappés vers des tags personnalisés (user‑defined tags).</p>
                     </section>
@@ -358,7 +358,7 @@
                             <li>l'âge minimum d'un objet avant classification,</li>
                             <li>l'application ou non des tags système,</li>
                             <li>l'application automatique de tag maps (tag custom ↔ tag system),</li>
-                            <li>la possibilité d'utiliser des classifiers custom. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>la possibilité d'utiliser des classifiers custom. </li>
                         </ul>
                     </section>
                 </section>
@@ -374,7 +374,7 @@
                     <p>Permet de lier les classifications système aux tags métier.</p>
                     <p>Exemples :</p>
                     <ul>
-                        <li>Si SEMANTIC_CATEGORY = NAME, alors ajouter automatiquement un tag pii = HIGHLY_CONFIDENTIAL. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Si SEMANTIC_CATEGORY = NAME, alors ajouter automatiquement un tag pii = HIGHLY_CONFIDENTIAL. </li>
                     </ul>
                 </section>
 
@@ -390,7 +390,7 @@
                     <ul>
                         <li>Taguer automatiquement des colonnes sensibles,</li>
                         <li>Appliquer ensuite masking policies via tags,</li>
-                        <li>Étendre une gouvernance cohérente sur tout un modèle de données. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Étendre une gouvernance cohérente sur tout un modèle de données. </li>
                     </ul>
                 </section>
 
@@ -409,7 +409,7 @@
                                 <li>Tag = clé–valeur pour annoter objets Snowflake.</li>
                                 <li>Inheritance + propagation automatique.</li>
                                 <li>Peut être utilisé pour cost tracking, security, data governance.</li>
-                                <li>Peut être associé à masking policies. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Peut être associé à masking policies. </li>
                             </ul>
                         </div>
 
@@ -420,7 +420,7 @@
                                 <li>Assigne des system classification tags.</li>
                                 <li>Utilise semantic & privacy categories.</li>
                                 <li>Peut être automatisé avec classification profiles.</li>
-                                <li>Tag mapping disponible pour propager vers des tags métier. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Tag mapping disponible pour propager vers des tags métier. </li>
                             </ul>
                         </div>
                     </div>

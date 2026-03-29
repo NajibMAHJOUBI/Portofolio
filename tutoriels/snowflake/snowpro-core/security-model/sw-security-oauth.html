@@ -197,14 +197,14 @@
                         <i class="fas fa-lock-open"></i> ✅ 1. Introduction à OAuth (OAuth Intro)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake supporte OAuth 2.0 comme mécanisme d'authentification/autorisation via des security integrations.</p>
 
                     <section id="oauth-types" class="tutorial-subsection">
                         <h3>✔ 1.1. Deux types d'OAuth supportés</h3>
                         <ul>
                             <li><strong>Snowflake OAuth</strong> (OAuth interne Snowflake)</li>
-                            <li><strong>External OAuth</strong> (IdP / OAuth server externe) <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><strong>External OAuth</strong> (IdP / OAuth server externe) </li>
                         </ul>
 
                         <table class="tutorial-table">
@@ -240,7 +240,7 @@
                         <h3>✔ 1.2. Fonctionnement général</h3>
                         <ul>
                             <li>Le client redirige vers une page d'autorisation.</li>
-                            <li>Snowflake génère un access token (et optionnellement un refresh token). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Snowflake génère un access token (et optionnellement un refresh token). </li>
                         </ul>
                     </section>
 
@@ -249,7 +249,7 @@
                         <p>Lorsqu'un utilisateur s'authentifie en OAuth, la colonne <code class="inline-code">FIRST_AUTHENTICATION_FACTOR = 'OAUTH_ACCESS_TOKEN'</code> apparaît dans :</p>
                         <ul>
                             <li>LOGIN_HISTORY</li>
-                            <li>LOGIN_HISTORY_BY_USER <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>LOGIN_HISTORY_BY_USER </li>
                         </ul>
                     </section>
                 </section>
@@ -262,7 +262,7 @@
                         <i class="fas fa-snowflake"></i> ✅ 2. Snowflake OAuth Overview
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake OAuth utilise le service OAuth natif de Snowflake comme authorization server et resource server.</p>
 
                     <section id="oauth-clients" class="tutorial-subsection">
@@ -272,7 +272,7 @@
                             <li>Looker</li>
                             <li>ThoughtSpot</li>
                             <li>Alation</li>
-                            <li>Clients personnalisés <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Clients personnalisés </li>
                         </ul>
                     </section>
 
@@ -284,7 +284,7 @@
                             <li>Le client reçoit un authorization code.</li>
                             <li>Le client échange ce code contre un access token (+ refresh token si activé).</li>
                             <li>Le client envoie le token au Snowflake Resource Server.</li>
-                            <li>Snowflake ouvre une session avec le rôle lié au token. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Snowflake ouvre une session avec le rôle lié au token. </li>
                         </ol>
                     </section>
 
@@ -295,7 +295,7 @@
                             <li>ACCOUNTADMIN</li>
                             <li>SECURITYADMIN</li>
                             <li>ORGADMIN</li>
-                            <li>GLOBALORGADMIN <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>GLOBALORGADMIN </li>
                         </ul>
                         <p>Paramètre pour lever le blocage :</p>
                         <div class="code-block">
@@ -309,7 +309,7 @@
                         <ul>
                             <li><strong>Access tokens</strong> : durée courte (~10 minutes).</li>
                             <li><strong>Refresh tokens</strong> : permettent d'obtenir de nouveaux access tokens.</li>
-                            <li>Single‑use refresh tokens disponibles pour réduire les risques de vol. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Single‑use refresh tokens disponibles pour réduire les risques de vol. </li>
                         </ul>
                     </section>
                 </section>
@@ -322,7 +322,7 @@
                         <i class="fas fa-key"></i> ✅ 3. Key‑pair Authentication & Rotation
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>L'authentification par paire de clés est une alternative plus sécurisée que le mot de passe.</p>
 
                     <section id="keypair-principe" class="tutorial-subsection">
@@ -330,7 +330,7 @@
                         <ul>
                             <li>L'utilisateur génère une paire RSA ≥ 2048 bits ou ECDSA (ES256/ES384/ES512).</li>
                             <li>Le public key est enregistré dans Snowflake via <code class="inline-code">ALTER USER</code>.</li>
-                            <li>Le client signe un JWT avec la private key et Snowflake l'utilise pour l'authentifier. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Le client signe un JWT avec la private key et Snowflake l'utilise pour l'authentifier. </li>
                         </ul>
                     </section>
 
@@ -339,7 +339,7 @@
                         <ul>
                             <li>Aucun mot de passe stocké.</li>
                             <li>Authentification forte.</li>
-                            <li>Rotation des clés supportée nativement. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Rotation des clés supportée nativement. </li>
                         </ul>
                     </section>
 
@@ -350,7 +350,7 @@
                             <li>SnowSQL, Snowflake CLI</li>
                             <li>Python, Spark, Kafka</li>
                             <li>JDBC, ODBC</li>
-                            <li>Node.js, .NET, PHP, Go <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Node.js, .NET, PHP, Go </li>
                         </ul>
                     </section>
 
@@ -359,7 +359,7 @@
                         <ul>
                             <li>Générer des clés chiffrées (recommandation Snowflake).</li>
                             <li>Protéger la private key avec une passphrase.</li>
-                            <li>Effectuer la rotation régulièrement. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Effectuer la rotation régulièrement. </li>
                         </ul>
                     </section>
                 </section>
@@ -423,8 +423,8 @@
                         <div class="usage-card">
                             <h4>🔐 Snowflake OAuth</h4>
                             <ul>
-                                <li>Authorization server intégré, adapté aux clients interactifs. <span class="reference">[docs.snowflake.com]</span></li>
-                                <li>Bloque les rôles privilégiés par défaut. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Authorization server intégré, adapté aux clients interactifs. </li>
+                                <li>Bloque les rôles privilégiés par défaut. </li>
                             </ul>
                         </div>
 
@@ -438,14 +438,14 @@
                         <div class="usage-card">
                             <h4>🔐 Key‑pair Auth</h4>
                             <ul>
-                                <li>Méthode recommandée pour sécurité maximale dans les automations. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Méthode recommandée pour sécurité maximale dans les automations. </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔐 Audit</h4>
                             <ul>
-                                <li>Les audit logs OAuth apparaissent dans LOGIN_HISTORY. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Les audit logs OAuth apparaissent dans LOGIN_HISTORY. </li>
                             </ul>
                         </div>
                     </div>

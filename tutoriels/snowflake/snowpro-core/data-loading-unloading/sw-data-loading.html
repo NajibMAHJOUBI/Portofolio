@@ -170,7 +170,7 @@
                     </h2>
 
                     <p>
-                        Snowflake propose plusieurs façons de charger des données, avec des outils, tâches, et approches différentes selon les besoins (batch, temps réel, semi-structuré, via interface ou via API). <span class="reference">[docs.snowflake.com]</span>
+                        Snowflake propose plusieurs façons de charger des données, avec des outils, tâches, et approches différentes selon les besoins (batch, temps réel, semi-structuré, via interface ou via API). 
                     </p>
 
                     <p>Les principales rubriques couvertes par l'overview sont :</p>
@@ -181,7 +181,7 @@
                         <li>Considérations & bonnes pratiques</li>
                         <li>Snowpipe & Snowpipe Streaming</li>
                         <li>Transformation à l'ingestion</li>
-                        <li>Querying staged files <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Querying staged files </li>
                     </ul>
                 </section>
 
@@ -200,7 +200,7 @@
                     <ul>
                         <li><strong>User stage</strong> : stage individuel par utilisateur</li>
                         <li><strong>Table stage</strong> : un stage implicite lié à chaque table</li>
-                        <li><strong>Named internal stage</strong> : objet explicite créé dans un schéma <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Named internal stage</strong> : objet explicite créé dans un schéma </li>
                     </ul>
 
                     <h3>✔ 2.2 External Stages</h3>
@@ -208,17 +208,17 @@
                     <ul>
                         <li>AWS S3</li>
                         <li>Google Cloud Storage</li>
-                        <li>Azure Blob Storage <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Azure Blob Storage </li>
                     </ul>
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>❗ Limite importante :</strong> les stockages d'archive type S3 Glacier ou Azure Archive ne sont pas supportés pour un chargement direct. <span class="reference">[docs.snowflake.com]</span>
+                        <strong>❗ Limite importante :</strong> les stockages d'archive type S3 Glacier ou Azure Archive ne sont pas supportés pour un chargement direct. 
                     </div>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
-                        <strong>❗ Attention à la facturation :</strong> du data transfer peut être facturé si le stockage externe est dans une autre région. <span class="reference">[docs.snowflake.com]</span>
+                        <strong>❗ Attention à la facturation :</strong> du data transfer peut être facturé si le stockage externe est dans une autre région. 
                     </div>
                 </section>
 
@@ -240,7 +240,7 @@
                             <ul>
                                 <li>fichiers situés dans internal ou external stages</li>
                                 <li>transformations légères</li>
-                                <li>file formats variés (CSV, JSON, Parquet, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>file formats variés (CSV, JSON, Parquet, etc.) </li>
                             </ul>
                         </div>
 
@@ -251,18 +251,18 @@
                                 <li>surveille l'arrivée des fichiers,</li>
                                 <li>charge automatiquement les données,</li>
                                 <li>retourne un statut d'ingestion,</li>
-                                <li>facture selon l'utilisation de compute serverless. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>facture selon l'utilisation de compute serverless. </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ 3.3 Snowpipe Streaming</h4>
-                            <p>Solution pour ingestion streaming haute performance, intégrée à Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Solution pour ingestion streaming haute performance, intégrée à Snowflake. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ 3.4 Snowsight — Chargement manuel pour petits volumes</h4>
-                            <p>Permet d'uploader des fichiers locaux via l'interface web. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Permet d'uploader des fichiers locaux via l'interface web. </p>
                         </div>
 
                         <div class="usage-card">
@@ -272,7 +272,7 @@
                                 <li>Google Cloud</li>
                                 <li>Azure</li>
                                 <li>Salesforce</li>
-                                <li>API & outils ETL (Fivetran, Informatica…) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>API & outils ETL (Fivetran, Informatica…) </li>
                             </ul>
                         </div>
                     </div>
@@ -293,7 +293,7 @@
                         <li>JSON</li>
                         <li>Parquet</li>
                         <li>AVRO</li>
-                        <li>etc. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>etc. </li>
                     </ul>
 
                     <h3>✔ 4.2 Transformations pendant le chargement</h3>
@@ -301,7 +301,7 @@
                     <ul>
                         <li>parsing</li>
                         <li>colonnes dérivées</li>
-                        <li>gestion d'erreurs <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>gestion d'erreurs </li>
                     </ul>
                 </section>
 
@@ -316,12 +316,12 @@
                     <p>Snowflake permet de lire les fichiers directement dans les stages avant ingestion :</p>
                     <ul>
                         <li>utile pour pré-validation</li>
-                        <li>via des commandes SQL (SELECT FROM @stage …) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>via des commandes SQL (SELECT FROM @stage …) </li>
                     </ul>
                     <p>Deux thématiques associées :</p>
                     <ul>
                         <li>Query data in staged files</li>
-                        <li>Query metadata for staged files <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Query metadata for staged files </li>
                     </ul>
                 </section>
 
@@ -354,19 +354,19 @@
 
                         <div class="usage-card">
                             <h4>✔ Gérer les permissions des stages</h4>
-                            <p>OWNERSHIP nécessaire pour table stage <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>OWNERSHIP nécessaire pour table stage </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Utiliser les row timestamps</h4>
-                            <p>Pour mesurer précisément la latence d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Pour mesurer précisément la latence d'ingestion. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Comprendre la facturation liée au chargement</h4>
                             <ul>
                                 <li>compute (COPY, Snowpipe)</li>
-                                <li>data transfer si stockage distant <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>data transfer si stockage distant </li>
                             </ul>
                         </div>
                     </div>

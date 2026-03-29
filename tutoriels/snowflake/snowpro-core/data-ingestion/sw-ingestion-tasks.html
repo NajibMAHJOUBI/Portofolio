@@ -137,7 +137,7 @@
                         <i class="fas fa-tasks"></i> ✅ 1. Introduction aux Tasks Snowflake
                     </h2>
 
-                    <p>Source : <em>Introduction to tasks – Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Introduction to tasks – Snowflake Documentation</em> </p>
 
                     <h3>✔ Définition</h3>
                     <p>Un task est un objet Snowflake permettant d'automatiser l'exécution de SQL (requêtes, DML, DDL, appels de procédures stockées).</p>
@@ -146,8 +146,8 @@
                     <h3>✔ Modes de déclenchement</h3>
                     <p>Un task peut être exécuté :</p>
                     <ul>
-                        <li>Selon un horaire (CRON, intervalle minutes / heures / secondes) <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Sur événement, notamment lorsque un stream contient de nouvelles données <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Selon un horaire (CRON, intervalle minutes / heures / secondes) </li>
+                        <li>Sur événement, notamment lorsque un stream contient de nouvelles données </li>
                     </ul>
 
                     <h3>✔ Compute pour les tasks</h3>
@@ -157,7 +157,7 @@
                             <strong>Serverless Tasks</strong> : Snowflake alloue automatiquement les ressources nécessaires.
                             <ul>
                                 <li>Taille max équivalente à XXLARGE WH.</li>
-                                <li>Pas de paramètre WAREHOUSE dans CREATE TASK. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Pas de paramètre WAREHOUSE dans CREATE TASK. </li>
                             </ul>
                         </li>
                         <li><strong>User-Managed Warehouse</strong> : le task utilise un WH existant défini dans la commande.</li>
@@ -170,18 +170,18 @@
                         <li>Définir le compute, le schedule/trigger, les comportements d'erreur</li>
                         <li>Tester via <code class="inline-code">EXECUTE TASK</code></li>
                         <li>Activer via <code class="inline-code">ALTER TASK … RESUME</code></li>
-                        <li>Surveiller les coûts & logs (TASK_HISTORY, monitoring) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Surveiller les coûts & logs (TASK_HISTORY, monitoring) </li>
                     </ol>
 
                     <h3>✔ Task Graphs (DAG)</h3>
                     <p>Les tasks peuvent être chaînés via <code class="inline-code">AFTER</code> pour créer des pipelines multi-étapes.</p>
-                    <p>Snowflake gère exécution parallèle/série selon la logique. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake gère exécution parallèle/série selon la logique. </p>
 
                     <h3>✔ Interaction avec les Streams</h3>
                     <p>Les tasks peuvent automatiquement :</p>
                     <ul>
                         <li>Identifier si un stream contient de nouvelles données (<code class="inline-code">SYSTEM$STREAM_HAS_DATA</code>)</li>
-                        <li>Consommer ces changements pour transformer ou charger des données <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Consommer ces changements pour transformer ou charger des données </li>
                     </ul>
                 </section>
 
@@ -193,10 +193,10 @@
                         <i class="fas fa-terminal"></i> ✅ 2. Commandes SQL liées aux Tasks
                     </h2>
 
-                    <p>Source : <em>Stream and task commands – Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Stream and task commands – Snowflake Documentation</em> </p>
 
                     <h3>✔ CREATE TASK</h3>
-                    <p>Source détaillée : <em>CREATE TASK – SQL Reference</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source détaillée : <em>CREATE TASK – SQL Reference</em> </p>
                     <p>Syntaxe principale (simplifiée) :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -213,7 +213,7 @@ AS
                         <i class="fas fa-info-circle"></i>
                         <strong>🟦 Points clés à mémoriser pour SnowPro Core</strong>
                         <ul>
-                            <li>Les tasks sont créés suspendus → il faut les activer avec <code class="inline-code">ALTER TASK … RESUME</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Les tasks sont créés suspendus → il faut les activer avec <code class="inline-code">ALTER TASK … RESUME</code>. </li>
                             <li>
                                 Plusieurs options importantes :
                                 <ul>
@@ -224,7 +224,7 @@ AS
                                     <li><code class="inline-code">AFTER</code> (chaînage)</li>
                                 </ul>
                             </li>
-                            <li>Pour les serverless tasks : pas de <code class="inline-code">WAREHOUSE</code>, Snowflake gère automatiquement. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Pour les serverless tasks : pas de <code class="inline-code">WAREHOUSE</code>, Snowflake gère automatiquement. </li>
                         </ul>
                     </div>
 
@@ -234,14 +234,14 @@ AS
                         <li>Modifier le schedule</li>
                         <li>Modifier le WH ou la taille serverless</li>
                         <li>Activer/désactiver (RESUME / SUSPEND)</li>
-                        <li>Modifier la condition WHEN <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Modifier la condition WHEN </li>
                     </ul>
 
                     <h3>✔ EXECUTE TASK</h3>
-                    <p>Permet d'exécuter manuellement un task pour test. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet d'exécuter manuellement un task pour test. </p>
 
                     <h3>✔ SHOW TASKS</h3>
-                    <p>Liste les tasks accessibles dans un schéma / base / compte. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Liste les tasks accessibles dans un schéma / base / compte. </p>
 
                     <h3>✔ DESCRIBE TASK</h3>
                     <p>Affiche détails complets du task :</p>
@@ -250,7 +250,7 @@ AS
                         <li>Schedule</li>
                         <li>Compute model</li>
                         <li>Dépendances (AFTER)</li>
-                        <li>Configuration (WHEN, notifications, etc.) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Configuration (WHEN, notifications, etc.) </li>
                     </ul>
 
                     <h3>✔ DROP TASK</h3>
@@ -274,7 +274,7 @@ SCHEDULE = '60 MINUTES'
 AS
 CALL process_new_data();</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Task serverless</h3>
                     <div class="code-block">
@@ -284,7 +284,7 @@ SCHEDULE = '30 MINUTES'
 AS
 DELETE FROM audit_table WHERE event_ts &lt; DATEADD(day,-7,current_timestamp());</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Activer un task</h3>
                     <div class="code-block">

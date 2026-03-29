@@ -167,7 +167,7 @@
 
                     <p>
                         La page officielle <em>Managing Your Snowflake Account</em> regroupe les opérations d'administration essentielles du compte.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <p>Ces tâches concernent principalement les rôles :</p>
@@ -178,7 +178,7 @@
                     </ul>
 
                     <h3>🔹 Les composants clés de la gestion de compte</h3>
-                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Selon la documentation : </p>
 
                     <table class="tutorial-table">
                         <thead>
@@ -210,7 +210,7 @@
                         <i class="fas fa-sliders-h"></i>2. Parameter Hierarchy & Types
                     </h2>
 
-                    <p>Snowflake documente trois types de paramètres : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake documente trois types de paramètres : </p>
 
                     <h3>✔ 1. Account parameters</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -231,13 +231,13 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Peuvent être définis au niveau : session, user, account</li>
                         <li>Définition via : <code class="inline-code">ALTER SESSION</code>, <code class="inline-code">ALTER USER</code>, ou <code class="inline-code">ALTER ACCOUNT</code>.</li>
-                        <li>Affectent uniquement la session active (si définis dans celle-ci). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Affectent uniquement la session active (si définis dans celle-ci). </li>
                     </ul>
 
                     <h3>✔ 3. Object parameters</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Définis pour les objets Snowflake : warehouses, databases, schemas, tasks, tables/views</li>
-                        <li>Définis via leur commande ALTER propre : <code class="inline-code">ALTER WAREHOUSE</code>, <code class="inline-code">ALTER SCHEMA</code>, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Définis via leur commande ALTER propre : <code class="inline-code">ALTER WAREHOUSE</code>, <code class="inline-code">ALTER SCHEMA</code>, etc. </li>
                     </ul>
                 </section>
 
@@ -249,7 +249,7 @@
                         <i class="fas fa-sitemap"></i>3. Hiérarchie des paramètres (ordre de priorité)
                     </h2>
 
-                    <p>La documentation précise que les paramètres suivent une hiérarchie de surcharge : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation précise que les paramètres suivent une hiérarchie de surcharge : </p>
 
                     <div class="info-note">
                         <strong>Ordre général de résolution</strong>
@@ -289,7 +289,7 @@ SHOW PARAMETERS FOR WAREHOUSE mywh;</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Elle affiche la valeur courante et la valeur par défaut.</li>
                         <li>Elle précise où le paramètre a été défini (session, user, object ou account).</li>
-                        <li>Elle ne nécessite pas de warehouse actif. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Elle ne nécessite pas de warehouse actif. </li>
                     </ul>
                 </section>
 
@@ -305,7 +305,7 @@ SHOW PARAMETERS FOR WAREHOUSE mywh;</code></pre>
                         <div class="usage-card">
                             <h4>✔ Account Management</h4>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                                <li>L'administration du compte couvre : users, roles, paramètres, comportement, sécurité. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>L'administration du compte couvre : users, roles, paramètres, comportement, sécurité. </li>
                                 <li>ACCOUNTADMIN est le rôle maître.</li>
                                 <li>Les identifiants de compte sont essentiels dans les environnements multi‑comptes.</li>
                             </ul>
@@ -316,8 +316,8 @@ SHOW PARAMETERS FOR WAREHOUSE mywh;</code></pre>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Trois types : account, session, object.</li>
                                 <li>Les paramètres ont des valeurs par défaut mais peuvent être surchargés.</li>
-                                <li>La hiérarchie détermine la priorité → session > object > user > account. <span class="reference">[docs.snowflake.com]</span></li>
-                                <li>Objet SHOW PARAMETERS indispensable pour troubleshooting. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>La hiérarchie détermine la priorité → session > object > user > account. </li>
+                                <li>Objet SHOW PARAMETERS indispensable pour troubleshooting. </li>
                             </ul>
                         </div>
                     </div>

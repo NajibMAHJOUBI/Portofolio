@@ -169,10 +169,10 @@
                 ============================================ -->
                 <section id="mfa-overview" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-mobile-alt"></i> ✅ 1. Multi‑Factor Authentication (MFA)
+                        <i class="fas fa-mobile-alt"></i>1. Multi‑Factor Authentication (MFA)
                     </h2>
 
-                    <p>Source principale : <span class="reference">[docs.snowflake.com]</span></p>
+                    
                     <p>La MFA est un pilier de la sécurité Snowflake. Elle réduit fortement les risques liés aux connexions par mot de passe en exigeant un second facteur d'authentification.</p>
                 </section>
 
@@ -181,19 +181,19 @@
                 ============================================ -->
                 <section id="mfa-principe" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i> ✅ 1.1. Principe général
-                    </h2>
+                        <i class="fas fa-info-circle"></i>1.1. Principe général
+                    </h3>
 
                     <p>Lorsqu'un utilisateur "password user" est enrolled en MFA, il doit fournir :</p>
                     <ul>
                         <li>son mot de passe,</li>
-                        <li>son second facteur (ex. Duo Mobile). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>son second facteur (ex. Duo Mobile). </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         MFA est destinée uniquement aux <strong>utilisateurs humains</strong>.<br>
-                        → Les "service users" doivent utiliser d'autres méthodes d'authentification. <span class="reference">[docs.snowflake.com]</span>
+                        → Les "service users" doivent utiliser d'autres méthodes d'authentification. 
                     </div>
                 </section>
 
@@ -207,15 +207,15 @@
 
                     <p>Snowflake rend progressivement la MFA obligatoire pour tous les utilisateurs humains :</p>
                     <ul>
-                        <li>Si le compte existait avant le bundle 2024_08 → l'admin doit configurer le compte pour imposer la MFA. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Si le compte a été créé après 2024_08 → MFA obligatoire par défaut pour tous les human users qui utilisent un mot de passe. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Si le compte existait avant le bundle 2024_08 → l'admin doit configurer le compte pour imposer la MFA. </li>
+                        <li>Si le compte a été créé après 2024_08 → MFA obligatoire par défaut pour tous les human users qui utilisent un mot de passe. </li>
                     </ul>
 
                     <h3>Exception</h3>
-                    <p>L'exigence MFA ne s'applique pas aux service users. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>L'exigence MFA ne s'applique pas aux service users. </p>
 
                     <h3>Option temporaire</h3>
-                    <p>Il est possible de rendre la MFA OPTIONAL via une Authentication Policy, mais ce sera temporaire, car Snowflake planifie la dépréciation totale du mot de passe single‑factor. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Il est possible de rendre la MFA OPTIONAL via une Authentication Policy, mais ce sera temporaire, car Snowflake planifie la dépréciation totale du mot de passe single‑factor. </p>
                 </section>
 
                 <!-- ============================================
@@ -228,7 +228,7 @@
 
                     <ul>
                         <li>Par défaut : Snowflake ne requiert pas de MFA additionnelle pour les utilisateurs SSO.</li>
-                        <li>La MFA doit être gérée par l'IdP (Okta, Azure AD…). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La MFA doit être gérée par l'IdP (Okta, Azure AD…). </li>
                     </ul>
                     <p>👉 Si nécessaire, une Authentication Policy peut imposer une MFA Snowflake après authentification SSO.</p>
                 </section>
@@ -244,7 +244,7 @@
                     <p>Snowflake a annoncé que :</p>
                     <ul>
                         <li>Tous les human users devront obligatoirement utiliser la MFA (s'ils utilisent un mot de passe).</li>
-                        <li>Les service users ne pourront plus utiliser un mot de passe. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les service users ne pourront plus utiliser un mot de passe. </li>
                     </ul>
                 </section>
 
@@ -256,12 +256,12 @@
                         <i class="fas fa-file-alt"></i> ✅ 2. Authentication Policies
                     </h2>
 
-                    <p>Source principale : <span class="reference">[docs.snowflake.com]</span></p>
+                    
                     <p>Les Authentication Policies sont des objets Snowflake permettant de définir finement comment les utilisateurs/clients s'authentifient.</p>
                     <p>Elles peuvent être appliquées :</p>
                     <ul>
                         <li>au niveau du compte,</li>
-                        <li>au niveau de l'utilisateur (ce niveau prévaut). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>au niveau de l'utilisateur (ce niveau prévaut). </li>
                     </ul>
                 </section>
 
@@ -276,7 +276,7 @@
                     <h3>🔐 1. Exigences MFA</h3>
                     <ul>
                         <li>Imposer que tous les utilisateurs s'inscrivent en MFA.</li>
-                        <li>Spécifier quels mécanismes d'authentification nécessitent la MFA. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Spécifier quels mécanismes d'authentification nécessitent la MFA. </li>
                     </ul>
 
                     <h3>🔐 2. Méthodes d'authentification autorisées</h3>
@@ -285,19 +285,19 @@
                         <li>OAuth</li>
                         <li>Key‑pair authentication</li>
                         <li>SAML</li>
-                        <li>Programmatic access token <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Programmatic access token </li>
                     </ul>
 
                     <h3>🔐 3. Contrôle des IdP (SAML2 security integrations)</h3>
                     <ul>
                         <li>Spécifier quels IdP sont disponibles lors du login.</li>
-                        <li>Restreindre par domaines ou patterns email (ALLOWED_USER_DOMAINS, ALLOWED_EMAIL_PATTERNS). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Restreindre par domaines ou patterns email (ALLOWED_USER_DOMAINS, ALLOWED_EMAIL_PATTERNS). </li>
                     </ul>
 
                     <h3>🔐 4. Contrôle des clients</h3>
                     <ul>
                         <li>Restreindre quels clients/clients types peuvent se connecter (Snowsight, SnowSQL, CLI, drivers).</li>
-                        <li>Définir des versions minimales de clients. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Définir des versions minimales de clients. </li>
                     </ul>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -307,7 +307,7 @@
                     <h3>🔐 5. Programmatic Access Tokens (PAT)</h3>
                     <ul>
                         <li>Définir expiration min/max</li>
-                        <li>Définir la nécessité d'une network policy <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Définir la nécessité d'une network policy </li>
                     </ul>
                 </section>
 
@@ -319,7 +319,7 @@
                         <i class="fas fa-sitemap"></i> ✅ 2.2. Application et hiérarchie
                     </h2>
 
-                    <p>Une Authentication Policy définie au niveau de l'utilisateur override la policy définie au niveau du compte. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Une Authentication Policy définie au niveau de l'utilisateur override la policy définie au niveau du compte. </p>
                 </section>
 
                 <!-- ============================================
@@ -335,7 +335,7 @@
                         <li>Exiger MFA pour toutes les méthodes d'authentification ou seulement pour certaines.</li>
                         <li>Imposer un IdP particulier et masquer les autres.</li>
                         <li>Restreindre les accès clients (ex. empêcher Snowsight pour certains utilisateurs).</li>
-                        <li>Exiger un niveau de sécurité plus fort pour certains groupes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Exiger un niveau de sécurité plus fort pour certains groupes. </li>
                     </ul>
                 </section>
 
@@ -356,7 +356,7 @@
     MFA_ENROLLMENT = 'REQUIRED'
     COMMENT = 'Policy enforcing MFA and limiting auth methods';</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -373,7 +373,7 @@
                             <ul>
                                 <li>Réservée aux utilisateurs humains.</li>
                                 <li>Deviendra obligatoire pour tous les password users.</li>
-                                <li>Les comptes créés après 2024_08 ont MFA obligatoire par défaut. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Les comptes créés après 2024_08 ont MFA obligatoire par défaut. </li>
                             </ul>
                         </div>
 
@@ -381,7 +381,7 @@
                             <h4>🔐 Authentication Policies</h4>
                             <ul>
                                 <li>Définissent les règles d'authentification (MFA, méthodes, IdP, clients).</li>
-                                <li>Peuvent s'appliquer au niveau compte ou utilisateur (user > account). <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Peuvent s'appliquer au niveau compte ou utilisateur (user > account). </li>
                             </ul>
                         </div>
 
@@ -389,14 +389,14 @@
                             <h4>🔐 SSO + MFA</h4>
                             <ul>
                                 <li>Pas obligatoire par défaut → IdP censé gérer la MFA.</li>
-                                <li>Snowflake peut la forcer via une Authentication Policy. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Snowflake peut la forcer via une Authentication Policy. </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔐 Service Users</h4>
                             <ul>
-                                <li>Ne doivent pas utiliser MFA → utiliser clés, tokens, OAuth… <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Ne doivent pas utiliser MFA → utiliser clés, tokens, OAuth… </li>
                             </ul>
                         </div>
                     </div>

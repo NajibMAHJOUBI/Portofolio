@@ -154,10 +154,10 @@
 
                     <p>
                         Snowflake regroupe ses capacités "intelligentes" en deux familles : <strong>Snowflake Cortex</strong> (suite de fonctionnalités IA/LLM clé en main) et <strong>Snowflake ML</strong> (construire et opérer ses propres modèles).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
-                    <p>Cortex couvre notamment : Cortex Agents, Cortex AI Functions (incluant les ex‑LLM functions), Cortex Analyst, Cortex Fine‑tuning, Cortex Search, ainsi que des expériences comme Cortex Code (Snowsight/CLI) et Snowflake Intelligence. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Cortex couvre notamment : Cortex Agents, Cortex AI Functions (incluant les ex‑LLM functions), Cortex Analyst, Cortex Fine‑tuning, Cortex Search, ainsi que des expériences comme Cortex Code (Snowsight/CLI) et Snowflake Intelligence. </p>
 
                     <div class="info-note">
                         <i class="fas fa-shield-alt"></i>
@@ -165,13 +165,13 @@
                         <ul>
                             <li>sécurité (modèles opérés dans le périmètre Snowflake),</li>
                             <li>confidentialité (Snowflake n'utilise pas vos données clients pour entraîner les modèles partagés),</li>
-                            <li>contrôle via RBAC. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>contrôle via RBAC. </li>
                         </ul>
                     </div>
 
                     <p>
                         Côté ML, Snowflake fournit des ML Functions prêtes à l'emploi (Forecast, Anomaly Detection, Classification, Top Insights) et des briques de MLOps (feature store, registry) pour les data scientists.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                 </section>
 
@@ -186,27 +186,27 @@
                     <h3>2.1. Concept & positionnement</h3>
                     <p>
                         Cortex AI Functions est l'interface SQL/Python pour opérer des tâches IA sur texte/images (et autres formats) sans sortir les données de Snowflake ; les modèles (OpenAI, Anthropic, Meta, Mistral, DeepSeek, etc.) sont hébergés dans Snowflake pour la performance, l'échelle et la gouvernance.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                     <p>
                         AI SQL regroupe et remplace/actualise les anciennes "LLM functions" sous une famille de fonctions AI_* (ex. AI_COMPLETE au lieu de COMPLETE, AI_EMBED au lieu de EMBED_TEXT_1024, etc.).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>2.2. Fonctions clés (exemples les plus courants)</h3>
                     <ul>
-                        <li><strong>Génération / complétion</strong> : AI_COMPLETE (génération texte ou image‑to‑text). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Classification / filtrage</strong> : AI_CLASSIFY, AI_FILTER (booléen exploitable en WHERE). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Agrégation IA cross‑lignes</strong> : AI_AGG, AI_SUMMARIZE_AGG (contournent la limite de contexte en opérant par lots agrégés). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Embeddings</strong> : AI_EMBED pour vecteurs de similarité (recherche, clustering, RAG). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Extraction structurée</strong> : AI_EXTRACT (texte/images/documents) pour schématiser des champs, tables, entités. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Analyse de sentiment / traduction / résumé</strong> : AI_SENTIMENT, AI_TRANSLATE, SUMMARIZE. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Génération / complétion</strong> : AI_COMPLETE (génération texte ou image‑to‑text). </li>
+                        <li><strong>Classification / filtrage</strong> : AI_CLASSIFY, AI_FILTER (booléen exploitable en WHERE). </li>
+                        <li><strong>Agrégation IA cross‑lignes</strong> : AI_AGG, AI_SUMMARIZE_AGG (contournent la limite de contexte en opérant par lots agrégés). </li>
+                        <li><strong>Embeddings</strong> : AI_EMBED pour vecteurs de similarité (recherche, clustering, RAG). </li>
+                        <li><strong>Extraction structurée</strong> : AI_EXTRACT (texte/images/documents) pour schématiser des champs, tables, entités. </li>
+                        <li><strong>Analyse de sentiment / traduction / résumé</strong> : AI_SENTIMENT, AI_TRANSLATE, SUMMARIZE. </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>Astuce examen :</strong> les fonctions AISQL sont managées (task‑specific) et s'emploient en SQL standard (SELECT/WHERE/JOIN) ou en Python, toujours dans le compte Snowflake (pas d'orchestration externe requise).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -221,27 +221,27 @@
                     <h3>3.1. Définition & objectifs</h3>
                     <p>
                         Cortex Analyst est un service géré (agentic LLM) qui convertit les questions en langage naturel en SQL précis sur vos données structurées Snowflake, puis exécute la requête et renvoie la réponse ; un REST API facilite l'intégration dans vos apps (chat interne, Streamlit, Slack/Teams, etc.).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                     <p>
                         L'intérêt est d'éviter la complexité des architectures RAG "maison", de la gestion des modèles et du tuning, tout en offrant latence/coût maîtrisés et haute précision text‑to‑SQL.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>3.2. Fonctionnement & intégration</h3>
                     <p>
                         Vous interagissez avec Cortex Analyst via un REST endpoint (/api/v2/cortex/analyst/message) : vous fournissez la question et un <strong>semantic model</strong> (YAML ou semantic view) qui contextualise les métriques/dimensions, et le service renvoie SQL + réponse (streaming possible).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                     <p>
                         Les custom instructions dans le YAML offrent un contrôle fin (arrondis, filtres par défaut, règles métier, instructions par module de la pipeline SQL).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>À retenir (exam) :</strong> Cortex Analyst ≠ simple LLM ; c'est un service text‑to‑SQL géré avec sémantique (YAML), RBAC, exécution dans le moteur Snowflake, et API‑first pour l'intégration.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -256,23 +256,23 @@
                     <h3>4.1. Définition & cas d'usage</h3>
                     <p>
                         Cortex Search fournit une recherche hybride (vector + keyword + sémantique) à faible latence directement sur vos données Snowflake, idéale pour RAG (chatbots enterprise) et enterprise search.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                     <p>
                         Le service gère embeddings, index, refresh et qualité : vous créez un Cortex Search Service, puis requêtez via API (ou fonctions associées).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>4.2. Mise en route & écosystème</h3>
                     <p>
                         La doc fournit un exemple complet (création DB/WH/Service + jeu de données), ainsi que des tutoriels : app de recherche, chatbot avec LLM functions, chatbot PDF.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>À retenir (exam) :</strong> Cortex Search est complémentaire des AI Functions (pour embeddings/summarize/extract) et de Cortex Analyst (structuré) ; c'est souvent le moteur "R" d'un pipeline RAG dans Snowflake (recherche → contexte → génération).
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -285,9 +285,9 @@
                     </h2>
 
                     <ul>
-                        <li><strong>AI Functions (AISQL)</strong> : primitives SQL/Python généralistes et spécialisées (complétion, classification, extraction, embedding, agrégations IA) pour opérer sur texte/images/documents dans Snowflake. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Cortex Analyst</strong> : text‑to‑SQL géré pour données structurées ; s'alimente d'un semantic model YAML, expose un REST API et renvoie SQL + réponse. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Cortex Search</strong> : recherche hybride managée pour RAG & enterprise search, gère embeddings/index/refresh pour texte non structuré et recherche contextuelle. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>AI Functions (AISQL)</strong> : primitives SQL/Python généralistes et spécialisées (complétion, classification, extraction, embedding, agrégations IA) pour opérer sur texte/images/documents dans Snowflake. </li>
+                        <li><strong>Cortex Analyst</strong> : text‑to‑SQL géré pour données structurées ; s'alimente d'un semantic model YAML, expose un REST API et renvoie SQL + réponse. </li>
+                        <li><strong>Cortex Search</strong> : recherche hybride managée pour RAG & enterprise search, gère embeddings/index/refresh pour texte non structuré et recherche contextuelle. </li>
                     </ul>
                 </section>
 
@@ -300,11 +300,11 @@
                     </h2>
 
                     <ul>
-                        <li><strong>Sécurité & gouvernance</strong> : modèles hébergés dans Snowflake, RBAC, données non utilisées pour entraîner des modèles publics. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>AISQL</strong> : préférez AI_* (nouvelles signatures) aux anciennes fonctions SNOWFLAKE.CORTEX. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>RAG dans Snowflake</strong> : Cortex Search (retrieval) + AI Functions (génération/synthèse/extraction) = pipeline complet in‑platform. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Cortex Analyst</strong> : nécessite un semantic model (YAML/semantic view) ; intégration via REST. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>ML Functions ≠ Cortex</strong> : ML "traditionnel" (Forecast/Anomaly/Classification/Top Insights) avec coûts compute + stockage modèles. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Sécurité & gouvernance</strong> : modèles hébergés dans Snowflake, RBAC, données non utilisées pour entraîner des modèles publics. </li>
+                        <li><strong>AISQL</strong> : préférez AI_* (nouvelles signatures) aux anciennes fonctions SNOWFLAKE.CORTEX. </li>
+                        <li><strong>RAG dans Snowflake</strong> : Cortex Search (retrieval) + AI Functions (génération/synthèse/extraction) = pipeline complet in‑platform. </li>
+                        <li><strong>Cortex Analyst</strong> : nécessite un semantic model (YAML/semantic view) ; intégration via REST. </li>
+                        <li><strong>ML Functions ≠ Cortex</strong> : ML "traditionnel" (Forecast/Anomaly/Classification/Top Insights) avec coûts compute + stockage modèles. </li>
                     </ul>
                 </section>
 
@@ -337,7 +337,7 @@ SELECT AI_AGG(text_col, 'List key themes and counts') AS insights FROM tickets;
 
                     <p>
                         <strong>Remarque :</strong> la syntaxe exacte (paramètres, options de modèle, FILE type, etc.) est détaillée dans la page AISQL.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                 </section>
             </main>

@@ -163,14 +163,14 @@
                     <p>Selon la documentation :</p>
                     <div class="info-note">
                         <em>Une vue permet d'accéder au résultat d'une requête comme s'il s'agissait d'une table.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Caractéristiques essentielles</h3>
                     <ul>
                         <li>Une vue est une définition SQL nommée, créée avec <code class="inline-code">CREATE VIEW</code>.</li>
-                        <li>Elle ne stocke pas de données : les résultats sont recalculés à chaque exécution. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Peut être utilisée partout où une table peut l'être (JOIN, sous‑requêtes...). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Elle ne stocke pas de données : les résultats sont recalculés à chaque exécution. </li>
+                        <li>Peut être utilisée partout où une table peut l'être (JOIN, sous‑requêtes...). </li>
                         <li>
                             Utilités :
                             <ul>
@@ -185,7 +185,7 @@
                     <p>Snowflake distingue :</p>
                     <ul>
                         <li><strong>Views</strong> (non matérialisées) : calculées à la demande.</li>
-                        <li><strong>Materialized Views</strong> : stockent physiquement les résultats. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Materialized Views</strong> : stockent physiquement les résultats. </li>
                     </ul>
                 </section>
 
@@ -200,23 +200,23 @@
                     <p>Selon la documentation :</p>
                     <div class="info-note">
                         <em>Une materialized view est un jeu de données pré‑calculé, stocké pour une utilisation ultérieure.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Fonctionnement</h3>
                     <ul>
                         <li>Les résultats de la requête sont stockés physiquement.</li>
-                        <li>Les requêtes sont beaucoup plus rapides, car Snowflake lit directement les données matérialisées. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les requêtes sont beaucoup plus rapides, car Snowflake lit directement les données matérialisées. </li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
                     <ul>
                         <li>Boost massif des performances pour requêtes répétitives ou complexes.<br>
-                        Exemples : agrégations lourdes, analyse de semi‑structuré, requêtes fréquentes. <span class="reference">[docs.snowflake.com]</span></li>
+                        Exemples : agrégations lourdes, analyse de semi‑structuré, requêtes fréquentes. </li>
                         <li>
                             Maintenance automatique :
                             <ul>
-                                <li>Un service en arrière‑plan met à jour la materialized view après les changements dans la table source. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Un service en arrière‑plan met à jour la materialized view après les changements dans la table source. </li>
                             </ul>
                         </li>
                     </ul>
@@ -225,7 +225,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Limitations (SnowPro Core aime tester ces points)</strong>
                         <ul>
-                            <li>Consomme du compute pour la maintenance. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Consomme du compute pour la maintenance. </li>
                             <li>Consomme du stockage.</li>
                             <li>Doit être basée sur une seule table (pas de JOIN), avec restrictions supplémentaires sur la requête.</li>
                         </ul>
@@ -250,18 +250,18 @@
                     <p>Selon la documentation :</p>
                     <div class="info-note">
                         <em>Les secure views empêchent toute exposition indirecte des données sous‑jacentes et masquent la définition de la vue.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Pourquoi les utiliser ?</h3>
                     <ul>
-                        <li>Les vues non sécurisées peuvent parfois permettre d'inférer des données sensibles via des optimisations internes ou des comportements d'erreur. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les vues non sécurisées peuvent parfois permettre d'inférer des données sensibles via des optimisations internes ou des comportements d'erreur. </li>
                         <li>
                             Les secure views désactivent ces optimisations afin d'empêcher :
                             <ul>
                                 <li>accès indirect aux données source,</li>
                                 <li>déduction par l'utilisateur (ex : division‑by‑zero trick),</li>
-                                <li>exposition de la définition SQL de la vue. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>exposition de la définition SQL de la vue. </li>
                             </ul>
                         </li>
                     </ul>
@@ -269,7 +269,7 @@
                     <h3>✔ Fonctionnement</h3>
                     <ul>
                         <li>Créées via : <code class="inline-code">CREATE SECURE VIEW …</code></li>
-                        <li>Le texte de la vue n'est visible que pour les rôles autorisés (propriétaires). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le texte de la vue n'est visible que pour les rôles autorisés (propriétaires). </li>
                         <li>Possible aussi avec des materialized views : <code class="inline-code">CREATE SECURE MATERIALIZED VIEW …</code></li>
                     </ul>
 
@@ -277,7 +277,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Inconvénients</strong>
                         <ul>
-                            <li>L'exécution peut être plus lente, car Snowflake ne peut pas appliquer certaines optimisations. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>L'exécution peut être plus lente, car Snowflake ne peut pas appliquer certaines optimisations. </li>
                         </ul>
                     </div>
 

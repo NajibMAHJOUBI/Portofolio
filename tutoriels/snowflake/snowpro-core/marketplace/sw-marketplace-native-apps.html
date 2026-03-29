@@ -162,11 +162,11 @@
                         <i class="fas fa-mobile-alt"></i> ✅ 1. Qu'est‑ce qu'une Snowflake Native App ?
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>The Snowflake Native App Framework allows you to create data applications that leverage core Snowflake functionality and share them with other Snowflake accounts.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Les Snowflake Native Apps sont des applications exécutées directement dans le compte du consumer, permettant au provider :</p>
@@ -194,7 +194,7 @@
 
                     <div class="info-note">
                         <em>The framework is built around the provider and consumer model.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="grid-2cols">
@@ -228,7 +228,7 @@
 
                     <div class="info-note">
                         <em>Providers create an application package that encapsulates data content, business logic, metadata, and setup script.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Un application package contient :</p>
@@ -253,24 +253,24 @@
 
                     <div class="info-note">
                         <em>You publish the app to consumers using listings. The application package becomes the data product of a listing.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Workflow de publication :</h3>
                     <ol>
                         <li>Créer et tester l'application package<br>
-                        <em>Ensure roles and privileges are set properly before publishing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Ensure roles and privileges are set properly before publishing.</em> </li>
                         <li>Devenir Provider de listings<br>
-                        <em>Becoming a provider of listings… see Use listings as a provider.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Becoming a provider of listings… see Use listings as a provider.</em> </li>
                         <li>Définir les release directives (quelle version de l'app pour quels clients)</li>
                         <li>Sécurité : lancer un automated security scan<br>
-                        <em>Initiate the automated security scan.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Initiate the automated security scan.</em> </li>
                         <li>
                             Créer un listing
                             <ul>
                                 <li>Peut être gratuit, privé, ou public</li>
                                 <li>Peut inclure un plan tarifaire pour monétiser<br>
-                                <em>Optional: Add a pricing plan to get paid.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                                <em>Optional: Add a pricing plan to get paid.</em> </li>
                             </ul>
                         </li>
                         <li>Soumettre pour approbation (nécessaire pour le Marketplace public)</li>
@@ -280,7 +280,7 @@
                         <strong>✔ Prérequis de rôle :</strong>
                         <ul>
                             <li>Le rôle publiant doit posséder l'application package<br>
-                            <em>The role must be the same role that created the application package.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>The role must be the same role that created the application package.</em> </li>
                             <li>CREATE LISTING privilège global</li>
                             <li>Pour l'auto-fulfillment : configuration par ORGADMIN</li>
                         </ul>
@@ -297,23 +297,23 @@
 
                     <div class="info-note">
                         <em>The business logic of an application can include Streamlit app, stored procedures, functions (Snowpark, JavaScript, SQL).</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="info-note">
                         <em>Providers can also add shared data content to an app — schemas, tables, external or Iceberg tables, views.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="warning-note">
                         <strong>✔ Restrictions importantes :</strong>
                         <ul>
                             <li>Pas de tables temporaires, volatiles ou transient.<br>
-                            <em>Shared tables cannot be temporary, volatile, or transient tables.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Shared tables cannot be temporary, volatile, or transient tables.</em> </li>
                             <li>Pas de virtual columns / policies avec code Python/JS.<br>
-                            <em>Tables cannot have virtual columns; view definitions cannot contain Java/Python/JS.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Tables cannot have virtual columns; view definitions cannot contain Java/Python/JS.</em> </li>
                             <li>Shared data non versionné : toutes versions de l'app utilisent les mêmes données.<br>
-                            <em>Shared data content is not versioned.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Shared data content is not versioned.</em> </li>
                         </ul>
                     </div>
                 </section>
@@ -328,28 +328,28 @@
 
                     <div class="info-note">
                         <em>Consumers can discover and install apps published to the Marketplace or via private listings.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Workflow côté consumer :</h3>
                     <ol>
                         <li>Installer l'app depuis un listing<br>
-                        <em>Install an app from a listing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Install an app from a listing.</em> </li>
                         <li>
                             Examiner les demandes d'accès
                             <ul>
                                 <li>L'app peut demander : privilèges sur objets, références pour accéder à d'autres bases / objets</li>
                             </ul>
-                            <em>Review access requests… including privileges and references required by the app.</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>Review access requests… including privileges and references required by the app.</em> 
                         </li>
                         <li>(Optionnel) Activer l'event table pour les logs<br>
-                        <em>Set up an event table to enable logging and event sharing.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Set up an event table to enable logging and event sharing.</em> </li>
                         <li>
                             Utiliser l'app
                             <ul>
                                 <li>via SQL Worksheets</li>
                                 <li>via Streamlit UI<br>
-                                <em>Use the app… view Streamlit apps created by the provider.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                                <em>Use the app… view Streamlit apps created by the provider.</em> </li>
                             </ul>
                         </li>
                         <li>Gérer les privilèges sur l'objet application<br>
@@ -367,7 +367,7 @@
 
                     <div class="info-note">
                         <em>Apps installed from trial listings are suspended when the trial ends unless converted to a full listing.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="warning-note">

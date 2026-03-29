@@ -176,7 +176,7 @@
                     <p>Selon la documentation :</p>
                     <div class="info-note">
                         Snowpipe permet de charger les données dès qu'elles sont disponibles dans un stage, en micro‑batches, avec disponibilité quasi‑immédiate pour les utilisateurs.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Ses caractéristiques essentielles :</p>
@@ -184,7 +184,7 @@
                         <li>Chargement automatisé et continu</li>
                         <li>Basé sur un pipe, objet Snowflake contenant un <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
                         <li>Fonctionne via compute serverless fourni par Snowflake</li>
-                        <li>Supporte tous les types de données, incluant JSON, Avro, Parquet etc. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Supporte tous les types de données, incluant JSON, Avro, Parquet etc. </li>
                     </ul>
                 </section>
 
@@ -200,7 +200,7 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Dès que les fichiers sont détectés dans un stage (interne ou externe).</li>
                         <li>En utilisant une instruction COPY définie dans un PIPE.</li>
-                        <li>Par des ressources compute Snowflake, sans warehouse à gérer. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Par des ressources compute Snowflake, sans warehouse à gérer. </li>
                     </ul>
 
                     <p>Les fichiers sont chargés par Snowflake immédiatement via :</p>
@@ -231,7 +231,7 @@ FILE_FORMAT = ...</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la source (un stage)</li>
                         <li>la cible (table Snowflake)</li>
-                        <li>les options de chargement <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>les options de chargement </li>
                     </ul>
 
                     <p>Snowpipe se base sur ce pipe et exécute automatiquement la logique COPY.</p>
@@ -252,7 +252,7 @@ FILE_FORMAT = ...</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>AWS S3 Event Notifications</li>
                         <li>Azure Event Grid</li>
-                        <li>GCP Pub/Sub <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>GCP Pub/Sub </li>
                     </ul>
                     <p>Snowpipe poll ensuite les notifications déposées dans une file (queue) et charge les fichiers correspondants.</p>
                     <p>C'est la méthode la plus utilisée pour le near real-time.</p>
@@ -263,7 +263,7 @@ FILE_FORMAT = ...</code></pre>
                         <li>un nom de pipe</li>
                         <li>une liste de fichiers</li>
                     </ul>
-                    <p>Snowflake vérifie les fichiers dans le stage puis les ajoute à la file d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake vérifie les fichiers dans le stage puis les ajoute à la file d'ingestion. </p>
                     <p>→ Utile pour les systèmes ne supportant pas les notifications cloud.</p>
                 </section>
 
@@ -280,7 +280,7 @@ FILE_FORMAT = ...</code></pre>
                         <li>Amazon S3</li>
                         <li>Google Cloud Storage</li>
                         <li>Azure Blob Storage</li>
-                        <li>Azure Data Lake Gen2 <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Azure Data Lake Gen2 </li>
                     </ul>
                     <p>Chaque cloud provider supporte tous les modes quand le compte Snowflake est hébergé sur AWS, Azure ou GCP.</p>
                 </section>
@@ -321,7 +321,7 @@ FILE_FORMAT = ...</code></pre>
                     </h2>
 
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>✔ Snowflake recommande d'activer le <strong>cloud event filtering</strong> pour réduire les coûts, améliorer la latence et éviter le bruit dans les notifications. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Snowflake recommande d'activer le <strong>cloud event filtering</strong> pour réduire les coûts, améliorer la latence et éviter le bruit dans les notifications. </li>
                         <li>✔ Utiliser un format cohérent dans les stages — Snowpipe prend en charge semi-structuré & compressé.</li>
                         <li>✔ Snowpipe ne gère pas lui‑même les transformations complexes → Utiliser COPY transformations limitées ou un pipeline ELT.</li>
                         <li>✔ Snowpipe ne garantit pas un chargement strictement en temps réel → Latence habituelle : quelques minutes.</li>

@@ -157,9 +157,9 @@
                         <i class="fas fa-search"></i> ✅ 1. Définition & Objectif du Search Optimization Service
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
-                    <p>Le Search Optimization Service (SOS) est une fonctionnalité <strong>Enterprise Edition (ou supérieure)</strong> conçue pour accélérer significativement certaines catégories de requêtes ayant des filtres sélectifs ou des conditions complexes. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Le Search Optimization Service (SOS) est une fonctionnalité <strong>Enterprise Edition (ou supérieure)</strong> conçue pour accélérer significativement certaines catégories de requêtes ayant des filtres sélectifs ou des conditions complexes. </p>
 
                     <h3>✔ But principal</h3>
                     <p>Réduire le nombre de micropartitions analysées et accélérer les recherches sélectives, notamment lorsque le pruning naturel de Snowflake n'est pas suffisant.</p>
@@ -176,7 +176,7 @@
                         <i class="fas fa-code"></i> ✅ 2. Types de requêtes qui bénéficient du SOS
                     </h2>
 
-                    <p>La documentation liste précisément les catégories optimisées : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation liste précisément les catégories optimisées : </p>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
@@ -195,7 +195,7 @@
                             <p>Accélération des recherches utilisant :</p>
                             <ul>
                                 <li><code class="inline-code">SEARCH()</code></li>
-                                <li><code class="inline-code">SEARCH_IP()</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><code class="inline-code">SEARCH_IP()</code> </li>
                             </ul>
                         </div>
 
@@ -203,7 +203,7 @@
                             <h4>✔ 3. Substring & Regex</h4>
                             <p>Optimisation des recherches utilisant :</p>
                             <ul>
-                                <li><code class="inline-code">LIKE</code>, <code class="inline-code">ILIKE</code>, <code class="inline-code">RLIKE</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><code class="inline-code">LIKE</code>, <code class="inline-code">ILIKE</code>, <code class="inline-code">RLIKE</code> </li>
                             </ul>
                         </div>
 
@@ -214,7 +214,7 @@
                                 <li>Comparaisons (=, IN)</li>
                                 <li>ARRAY_CONTAINS, ARRAYS_OVERLAP</li>
                                 <li>Recherche textuelle dans les champs JSON</li>
-                                <li>Vérification de NULL <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Vérification de NULL </li>
                             </ul>
                         </div>
 
@@ -223,13 +223,13 @@
                             <p>Optimisation pour :</p>
                             <ul>
                                 <li>EQUALITY, IN</li>
-                                <li>SUBSTRING sur champs STRING <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>SUBSTRING sur champs STRING </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ 6. Fonctions géospatiales</h4>
-                            <p>Certaines requêtes géospatiales utilisant des données GEOGRAPHY. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Certaines requêtes géospatiales utilisant des données GEOGRAPHY. </p>
                         </div>
                     </div>
                 </section>
@@ -247,12 +247,12 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>ALTER TABLE … ADD SEARCH OPTIMIZATION</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Privilèges nécessaires</h3>
                     <ul>
                         <li>OWNERSHIP sur la table</li>
-                        <li>ADD SEARCH OPTIMIZATION sur le schéma <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>ADD SEARCH OPTIMIZATION sur le schéma </li>
                     </ul>
 
                     <h3>✔ Deux modes d'activation</h3>
@@ -275,7 +275,7 @@
                     <ul>
                         <li>EQUALITY</li>
                         <li>SUBSTRING</li>
-                        <li>GEO <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>GEO </li>
                     </ul>
                 </section>
 
@@ -287,13 +287,13 @@
                         <i class="fas fa-coins"></i> ✅ 4. Impact sur les coûts
                     </h2>
 
-                    <p>L'activation du SOS entraîne un coût supplémentaire en compute et stockage. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>L'activation du SOS entraîne un coût supplémentaire en compute et stockage. </p>
 
                     <h3>✔ Coûts de stockage</h3>
                     <p>Le Search Access Path :</p>
                     <ul>
                         <li>Peut peser jusqu'à 1/4 de la taille de la table, parfois plus</li>
-                        <li>Peut atteindre la taille de la table si toutes les valeurs sont uniques <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Peut atteindre la taille de la table si toutes les valeurs sont uniques </li>
                     </ul>
 
                     <h3>✔ Coûts compute</h3>
@@ -301,7 +301,7 @@
                     <ul>
                         <li>La construction initiale des search paths</li>
                         <li>Le maintien à jour (fort impact si high churn)</li>
-                        <li>DELETE/INSERT massifs <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>DELETE/INSERT massifs </li>
                     </ul>
 
                     <h3>✔ Estimation des coûts</h3>
@@ -310,12 +310,12 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>SYSTEM$ESTIMATE_SEARCH_OPTIMIZATION_COSTS()</code></pre>
                     </div>
-                    <p>→ utile pour évaluer l'impact avant activation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ utile pour évaluer l'impact avant activation </p>
 
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Recommandation Snowflake</strong><br>
-                        → Commencer par un petit nombre de tables et surveiller les coûts <span class="reference">[docs.snowflake.com]</span>
+                        → Commencer par un petit nombre de tables et surveiller les coûts 
                     </div>
                 </section>
 
@@ -328,15 +328,15 @@
                     </h2>
 
                     <ul>
-                        <li><strong>Reconstruction des paths :</strong> Si les valeurs par défaut changent, le Search Access Path devient invalidé et doit être recréé. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Reconstruction des paths :</strong> Si les valeurs par défaut changent, le Search Access Path devient invalidé et doit être recréé. </li>
                         <li><strong>Ajout / suppression / renommage de colonnes :</strong>
                             <ul>
                                 <li>Ajout : pris en compte automatiquement si SOS est activé globalement</li>
                                 <li>Suppression : le path est automatiquement mis à jour</li>
-                                <li>Renommage : pas de changement nécessaire <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Renommage : pas de changement nécessaire </li>
                             </ul>
                         </li>
-                        <li><strong>Clonage :</strong> Les clones zéro‑copy incluent aussi les access paths. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Clonage :</strong> Les clones zéro‑copy incluent aussi les access paths. </li>
                     </ul>
                 </section>
 

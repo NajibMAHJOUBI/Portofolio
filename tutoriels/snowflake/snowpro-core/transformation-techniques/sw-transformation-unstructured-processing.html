@@ -162,7 +162,7 @@
                         <i class="fas fa-file-alt"></i> ✅ 1. Objectif : lire & traiter des fichiers non structurés depuis Snowflake
                     </h2>
 
-                    <p>Source : <span class="reference">[y42.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Snowflake permet de :</p>
                     <ul>
@@ -173,7 +173,7 @@
 
                     <div class="info-note">
                         <em>This topic provides examples of reading and processing unstructured data in staged files with handler code written in Java UDFs, UDTFs, and procedures.</em>
-                        <span class="reference">[y42.com]</span>
+                        
                     </div>
                 </section>
 
@@ -188,7 +188,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Point MAJEUR pour SnowPro Core :</strong>
-                        <p><em>To make your code resilient to file injection attacks, always use a scoped URL when passing a file's location to a UDF.</em> <span class="reference">[y42.com]</span></p>
+                        <p><em>To make your code resilient to file injection attacks, always use a scoped URL when passing a file's location to a UDF.</em> </p>
                     </div>
 
                     <h3>✔ Pourquoi ?</h3>
@@ -217,7 +217,7 @@
                             <h4>✔ Dans un UDF Java</h4>
                             <div class="info-note">
                                 <em>The UDF handler reads the file using a Java InputStream.</em>
-                                <span class="reference">[y42.com]</span>
+                                
                             </div>
                             <p>➡️ Le fichier est lu via InputStream fourni par Snowflake.</p>
                             <p>➡️ Les UDF sont conçues pour renvoyer un résultat directement via SQL.</p>
@@ -227,7 +227,7 @@
                             <h4>✔ Dans une procedure Java</h4>
                             <div class="info-note">
                                 <em>The handler reads the file using a SnowflakeFile.</em>
-                                <span class="reference">[y42.com]</span>
+                                
                             </div>
                             <p>➡️ SnowflakeFile expose un accès plus riche (métadonnées, taille, etc.)</p>
                             <p>➡️ Adapté aux traitements complets ou multi‑étapes.</p>
@@ -246,7 +246,7 @@
                     <p>Snowflake montre un cas utilisant la bibliothèque Apache PDFBox :</p>
                     <div class="info-note">
                         <em>Both handlers extract the contents of a specified PDF file using the Apache PDFBox library.</em>
-                        <span class="reference">[y42.com]</span>
+                        
                     </div>
 
                     <p>Le workflow présenté suit ces étapes :</p>
@@ -275,7 +275,7 @@
 
                     <div class="info-note">
                         <em>Create stages… to keep your handler code's dependencies and the data file.</em>
-                        <span class="reference">[y42.com]</span>
+                        
                     </div>
 
                     <p>Exemples fournis :</p>
@@ -333,7 +333,7 @@ CREATE OR REPLACE STAGE data_stage DIRECTORY = (ENABLE = TRUE);</code></pre>
 
                     <div class="info-note">
                         <em>Handlers written in Python or Scala (UDFs, UDTFs, procedures).</em>
-                        <span class="reference">[y42.com]</span>
+                        
                     </div>
                     <p>Ce n'est pas limité à Java.</p>
                 </section>
@@ -349,7 +349,7 @@ CREATE OR REPLACE STAGE data_stage DIRECTORY = (ENABLE = TRUE);</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Toujours passer une Scoped URL au handler</h4>
-                            <p>➡ Sécurité la plus importante. <span class="reference">[y42.com]</span></p>
+                            <p>➡ Sécurité la plus importante. </p>
                         </div>
 
                         <div class="usage-card">
@@ -361,7 +361,7 @@ CREATE OR REPLACE STAGE data_stage DIRECTORY = (ENABLE = TRUE);</code></pre>
                             <h4>✔ Utiliser des stages différents :</h4>
                             <ul>
                                 <li>un pour les librairies</li>
-                                <li>un pour les données <span class="reference">[y42.com]</span></li>
+                                <li>un pour les données </li>
                             </ul>
                         </div>
 

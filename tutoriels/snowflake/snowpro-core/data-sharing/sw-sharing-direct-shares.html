@@ -150,9 +150,9 @@
                     <div class="info-note">
                         <strong>Ce que dit la documentation officielle :</strong>
                         <ul>
-                            <li>Snowflake permet le partage <strong>sans copie</strong>, entièrement basé sur la couche de services et le métastore : aucune donnée n'est physiquement copiée vers le compte consumer. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Tous les objets partagés sont en <strong>lecture seule</strong> pour les consumers. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Les consumers ne paient que pour leur compute, <strong>jamais pour le stockage</strong> associé aux données partagées. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Snowflake permet le partage <strong>sans copie</strong>, entièrement basé sur la couche de services et le métastore : aucune donnée n'est physiquement copiée vers le compte consumer. </li>
+                            <li>Tous les objets partagés sont en <strong>lecture seule</strong> pour les consumers. </li>
+                            <li>Les consumers ne paient que pour leur compute, <strong>jamais pour le stockage</strong> associé aux données partagées. </li>
                         </ul>
                     </div>
                 </section>
@@ -165,20 +165,20 @@
                         <i class="fas fa-share-alt"></i> ✅ 2. Direct Share — Fonctionnement et caractéristiques
                     </h2>
 
-                    <p>Source : <em>Snowflake Sharing Overview → section direct share</em> <span class="reference">[sql.info]</span></p>
+                    <p>Source : <em>Snowflake Sharing Overview → section direct share</em> </p>
 
                     <div class="info-note">
                         <em>Un direct share permet de partager des données avec un ou plusieurs comptes dans la même région Snowflake.</em>
-                        <span class="reference">[sql.info]</span>
+                        
                     </div>
 
                     <h3>⭐ Caractéristiques clés d'un Direct Share</h3>
                     <ul>
                         <li><strong>Même région</strong> : pas de partage cross‑region ou cross‑cloud.<br>
-                        <em>Direct share = “one or more accounts in your region”</em> <span class="reference">[sql.info]</span></li>
+                        <em>Direct share = “one or more accounts in your region”</em> </li>
                         <li><strong>Zero-copy</strong>, identique aux autres types de sharing.</li>
                         <li>Pas de monétisation possible (contrairement aux listings Marketplace).<br>
-                        <em>Direct share → “Optionally charge? No / Public? No / Metrics? No”</em> <span class="reference">[sql.info]</span></li>
+                        <em>Direct share → “Optionally charge? No / Public? No / Metrics? No”</em> </li>
                         <li>Pas de metadata enrichie (contrairement aux listings Marketplace).</li>
                         <li>Processus simple : Provider crée un share → l'associe à des comptes Snowflake de la même région.</li>
                     </ul>
@@ -198,7 +198,7 @@
                         <i class="fas fa-rocket"></i> ✅ 3. Data Sharing – Getting Started (data-sharing-gs)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <h3>3.1. Ajouter des objets à un share</h3>
                     <p>La documentation explique que deux méthodes existent :</p>
@@ -208,7 +208,7 @@
                             <h4>Option 1 — Accorder des database roles à un share</h4>
                             <div class="info-note">
                                 <em>Segment the securable objects… by creating multiple database roles … grant each database role to the share.</em>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </div>
                             <p>Permet une segmentation fine de l'accès côté consumer.</p>
                         </div>
@@ -217,7 +217,7 @@
                             <h4>Option 2 — Accorder des privilèges directement au share</h4>
                             <div class="info-note">
                                 <em>Grant privileges on specific objects directly to a share… allows including data from multiple databases in a share.</em>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </div>
                             <p>Méthode classique via <code class="inline-code">GRANT … TO SHARE</code>.</p>
                         </div>
@@ -234,7 +234,7 @@
                             </ul>
                             <div class="warning-note">
                                 <strong>Limites :</strong> Impossible pour des objets provenant de plusieurs databases, car REFERENCE_USAGE n'est pas compatible avec les database roles.<br>
-                                <em>You cannot use this option if sharing data from multiple databases.</em> <span class="reference">[docs.snowflake.com]</span>
+                                <em>You cannot use this option if sharing data from multiple databases.</em> 
                             </div>
                         </div>
 
@@ -250,10 +250,10 @@
 
                     <h3>3.3. Fonctionnement côté consumer</h3>
                     <ul>
-                        <li>Après création d'une database à partir d'un share, les consumers peuvent accorder le privilège <code class="inline-code">IMPORTED PRIVILEGES</code> à des rôles locaux. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Après création d'une database à partir d'un share, les consumers peuvent accorder le privilège <code class="inline-code">IMPORTED PRIVILEGES</code> à des rôles locaux. </li>
                         <li>Cela donne accès en lecture à tous les objets partagés.</li>
                         <li>Sans database roles, ce modèle est tout ou rien pour un share unique.<br>
-                        <em>This all-or-nothing approach requires multiple shares to grant subsets of objects.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>This all-or-nothing approach requires multiple shares to grant subsets of objects.</em> </li>
                     </ul>
                 </section>
 
@@ -267,11 +267,11 @@
 
                     <ul>
                         <li><strong>✔ Partage instantané</strong><br>
-                        Dès qu'un provider ajoute un consumer à un share, ce dernier y a accès immédiatement. <span class="reference">[docs.snowflake.com]</span></li>
+                        Dès qu'un provider ajoute un consumer à un share, ce dernier y a accès immédiatement. </li>
                         <li><strong>✔ Mises à jour visibles en temps réel</strong><br>
-                        <em>New and modified rows are available immediately to consumers…</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>New and modified rows are available immediately to consumers…</em> </li>
                         <li><strong>✔ Les objets recréés ne sont pas automatiquement re‑partagés</strong><br>
-                        <em>A new object created or recreated … is not automatically available.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>A new object created or recreated … is not automatically available.</em> </li>
                     </ul>
                 </section>
 

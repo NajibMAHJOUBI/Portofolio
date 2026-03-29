@@ -174,15 +174,15 @@
                     <p>Quand plusieurs requêtes arrivent simultanément :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>si suffisamment de ressources → exécution immédiate</li>
-                        <li>sinon → requêtes mises en file d'attente <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>sinon → requêtes mises en file d'attente </li>
                     </ul>
 
-                    <p>Avec les multi‑cluster warehouses, Snowflake peut provisionner plusieurs clusters pour absorber la concurrence, de façon statique ou dynamique. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Avec les multi‑cluster warehouses, Snowflake peut provisionner plusieurs clusters pour absorber la concurrence, de façon statique ou dynamique. </p>
 
                     <p>Un multi‑cluster se définit par :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">MIN_CLUSTER_COUNT</code></li>
-                        <li><code class="inline-code">MAX_CLUSTER_COUNT</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">MAX_CLUSTER_COUNT</code> </li>
                     </ul>
 
                     <div class="info-note">
@@ -199,7 +199,7 @@
                         <i class="fas fa-chart-bar"></i> ✅ 2. Limites de clusters (par taille de warehouse)
                     </h2>
 
-                    <p>La limite dépend de la taille du warehouse : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La limite dépend de la taille du warehouse : </p>
 
                     <table class="tutorial-table">
                         <thead>
@@ -236,13 +236,13 @@
 MAX_CLUSTER_COUNT = 4</code></pre>
                     </div>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>➡ Snowflake démarre tous les clusters immédiatement et les maintient actifs tant que le warehouse tourne. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>➡ Snowflake démarre tous les clusters immédiatement et les maintient actifs tant que le warehouse tourne. </li>
                         <li><strong>Avantage</strong> : capacité maximale constante.</li>
                         <li><strong>Inconvénient</strong> : coût plus élevé.</li>
                     </ul>
 
                     <h3>✔ Auto‑Scale mode</h3>
-                    <p>Quand MIN &lt; MAX, Snowflake ajuste automatiquement le nombre de clusters selon la charge. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Quand MIN &lt; MAX, Snowflake ajuste automatiquement le nombre de clusters selon la charge. </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Avantage</strong> : équilibre coût/performance.</li>
                         <li><strong>Inconvénient</strong> : latence possible si un cluster doit être provisionné.</li>
@@ -257,7 +257,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                         <i class="fas fa-chart-line"></i> ✅ 4. Scaling Policies (Standard vs Economy)
                     </h2>
 
-                    <p>La section dédiée se trouve dans la documentation du multi‑cluster warehouse : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La section dédiée se trouve dans la documentation du multi‑cluster warehouse : </p>
                     <p>Les scaling policies déterminent comment Snowflake ajoute ou retire des clusters.</p>
 
                     <div class="grid-2cols">
@@ -267,7 +267,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                             <p><strong>Comportement :</strong></p>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Démarre rapidement un nouveau cluster dès que des requêtes sont en file d'attente.</li>
-                                <li>Arrête les clusters quand la charge reste faible. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Arrête les clusters quand la charge reste faible. </li>
                             </ul>
                             <p><strong>Objectif :</strong> ➡ Réduire la latence, maintenir une haute réactivité.</p>
                             <p><strong>Cas d'usage :</strong></p>
@@ -284,7 +284,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                             <p><strong>Comportement :</strong></p>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Les clusters ne démarrent que si Snowflake estime qu'un cluster supplémentaire sera pleinement utilisé.</li>
-                                <li>Snowflake peut laisser des requêtes en file d'attente plus longtemps. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Snowflake peut laisser des requêtes en file d'attente plus longtemps. </li>
                             </ul>
                             <p><strong>Objectif :</strong> ➡ Réduire la consommation de crédits.</p>
                             <p><strong>Cas d'usage :</strong></p>
@@ -305,7 +305,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                         <i class="fas fa-chart-simple"></i> ✅ 5. Comment Snowflake décide d'ajouter ou retirer des clusters ?
                     </h2>
 
-                    <p>D'après la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>D'après la documentation : </p>
 
                     <h3>Démarrage d'un cluster</h3>
                     <p>Snowflake démarre un cluster supplémentaire lorsque :</p>
@@ -335,7 +335,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Peut être redimensionné à chaud</li>
                         <li>Auto‑Suspend s'applique à l'ensemble du warehouse (pas cluster par cluster)</li>
-                        <li>Auto‑Resume dès qu'une requête arrive <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Auto‑Resume dès qu'une requête arrive </li>
                     </ul>
                 </section>
 

@@ -158,14 +158,14 @@
                     <ul>
                         <li>Visualiser les requêtes individuelles ou groupées exécutées dans le compte.</li>
                         <li>Voir les détails de performance d'une requête (durée, warehouse, statut).</li>
-                        <li>Accéder au Query Profile pour examiner chaque étape du plan d'exécution. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Accéder au Query Profile pour examiner chaque étape du plan d'exécution. </li>
                     </ul>
 
                     <h3>✔ Période disponible</h3>
-                    <p>Snowsight affiche les <strong>14 derniers jours</strong> d'exécution. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowsight affiche les <strong>14 derniers jours</strong> d'exécution. </p>
 
                     <h3>✔ Comment y accéder ?</h3>
-                    <p>Snowsight → Monitoring → Query History <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowsight → Monitoring → Query History </p>
 
                     <h3>✔ Privileges nécessaires</h3>
                     <ul>
@@ -175,7 +175,7 @@
                             <ul>
                                 <li><strong>ACCOUNTADMIN</strong> → visibilité totale.</li>
                                 <li>Rôle avec <strong>MONITOR</strong> ou <strong>OPERATE</strong> sur un warehouse → visibilité sur les requêtes de ce warehouse.</li>
-                                <li><strong>GOVERNANCE_VIEWER</strong> → visibilité Grouped Queries mais pas Individual. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><strong>GOVERNANCE_VIEWER</strong> → visibilité Grouped Queries mais pas Individual. </li>
                             </ul>
                         </li>
                     </ul>
@@ -189,7 +189,7 @@
                         <i class="fas fa-database"></i> ✅ 2. ACCOUNT_USAGE.QUERY_HISTORY (vue)
                     </h2>
 
-                    <p>La vue <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</code> sert à auditer l'historique des requêtes sur <strong>1 an (365 jours)</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La vue <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</code> sert à auditer l'historique des requêtes sur <strong>1 an (365 jours)</strong>. </p>
 
                     <h3>✔ Étendue et contenu</h3>
                     <p>Elle retourne :</p>
@@ -197,16 +197,16 @@
                         <li>query_id, query_text, user_name, role_name</li>
                         <li>warehouse_name, warehouse_size, warehouse_type</li>
                         <li>query_type, session_id</li>
-                        <li>Timestamps start et end <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Timestamps start et end </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Particularités</strong>
                         <ul>
-                            <li>Contient également les requêtes de reader accounts, avec colonnes supplémentaires reader_account_name. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>SQL text tronqué à 100 000 caractères. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Plus longue rétention que Information Schema (qui ne garde que 7 jours). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Contient également les requêtes de reader accounts, avec colonnes supplémentaires reader_account_name. </li>
+                            <li>SQL text tronqué à 100 000 caractères. </li>
+                            <li>Plus longue rétention que Information Schema (qui ne garde que 7 jours). </li>
                         </ul>
                     </div>
                 </section>
@@ -219,21 +219,21 @@
                         <i class="fas fa-chart-pie"></i> ✅ 3. ACCOUNT_USAGE.QUERY_ATTRIBUTION_HISTORY (vue)
                     </h2>
 
-                    <p>Cette vue permet d'attribuer les coûts de compute d'une requête, par warehouse. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Cette vue permet d'attribuer les coûts de compute d'une requête, par warehouse. </p>
 
                     <h3>✔ Colonnes essentielles</h3>
                     <ul>
                         <li><code class="inline-code">CREDITS_ATTRIBUTED_COMPUTE</code> : crédits consommés pour exécuter la requête (hors idle time).</li>
-                        <li><code class="inline-code">CREDITS_USED_QUERY_ACCELERATION</code> : crédits QAS (Query Acceleration Service). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">CREDITS_USED_QUERY_ACCELERATION</code> : crédits QAS (Query Acceleration Service). </li>
                     </ul>
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>✔ Détails importants pour l'examen</strong>
                         <ul>
-                            <li>La latence de mise à jour peut atteindre <strong>8 heures</strong>. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Inclut coûts liés aux ajustements de taille (resizing) et autoscaling. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Ne comprend pas : data transfer, storage, cloud services, idle time, serverless features, AI token usage. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>La latence de mise à jour peut atteindre <strong>8 heures</strong>. </li>
+                            <li>Inclut coûts liés aux ajustements de taille (resizing) et autoscaling. </li>
+                            <li>Ne comprend pas : data transfer, storage, cloud services, idle time, serverless features, AI token usage. </li>
                         </ul>
                     </div>
 
@@ -253,7 +253,7 @@
                         <i class="fas fa-table"></i> ✅ 4. INFORMATION_SCHEMA – QUERY_HISTORY table functions
                     </h2>
 
-                    <p>Les fonctions <code class="inline-code">QUERY_HISTORY()</code>, <code class="inline-code">QUERY_HISTORY_BY_USER()</code>, <code class="inline-code">QUERY_HISTORY_BY_SESSION()</code>, <code class="inline-code">QUERY_HISTORY_BY_WAREHOUSE()</code> permettent d'obtenir l'historique des requêtes des <strong>7 derniers jours</strong>, car elles s'appuient sur l'Information Schema. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Les fonctions <code class="inline-code">QUERY_HISTORY()</code>, <code class="inline-code">QUERY_HISTORY_BY_USER()</code>, <code class="inline-code">QUERY_HISTORY_BY_SESSION()</code>, <code class="inline-code">QUERY_HISTORY_BY_WAREHOUSE()</code> permettent d'obtenir l'historique des requêtes des <strong>7 derniers jours</strong>, car elles s'appuient sur l'Information Schema. </p>
 
                     <h3>✔ Syntaxe</h3>
                     <div class="code-block">
@@ -270,12 +270,12 @@ FROM TABLE(information_schema.query_history(
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Points clefs</strong>
                         <ul>
-                            <li>Limite à <strong>7 jours</strong>, contrairement à ACCOUNT_USAGE (365 jours). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Limite à <strong>7 jours</strong>, contrairement à ACCOUNT_USAGE (365 jours). </li>
                             <li>
                                 Paramètres optionnels :
                                 <ul>
                                     <li>RESULT_LIMIT (max 10000)</li>
-                                    <li>USER_NAME, WAREHOUSE_NAME, SESSION_ID selon la fonction <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>USER_NAME, WAREHOUSE_NAME, SESSION_ID selon la fonction </li>
                                 </ul>
                             </li>
                             <li>Peut inclure les requêtes en cours.</li>
@@ -312,7 +312,7 @@ FROM TABLE(information_schema.query_history(
                                 <td><strong>ACCOUNT_USAGE.QUERY_HISTORY</strong>
                                 <td>365 jours
                                 <td>Audit, analyses avancées
-                                <td>Latence 45 min – 3h (selon vue) <span class="reference">[docs.snowflake.com]</span>
+                                <td>Latence 45 min – 3h (selon vue) 
                             
                         </tbody>
                     划
@@ -341,7 +341,7 @@ FROM TABLE(information_schema.query_history(
                             <ul>
                                 <li>Donne le coût compute attribué par requête</li>
                                 <li>Ne compte pas l'idle time</li>
-                                <li>Colonnes importantes : credits_attributed_compute, credits_used_query_acceleration <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Colonnes importantes : credits_attributed_compute, credits_used_query_acceleration </li>
                             </ul>
                         </div>
 
@@ -350,7 +350,7 @@ FROM TABLE(information_schema.query_history(
                             <ul>
                                 <li>ACCOUNTADMIN → visibilité totale</li>
                                 <li>MONITOR/OPERATE → visibilité warehouse</li>
-                                <li>GOVERNANCE_VIEWER → accès aux vues d'audit (mais visibilité limitée dans Snowsight) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>GOVERNANCE_VIEWER → accès aux vues d'audit (mais visibilité limitée dans Snowsight) </li>
                             </ul>
                         </div>
 
@@ -359,7 +359,7 @@ FROM TABLE(information_schema.query_history(
                             <ul>
                                 <li>Limite 7 jours</li>
                                 <li>Peut récupérer les requêtes en cours</li>
-                                <li>Peut filtrer par user, warehouse, session <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Peut filtrer par user, warehouse, session </li>
                             </ul>
                         </div>
                     </div>
@@ -376,22 +376,22 @@ FROM TABLE(information_schema.query_history(
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>❓ Quelle vue utiliser pour analyser la consommation crédit par requête ?</h4>
-                            <p>→ <code class="inline-code">ACCOUNT_USAGE.QUERY_ATTRIBUTION_HISTORY</code> <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">ACCOUNT_USAGE.QUERY_ATTRIBUTION_HISTORY</code> </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Comment récupérer les requêtes exécutées par un user précis sur les dernières heures ?</h4>
-                            <p>→ <code class="inline-code">QUERY_HISTORY_BY_USER()</code> via Information Schema <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">QUERY_HISTORY_BY_USER()</code> via Information Schema </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Comment voir l'historique complet d'un compte sur 1 an ?</h4>
-                            <p>→ <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</code> <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY</code> </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Comment naviguer dans les requêtes dans l'UI ?</h4>
-                            <p>→ Snowsight → Monitoring → Query History <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Snowsight → Monitoring → Query History </p>
                         </div>
                     </div>
                 </section>

@@ -152,17 +152,17 @@
                         <i class="fas fa-file-alt"></i> ✅ 1. Contexte : travailler avec des fichiers non structurés
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>Unstructured data includes text-heavy content (documents), images, video, audio, and specialized industry file types.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Les fichiers doivent être dans un stage interne ou externe, puis manipulés en SQL via :</p>
                     <ul>
                         <li>URL de fichier (Scoped / Stage File URL)</li>
-                        <li>FILE objects (via <code class="inline-code">TO_FILE</code> / <code class="inline-code">TRY_TO_FILE</code>) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>FILE objects (via <code class="inline-code">TO_FILE</code> / <code class="inline-code">TRY_TO_FILE</code>) </li>
                     </ul>
                 </section>
 
@@ -176,7 +176,7 @@
 
                     <div class="info-note">
                         <em>A FILE value represents a file stored in an internal or external stage… It stores metadata such as size, type, etag, last modified timestamp.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Le FILE contient notamment :</p>
@@ -200,7 +200,7 @@
                         <i class="fas fa-calculator"></i> ✅ 3. Fonctions SQL associées au FILE type
                     </h2>
 
-                    <p>Source : <em>FILE functions</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>FILE functions</em> </p>
 
                     <h3>✔ A. Fonctions Constructeurs</h3>
                     <p>Permettent de créer un objet FILE :</p>
@@ -210,7 +210,7 @@
                     </ul>
                     <div class="info-note">
                         <em>You can create a file by passing a scoped file URL, a stage and path, or a metadata object.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ B. Fonctions Accessors (lecture des métadonnées file-level)</h3>
@@ -227,7 +227,7 @@
                             32<td>FL_GET_SCOPED_FILE_URL</td><td>scoped URL utilisable dans UDF / external apps</td>
                             32<td>FL_GET_SIZE</td><td>taille en bytes</td>
                             32<td>FL_GET_STAGE</td><td>stage source</td>
-                            32<td>FL_GET_STAGE_FILE_URL</td><td>URL du fichier dans le stage <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td>FL_GET_STAGE_FILE_URL</td><td>URL du fichier dans le stage </td>
                         </tbody>
                     划
 
@@ -247,7 +247,7 @@
                     划
                     <div class="info-note">
                         <em>Utility functions include FL_IS_AUDIO, FL_IS_COMPRESSED, FL_IS_DOCUMENT, FL_IS_IMAGE, FL_IS_VIDEO.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -284,7 +284,7 @@
                     <div class="info-note">
                         <em>Scoped URL… expires after the persisted result period (24h).<br>
                         Pre-signed URL… access through HTTPS with token.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -298,7 +298,7 @@
 
                     <div class="info-note">
                         <em>Use a scoped URL when passing a file's location to a UDF.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <p>Très souvent testé en SnowPro : toujours utiliser <strong>Scoped URL</strong> dans un UDF pour éviter les attaques de type file-injection.</p>
                 </section>
@@ -314,7 +314,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Toujours utiliser un Scoped URL</h4>
-                            <p>→ sécurité + limite temporelle <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ sécurité + limite temporelle </p>
                         </div>
 
                         <div class="usage-card">
@@ -329,12 +329,12 @@
 
                         <div class="usage-card">
                             <h4>✔ FILE n'est qu'un descripteur, pas le contenu</h4>
-                            <p><em>FILE values do not store the file data itself.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                            <p><em>FILE values do not store the file data itself.</em> </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Les FILE values ne se mettent pas à jour automatiquement si le fichier change</h4>
-                            <p><em>FILE values may become inconsistent with the underlying staged files.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                            <p><em>FILE values may become inconsistent with the underlying staged files.</em> </p>
                         </div>
                     </div>
                 </section>

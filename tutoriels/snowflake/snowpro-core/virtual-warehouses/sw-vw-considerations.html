@@ -172,7 +172,7 @@
 
                     <p>Snowflake rappelle que les recommandations ne sont pas absolues, car :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>chaque workload diffère en concurrence, taille des données, type de requêtes, latence acceptable, coût, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>chaque workload diffère en concurrence, taille des données, type de requêtes, latence acceptable, coût, etc. </li>
                     </ul>
                     <p>Ainsi, l'administrateur doit expérimenter différentes configurations pour trouver le meilleur équilibre.</p>
                 </section>
@@ -189,7 +189,7 @@
                     <p>Snowflake recommande explicitement :</p>
                     <div class="info-note">
                         <em>"Experiment with different types of queries and different warehouse sizes…"</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <p>En effet :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -201,14 +201,14 @@
                     <h3>✔ 2. Ne pas se focaliser uniquement sur la taille</h3>
                     <p>Grâce à la facturation à la seconde, Snowflake souligne qu'utiliser un warehouse plus grand n'est pas forcément plus coûteux :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>→ un cluster plus grand termine plus vite, donc consomme moins de crédits au total. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>→ un cluster plus grand termine plus vite, donc consomme moins de crédits au total. </li>
                     </ul>
                     <p>Exemple implicite : Un LARGE qui met 5 minutes peut coûter moins qu'un SMALL qui prend 20 minutes.</p>
 
                     <h3>✔ 3. Suspendre les warehouses lorsqu'ils ne sont pas utilisés</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la suspension automatique permet d'éviter les coûts d'inactivité</li>
-                        <li>Snowflake facture minimum 60 secondes à chaque démarrage, puis par seconde <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowflake facture minimum 60 secondes à chaque démarrage, puis par seconde </li>
                     </ul>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -228,7 +228,7 @@
                         <i class="fas fa-coins"></i> ✅ 3. Facturation des warehouses — Points critiques
                     </h2>
 
-                    <p>La facturation Snowflake dépend de trois facteurs : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La facturation Snowflake dépend de trois facteurs : </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Taille du warehouse (XS, S, M...).</li>
                         <li>Nombre de clusters (si multi‑cluster).</li>
@@ -239,7 +239,7 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Si le warehouse tourne entre 30 et 60 sec → facturation = 60 sec</li>
                         <li>Si le warehouse tourne 61 sec → facturation = 61 sec</li>
-                        <li>Si le warehouse tourne, s'arrête, puis redémarre &lt;60 sec → facturé : 60 + 1 + 60 = 121 sec <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Si le warehouse tourne, s'arrête, puis redémarre &lt;60 sec → facturé : 60 + 1 + 60 = 121 sec </li>
                     </ul>
                     <p><strong>Indicateur clé en SnowPro Core :</strong> → comprendre les effets multiplicatifs des suspensions / reprises trop fréquentes.</p>
                 </section>
@@ -255,7 +255,7 @@
                     <p>Snowflake souligne que changer la taille d'un warehouse :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>provisionne de nouvelles ressources pour chaque cluster</li>
-                        <li>augmente les crédits facturés à partir du moment où les ressources additionnelles sont provisionnées <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>augmente les crédits facturés à partir du moment où les ressources additionnelles sont provisionnées </li>
                     </ul>
                     <div class="info-note">
                         <strong>Points essentiels :</strong>
@@ -278,7 +278,7 @@
                     <p>Même si la documentation complète est dans une autre page, Warehouse Considerations rappelle que :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>les multi‑cluster warehouses suivent les mêmes règles de facturation</li>
-                        <li>la consommation dépend du nombre de clusters actifs × taille × durée <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>la consommation dépend du nombre de clusters actifs × taille × durée </li>
                     </ul>
                     <p>Snowflake recommande d'utiliser multi‑cluster uniquement si la concurrence l'exige (éliminer les queries en file d'attente).</p>
                 </section>
@@ -298,12 +298,12 @@
                             32<th>Concept</th><th>À retenir</th>
                         </thead>
                         <tbody>
-                            32<td><strong>Expérimentation</strong></td><td>Tester différentes tailles selon le workload <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Taille ↔ Durée</strong></td><td>Un gros warehouse peut être plus économique qu'un petit <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Facturation</strong></td><td>Minimum 60 sec, puis à la seconde <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Redémarrage fréquent</strong></td><td>Mauvaise pratique → multiplie les 60 sec de facturation <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Resizing</strong></td><td>Provisionne plus de compute et augmente le coût <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Multi‑cluster</strong></td><td>Coût = taille × nb clusters × durée <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Expérimentation</strong></td><td>Tester différentes tailles selon le workload </td>
+                            32<td><strong>Taille ↔ Durée</strong></td><td>Un gros warehouse peut être plus économique qu'un petit </td>
+                            32<td><strong>Facturation</strong></td><td>Minimum 60 sec, puis à la seconde </td>
+                            32<td><strong>Redémarrage fréquent</strong></td><td>Mauvaise pratique → multiplie les 60 sec de facturation </td>
+                            32<td><strong>Resizing</strong></td><td>Provisionne plus de compute et augmente le coût </td>
+                            32<td><strong>Multi‑cluster</strong></td><td>Coût = taille × nb clusters × durée </td>
                         </tbody>
                     </table>
                 </section>

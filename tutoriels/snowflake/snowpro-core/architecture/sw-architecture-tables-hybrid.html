@@ -172,7 +172,7 @@
 
                         <p>
                             Elles servent notamment pour des workloads <strong>Unistore</strong>, mêlant transactionnel + analytique.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <h3>Cas d'usage typiques</h3>
@@ -181,7 +181,7 @@
                             <li>Gestion de <strong>métadonnées</strong> d'applications ou workflows massivement parallèles</li>
                             <li>Serving <strong>faible latence</strong> de données pré‑agrégées (API/UI)</li>
                             <li>Applications transactionnelles légères (états, paniers, sessions)
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -202,7 +202,7 @@
                             <li>Utilisent les mêmes services de cloud, warehouses et moteurs de requêtes</li>
                             <li>Permettent des transactions atomiques entre tables hybrides et standard</li>
                             <li>Supportent les fonctionnalités de gouvernance Snowflake
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -218,14 +218,14 @@
                             <li><b>Stockage secondaire : Object Storage</b> (copie asynchrone)</li>
                             <li>
                                 <b>Caches en colonnes</b> sur warehouse → meilleures performances analytiques.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
                         <p>
                             <b>Le Query Optimizer choisit automatiquement la meilleure source</b>
                             (row store, object storage, columnar cache).
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
                     </section>
 
@@ -240,7 +240,7 @@
                         <p>Nécessite :</p>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Entrepôt Snowflake en cours d'exécution (sinon erreur)
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -256,7 +256,7 @@
     col2 VARCHAR(20) NOT NULL
 );</code></pre>
                         </div>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
 
                         <h4>2️⃣ CREATE HYBRID TABLE … AS SELECT (CTAS)</h4>
 
@@ -268,7 +268,7 @@
 )
 AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                         </div>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
 
                         <h4>3️⃣ CREATE HYBRID TABLE … LIKE</h4>
                         <p>Pour répliquer une structure existante.</p>
@@ -286,7 +286,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Footprint plus important que les tables standards</li>
                             <li>Moins de compression que les tables colonnes
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -306,7 +306,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
 
                         <p>
                             Vitesses usuelles : jusqu'à <b>1M lignes/minute</b> (variable selon structure).
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
                     </section>
 
@@ -325,7 +325,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                             <li><b>UNIQUE</b></li>
                             <li>
                                 <b>FOREIGN KEY</b> (avec enforcement)
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -342,7 +342,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                             <i class="fas fa-lightbulb"></i>6. Meilleures pratiques (Best Practices)
                         </h2>
 
-                        <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Source : </p>
 
                         <h3>A. Drivers & Connectivité</h3>
                         <p>Utiliser un driver compatible (exemples) :</p>
@@ -403,11 +403,11 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                             </li>
                             <li>
                                 Non disponible en <b>Chine</b>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                             <li>
                                 Stockage plus volumineux que les tables colonnes
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                             <li>
                                 Certaines fonctionnalités Snowflake restent <b>non supportées ou limitées</b>

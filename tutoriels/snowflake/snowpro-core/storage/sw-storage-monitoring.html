@@ -160,7 +160,7 @@
                         <i class="fas fa-chart-line"></i> ✅ 1. Monitoring Data Storage (Surveillance du stockage)
                     </h2>
 
-                    <p>La documentation décrit plusieurs niveaux de visibilité : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation décrit plusieurs niveaux de visibilité : </p>
 
                     <h3>🔹 1.1. Monitoring au niveau Account (ACCOUNTADMIN)</h3>
                     <p>Dans Snowsight :</p>
@@ -172,14 +172,14 @@
                                 <li>le total du stockage moyen pour l'account,</li>
                                 <li>le stockage des bases de données,</li>
                                 <li>des stages,</li>
-                                <li>du Fail-safe. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>du Fail-safe. </li>
                             </ul>
                         </li>
                         <li>Permet d'obtenir une vue globale de l'empreinte de stockage.</li>
                     </ul>
 
                     <h3>🔹 1.2. Monitoring au niveau table</h3>
-                    <p>Méthodes possibles : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Méthodes possibles : </p>
                     <ul>
                         <li>Snowsight → Catalog → Database Explorer → Table</li>
                         <li>SHOW TABLES (SQL)</li>
@@ -190,7 +190,7 @@
                     <ul>
                         <li>ACTIVE_BYTES : données actives</li>
                         <li>TIME_TRAVEL_BYTES : données historiques (Time Travel)</li>
-                        <li>FAILSAFE_BYTES : données en Fail-safe <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>FAILSAFE_BYTES : données en Fail-safe </li>
                     </ul>
                     <p>Elle distingue aussi :</p>
                     <ul>
@@ -199,7 +199,7 @@
                     </ul>
 
                     <h3>🔹 1.3. Monitoring des fichiers en stage</h3>
-                    <p>Snowflake stocke les fichiers en stage pour l'ingestion. Leur stockage contribue aux coûts de stockage. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake stocke les fichiers en stage pour l'ingestion. Leur stockage contribue aux coûts de stockage. </p>
                 </section>
 
                 <!-- ============================================
@@ -210,18 +210,18 @@
                         <i class="fas fa-coins"></i> ✅ 2. Exploring Data Storage Cost (Comprendre et explorer les coûts)
                     </h2>
 
-                    <p>La page dédiée permet de comprendre comment naviguer dans les coûts depuis Snowsight. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La page dédiée permet de comprendre comment naviguer dans les coûts depuis Snowsight. </p>
 
                     <h3>🔹 2.1. Accès au tableau de bord Storage Cost</h3>
                     <p>Snowsight :</p>
                     <ul>
-                        <li>Admin → Cost management → Consumption → Storage <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Admin → Cost management → Consumption → Storage </li>
                         <li>
                             Filtrage possible :
                             <ul>
                                 <li>par tag (attribution analytique des coûts)</li>
                                 <li>par Type (Database / Fail-safe / Stage)</li>
-                                <li>par Object (par base, schéma, table) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>par Object (par base, schéma, table) </li>
                             </ul>
                         </li>
                     </ul>
@@ -231,13 +231,13 @@
                     <ul>
                         <li>fichiers en stage</li>
                         <li>stockage des tables (actif + Time Travel)</li>
-                        <li>stockage Fail-safe <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>stockage Fail-safe </li>
                     </ul>
 
                     <h3>🔹 2.3. Visualisation par table</h3>
                     <p>Dans Snowsight, chaque table affiche :</p>
                     <ul>
-                        <li>→ la taille active (Active Bytes) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>→ la taille active (Active Bytes) </li>
                     </ul>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -258,7 +258,7 @@
                         <i class="fas fa-clock"></i> ✅ 3. CDP Storage Costs (Time Travel & Fail-safe)
                     </h2>
 
-                    <p>La documentation détaille les mécanismes de Continuous Data Protection (CDP), incluant Time Travel et Fail-safe. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation détaille les mécanismes de Continuous Data Protection (CDP), incluant Time Travel et Fail-safe. </p>
 
                     <h3>🔹 3.1. Ce qui génère des coûts</h3>
                     <p>Seront facturés :</p>
@@ -266,17 +266,17 @@
                         <li>données actives,</li>
                         <li>données Time Travel,</li>
                         <li>Fail-safe,</li>
-                        <li>clones qui référencent des données supprimées. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>clones qui référencent des données supprimées. </li>
                     </ul>
-                    <p>Snowflake compresse automatiquement les données et applique la facturation sur la taille compressée. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake compresse automatiquement les données et applique la facturation sur la taille compressée. </p>
 
                     <h3>🔹 3.2. Time Travel & Fail-safe — Facturation</h3>
                     <ul>
-                        <li>Facturation par jour pour chaque segment conservé. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Facturation par jour pour chaque segment conservé. </li>
                         <li>
                             Snowflake ne stocke pas toute la table :
                             <ul>
-                                <li>Snowflake minimise la quantité de stockage pour les données historiques en conservant seulement les informations nécessaires à restaurer les lignes modifiées. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Snowflake minimise la quantité de stockage pour les données historiques en conservant seulement les informations nécessaires à restaurer les lignes modifiées. </li>
                             </ul>
                         </li>
                         <li>
@@ -284,7 +284,7 @@
                             <ul>
                                 <li>DROP TABLE,</li>
                                 <li>TRUNCATE<br>
-                                (→ coûte plus cher). <span class="reference">[docs.snowflake.com]</span></li>
+                                (→ coûte plus cher). </li>
                             </ul>
                         </li>
                     </ul>
@@ -292,7 +292,7 @@
                     <h3>🔹 3.3. Particularités pour les Temporary / Transient tables</h3>
                     <ul>
                         <li>Time Travel : 0 à 1 jour max</li>
-                        <li>Fail-safe : aucun Fail-safe <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Fail-safe : aucun Fail-safe </li>
                         <li>→ Ces tables sont moins coûteuses.</li>
                     </ul>
                 </section>
@@ -308,25 +308,25 @@
                     <div class="info-note">
                         <h3>✔ Monitoring</h3>
                         <ul>
-                            <li>Utiliser <strong>TABLE_STORAGE_METRICS</strong> pour voir Active / Time Travel / Fail-safe. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Snowsight → Cost Management → Consumption → Storage. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Utiliser <strong>TABLE_STORAGE_METRICS</strong> pour voir Active / Time Travel / Fail-safe. </li>
+                            <li>Snowsight → Cost Management → Consumption → Storage. </li>
                         </ul>
 
                         <h3>✔ Cost categories</h3>
                         <ul>
-                            <li>Storage = fichiers en stage + bases de données + Time Travel + Fail-safe. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Storage = fichiers en stage + bases de données + Time Travel + Fail-safe. </li>
                         </ul>
 
                         <h3>✔ CDP cost behavior</h3>
                         <ul>
-                            <li>Tout ce qui transite par Time Travel et Fail-safe reste facturé jusqu'à sortie du Fail-safe. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Micro-partitions supprimées via INSERT/COPY/SNOWPIPE contribuent immédiatement à TIME_TRAVEL_BYTES et FAILSAFE_BYTES. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Tout ce qui transite par Time Travel et Fail-safe reste facturé jusqu'à sortie du Fail-safe. </li>
+                            <li>Micro-partitions supprimées via INSERT/COPY/SNOWPIPE contribuent immédiatement à TIME_TRAVEL_BYTES et FAILSAFE_BYTES. </li>
                         </ul>
 
                         <h3>✔ Optimization insights</h3>
                         <ul>
                             <li>Clones n'augmentent pas le stockage tant qu'ils ne modifient pas les données.</li>
-                            <li>Temporary & Transient tables = pas de Fail-safe → moins coûteux. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Temporary & Transient tables = pas de Fail-safe → moins coûteux. </li>
                         </ul>
                     </div>
                 </section>

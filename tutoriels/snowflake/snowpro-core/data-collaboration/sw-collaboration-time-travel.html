@@ -157,7 +157,7 @@
                         <i class="fas fa-clock"></i> ✅ 1. Time Travel – Définition & objectifs
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Snowflake Time Travel permet :</p>
                     <ul>
@@ -168,7 +168,7 @@
 
                     <div class="info-note">
                         <em>Time Travel allows viewing and restoring historical data (tables, schemas, and databases) for a defined retention period.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -188,7 +188,7 @@
 
                     <div class="info-note">
                         <em>Data retention is based on the number of days Snowflake retains historical data for Time Travel.</em>
-                        <span class="reference">[thinketl.com]</span>
+                        
                     </div>
 
                     <h3>✔ Valeurs :</h3>
@@ -225,7 +225,7 @@
 
                     <div class="info-note">
                         <em>The AT | BEFORE clause accepts TIMESTAMP, OFFSET, or STATEMENT to query historical data.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
 
                     <h3>✔ Exemples :</h3>
@@ -268,7 +268,7 @@ BEFORE (OFFSET => -56060);</code></pre>
 
                     <div class="info-note">
                         <em>Time Travel supports restoring dropped tables, schemas, and databases during the data retention period.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Commandes typiques :</h3>
@@ -297,7 +297,7 @@ BEFORE (OFFSET => -56060);</code></pre>
                         <pre><code>CREATE TABLE my_table_restored CLONE my_table
 AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
                     </div>
-                    <p><span class="reference">[learn.microsoft.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -316,7 +316,7 @@ AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
 
                     <div class="info-note">
                         <em>CREATE … CLONE supports AT | BEFORE to clone using Time Travel for databases, schemas, and tables.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
                 </section>
 

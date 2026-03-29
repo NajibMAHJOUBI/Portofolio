@@ -167,12 +167,12 @@
                     <p>Le data transfer correspond au mouvement des données <strong>vers</strong> Snowflake (ingress) ou <strong>depuis</strong> Snowflake (egress).</p>
                     <ul>
                         <li><strong>Ingress</strong> = gratuit pour Snowflake.</li>
-                        <li><strong>Egress</strong> = payant sous certaines conditions. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Egress</strong> = payant sous certaines conditions. </li>
                     </ul>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Exception :</strong> votre fournisseur cloud peut facturer ses propres egress fees même si Snowflake ne le fait pas.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -189,7 +189,7 @@
                         <strong>📌 2.1 Règle clé</strong><br>
                         Les coûts apparaissent uniquement lors de l'<strong>egress</strong>, c'est‑à‑dire lorsque les données <strong>sortent</strong> de Snowflake vers une autre région ou vers un autre cloud provider.<br>
                         <strong>Transfert dans la même région = gratuit.</strong>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -206,37 +206,37 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Unloading Data</h4>
-                            <p>Exemple : <code class="inline-code">COPY INTO &lt;location&gt;</code> vers un bucket S3 / GCS / Azure situé dans une autre région ou un autre cloud. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Exemple : <code class="inline-code">COPY INTO &lt;location&gt;</code> vers un bucket S3 / GCS / Azure situé dans une autre région ou un autre cloud. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Database Replication</h4>
-                            <p>Réplication initiale + synchronisations régulières entre régions ou clouds. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Réplication initiale + synchronisations régulières entre régions ou clouds. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ External Network Access</h4>
-                            <p>Appels externes depuis un UDF ou une procédure Snowpark via External Access. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Appels externes depuis un UDF ou une procédure Snowpark via External Access. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Copy Files entre Stages</h4>
-                            <p>Copier des fichiers entre stages situés dans des régions / clouds différents. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Copier des fichiers entre stages situés dans des régions / clouds différents. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ External Functions</h4>
-                            <p>Transfert de données vers AWS / Azure / GCP via fonctions externes. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Transfert de données vers AWS / Azure / GCP via fonctions externes. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Cross‑Cloud Auto‑Fulfillment</h4>
-                            <p>Diffusion de listings Marketplace Snowflake vers d'autres régions cloud. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Diffusion de listings Marketplace Snowflake vers d'autres régions cloud. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ FileOperation.put via Snowpark</h4>
-                            <p>PUT vers un stage externe situé hors région. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>PUT vers un stage externe situé hors région. </p>
                         </div>
                     </div>
 
@@ -256,7 +256,7 @@
 
                     <h3>📌 4.1 Facturation à l'octet</h3>
                     <p>Snowflake facture un <strong>prix par octet transféré en egress</strong>.</p>
-                    <p>Le tarif dépend du cloud provider et de la région où est hébergé le compte Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Le tarif dépend du cloud provider et de la région où est hébergé le compte Snowflake. </p>
                     <p>Pour le détail des prix → <strong>Snowflake Pricing Guide</strong></p>
                 </section>
 
@@ -272,7 +272,7 @@
                     <p>Snowflake permet de visualiser l'historique des transferts :</p>
                     <ul>
                         <li>Menu : <strong>Admin → Cost Management → Consumption → Data Transfer</strong></li>
-                        <li>Unité : bytes transférés dans la plage temporelle sélectionnée. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Unité : bytes transférés dans la plage temporelle sélectionnée. </li>
                     </ul>
 
                     <h3>5.2 Via les vues ACCOUNT_USAGE / ORGANIZATION_USAGE</h3>
@@ -284,22 +284,22 @@
                             32
                                 <td><strong>DATA_TRANSFER_DAILY_HISTORY</strong>
                                 <td>Volume journalier transféré.
-                                <td>ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                                <td>ORGANIZATION_USAGE 
                             
                             32
                                 <td><strong>DATA_TRANSFER_HISTORY</strong>
                                 <td>Détail complet : source, destination, type de transfert.
-                                <td>ACCOUNT_USAGE / ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                                <td>ACCOUNT_USAGE / ORGANIZATION_USAGE 
                             
                             32
                                 <td><strong>DATABASE_REPLICATION_USAGE_HISTORY</strong>
                                 <td>Octets transférés + crédits consommés lors des réplications.
-                                <td>ACCOUNT_USAGE <span class="reference">[docs.snowflake.com]</span>
+                                <td>ACCOUNT_USAGE 
                             
                             32
                                 <td><strong>USAGE_IN_CURRENCY_DAILY</strong>
                                 <td>Conversion du volume transféré en montant facturé.
-                                <td>ORGANIZATION_USAGE <span class="reference">[docs.snowflake.com]</span>
+                                <td>ORGANIZATION_USAGE 
                             
                         </tbody>
                     划

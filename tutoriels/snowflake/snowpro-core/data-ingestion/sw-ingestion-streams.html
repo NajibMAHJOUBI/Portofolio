@@ -152,26 +152,26 @@
                         <i class="fas fa-stream"></i> ✅ 1. Introduction aux Streams Snowflake (CDC)
                     </h2>
 
-                    <p>Source : <em>Introduction to streams</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Introduction to streams</em> </p>
 
                     <h3>✔ Définition</h3>
-                    <p>Un stream est un objet Snowflake qui enregistre les modifications DML (INSERT, UPDATE, DELETE) effectuées sur un objet source (table, vue, table externe, table Iceberg, table dynamique…). Il fournit une <strong>Change Data Capture (CDC) interne</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Un stream est un objet Snowflake qui enregistre les modifications DML (INSERT, UPDATE, DELETE) effectuées sur un objet source (table, vue, table externe, table Iceberg, table dynamique…). Il fournit une <strong>Change Data Capture (CDC) interne</strong>. </p>
 
                     <h3>✔ Objectif</h3>
-                    <p>Fournir une "change table" permettant d'identifier ce qui a changé entre deux versions transactionnelles d'un objet. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Fournir une "change table" permettant d'identifier ce qui a changé entre deux versions transactionnelles d'un objet. </p>
 
                     <h3>✔ Fonctionnement général</h3>
                     <ul>
                         <li>Lors de la création d'un stream, Snowflake capture un offset initial : un instantané logique du contenu de la table.</li>
                         <li>Ensuite, Snowflake enregistre tous les changements intervenus après cet offset.</li>
-                        <li>Les données restituées incluent des métadonnées sur chaque événement de changement (old/new values, type de changement). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les données restituées incluent des métadonnées sur chaque événement de changement (old/new values, type de changement). </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Important : les streams ne stockent pas de données</strong>
                         <p>Un stream ne contient pas les lignes : il stocke uniquement l'offset et s'appuie sur l'historique de versioning du tableau.</p>
-                        <p>Quand un stream est créé, Snowflake ajoute des colonnes cachées au tableau pour suivre les modifications. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Quand un stream est créé, Snowflake ajoute des colonnes cachées au tableau pour suivre les modifications. </p>
                     </div>
 
                     <h3>✔ Types d'objets pouvant avoir un stream</h3>
@@ -180,7 +180,7 @@
                         <li>Vues (avec change tracking activé)</li>
                         <li>Tables externes</li>
                         <li>Tables dynamiques</li>
-                        <li>Tables Iceberg (avec limitations) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Tables Iceberg (avec limitations) </li>
                     </ul>
                 </section>
 
@@ -192,7 +192,7 @@
                         <i class="fas fa-chart-line"></i> ✅ 2. Comprendre les offsets et la consommation
                     </h2>
 
-                    <p>Source : <em>CDC usage details</em> <span class="reference">[select.dev]</span></p>
+                    <p>Source : <em>CDC usage details</em> </p>
 
                     <h3>✔ Offset (position temporelle du stream)</h3>
                     <ul>
@@ -204,7 +204,7 @@
                                 <li>UPDATE</li>
                                 <li>DELETE</li>
                                 <li>MERGE</li>
-                                <li>CTAS <span class="reference">[select.dev]</span></li>
+                                <li>CTAS </li>
                             </ul>
                         </li>
                     </ul>
@@ -212,7 +212,7 @@
                     <h3>✔ Consommation vs simple lecture</h3>
                     <ul>
                         <li>Un <code class="inline-code">SELECT</code> n'avance pas l'offset : on peut inspecter les données sans les consommer.</li>
-                        <li>Une opération DML consomme la modification → ces changements ne seront plus renvoyés lors de la prochaine requête. <span class="reference">[select.dev]</span></li>
+                        <li>Une opération DML consomme la modification → ces changements ne seront plus renvoyés lors de la prochaine requête. </li>
                     </ul>
                 </section>
 
@@ -224,7 +224,7 @@
                         <i class="fas fa-table"></i> ✅ 3. Contenu d'un Stream : structure CDC
                     </h2>
 
-                    <p>Source : <em>Introduction to streams</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Introduction to streams</em> </p>
 
                     <p>Chaque ligne de CDC contient :</p>
                     <ul>
@@ -239,7 +239,7 @@
                         </li>
                     </ul>
                     <div class="warning-note">
-                        ⚠️ Les streams utilisent le schéma courant de la table mais peuvent échouer si des modifications du schéma sont incompatibles avec des données supprimées (Time Travel). <span class="reference">[docs.snowflake.com]</span>
+                        ⚠️ Les streams utilisent le schéma courant de la table mais peuvent échouer si des modifications du schéma sont incompatibles avec des données supprimées (Time Travel). 
                     </div>
                 </section>
 
@@ -251,7 +251,7 @@
                         <i class="fas fa-plus-circle"></i> ✅ 4. Commande SQL : CREATE STREAM & options
                     </h2>
 
-                    <p>Source : <em>SQL CREATE STREAM reference</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>SQL CREATE STREAM reference</em> </p>
 
                     <h3>✔ Syntaxe générale (table)</h3>
                     <div class="code-block">
@@ -267,7 +267,7 @@
                     <ul>
                         <li><code class="inline-code">APPEND_ONLY = TRUE</code> : suit uniquement les INSERT (utile pour éviter updates/deletes).</li>
                         <li><code class="inline-code">SHOW_INITIAL_ROWS = TRUE</code> : renvoie les lignes existantes de la table lors de la création (sinon stream vide).</li>
-                        <li>Modes temporels : <code class="inline-code">AT / BEFORE TIMESTAMP, OFFSET, STATEMENT</code> → permettre de créer un stream sur un état passé. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Modes temporels : <code class="inline-code">AT / BEFORE TIMESTAMP, OFFSET, STATEMENT</code> → permettre de créer un stream sur un état passé. </li>
                     </ul>
 
                     <h3>✔ Variants disponibles</h3>
@@ -276,7 +276,7 @@
                         <li>Sur une vue</li>
                         <li>Sur une table Iceberg</li>
                         <li>Sur une dynamic table</li>
-                        <li>Sur une directory table (ON STAGE) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Sur une directory table (ON STAGE) </li>
                     </ul>
 
                     <h3>✔ Clone</h3>
@@ -284,7 +284,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE STREAM &lt;name&gt; CLONE &lt;source_stream&gt;;</code></pre>
                     </div>
-                    <p>→ Reprend le même offset que l'original. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ Reprend le même offset que l'original. </p>
                 </section>
 
                 <!-- ============================================
@@ -295,7 +295,7 @@
                         <i class="fas fa-terminal"></i> ✅ 5. Commandes associées aux streams
                     </h2>
 
-                    <p>Source : <em>SQL Reference Streams commands</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>SQL Reference Streams commands</em> </p>
 
                     <h3>✔ SHOW STREAMS</h3>
                     <p>Liste les streams du schéma / compte.</p>
@@ -329,12 +329,12 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>🔹 1. Un stream = un "bookmark" CDC</h4>
-                            <p>→ Enregistre à partir de un point dans le temps ; n'est pas un stockage de données. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Enregistre à partir de un point dans le temps ; n'est pas un stockage de données. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔹 2. Consommation unique des données</h4>
-                            <p>→ Une fois consommées via DML, les données disparaissent du stream. <span class="reference">[select.dev]</span></p>
+                            <p>→ Une fois consommées via DML, les données disparaissent du stream. </p>
                         </div>
 
                         <div class="usage-card">
@@ -344,12 +344,12 @@
 
                         <div class="usage-card">
                             <h4>🔹 4. Interaction avec Tasks</h4>
-                            <p>Les tasks peuvent automatiser le traitement des changements (e.g. MERGE sur une table cible). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Les tasks peuvent automatiser le traitement des changements (e.g. MERGE sur une table cible). </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔹 5. Hidden metadata columns</h4>
-                            <p>→ Ajoutées à la table source dès la création du premier stream. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Ajoutées à la table source dès la création du premier stream. </p>
                         </div>
                     </div>
                 </section>
@@ -367,7 +367,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE STREAM my_stream ON TABLE my_table;</code></pre>
                     </div>
-                    <p><span class="reference">[linkedin.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Consommation via MERGE :</h3>
                     <div class="code-block">
@@ -378,7 +378,7 @@ ON t.id = s.id
 WHEN MATCHED THEN UPDATE SET ...
 WHEN NOT MATCHED THEN INSERT (...);</code></pre>
                     </div>
-                    <p><span class="reference">[linkedin.com]</span></p>
+                    <p></p>
                 </section>
             </main>
         </div>

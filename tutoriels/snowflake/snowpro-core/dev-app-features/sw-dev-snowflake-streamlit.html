@@ -180,25 +180,25 @@
                     <p>Selon Snowflake :</p>
                     <div class="info-note">
                         <em>Streamlit est une librairie Python open‑source permettant de créer facilement des web apps data/ML.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Objectif (dans Snowflake)</h3>
-                    <p>Streamlit in Snowflake permet de développer, déployer et partager des applications interactives directement dans le Data Cloud, sans déplacer les données ni le code vers une infrastructure externe. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Streamlit in Snowflake permet de développer, déployer et partager des applications interactives directement dans le Data Cloud, sans déplacer les données ni le code vers une infrastructure externe. </p>
 
                     <h3>✔ Avantages principaux</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Snowflake gère le compute et le stockage des apps Streamlit. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Le code est stocké dans un objet Streamlit gouverné par RBAC. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Intégration native : Snowpark, UDFs, Stored Procedures, Native Apps. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Développement facile dans Snowsight (éditeur + preview côte‑à‑côte). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowflake gère le compute et le stockage des apps Streamlit. </li>
+                        <li>Le code est stocké dans un objet Streamlit gouverné par RBAC. </li>
+                        <li>Intégration native : Snowpark, UDFs, Stored Procedures, Native Apps. </li>
+                        <li>Développement facile dans Snowsight (éditeur + preview côte‑à‑côte). </li>
                     </ul>
 
                     <h3>✔ Modes d'exécution</h3>
                     <p>Deux runtimes disponibles :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Warehouse Runtime</strong> : exécute Python + SQL via un warehouse Snowflake.</li>
-                        <li><strong>Container Runtime (Preview)</strong> : exécute l'app dans un compute pool. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Container Runtime (Preview)</strong> : exécute l'app dans un compute pool. </li>
                     </ul>
                 </section>
 
@@ -213,15 +213,15 @@
                     <h3>✔ Compute utilisé</h3>
                     <p>Selon la documentation :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Un warehouse Snowflake est requis pour exécuter l'application Streamlit et les requêtes SQL. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Un warehouse Snowflake est requis pour exécuter l'application Streamlit et les requêtes SQL. </li>
                         <li>Le même warehouse exécute Streamlit + SQL queries.</li>
-                        <li>La session reste active tant que la connexion WebSocket reste ouverte (~15 min après la dernière activité). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La session reste active tant que la connexion WebSocket reste ouverte (~15 min après la dernière activité). </li>
                     </ul>
 
                     <h3>✔ Consommation de crédits</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tant qu'un utilisateur a l'onglet ouvert → warehouse actif → crédits consommés.</li>
-                        <li>Fermer la page ou suspendre le warehouse → arrêt de consommation. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Fermer la page ou suspendre le warehouse → arrêt de consommation. </li>
                     </ul>
                 </section>
 
@@ -240,7 +240,7 @@
                         <li>USAGE sur la database</li>
                         <li>USAGE, CREATE STREAMLIT sur le schema</li>
                         <li>USAGE sur le warehouse</li>
-                        <li>USAGE sur le compute pool (uniquement pour container runtime) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>USAGE sur le compute pool (uniquement pour container runtime) </li>
                     </ul>
                 </section>
 
@@ -252,7 +252,7 @@
                         <i class="fas fa-plus-circle"></i> ✅ 4. Créer une application Streamlit (Snowsight UI)
                     </h2>
 
-                    <p>Étapes décrites dans la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Étapes décrites dans la documentation : </p>
 
                     <h3>✔ Étape 1 – Créer une nouvelle app</h3>
                     <p>Dans Snowsight :</p>
@@ -270,7 +270,7 @@
                         </li>
                         <li>Créer l'application</li>
                     </ul>
-                    <p>Snowflake fournit automatiquement un template / code de démarrage. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake fournit automatiquement un template / code de démarrage. </p>
                 </section>
 
                 <!-- ============================================
@@ -289,18 +289,18 @@
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Files (source Python)</li>
                                 <li>Code Editor</li>
-                                <li>Preview de l'app <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Preview de l'app </li>
                             </ul>
                         </li>
                     </ul>
 
                     <h3>✔ Exécution :</h3>
-                    <p>Cliquer sur Run pour rafraîchir l'application. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Cliquer sur Run pour rafraîchir l'application. </p>
 
                     <h3>✔ Upload de fichiers (assets)</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Taille max = 250 MB par fichier</li>
-                        <li>Upload dans l'internal stage de l'app <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Upload dans l'internal stage de l'app </li>
                     </ul>
                 </section>
 
@@ -355,7 +355,7 @@
                         <div class="usage-card">
                             <h4>✔ Limitations</h4>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                                <li>Multi‑file editing non supporté si l'app utilise ROOT_LOCATION. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Multi‑file editing non supporté si l'app utilise ROOT_LOCATION. </li>
                             </ul>
                         </div>
                     </div>

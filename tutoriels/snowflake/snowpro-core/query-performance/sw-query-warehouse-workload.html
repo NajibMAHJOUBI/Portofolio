@@ -205,7 +205,7 @@
                         <i class="fas fa-chart-simple"></i> ✅ 3. Exploring Query Performance (User Guide)
                     </h2>
 
-                    <p>Source : <em>Exploring execution times</em> <span class="reference">[y42.com]</span></p>
+                    <p>Source : <em>Exploring execution times</em> </p>
                     <p>Cette page explique comment diagnostiquer les performances de requêtes via Snowsight, les vues ACCOUNT_USAGE et le Query Profile.</p>
 
                     <h3>3.1 ⭐ Snowsight – Analyse graphique des performances</h3>
@@ -217,27 +217,27 @@
                     <p>✔ Visualiser la charge d'un warehouse</p>
                     <ul>
                         <li>Snowsight → Compute → Warehouses → onglet Activity</li>
-                        <li>Vous y voyez : Charge du warehouse, Concurrency, Requêtes en queue <span class="reference">[y42.com]</span></li>
+                        <li>Vous y voyez : Charge du warehouse, Concurrency, Requêtes en queue </li>
                     </ul>
 
                     <h3>3.2 ⭐ Query Profile – Analyse détaillée des étapes</h3>
                     <p>(accès via Query History → query_id → Query Profile)</p>
                     <ul>
                         <li>Visualiser les nœuds les plus coûteux ("Most Expensive Nodes").</li>
-                        <li>Analyser le temps passé dans chaque catégorie (scan, filter, join…). <span class="reference">[y42.com]</span></li>
+                        <li>Analyser le temps passé dans chaque catégorie (scan, filter, join…). </li>
                     </ul>
-                    <p>Snowflake fournit également une fonction SQL : <code class="inline-code">GET_QUERY_OPERATOR_STATS()</code> pour extraire les stats du Query Profile. <span class="reference">[y42.com]</span></p>
+                    <p>Snowflake fournit également une fonction SQL : <code class="inline-code">GET_QUERY_OPERATOR_STATS()</code> pour extraire les stats du Query Profile. </p>
 
                     <h3>3.3 ⭐ Analyse programmatique (SQL)</h3>
                     <p>Snowflake recommande d'interroger les vues Account Usage pour créer vos propres tableaux de bord :</p>
                     <ul>
-                        <li><code class="inline-code">QUERY_HISTORY</code> → analyse fine des temps d'exécution <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">QUERY_HISTORY</code> → analyse fine des temps d'exécution </li>
                         <li><code class="inline-code">WAREHOUSE_LOAD_HISTORY</code> → analyse de la concurrence</li>
                         <li><code class="inline-code">WAREHOUSE_METERING_HISTORY</code> → analyse des crédits</li>
                         <li><code class="inline-code">TASK_HISTORY</code> → analyse des transformations (si applicable)</li>
                     </ul>
                     <div class="warning-note">
-                        NB : Seuls les rôles ayant accès à la base <strong>SNOWFLAKE</strong> peuvent interroger ACCOUNT_USAGE. <span class="reference">[y42.com]</span>
+                        NB : Seuls les rôles ayant accès à la base <strong>SNOWFLAKE</strong> peuvent interroger ACCOUNT_USAGE. 
                     </div>
                 </section>
 
@@ -257,7 +257,7 @@
                             32
                                 <td>Pourquoi mes requêtes sont lentes ?
                                 <td><strong>QUERY_HISTORY</strong>
-                                <td>Durée + statut + bytes scanned <span class="reference">[docs.snowflake.com]</span>
+                                <td>Durée + statut + bytes scanned 
                             
                             32
                                 <td>Pourquoi mes requêtes entrent en queue ?
@@ -272,7 +272,7 @@
                             32
                                 <td>Quelles étapes d'une requête posent problème ?
                                 <td><strong>Query Profile</strong>
-                                <td>Analyse des nodes coûteux <span class="reference">[y42.com]</span>
+                                <td>Analyse des nodes coûteux 
                             
                             32
                                 <td>Comment le coût est attribué à une requête ?
@@ -320,7 +320,7 @@
                         <div class="usage-card">
                             <h4>🔹 Rétention des données</h4>
                             <ul>
-                                <li>ACCOUNT_USAGE : 365 jours pour Query History. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>ACCOUNT_USAGE : 365 jours pour Query History. </li>
                             </ul>
                         </div>
                     </div>

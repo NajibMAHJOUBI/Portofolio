@@ -142,7 +142,7 @@
                         <i class="fas fa-brain"></i> ✅ 1. Snowflake ML – Overview
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Snowflake ML est la suite d'outils permettant :</p>
 
@@ -153,14 +153,14 @@
                         <li>un Feature Store,</li>
                         <li>un Model Registry pour suivre versions et artefacts,</li>
                         <li>des connecteurs vers frameworks,</li>
-                        <li>des snapshots immuables pour la traçabilité ML. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>des snapshots immuables pour la traçabilité ML. </li>
                     </ul>
 
                     <h3>✔ Exécuter du ML sans écrire de code (ML Functions)</h3>
                     <p>Les ML Functions permettent de :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>entraîner rapidement des modèles sur données structurées,</li>
-                        <li>réaliser : forecasting, anomaly detection, classification, top insights. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>réaliser : forecasting, anomaly detection, classification, top insights. </li>
                     </ul>
 
                     <div class="info-note">
@@ -169,7 +169,7 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><strong>Sécurité</strong> : les modèles tournent dans le périmètre Snowflake.</li>
                             <li><strong>Data privacy</strong> : les données clients ne sont jamais utilisées pour entraîner les modèles d'autres utilisateurs.</li>
-                            <li><strong>Contrôle via RBAC</strong>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><strong>Contrôle via RBAC</strong>. </li>
                         </ul>
                     </div>
                 </section>
@@ -182,7 +182,7 @@
                         <i class="fas fa-chart-line"></i> ✅ 2. ML Functions – Overview
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Les ML Functions sont des fonctions SQL "clé en main" pour les non‑experts ML.</p>
 
@@ -191,20 +191,20 @@
                     <h4>(A) Time-Series Functions</h4>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Forecasting</strong> : prédiction d'une métrique sur la base de séries temporelles.</li>
-                        <li><strong>Anomaly Detection</strong> : détection des valeurs atypiques. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Anomaly Detection</strong> : détection des valeurs atypiques. </li>
                     </ul>
 
                     <h4>(B) Autres fonctions analytiques</h4>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Classification</strong> : prédiction d'une classe.</li>
-                        <li><strong>Top Insights</strong> : identification automatique des dimensions ayant un impact significatif sur la métrique. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Top Insights</strong> : identification automatique des dimensions ayant un impact significatif sur la métrique. </li>
                     </ul>
 
                     <h3>✔ Coûts et stockage</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Chaque modèle entraîne un stockage de l'instance du modèle (visible dans ACCOUNT_USAGE.TABLES / STAGES mais sans DB/schema).</li>
                         <li>Les coûts dépendent : quantité de données, complexité, durée d'entraînement.</li>
-                        <li>Pour réduire coûts : supprimer les modèles obsolètes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pour réduire coûts : supprimer les modèles obsolètes. </li>
                     </ul>
 
                     <div class="warning-note">
@@ -212,7 +212,7 @@
                         <strong>Limitations importantes</strong>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>AUTOCOMMIT doit être actif.</li>
-                            <li>Incompatibilité : Snowpark session.call ne peut pas invoquer directement des modèles ML Functions → utiliser <code class="inline-code">session.sql("CALL model!FORECAST(...)")</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Incompatibilité : Snowpark session.call ne peut pas invoquer directement des modèles ML Functions → utiliser <code class="inline-code">session.sql("CALL model!FORECAST(...)")</code>. </li>
                         </ul>
                     </div>
                 </section>
@@ -225,7 +225,7 @@
                         <i class="fas fa-database"></i> ✅ 3. SQL DDL pour les modèles ML (CREATE MODEL, ALTER MODEL, DROP MODEL)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <h3>✔ CREATE MODEL</h3>
                     <p>Permet d'entraîner un modèle ML à partir d'une source de données structurée :</p>
@@ -256,7 +256,7 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">!FORECAST</code></li>
                         <li><code class="inline-code">!DETECT_ANOMALIES</code></li>
-                        <li><code class="inline-code">!CLASSIFY</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">!CLASSIFY</code> </li>
                     </ul>
                     <p>Appel direct :</p>
                     <div class="code-block">
@@ -275,7 +275,7 @@
                         <i class="fas fa-cubes"></i> ✅ 4. Snowflake ML – Model Registry (Overview)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Le Model Registry est le composant dédié au cycle de vie des modèles.</p>
 
@@ -291,7 +291,7 @@
                     <h3>✔ Briques offertes par le Model Registry</h3>
                     <p>Snowpark ML Overview décrit les composants inclus :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Model registry pour conserver version, état, artefacts. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Model registry pour conserver version, état, artefacts. </li>
                         <li>Compatibilité avec les pipelines ML Snowflake.</li>
                         <li>Support pour le développement + déploiement dans Snowflake même.</li>
                     </ul>

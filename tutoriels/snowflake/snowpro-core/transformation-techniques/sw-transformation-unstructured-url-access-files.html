@@ -152,12 +152,12 @@
                         <i class="fas fa-link"></i> 📘 Types d'URL pour accéder aux fichiers non structurés dans Snowflake
                     </h2>
 
-                    <p>Source officielle : <em>Introduction to unstructured data</em> <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>Source officielle : <em>Introduction to unstructured data</em> </p>
 
                     <p>Snowflake propose trois types d'URL pour accéder à des fichiers stockés sur un stage interne ou externe. Elles sont utilisées dans les requêtes SQL, les UDF/procedures, les applications externes, et les workflows de data loading/processing.</p>
 
                     <div class="info-note">
-                        La documentation souligne que ces URL offrent des niveaux différents de sécurité, de portée et d'usage. <span class="reference">[learn.microsoft.com]</span>
+                        La documentation souligne que ces URL offrent des niveaux différents de sécurité, de portée et d'usage. 
                     </div>
                 </section>
 
@@ -172,14 +172,14 @@
                     <h3>✔ Définition</h3>
                     <div class="info-note">
                         <em>Encoded URL that permits temporary access to a staged file without granting privileges to the stage.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
                     <p>Une Scoped URL donne un accès temporaire aux fichiers, sans transmettre les privilèges du stage sous-jacent. Elle est cryptée et limitée à un contexte de sécurité spécifique.</p>
 
                     <h3>✔ Expiration</h3>
                     <div class="info-note">
                         <em>The URL expires when the persisted query result period ends (24 hours).</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
                     <p>Durée : <strong>24 heures</strong>, liée au résultat persistant de Snowflake.</p>
 
@@ -191,7 +191,7 @@
                     </ul>
 
                     <h3>✔ Particularités</h3>
-                    <p>Snowflake journalise dans l'history qui accède au fichier via une scoped URL. <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>Snowflake journalise dans l'history qui accède au fichier via une scoped URL. </p>
                 </section>
 
                 <!-- ============================================
@@ -205,7 +205,7 @@
                     <h3>✔ Définition</h3>
                     <div class="info-note">
                         <em>URL that identifies the database, schema, stage, and file path.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
                     <p>Il s'agit de l'URL native et permanente d'un fichier situé sur un stage Snowflake.</p>
 
@@ -219,11 +219,11 @@
                     </ul>
                     <div class="info-note">
                         <em>Ideal for custom applications… or for downloading/analyzing unstructured data in Snowsight.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
 
                     <h3>✔ Conditions d'accès</h3>
-                    <p>L'utilisateur doit avoir les privilèges sur le stage (USAGE + READ). <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>L'utilisateur doit avoir les privilèges sur le stage (USAGE + READ). </p>
                 </section>
 
                 <!-- ============================================
@@ -237,12 +237,12 @@
                     <h3>✔ Définition</h3>
                     <div class="info-note">
                         <em>A simple HTTPS URL used to access a file via a web browser… using a pre-signed access token.</em>
-                        <span class="reference">[learn.microsoft.com]</span>
+                        
                     </div>
                     <p>C'est une URL HTTP(S) visant à exposer un fichier Snowflake à un utilisateur ou une application hors de Snowflake, via un token d'accès temporaire.</p>
 
                     <h3>✔ Expiration</h3>
-                    <p>L'expiration du token est configurable. <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>L'expiration du token est configurable. </p>
 
                     <h3>✔ Cas d'usage recommandé</h3>
                     <p>Scénarios externes :</p>
@@ -295,7 +295,7 @@
                             
                         </tbody>
                     划
-                    <p>Sources : <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>Sources : </p>
                 </section>
 
                 <!-- ============================================
@@ -314,17 +314,17 @@
 
                         <div class="usage-card">
                             <h4>🔹 2. Les File URLs nécessitent des privilèges sur le stage</h4>
-                            <p>→ Pas d'accès sinon. <span class="reference">[learn.microsoft.com]</span></p>
+                            <p>→ Pas d'accès sinon. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔹 3. Les Pre‑signed URLs sont destinées aux applications externes</h4>
-                            <p>→ Via navigateur ou API HTTP. <span class="reference">[learn.microsoft.com]</span></p>
+                            <p>→ Via navigateur ou API HTTP. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>🔹 4. Scoped URLs sont limitées à 24h et sont journalisées</h4>
-                            <p>→ Important pour audit & compliance. <span class="reference">[learn.microsoft.com]</span></p>
+                            <p>→ Important pour audit & compliance. </p>
                         </div>
 
                         <div class="usage-card">

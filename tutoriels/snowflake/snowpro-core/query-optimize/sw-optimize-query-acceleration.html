@@ -157,9 +157,9 @@
                         <i class="fas fa-bolt"></i> ✅ 1. Qu'est‑ce que le Query Acceleration Service ?
                     </h2>
 
-                    <p>Source officielle : <em>Using the Query Acceleration Service (QAS)</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source officielle : <em>Using the Query Acceleration Service (QAS)</em> </p>
 
-                    <p>Le Query Acceleration Service (QAS) est une fonctionnalité <strong>Enterprise Edition (ou +)</strong> permettant d'accélérer certaines requêtes en offloadant une partie du traitement vers des ressources serverless supplémentaires. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Le Query Acceleration Service (QAS) est une fonctionnalité <strong>Enterprise Edition (ou +)</strong> permettant d'accélérer certaines requêtes en offloadant une partie du traitement vers des ressources serverless supplémentaires. </p>
 
                     <h3>✔ Objectif :</h3>
                     <p>Accélérer les requêtes « outliers » – celles qui consomment anormalement plus de ressources que la majorité des requêtes d'un même warehouse.</p>
@@ -167,7 +167,7 @@
                     <h3>✔ Comment ?</h3>
                     <ul>
                         <li>Le QAS ajoute dynamiquement du compute supplémentaire.</li>
-                        <li>Il traite en parallèle des étapes coûteuses : scanning, filtering, traitements intensifs. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Il traite en parallèle des étapes coûteuses : scanning, filtering, traitements intensifs. </li>
                     </ul>
 
                     <h3>✔ Bénéfices</h3>
@@ -190,7 +190,7 @@
                     <ul>
                         <li>Ad-hoc analytics (requêtes imprévisibles)</li>
                         <li>Requêtes avec volumes de données variables et imprévisibles</li>
-                        <li>Requêtes avec gros scans + filtres sélectifs <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Requêtes avec gros scans + filtres sélectifs </li>
                     </ul>
                     <div class="info-note">
                         Ces workloads génèrent souvent des situations où une seule requête bloque ou ralentit toutes les autres : QAS évite cela.
@@ -210,7 +210,7 @@
                         <li>SELECT</li>
                         <li>INSERT</li>
                         <li>CREATE TABLE AS SELECT (CTAS)</li>
-                        <li>COPY INTO &lt;table&gt; <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>COPY INTO &lt;table&gt; </li>
                     </ul>
                     <div class="warning-note">
                         ⚠️ Le QAS peut accélérer l'intégralité d'une requête, ou uniquement un sous‑ensemble (subqueries, clauses), selon l'éligibilité.
@@ -231,7 +231,7 @@
                         <pre><code>CREATE WAREHOUSE my_wh
     WITH ENABLE_QUERY_ACCELERATION = true;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>📌 Activer sur un warehouse existant</h3>
                     <div class="code-block">
@@ -239,7 +239,7 @@
                         <pre><code>ALTER WAREHOUSE my_wh
     SET ENABLE_QUERY_ACCELERATION = true;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>📌 Vérifier l'état du QAS</h3>
                     <div class="code-block">
@@ -251,10 +251,10 @@ FROM $1;</code></pre>
                     <p>Résultat typique :</p>
                     <ul>
                         <li><code class="inline-code">enable_query_acceleration = TRUE</code></li>
-                        <li><code class="inline-code">query_acceleration_max_scale_factor = 8</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">query_acceleration_max_scale_factor = 8</code> </li>
                     </ul>
                     <div class="info-note">
-                        Note importante : Le QAS dépend de la disponibilité du serveur → l'accélération peut varier. <span class="reference">[docs.snowflake.com]</span>
+                        Note importante : Le QAS dépend de la disponibilité du serveur → l'accélération peut varier. 
                     </div>
                 </section>
 
@@ -266,7 +266,7 @@ FROM $1;</code></pre>
                         <i class="fas fa-coins"></i> ✅ 5. Coûts associés
                     </h2>
 
-                    <p>L'utilisation du QAS augmente le taux de consommation de crédits. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>L'utilisation du QAS augmente le taux de consommation de crédits. </p>
 
                     <h3>✔ Pourquoi ?</h3>
                     <p>Parce que Snowflake mobilise des ressources serverless additionnelles, facturées en plus du warehouse.</p>

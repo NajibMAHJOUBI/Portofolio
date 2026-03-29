@@ -167,11 +167,11 @@
                         <i class="fas fa-copy"></i> ✅ 1. Qu'est‑ce que le Zero‑Copy Cloning ?
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>CREATE … CLONE creates a copy of an existing object… primarily used for zero‑copy clones of databases, schemas, and tables.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Points clés :</h3>
@@ -195,13 +195,13 @@
                     <ul>
                         <li>Databases</li>
                         <li>Schemas</li>
-                        <li>Tables (y compris tables dynamiques, event tables, Iceberg tables) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Tables (y compris tables dynamiques, event tables, Iceberg tables) </li>
                     </ul>
 
                     <h3>✔ Autres objets de schéma clonables</h3>
                     <div class="info-note">
                         <em>You can also clone external stages, file formats, sequences, database roles, alerts, streams, tasks, etc.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <ul>
                         <li>FILE FORMAT</li>
@@ -233,27 +233,27 @@
                         <pre><code>CREATE DATABASE my_clone CLONE my_db
     AT (TIMESTAMP => '2025-01-01 12:00:00');</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>B) Cloner une table</h3>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE TABLE t_clone CLONE my_table;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>C) Cloner en "point‑in‑time"</h3>
                     <p>Snowflake supporte :</p>
                     <ul>
                         <li><code class="inline-code">TIMESTAMP => &lt;timestamp&gt;</code></li>
                         <li><code class="inline-code">OFFSET => &lt;interval&gt;</code></li>
-                        <li><code class="inline-code">STATEMENT => &lt;query_id&gt;</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">STATEMENT => &lt;query_id&gt;</code> </li>
                     </ul>
 
                     <h3>D) Paramètres Time Travel utiles</h3>
                     <ul>
                         <li><code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code></li>
-                        <li><code class="inline-code">IGNORE HYBRID TABLES</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">IGNORE HYBRID TABLES</code> </li>
                     </ul>
                 </section>
 
@@ -267,7 +267,7 @@
 
                     <div class="info-note">
                         <em>CLONE supports an AT | BEFORE clause for cloning using Time Travel for databases, schemas, and non‑temporary tables.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="warning-note">
@@ -289,7 +289,7 @@
 
                     <div class="info-note">
                         <em>The clone inherits privileges of child objects, but not the privileges granted on the container itself.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Résumé :</h3>
@@ -307,7 +307,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <p><strong>Exemple :</strong> <code class="inline-code">CREATE TABLE … CLONE … COPY GRANTS</code> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Exemple :</strong> <code class="inline-code">CREATE TABLE … CLONE … COPY GRANTS</code> </p>
                 </section>
 
                 <!-- ============================================
@@ -319,10 +319,10 @@
                     </h2>
 
                     <ul>
-                        <li><strong>DDL/DML et Time Travel :</strong> <em>DDL/DML transactions, Time Travel, and retention periods can affect the object clone.</em> <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Object parameters :</strong> Les paramètres explicitement définis sur un objet sont hérités par le clone. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Séquences et valeurs par défaut :</strong> <em>A cloned table referencing a sequence may reference the cloned sequence or the source sequence depending on scope.</em> <span class="reference">[docs.snowflake.com]</span></li>
-                        <li><strong>Managed access schemas :</strong> Le clonage d'un schéma en "managed access" a des exigences de privilèges particulières. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>DDL/DML et Time Travel :</strong> <em>DDL/DML transactions, Time Travel, and retention periods can affect the object clone.</em> </li>
+                        <li><strong>Object parameters :</strong> Les paramètres explicitement définis sur un objet sont hérités par le clone. </li>
+                        <li><strong>Séquences et valeurs par défaut :</strong> <em>A cloned table referencing a sequence may reference the cloned sequence or the source sequence depending on scope.</em> </li>
+                        <li><strong>Managed access schemas :</strong> Le clonage d'un schéma en "managed access" a des exigences de privilèges particulières. </li>
                     </ul>
                 </section>
 
@@ -336,7 +336,7 @@
 
                     <p>Bien que non explicitement listé ici, la documentation précise des exceptions :</p>
                     <ul>
-                        <li>Certains objets comme les <strong>pipes</strong> donnent OWNERSHIP au rôle créateur lors du clonage. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Certains objets comme les <strong>pipes</strong> donnent OWNERSHIP au rôle créateur lors du clonage. </li>
                     </ul>
                 </section>
 
@@ -377,7 +377,7 @@
                         <pre><code>CREATE TABLE orders_old CLONE orders
     BEFORE (STATEMENT => '01ae3b2b-0602-4ac2');</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>Cloner une Dynamic Table</h3>
                     <div class="code-block">
@@ -387,7 +387,7 @@
     TARGET_LAG = '5 minutes'
     WAREHOUSE = my_wh;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -406,22 +406,22 @@
 
                         <div class="usage-card">
                             <h4>❓ Les privilèges du schéma source sont‑ils automatiquement transférés ?</h4>
-                            <p>→ <strong>Non</strong>, le schéma clone n'hérite pas des privilèges du schéma source. Les objets internes, oui. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <strong>Non</strong>, le schéma clone n'hérite pas des privilèges du schéma source. Les objets internes, oui. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Peut‑on cloner via Time Travel ?</h4>
-                            <p>→ <strong>Oui</strong>, avec <code class="inline-code">AT</code> ou <code class="inline-code">BEFORE</code>. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <strong>Oui</strong>, avec <code class="inline-code">AT</code> ou <code class="inline-code">BEFORE</code>. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Peut‑on cloner un stage ou un file format ?</h4>
-                            <p>→ <strong>Oui</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <strong>Oui</strong>. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ COPY GRANTS copie‑t‑il OWNERSHIP ?</h4>
-                            <p>→ <strong>Non</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <strong>Non</strong>. </p>
                         </div>
                     </div>
                 </section>

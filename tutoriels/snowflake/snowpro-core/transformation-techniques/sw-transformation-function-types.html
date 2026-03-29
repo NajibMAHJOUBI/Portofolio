@@ -168,7 +168,7 @@
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
-                        <strong>Point clé performance :</strong> Certaines fonctions empêchent l'utilisation du cache : <code class="inline-code">CURRENT_TIMESTAMP</code>, <code class="inline-code">RANDOM</code>, <code class="inline-code">UUID_STRING</code>, etc. <span class="reference">[booleandata.ai]</span>
+                        <strong>Point clé performance :</strong> Certaines fonctions empêchent l'utilisation du cache : <code class="inline-code">CURRENT_TIMESTAMP</code>, <code class="inline-code">RANDOM</code>, <code class="inline-code">UUID_STRING</code>, etc. 
                         <p>Cela signifie que TOUTES les fonctions ne sont pas équivalentes en termes de performance, ce qui est un point important pour SnowPro.</p>
                     </div>
                 </section>
@@ -191,7 +191,7 @@
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Impact cache :</strong> Les fonctions évaluées à l'exécution (ex. <code class="inline-code">CURRENT_TIMESTAMP</code>) empêchent la réutilisation du Persisted Result Cache <span class="reference">[booleandata.ai]</span>
+                        <strong>Impact cache :</strong> Les fonctions évaluées à l'exécution (ex. <code class="inline-code">CURRENT_TIMESTAMP</code>) empêchent la réutilisation du Persisted Result Cache 
                     </div>
                 </section>
 
@@ -212,8 +212,8 @@
                     <h3>✔ RESULT_SCAN() – Fonction clé</h3>
                     <p>Permet de récupérer explicitement les résultats d'une requête précédente :</p>
                     <ul>
-                        <li>Permet d'utiliser un jeu de résultats sans réexécuter la requête <span class="reference">[theinfotrust.com]</span></li>
-                        <li>Fonction utile même lorsque les conditions du persisted result cache ne sont plus remplies <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Permet d'utiliser un jeu de résultats sans réexécuter la requête </li>
+                        <li>Fonction utile même lorsque les conditions du persisted result cache ne sont plus remplies </li>
                     </ul>
 
                     <p><strong>Exemple :</strong></p>
@@ -240,7 +240,7 @@
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>✔ Point clé :</strong> Le recours à une external function empêche la réutilisation du cache des résultats <span class="reference">[booleandata.ai]</span>
+                        <strong>✔ Point clé :</strong> Le recours à une external function empêche la réutilisation du cache des résultats 
                     </div>
 
                     <p>C'est un point très testé dans SnowPro Core :</p>
@@ -267,7 +267,7 @@
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>✔ Impact cache :</strong> Un UDF empêche le persisted result cache. Snowflake considère les UDFs comme du code évalué à l'exécution → pas de réutilisation du cache <span class="reference">[booleandata.ai]</span>
+                        <strong>✔ Impact cache :</strong> Un UDF empêche le persisted result cache. Snowflake considère les UDFs comme du code évalué à l'exécution → pas de réutilisation du cache 
                     </div>
 
                     <p>Les UDFs Snowflake peuvent être écrites en :</p>
@@ -292,7 +292,7 @@
                         <ul>
                             <li>Les UDFs tournent dans l'environnement Snowflake → stateless</li>
                             <li>Ils peuvent avoir un impact performance important</li>
-                            <li>Ils cassent le cache des résultats persistés <span class="reference">[booleandata.ai]</span></li>
+                            <li>Ils cassent le cache des résultats persistés </li>
                         </ul>
                     </div>
                 </section>
@@ -312,7 +312,7 @@
                         <tbody>
                             32
                                 <td><strong>Fonction système</strong>
-                                卷第Peut casser le cache si évaluée runtime (ex. CURRENT_TIMESTAMP) <span class="reference">[booleandata.ai]</span>
+                                卷第Peut casser le cache si évaluée runtime (ex. CURRENT_TIMESTAMP) 
                             
                             32
                                 <td><strong>Table function</strong>
@@ -320,11 +320,11 @@
                             
                             32
                                 <td><strong>External function</strong>
-                                卷第Désactive la réutilisation du persisted result cache <span class="reference">[booleandata.ai]</span>
+                                卷第Désactive la réutilisation du persisted result cache 
                             
                             32
                                 <td><strong>UDF</strong>
-                                卷第Désactive également la réutilisation du persisted result cache <span class="reference">[booleandata.ai]</span>
+                                卷第Désactive également la réutilisation du persisted result cache 
                             
                         </tbody>
                     划

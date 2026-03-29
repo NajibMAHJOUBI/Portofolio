@@ -137,21 +137,21 @@
                         <i class="fas fa-download"></i> ✅ 1. Overview of Data Unloading
                     </h2>
 
-                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation </p>
 
                     <h3>✔ Principe général</h3>
                     <p>Snowflake permet l'export (unload) de données vers des fichiers plats (CSV, TSV, JSON…) de façon similaire au chargement, mais en sens inverse.</p>
                     <p>Le mécanisme principal repose sur :</p>
                     <ul>
                         <li><strong>COPY INTO</strong> : écrit les données de la table vers un internal ou external stage.</li>
-                        <li><strong>GET</strong> : télécharge les fichiers depuis le stage (ou via interfaces cloud : S3, Azure, GCS). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>GET</strong> : télécharge les fichiers depuis le stage (ou via interfaces cloud : S3, Azure, GCS). </li>
                     </ul>
 
                     <h3>✔ Unloading via SELECT</h3>
                     <p>Au lieu d'exporter une table complète, Snowflake permet :</p>
                     <ul>
                         <li>d'utiliser une requête <code class="inline-code">SELECT</code> dans <code class="inline-code">COPY INTO &lt;location&gt;</code></li>
-                        <li>d'inclure des JOIN, des filtres, etc.<br>→ Le résultat est exporté sous forme de fichiers. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>d'inclure des JOIN, des filtres, etc.<br>→ Le résultat est exporté sous forme de fichiers. </li>
                     </ul>
 
                     <h3>✔ Unloading en un ou plusieurs fichiers</h3>
@@ -160,14 +160,14 @@
                         <li><code class="inline-code">SINGLE = TRUE</code> → un fichier unique</li>
                         <li><code class="inline-code">SINGLE = FALSE</code> (défaut) → plusieurs fichiers générés en parallèle</li>
                         <li>Fichiers nommés automatiquement avec préfixe (ex: data_...).</li>
-                        <li><code class="inline-code">MAX_FILE_SIZE</code> permet de limiter la taille maximum par fichier. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">MAX_FILE_SIZE</code> permet de limiter la taille maximum par fichier. </li>
                     </ul>
 
                     <h3>✔ Partitionnement lors de l'unload</h3>
                     <p>Copy option : <code class="inline-code">PARTITION BY</code></p>
                     <ul>
                         <li>Permet de diviser les lignes en plusieurs fichiers organisés par répertoires, utile pour les data lakes.</li>
-                        <li>Très efficace pour ingestion en aval par des outils tiers. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Très efficace pour ingestion en aval par des outils tiers. </li>
                     </ul>
                 </section>
 
@@ -179,7 +179,7 @@
                         <i class="fas fa-exclamation-triangle"></i> ✅ 2. Data Unloading Considerations
                     </h2>
 
-                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation </p>
 
                     <div class="info-note">
                         <i class="fas fa-bullseye"></i>
@@ -200,7 +200,7 @@
                     <ul>
                         <li>Permet d'envelopper les valeurs chaines dans un caractère (', ").</li>
                         <li>Recommandé pour distinguer NULL et empty string.</li>
-                        <li>Peut être NONE (défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Peut être NONE (défaut). </li>
                     </ul>
 
                     <h4>🔹 EMPTY_FIELD_AS_NULL</h4>
@@ -209,13 +209,13 @@
                         <li><code class="inline-code">FALSE</code> → empty string reste une chaîne vide</li>
                     </ul>
                     <div class="warning-note">
-                        ⚠ interdit d'utiliser <code class="inline-code">EMPTY_FIELD_AS_NULL=TRUE</code> avec certains comportements ; cela peut rendre NULL et empty string indistinguables. <span class="reference">[docs.snowflake.com]</span>
+                        ⚠ interdit d'utiliser <code class="inline-code">EMPTY_FIELD_AS_NULL=TRUE</code> avec certains comportements ; cela peut rendre NULL et empty string indistinguables. 
                     </div>
 
                     <h4>🔹 NULL_IF</h4>
                     <ul>
                         <li>Indique la représentation textuelle qui doit être interprétée comme NULL.</li>
-                        <li>Important lorsque <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY = NONE</code> et <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Important lorsque <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY = NONE</code> et <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code>. </li>
                     </ul>
 
                     <div class="info-note">
@@ -226,7 +226,7 @@
                             <li>Si pas d'enclosure :
                                 <ul>
                                     <li>mettre <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code></li>
-                                    <li>définir <code class="inline-code">NULL_IF</code> pour différencier NULL et chaînes vides <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>définir <code class="inline-code">NULL_IF</code> pour différencier NULL et chaînes vides </li>
                                 </ul>
                             </li>
                         </ul>
@@ -241,14 +241,14 @@
                         <i class="fas fa-tools"></i> ✅ 3. Preparing to Unload Data
                     </h2>
 
-                    <p>Source : Snowflake Documentation (via Data Unloading Overview + Unload processes) <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation (via Data Unloading Overview + Unload processes) </p>
 
                     <p>Snowflake fournit des instructions précises pour préparer l'unload, notamment :</p>
 
                     <h3>✔ Étapes du processus d'unload</h3>
                     <ol>
                         <li><code class="inline-code">COPY INTO @stage/path</code> vers un internal named stage, un user stage, ou un external stage (S3, Azure, GCS)</li>
-                        <li><code class="inline-code">GET @stage/path</code> pour récupérer les fichiers localement si besoin <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">GET @stage/path</code> pour récupérer les fichiers localement si besoin </li>
                     </ol>
 
                     <h3>✔ Préparation du stage</h3>
@@ -263,7 +263,7 @@
                         <pre><code>CREATE OR REPLACE STAGE my_unload_stage
     FILE_FORMAT = my_csv_unload_format;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Unloading vers un internal stage</h3>
                     <div class="code-block">
@@ -273,7 +273,7 @@ FROM mytable;</code></pre>
                     </div>
                     <ul>
                         <li>Le préfixe <code class="inline-code">unload/</code> organise les fichiers dans un sous-dossier.</li>
-                        <li>Pas besoin de préciser de FILE_FORMAT si défini au niveau du stage. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pas besoin de préciser de FILE_FORMAT si défini au niveau du stage. </li>
                     </ul>
 
                     <h3>✔ Téléchargement local via Snowsql</h3>

@@ -169,7 +169,7 @@
 
                     <p>
                         Les virtual warehouses sont les clusters de compute qui exécutent toutes les opérations nécessitant des ressources : requêtes SQL, DML, COPY INTO, etc.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <p>Ils existent en deux types :</p>
@@ -192,7 +192,7 @@
                         <li>d'exécuter des SELECT,</li>
                         <li>d'exécuter INSERT/UPDATE/DELETE,</li>
                         <li>de charger des données (COPY INTO table),</li>
-                        <li>d'unloader (COPY INTO location). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>d'unloader (COPY INTO location). </li>
                     </ul>
 
                     <div class="info-note">
@@ -201,7 +201,7 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>peut être start/stop à volonté,</li>
                             <li>peut être redimensionné à chaud,</li>
-                            <li>facturation à la seconde après un minimum de 60 secondes. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>facturation à la seconde après un minimum de 60 secondes. </li>
                         </ul>
                     </div>
                 </section>
@@ -218,7 +218,7 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>génération historique</li>
                         <li>tailles XS à 6X-Large</li>
-                        <li>consommation doublée à chaque taille <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>consommation doublée à chaque taille </li>
                     </ul>
 
                     <h3>🔹 Gen2 Standard Warehouses</h3>
@@ -226,19 +226,19 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>construits sur un matériel plus rapide,</li>
                         <li>optimisés pour DELETE/UPDATE/MERGE,</li>
-                        <li>meilleurs pour les scans de tables. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>meilleurs pour les scans de tables. </li>
                     </ul>
 
                     <p><strong>Spécifications clés :</strong></p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Choix via : <code class="inline-code">GENERATION = '1' | '2'</code> ou via <code class="inline-code">RESOURCE_CONSTRAINT = STANDARD_GEN_1 / STANDARD_GEN_2</code>. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Non disponible pour tailles X5LARGE et X6LARGE. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Gen2 devient progressivement la valeur par défaut dans plusieurs régions depuis 2025. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Choix via : <code class="inline-code">GENERATION = '1' | '2'</code> ou via <code class="inline-code">RESOURCE_CONSTRAINT = STANDARD_GEN_1 / STANDARD_GEN_2</code>. </li>
+                        <li>Non disponible pour tailles X5LARGE et X6LARGE. </li>
+                        <li>Gen2 devient progressivement la valeur par défaut dans plusieurs régions depuis 2025. </li>
                     </ul>
 
                     <div class="warning-note">
                         <i class="fas fa-info-circle"></i>
-                        <strong>Note :</strong> Gen2 s'applique aux Warehouse standard, pas aux Snowpark‑optimized. <span class="reference">[docs.snowflake.com]</span>
+                        <strong>Note :</strong> Gen2 s'applique aux Warehouse standard, pas aux Snowpark‑optimized. 
                     </div>
                 </section>
 
@@ -255,14 +255,14 @@
                         <li>à forte consommation mémoire,</li>
                         <li>nécessitant architectures CPU spécifiques,</li>
                         <li>ML training,</li>
-                        <li>UDF/UDTF Snowpark. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>UDF/UDTF Snowpark. </li>
                     </ul>
 
                     <p><strong>Caractéristiques :</strong></p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED'</code></li>
                         <li>mémoire par nœud jusqu'à 16× plus élevée qu'un standard warehouse</li>
-                        <li>options de resource constraints (MEMORY_1X, 16X, 64X…) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>options de resource constraints (MEMORY_1X, 16X, 64X…) </li>
                     </ul>
 
                     <p><strong>Exemple de création :</strong></p>
@@ -271,7 +271,7 @@
                         <pre><code>CREATE WAREHOUSE my_wh
 WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -286,14 +286,14 @@ WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>XS = 1 crédit/h</li>
                         <li>S = 2 crédits/h</li>
-                        <li>… jusqu'à 6XL = 512 crédits/h <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>… jusqu'à 6XL = 512 crédits/h </li>
                     </ul>
 
                     <p><strong>Facturation :</strong></p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>minimum 60 secondes</li>
                         <li>ensuite à la seconde</li>
-                        <li>resizing = provisionnement immédiat → facturation proportionnelle <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>resizing = provisionnement immédiat → facturation proportionnelle </li>
                     </ul>
                 </section>
 
@@ -308,7 +308,7 @@ WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
                     <p>Permettent de scaler horizontalement pour gérer la concurrence.</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>tailles de clusters fixées</li>
-                        <li>nombre de clusters variable (ex : 1→3) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>nombre de clusters variable (ex : 1→3) </li>
                     </ul>
                     <p>Utilisation :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -329,14 +329,14 @@ WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>ne pas se focaliser uniquement sur la taille, car la facturation à la seconde rend les tailles plus grandes parfois plus économiques</li>
                         <li>expérimenter les tailles selon les workloads</li>
-                        <li>s'applique aux single et multi‑cluster <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>s'applique aux single et multi‑cluster </li>
                     </ul>
 
                     <p><strong>Facteurs impactant la facture :</strong></p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Taille du warehouse</li>
                         <li>Nombre de clusters</li>
-                        <li>Temps d'exécution <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Temps d'exécution </li>
                     </ul>
                 </section>
 
@@ -348,7 +348,7 @@ WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
                         <i class="fas fa-chart-line"></i> ✅ 7. Scaling Up vs Scaling Out (Key Topic SnowPro)
                     </h2>
 
-                    <p>Source : Warehouse considerations — scaling section <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Warehouse considerations — scaling section </p>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
@@ -422,13 +422,13 @@ WAREHOUSE_TYPE = 'SNOWPARK-OPTIMIZED';</code></pre>
 
                     <div class="warning-note">
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                            <li>Un warehouse doit être en marche pour exécuter DML/queries. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Facturation à la seconde après 60s. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Gen2 = meilleure performance + requêtes plus rapides. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Snowpark‑Optimized = recommandé pour ML / workloads lourds. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Un warehouse doit être en marche pour exécuter DML/queries. </li>
+                            <li>Facturation à la seconde après 60s. </li>
+                            <li>Gen2 = meilleure performance + requêtes plus rapides. </li>
+                            <li>Snowpark‑Optimized = recommandé pour ML / workloads lourds. </li>
                             <li>Scaling Up = puissance → performance. Scaling Out = clusters → concurrence.</li>
                             <li>Multi‑cluster uniquement en Enterprise Edition+.</li>
-                            <li>Redimensionnement immédiat, sans arrêt du warehouse. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Redimensionnement immédiat, sans arrêt du warehouse. </li>
                         </ul>
                     </div>
                 </section>

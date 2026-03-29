@@ -157,7 +157,7 @@
                         <i class="fas fa-eye"></i>Introduction aux vues (Views)
                     </h2>
 
-                    <p>Source Snowflake : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source Snowflake : </p>
 
                     <p>
                         Les views (vues) sont un objet fondamental dans Snowflake. Elles permettent d'exposer le résultat d'une requête comme s'il s'agissait d'une table, tout en offrant des capacités de sécurisation, d'abstraction et de gestion logique des données — un sujet essentiel pour la certification SnowPro Core.
@@ -177,7 +177,7 @@
                     </p>
                     <p>
                         Elle peut être utilisée exactement comme une table : joins, sous‑requêtes, projections, etc.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>Objectifs principaux :</h3>
@@ -186,7 +186,7 @@
                         <li>Ségréguer des données par profil métier</li>
                         <li>Protéger des données sensibles</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <div class="info-note">
                         <i class="fas fa-stethoscope"></i>
@@ -195,7 +195,7 @@
                             <li><b>doctor_view</b> : expose diagnosis & treatment</li>
                             <li><b>accountant_view</b> : expose billing_address & cost</li>
                         </ul>
-                        <p>→ Séparation logique selon les rôles d'utilisateurs. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>→ Séparation logique selon les rôles d'utilisateurs. </p>
                     </div>
                 </section>
 
@@ -219,7 +219,7 @@
                         <li>Extraire toutes les valeurs distinctes de diagnosis via doctor_view.</li>
                         <li>Joindre doctor_view et accountant_view pour agréger coût et traitement sans révéler les informations personnelles.</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -247,7 +247,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Important :</strong>
                         <p>Si le schéma n'est pas précisé dans la définition de la vue, Snowflake suppose que la table source se trouve dans le même schéma que la vue.</p>
-                        <p>→ Évite qu'une vue change de table source selon le schéma actif. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>→ Évite qu'une vue change de table source selon le schéma actif. </p>
                     </div>
                 </section>
 
@@ -266,7 +266,7 @@
                         <li>Résultats recalculés à chaque exécution</li>
                         <li>Pas de stockage physique supplémentaire</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>2. Materialized views</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -274,7 +274,7 @@
                         <li>Stockent physiquement le résultat</li>
                         <li>Améliorent les performances sur requêtes répétitives</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -286,7 +286,7 @@
                     </h2>
 
                     <h3>✔ Sécurité</h3>
-                    <p>Les vues cachent les colonnes non nécessaires, protégeant les données sensibles. (ex : PII masquée via un subset logique) <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Les vues cachent les colonnes non nécessaires, protégeant les données sensibles. (ex : PII masquée via un subset logique) </p>
 
                     <h3>✔ Abstraction</h3>
                     <p>Elles permettent de présenter une représentation métier indépendante du modèle physique.</p>
@@ -307,7 +307,7 @@
                     </h2>
 
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Toujours spécifier le schéma lors de la création des vues → évite les résolutions dynamiques et comportements imprévisibles. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Toujours spécifier le schéma lors de la création des vues → évite les résolutions dynamiques et comportements imprévisibles. </li>
                         <li>Utiliser les vues pour limiter l'accès : sécurisation logique des données.</li>
                         <li>Documenter les vues pour clarifier leur rôle métier.</li>
                         <li>Éviter les cascades de vues trop profondes → complexité et pertes de performance potentielles.</li>

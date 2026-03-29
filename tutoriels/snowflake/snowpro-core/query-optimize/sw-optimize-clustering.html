@@ -147,19 +147,19 @@
                         <i class="fas fa-cubes"></i> ✅ 1. Micro-partitions & Data Clustering
                     </h2>
 
-                    <p>Source : <em>Micro-partitions & Data Clustering</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Micro-partitions & Data Clustering</em> </p>
 
                     <h3>✔ Qu'est‑ce qu'une micro-partition ?</h3>
                     <ul>
                         <li>Unité de stockage fondamentale dans Snowflake : <strong>50 à 500 MB non compressés</strong>.</li>
-                        <li>Organisée en format columnar, immuable, et générée automatiquement lors du chargement des données. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Organisée en format columnar, immuable, et générée automatiquement lors du chargement des données. </li>
                     </ul>
 
                     <h3>✔ Quel lien avec le clustering ?</h3>
                     <ul>
-                        <li>Lors de l'ingestion, les données sont naturellement ordonnées selon l'ordre d'insertion → <strong>natural clustering</strong>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Lors de l'ingestion, les données sont naturellement ordonnées selon l'ordre d'insertion → <strong>natural clustering</strong>. </li>
                         <li>Snowflake stocke pour chaque micro-partition des métadonnées : min/max, distinct count, informations de filtrage.</li>
-                        <li>Ces métadonnées permettent le <strong>pruning</strong> : ignorer les micro-partitions non pertinentes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Ces métadonnées permettent le <strong>pruning</strong> : ignorer les micro-partitions non pertinentes. </li>
                     </ul>
 
                     <div class="info-note">
@@ -183,7 +183,7 @@
                         <i class="fas fa-key"></i> ✅ 2. Clustering Keys (Cluster By)
                     </h2>
 
-                    <p>Source : <em>Clustering Keys & Clustered Tables</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Clustering Keys & Clustered Tables</em> </p>
 
                     <h3>✔ Définition</h3>
                     <p>Un clustering key est un ensemble de colonnes ou expressions utilisées pour co‑localiser les données dans les micro-partitions.</p>
@@ -192,14 +192,14 @@
                     <p>Indicateurs :</p>
                     <ul>
                         <li>Les requêtes sur la table deviennent plus lentes.</li>
-                        <li>Le clustering depth du tableau est élevé. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le clustering depth du tableau est élevé. </li>
                     </ul>
 
                     <h3>✔ Bénéfices</h3>
                     <p>Pour les très grandes tables (>1 To ou plusieurs milliards de lignes) :</p>
                     <ul>
                         <li>Meilleur pruning, donc scans plus courts.</li>
-                        <li>Meilleure compression des colonnes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Meilleure compression des colonnes. </li>
                     </ul>
 
                     <h3>✔ Définition / modification</h3>
@@ -213,7 +213,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>ALTER TABLE t CLUSTER BY (col1, col2);</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -222,7 +222,7 @@
                         <ul>
                             <li>la table est très volumineuse,</li>
                             <li>les requêtes filtrent souvent sur les mêmes colonnes,</li>
-                            <li>les gains de performance > coûts de maintenance. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>les gains de performance > coûts de maintenance. </li>
                         </ul>
                     </div>
                 </section>
@@ -235,16 +235,16 @@
                         <i class="fas fa-sync-alt"></i> ✅ 3. Automatic Reclustering
                     </h2>
 
-                    <p>Source : <em>Automatic Clustering Service</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Automatic Clustering Service</em> </p>
 
                     <h3>✔ Qu'est‑ce que l'Automatic Reclustering ?</h3>
-                    <p>Un service Snowflake qui gère automatiquement et continuellement le reclustering des tables ayant un clustering key. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Un service Snowflake qui gère automatiquement et continuellement le reclustering des tables ayant un clustering key. </p>
 
                     <h3>✔ Avantages</h3>
                     <ul>
                         <li><strong>Zéro maintenance :</strong> Vous n'avez plus à surveiller manuellement l'état du clustering.</li>
                         <li>Snowflake reclustre uniquement si nécessaire.</li>
-                        <li>Pas de warehouse à spécifier → effectué via compute serverless. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pas de warehouse à spécifier → effectué via compute serverless. </li>
                     </ul>
 
                     <h3>✔ Contrôle total</h3>
@@ -254,19 +254,19 @@
                         <pre><code>ALTER TABLE t SUSPEND RECLUSTER;
 ALTER TABLE t RESUME RECLUSTER;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                     <p>Supprimer le clustering key : → Arrête toute activité de reclustering.</p>
 
                     <h3>✔ Non‑blocking</h3>
-                    <p>Le reclustering n'interrompt pas les DML. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Le reclustering n'interrompt pas les DML. </p>
 
                     <h3>✔ Comment est‑il déclenché ?</h3>
-                    <p>Snowflake ne reclustre que si cela apporte un bénéfice concret → pas de compute inutile. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake ne reclustre que si cela apporte un bénéfice concret → pas de compute inutile. </p>
 
                     <h3>✔ Activateur implicite</h3>
                     <p>Définir un clustering key suffit à activer Automatic Clustering.</p>
                     <div class="warning-note">
-                        ⚠️ Exception : si le tableau est issu d'un CLONE, l'auto‑reclustering est désactivé par défaut. <span class="reference">[docs.snowflake.com]</span>
+                        ⚠️ Exception : si le tableau est issu d'un CLONE, l'auto‑reclustering est désactivé par défaut. 
                     </div>
                 </section>
 
@@ -350,12 +350,12 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>❓ Faut-il définir un clustering key pour toutes les tables ?</h4>
-                            <p>→ Non. Seulement pour les tables volumineuses avec des patterns de filtrage stables. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Non. Seulement pour les tables volumineuses avec des patterns de filtrage stables. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Automatic Clustering bloque‑t‑il les requêtes ?</h4>
-                            <p>→ Jamais. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Jamais. </p>
                         </div>
 
                         <div class="usage-card">
@@ -365,7 +365,7 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
 
                         <div class="usage-card">
                             <h4>❓ Le reclustering commence‑t‑il immédiatement après un CLUSTER BY ?</h4>
-                            <p>→ Parfois non : Snowflake l'exécute uniquement si nécessaire. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Parfois non : Snowflake l'exécute uniquement si nécessaire. </p>
                         </div>
                     </div>
                 </section>

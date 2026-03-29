@@ -137,14 +137,14 @@
                         <i class="fas fa-cog"></i> ✅ 1. COPY INTO — COPY_OPTIONS
                     </h2>
 
-                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation </p>
 
                     <p>La commande <code class="inline-code">COPY INTO &lt;table&gt;</code> permet de charger des fichiers depuis un stage interne/externe vers une table Snowflake. Les <strong>COPY_OPTIONS</strong> permettent de contrôler finement le comportement du chargement.</p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         ⭐ <strong>COPY_OPTIONS les plus importants à connaître</strong><br>
-                        <span class="reference">[thinketl.com]</span>
+                        
                     </div>
 
                     <div class="grid-2cols">
@@ -183,7 +183,7 @@
                         <div class="usage-card">
                             <h4>🔹 6. MATCH_BY_COLUMN_NAME</h4>
                             <p>Gère comment les colonnes du fichier se mappent aux colonnes de la table.</p>
-                            <p>Inclut : COLUMN MATCH CRITERIA, LOAD CRITERIA, gestion des colonnes non correspondantes, limitations <span class="reference">[thinketl.com]</span></p>
+                            <p>Inclut : COLUMN MATCH CRITERIA, LOAD CRITERIA, gestion des colonnes non correspondantes, limitations </p>
                         </div>
 
                         <div class="usage-card">
@@ -207,7 +207,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>VALIDATION_MODE = RETURN_ERRORS | RETURN_ALL_ERRORS | RETURN_n_ROWS</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                     <p>Permet de vérifier les problèmes avant un chargement réel.</p>
                     <p>Très utile pour les examens SnowPro.</p>
                 </section>
@@ -220,7 +220,7 @@
                         <i class="fas fa-chart-line"></i> ✅ 3. Fonction de table VALIDATE
                     </h2>
 
-                    <p>Source officielle Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source officielle Snowflake Documentation </p>
 
                     <p>La fonction <code class="inline-code">VALIDATE</code> permet d'analyser les erreurs d'un chargement COPY INTO déjà exécuté.</p>
 
@@ -248,14 +248,14 @@ FROM TABLE(VALIDATE(
 
                     <h3>ℹ Notes d'utilisation essentielles</h3>
                     <ul>
-                        <li>Ne retourne rien si le COPY utilisait <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (par défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Ne retourne rien si le COPY utilisait <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (par défaut). </li>
                         <li>
                             Échec si :
                             <ul>
                                 <li>Le COPY incluait un SELECT transformant les données</li>
                                 <li>L'utilisateur n'a pas les droits sur la table</li>
                                 <li>Les métadonnées du COPY ont expiré</li>
-                                <li>Le query_id appartient à un autre utilisateur et l'accès n'est pas autorisé <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Le query_id appartient à un autre utilisateur et l'accès n'est pas autorisé </li>
                             </ul>
                         </li>
                         <li>Nouveaux fichiers ajoutés au stage après l'exécution → ignorés</li>

@@ -163,31 +163,31 @@
                     <p>Selon la documentation Snowflake :</p>
                     <div class="info-note">
                         <em>All data in Snowflake tables is automatically divided into micro‑partitions, which are contiguous units of storage.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Caractéristiques essentielles</h3>
 
                     <h4>Taille :</h4>
-                    <p>Chaque micro‑partition contient <strong>50 à 500 MB de données non compressées</strong> (stockage réel plus petit car compressé). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Chaque micro‑partition contient <strong>50 à 500 MB de données non compressées</strong> (stockage réel plus petit car compressé). </p>
 
                     <h4>Structure colonne (columnar)</h4>
                     <p>Les lignes du tableau sont réorganisées par colonne dans chaque micro‑partition.<br>
-                    ➜ Permet de ne scanner que les colonnes utiles. <span class="reference">[docs.snowflake.com]</span></p>
+                    ➜ Permet de ne scanner que les colonnes utiles. </p>
 
                     <h4>Création automatique</h4>
                     <p>Pas besoin de définir des partitions manuellement.<br>
-                    Snowflake partitionne transparently selon l'ordre d'ingestion. <span class="reference">[docs.snowflake.com]</span></p>
+                    Snowflake partitionne transparently selon l'ordre d'ingestion. </p>
 
                     <h4>Métadonnées riches stockées par micro‑partition :</h4>
                     <ul>
                         <li>Plage de valeurs (min/max) par colonne</li>
                         <li>Nombre de valeurs distinctes</li>
-                        <li>Autres statistiques (pour optimisation et query processing) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Autres statistiques (pour optimisation et query processing) </li>
                     </ul>
 
                     <h4>Nombre élevé</h4>
-                    <p>Un tableau peut contenir des millions de micro‑partitions. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Un tableau peut contenir des millions de micro‑partitions. </p>
 
                     <h4>Immuabilité</h4>
                     <p>Une micro‑partition est immuable :<br>
@@ -202,7 +202,7 @@
                         <i class="fas fa-star"></i> ✅ 2. Benefits of Micro‑Partitions
                     </h2>
 
-                    <p>La documentation met en avant plusieurs avantages clés : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation met en avant plusieurs avantages clés : </p>
 
                     <h3>✔ Automatisation complète</h3>
                     <p>Contrairement au partitionnement statique traditionnel,<br>
@@ -260,7 +260,7 @@
                     <p>Snowflake note que les partitions sont créées selon l'ordre d'insertion.</p>
                     <ul>
                         <li>➜ Un chargement désordonné peut nuire au pruning.</li>
-                        <li>➜ Un chargement trié peut améliorer naturellement le clustering. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>➜ Un chargement trié peut améliorer naturellement le clustering. </li>
                     </ul>
 
                     <h3>✔ 4. Foundation of Clustering</h3>
@@ -293,13 +293,13 @@
                             32<th>Concept</th><th>À maîtriser absolument</th>
                         </thead>
                         <tbody>
-                            32<td><strong>Taille</strong></td><td>50–500 MB non compressés par micro‑partition. <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Automatisation</strong></td><td>Créées automatiquement → pas de partitionnement manuel. <span class="reference">[docs.snowflake.com]</span></td>
-                            32<td><strong>Métadonnées</strong></td><td>min/max, NDV, statistiques utilisées pour pruning. <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Taille</strong></td><td>50–500 MB non compressés par micro‑partition. </td>
+                            32<td><strong>Automatisation</strong></td><td>Créées automatiquement → pas de partitionnement manuel. </td>
+                            32<td><strong>Métadonnées</strong></td><td>min/max, NDV, statistiques utilisées pour pruning. </td>
                             32<td><strong>Pruning</strong></td><td>Snowflake ignore les micro‑partitions non pertinentes (impact énorme).</td>
                             32<td><strong>Clustering</strong></td><td>Dépend directement de la distribution des données dans les micro‑partitions.</td>
                             32<td><strong>Immuabilité</strong></td><td>Toute modification DML régénère de nouvelles micro‑partitions.</td>
-                            32<td><strong>Overlap</strong></td><td>Les micro‑partitions peuvent se chevaucher → moins de skew. <span class="reference">[docs.snowflake.com]</span></td>
+                            32<td><strong>Overlap</strong></td><td>Les micro‑partitions peuvent se chevaucher → moins de skew. </td>
                         </tbody>
                     </table>
                 </section>

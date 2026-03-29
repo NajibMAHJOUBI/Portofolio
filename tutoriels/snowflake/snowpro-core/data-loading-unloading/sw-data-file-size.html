@@ -132,7 +132,7 @@
                         <i class="fas fa-compress-alt"></i> ✅ 1. Data File Compression
                     </h2>
 
-                    <p>Source : <em>Preparing to load data — Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Preparing to load data — Snowflake Documentation</em> </p>
 
                     <div class="info-note">
                         <i class="fas fa-bullseye"></i>
@@ -143,12 +143,12 @@
                     <h3>📌 Points essentiels à retenir</h3>
 
                     <ul>
-                        <li>✔ Snowflake <strong>recommande de compresser les fichiers</strong> pour les chargements volumineux <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Snowflake <strong>recommande de compresser les fichiers</strong> pour les chargements volumineux </li>
                         <li>
                             ✔ Snowflake détecte automatiquement :
                             <ul>
                                 <li>Le format du fichier compressé</li>
-                                <li>Le codec de compression utilisé <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Le codec de compression utilisé </li>
                             </ul>
                         </li>
                         <li>
@@ -157,13 +157,13 @@
                                 <li>Peut être définie :</li>
                                 <ul>
                                     <li>Dans le <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
-                                    <li>Ou dans un named file format ou named stage utilisé dans le COPY <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>Ou dans un named file format ou named stage utilisé dans le COPY </li>
                                 </ul>
                             </ul>
                         </li>
                         <li>
                             ✔ <strong>Compatibilité et formats pris en charge (avec compression automatique) :</strong><br>
-                            Avro, ORC, Parquet → Snowflake gère automatiquement la détection et le traitement des fichiers compressés <span class="reference">[docs.snowflake.com]</span>
+                            Avro, ORC, Parquet → Snowflake gère automatiquement la détection et le traitement des fichiers compressés 
                         </li>
                     </ul>
                 </section>
@@ -176,7 +176,7 @@
                         <i class="fas fa-chart-bar"></i> ✅ 2. File Sizing Best Practices & Limitations
                     </h2>
 
-                    <p>Source : <em>Preparing your data files — Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Preparing your data files — Snowflake Documentation</em> </p>
 
                     <div class="info-note">
                         <i class="fas fa-bullseye"></i>
@@ -189,13 +189,13 @@
                     <ul>
                         <li>
                             ✔ <strong>Taille recommandée des fichiers : 100–250 MB (compressés)</strong><br>
-                            → Permet de maximiser le parallélisme et l'efficacité du warehouse. <span class="reference">[docs.snowflake.com]</span>
+                            → Permet de maximiser le parallélisme et l'efficacité du warehouse. 
                         </li>
                         <li>
                             ✔ <strong>Pourquoi ?</strong>
                             <ul>
                                 <li>Le nombre d'opérations en parallèle est limité par le nombre de fichiers disponibles</li>
-                                <li>Plus de fichiers → Plus de parallélisme → Temps de chargement plus court <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Plus de fichiers → Plus de parallélisme → Temps de chargement plus court </li>
                             </ul>
                         </li>
                     </ul>
@@ -206,7 +206,7 @@
                         <ul>
                             <li>Peu recommandé</li>
                             <li>Si nécessaire, vérifier attentivement <code class="inline-code">ON_ERROR</code></li>
-                            <li>Risque : abandon du chargement si durée > 24 heures (aucune partie du fichier n'est committée) <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Risque : abandon du chargement si durée > 24 heures (aucune partie du fichier n'est committée) </li>
                         </ul>
                     </div>
 
@@ -215,22 +215,22 @@
                     <ul>
                         <li>
                             ✔ <strong>Agréger les petits fichiers</strong><br>
-                            → Réduit le surcoût de traitement par fichier <span class="reference">[docs.snowflake.com]</span>
+                            → Réduit le surcoût de traitement par fichier 
                         </li>
                         <li>
                             ✔ <strong>Fractionner les gros fichiers</strong><br>
-                            → Meilleure répartition de la charge entre les clusters Snowflake <span class="reference">[docs.snowflake.com]</span>
+                            → Meilleure répartition de la charge entre les clusters Snowflake 
                         </li>
                         <li>
                             ✔ <strong>Fractionner par lignes, pas par octets</strong><br>
-                            → Évite que des enregistrements soient coupés entre deux fichiers <span class="reference">[docs.snowflake.com]</span>
+                            → Évite que des enregistrements soient coupés entre deux fichiers 
                         </li>
                         <li>
                             ✔ <strong>Outils recommandés pour le splitting</strong>
                             <ul>
                                 <li>Sous Linux/macOS : <code class="inline-code">split</code></li>
-                                <li>Exemple : <code class="inline-code">split -l 100000 pagecounts-20151201.csv pages</code> <span class="reference">[docs.snowflake.com]</span></li>
-                                <li>Sous Windows → Utiliser des utilitaires tiers (pas d'outil natif) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Exemple : <code class="inline-code">split -l 100000 pagecounts-20151201.csv pages</code> </li>
+                                <li>Sous Windows → Utiliser des utilitaires tiers (pas d'outil natif) </li>
                             </ul>
                         </li>
                     </ul>
@@ -239,7 +239,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>⚠ Limites particulières : Objets > 16 MB</strong>
                         <p>Snowflake recommande de réduire les objets dépassant 16 MB avant chargement.</p>
-                        <p>Cette fonctionnalité nécessite le bundle 2024_08 activé (activé par défaut). <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Cette fonctionnalité nécessite le bundle 2024_08 activé (activé par défaut). </p>
                     </div>
                 </section>
 

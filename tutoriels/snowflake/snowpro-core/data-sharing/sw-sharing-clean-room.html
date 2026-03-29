@@ -157,14 +157,14 @@
                         <i class="fas fa-door-open"></i> ✅ 1. Définition et objectifs d'une Clean Room
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>Data clean rooms are configurable, isolated Snowflake environments where collaborators can import data, specify what queries can be run, and configure data protection settings such as differential privacy.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
-                    <p>Elles permettent d'obtenir des insights tout en protégeant les données sous-jacentes. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Elles permettent d'obtenir des insights tout en protégeant les données sous-jacentes. </p>
 
                     <h3>✔ Points clés :</h3>
                     <ul>
@@ -179,7 +179,7 @@
                             </ul>
                         </li>
                         <li>Aucune fonctionnalité de monétisation.<br>
-                        <em>Clean rooms don't support monetization.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Clean rooms don't support monetization.</em> </li>
                     </ul>
                 </section>
 
@@ -198,7 +198,7 @@
                             <h4>Provider</h4>
                             <div class="info-note">
                                 <em>Creates a clean room, adds data, configures allowed analyses, and shares the clean room with consumers.</em>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </div>
                         </div>
 
@@ -206,7 +206,7 @@
                             <h4>Consumer</h4>
                             <div class="info-note">
                                 <em>Installs the clean room, adds datasets, and performs analyses including joining provider data with their own data.</em>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </div>
                         </div>
                     </div>
@@ -215,9 +215,9 @@
                         <strong>Informations essentielles :</strong>
                         <ul>
                             <li>Accès uniquement sur invitation.<br>
-                            <em>Access is by invitation only.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Access is by invitation only.</em> </li>
                             <li>Un compte peut être provider dans une clean room et consumer dans une autre.</li>
-                            <li>Possibilité d'inclure des collaborateurs non-Snowflake via des "managed accounts". <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Possibilité d'inclure des collaborateurs non-Snowflake via des "managed accounts". </li>
                         </ul>
                     </div>
                 </section>
@@ -232,7 +232,7 @@
 
                     <div class="info-note">
                         <em>The environment is installed once per Snowflake account by someone with ACCOUNTADMIN privileges.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>L'administrateur configure :</p>
@@ -240,7 +240,7 @@
                         <li>Quels utilisateurs peuvent créer et utiliser les clean rooms.</li>
                         <li>Quels comptes peuvent être invités à collaborer.</li>
                         <li>Quels jeux de données peuvent être importés dans les clean rooms.</li>
-                        <li>Quels services tiers peuvent exporter les résultats. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Quels services tiers peuvent exporter les résultats. </li>
                     </ul>
 
                     <div class="warning-note">
@@ -266,7 +266,7 @@
                     <h3>✔ Importer des datasets autorisés</h3>
                     <div class="info-note">
                         <em>Specify what data a clean room creator can import.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Définir les règles de protection</h3>
@@ -280,7 +280,7 @@
                     <p>La collaboration se fait via des <strong>analysis templates</strong>, préconfigurés par le provider.</p>
                     <div class="info-note">
                         <em>The collaborator who is sharing their data can define what analyses are available to the others.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Contrôler tout accès et usage</h3>
@@ -297,7 +297,7 @@
 
                     <div class="info-note">
                         <em>All analyses are conducted within the secure environment; collaborators receive only aggregated results.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Important :</h3>
@@ -305,14 +305,14 @@
                         <li>Aucun accès aux données brutes.</li>
                         <li>Les résultats sont <strong>agrégés</strong>, soumis aux contraintes du provider.</li>
                         <li>Peut inclure du JOIN entre données provider et consumer.<br>
-                        <em>Consumer can join their own data with provider data.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Consumer can join their own data with provider data.</em> </li>
                     </ul>
 
                     <h3>✔ Facturation :</h3>
                     <ul>
                         <li><strong>Provider</strong> : paie les processus internes nécessaires.</li>
                         <li><strong>Consumer</strong> : paie pour le compute utilisé lors de ses analyses.<br>
-                        <em>Provider billed for background processes; consumer billed standard compute/data usage.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>Provider billed for background processes; consumer billed standard compute/data usage.</em> </li>
                     </ul>
                 </section>
 
@@ -326,7 +326,7 @@
 
                     <div class="info-note">
                         <em>By default, you can share clean rooms only with accounts in the same web hosting region.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <p>L'administrateur peut toutefois étendre le partage à d'autres régions Snowflake.</p>
                 </section>
@@ -341,7 +341,7 @@
 
                     <div class="info-note">
                         <em>Collaborators can use either the Clean Rooms UI (business-friendly) or the API (developer-focused).</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ UI Clean Rooms</h3>
@@ -353,7 +353,7 @@
                     <h3>✔ API Clean Rooms</h3>
                     <ul>
                         <li>Permet l'automatisation et les intégrations.</li>
-                        <li>Nécessite un rôle API spécifique (ex. SAMOOHA_APP_ROLE). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Nécessite un rôle API spécifique (ex. SAMOOHA_APP_ROLE). </li>
                     </ul>
                 </section>
 

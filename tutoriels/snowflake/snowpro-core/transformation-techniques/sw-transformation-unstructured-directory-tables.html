@@ -167,11 +167,11 @@
                         <i class="fas fa-table"></i> ✅ 1. Qu'est‑ce qu'une Directory Table ?
                     </h2>
 
-                    <p>Source : <em>Directory Tables – Snowflake Documentation</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Directory Tables – Snowflake Documentation</em> </p>
 
                     <div class="info-note">
                         <em>“A directory table is an implicit object layered on a stage… conceptually similar to an external table because it stores file‑level metadata about the data files in the stage.”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Caractéristiques clés :</h3>
@@ -184,7 +184,7 @@
                                 <li>nom du fichier</li>
                                 <li>taille</li>
                                 <li>timestamp dernière modification</li>
-                                <li>URL Snowflake du fichier <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>URL Snowflake du fichier </li>
                             </ul>
                         </li>
                     </ul>
@@ -203,7 +203,7 @@
                         <i class="fas fa-lightbulb"></i> ✅ 2. Pourquoi utiliser une Directory Table ?
                     </h2>
 
-                    <p>Snowflake liste trois usages centraux : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake liste trois usages centraux : </p>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
@@ -239,7 +239,7 @@
 
                     <div class="info-note">
                         <em>“You can add a directory table to a stage when you create a stage or later using ALTER STAGE.”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Exemple (documentation ThinkETL basée sur Snowflake)</h3>
@@ -249,14 +249,14 @@
                         <pre><code>CREATE OR REPLACE STAGE my_stage
     DIRECTORY = (ENABLE = TRUE);</code></pre>
                     </div>
-                    <p><span class="reference">[thinketl.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Activation sur stage existant :</h3>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>ALTER STAGE my_stage SET DIRECTORY = (ENABLE = TRUE);</code></pre>
                     </div>
-                    <p><span class="reference">[thinketl.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -274,7 +274,7 @@
                         <pre><code>SELECT *
 FROM DIRECTORY(@my_stage);</code></pre>
                     </div>
-                    <p><span class="reference">[thinketl.com]</span></p>
+                    <p></p>
 
                     <p>Cela retourne des colonnes comme :</p>
                     <ul>
@@ -298,13 +298,13 @@ FROM DIRECTORY(@my_stage);</code></pre>
 
                     <div class="info-note">
                         <em>“You can refresh the directory table metadata manually using ALTER STAGE … REFRESH.”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Coûts :</h3>
                     <ul>
-                        <li>Le rafraîchissement automatique via notifications cloud → facturé comme <strong>Snowpipe</strong> (car Snowpipe gère les event notifications) <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Le rafraîchissement manuel → facturé en <strong>Cloud Services</strong> "standard" (n'apparaît pas dans PIPE_USAGE_HISTORY) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Le rafraîchissement automatique via notifications cloud → facturé comme <strong>Snowpipe</strong> (car Snowpipe gère les event notifications) </li>
+                        <li>Le rafraîchissement manuel → facturé en <strong>Cloud Services</strong> "standard" (n'apparaît pas dans PIPE_USAGE_HISTORY) </li>
                     </ul>
                 </section>
 
@@ -317,7 +317,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                     </h2>
 
                     <p>Snowflake fournit des guides spécifiques selon le cloud (Azure Event Grid, AWS S3 notifications, GCP Pub/Sub).</p>
-                    <p>Exemple Azure : L'auto‑refresh dépend d'événements blob : BlobCreated, BlobDeleted… <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Exemple Azure : L'auto‑refresh dépend d'événements blob : BlobCreated, BlobDeleted… </p>
 
                     <div class="info-note">
                         <strong>Points clés :</strong>
@@ -338,13 +338,13 @@ FROM DIRECTORY(@my_stage);</code></pre>
 
                     <div class="info-note">
                         <em>“Overhead to manage event notifications … appears as Snowpipe charges.”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Mesurer les coûts :</h3>
                     <ul>
                         <li><code class="inline-code">PIPE_USAGE_HISTORY</code> (Snowpipe events)</li>
-                        <li><code class="inline-code">AUTO_REFRESH_REGISTRATION_HISTORY</code> (historique des fichiers et coûts associés) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">AUTO_REFRESH_REGISTRATION_HISTORY</code> (historique des fichiers et coûts associés) </li>
                     </ul>
                 </section>
 
@@ -360,7 +360,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                     <p>Via ThinkETL (confirmant la doc Snowflake) :</p>
                     <ul>
                         <li>Pour interroger → <code class="inline-code">READ</code> ou <code class="inline-code">USAGE</code> selon stage interne/externe</li>
-                        <li>Pour rafraîchir → <code class="inline-code">WRITE</code> / <code class="inline-code">ALTER STAGE</code> <span class="reference">[thinketl.com]</span></li>
+                        <li>Pour rafraîchir → <code class="inline-code">WRITE</code> / <code class="inline-code">ALTER STAGE</code> </li>
                     </ul>
                 </section>
 
@@ -410,7 +410,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                         <tbody>
                             32
                                 <td><strong>Nature</strong>
-                                卷第Objet implicite sur un stage (pas une table SQL) <span class="reference">[docs.snowflake.com]</span>
+                                卷第Objet implicite sur un stage (pas une table SQL) 
                             
                             32
                                 <td><strong>Fonction</strong>
@@ -422,7 +422,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                             
                             32
                                 <td><strong>Refresh</strong>
-                                卷第Manuel (ALTER STAGE … REFRESH) ou automatique (notifications cloud) <span class="reference">[docs.snowflake.com]</span>
+                                卷第Manuel (ALTER STAGE … REFRESH) ou automatique (notifications cloud) 
                             
                             32
                                 <td><strong>Coûts</strong>
@@ -430,11 +430,11 @@ FROM DIRECTORY(@my_stage);</code></pre>
                             
                             32
                                 <td><strong>Privileges</strong>
-                                卷第Hérite du stage (READ/WRITE/USAGE) <span class="reference">[thinketl.com]</span>
+                                卷第Hérite du stage (READ/WRITE/USAGE) 
                             
                             32
                                 <td><strong>Monitoring</strong>
-                                卷第PIPE_USAGE_HISTORY, AUTO_REFRESH_REGISTRATION_HISTORY <span class="reference">[docs.snowflake.com]</span>
+                                卷第PIPE_USAGE_HISTORY, AUTO_REFRESH_REGISTRATION_HISTORY 
                             
                         </tbody>
                     划

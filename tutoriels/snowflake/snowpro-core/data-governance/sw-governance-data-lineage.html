@@ -137,7 +137,7 @@
                         <i class="fas fa-project-diagram"></i> ✅ 1. Data Lineage dans Snowsight (UI)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>La data lineage est une fonctionnalité <strong>Enterprise Edition</strong> permettant de visualiser comment les données circulent entre les objets Snowflake (tables, vues, stages, materialized views, etc.).</p>
 
@@ -169,7 +169,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ 1.2. Avantages du Data Lineage</h3>
                     <p>Selon la documentation, cela permet :</p>
@@ -178,14 +178,14 @@
                         <li><strong>Monitoring & troubleshooting</strong> : analyser les flux de données et leurs origines</li>
                         <li><strong>Compliance</strong> : suivre le mouvement des données sensibles</li>
                         <li><strong>Travail avec tags & masking policies</strong> : propagation de sensibilité via lineage</li>
-                        <li><strong>Confiance dans les données</strong> : comprendre source → transformation → destination <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Confiance dans les données</strong> : comprendre source → transformation → destination </li>
                     </ul>
 
                     <h3>✔ 1.3. Upstream / Downstream</h3>
                     <ul>
                         <li>Un objet <strong>upstream</strong> est la source (ex : table1).</li>
                         <li>Un objet <strong>downstream</strong> est la cible (ex : table2).</li>
-                        <li>Snowsight permet d'explorer les relations pas à pas dans les deux directions. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowsight permet d'explorer les relations pas à pas dans les deux directions. </li>
                     </ul>
 
                     <h3>✔ 1.4. Accès dans Snowsight</h3>
@@ -200,7 +200,7 @@
                             <ul>
                                 <li>zoom +/-</li>
                                 <li>explorer upstream/downstream</li>
-                                <li>afficher détails des colonnes/tags <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>afficher détails des colonnes/tags </li>
                             </ul>
                         </li>
                     </ol>
@@ -214,7 +214,7 @@
                         <i class="fas fa-history"></i> ✅ 2. Access History – Vue d'Audit des Accès
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>L'Access History est une fonctionnalité <strong>Enterprise Edition</strong> permettant d'auditer :</p>
                     <ul>
@@ -238,27 +238,27 @@
                             <strong>🔹 Colonnes source auxquelles un utilisateur a accédé</strong>
                             <ul>
                                 <li>Directement</li>
-                                <li>Indirectement (via une vue, une jointure…) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Indirectement (via une vue, une jointure…) </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Colonnes projetées dans le résultat</strong>
                             <ul>
-                                <li>→ liste dans <code class="inline-code">direct_objects_accessed</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>→ liste dans <code class="inline-code">direct_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Colonnes utilisées mais non projetées</strong>
                             <ul>
                                 <li>(ex : colonnes de WHERE, JOIN, FILTER)</li>
-                                <li>→ enregistrées dans <code class="inline-code">base_objects_accessed</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>→ enregistrées dans <code class="inline-code">base_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Objets modifiés par la requête</strong>
                             <ul>
                                 <li>→ INSERT, UPDATE, MERGE, DELETE, COPY</li>
-                                <li>→ enregistrés dans <code class="inline-code">objects_modified</code> <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>→ enregistrés dans <code class="inline-code">objects_modified</code> </li>
                             </ul>
                         </li>
                     </ul>
@@ -273,7 +273,7 @@ SELECT c1, c2 FROM t WHERE t.c3 > 0;</code></pre>
                     <ul>
                         <li>C1 et C2 : colonnes sources directes (base_objects_accessed)</li>
                         <li>C3 : colonne utilisée pour filtrer (base_objects_accessed)</li>
-                        <li>VC1 et VC2 : colonnes projetées (direct_objects_accessed) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>VC1 et VC2 : colonnes projetées (direct_objects_accessed) </li>
                     </ul>
 
                     <p><strong>Exemple 2 – Jointure</strong></p>
@@ -290,7 +290,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
                                 <li>colonnes de jt (C1)</li>
                             </ul>
                         </li>
-                        <li>→ dans base_objects_accessed <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>→ dans base_objects_accessed </li>
                     </ul>
 
                     <h3>✔ 2.3. Cas d'usage de l'Access History</h3>
@@ -300,16 +300,16 @@ WHERE bt.c3 = jt.c1;</code></pre>
                         <li>identifier quelles données sont réellement utilisées</li>
                         <li>déterminer quelles colonnes sont les plus consultées</li>
                         <li>sécuriser l'usage (détection d'accès anormaux)</li>
-                        <li>analyses d'impact et optimisation des pipelines <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>analyses d'impact et optimisation des pipelines </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ 2.4. Précisions importantes</strong>
                         <ul>
-                            <li>Disponible uniquement en Enterprise Edition ou plus <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Disponible uniquement en Enterprise Edition ou plus </li>
                             <li>Retention : 365 jours</li>
-                            <li>Certaines requêtes ne créent pas d'entrée dans Access History selon leur structure <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Certaines requêtes ne créent pas d'entrée dans Access History selon leur structure </li>
                         </ul>
                     </div>
                 </section>
@@ -359,7 +359,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
                                 <li>Montre data movement + object dependencies</li>
                                 <li>Inclut lineage au niveau colonne</li>
                                 <li>Utilisé pour impact analysis, troubleshooting, compliance</li>
-                                <li>Accessible dans Snowsight → Catalog → Lineage <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Accessible dans Snowsight → Catalog → Lineage </li>
                             </ul>
                         </div>
 
@@ -369,7 +369,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
                                 <li>Table d'audit des accès (lecture, écriture)</li>
                                 <li>Fourni par ACCOUNT_USAGE / ORGANIZATION_USAGE</li>
                                 <li>Identifie colonnes utilisées, projetées, filtrées</li>
-                                <li>Utilisé pour conformité, sécurité, analyse d'usage <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Utilisé pour conformité, sécurité, analyse d'usage </li>
                             </ul>
                         </div>
                     </div>

@@ -168,7 +168,7 @@
                         <li>Les services externes nécessitant une authentification IAM,</li>
                         <li>Les API REST privées exposées par une organisation.</li>
                     </ul>
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                 </section>
 
                 <!-- ============================================
@@ -183,11 +183,11 @@
                     <ul>
                         <li>Contient les informations d'identité et d'accès permettant à Snowflake d'appeler une API externe (ex. rôle AWS, OAuth GitHub, audience Google…).</li>
                         <li>Définit les endpoints autorisés ou bloqués (<code class="inline-code">API_ALLOWED_PREFIXES</code>, <code class="inline-code">API_BLOCKED_PREFIXES</code>).</li>
-                        <li>Sert à sécuriser la communication entre Snowflake et un proxy HTTPS externe (par ex. AWS API Gateway). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Sert à sécuriser la communication entre Snowflake et un proxy HTTPS externe (par ex. AWS API Gateway). </li>
                     </ul>
                     <p>Elle est notamment utilisée par :</p>
                     <ul>
-                        <li><code class="inline-code">CREATE EXTERNAL FUNCTION</code> (pour appeler une API depuis SQL). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">CREATE EXTERNAL FUNCTION</code> (pour appeler une API depuis SQL). </li>
                     </ul>
                 </section>
 
@@ -207,7 +207,7 @@
                     <ul>
                         <li>aws_api_gateway, aws_private_api_gateway, aws_gov_api_gateway, aws_gov_private_api_gateway</li>
                         <li>azure_api_management</li>
-                        <li>google_api_gateway <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>google_api_gateway </li>
                     </ul>
 
                     <h3>✔ Identité & credentials</h3>
@@ -216,15 +216,15 @@
                         <li><strong>AWS</strong> : API_AWS_ROLE_ARN + éventuellement API_KEY</li>
                         <li><strong>Azure</strong> : AZURE_TENANT_ID, AZURE_AD_APPLICATION_ID, API_KEY optionnel</li>
                         <li><strong>GCP</strong> : GOOGLE_AUDIENCE</li>
-                        <li><strong>Git repository</strong> : Personal Access Token ou OAuth (support GA pour GitHub, preview pour autres providers) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Git repository</strong> : Personal Access Token ou OAuth (support GA pour GitHub, preview pour autres providers) </li>
                     </ul>
 
                     <h3>✔ API_ALLOWED_PREFIXES / API_BLOCKED_PREFIXES</h3>
                     <p>Liste des URLs autorisées ou interdites comme préfixes de requêtes.</p>
-                    <p>Permet d'appliquer un filtrage strict des endpoints accessibles. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Permet d'appliquer un filtrage strict des endpoints accessibles. </p>
 
                     <h3>✔ ENABLED = TRUE|FALSE</h3>
-                    <p>Active ou désactive l'intégration. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Active ou désactive l'intégration. </p>
                 </section>
 
                 <!-- ============================================
@@ -244,7 +244,7 @@
     API_ALLOWED_PREFIXES = ('https://abc123.execute-api.us-east-1.amazonaws.com/prod/')
     ENABLED = TRUE;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>🔹 Azure API Management</h3>
                     <div class="code-block">
@@ -256,7 +256,7 @@
     API_ALLOWED_PREFIXES = ('https://myapi.azure-api.net/v1/')
     ENABLED = TRUE;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>🔹 Google Cloud API Gateway</h3>
                     <div class="code-block">
@@ -267,7 +267,7 @@
     API_ALLOWED_PREFIXES = ('https://my-gateway-123.gateway.dev/')
     ENABLED = TRUE;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -281,7 +281,7 @@
                     <ul>
                         <li>Support GA pour GitHub (OAuth).</li>
                         <li>Support preview pour les autres providers Git.</li>
-                        <li>Permet d'utiliser un token ou l'OAuth pour accéder à une API Git. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Permet d'utiliser un token ou l'OAuth pour accéder à une API Git. </li>
                     </ul>
                 </section>
 
@@ -294,10 +294,10 @@
                     </h2>
 
                     <h3>✔ 1. Création de l'intégration</h3>
-                    <p>→ via <code class="inline-code">CREATE API INTEGRATION</code> (objet de sécurité géré par ACCOUNTADMIN). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ via <code class="inline-code">CREATE API INTEGRATION</code> (objet de sécurité géré par ACCOUNTADMIN). </p>
 
                     <h3>✔ 2. Contrôle des endpoints autorisés</h3>
-                    <p>→ grâce à <code class="inline-code">API_ALLOWED_PREFIXES</code>. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ grâce à <code class="inline-code">API_ALLOWED_PREFIXES</code>. </p>
 
                     <h3>✔ 3. Consommation via External Functions</h3>
                     <p>Exemple pour utiliser l'intégration dans une fonction externe :</p>
@@ -309,10 +309,10 @@ API_INTEGRATION = my_api_int
 URL = 'https://my-api/weather'
 HEADERS = ('X-Custom-Key' = 'value');</code></pre>
                     </div>
-                    <p>(Les external functions ne sont citées que par référence dans la documentation API Integration) <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>(Les external functions ne sont citées que par référence dans la documentation API Integration) </p>
 
                     <h3>✔ 4. Monitoring</h3>
-                    <p>→ <code class="inline-code">SHOW API INTEGRATIONS</code> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ <code class="inline-code">SHOW API INTEGRATIONS</code> </p>
                 </section>
 
                 <!-- ============================================
@@ -327,7 +327,7 @@ HEADERS = ('X-Custom-Key' = 'value');</code></pre>
                         <li>Utiliser <code class="inline-code">API_ALLOWED_PREFIXES</code> comme périmètre minimal de sécurité.</li>
                         <li>Ne jamais autoriser un préfixe trop large.</li>
                         <li>Activer/désactiver via <code class="inline-code">ENABLED = TRUE|FALSE</code>.</li>
-                        <li>Pour AWS : utiliser un IAM Role dédié et limiter les actions. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pour AWS : utiliser un IAM Role dédié et limiter les actions. </li>
                     </ul>
                 </section>
 
@@ -366,7 +366,7 @@ HEADERS = ('X-Custom-Key' = 'value');</code></pre>
                                 <li>CREATE API INTEGRATION</li>
                                 <li>ALTER API INTEGRATION</li>
                                 <li>DROP INTEGRATION</li>
-                                <li>SHOW INTEGRATIONS <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>SHOW INTEGRATIONS </li>
                             </ul>
                         </div>
                     </div>

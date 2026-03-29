@@ -142,15 +142,15 @@
                         <i class="fas fa-info-circle"></i> ✅ 1. Principes & limites — données semi‑structurées dans VARIANT
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <h3>✔ Taille maximale d'une valeur VARIANT</h3>
-                    <p>Jusqu'à <strong>128 MB non compressés</strong> (en pratique un peu moins à cause des surcharges internes et selon l'objet stocké). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Jusqu'à <strong>128 MB non compressés</strong> (en pratique un peu moins à cause des surcharges internes et selon l'objet stocké). </p>
 
                     <h3>✔ Quand stocker en VARIANT vs. aplatir ?</h3>
                     <ul>
                         <li>Si vos cas d'usage ne sont pas encore connus, Snowflake recommande de stocker d'abord dans VARIANT.</li>
-                        <li>Pour des données "régulières" (ex. JSON avec chaînes/entiers), les besoins de stockage et la performance sont proches du relationnel. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pour des données "régulières" (ex. JSON avec chaînes/entiers), les besoins de stockage et la performance sont proches du relationnel. </li>
                         <li>
                             Pour améliorer le pruning et réduire le stockage, <strong>aplatir</strong> (via colonnes relationnelles) si vos documents contiennent :
                             <ul>
@@ -159,18 +159,18 @@
                                 <li>tableaux</li>
                             </ul>
                         </li>
-                        <li>Les valeurs non natives (dates dans JSON) stockées comme string dans VARIANT sont plus lentes à traiter et prennent plus d'espace que des colonnes typées. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les valeurs non natives (dates dans JSON) stockées comme string dans VARIANT sont plus lentes à traiter et prennent plus d'espace que des colonnes typées. </li>
                     </ul>
 
                     <h3>✔ Approche de validation</h3>
-                    <p>Charger un échantillon dans VARIANT, FLATTEN les clés ciblées dans une table relationnelle, puis comparer les performances de vos requêtes typiques. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Charger un échantillon dans VARIANT, FLATTEN les clés ciblées dans une table relationnelle, puis comparer les performances de vos requêtes typiques. </p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Deux types de NULL dans le semi‑structuré :</strong>
                         <ul>
                             <li><strong>SQL NULL</strong> : valeur manquante/inconnue (comme pour les types structurés).</li>
-                            <li><strong>JSON null</strong> (dit "VARIANT NULL") : stocké comme chaîne contenant "null" pour le distinguer de SQL NULL. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li><strong>JSON null</strong> (dit "VARIANT NULL") : stocké comme chaîne contenant "null" pour le distinguer de SQL NULL. </li>
                         </ul>
                     </div>
                 </section>
@@ -183,9 +183,9 @@
                         <i class="fas fa-code"></i> ✅ 2. PARSE_JSON — conversion d'une chaîne JSON en VARIANT
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
-                    <p><strong>But :</strong> interprète une chaîne d'entrée comme un document JSON et retourne un VARIANT (OBJECT/ARRAY au besoin). Pratique pour insérer du JSON inline ou transformer une colonne texte en JSON navigable. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>But :</strong> interprète une chaîne d'entrée comme un document JSON et retourne un VARIANT (OBJECT/ARRAY au besoin). Pratique pour insérer du JSON inline ou transformer une colonne texte en JSON navigable. </p>
 
                     <h3>✔ Syntaxe & paramètres</h3>
                     <div class="code-block">
@@ -198,24 +198,24 @@
                             <code class="inline-code">'&lt;parameter&gt;'</code> : contrôle notamment la gestion des clés dupliquées :
                             <ul>
                                 <li><code class="inline-code">'d'</code> = autoriser les clés dupliquées (la dernière valeur l'emporte)</li>
-                                <li><code class="inline-code">'s'</code> = strict (refus des doublons, par défaut). <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><code class="inline-code">'s'</code> = strict (refus des doublons, par défaut). </li>
                             </ul>
                         </li>
                     </ul>
 
                     <h3>✔ Comportements importants</h3>
                     <ul>
-                        <li>Retourne VARIANT ; NULL en entrée → NULL en sortie. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Chaîne vide ou espaces uniquement → retourne NULL (pas d'erreur), pour laisser continuer le traitement. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>La chaîne <code class="inline-code">'null'</code> (littéral) devient un JSON null dans VARIANT (≠ SQL NULL). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Précision numérique : tente de préserver l'exactitude des décimaux (ex. 123.45 → NUMBER(5,2)), mais notation scientifique ou incompatibilités d'échelle → DOUBLE. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Types non natifs en JSON (DATE/TIME/TIMESTAMP/BINARY) doivent être représentés en chaînes. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Taille max de l'entrée : <strong>64 MB compressés</strong> pour l'expression de PARSE_JSON. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Retourne VARIANT ; NULL en entrée → NULL en sortie. </li>
+                        <li>Chaîne vide ou espaces uniquement → retourne NULL (pas d'erreur), pour laisser continuer le traitement. </li>
+                        <li>La chaîne <code class="inline-code">'null'</code> (littéral) devient un JSON null dans VARIANT (≠ SQL NULL). </li>
+                        <li>Précision numérique : tente de préserver l'exactitude des décimaux (ex. 123.45 → NUMBER(5,2)), mais notation scientifique ou incompatibilités d'échelle → DOUBLE. </li>
+                        <li>Types non natifs en JSON (DATE/TIME/TIMESTAMP/BINARY) doivent être représentés en chaînes. </li>
+                        <li>Taille max de l'entrée : <strong>64 MB compressés</strong> pour l'expression de PARSE_JSON. </li>
                     </ul>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
-                        <strong>Variante tolérante :</strong> <code class="inline-code">TRY_PARSE_JSON(&lt;expr&gt; [, '&lt;parameter&gt;'])</code> → retourne NULL si parsing en erreur (utile en ingestion "best‑effort"). <span class="reference">[docs.snowflake.com]</span>
+                        <strong>Variante tolérante :</strong> <code class="inline-code">TRY_PARSE_JSON(&lt;expr&gt; [, '&lt;parameter&gt;'])</code> → retourne NULL si parsing en erreur (utile en ingestion "best‑effort"). 
                     </div>
                 </section>
 
@@ -230,32 +230,32 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>📌 Modéliser selon l'usage</h4>
-                            <p>Si vos analyses ciblent dates, champs numériques, filtres sur éléments d'ARRAY, envisagez un aplatissage sélectif pour les colonnes critiques → meilleur pruning et coûts moindres. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Si vos analyses ciblent dates, champs numériques, filtres sur éléments d'ARRAY, envisagez un aplatissage sélectif pour les colonnes critiques → meilleur pruning et coûts moindres. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>📌 Gérer les NULL correctement</h4>
-                            <p>Faites la différence entre SQL NULL et JSON null (dans VARIANT) → impacts sur filtres, agrégations et jointures. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Faites la différence entre SQL NULL et JSON null (dans VARIANT) → impacts sur filtres, agrégations et jointures. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>📌 Encodage des dates/nombres</h4>
-                            <p>Dates/Timestamps en JSON = strings → préférez cast explicite à la lecture (et/ou colonnes relationnelles si réusage intensif). Chiffres encodés en chaînes = performance moindre ; privilégiez des nombres natifs ou des colonnes numériques. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Dates/Timestamps en JSON = strings → préférez cast explicite à la lecture (et/ou colonnes relationnelles si réusage intensif). Chiffres encodés en chaînes = performance moindre ; privilégiez des nombres natifs ou des colonnes numériques. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>📌 Clés dupliquées</h4>
-                            <p>Par défaut, PARSE_JSON est strict ('s') : une clé dupliquée lève une erreur ; vous pouvez autoriser via 'd' (la dernière valeur est conservée). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Par défaut, PARSE_JSON est strict ('s') : une clé dupliquée lève une erreur ; vous pouvez autoriser via 'd' (la dernière valeur est conservée). </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>📌 Tolérance à l'erreur</h4>
-                            <p>En flux hétérogène (APIs, logs), préférez TRY_PARSE_JSON pour éviter l'échec de la requête en cas de JSON malformé. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>En flux hétérogène (APIs, logs), préférez TRY_PARSE_JSON pour éviter l'échec de la requête en cas de JSON malformé. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>📌 Taille & performance</h4>
-                            <p>Surveillez la taille de vos documents (VARIANT ≤ 128 MB non compressés) et l'entrée de PARSE_JSON (≤ 64 MB compressés). Les gros objets sont plus coûteux et limitent certaines opérations. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Surveillez la taille de vos documents (VARIANT ≤ 128 MB non compressés) et l'entrée de PARSE_JSON (≤ 64 MB compressés). Les gros objets sont plus coûteux et limitent certaines opérations. </p>
                         </div>
                     </div>
                 </section>
@@ -285,7 +285,7 @@ SELECT
     payload:ts::TIMESTAMP_TZ      AS ts_utc
 FROM events;</code></pre>
                     </div>
-                    <p>PARSE_JSON → VARIANT ; accès par <code class="inline-code">:</code> et casts explicites. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>PARSE_JSON → VARIANT ; accès par <code class="inline-code">:</code> et casts explicites. </p>
 
                     <h3>B. Aplatir un tableau (FLATTEN) pour analyses</h3>
                     <div class="code-block">
@@ -298,7 +298,7 @@ SELECT
 FROM events e,
 LATERAL FLATTEN(input => e.payload:items) f;</code></pre>
                     </div>
-                    <p>Stratégie recommandée quand les ARRAY sont souvent parcourus : aplatir pour gagner en lisibilité et en performance selon les cas d'usage. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Stratégie recommandée quand les ARRAY sont souvent parcourus : aplatir pour gagner en lisibilité et en performance selon les cas d'usage. </p>
 
                     <h3>C. Résilience face aux "JSON imparfaits"</h3>
                     <div class="code-block">
@@ -307,7 +307,7 @@ LATERAL FLATTEN(input => e.payload:items) f;</code></pre>
 SELECT TRY_PARSE_JSON(raw_line) AS parsed
 FROM external_feed;</code></pre>
                     </div>
-                    <p>TRY_PARSE_JSON évite l'arrêt de pipeline en cas de malformation ponctuelle. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>TRY_PARSE_JSON évite l'arrêt de pipeline en cas de malformation ponctuelle. </p>
 
                     <h3>D. Gestion des clés dupliquées</h3>
                     <div class="code-block">
@@ -318,7 +318,7 @@ SELECT PARSE_JSON('{"k":1,"k":2}');   -- ERREUR (mode 's')
 -- Permissif : conserve la dernière valeur
 SELECT PARSE_JSON('{"k":1,"k":2}', 'd');   -- {"k":2}</code></pre>
                     </div>
-                    <p>Paramètre 'd' = duplicate keys allowed ; 's' = strict (défaut). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Paramètre 'd' = duplicate keys allowed ; 's' = strict (défaut). </p>
                 </section>
 
                 <!-- ============================================
@@ -331,31 +331,31 @@ SELECT PARSE_JSON('{"k":1,"k":2}', 'd');   -- {"k":2}</code></pre>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <p>✔ VARIANT ≤ 128 MB non compressés ; PARSE_JSON ≤ 64 MB compressés. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ VARIANT ≤ 128 MB non compressés ; PARSE_JSON ≤ 64 MB compressés. </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ Stocker vs Aplatir : si beaucoup de dates/nombres/arrays, envisager aplatissage pour meilleur pruning et moins de stockage. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ Stocker vs Aplatir : si beaucoup de dates/nombres/arrays, envisager aplatissage pour meilleur pruning et moins de stockage. </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ NULL : distinguer SQL NULL et JSON null (VARIANT). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ NULL : distinguer SQL NULL et JSON null (VARIANT). </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ PARSE_JSON : strict par défaut ('s'), 'd' tolère les clés dupliquées (dernière valeur). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ PARSE_JSON : strict par défaut ('s'), 'd' tolère les clés dupliquées (dernière valeur). </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ Numériques : décimaux préservés (ex. NUMBER(5,2)), scientifique → DOUBLE. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ Numériques : décimaux préservés (ex. NUMBER(5,2)), scientifique → DOUBLE. </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ Dates en JSON ⇒ strings ; cas d'usage intensifs ⇒ colonnes typées. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ Dates en JSON ⇒ strings ; cas d'usage intensifs ⇒ colonnes typées. </p>
                         </div>
 
                         <div class="usage-card">
-                            <p>✔ TRY_PARSE_JSON pour l'ingestion robuste. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>✔ TRY_PARSE_JSON pour l'ingestion robuste. </p>
                         </div>
                     </div>
                 </section>

@@ -147,7 +147,7 @@
                         <i class="fas fa-chart-line"></i> ✅ 1. Private Sharing dans Snowsight
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Snowsight permet d'explorer et gérer les bases partagées (shared databases) provenant d'un partage direct ou d'un listing.</p>
 
@@ -156,7 +156,7 @@
                         <ul>
                             <li>Visualiser si la base est issue d'un share.</li>
                             <li>Voir le provider, le type de partage, le nom du share ou listing.</li>
-                            <li>Supprimer (DROP) la base consommée (cela ne supprime pas le share dans le compte du provider). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Supprimer (DROP) la base consommée (cela ne supprime pas le share dans le compte du provider). </li>
                             <li>Gérer les privilèges locaux sur la base consommée (RBAC classique).</li>
                         </ul>
                     </div>
@@ -179,11 +179,11 @@
                         <i class="fas fa-code"></i> ✅ 2. Data Sharing côté Provider (Using SQL with Data Shares)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>This topic describes the tasks for a data provider creating and configuring shares, adding consumer accounts, and maintaining shares.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ 1. Création du SHARE</h3>
@@ -201,7 +201,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                     </div>
                     <div class="info-note">
                         <em>Granting privileges effectively adds the objects to the share.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ 3. Ajout des consumer accounts</h3>
@@ -211,17 +211,17 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                     </div>
                     <div class="info-note">
                         <em>A share is available immediately to a consumer when you add that consumer's account.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="info-note">
                         <strong>✔ Notes importantes</strong>
                         <ul>
                             <li>Un share peut contenir des objets provenant de plusieurs bases, si elles sont toutes dans le même compte.<br>
-                            <em>A share can include data from multiple databases.</em> <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Le partage est temps réel : <em>New and modified rows are available immediately to consumers.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>A share can include data from multiple databases.</em> </li>
+                            <li>Le partage est temps réel : <em>New and modified rows are available immediately to consumers.</em> </li>
                             <li>Attention : recréer un objet (DROP puis CREATE) fait qu'il n'est plus automatiquement dans le share.<br>
-                            <em>A new object created or recreated is not automatically available.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>A new object created or recreated is not automatically available.</em> </li>
                         </ul>
                     </div>
                 </section>
@@ -234,11 +234,11 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         <i class="fas fa-lock"></i> ✅ 3. Sécurité et privilèges liés aux Shares
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>GRANT … TO SHARE grants access privileges for supported objects; this effectively adds the objects to the share.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Privilèges utilisables avec TO SHARE</h3>
@@ -247,9 +247,9 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         <li><strong>SCHEMA</strong> : USAGE</li>
                         <li><strong>TABLE / VIEW / EXTERNAL TABLE / ICEBERG TABLE / DYNAMIC TABLE</strong> : SELECT</li>
                         <li><strong>SECURE VIEW</strong> : SELECT (impossible sur vue non sécurisée)<br>
-                        <em>The SELECT privilege on views can only be granted on secure views.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>The SELECT privilege on views can only be granted on secure views.</em> </li>
                         <li><strong>UDF secure</strong> : USAGE (pas possible sur UDF non‑secure)<br>
-                        <em>USAGE privilege can only be granted on secure UDFs.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <em>USAGE privilege can only be granted on secure UDFs.</em> </li>
                         <li><strong>TAG</strong> : READ</li>
                     </ul>
 
@@ -257,14 +257,14 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         <strong>✔ Règles importantes pour SnowPro :</strong>
                         <ul>
                             <li>Un share ne peut recevoir USAGE que d'une seule database.<br>
-                            <em>The USAGE privilege on only a single database can be granted to a share.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>The USAGE privilege on only a single database can be granted to a share.</em> </li>
                             <li>Pour partager toutes les tables d'un schéma :<br>
                             <code class="inline-code">GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code><br>
-                            <em>Using an ALL clause, you can grant SELECT on all tables.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Using an ALL clause, you can grant SELECT on all tables.</em> </li>
                             <li>Les vues non‑secure ne peuvent pas être partagées.</li>
                             <li>Les UDF non‑secure ne peuvent pas être partagées.</li>
                             <li>Les UDF ne peuvent pas référencer des objets d'autres databases.<br>
-                            <em>Sharing a UDF that references objects from another database is not supported.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                            <em>Sharing a UDF that references objects from another database is not supported.</em> </li>
                         </ul>
                     </div>
                 </section>

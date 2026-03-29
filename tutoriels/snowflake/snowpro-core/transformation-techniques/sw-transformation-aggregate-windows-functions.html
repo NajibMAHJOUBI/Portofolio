@@ -151,7 +151,7 @@
                     <p>Une fonction d'agrégation opère sur plusieurs lignes et retourne une seule valeur.</p>
                     <div class="info-note">
                         <em>“Aggregate functions operate on values across rows … and always return exactly one row, even when the input contains zero rows.”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Catégories principales</h3>
@@ -164,7 +164,7 @@
                                 <li>SUM, AVG, COUNT, COUNT_IF</li>
                                 <li>MIN, MAX, MEDIAN, MODE</li>
                                 <li>LISTAGG (concaténation)</li>
-                                <li>CORR, COVAR_POP, COVAR_SAMP, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>CORR, COVAR_POP, COVAR_SAMP, etc. </li>
                             </ul>
                         </div>
 
@@ -173,7 +173,7 @@
                             <ul>
                                 <li><strong>Bitwise</strong> : BITAND_AGG, BITOR_AGG, BITXOR_AGG</li>
                                 <li><strong>Booléennes</strong> : BOOLAND_AGG, BOOLOR_AGG, BOOLXOR_AGG</li>
-                                <li><strong>Semi‑structuré</strong> : ARRAY_AGG, OBJECT_AGG <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><strong>Semi‑structuré</strong> : ARRAY_AGG, OBJECT_AGG </li>
                             </ul>
                         </div>
 
@@ -181,7 +181,7 @@
                             <h4>3. Statistiques & Probabilités</h4>
                             <ul>
                                 <li>KURTOSIS</li>
-                                <li>SKEW <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>SKEW </li>
                             </ul>
                         </div>
 
@@ -191,7 +191,7 @@
                             <ul>
                                 <li>APPROX_COUNT_DISTINCT (alias de HLL)</li>
                                 <li>DATASKETCHES_HLL_*</li>
-                                <li>APPROX_PERCENTILE, APPROX_TOP_K <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>APPROX_PERCENTILE, APPROX_TOP_K </li>
                             </ul>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Particularités Snowflake (attention examen)</strong>
                         <ul>
-                            <li>Certaines fonctions ont une syntaxe spéciale : <code class="inline-code">PERCENTILE_CONT</code>, <code class="inline-code">PERCENTILE_DISC</code> utilisent <code class="inline-code">WITHIN GROUP</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Certaines fonctions ont une syntaxe spéciale : <code class="inline-code">PERCENTILE_CONT</code>, <code class="inline-code">PERCENTILE_DISC</code> utilisent <code class="inline-code">WITHIN GROUP</code>. </li>
                             <li>Beaucoup d'alias existent (VAR_POP = VARIANCE_POP).</li>
                             <li>Entrée vide = généralement NULL, mais pas toujours (ex : COUNT(*) retourne 0).</li>
                         </ul>
@@ -218,7 +218,7 @@
                     <h3>✔ Définition</h3>
                     <div class="info-note">
                         <em>“Window functions are analytic functions used for running totals, moving averages, rankings…”</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <ul>
                         <li>Elles retournent une valeur par ligne, contrairement aux agrégations classiques.</li>
@@ -228,7 +228,7 @@
                                 <li>OVER ( … )</li>
                                 <li>PARTITION BY</li>
                                 <li>ORDER BY</li>
-                                <li>Un window frame (ex : ROWS BETWEEN …). <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Un window frame (ex : ROWS BETWEEN …). </li>
                             </ul>
                         </li>
                     </ul>
@@ -242,7 +242,7 @@
                         <i class="fas fa-code"></i> ✅ 3. Syntaxe OVER() — Composants essentiels
                     </h2>
 
-                    <p>Source : <em>Window Function Syntax</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Window Function Syntax</em> </p>
 
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -256,23 +256,23 @@
                     <h3>✔ PARTITION BY</h3>
                     <ul>
                         <li>Définit des groupes logiques (ex : par client, par jour).</li>
-                        <li>Optionnel → une seule partition si absent. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Optionnel → une seule partition si absent. </li>
                     </ul>
 
                     <h3>✔ ORDER BY</h3>
                     <ul>
                         <li>Indispensable pour les fonctions de ranking.</li>
-                        <li>Indépendant du ORDER BY final de la requête. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Indépendant du ORDER BY final de la requête. </li>
                     </ul>
 
                     <h3>✔ Fenêtre (window frame)</h3>
                     <p>Exemples :</p>
                     <ul>
                         <li><code class="inline-code">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code></li>
-                        <li><code class="inline-code">ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING</code> </li>
                     </ul>
                     <div class="warning-note">
-                        ⚠️ Note : Snowflake ne supporte pas les positions ordinales dans OVER (ex : OVER (ORDER BY 1) interdit). <span class="reference">[docs.snowflake.com]</span>
+                        ⚠️ Note : Snowflake ne supporte pas les positions ordinales dans OVER (ex : OVER (ORDER BY 1) interdit). 
                     </div>
                 </section>
 
@@ -291,12 +291,12 @@
                             <ul>
                                 <li>SUM, AVG, COUNT, MIN, MAX</li>
                                 <li>LISTAGG (avec WITHIN GROUP)</li>
-                                <li>CORR, COVAR_POP/SAMP <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>CORR, COVAR_POP/SAMP </li>
                             </ul>
                             <p>La différence :</p>
                             <ul>
                                 <li>Agrégat → une seule ligne</li>
-                                <li>Window → une sortie par ligne <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Window → une sortie par ligne </li>
                             </ul>
                         </div>
 
@@ -307,7 +307,7 @@
                                 <li>RANK</li>
                                 <li>DENSE_RANK</li>
                                 <li>NTILE</li>
-                                <li>PERCENT_RANK (limitation : supporte uniquement RANGE BETWEEN sans offset) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>PERCENT_RANK (limitation : supporte uniquement RANGE BETWEEN sans offset) </li>
                             </ul>
                         </div>
 
@@ -318,7 +318,7 @@
                                 <li>LEAD</li>
                                 <li>FIRST_VALUE</li>
                                 <li>LAST_VALUE</li>
-                                <li>NTH_VALUE <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>NTH_VALUE </li>
                             </ul>
                             <p>Ces fonctions obligent un ORDER BY dans OVER.</p>
                         </div>
@@ -327,7 +327,7 @@
                             <h4>✔ 4. Fonctions statistiques avancées</h4>
                             <ul>
                                 <li>KURTOSIS</li>
-                                <li>REGR_* (régression linéaire) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>REGR_* (régression linéaire) </li>
                             </ul>
                         </div>
 
@@ -336,7 +336,7 @@
                             <p>Certaines fonctions agrégées sont aussi compatibles sous forme fenêtre :</p>
                             <ul>
                                 <li>ARRAY_AGG, OBJECT_AGG</li>
-                                <li>BITAND_AGG, BOOLAND_AGG <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>BITAND_AGG, BOOLAND_AGG </li>
                             </ul>
                         </div>
                     </div>
@@ -364,14 +364,14 @@
                             32
                                 <td><strong>Window</strong>
                                 卷第Plusieurs lignes
-                                卷第1 ligne par ligne d'entrée <span class="reference">[docs.snowflake.com]</span>
+                                卷第1 ligne par ligne d'entrée 
                             
                         </tbody>
                     划
 
                     <h3>✔ QUALIFY</h3>
                     <p>Même si non demandé, essentiel pour SnowPro :<br>
-                    QUALIFY filtre sur les résultats de fonctions fenêtre, comme HAVING filtre les agrégations. <span class="reference">[docs.snowflake.com]</span></p>
+                    QUALIFY filtre sur les résultats de fonctions fenêtre, comme HAVING filtre les agrégations. </p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
@@ -379,7 +379,7 @@
                         <ul>
                             <li>Beaucoup d'agrégations → version fenêtre avec OVER()</li>
                             <li>Certaines fonctions changent de comportement entre agrégat et window (ex. SUM)</li>
-                            <li>DISTINCT interdit dans les window functions (ex : AVG(DISTINCT col) OVER() provoque erreur) <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>DISTINCT interdit dans les window functions (ex : AVG(DISTINCT col) OVER() provoque erreur) </li>
                         </ul>
                     </div>
                 </section>

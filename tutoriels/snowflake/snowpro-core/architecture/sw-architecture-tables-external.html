@@ -175,7 +175,7 @@
                         <p>
                             Une <b>external table</b> est un objet Snowflake qui référence des fichiers stockés 
                             dans un <b>external stage</b> (S3, GCS, Azure Blob), tout en permettant de les requêter via SQL.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <p>
@@ -187,7 +187,7 @@
                             <li>
                                 Snowflake stocke uniquement <b>des métadonnées au niveau fichier</b> 
                                 (filename, version, propriétés).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -207,7 +207,7 @@
                             <li>Aucun DML possible (INSERT, UPDATE, DELETE)</li>
                             <li>
                                 Elles servent uniquement à interroger et joindre les données.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -216,7 +216,7 @@
                         <p>
                             Supporte tous les formats compatibles avec <code class="inline-code">COPY INTO</code> 
                             <strong>sauf XML</strong>.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <!-- Performance -->
@@ -227,14 +227,14 @@
                             </li>
                             <li>
                                 Pour accélérer : créer une <strong>materialized view</strong> sur l'external table.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
                         <div class="info-note">
                             ▶ <strong>Recommandation :</strong> Snowflake recommande, pour Parquet, 
                             de préférer <strong>Iceberg tables</strong> (plus performantes).
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </div>
                     </section>
 
@@ -249,7 +249,7 @@
                         <p>
                             L'external stage peut être configuré avec <strong>outbound private connectivity</strong> 
                             pour renforcer la sécurité (accès privé aux fichiers).
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
                     </section>
 
@@ -268,7 +268,7 @@
                             <li>la requête continue avec les fichiers suivants</li>
                             <li>
                                 résultat <strong>partiel possible</strong> (si scan incomplet).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -301,14 +301,14 @@
                             <li><code class="inline-code">METADATA$FILENAME</code></li>
                             <li>
                                 <code class="inline-code">METADATA$FILE_ROW_NUMBER</code>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
                         <div class="warning-note">
                             ⚠ <strong>Attention :</strong> un <code class="inline-code">SELECT *</code> 
                             retourne toujours la colonne <code class="inline-code">VALUE</code>.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </div>
                     </section>
 
@@ -330,14 +330,14 @@
                             <li><code class="inline-code">METADATA$FILENAME</code></li>
                             <li>
                                 <code class="inline-code">METADATA$FILE_ROW_NUMBER</code>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
                         <p>
                             Snowflake impose un <strong>type checking strict</strong> : les types des colonnes virtuelles 
                             doivent correspondre aux données dans les fichiers.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
                     </section>
 

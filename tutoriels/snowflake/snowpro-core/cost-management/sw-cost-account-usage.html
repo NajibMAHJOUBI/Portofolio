@@ -156,7 +156,7 @@
                     <ul>
                         <li>interroger les métadonnées d'objets,</li>
                         <li>analyser l'historique de l'usage et de la consommation,</li>
-                        <li>suivre les ressources du compte et des éventuels reader accounts. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>suivre les ressources du compte et des éventuels reader accounts. </li>
                     </ul>
                     <p>Ils fournissent une vue analytique complète, indispensable pour la gouvernance, la facturation interne et la surveillance de la plateforme.</p>
                 </section>
@@ -177,20 +177,20 @@
                             <p>Les vues ACCOUNT_USAGE incluent les objets supprimés, avec :</p>
                             <ul>
                                 <li>une colonne DELETED (timestamp),</li>
-                                <li>des informations nulles pour les noms et parents si l'objet est supprimé. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>des informations nulles pour les noms et parents si l'objet est supprimé. </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ 2.2 Latence des données</h4>
                             <p><strong>45 minutes à 3 heures</strong> selon les vues.</p>
-                            <p>Information key : ACCOUNT_USAGE n'est <strong>pas en temps réel</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Information key : ACCOUNT_USAGE n'est <strong>pas en temps réel</strong>. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ 2.3 Rétention des données</h4>
                             <p>Historique conservé <strong>1 an</strong> dans ACCOUNT_USAGE.</p>
-                            <p>Contre 7 jours à 6 mois dans Information Schema (selon les vues). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Contre 7 jours à 6 mois dans Information Schema (selon les vues). </p>
                         </div>
                     </div>
                 </section>
@@ -207,7 +207,7 @@
                     <p>Fournit :</p>
                     <ul>
                         <li>des vues de métadonnées d'objets (tables, rôles, utilisateurs, warehouses…),</li>
-                        <li>des vues d'usage historique : requêtes, stockage, compute, crédits consommés, data transfer, etc. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>des vues d'usage historique : requêtes, stockage, compute, crédits consommés, data transfer, etc. </li>
                     </ul>
                     <p>Ces vues sont essentielles pour :</p>
                     <ul>
@@ -220,7 +220,7 @@
 
                     <h3>✔ 3.2 READER_ACCOUNT_USAGE</h3>
                     <p>Uniquement si vous êtes provider d'un reader account (Secure Data Sharing).</p>
-                    <p>Chaque vue contient en plus une colonne : <code class="inline-code">READER_ACCOUNT_NAME</code> (pour filtrage multi‑comptes). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Chaque vue contient en plus une colonne : <code class="inline-code">READER_ACCOUNT_NAME</code> (pour filtrage multi‑comptes). </p>
                 </section>
 
                 <!-- ============================================
@@ -237,7 +237,7 @@
                             <ul>
                                 <li>DATABASES, SCHEMAS, TABLES, VIEWS</li>
                                 <li>PIPES, STAGES, STREAMS</li>
-                                <li>USERS, ROLES, GRANTS <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>USERS, ROLES, GRANTS </li>
                             </ul>
                         </div>
 
@@ -247,7 +247,7 @@
                                 <li>WAREHOUSE_METERING_HISTORY : crédits consommés par warehouse</li>
                                 <li>QUERY_HISTORY : métadonnées et statistiques des requêtes</li>
                                 <li>AUTOMATIC_CLUSTERING_HISTORY</li>
-                                <li>MATERIALIZED_VIEW_REFRESH_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>MATERIALIZED_VIEW_REFRESH_HISTORY </li>
                             </ul>
                         </div>
 
@@ -257,7 +257,7 @@
                                 <li>STORAGE_USAGE</li>
                                 <li>TABLE_STORAGE_METRICS</li>
                                 <li>STAGE_STORAGE_HISTORY</li>
-                                <li>DATA_TRANSFER_HISTORY / DATA_TRANSFER_DAILY_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>DATA_TRANSFER_HISTORY / DATA_TRANSFER_DAILY_HISTORY </li>
                             </ul>
                         </div>
 
@@ -265,7 +265,7 @@
                             <h4>4.4. Serverless & Cloud Services</h4>
                             <ul>
                                 <li>SERVERLESS_TASK_HISTORY</li>
-                                <li>AUTOMATIC_CLONING_HISTORY <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>AUTOMATIC_CLONING_HISTORY </li>
                             </ul>
                         </div>
 
@@ -274,7 +274,7 @@
                             <ul>
                                 <li>LOGIN_HISTORY</li>
                                 <li>ACCESS_HISTORY (si activé)</li>
-                                <li>GRANTS_TO_USERS / GRANTS_TO_ROLES <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>GRANTS_TO_USERS / GRANTS_TO_ROLES </li>
                             </ul>
                         </div>
                     </div>
@@ -289,11 +289,11 @@
                     </h2>
 
                     <ul>
-                        <li>✔ Les vues ACCOUNT_USAGE sont accessibles via <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE</code>. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ Le contenu inclut les <strong>objets supprimés</strong>, avec leurs timestamps et IDs uniques.<br>→ Permet de tracer l'historique même après suppression. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ <strong>Rétention longue : 1 an</strong> → utile pour analyses temporelles. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ Attention à la <strong>latence (45 min à 3h)</strong>.<br>→ À connaître pour troubleshooting & monitoring. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>✔ Certaines vues READER_ACCOUNT_USAGE ne sont pas peuplées si aucun reader n'existe. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>✔ Les vues ACCOUNT_USAGE sont accessibles via <code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE</code>. </li>
+                        <li>✔ Le contenu inclut les <strong>objets supprimés</strong>, avec leurs timestamps et IDs uniques.<br>→ Permet de tracer l'historique même après suppression. </li>
+                        <li>✔ <strong>Rétention longue : 1 an</strong> → utile pour analyses temporelles. </li>
+                        <li>✔ Attention à la <strong>latence (45 min à 3h)</strong>.<br>→ À connaître pour troubleshooting & monitoring. </li>
+                        <li>✔ Certaines vues READER_ACCOUNT_USAGE ne sont pas peuplées si aucun reader n'existe. </li>
                     </ul>
                 </section>
 

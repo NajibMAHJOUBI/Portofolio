@@ -162,16 +162,16 @@
                         <i class="fas fa-shield-alt"></i> ✅ 1. Définition et rôle du Fail‑safe
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <div class="info-note">
                         <em>Separate and distinct from Time Travel, Fail-safe ensures historical data is protected in the event of a system failure or security breach.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="info-note">
                         <em>Fail-safe provides a (non-configurable) 7-day period during which historical data may be recoverable by Snowflake.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p><strong>✔ Points essentiels :</strong></p>
@@ -193,7 +193,7 @@
 
                     <div class="warning-note">
                         <em>Fail-safe is not provided as a means for accessing historical data after the Time Travel retention period has ended.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p><strong>❌ Vous ne pouvez PAS :</strong></p>
@@ -215,7 +215,7 @@
 
                     <div class="info-note">
                         <em>Fail-safe is intended only for use when all other recovery options have been attempted.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p><strong>Cas typiques :</strong></p>
@@ -227,7 +227,7 @@
 
                     <div class="warning-note">
                         <strong>Data recovery via Fail-safe peut nécessiter :</strong>
-                        <p><em>several hours to several days.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        <p><em>several hours to several days.</em> </p>
                     </div>
                 </section>
 
@@ -244,12 +244,12 @@
 
                     <div class="info-note">
                         <em>Fail-safe period starts when Time Travel retention expires.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <div class="warning-note">
                         <strong>Important SnowPro :</strong>
-                        <p><em>A long-running Time Travel query will delay moving data into Fail-safe until the query completes.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        <p><em>A long-running Time Travel query will delay moving data into Fail-safe until the query completes.</em> </p>
                     </div>
                 </section>
 
@@ -264,11 +264,11 @@
                     <p>Snowflake affiche la quantité de données présentes en Fail-safe :</p>
                     <div class="info-note">
                         <em>You can view the historical data storage in Fail-safe (ACCOUNTADMIN only).</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <ul>
-                        <li>Snowsight › Admin › Cost management › Consumption › Storage. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowsight › Admin › Cost management › Consumption › Storage. </li>
                         <li>Les types de stockage sont visibles via les barres colorées (Storage Breakdown).</li>
                     </ul>
                 </section>
@@ -283,7 +283,7 @@
 
                     <div class="info-note">
                         <em>Fail-safe uses Snowflake-managed serverless compute. Standard serverless compute billing applies.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <p>Il ne s'agit pas d'un service gratuit : des crédits sont consommés lors d'opérations de récupération effectuées par Snowflake.</p>
@@ -292,7 +292,7 @@
                     <ul>
                         <li><code class="inline-code">METERING_DAILY_HISTORY</code></li>
                         <li><code class="inline-code">METERING_HISTORY</code></li>
-                        <li>Filtrer par : <code class="inline-code">service_type = 'FAILSAFE_RECOVERY'</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Filtrer par : <code class="inline-code">service_type = 'FAILSAFE_RECOVERY'</code> </li>
                     </ul>
                 </section>
 
@@ -306,7 +306,7 @@
 
                     <div class="warning-note">
                         <strong>❌ Fail-safe et Snowpipe Streaming Classic</strong>
-                        <p><em>Fail-safe doesn't support tables that contain data ingested by Snowpipe Streaming Classic.</em> <span class="reference">[docs.snowflake.com]</span></p>
+                        <p><em>Fail-safe doesn't support tables that contain data ingested by Snowpipe Streaming Classic.</em> </p>
                         <p>⚠️ Une récupération Fail-safe sur ces tables échouera complètement.</p>
                     </div>
                 </section>

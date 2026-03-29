@@ -172,11 +172,11 @@
                     <div class="info-note">
                         <strong>Points essentiels :</strong>
                         <ul>
-                            <li>Snowflake supporte Amazon S3, Google Cloud Storage, Azure Blob/ADLS. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Les données dans les classes archival (ex. S3 Glacier, Azure Archive) ne sont pas accessibles. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Un external stage est un objet de base de données stockant : URL du bucket, Credentials ou Storage Integration, File format éventuel. <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Création via <code class="inline-code">CREATE STAGE</code> (avec paramètres spécifiques selon le cloud). <span class="reference">[docs.snowflake.com]</span></li>
-                            <li>Possibilité d'associer un directory table (métadonnées des fichiers). <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Snowflake supporte Amazon S3, Google Cloud Storage, Azure Blob/ADLS. </li>
+                            <li>Les données dans les classes archival (ex. S3 Glacier, Azure Archive) ne sont pas accessibles. </li>
+                            <li>Un external stage est un objet de base de données stockant : URL du bucket, Credentials ou Storage Integration, File format éventuel. </li>
+                            <li>Création via <code class="inline-code">CREATE STAGE</code> (avec paramètres spécifiques selon le cloud). </li>
+                            <li>Possibilité d'associer un directory table (métadonnées des fichiers). </li>
                         </ul>
                     </div>
                 </section>
@@ -194,17 +194,17 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>User stage (@~)</h4>
-                            <p>Dédié à chaque utilisateur, accessible uniquement par celui-ci ; ne peut pas être modifié ou supprimé. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Dédié à chaque utilisateur, accessible uniquement par celui-ci ; ne peut pas être modifié ou supprimé. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>Table stage (@%table_name)</h4>
-                            <p>Lié à une table Snowflake, pour charger des fichiers uniquement dans cette table. Ne peut pas être supprimé. Le propriétaire de la table doit disposer de OWNERSHIP pour manipuler ses fichiers. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Lié à une table Snowflake, pour charger des fichiers uniquement dans cette table. Ne peut pas être supprimé. Le propriétaire de la table doit disposer de OWNERSHIP pour manipuler ses fichiers. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>Named internal stage</h4>
-                            <p>Objet explicite créé via <code class="inline-code">CREATE STAGE</code>. Peut servir à charger plusieurs tables, est partageable entre utilisateurs. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Objet explicite créé via <code class="inline-code">CREATE STAGE</code>. Peut servir à charger plusieurs tables, est partageable entre utilisateurs. </p>
                         </div>
                     </div>
 
@@ -224,25 +224,25 @@
                     <div class="info-note">
                         <strong>Principes :</strong>
                         <ul>
-                            <li>Ce n'est pas un objet indépendant : c'est une couche liée au stage. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Ce n'est pas un objet indépendant : c'est une couche liée au stage. </li>
                             <li>Fonctionne comme une « external table » (métadonnées : taille, last_modified, file_url...).</li>
-                            <li>Peut être activé lors de <code class="inline-code">CREATE STAGE DIRECTORY = (ENABLE=TRUE)</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Peut être activé lors de <code class="inline-code">CREATE STAGE DIRECTORY = (ENABLE=TRUE)</code>. </li>
                             <li>
                                 Utilisations :
                                 <ul>
                                     <li>Lister tous les fichiers d'un stage</li>
                                     <li>Construire des pipelines de traitement de fichiers</li>
-                                    <li>Joindre fichiers + métadonnées <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>Joindre fichiers + métadonnées </li>
                                 </ul>
                             </li>
                             <li>
                                 Rafraîchissement nécessaire :
                                 <ul>
                                     <li>Automatique via events cloud</li>
-                                    <li>Manuel via <code class="inline-code">ALTER STAGE … REFRESH</code> (peut être coûteux) <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>Manuel via <code class="inline-code">ALTER STAGE … REFRESH</code> (peut être coûteux) </li>
                                 </ul>
                             </li>
-                            <li>Requêtage via : <code class="inline-code">SELECT * FROM DIRECTORY(@stage_name);</code> <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Requêtage via : <code class="inline-code">SELECT * FROM DIRECTORY(@stage_name);</code> </li>
                         </ul>
                     </div>
                 </section>
@@ -260,19 +260,19 @@
                     <div class="info-note">
                         <strong>Points clés :</strong>
                         <ul>
-                            <li>Supporté dans internal et external stages. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Supporté dans internal et external stages. </li>
                             <li>
                                 Types d'URL pour accéder aux fichiers :
                                 <ul>
                                     <li><strong>Scoped URL</strong> (accès temporaire sécurisé, recommandé)</li>
                                     <li><strong>File URL</strong> (permanent, nécessite privilèges sur le stage)</li>
-                                    <li><strong>Pre-signed URL</strong> (pour applications externes, avec expiration configurable) <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li><strong>Pre-signed URL</strong> (pour applications externes, avec expiration configurable) </li>
                                 </ul>
                             </li>
                             <li>
                                 Server-side encryption :
                                 <ul>
-                                    <li>Pour éviter corruption lors de GET → vérifier <code class="inline-code">ENCRYPTION='SNOWFLAKE_SSE'</code> sur le stage. <span class="reference">[docs.snowflake.com]</span></li>
+                                    <li>Pour éviter corruption lors de GET → vérifier <code class="inline-code">ENCRYPTION='SNOWFLAKE_SSE'</code> sur le stage. </li>
                                 </ul>
                             </li>
                         </ul>
@@ -291,9 +291,9 @@
                     <ul>
                         <li>d'améliorer la lisibilité et le partitionnement logique,</li>
                         <li>d'utiliser <code class="inline-code">PATTERN</code> dans COPY INTO,</li>
-                        <li>d'optimiser les refresh de directory tables via <code class="inline-code">SUBPATH</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>d'optimiser les refresh de directory tables via <code class="inline-code">SUBPATH</code>. </li>
                     </ul>
-                    <p>L'organisation par chemins est une bonne pratique mentionnée dans les considérations de staging. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>L'organisation par chemins est une bonne pratique mentionnée dans les considérations de staging. </p>
                 </section>
 
                 <!-- ============================================
@@ -329,7 +329,7 @@
                         <ul>
                             <li><code class="inline-code">FILE_FORMAT</code> peut être défini directement dans le stage.</li>
                             <li><code class="inline-code">DIRECTORY</code> table peut être activée.</li>
-                            <li>Encrypted external stages peuvent utiliser AWS_SSE_S3, AWS_SSE_KMS, ou NONE. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Encrypted external stages peuvent utiliser AWS_SSE_S3, AWS_SSE_KMS, ou NONE. </li>
                         </ul>
                     </div>
                 </section>

@@ -157,13 +157,13 @@
                         <i class="fas fa-table"></i> ✅ 1. FLATTEN : rôle, fonctionnement, usage
                     </h2>
 
-                    <p>Source : Snowflake Community <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>Source : Snowflake Community </p>
 
                     <p>Snowflake utilise FLATTEN pour transformer un <strong>ARRAY</strong> ou <strong>OBJECT</strong> contenu dans un champ VARIANT en un jeu de lignes relationnel.</p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
-                        FLATTEN permet d'exploser un ARRAY JSON ou une structure imbriquée pour extraire dynamiquement des données semi‑structurées. <span class="reference">[learn.microsoft.com]</span>
+                        FLATTEN permet d'exploser un ARRAY JSON ou une structure imbriquée pour extraire dynamiquement des données semi‑structurées. 
                     </div>
 
                     <h3>✔ Principe</h3>
@@ -208,7 +208,7 @@ FROM TABLE(FLATTEN(
                     </ul>
 
                     <div class="info-note">
-                        Snowflake permet d'extraire dynamiquement des objets JSON à l'aide de FLATTEN combiné à LATERAL. <span class="reference">[learn.microsoft.com]</span>
+                        Snowflake permet d'extraire dynamiquement des objets JSON à l'aide de FLATTEN combiné à LATERAL. 
                     </div>
                 </section>
 
@@ -223,7 +223,7 @@ FROM TABLE(FLATTEN(
                     <p>La ressource Snowflake Community décrit spécifiquement l'usage réel pour "dynamically extracting JSON using LATERAL FLATTEN".</p>
 
                     <h3>✔ L'accès aux champs imbriqués</h3>
-                    <p>La combinaison de LATERAL et FLATTEN permet d'accéder dynamiquement aux valeurs d'objets JSON, y compris lorsqu'on ne connaît pas les clés en avance. <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>La combinaison de LATERAL et FLATTEN permet d'accéder dynamiquement aux valeurs d'objets JSON, y compris lorsqu'on ne connaît pas les clés en avance. </p>
 
                     <h3>✔ Approche 1 : extraction simple</h3>
                     <div class="code-block">
@@ -235,7 +235,7 @@ LATERAL FLATTEN(input => t.json_column) f;</code></pre>
                     </div>
 
                     <h3>✔ Approche 2 : extraction profonde (hiérarchie)</h3>
-                    <p>FLATTEN peut être utilisé plusieurs fois (multi‑FLATTEN) pour naviguer dans des structures JSON hiérarchiques complexes. <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>FLATTEN peut être utilisé plusieurs fois (multi‑FLATTEN) pour naviguer dans des structures JSON hiérarchiques complexes. </p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>SELECT
@@ -246,7 +246,7 @@ LATERAL FLATTEN(input => parent.value:child_array) child;</code></pre>
                     </div>
 
                     <h3>✔ Approche 3 : extraction dynamique des clés</h3>
-                    <p>FLATTEN retourne KEY, VALUE, PATH, ce qui permet d'extraire dynamiquement des colonnes sans connaître les noms des clés JSON à l'avance. <span class="reference">[learn.microsoft.com]</span></p>
+                    <p>FLATTEN retourne KEY, VALUE, PATH, ce qui permet d'extraire dynamiquement des colonnes sans connaître les noms des clés JSON à l'avance. </p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>SELECT
@@ -283,7 +283,7 @@ LATERAL FLATTEN(input => t.json_column) f;</code></pre>
                     <p>Dans la communauté, l'article rappelle que du JSON peut être chargé via <code class="inline-code">PARSE_JSON()</code> et ensuite "flattened" :</p>
 
                     <div class="info-note">
-                        La fonction PARSE_JSON peut être utilisée pour transformer des chaînes JSON avant de les traiter avec FLATTEN. <span class="reference">[learn.microsoft.com]</span>
+                        La fonction PARSE_JSON peut être utilisée pour transformer des chaînes JSON avant de les traiter avec FLATTEN. 
                     </div>
 
                     <div class="code-block">

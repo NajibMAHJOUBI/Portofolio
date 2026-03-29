@@ -147,7 +147,7 @@
                         <i class="fas fa-table"></i> ✅ 1. Qu'est‑ce qu'une Dynamic Table ?
                     </h2>
 
-                    <p>Source : Documentation Snowflake sur les Dynamic Tables <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Documentation Snowflake sur les Dynamic Tables </p>
 
                     <h3>✔ Définition</h3>
                     <p>Une <strong>Dynamic Table</strong> est une table gérée automatiquement par Snowflake, alimentée par une requête SQL déclarative.</p>
@@ -161,7 +161,7 @@
                     <h3>✔ Fonctionnement</h3>
                     <ul>
                         <li>Lors de la création, la requête passée dans <code class="inline-code">AS &lt;query&gt;</code> définit le contenu de la Dynamic Table.</li>
-                        <li>Snowflake détecte les changements dans les objets sources et applique un rafraîchissement automatique. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowflake détecte les changements dans les objets sources et applique un rafraîchissement automatique. </li>
                     </ul>
 
                     <div class="info-note">
@@ -182,7 +182,7 @@
                         <i class="fas fa-clock"></i> ✅ 2. TARGET_LAG – Fraîcheur de données
                     </h2>
 
-                    <p>Source : Snowflake Dynamic Tables overview <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Dynamic Tables overview </p>
 
                     <h3>✔ Rôle</h3>
                     <p><code class="inline-code">TARGET_LAG</code> fixe l'écart maximal autorisé entre la Dynamic Table et les données sources.</p>
@@ -191,7 +191,7 @@
                     <h3>✔ Impact</h3>
                     <ul>
                         <li>Contrôle la fréquence de rafraîchissement.</li>
-                        <li>Impacte le coût compute : plus la fréquence est élevée, plus l'usage est important. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Impacte le coût compute : plus la fréquence est élevée, plus l'usage est important. </li>
                     </ul>
                 </section>
 
@@ -203,13 +203,13 @@
                         <i class="fas fa-sync-alt"></i> ✅ 3. Refresh : fonctionnement, modes et initialisation
                     </h2>
 
-                    <p>Sources : Dynamic tables refresh <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Sources : Dynamic tables refresh </p>
 
                     <h3>✔ Initialisation</h3>
                     <p>Lors de la création d'une Dynamic Table :</p>
                     <ul>
                         <li><code class="inline-code">INITIALIZE = ON_CREATE</code> → rafraîchissement initial immédiat. (par défaut)</li>
-                        <li><code class="inline-code">INITIALIZE = ON_SCHEDULE</code> → initialisation selon le target lag. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">INITIALIZE = ON_SCHEDULE</code> → initialisation selon le target lag. </li>
                     </ul>
 
                     <h3>✔ Modes de Refresh</h3>
@@ -217,7 +217,7 @@
                     <ul>
                         <li><strong>INCREMENTAL</strong> : ne traite que les données modifiées (optimisé performance).</li>
                         <li><strong>FULL</strong> : recalcul complet.</li>
-                        <li><strong>AUTO</strong> : Snowflake choisit automatiquement (recommandé en développement). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>AUTO</strong> : Snowflake choisit automatiquement (recommandé en développement). </li>
                     </ul>
 
                     <h3>✔ Rafraîchissement manuel</h3>
@@ -227,7 +227,7 @@
                         <pre><code>ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
                     </div>
                     <div class="warning-note">
-                        ⚠ À utiliser avec parcimonie : trop de refresh manuel peut perturber les rafraîchissements planifiés. <span class="reference">[docs.snowflake.com]</span>
+                        ⚠ À utiliser avec parcimonie : trop de refresh manuel peut perturber les rafraîchissements planifiés. 
                     </div>
 
                     <h3>✔ Rafraîchissement via TASK</h3>
@@ -239,7 +239,7 @@
     SCHEDULE = 'USING CRON 0 0 * * * UTC'
 AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -250,7 +250,7 @@ AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
                         <i class="fas fa-check-circle"></i> ✅ 4. Prérequis techniques & bonnes pratiques
                     </h2>
 
-                    <p>Source : Create dynamic tables <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Create dynamic tables </p>
 
                     <h3>✔ Change Tracking obligatoire</h3>
                     <p>Pour qu'une Dynamic Table fonctionne en mode incrémental :</p>
@@ -264,13 +264,13 @@ AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
                     <ul>
                         <li>Tables Snowflake</li>
                         <li>Tables Iceberg Snowflake-managed</li>
-                        <li>Tables Iceberg externes <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Tables Iceberg externes </li>
                     </ul>
 
                     <h3>✔ Conseils d'architecture</h3>
                     <ul>
                         <li>Découper les Dynamic Tables complexes en plusieurs étapes.</li>
-                        <li>Optimiser les requêtes pour tirer avantage du refresh incrémental. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Optimiser les requêtes pour tirer avantage du refresh incrémental. </li>
                     </ul>
                 </section>
 
@@ -282,7 +282,7 @@ AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
                         <i class="fas fa-terminal"></i> ✅ 5. Commandes SQL pour Dynamic Tables (CREATE / ALTER / DESCRIBE)
                     </h2>
 
-                    <p>Source : CREATE DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : CREATE DYNAMIC TABLE </p>
 
                     <h3>✔ CREATE DYNAMIC TABLE</h3>
                     <p>Exemple complet :</p>
@@ -306,11 +306,11 @@ SELECT col1, col2 FROM staging_table;</code></pre>
                         <li><code class="inline-code">REFRESH_MODE = AUTO | FULL | INCREMENTAL</code></li>
                         <li><code class="inline-code">INITIALIZE = ON_CREATE | ON_SCHEDULE</code></li>
                         <li><code class="inline-code">IMMUTABLE WHERE (&lt;expr&gt;)</code> → empêcher la mise à jour de certaines lignes</li>
-                        <li><code class="inline-code">CLUSTER BY (...)</code> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><code class="inline-code">CLUSTER BY (...)</code> </li>
                     </ul>
 
                     <h3>✔ ALTER DYNAMIC TABLE</h3>
-                    <p>Source : ALTER DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : ALTER DYNAMIC TABLE </p>
                     <p>Permet de modifier :</p>
                     <ul>
                         <li>TARGET_LAG</li>
@@ -327,7 +327,7 @@ SELECT col1, col2 FROM staging_table;</code></pre>
                     </div>
 
                     <h3>✔ DESCRIBE DYNAMIC TABLE</h3>
-                    <p>Source : DESC DYNAMIC TABLE <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : DESC DYNAMIC TABLE </p>
                     <p>Utilisation :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>

@@ -142,7 +142,7 @@
                         <i class="fas fa-cloud-upload-alt"></i> ✅ 1. Snowpipe – Introduction (Continuous File-Based Ingestion)
                     </h2>
 
-                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation </p>
 
                     <h3>✔ Définition</h3>
                     <p>Snowpipe est le service Snowflake de chargement continu des données dès que des fichiers apparaissent dans un stage. Il ingère les données en micro-batchs, garantissant une disponibilité rapide sans lancer manuellement un COPY.</p>
@@ -151,7 +151,7 @@
                     <p>Snowpipe repose sur un objet <strong>PIPE</strong>, qui contient l'instruction <code class="inline-code">COPY INTO &lt;table&gt;</code> définissant :</p>
                     <ul>
                         <li>La source (stage)</li>
-                        <li>La table cible <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La table cible </li>
                     </ul>
 
                     <h3>✔ Détection des fichiers</h3>
@@ -161,13 +161,13 @@
                             <strong>Cloud Messaging (événementiel)</strong>
                             <ul>
                                 <li>Utilise S3/SNS/SQS, Azure Event Grid, GCP Pub/Sub</li>
-                                <li>Snowpipe lit les événements et charge automatiquement les fichiers <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Snowpipe lit les événements et charge automatiquement les fichiers </li>
                             </ul>
                         </li>
                         <li>
                             <strong>Snowpipe REST API</strong>
                             <ul>
-                                <li>Le client appelle une API Snowflake et fournit la liste des fichiers <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Le client appelle une API Snowflake et fournit la liste des fichiers </li>
                             </ul>
                         </li>
                     </ul>
@@ -177,7 +177,7 @@
                     <ul>
                         <li>S3</li>
                         <li>GCS</li>
-                        <li>Azure Blob & ADLS Gen2 <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Azure Blob & ADLS Gen2 </li>
                     </ul>
                 </section>
 
@@ -189,13 +189,13 @@
                         <i class="fas fa-cogs"></i> ✅ 2. Snowpipe – Gestion & Administration
                     </h2>
 
-                    <p>Source : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : Snowflake Documentation </p>
 
                     <h3>✔ Suppression des fichiers source</h3>
                     <ul>
                         <li>Snowpipe ne supporte pas <code class="inline-code">PURGE</code>.</li>
                         <li>Il ne supprime pas automatiquement les fichiers du stage.</li>
-                        <li>Il faut utiliser <code class="inline-code">REMOVE</code>, ou configurer la politique de cycle de vie du cloud. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Il faut utiliser <code class="inline-code">REMOVE</code>, ou configurer la politique de cycle de vie du cloud. </li>
                     </ul>
 
                     <h3>✔ Chargement de données historiques</h3>
@@ -206,7 +206,7 @@
                             <ul>
                                 <li>Charger manuellement via <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
                                 <li>Reconfigurer Snowpipe pour l'ingestion automatique</li>
-                                <li>Utiliser <code class="inline-code">ALTER PIPE … REFRESH</code> pour éviter les doublons <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Utiliser <code class="inline-code">ALTER PIPE … REFRESH</code> pour éviter les doublons </li>
                             </ul>
                         </li>
                     </ul>
@@ -218,7 +218,7 @@
                         <li>Vérifier via <code class="inline-code">SYSTEM$PIPE_STATUS</code></li>
                         <li>Recréer le pipe (<code class="inline-code">CREATE OR REPLACE PIPE</code>)</li>
                         <li>Vérifier la configuration cloud (SNS/SQS, Event Grid…)</li>
-                        <li>Reprendre le pipe <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Reprendre le pipe </li>
                     </ol>
                 </section>
 
@@ -242,7 +242,7 @@ AS COPY INTO mytable
 FROM @mystage/path
 FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                     <p><strong>Points clés :</strong></p>
                     <ul>
                         <li><code class="inline-code">AUTO_INGEST = TRUE</code> active les notifications pour ingestion automatique</li>
@@ -251,12 +251,12 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                             Supporte deux types de sources :
                             <ul>
                                 <li>Fichiers en stage</li>
-                                <li>Source de streaming (<code class="inline-code">DATA_SOURCE(TYPE => 'STREAMING')</code>) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Source de streaming (<code class="inline-code">DATA_SOURCE(TYPE => 'STREAMING')</code>) </li>
                             </ul>
                         </li>
                     </ul>
                     <div class="warning-note">
-                        ⚠ <strong>Recommandations :</strong> Ne pas utiliser CURRENT_DATE, CURRENT_TIMESTAMP, etc. dans un COPY Snowpipe <span class="reference">[docs.snowflake.com]</span>
+                        ⚠ <strong>Recommandations :</strong> Ne pas utiliser CURRENT_DATE, CURRENT_TIMESTAMP, etc. dans un COPY Snowpipe 
                     </div>
 
                     <h3>✔ DESCRIBE PIPE</h3>
@@ -265,11 +265,11 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                         <li>Définition COPY</li>
                         <li>Canal de notification</li>
                         <li>Propriétaire</li>
-                        <li>Type de pipe (manuel ou auto-généré par Snowpipe Streaming HP) <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Type de pipe (manuel ou auto-généré par Snowpipe Streaming HP) </li>
                     </ul>
 
                     <h3>✔ SHOW PIPES</h3>
-                    <p>Liste tous les pipes accessibles, avec filtre possible via LIKE. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Liste tous les pipes accessibles, avec filtre possible via LIKE. </p>
                 </section>
 
                 <!-- ============================================
@@ -280,7 +280,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                         <i class="fas fa-bolt"></i> ✅ 4. Snowpipe Streaming – Overview
                     </h2>
 
-                    <p>Sources : Snowflake Documentation <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Sources : Snowflake Documentation </p>
 
                     <h3>✔ Principe</h3>
                     <p>Snowpipe Streaming permet l'ingestion ligne par ligne en quasi temps réel, sans utiliser de stage fichier → flux direct dans Snowflake.</p>
@@ -290,7 +290,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                         <li>Latence extrêmement faible</li>
                         <li>Pas de fichiers compressés intermédiaires</li>
                         <li>Pipelines simplifiés</li>
-                        <li>Serverless et auto‑scalable <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Serverless et auto‑scalable </li>
                     </ul>
 
                     <h3>✔ Deux architectures</h3>
@@ -301,7 +301,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                         <li>Prix basé sur le débit (GB non compressé)</li>
                         <li>S'appuie sur un objet PIPE, contre lequel sont ouverts les "channels"</li>
                         <li>Ingestion via REST API</li>
-                        <li>Validation de schéma côté serveur <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Validation de schéma côté serveur </li>
                     </ul>
 
                     <h4>2. Snowpipe Streaming – Architecture Classique</h4>
@@ -315,7 +315,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                             <ul>
                                 <li>CONTINUE</li>
                                 <li>SKIP_BATCH</li>
-                                <li>ABORT (défaut) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>ABORT (défaut) </li>
                             </ul>
                         </li>
                     </ul>
@@ -337,7 +337,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                                 <li>Détection par notifications cloud</li>
                                 <li>Latence en minutes</li>
                                 <li>Appending only (pas d'UPSERT)</li>
-                                <li>Nécessite CREATE PIPE <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Nécessite CREATE PIPE </li>
                             </ul>
                         </div>
 
@@ -347,7 +347,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                                 <li>Données streamées directement (pas de stage fichier)</li>
                                 <li>Ingestion quasi-immédiate</li>
                                 <li>Utilise un PIPE (HP) ou un channel (classique)</li>
-                                <li>Basé sur SDK (Java/Python) <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Basé sur SDK (Java/Python) </li>
                             </ul>
                         </div>
                     </div>

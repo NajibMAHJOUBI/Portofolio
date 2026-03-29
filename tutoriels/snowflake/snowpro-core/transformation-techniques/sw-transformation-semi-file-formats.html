@@ -157,7 +157,7 @@
                         <i class="fas fa-code-branch"></i> ✅ 1. Les types semi‑structurés dans Snowflake
                     </h2>
 
-                    <p>Source : <em>Data Types Semi‑structured</em> <span class="reference">[booleandata.ai]</span></p>
+                    <p>Source : <em>Data Types Semi‑structured</em> </p>
 
                     <p>Snowflake supporte nativement plusieurs types semi‑structurés, optimisés pour manipuler des formats comme JSON, Avro, ORC, Parquet, XML.</p>
 
@@ -169,7 +169,7 @@
                     </ul>
 
                     <div class="info-note">
-                        Ces types sont stockés dans des micro‑partitions en format columnar, ce qui favorise un traitement performant, même dans les structures imbriquées. Snowflake stocke également des métadonnées détaillées dans chaque micro‑partition, incluant les valeurs min/max et d'autres statistiques utiles pour le pruning. <span class="reference">[booleandata.ai]</span>
+                        Ces types sont stockés dans des micro‑partitions en format columnar, ce qui favorise un traitement performant, même dans les structures imbriquées. Snowflake stocke également des métadonnées détaillées dans chaque micro‑partition, incluant les valeurs min/max et d'autres statistiques utiles pour le pruning. 
                     </div>
                 </section>
 
@@ -181,7 +181,7 @@
                         <i class="fas fa-database"></i> ✅ 2. Stockage & architecture des données semi‑structurées
                     </h2>
 
-                    <p>Source : <em>Micro‑partitions & Data Clustering</em> <span class="reference">[booleandata.ai]</span></p>
+                    <p>Source : <em>Micro‑partitions & Data Clustering</em> </p>
 
                     <h3>✔ Les points essentiels à retenir pour l'examen</h3>
                     <ul>
@@ -199,7 +199,7 @@
                         <i class="fas fa-search"></i> ✅ 3. Interroger des données semi‑structurées
                     </h2>
 
-                    <p>Source : <em>Querying Semi‑structured Data</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Querying Semi‑structured Data</em> </p>
 
                     <p>La documentation décrit comment interroger des données hiérarchiques stockées dans un type VARIANT.</p>
 
@@ -223,7 +223,7 @@ SELECT v:items[0].price FROM raw_table;</code></pre>
                         <li>Conversion via TO_VARIANT, TO_OBJECT, TO_ARRAY</li>
                         <li>Cast explicite pour convertir un champ en type SQL classique (ex → ::string, ::number)</li>
                     </ul>
-                    <p>La documentation rappelle que Snowflake inclut des opérateurs et fonctions spécifiques pour exploiter les formats semi‑structurés. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation rappelle que Snowflake inclut des opérateurs et fonctions spécifiques pour exploiter les formats semi‑structurés. </p>
                 </section>
 
                 <!-- ============================================
@@ -261,7 +261,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                         <li>ARRAY_AGG</li>
                         <li>OBJECT_AGG</li>
                     </ul>
-                    <p>Ce point apparaît dans la liste officielle des fonctions d'agrégation. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Ce point apparaît dans la liste officielle des fonctions d'agrégation. </p>
                     <p>Cela permet de regrouper des objets JSON, par exemple pour reconstruire un document.</p>
                 </section>
 
@@ -274,7 +274,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                     </h2>
 
                     <h3>✔ Micro‑partitions et pruning</h3>
-                    <p>Les métadonnées minimales/maximales de colonnes VARIANT permettent du pruning très efficace. <span class="reference">[booleandata.ai]</span></p>
+                    <p>Les métadonnées minimales/maximales de colonnes VARIANT permettent du pruning très efficace. </p>
 
                     <h3>✔ Coût structurel</h3>
                     <p>Les formats semi‑structurés étant colonaires + compressés, Snowflake peut lire uniquement les champs demandés.</p>
@@ -306,7 +306,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                             32
                                 <td><strong>Stockage</strong>
                                 卷第Snowflake stocke-t-il JSON tel quel ?
-                                卷第❌ Non, il stocke en colonnes, compressé, avec métadonnées, dans des micro‑partitions <span class="reference">[booleandata.ai]</span>
+                                卷第❌ Non, il stocke en colonnes, compressé, avec métadonnées, dans des micro‑partitions 
                             
                             32
                                 <td><strong>Navigation</strong>
@@ -316,7 +316,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                             32
                                 <td><strong>Performance</strong>
                                 卷第Le semi‑structuré supporte-t-il le pruning ?
-                                卷第✔ Oui, grâce aux métadonnées des micro‑partitions <span class="reference">[booleandata.ai]</span>
+                                卷第✔ Oui, grâce aux métadonnées des micro‑partitions 
                             
                             32
                                 <td><strong>Flatten</strong>
@@ -348,7 +348,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Stockés dans micro‑partitions columnaires (50–500MB)</h4>
-                            <p><span class="reference">[booleandata.ai]</span></p>
+                            <p></p>
                         </div>
 
                         <div class="usage-card">
@@ -361,7 +361,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Pruning & performance : pleinement supporté</h4>
-                            <p><span class="reference">[booleandata.ai]</span></p>
+                            <p></p>
                         </div>
                     </div>
                 </section>

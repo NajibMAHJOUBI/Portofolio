@@ -187,12 +187,12 @@
                         <li>organiser plusieurs opérations en un seul appel,</li>
                         <li>être réutilisée par différents utilisateurs ou processus.</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         Snowflake précise qu'une procédure est utile pour automatiser des tâches nécessitant plusieurs opérations SQL, comme un nettoyage de tables.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -204,14 +204,14 @@
                         <i class="fas fa-lightbulb"></i>2. Cas d'usage typiques
                     </h2>
 
-                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Selon la documentation : </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>✔ Automatiser des tâches répétées (purge, maintenance, traitement de lots)</li>
                         <li>✔ Générer et exécuter du SQL dynamique</li>
                         <li>✔ Cacher des opérations complexes derrière un appel simple</li>
                         <li>✔ Donner accès à des fonctions sensibles grâce au modèle "owner's rights" (voir ci‑dessous)</li>
                     </ul>
-                    <p>Exemple donné dans la doc : un nettoyage de tables basé sur une date passée en paramètre. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Exemple donné dans la doc : un nettoyage de tables basé sur une date passée en paramètre. </p>
                 </section>
 
                 <!-- ============================================
@@ -225,7 +225,7 @@
                     <p>Particularité clé :</p>
                     <div class="warning-note">
                         <p>Une stored procedure s'exécute avec les privilèges du rôle qui la possède, pas du rôle qui la lance.</p>
-                        <p><span class="reference">[docs.snowflake.com]</span></p>
+                        <p></p>
                     </div>
 
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -242,7 +242,7 @@
                         <i class="fas fa-balance-scale"></i>4. Stored Procedure vs UDF : différences essentielles
                     </h2>
 
-                    <p>La documentation insiste sur les différences : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>La documentation insiste sur les différences : </p>
 
                     <table class="tutorial-table">
                         <thead>
@@ -285,7 +285,7 @@
                         <i class="fas fa-code"></i>5. Langages supportés
                     </h2>
 
-                    <p>Vous écrivez la logique (handler) dans l'un des langages suivants : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Vous écrivez la logique (handler) dans l'un des langages suivants : </p>
 
                     <table class="tutorial-table">
                         <thead>
@@ -311,7 +311,7 @@
                         <i class="fas fa-tools"></i>6. Outils utilisables pour créer/administrer des Stored Procedures
                     </h2>
 
-                    <p>Snowflake documente plusieurs possibilités : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake documente plusieurs possibilités : </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>SQL direct (Snowsight, SnowSQL, worksheets)</li>
                         <li>Snowpark API (Java / Python / Scala)</li>
@@ -329,7 +329,7 @@
                         <i class="fas fa-play"></i>7. Fonctionnement d'une Stored Procedure
                     </h2>
 
-                    <p>Selon la documentation : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Selon la documentation : </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>L'utilisateur exécute <code class="inline-code">CALL my_proc(...)</code></li>
                         <li>Snowflake invoque le handler (Java/Python/JS…) en lui passant les arguments</li>
@@ -351,7 +351,7 @@
                         <li><strong>Automatisation</strong> — idéal pour les pipelines ETL/ELT avancés</li>
                         <li><strong>Réutilisation</strong> — logique centralisée dans un objet maintenable</li>
                         <li><strong>Encapsulation</strong> — masque la complexité aux utilisateurs finaux</li>
-                        <li><strong>Sécurité</strong> — owner's rights pour limiter les privilèges directs <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Sécurité</strong> — owner's rights pour limiter les privilèges directs </li>
                     </ul>
                 </section>
 

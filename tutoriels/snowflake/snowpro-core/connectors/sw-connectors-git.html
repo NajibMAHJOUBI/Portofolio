@@ -152,17 +152,17 @@
                         <i class="fab fa-git-alt"></i> ✅ 1. Introduction : Git dans Snowflake
                     </h2>
 
-                    <p>Source : <em>Using a Git repository in Snowflake</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Using a Git repository in Snowflake</em> </p>
 
                     <p>Snowflake permet d'intégrer un dépôt Git distant (GitHub, GitLab, etc.) et de synchroniser son contenu dans un <strong>Git repository clone</strong> dans Snowflake.</p>
-                    <p>Ce clone constitue une copie locale complète : branches, tags, commits. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Ce clone constitue une copie locale complète : branches, tags, commits. </p>
 
                     <p>Avec cette intégration, vous pouvez :</p>
                     <ul>
                         <li>Consommer des fichiers Git comme du code exécuté dans Snowflake (procédures, UDF handlers…).</li>
                         <li>Naviguer dans les branches, tags, fichiers.</li>
                         <li>Exécuter des fichiers .sql ou .py.</li>
-                        <li>Pousser des commits depuis Snowflake (uniquement Workspaces, Streamlit, Notebooks). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Pousser des commits depuis Snowflake (uniquement Workspaces, Streamlit, Notebooks). </li>
                     </ul>
                 </section>
 
@@ -178,13 +178,13 @@
                     <ul>
                         <li>Copie locale complète d'un dépôt Git : branches, tags, commits.</li>
                         <li>Accès aux fichiers comme s'ils étaient dans un stage Snowflake.</li>
-                        <li>Snowflake peut fetch les dernières modifications du dépôt externe. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Snowflake peut fetch les dernières modifications du dépôt externe. </li>
                     </ul>
 
                     <h3>✔ Synchronisation (FETCH)</h3>
                     <ul>
                         <li>Snowflake met à jour le clone via <code class="inline-code">ALTER GIT REPOSITORY &lt;repo&gt; FETCH</code>.</li>
-                        <li>Récupère nouveaux commits et nettoie les éléments supprimés du remote. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Récupère nouveaux commits et nettoie les éléments supprimés du remote. </li>
                     </ul>
                 </section>
 
@@ -196,7 +196,7 @@
                         <i class="fas fa-tools"></i> ✅ 3. Mise en place : Setup Git dans Snowflake
                     </h2>
 
-                    <p>Source : <em>Setting up Snowflake to use Git</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Setting up Snowflake to use Git</em> </p>
 
                     <h3>✔ Méthodes d'accès pour le dépôt Git</h3>
                     <p>Snowflake supporte plusieurs types d'authentification :</p>
@@ -223,7 +223,7 @@
                         <i class="fas fa-terminal"></i> ✅ 4. SQL Commands – Git dans Snowflake
                     </h2>
 
-                    <p>Source : <em>Git operations in Snowflake</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>Git operations in Snowflake</em> </p>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
@@ -244,7 +244,7 @@
                                 <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                                 <pre><code>ALTER GIT REPOSITORY my_repo FETCH;</code></pre>
                             </div>
-                            <p><span class="reference">[docs.snowflake.com]</span></p>
+                            <p></p>
                         </div>
 
                         <div class="usage-card">
@@ -254,12 +254,12 @@
                                 <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                                 <pre><code>SHOW GIT BRANCHES IN my_repo;</code></pre>
                             </div>
-                            <p><span class="reference">[docs.snowflake.com]</span></p>
+                            <p></p>
                         </div>
 
                         <div class="usage-card">
                             <h4>🧩 4.4 SHOW GIT TAGS</h4>
-                            <p>Affiche tous les tags. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Affiche tous les tags. </p>
                         </div>
 
                         <div class="usage-card">
@@ -270,7 +270,7 @@
                                 <li>created_on</li>
                                 <li>origin</li>
                                 <li>api_integration</li>
-                                <li>git_credentials <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>git_credentials </li>
                             </ul>
                         </div>
 
@@ -295,7 +295,7 @@
                         <li>D'exécuter directement un script .sql ou .py</li>
                         <li>D'utiliser des fichiers provenant d'une branche spécifique</li>
                     </ul>
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                 </section>
 
                 <!-- ============================================
@@ -307,7 +307,7 @@
                     </h2>
 
                     <ul>
-                        <li>Les opérations Git requièrent des privilèges spécifiques, par exemple OWNERSHIP pour <code class="inline-code">DESCRIBE GIT REPOSITORY</code>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les opérations Git requièrent des privilèges spécifiques, par exemple OWNERSHIP pour <code class="inline-code">DESCRIBE GIT REPOSITORY</code>. </li>
                         <li><code class="inline-code">API_ALLOWED_PREFIXES</code> dans l'API Integration limite les URLs Git accessibles.</li>
                         <li>Les secrets permettent de stocker les tokens Git de façon sécurisée.</li>
                     </ul>
@@ -328,11 +328,11 @@
                         <tbody>
                             32
                                 <td><strong>Git Repository Clone</strong>
-                                一道道Clone complet d'un repo Git dans Snowflake <span class="reference">[docs.snowflake.com]</span>
+                                一道道Clone complet d'un repo Git dans Snowflake 
                             
                             32
                                 <td><strong>Accès Git</strong>
-                                一道道Public, Token (SECRET), OAuth2 <span class="reference">[docs.snowflake.com]</span>
+                                一道道Public, Token (SECRET), OAuth2 
                             
                             32
                                 <td><strong>API INTEGRATION</strong>
@@ -340,11 +340,11 @@
                             
                             32
                                 <td><strong>Commandes clés</strong>
-                                一道一道ALTER GIT REPOSITORY FETCH, SHOW GIT BRANCHES/TAGS, DESCRIBE GIT REPOSITORY <span class="reference">[docs.snowflake.com]</span>
+                                一道一道ALTER GIT REPOSITORY FETCH, SHOW GIT BRANCHES/TAGS, DESCRIBE GIT REPOSITORY 
                             
                             32
                                 <td><strong>Utilisation</strong>
-                                一道道Versionner du code utilisé en Snowflake (UDF, SP, tasks…) <span class="reference">[docs.snowflake.com]</span>
+                                一道道Versionner du code utilisé en Snowflake (UDF, SP, tasks…) 
                             
                         </tbody>
                     划

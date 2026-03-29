@@ -162,7 +162,7 @@
                         <i class="fas fa-cloud"></i> ✅ 1. Qu'est‑ce que le Cloud Services Compute ?
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <p>Le Cloud Services layer est une couche de l'architecture Snowflake qui orchestre toutes les opérations nécessaires pour exécuter, optimiser, et sécuriser les requêtes :</p>
                     <ul>
@@ -176,7 +176,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         Snowflake indique que ce sont des <strong>compute resources gérées intégralement par Snowflake</strong>.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -195,7 +195,7 @@
                     <p>MAIS Snowflake applique une règle spécifique :</p>
                     <div class="warning-note">
                         <strong>Les crédits Cloud Services ne sont facturés que si leur consommation quotidienne dépasse 10 % de la consommation quotidienne des warehouses.</strong>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <p>Cela signifie :</p>
                     <ul>
@@ -211,7 +211,7 @@
                             <li>Le serverless compute <strong>n'entre pas</strong> dans le calcul des 10 %.</li>
                             <li>L'ajustement mensuel est la somme des ajustements quotidiens.</li>
                         </ul>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -237,7 +237,7 @@
                             32<td><strong>Total</strong></td><td><strong>400</strong></td><td><strong>48</strong></td><td><strong>-35</strong></td><td><strong>413</strong></td>
                         </tbody>
                     </table>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                     <p>➡ <strong>Interprétation :</strong> Sur la période, 48 crédits Cloud Services ont été consommés, mais seulement 35 ont été facturés (les 13 restants ont été absorbés par la règle des 10 %).</p>
                 </section>
 
@@ -258,7 +258,7 @@
                         <li>gestion de l'état global (distributed metadata store)</li>
                         <li>services transverses (caching, coordination des warehouses)</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
@@ -299,7 +299,7 @@
                             
                         </tbody>
                     </table>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -316,7 +316,7 @@
                         <li>Il est normalement <strong>minoritaire</strong> par rapport aux warehouses.</li>
                         <li>Cette règle évite une facturation excessive en offrant un "crédit" quotidien équivalent à 10 % de l'usage warehouses.</li>
                     </ul>
-                    <p>Cette politique est un <strong>point fondamental à connaître pour l'examen</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Cette politique est un <strong>point fondamental à connaître pour l'examen</strong>. </p>
                 </section>
 
                 <!-- ============================================
@@ -352,12 +352,12 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Cloud Services fait partie du compute</h4>
-                            <p>→ donc consommateur de credits. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ donc consommateur de credits. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Règle de facturation</h4>
-                            <p>Cloud Services Credits > 10 % des Warehouse Credits (par jour) <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Cloud Services Credits > 10 % des Warehouse Credits (par jour) </p>
                         </div>
 
                         <div class="usage-card">
@@ -372,7 +372,7 @@
 
                         <div class="usage-card">
                             <h4>✔ Cloud Services inclut</h4>
-                            <p>authentification, metadata, optimisation de requêtes, orchestration interne <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>authentification, metadata, optimisation de requêtes, orchestration interne </p>
                         </div>
 
                         <div class="usage-card">
@@ -396,7 +396,7 @@
                             <li><strong>Cloud Services</strong> = compute administratif de Snowflake.</li>
                             <li>Chaque jour, Snowflake compare : crédits Cloud Services et <strong>10 % des crédits Warehouse</strong>.</li>
                             <li>Pas de facturation si Cloud Services ≤ 10 % des Warehouse.</li>
-                            <li>Facturation seulement pour la partie excédant ces 10 %. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Facturation seulement pour la partie excédant ces 10 %. </li>
                         </ul>
                     </div>
                 </section>

@@ -157,25 +157,25 @@
                         <i class="fas fa-globe"></i> ✅ 1. Introduction – Réplication & failover multi‑comptes
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
-                    <p><strong>Objectif :</strong> répliquer des objets d'un compte source vers un ou plusieurs comptes cibles d'une même organisation, entre régions et même entre clouds, pour la continuité d'activité et la reprise après sinistre. Les objets répliqués dans les cibles sont des secondaires (réplicas). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Objectif :</strong> répliquer des objets d'un compte source vers un ou plusieurs comptes cibles d'une même organisation, entre régions et même entre clouds, pour la continuité d'activité et la reprise après sinistre. Les objets répliqués dans les cibles sont des secondaires (réplicas). </p>
 
                     <h3>✔ Éditions requises</h3>
                     <ul>
                         <li>La réplication de bases & de partages est disponible pour <strong>toutes les éditions</strong>.</li>
-                        <li>La réplication d'autres objets de compte (users, roles, warehouses, etc.) ainsi que failover/failback nécessitent <strong>Business Critical Edition (ou +)</strong>. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La réplication d'autres objets de compte (users, roles, warehouses, etc.) ainsi que failover/failback nécessitent <strong>Business Critical Edition (ou +)</strong>. </li>
                     </ul>
 
                     <h3>✔ Groupes de réplication & de basculement</h3>
                     <ul>
                         <li><strong>Replication group</strong> = collection d'objets répliqués en lecture seule.</li>
-                        <li><strong>Failover group</strong> = replication group qui peut être promu en primaire pour passer en lecture/écriture ; fournit une cohérence "point‑in‑time" côté cible. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Failover group</strong> = replication group qui peut être promu en primaire pour passer en lecture/écriture ; fournit une cohérence "point‑in‑time" côté cible. </li>
                     </ul>
 
                     <div class="info-note">
                         <strong>Cas d'usage BC/DR :</strong> basculements planifiés (tests DR), non planifiés (panne régionale/cloud), migrations entre régions/clouds, et secondaires multiples lisibles en parallèle.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -192,25 +192,25 @@
                         <li>Un objet ne peut être que dans <strong>un seul failover group</strong>.</li>
                         <li>Un objet peut être dans plusieurs replication groups si chaque groupe réplique vers un compte cible différent.</li>
                         <li>Un objet ne peut pas être simultanément dans un replication group et un failover group.</li>
-                        <li>Seuls les <strong>outbound shares</strong> sont réplicables (pas les inbound). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Seuls les <strong>outbound shares</strong> sont réplicables (pas les inbound). </li>
                     </ul>
 
                     <h3>✔ Limites & Privilèges</h3>
                     <ul>
-                        <li>Un seul replication/failover group peut contenir des objets autres que bases & shares pour un même compte. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Un seul replication/failover group peut contenir des objets autres que bases & shares pour un même compte. </li>
                         <li>
                             Privilèges :
                             <ul>
                                 <li><code class="inline-code">CREATE REPLICATION GROUP</code> / <code class="inline-code">CREATE FAILOVER GROUP</code> sur le compte (ACCOUNTADMIN).</li>
                                 <li><code class="inline-code">OWNERSHIP</code> sur les groupes pour gérer ALT/GRANT/REVOKE.</li>
-                                <li><code class="inline-code">FAILOVER</code> sur un failover group pour promouvoir un secondaire en primaire. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li><code class="inline-code">FAILOVER</code> sur un failover group pour promouvoir un secondaire en primaire. </li>
                             </ul>
                         </li>
                     </ul>
 
                     <div class="info-note">
                         <strong>Recommandation stratégique :</strong> Snowflake recommande l'<strong>account replication (group‑based)</strong> plutôt que la database replication "historique", car elle inclut plus d'objets (ex. rôles, users, warehouses) et gère mieux des cas de sécurité/dangling references.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 
@@ -231,7 +231,7 @@
                                 <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                                 <pre><code>SELECT SYSTEM$GLOBAL_ACCOUNT_SET_PARAMETER('&lt;org.account&gt;', 'ENABLE_ACCOUNT_DATABASE_REPLICATION', 'true');</code></pre>
                             </div>
-                            <p>À exécuter pour chaque compte impliqué (source et cibles). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>À exécuter pour chaque compte impliqué (source et cibles). </p>
                         </li>
                         <li>
                             <strong>Basculer d'un modèle "database replication" vers "group‑based"</strong>
@@ -239,14 +239,14 @@
                                 <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                                 <pre><code>SELECT SYSTEM$DISABLE_DATABASE_REPLICATION('mydb');</code></pre>
                             </div>
-                            <p>Désactiver la réplication DB existante avant d'ajouter la DB à un failover/replication group. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>Désactiver la réplication DB existante avant d'ajouter la DB à un failover/replication group. </p>
                         </li>
-                        <li>Créer un primary failover group (ou replication group) dans le compte source, y inclure les objets (DBs, shares, users/roles/warehouses si BCE), définir les comptes cibles et la planification (refresh). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Créer un secondary failover group correspondant dans chaque compte cible puis rafraîchir (initial + récurrent) pour synchroniser. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Créer un primary failover group (ou replication group) dans le compte source, y inclure les objets (DBs, shares, users/roles/warehouses si BCE), définir les comptes cibles et la planification (refresh). </li>
+                        <li>Créer un secondary failover group correspondant dans chaque compte cible puis rafraîchir (initial + récurrent) pour synchroniser. </li>
                     </ol>
 
                     <div class="warning-note">
-                        ⚠️ <strong>Note :</strong> Upgrade vers Business Critical → failover peut prendre jusqu'à <strong>12 h</strong> à devenir disponible. <span class="reference">[docs.snowflake.com]</span>
+                        ⚠️ <strong>Note :</strong> Upgrade vers Business Critical → failover peut prendre jusqu'à <strong>12 h</strong> à devenir disponible. 
                     </div>
                 </section>
 
@@ -258,23 +258,23 @@
                         <i class="fas fa-exchange-alt"></i> ✅ 4. Failover & Failback (basculement / restauration)
                     </h2>
 
-                    <p><strong>Failover group :</strong> permet de promouvoir un secondaire (cible) en primaire ; les objets du groupe deviennent écrits sur le nouveau primaire et en lecture seule sur l'ex‑primaire. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Failover group :</strong> permet de promouvoir un secondaire (cible) en primaire ; les objets du groupe deviennent écrits sur le nouveau primaire et en lecture seule sur l'ex‑primaire. </p>
 
                     <h3>✔ Pré‑requis</h3>
                     <ul>
                         <li>Réplication activée entre comptes</li>
                         <li>Primary/secondary failover groups existants</li>
-                        <li>Refresh initial & scheduler en place <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Refresh initial & scheduler en place </li>
                     </ul>
 
                     <h3>✔ Orchestration</h3>
-                    <p>Via Snowsight (bulk failover recommandé pour cohérence : promouvoir tous les groupes et connexions en même temps) ou SQL. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Via Snowsight (bulk failover recommandé pour cohérence : promouvoir tous les groupes et connexions en même temps) ou SQL. </p>
 
                     <h3>✔ Scénarios</h3>
                     <ul>
                         <li>DR planifié (exercices)</li>
                         <li>DR non planifié (panne régionale/cloud)</li>
-                        <li>Migration contrôlée <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Migration contrôlée </li>
                     </ul>
                 </section>
 
@@ -286,15 +286,15 @@
                         <i class="fas fa-link"></i> ✅ 5. Client Redirect (redirection des connexions client)
                     </h2>
 
-                    <p><strong>But :</strong> exposer une URL de connexion stable (basée sur un objet connection) qui pointe vers l'accès primaire, sans changer les paramètres côté application lors d'un basculement/migration. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>But :</strong> exposer une URL de connexion stable (basée sur un objet connection) qui pointe vers l'accès primaire, sans changer les paramètres côté application lors d'un basculement/migration. </p>
 
                     <div class="info-note">
                         <strong>URL :</strong> <code class="inline-code">organization_name-connection_name.snowflakecomputing.com</code> (ne contient pas l'identifiant de compte) ; l'admin désigne dans quel compte se trouve la connexion primaire.
                         <br>En cas de panne, promouvoir une connexion liée dans un autre compte/région et garder la même URL côté clients.
-                        <br>Les comptes primaire & secondaire doivent être dans des <strong>régions différentes</strong>. <span class="reference">[docs.snowflake.com]</span>
+                        <br>Les comptes primaire & secondaire doivent être dans des <strong>régions différentes</strong>. 
                     </div>
 
-                    <p><strong>Intégration OAuth :</strong> Client Redirect est compatible avec Snowflake OAuth custom clients ; utile lors de migrations ou DR. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Intégration OAuth :</strong> Client Redirect est compatible avec Snowflake OAuth custom clients ; utile lors de migrations ou DR. </p>
                 </section>
 
                 <!-- ============================================
@@ -306,17 +306,17 @@
                     </h2>
 
                     <ul>
-                        <li><strong>Règle globale :</strong> pas de frais d'ingress Snowflake ; frais d'egress quand des données sortent de la région du compte (vers autre région du même cloud ou autre cloud). <strong>Transferts intra‑région gratuits.</strong> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Règle globale :</strong> pas de frais d'ingress Snowflake ; frais d'egress quand des données sortent de la région du compte (vers autre région du même cloud ou autre cloud). <strong>Transferts intra‑région gratuits.</strong> </li>
                         <li>
                             Fonctionnalités qui génèrent des coûts de transfert (exemples reliés à ce sujet) :
                             <ul>
                                 <li>Replication (bases/objets) vers un compte dans une autre région/cloud.</li>
-                                <li>Client Redirect lui‑même ne facture pas, mais les flux de données associés (ex. réplication, déchargement, external functions) peuvent générer de l'egress si cross‑region/cloud. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Client Redirect lui‑même ne facture pas, mais les flux de données associés (ex. réplication, déchargement, external functions) peuvent générer de l'egress si cross‑region/cloud. </li>
                             </ul>
                         </li>
                         <li>
                             <strong>Suivi/visibilité :</strong> vues ACCOUNT_USAGE / ORGANIZATION_USAGE (ex. DATA_TRANSFER_HISTORY, DATABASE_REPLICATION_USAGE_HISTORY) ou Snowsight Cost management → Data Transfer.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </li>
                     </ul>
                 </section>
@@ -332,32 +332,32 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>❓ Qu'est‑ce qu'un failover group ?</h4>
-                            <p>→ Un replication group promouvable en primaire, permettant lecture/écriture après failover, avec cohérence point‑in‑time. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Un replication group promouvable en primaire, permettant lecture/écriture après failover, avec cohérence point‑in‑time. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Contraintes d'appartenance aux groupes</h4>
-                            <p>→ Un objet = 1 seul failover group ; possible plusieurs replication groups si comptes cibles différents ; pas à la fois dans un replication group et un failover group. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Un objet = 1 seul failover group ; possible plusieurs replication groups si comptes cibles différents ; pas à la fois dans un replication group et un failover group. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Activer la réplication pour les comptes</h4>
-                            <p>→ <code class="inline-code">SYSTEM$GLOBAL_ACCOUNT_SET_PARAMETER('&lt;org.account&gt;', 'ENABLE_ACCOUNT_DATABASE_REPLICATION','true')</code> (org admin). <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">SYSTEM$GLOBAL_ACCOUNT_SET_PARAMETER('&lt;org.account&gt;', 'ENABLE_ACCOUNT_DATABASE_REPLICATION','true')</code> (org admin). </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Basculer d'une DB replication "ancienne" vers group‑based</h4>
-                            <p>→ <code class="inline-code">SYSTEM$DISABLE_DATABASE_REPLICATION('mydb')</code> puis ajouter la DB au failover group. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">SYSTEM$DISABLE_DATABASE_REPLICATION('mydb')</code> puis ajouter la DB au failover group. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Client Redirect – URL</h4>
-                            <p>→ <code class="inline-code">org-connection.snowflakecomputing.com</code> ; promotion de la connexion secondaire sans changer l'URL client ; régions différentes requises. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ <code class="inline-code">org-connection.snowflakecomputing.com</code> ; promotion de la connexion secondaire sans changer l'URL client ; régions différentes requises. </p>
                         </div>
 
                         <div class="usage-card">
                             <h4>❓ Coûts data transfer</h4>
-                            <p>→ Egress si inter‑région/inter‑cloud (réplication, unloading, external access…) ; intra‑région = 0. <span class="reference">[docs.snowflake.com]</span></p>
+                            <p>→ Egress si inter‑région/inter‑cloud (réplication, unloading, external access…) ; intra‑région = 0. </p>
                         </div>
                     </div>
                 </section>
@@ -385,7 +385,7 @@ SELECT SYSTEM$DISABLE_DATABASE_REPLICATION('MYDB');
                     </div>
 
                     <div class="info-note">
-                        <strong>Astuce :</strong> après upgrade vers BCE, attendre jusqu'à <strong>12 h</strong> pour que les capacités de failover deviennent disponibles. <span class="reference">[docs.snowflake.com]</span>
+                        <strong>Astuce :</strong> après upgrade vers BCE, attendre jusqu'à <strong>12 h</strong> pour que les capacités de failover deviennent disponibles. 
                     </div>
                 </section>
             </main>

@@ -165,7 +165,7 @@
                         <li>des erreurs,</li>
                         <li>des dérives de données,</li>
                         <li>des charges ETL,</li>
-                        <li>des métriques d'usage. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>des métriques d'usage. </li>
                     </ul>
 
                     <h3>✔ 1.1. Fonctionnement d'une Snowflake Alert</h3>
@@ -182,7 +182,7 @@
                         <li>détecter seuils de KPI dépassés,</li>
                         <li>détecter des anomalies dans les données,</li>
                         <li>activer une notification automatique,</li>
-                        <li>déclencher une remédiation SQL. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>déclencher une remédiation SQL. </li>
                     </ul>
 
                     <div class="info-note">
@@ -212,7 +212,7 @@
                         <li>une adresse e-mail,</li>
                         <li>une file Cloud provider (SNS / Event Grid / Pub/Sub),</li>
                         <li>un webhook (Slack, Teams, PagerDuty),</li>
-                        <li>ou via SQL. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>ou via SQL. </li>
                     </ul>
                 </section>
 
@@ -240,12 +240,12 @@
     TYPE=EMAIL
     ENABLED=TRUE;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ Restrictions e-mails</h3>
                     <ul>
                         <li>Snowflake ne peut envoyer qu'aux utilisateurs du même compte Snowflake.</li>
-                        <li>L'envoi se fait via AWS SES (détail important) et les messages peuvent être temporairement conservés 30 jours. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>L'envoi se fait via AWS SES (détail important) et les messages peuvent être temporairement conservés 30 jours. </li>
                     </ul>
 
                     <h3>✔ ALLOWED_RECIPIENTS</h3>
@@ -257,7 +257,7 @@
     ENABLED=TRUE
     ALLOWED_RECIPIENTS=('first.last@example.com');</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -272,7 +272,7 @@
                     <ul>
                         <li>Amazon SNS,</li>
                         <li>Azure Event Grid,</li>
-                        <li>Google Cloud Pub/Sub. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Google Cloud Pub/Sub. </li>
                     </ul>
                     <p>Ces intégrations permettent :</p>
                     <ul>
@@ -294,7 +294,7 @@
                     <ul>
                         <li>Slack,</li>
                         <li>Microsoft Teams,</li>
-                        <li>PagerDuty. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>PagerDuty. </li>
                     </ul>
 
                     <h3>✔ 5.1. Prérequis : créer un secret</h3>
@@ -303,7 +303,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE SECRET my_webhook_secret TYPE=GENERIC_STRING ... ;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ 5.2. Créer l'intégration</h3>
                     <div class="code-block">
@@ -312,14 +312,14 @@
     TYPE=WEBHOOK ...
     SECRET=my_webhook_secret;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ 5.3. Envoyer une notification</h3>
                     <p>On utilise : <code class="inline-code">SYSTEM$SEND_SNOWFLAKE_NOTIFICATION</code> avec les fonctions helper :</p>
                     <ul>
                         <li>APPLICATION_JSON,</li>
                         <li>TEXT_PLAIN,</li>
-                        <li>SANITIZE_WEBHOOK_CONTENT. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>SANITIZE_WEBHOOK_CONTENT. </li>
                     </ul>
                 </section>
 
@@ -336,7 +336,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>INFORMATION_SCHEMA.NOTIFICATION_HISTORY</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================

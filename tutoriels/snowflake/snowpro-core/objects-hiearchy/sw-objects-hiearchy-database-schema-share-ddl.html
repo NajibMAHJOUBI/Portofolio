@@ -157,7 +157,7 @@
                         <i class="fas fa-database"></i>DDL Database — CREATE / ALTER / DROP / UNDROP DATABASE
                     </h2>
 
-                    <p>Source principale : <span class="reference">[docs.snowflake.com]</span></p>
+                    
 
                     <p>
                         Les commandes DDL liées aux bases de données dans Snowflake permettent de <strong>créer, modifier, cloner, répliquer, restaurer, supprimer et récupérer</strong> des bases.
@@ -188,7 +188,7 @@
                     </ul>
                     <p>
                         C'est l'une des commandes DDL les plus puissantes de Snowflake.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                 </section>
 
@@ -225,7 +225,7 @@
     [ OBJECT_VISIBILITY = &lt;value&gt; | PRIVILEGED ]
     [ ENABLE_DATA_COMPACTION = TRUE | FALSE ];</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -241,7 +241,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE DATABASE my_db;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ B. Transient Database</h3>
                     <div class="code-block">
@@ -262,7 +262,7 @@
                         <pre><code>CREATE DATABASE my_clone
     CLONE my_db AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                     <p>Options supplémentaires :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</li>
@@ -275,7 +275,7 @@
                         <pre><code>CREATE DATABASE restored_db
     FROM BACKUP SET my_backup IDENTIFIER 'backup_id';</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ E. Base à partir d'un Listing (Marketplace)</h3>
                     <div class="code-block">
@@ -283,7 +283,7 @@
                         <pre><code>CREATE DATABASE db_from_listing
     FROM LISTING 'provider/listing_name';</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ F. Base créée à partir d'un Share (Secure Data Sharing)</h3>
                     <div class="code-block">
@@ -291,7 +291,7 @@
                         <pre><code>CREATE DATABASE shared_db
     FROM SHARE provider_account.share_name;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ G. Base répliquée (replica)</h3>
                     <div class="code-block">
@@ -299,7 +299,7 @@
                         <pre><code>CREATE DATABASE my_replica
     AS REPLICA OF acct.primary_db;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -320,7 +320,7 @@
                     <p>
                         Référencé dans les commandes associées :
                         ALTER DATABASE, DESCRIBE DATABASE, SHOW DATABASES
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
                 </section>
 
@@ -338,7 +338,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>DROP DATABASE my_db;</code></pre>
                     </div>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
 
                     <h3>✔ UNDROP DATABASE</h3>
                     <p>Grâce à Time Travel, Snowflake permet de restaurer une base supprimée :</p>
@@ -374,7 +374,7 @@
                             <tr><td>ENABLE_DATA_COMPACTION</td><td>Optimisation du stockage</td></tr>
                         </tbody>
                     </table>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
 
                 <!-- ============================================
@@ -395,7 +395,7 @@
                         <li>CREATE ... FROM SHARE</li>
                         <li>CREATE ... AS REPLICA</li>
                     </ul>
-                    <p><span class="reference">[docs.snowflake.com]</span></p>
+                    <p></p>
                 </section>
             </main>
         </div>

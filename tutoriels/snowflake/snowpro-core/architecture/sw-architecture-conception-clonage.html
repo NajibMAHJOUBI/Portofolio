@@ -173,7 +173,7 @@
                             <li>Les micro‑partitions sont partagées entre source et clone.</li>
                             <li>
                                 Le clone n'ajoute du stockage que si des modifications ultérieures sont apportées (copy‑on‑write).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -190,7 +190,7 @@
                             <li>Iceberg tables</li>
                             <li>
                                 Stages externes, file formats, sequences, tasks, streams
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -227,7 +227,7 @@
                             <li>OFFSET => &lt;time_difference&gt;</li>
                             <li>
                                 STATEMENT => &lt;query_id&gt;
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -249,7 +249,7 @@
                             <li>après une durée relative,</li>
                             <li>
                                 après une requête spécifique (STATEMENT).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -261,7 +261,7 @@
                             <li>
                                 elles ont été purgées de Time Travel, 
                                 → utiliser IGNORE TABLES WITH INSUFFICIENT DATA RETENTION
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -286,7 +286,7 @@
                         <p>
                             <b>→ Les commandes prenant en charge COPY GRANTS (ex: CREATE TABLE … CLONE) 
                             peuvent cloner tous les privilèges <b>sauf OWNERSHIP</b>.</b>
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <p>Exemple</p>
@@ -311,7 +311,7 @@
                             <li>
                                 Le clone <b>hérite des privilèges des objets contenus</b>, mais <b>pas</b> 
                                 des privilèges du conteneur lui-même (BD/schéma).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -320,7 +320,7 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 Les exigences en privilèges varient selon que le schéma source est géré ou non.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -329,7 +329,7 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 Les paramètres d'objet sont <b>hérités</b> lors du clonage (si définis sur l'objet).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -341,7 +341,7 @@
                             <li>si table + séquence sont clonées ensemble → la table clonée utilise la <b>séquence clonée</b>,</li>
                             <li>
                                 sinon elle continue d'utiliser la <b>séquence source</b>.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -361,7 +361,7 @@
                             <li>rétention Time Travel (important pour les clones historiques),</li>
                             <li>
                                 tables transientes (retenue faible → risque de tables ignorées).
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -403,7 +403,7 @@
                         <h3>Clonage impossible pour :</h3>
                         <p>
                             Tables temporaires (ne supportent pas Time Travel)
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <h3>Ownership jamais copié</h3>
@@ -412,7 +412,7 @@
                         <h3>Rétention Time Travel peut exclure des tables</h3>
                         <p>
                             → utiliser IGNORE TABLES WITH INSUFFICIENT DATA RETENTION.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
                     </section>
                 </main>

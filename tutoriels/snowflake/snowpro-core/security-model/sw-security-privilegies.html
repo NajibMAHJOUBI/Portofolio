@@ -167,14 +167,14 @@
                         <i class="fas fa-lock"></i> ✅ 1. Configuration du contrôle d'accès
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake utilise un modèle d'accès hybride RBAC + DAC + UBAC, mais RBAC est le modèle recommandé pour toutes les implémentations.</p>
 
                     <h3>✔ Principes essentiels</h3>
                     <ul>
-                        <li>Les privilèges sont accordés à des rôles, non directement aux utilisateurs (sauf exceptions). <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Les utilisateurs activent un primary role, et peuvent activer d'autres privilèges via les secondary roles. <span class="reference">[docs.snowflake.com]</span></li>
-                        <li>Les owners (privilège OWNERSHIP) gèrent la sécurité de leurs objets (DAC). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les privilèges sont accordés à des rôles, non directement aux utilisateurs (sauf exceptions). </li>
+                        <li>Les utilisateurs activent un primary role, et peuvent activer d'autres privilèges via les secondary roles. </li>
+                        <li>Les owners (privilège OWNERSHIP) gèrent la sécurité de leurs objets (DAC). </li>
                     </ul>
 
                     <h3>✔ Étapes de configuration générale</h3>
@@ -196,7 +196,7 @@
                         <i class="fas fa-users"></i> ✅ 2. User Management (Admin — User Management)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
 
                     <h3>✔ Rôles impliqués dans la gestion utilisateur</h3>
                     <ul>
@@ -209,7 +209,7 @@
                         <li>Création via SnowSight, SQL (<code class="inline-code">CREATE USER</code>) ou SCIM (provisionnement IdP).</li>
                         <li>Les utilisateurs ont un primary role défini dans DEFAULT_ROLE.</li>
                         <li>Ils peuvent avoir plusieurs rôles attribués.</li>
-                        <li>Par défaut, tous les utilisateurs héritent aussi du rôle PUBLIC. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Par défaut, tous les utilisateurs héritent aussi du rôle PUBLIC. </li>
                     </ul>
                 </section>
 
@@ -221,7 +221,7 @@
                         <i class="fas fa-plus-circle"></i> ✅ 3. CREATE ROLE
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Créer un rôle personnalisé :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -229,7 +229,7 @@
                     </div>
                     <ul>
                         <li>Nécessite un rôle ayant privilège CREATE ROLE (souvent USERADMIN).</li>
-                        <li>Les rôles peuvent être assignés à d'autres rôles, créant une hiérarchie. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Les rôles peuvent être assignés à d'autres rôles, créant une hiérarchie. </li>
                     </ul>
                 </section>
 
@@ -241,7 +241,7 @@
                         <i class="fas fa-user-tag"></i> ✅ 4. GRANT ROLE
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Attribuer un rôle à un utilisateur ou un autre rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -251,7 +251,7 @@ GRANT ROLE analyst TO ROLE finance_team;</code></pre>
 
                     <h3>✔ Points essentiels</h3>
                     <ul>
-                        <li>L'héritage s'applique : un rôle "parent" hérite des privilèges des rôles enfants. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>L'héritage s'applique : un rôle "parent" hérite des privilèges des rôles enfants. </li>
                         <li>Le rôle ACTIVÉ par l'utilisateur détermine les privilèges disponibles dans la session.</li>
                     </ul>
                 </section>
@@ -264,7 +264,7 @@ GRANT ROLE analyst TO ROLE finance_team;</code></pre>
                         <i class="fas fa-key"></i> ✅ 5. GRANT PRIVILEGE
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Attribuer des privilèges à un rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -281,7 +281,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                                 <li>USAGE (db, schema, warehouse)</li>
                                 <li>SELECT, INSERT, UPDATE, DELETE (tables)</li>
                                 <li>CREATE TABLE, CREATE VIEW (schema)</li>
-                                <li>OWNERSHIP (objet complet) — non héritable. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>OWNERSHIP (objet complet) — non héritable. </li>
                             </ul>
                         </li>
                     </ul>
@@ -293,7 +293,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                         <ul>
                             <li>USAGE on DATABASE</li>
                             <li>+ USAGE on SCHEMA</li>
-                            <li>+ privilege on OBJECT <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>+ privilege on OBJECT </li>
                         </ul>
                     </div>
                 </section>
@@ -306,7 +306,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                         <i class="fas fa-search"></i> ✅ 6. SHOW GRANTS
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Permet d'auditer les privilèges.</p>
 
                     <h3>✔ Exemples</h3>
@@ -334,7 +334,7 @@ SHOW GRANTS ON TABLE sales;</code></pre>
                         <i class="fas fa-user-minus"></i> ✅ 7. REVOKE ROLE
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Révoquer un rôle d'un user ou d'un autre rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -355,7 +355,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                         <i class="fas fa-lock-open"></i> ✅ 8. REVOKE PRIVILEGE
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Retirer un privilège d'un rôle :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -377,7 +377,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                         <i class="fas fa-exchange-alt"></i> ✅ 9. USE SECONDARY ROLES
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Contrôle l'utilisation des privilèges attribués directement aux users (UBAC).</p>
 
                     <h3>✔ Activation</h3>
@@ -396,7 +396,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>✔ Rappel important</strong>
-                        <p>Sans <code class="inline-code">USE SECONDARY ROLES ALL</code>, les privilèges accordés directement à un user ne sont pas considérés. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Sans <code class="inline-code">USE SECONDARY ROLES ALL</code>, les privilèges accordés directement à un user ne sont pas considérés. </p>
                     </div>
                 </section>
 

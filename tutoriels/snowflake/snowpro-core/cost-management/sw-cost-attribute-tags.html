@@ -151,13 +151,13 @@
                     <ul>
                         <li>départements</li>
                         <li>environnements</li>
-                        <li>projets <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>projets </li>
                     </ul>
                     <p>Ce mécanisme sert au <strong>showback / chargeback</strong>, facilitant :</p>
                     <ul>
                         <li>la comptabilité interne,</li>
                         <li>l'identification des sources de coûts,</li>
-                        <li>la mise en place d'optimisations pertinentes. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>la mise en place d'optimisations pertinentes. </li>
                     </ul>
                 </section>
 
@@ -173,18 +173,18 @@
                     <p>Ils permettent d'associer :</p>
                     <ul>
                         <li>des ressources Snowflake (ex. warehouses, bases, users)</li>
-                        <li>à des groupes logiques (departments, projects…). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>à des groupes logiques (departments, projects…). </li>
                     </ul>
-                    <p><strong>Usage recommandé :</strong> Associer un warehouse à un département → le coût total du warehouse est attribué au département. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p><strong>Usage recommandé :</strong> Associer un warehouse à un département → le coût total du warehouse est attribué au département. </p>
 
                     <h3>✔ 2.2 Query Tags (Balises de requête)</h3>
                     <p>Indispensables lorsque :</p>
                     <ul>
                         <li>une application exécute des requêtes pour plusieurs équipes,</li>
-                        <li>des utilisateurs de multiples départements partagent les mêmes ressources. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>des utilisateurs de multiples départements partagent les mêmes ressources. </li>
                     </ul>
                     <p>Chaque requête reçoit un tag identifiant :<br>
-                    ➡️ l'équipe / département / cost center. <span class="reference">[docs.snowflake.com]</span></p>
+                    ➡️ l'équipe / département / cost center. </p>
                 </section>
 
                 <!-- ============================================
@@ -203,7 +203,7 @@
                             <p>Exemple : un warehouse dédié.</p>
                             <ul>
                                 <li>✔ On attribue des object tags au warehouse.</li>
-                                <li>✔ 100% du coût est imputé au département. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>✔ 100% du coût est imputé au département. </li>
                             </ul>
                         </div>
 
@@ -212,7 +212,7 @@
                             <p>Exemple : un warehouse utilisé par divers utilisateurs.</p>
                             <ul>
                                 <li>✔ On attribue un object tag à chaque utilisateur.</li>
-                                <li>✔ Le coût est attribué en fonction des requêtes exécutées par utilisateur. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>✔ Le coût est attribué en fonction des requêtes exécutées par utilisateur. </li>
                             </ul>
                         </div>
 
@@ -220,7 +220,7 @@
                             <h4>Scenario 3 : Application / workflow partagé</h4>
                             <p>Exemple : requêtes exécutées par une application pour des utilisateurs variés.</p>
                             <ul>
-                                <li>✔ On utilise les query tags pour associer chaque requête au bon département. <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>✔ On utilise les query tags pour associer chaque requête au bon département. </li>
                             </ul>
                         </div>
                     </div>
@@ -238,14 +238,14 @@
                     <p>Lorsque vous configurez des tags, vous devez choisir s'ils s'appliquent à :</p>
                     <ul>
                         <li>un seul compte Snowflake,</li>
-                        <li>plusieurs comptes au sein d'une organisation Snowflake. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>plusieurs comptes au sein d'une organisation Snowflake. </li>
                     </ul>
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>Règle clé :</strong>
                         <ul>
                             <li>Si les ressources d'un département sont dans un seul compte, créez les tags dans ce compte.</li>
-                            <li>Si elles sont réparties sur plusieurs comptes, créez les tags dans un compte "central" et répliquez-les. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Si elles sont réparties sur plusieurs comptes, créez les tags dans un compte "central" et répliquez-les. </li>
                         </ul>
                     </div>
                 </section>
@@ -262,9 +262,9 @@
                     <ul>
                         <li>Quel département consomme le plus de crédits ?</li>
                         <li>Quelle équipe génère les requêtes les plus coûteuses ?</li>
-                        <li>Quels workloads nécessitent optimisation ? <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Quels workloads nécessitent optimisation ? </li>
                     </ul>
-                    <p>Elle s'intègre dans la démarche globale de <strong>Cost Management</strong> (Visibilité → Contrôle → Optimisation). <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Elle s'intègre dans la démarche globale de <strong>Cost Management</strong> (Visibilité → Contrôle → Optimisation). </p>
                 </section>
 
                 <!-- ============================================

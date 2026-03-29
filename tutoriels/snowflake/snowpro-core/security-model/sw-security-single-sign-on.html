@@ -162,7 +162,7 @@
                         <i class="fas fa-id-card"></i> ✅ 1. Supported Identity Providers (IdP)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake fonctionne comme <strong>Service Provider (SP)</strong> et délègue l'authentification à un Identity Provider (IdP) compatible SAML2.</p>
 
                     <!-- 1.1 IdP avec support natif -->
@@ -171,7 +171,7 @@
                         <p>Les fournisseurs suivants disposent d'une intégration native avec Snowflake, simplifiant la configuration SSO :</p>
                         <ul>
                             <li>Okta (cloud)</li>
-                            <li>Microsoft Entra ID (ancien Azure Active Directory) <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Microsoft Entra ID (ancien Azure Active Directory) </li>
                         </ul>
                     </section>
 
@@ -184,22 +184,22 @@
                             <li>OneLogin</li>
                             <li>Ping Identity</li>
                             <li>PingOne</li>
-                            <li>Tout autre IdP SAML 2.0‑compliant <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>Tout autre IdP SAML 2.0‑compliant </li>
                         </ul>
-                        <p>👉 Pour ceux-ci, il faut créer une <strong>application personnalisée Snowflake</strong> dans l'IdP. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>👉 Pour ceux-ci, il faut créer une <strong>application personnalisée Snowflake</strong> dans l'IdP. </p>
                     </section>
 
                     <!-- 1.3 Multi-Identity Providers -->
                     <section id="multi-idp" class="tutorial-subsection">
                         <h3>✔ 1.3. Multi‑Identity Providers (Multi‑IdP)</h3>
-                        <p>Snowflake permet d'enregistrer plusieurs IdP simultanément, afin que différents utilisateurs puissent s'authentifier via différents IdP. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Snowflake permet d'enregistrer plusieurs IdP simultanément, afin que différents utilisateurs puissent s'authentifier via différents IdP. </p>
                         <div class="warning-note">
                             <i class="fas fa-exclamation-triangle"></i>
                             <strong>Limitation importante :</strong> Seuls certains drivers supportent Multi‑IdP :
                             <ul>
                                 <li>JDBC</li>
                                 <li>ODBC</li>
-                                <li>Python <span class="reference">[docs.snowflake.com]</span></li>
+                                <li>Python </li>
                             </ul>
                         </div>
                     </section>
@@ -213,7 +213,7 @@
                         <i class="fas fa-exchange-alt"></i> ✅ 2. Supported SSO Workflows (Workflows d'authentification SSO supportés)
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : </p>
                     <p>Snowflake prend en charge plusieurs flux d'authentification SSO basés sur SAML2. Ceux-ci couvrent login, logout et expirations de session.</p>
 
                     <!-- 2.1 Login workflows -->
@@ -224,15 +224,15 @@
                         <ol>
                             <li>L'utilisateur accède à Snowflake (ex : https://.snowflakecomputing.com).</li>
                             <li>Snowflake redirige l'utilisateur vers l'IdP pour authentification.</li>
-                            <li>L'IdP renvoie une assertion SAML valide → ouverture de session Snowflake. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>L'IdP renvoie une assertion SAML valide → ouverture de session Snowflake. </li>
                         </ol>
-                        <p>💡 Une configuration permet de rediriger automatiquement l'utilisateur vers l'IdP sans afficher la page de login Snowflake. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>💡 Une configuration permet de rediriger automatiquement l'utilisateur vers l'IdP sans afficher la page de login Snowflake. </p>
 
                         <h4>🔹 IdP‑Initiated Login</h4>
                         <ol>
                             <li>L'utilisateur ouvre son portail IdP (Okta, Entra ID…).</li>
                             <li>Clique sur l'application Snowflake.</li>
-                            <li>L'IdP envoie directement une assertion SAML à Snowflake → session ouverte. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>L'IdP envoie directement une assertion SAML à Snowflake → session ouverte. </li>
                         </ol>
                     </section>
 
@@ -240,7 +240,7 @@
                     <section id="logout-workflows" class="tutorial-subsection">
                         <h3>✔ 2.2. Logout workflows</h3>
                         <p>Snowflake supporte le logout initié par Snowflake ou par l'IdP.</p>
-                        <p>Le comportement final dépend de l'origine du logout. <span class="reference">[docs.snowflake.com]</span></p>
+                        <p>Le comportement final dépend de l'origine du logout. </p>
                         <p>Ex. : Un logout effectué dans Snowflake peut ne pas déconnecter l'utilisateur de l'IdP (selon les capacités de celui‑ci).</p>
                     </section>
 
@@ -250,7 +250,7 @@
                         <p>Lorsqu'une session Snowflake expire pour inactivité, les actions dépendent encore une fois :</p>
                         <ul>
                             <li>de qui initie la fin de session (Snowflake ou IdP),</li>
-                            <li>et de la manière dont l'IdP gère les sessions persistantes. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>et de la manière dont l'IdP gère les sessions persistantes. </li>
                         </ul>
                     </section>
                 </section>

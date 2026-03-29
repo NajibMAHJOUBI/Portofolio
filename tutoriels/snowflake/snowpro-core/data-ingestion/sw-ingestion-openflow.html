@@ -152,14 +152,14 @@
                         <i class="fas fa-cloud-upload-alt"></i> ✅ 1. Openflow – Vue d'ensemble
                     </h2>
 
-                    <p>Source : <em>About Openflow</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>About Openflow</em> </p>
 
                     <h3>✔ Définition</h3>
                     <p>Snowflake Openflow est un service d'intégration de données, basé sur Apache NiFi, permettant de connecter toute source et toute destination, en traitant des données structurées comme non structurées (texte, images, audio, vidéo, capteurs).</p>
                     <ul>
                         <li>Ingestion batch & streaming</li>
                         <li>Moteur géré par Snowflake (selon le type de déploiement)</li>
-                        <li>Support de centaines de processeurs NiFi <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Support de centaines de processeurs NiFi </li>
                     </ul>
 
                     <h3>✔ Caractéristiques clés</h3>
@@ -168,14 +168,14 @@
                         <li><strong>Plateforme unifiée</strong> : extraction & chargement bidirectionnels.</li>
                         <li><strong>Enterprise-ready</strong> : sécurité, gouvernance, observabilité.</li>
                         <li><strong>Ingestion haute vitesse</strong> : multimodal, à grande échelle.</li>
-                        <li><strong>Ingestion continue pour l'IA</strong> : intégration quasi temps réel (ex: Google Drive, SharePoint). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Ingestion continue pour l'IA</strong> : intégration quasi temps réel (ex: Google Drive, SharePoint). </li>
                     </ul>
 
                     <h3>✔ Types de déploiements</h3>
                     <p>Openflow peut être déployé de deux manières :</p>
                     <ul>
                         <li><strong>BYOC (Bring Your Own Cloud)</strong> – votre propre VPC AWS</li>
-                        <li><strong>SPCS (Snowpark Container Services)</strong> – entièrement géré dans Snowflake <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>SPCS (Snowpark Container Services)</strong> – entièrement géré dans Snowflake </li>
                     </ul>
                 </section>
 
@@ -187,11 +187,11 @@
                         <i class="fas fa-cloud"></i> ✅ 2. Openflow BYOC (Bring Your Own Cloud)
                     </h2>
 
-                    <p>Source : <em>About Openflow – BYOC</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>About Openflow – BYOC</em> </p>
 
                     <h3>✔ Principe</h3>
                     <p>Openflow BYOC apporte toutes les fonctionnalités Openflow dans votre propre infrastructure Cloud (AWS).</p>
-                    <p>→ Vous gardez le contrôle complet du réseau, des runtimes et de la gouvernance. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ Vous gardez le contrôle complet du réseau, des runtimes et de la gouvernance. </p>
 
                     <h3>✔ Fonctionnement (workflow BYOC)</h3>
                     <ul>
@@ -199,17 +199,17 @@
                         <li><strong>Data Engineer (auteur)</strong> : construit ou configure les flux (connecteurs + canvas).</li>
                         <li><strong>Pipeline operator</strong> : paramètre et exécute les flux.</li>
                         <li><strong>Data engineer transformation</strong> : produit les couches Silver/Gold à partir du Bronze.</li>
-                        <li><strong>Business user</strong> : exploite la couche Gold. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Business user</strong> : exploite la couche Gold. </li>
                     </ul>
 
                     <h3>✔ Sécurité & limitations</h3>
                     <ul>
                         <li>Modèle de responsabilité partagée : vous devez sécuriser votre côté (réseau, IAM, déploiements).</li>
-                        <li>Openflow n'autorise pas l'héritage implicite (le rôle doit être directement attribué à l'utilisateur). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Openflow n'autorise pas l'héritage implicite (le rôle doit être directement attribué à l'utilisateur). </li>
                     </ul>
 
                     <h3>✔ Régions supportées</h3>
-                    <p>AWS Commercial uniquement. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>AWS Commercial uniquement. </p>
 
                     <h3>✔ Quand l'utiliser ?</h3>
                     <ul>
@@ -227,7 +227,7 @@
                         <i class="fas fa-snowplow"></i> ✅ 3. Openflow SPCS (Snowpark Container Services)
                     </h2>
 
-                    <p>Source : <em>About Openflow – Snowflake Deployments (SPCS)</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>About Openflow – Snowflake Deployments (SPCS)</em> </p>
 
                     <h3>✔ Principe</h3>
                     <p>Openflow SPCS exécute le runtime entièrement dans Snowflake, via les Snowpark Container Services.</p>
@@ -238,7 +238,7 @@
                         <li><strong>Déploiement simplifié</strong> : SPCS est un service auto‑contenu.</li>
                         <li><strong>Intégration native à la sécurité Snowflake</strong> : authentification, autorisation, EAIs.</li>
                         <li><strong>Optimisé pour la connectivité</strong> : accès facile aux sources/destinations externes.</li>
-                        <li><strong>Coût maîtrisé</strong> : compute contrôlé par Snowflake. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><strong>Coût maîtrisé</strong> : compute contrôlé par Snowflake. </li>
                     </ul>
 
                     <h3>✔ Cas d'usage idéaux</h3>
@@ -247,7 +247,7 @@
                         <li>Enrichir des tables déjà présentes.</li>
                         <li>Workflow complet de l'ingestion à la consommation, au sein de Snowflake.</li>
                         <li>Cas d'usage AI : ingestion puis analyse via Snowflake AI.</li>
-                        <li>Reverse ETL (API, messaging). <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Reverse ETL (API, messaging). </li>
                     </ul>
                 </section>
 
@@ -259,7 +259,7 @@
                         <i class="fas fa-project-diagram"></i> ✅ 4. Architecture Openflow : Control Plane & Data Plane
                     </h2>
 
-                    <p>Source : <em>phData Openflow architecture</em> <span class="reference">[phdata.io]</span></p>
+                    <p>Source : <em>phData Openflow architecture</em> </p>
 
                     <h3>✔ Control Plane (géré par Snowflake)</h3>
                     <ul>
@@ -327,7 +327,7 @@
                             
                         </tbody>
                     划
-                    <p>Sources : <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Sources : </p>
                 </section>
 
                 <!-- ============================================
@@ -338,7 +338,7 @@
                         <i class="fas fa-lightbulb"></i> ✅ 6. Cas d'usage Openflow
                     </h2>
 
-                    <p>Source : <em>About Openflow et Openflow Explained</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Source : <em>About Openflow et Openflow Explained</em> </p>
 
                     <ul>
                         <li>Ingestion multimodale pour l'IA (texte, images, PDF, audio…).</li>

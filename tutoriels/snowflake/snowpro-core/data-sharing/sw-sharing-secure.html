@@ -156,7 +156,7 @@
                         <em>Secure Data Sharing lets you share selected objects… with other Snowflake accounts.</em>
                         <br>
                         <em>No actual data is copied or transferred… all sharing uses Snowflake's services layer and metadata store.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Caractéristiques clés :</h3>
@@ -165,7 +165,7 @@
                         <li><strong>Temps réel</strong> : les consommateurs voient les mises à jour immédiatement.</li>
                         <li>
                             <strong>Lecture seule côté consumer</strong> :
-                            <em>All shared database objects are read‑only.</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>All shared database objects are read‑only.</em> 
                         </li>
                         <li>
                             <strong>Coûts</strong> :
@@ -173,7 +173,7 @@
                                 <li>Provider : paie le stockage.</li>
                                 <li>Consumer : paie uniquement le compute pour requêter les données.</li>
                             </ul>
-                            <em>Shared data does not take up any storage in a consumer account… only compute charges apply.</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>Shared data does not take up any storage in a consumer account… only compute charges apply.</em> 
                         </li>
                     </ul>
                 </section>
@@ -188,7 +188,7 @@
 
                     <div class="info-note">
                         <em>Shares are named Snowflake objects that encapsulate all information required to share a database.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Un share contient :</h3>
@@ -205,7 +205,7 @@
                                 <li>Semantic views</li>
                                 <li>Cortex Search services</li>
                             </ul>
-                            <em>You can share the following Snowflake objects…</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>You can share the following Snowflake objects…</em> 
                         </li>
                         <li>La liste des consommateurs autorisés (Snowflake accounts ou reader accounts).</li>
                     </ul>
@@ -216,7 +216,7 @@
                         <li>Il ajoute un ou plusieurs consumer accounts au SHARE.</li>
                         <li>
                             Le consumer crée une database en lecture seule depuis le SHARE.
-                            <em>On the consumer side, a read‑only database is created from the share.</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>On the consumer side, a read‑only database is created from the share.</em> 
                         </li>
                     </ol>
 
@@ -227,7 +227,7 @@
                             <li>Un share ne peut provenir que d'un seul compte Snowflake.</li>
                             <li>
                                 Un share peut contenir des objets provenant de plusieurs bases du même compte provider.
-                                <em>Provider can share data from multiple databases as long as these databases belong to the same account.</em> <span class="reference">[docs.snowflake.com]</span>
+                                <em>Provider can share data from multiple databases as long as these databases belong to the same account.</em> 
                             </li>
                         </ul>
                     </div>
@@ -267,7 +267,7 @@
                             </ul>
                             <div class="info-note">
                                 <em>Any full Snowflake account can both provide and consume imported data.</em>
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </div>
                         </div>
                     </div>
@@ -283,13 +283,13 @@
 
                     <div class="info-note">
                         <em>There are many ways to share data… including listings and direct shares.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ OPTION 1 — Listings (Snowflake Marketplace ou private listings)</h3>
                     <div class="info-note">
                         <em>Listings let you share data with people in any Snowflake region, across clouds.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <ul>
                         <li>Fonctionne cross‑cloud et cross‑region.</li>
@@ -301,7 +301,7 @@
                                 <li>Publier publiquement</li>
                                 <li>Voir les métriques d'usage consumers</li>
                             </ul>
-                            <em>Optionally charge for data… offer publicly… get consumer usage metrics.</em> <span class="reference">[docs.snowflake.com]</span>
+                            <em>Optionally charge for data… offer publicly… get consumer usage metrics.</em> 
                         </li>
                         <li><strong>Types de listings :</strong> Public (Snowflake Marketplace) ou Private (partage ciblé).</li>
                     </ul>
@@ -309,7 +309,7 @@
                     <h3>✔ OPTION 2 — Direct Share</h3>
                     <div class="info-note">
                         <em>Use a direct share to share data with one or more accounts in the same Snowflake region.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <ul>
                         <li>Fonctionne uniquement dans la même région.</li>
@@ -317,13 +317,13 @@
                         <li>Pas de possibilité de monétiser.</li>
                         <li>Pas de métadonnées Marketplace.</li>
                         <li>Share → Consumer DB (lecture seule).</li>
-                        <li><em>You don't need to copy or move data shared with a direct share.</em> <span class="reference">[docs.snowflake.com]</span></li>
+                        <li><em>You don't need to copy or move data shared with a direct share.</em> </li>
                     </ul>
 
                     <h3>✔ OPTION 3 — Reader Accounts</h3>
                     <div class="info-note">
                         <em>You can share with people who don't have Snowflake accounts by using Reader Accounts.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                     <ul>
                         <li>Utilisé lorsque le consumer n'a pas son propre compte Snowflake.</li>
@@ -341,7 +341,7 @@
                         <i class="fas fa-chart-simple"></i> ✅ 5. Tableau de comparaison (officiel Snowflake)
                     </h2>
 
-                    <p>Extrait documentation : <em>Data Sharing Mechanism table (Listing vs Direct Share).</em> <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Extrait documentation : <em>Data Sharing Mechanism table (Listing vs Direct Share).</em> </p>
 
                     <table class="tutorial-table">
                         <thead>
@@ -386,7 +386,7 @@
 
                     <div class="info-note">
                         <em>You can share… databases, tables, views, secure views, external tables, Iceberg tables, dynamic tables, UDFs, semantic views, Cortex search services, models…</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
                 </section>
 

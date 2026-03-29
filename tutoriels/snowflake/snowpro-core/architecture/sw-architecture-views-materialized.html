@@ -152,7 +152,7 @@
                             Une <b>Materialized View</b> est un ensemble de données <b>pré‑calculé</b> et <b>stocké</b>, 
                             dérivé d'une requête SQL définie dans la vue (SELECT). 
                             Contrairement aux vues standard, elle conserve physiquement les résultats.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <h3>Objectif principal :</h3>
@@ -177,7 +177,7 @@
                             <li>
                                 Une materialized view est beaucoup plus rapide à interroger qu'une vue classique, 
                                 puisque les résultats sont pré‑calculés.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                             <li>
                                 Idéale pour :
@@ -187,7 +187,7 @@
                                     <li>projections complexes,</li>
                                     <li>
                                         grandes tables ou tables externes (moins performantes).
-                                        <span class="reference">[docs.snowflake.com]</span>
+                                        
                                     </li>
                                 </ul>
                             </li>
@@ -199,14 +199,14 @@
                             <li>
                                 Snowflake met automatiquement la MV à jour après tout changement 
                                 dans la table sous‑jacente.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                             <li>
                                 Si une requête arrive avant la fin de la mise à jour :
                                 <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>
                                         Snowflake combine les parties à jour et les données de base manquantes.
-                                        <span class="reference">[docs.snowflake.com]</span>
+                                        
                                     </li>
                                 </ul>
                             </li>
@@ -217,7 +217,7 @@
                         <p>
                             Les données de la MV reflètent toujours les derniers changements, 
                             quelle que soit l'intensité du DML sur la table source.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <h3>D. Caractéristiques spécifiques à Snowflake</h3>
@@ -226,7 +226,7 @@
                             <li>Maintenance en tâche de fond.</li>
                             <li>
                                 Gestion transparente par le moteur Snowflake.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -243,7 +243,7 @@
 
                         <p>
                             Les vues matérialisées nécessitent l'<b>Enterprise Edition</b>.
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <h3>B. Coûts</h3>
@@ -251,11 +251,11 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 La matérialisation + la maintenance automatique <b>consomment des crédits</b>.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                             <li>
                                 Les résultats pré‑calculés nécessitent du <b>stockage</b>.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
 
@@ -268,7 +268,7 @@
                             <li>
                                 Les résultats matérialisés doivent être réutilisés <b>suffisamment souvent</b> 
                                 pour compenser les coûts.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -295,7 +295,7 @@
                             </li>
                             <li>
                                 la table source ne change <b>pas trop fréquemment</b>.
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -310,7 +310,7 @@
 
                         <h3>Commande CREATE MATERIALIZED VIEW</h3>
 
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
 
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -328,7 +328,7 @@ GROUP BY customer_id;</code></pre>
                             <li>CLUSTER BY pour optimiser l'accès</li>
                             <li>
                                 Masquage, policies, tags, row access policy disponibles
-                                <span class="reference">[docs.snowflake.com]</span>
+                                
                             </li>
                         </ul>
                     </section>
@@ -343,7 +343,7 @@ GROUP BY customer_id;</code></pre>
 
                         <p>
                             Source comparative :
-                            <span class="reference">[docs.snowflake.com]</span>
+                            
                         </p>
 
                         <table class="tutorial-table">

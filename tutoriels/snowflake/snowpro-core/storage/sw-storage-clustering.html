@@ -170,16 +170,16 @@
                     </p>
                     <p>
                         Le <strong>clustering</strong> désigne la manière dont les valeurs d'un ou plusieurs attributs sont distribuées dans ces micro‑partitions.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>✔ Objectif principal</h3>
                     <p>Améliorer l'efficacité du micro‑partition pruning :</p>
-                    <p>Snowflake utilise les métadonnées (min/max) des micro‑partitions pour ignorer celles qui ne contiennent pas les données pertinentes pour une requête. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>Snowflake utilise les métadonnées (min/max) des micro‑partitions pour ignorer celles qui ne contiennent pas les données pertinentes pour une requête. </p>
 
                     <h3>✔ Clustering naturel</h3>
                     <p>Sans clustering key, Snowflake utilise l'ordre d'insertion des données pour organiser les micro‑partitions.</p>
-                    <p>→ On parle de <strong>natural clustering</strong>. <span class="reference">[docs.snowflake.com]</span></p>
+                    <p>→ On parle de <strong>natural clustering</strong>. </p>
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
@@ -204,7 +204,7 @@
 
                     <p>
                         Une clustering key permet d'optimiser explicitement l'organisation des données dans les micro‑partitions selon une ou plusieurs colonnes.
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </p>
 
                     <h3>✔ Cas d'usage typiques</h3>
@@ -218,7 +218,7 @@
                     <p>Quand un clustering key est défini :</p>
                     <ul>
                         <li>Snowflake organise les micro‑partitions de manière à regrouper les données ayant des valeurs proches selon la clé.</li>
-                        <li>La clé peut être un ensemble de colonnes ou une expression. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>La clé peut être un ensemble de colonnes ou une expression. </li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
@@ -253,7 +253,7 @@
                     <p>La documentation précise :</p>
                     <div class="info-note">
                         <em>Automatic reclustering is a Snowflake serverless feature that continuously maintains clustering of large tables.</em>
-                        <span class="reference">[docs.snowflake.com]</span>
+                        
                     </div>
 
                     <h3>✔ Quand intervient le reclustering ?</h3>
