@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Sécurité et Réseau | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -66,32 +66,32 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#network-policies" class="active">
-                            <i class="fas fa-shield-alt"></i>1. Network Policies
+                            <i class="fas fa-shield-alt"></i>1. Politiques Réseau
                         </a>
                     </li>
                     <li>
                         <a href="#network-rules">
-                            <i class="fas fa-network-wired"></i>2. Network Rules
+                            <i class="fas fa-network-wired"></i>2. Règles Réseau
                         </a>
                     </li>
                     <li>
                         <a href="#secure-snowflake">
-                            <i class="fas fa-lock"></i>3. Secure Snowflake – Guides Overview
+                            <i class="fas fa-lock"></i>3. Guide de sécurité dans Snowflake
                         </a>
                     </li>
                     <li>
                         <a href="#login-history">
-                            <i class="fas fa-history"></i>4. LOGIN_HISTORY (ACCOUNT_USAGE)
+                            <i class="fas fa-history"></i>4. LOGIN_HISTORY
                         </a>
                     </li>
                     <li>
                         <a href="#synthese-comparative">
-                            <i class="fas fa-chart-simple"></i>5. Synthèse comparative : Policies vs Rules
+                            <i class="fas fa-chart-simple"></i>5. Politiques vs Règles
                         </a>
                     </li>
                     <li>
                         <a href="#points-cles">
-                            <i class="fas fa-star"></i>6. Points clés SnowPro Core à retenir
+                            <i class="fas fa-star"></i>6. Résumé des points clés
                         </a>
                     </li>
                 </ul>
@@ -110,7 +110,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Snowflake - Sécurité et Réseau</h1>
+                    <h1>Sécurité et Réseau</h1>
 
                     <span class="level-badge">Niveau Intermédiaire</span>
 
@@ -144,23 +144,21 @@
                 ============================================ -->
                 <section id="network-policies" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-shield-alt"></i> ✅ 1. Network Policies
+                        <i class="fas fa-shield-alt"></i>1. Politiques Réseau 
                     </h2>
-
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
 
                     <p>Les Network Policies servent à restreindre l'accès réseau à votre compte Snowflake en contrôlant quelles adresses IP peuvent se connecter.</p>
 
                     <h3>✔ Fonctionnement</h3>
                     <p>Une Network Policy définit :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>une liste <code class="inline-code">allowed_ip_list</code> (IP autorisées)</li>
                         <li>une liste <code class="inline-code">blocked_ip_list</code> (IP explicitement bloquées)</li>
                     </ul>
                     <p>Une priorité : le blocage > l'autorisation</p>
 
                     <h3>✔ Types d'application</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Au niveau du compte → affecte tous les utilisateurs</li>
                         <li>Au niveau utilisateur → peut surcharger la règle du compte</li>
                     </ul>
@@ -176,9 +174,9 @@
                     <div class="info-note">
                         <i class="fas fa-check-circle"></i>
                         <strong>Bonnes pratiques (selon Snowflake Secure Guides) :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Restreindre l'accès via politiques réseau est un pilier de la sécurité Snowflake.</li>
-                            <li>S'intègre avec RBAC, MFA et autres contrôles. <span class="reference">[docs.snowflake.com]</span></li>
+                            <li>S'intègre avec RBAC, MFA et autres contrôles.</li>
                         </ul>
                     </div>
                 </section>
@@ -188,16 +186,14 @@
                 ============================================ -->
                 <section id="network-rules" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-network-wired"></i> ✅ 2. Network Rules
+                        <i class="fas fa-network-wired"></i>2. Règles Réseau
                     </h2>
-
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
 
                     <p>Les Network Rules sont utilisées dans les External Access Integrations, notamment pour autoriser Snowflake à contacter des endpoints externes (API externes, services cloud, etc.).</p>
 
                     <h3>✔ Types de Network Rules</h3>
                     <p>Elles définissent quelles adresses/IP/domaines Snowflake peut contacter pour :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>External Functions</li>
                         <li>Remote Services</li>
                         <li>Outbound accesses maîtrisés</li>
@@ -205,7 +201,7 @@
 
                     <h3>✔ Structure</h3>
                     <p>Une Network Rule peut définir :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>hostnames</li>
                         <li>port ranges</li>
                         <li>Protocols</li>
@@ -235,19 +231,17 @@ CREATE EXTERNAL ACCESS INTEGRATION my_int
                 ============================================ -->
                 <section id="secure-snowflake" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lock"></i> ✅ 3. Secure Snowflake – Guides Overview
+                        <i class="fas fa-lock"></i>3. Guide de sécurité dans Snowflake
                     </h2>
-
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
 
                     <p>Les guides "Secure" décrivent les fondamentaux de sécurité de Snowflake :</p>
 
                     <h3>✔ Principes de sécurité Snowflake</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Sécurité complète : opérations IA/ML et données protégées dans le périmètre Snowflake.</li>
                         <li>
                             Gouvernance centralisée avec :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>RBAC</li>
                                 <li>Network Policies</li>
                                 <li>Data Masking</li>
@@ -256,11 +250,11 @@ CREATE EXTERNAL ACCESS INTEGRATION my_int
                                 <li>External Tokenization</li>
                             </ul>
                         </li>
-                        <li>Confidentialité : aucune donnée client n'est utilisée pour entraîner des modèles partagés. <span class="reference">[docs.snowflake.com]</span></li>
+                        <li>Confidentialité : aucune donnée client n'est utilisée pour entraîner des modèles partagés.</li>
                     </ul>
 
                     <h3>✔ Composants clés à connaître pour l'examen</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>RBAC</strong> (database → schema → object privileges)</li>
                         <li><strong>Encryption</strong> (always-on)</li>
                         <li><strong>Time Travel & Fail-safe</strong> (protection et récupération)</li>
@@ -274,13 +268,11 @@ CREATE EXTERNAL ACCESS INTEGRATION my_int
                 ============================================ -->
                 <section id="login-history" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-history"></i> ✅ 4. LOGIN_HISTORY (ACCOUNT_USAGE)
+                        <i class="fas fa-history"></i>4. LOGIN_HISTORY
                     </h2>
 
-                    <p>Source : <span class="reference">[docs.snowflake.com]</span></p>
-
                     <p>La vue <code class="inline-code">ACCOUNT_USAGE.LOGIN_HISTORY</code> permet d'auditer :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>les connexions au compte</li>
                         <li>les succès / échecs</li>
                         <li>l'IP source</li>
@@ -291,7 +283,7 @@ CREATE EXTERNAL ACCESS INTEGRATION my_int
 
                     <h3>✔ Types d'informations exportées</h3>
                     <p>Elle contient, entre autres :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">EVENT_TIMESTAMP</code></li>
                         <li><code class="inline-code">USER_NAME</code></li>
                         <li><code class="inline-code">CLIENT_IP</code></li>
@@ -309,7 +301,7 @@ FROM SNOWFLAKE.ACCOUNT_USAGE.LOGIN_HISTORY
 ORDER BY EVENT_TIMESTAMP DESC;</code></pre>
                     </div>
                     <p>Utilisée pour :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>auditing de sécurité</li>
                         <li>détection de connexions suspicieuses</li>
                         <li>investigations d'incidents</li>
@@ -318,25 +310,45 @@ ORDER BY EVENT_TIMESTAMP DESC;</code></pre>
                 </section>
 
                 <!-- ============================================
-                     SECTION 5: SYNTHÈSE COMPARATIVE : POLICIES VS RULES
+                     SECTION 5: POLICIES VS RULES
                 ============================================ -->
                 <section id="synthese-comparative" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> ✅ 5. Synthèse comparative : Policies vs Rules
+                        <i class="fas fa-chart-simple"></i>5. Politiques vs Règles
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Élément</th><th>Network Policies</th><th>Network Rules</th>
+                            <th>Élément</th><th>Network Policies</th><th>Network Rules</th>
                         </thead>
                         <tbody>
-                            32<td><strong>Type de contrôle</strong><td>Entrant (clients → Snowflake)<td>Sortant (Snowflake → endpoints externes)
-                            32<td><strong>Objet</strong><td>Authentification / Connexions utilisateur<td>External functions / Services externes
-                            32<td><strong>Configuration</strong><td>Au niveau compte ou utilisateur<td>Associées à External Access Integrations
-                            32<td><strong>Basées sur</strong><td>IP (allow/deny lists)<td>Hosts, ports, protocoles
-                            32<td><strong>But principal</strong><td>Limiter l'accès au compte Snowflake<td>Contrôler les appels sortants
+                            <tr>
+                                <td><strong>Type de contrôle</strong></td>
+                                <td>Entrant (clients → Snowflake)</td>
+                                <td>Sortant (Snowflake → endpoints externes)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Objet</strong></td>
+                                <td>Authentification / Connexions utilisateur</td>
+                                <td>External functions / Services externes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Configuration</strong></td>
+                                <td>Au niveau compte ou utilisateur</td>
+                                <td>Associées à External Access Integrations</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Basées sur</strong></td>
+                                <td>IP (allow/deny lists)</td>
+                                <td>Hosts, ports, protocoles</td>
+                            </tr>
+                            <tr>
+                                <td><strong>But principal</strong></td>
+                                <td>Limiter l'accès au compte Snowflake</td>
+                                <td>Contrôler les appels sortants</td>
+                            </tr>
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -344,37 +356,37 @@ ORDER BY EVENT_TIMESTAMP DESC;</code></pre>
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 6. Points clés SnowPro Core à retenir
+                        <i class="fas fa-star"></i>6. Résumé des points clés
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔐 Network Policies</h4>
-                            <ul>
+                            <h4>✔ Network Policies</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Filtrent l'accès au compte → IP clients autorisées.</li>
                                 <li>Peuvent être appliquées par‑utilisateur.</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🌐 Network Rules</h4>
-                            <ul>
+                            <h4>✔ Network Rules</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Filtrent les connexions sortantes → endpoints externes.</li>
                                 <li>Nécessaires pour External Functions & API calls.</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🛡️ Secure Snowflake</h4>
-                            <ul>
+                            <h4>✔ Secure Snowflake</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Basé sur RBAC + policies + encryption.</li>
                                 <li>Approche "zero-trust" + gouvernance fine.</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📊 LOGIN_HISTORY</h4>
-                            <ul>
+                            <h4>✔ LOGIN_HISTORY</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Audit complet des tentatives de connexion.</li>
                                 <li>Analyse des IP, erreurs, authentifications.</li>
                             </ul>
