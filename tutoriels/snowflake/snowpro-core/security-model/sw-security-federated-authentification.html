@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel Snowflake - Federated Authentication & SSO | DataOps Learning</title>
+    <title>Tutoriel - Federated Authentication & SSO | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../../css/tutoriel.css">
     <link rel="stylesheet" href="../../../../css/icone-fabric.css">
@@ -125,7 +125,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Snowflake - Federated Authentication & SSO</h1>
+                    <h1>Federated Authentication & SSO</h1>
 
                     <span class="level-badge">Niveau Intermédiaire</span>
 
@@ -159,7 +159,7 @@
                 ============================================ -->
                 <section id="definition" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i>1. Définition : Qu'est‑ce qu'un environnement fédéré ?
+                        <i class="fas fa-info-circle"></i>1. Qu'est‑ce qu'un environnement fédéré ?
                     </h2>
 
                     
@@ -261,10 +261,10 @@
                     </ul>
 
                     <h3>✔ SSO Logout</h3>
-                    <p>Prise en charge du logout initié par Snowflake ou IdP. Le comportement dépend de l'initiateur (Snowflake ou IdP) </p>
+                    <p style="margin-left: 2.5rem; margin-bottom: 1.5rem;">Prise en charge du logout initié par Snowflake ou IdP. Le comportement dépend de l'initiateur (Snowflake ou IdP) </p>
 
                     <h3>✔ Timeout (session inactivité)</h3>
-                    <p>Fonctionne en conformité avec la session côté Snowflake et IdP </p>
+                    <p style="margin-left: 2.5rem; margin-bottom: 1.5rem;">Fonctionne en conformité avec la session côté Snowflake et IdP </p>
                 </section>
 
                 <!-- ============================================
@@ -332,11 +332,11 @@
                 </section>
 
                 <!-- ============================================
-                     SECTION 8: POINTS CLÉS SNOWPRO CORE – À MÉMORISER ABSOLUMENT
+                     SECTION 8: SYNTHESE
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i>8. Points clés SnowPro Core – à mémoriser absolument
+                        <i class="fas fa-star"></i>8. Synthèse
                     </h2>
 
                     <div class="grid-2cols">
@@ -388,22 +388,19 @@
                             </ul>
                         </div>
                     </div>
-                </section>
 
-                <!-- ============================================
-                     SECTION 9: SYNTHESE
-                ============================================ -->
-                <section id="resume-express" class="tutorial-section">
-                    <h2>
-                        <i class="fas fa-graduation-cap"></i>9. Synthèse
-                    </h2>
-
+                    
                     <div class="info-note">
                         <p>
                             Snowflake utilise un modèle SSO fédéré basé sur SAML2 : un IdP authentifie l'utilisateur, Snowflake l'accepte en tant que SP. Snowflake‑initiated ou IdP‑initiated login sont tous deux supportés. Okta & Entra ID ont un support natif. Le SSO est configuré via une SAML2 Security Integration et Snowflake recommande de ne plus stocker de mots de passe pour les utilisateurs humains — sauf un compte admin d'urgence.
                         </p>
                     </div>
+
                 </section>
+
+
+
+                
             </main>
         </div>
     </div>
