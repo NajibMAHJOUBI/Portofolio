@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -185,7 +185,7 @@
                     </h3>
 
                     <p>Lorsqu'un utilisateur "password user" est enrolled en MFA, il doit fournir :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>son mot de passe,</li>
                         <li>son second facteur (ex. Duo Mobile). </li>
                     </ul>
@@ -202,11 +202,11 @@
                 ============================================ -->
                 <section id="mfa-regles-obligation" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-calendar-alt"></i> ✅ 1.2. Règles d'obligation MFA – selon la date de création du compte
+                        <i class="fas fa-calendar-alt"></i>1.2. Règles d'obligation MFA – selon la date de création du compte
                     </h2>
 
                     <p>Snowflake rend progressivement la MFA obligatoire pour tous les utilisateurs humains :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Si le compte existait avant le bundle 2024_08 → l'admin doit configurer le compte pour imposer la MFA. </li>
                         <li>Si le compte a été créé après 2024_08 → MFA obligatoire par défaut pour tous les human users qui utilisent un mot de passe. </li>
                     </ul>
@@ -223,14 +223,14 @@
                 ============================================ -->
                 <section id="mfa-sso" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-id-card"></i> ✅ 1.3. MFA avec SSO (Single Sign-On)
+                        <i class="fas fa-id-card"></i>1.3. MFA avec SSO (Single Sign-On)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Par défaut : Snowflake ne requiert pas de MFA additionnelle pour les utilisateurs SSO.</li>
                         <li>La MFA doit être gérée par l'IdP (Okta, Azure AD…). </li>
                     </ul>
-                    <p>👉 Si nécessaire, une Authentication Policy peut imposer une MFA Snowflake après authentification SSO.</p>
+                    <p>-> Si nécessaire, une Authentication Policy peut imposer une MFA Snowflake après authentification SSO.</p>
                 </section>
 
                 <!-- ============================================
@@ -238,11 +238,11 @@
                 ============================================ -->
                 <section id="mfa-depreciation" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exclamation-triangle"></i> ✅ 1.4. Dépréciation du password single‑factor
+                        <i class="fas fa-exclamation-triangle"></i>1.4. Dépréciation du password single‑factor
                     </h2>
 
                     <p>Snowflake a annoncé que :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tous les human users devront obligatoirement utiliser la MFA (s'ils utilisent un mot de passe).</li>
                         <li>Les service users ne pourront plus utiliser un mot de passe. </li>
                     </ul>
@@ -253,13 +253,13 @@
                 ============================================ -->
                 <section id="auth-policies" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-file-alt"></i> ✅ 2. Authentication Policies
+                        <i class="fas fa-file-alt"></i>2. Authentication Policies
                     </h2>
 
                     
                     <p>Les Authentication Policies sont des objets Snowflake permettant de définir finement comment les utilisateurs/clients s'authentifient.</p>
                     <p>Elles peuvent être appliquées :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>au niveau du compte,</li>
                         <li>au niveau de l'utilisateur (ce niveau prévaut). </li>
                     </ul>
@@ -270,17 +270,17 @@
                 ============================================ -->
                 <section id="auth-policies-controle" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sliders-h"></i> ✅ 2.1. Ce qu'une Authentication Policy peut contrôler
+                        <i class="fas fa-sliders-h"></i>2.1. Ce qu'une Authentication Policy peut contrôler
                     </h2>
 
-                    <h3>🔐 1. Exigences MFA</h3>
-                    <ul>
+                    <h3>✔ 1. Exigences MFA</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Imposer que tous les utilisateurs s'inscrivent en MFA.</li>
                         <li>Spécifier quels mécanismes d'authentification nécessitent la MFA. </li>
                     </ul>
 
-                    <h3>🔐 2. Méthodes d'authentification autorisées</h3>
-                    <ul>
+                    <h3>✔ 2. Méthodes d'authentification autorisées</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Password</li>
                         <li>OAuth</li>
                         <li>Key‑pair authentication</li>
@@ -288,14 +288,14 @@
                         <li>Programmatic access token </li>
                     </ul>
 
-                    <h3>🔐 3. Contrôle des IdP (SAML2 security integrations)</h3>
-                    <ul>
+                    <h3>✔ 3. Contrôle des IdP (SAML2 security integrations)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Spécifier quels IdP sont disponibles lors du login.</li>
                         <li>Restreindre par domaines ou patterns email (ALLOWED_USER_DOMAINS, ALLOWED_EMAIL_PATTERNS). </li>
                     </ul>
 
-                    <h3>🔐 4. Contrôle des clients</h3>
-                    <ul>
+                    <h3>✔ 4. Contrôle des clients</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Restreindre quels clients/clients types peuvent se connecter (Snowsight, SnowSQL, CLI, drivers).</li>
                         <li>Définir des versions minimales de clients. </li>
                     </ul>
@@ -304,8 +304,8 @@
                         <strong>Limitations :</strong> Le filtrage via CLIENT_TYPES est un best‑effort → ne bloque pas l'accès via l'API REST Snowflake.
                     </div>
 
-                    <h3>🔐 5. Programmatic Access Tokens (PAT)</h3>
-                    <ul>
+                    <h3>✔ 5. Programmatic Access Tokens (PAT)</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Définir expiration min/max</li>
                         <li>Définir la nécessité d'une network policy </li>
                     </ul>
@@ -316,7 +316,7 @@
                 ============================================ -->
                 <section id="auth-policies-application" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sitemap"></i> ✅ 2.2. Application et hiérarchie
+                        <i class="fas fa-sitemap"></i>2.2. Application et hiérarchie
                     </h2>
 
                     <p>Une Authentication Policy définie au niveau de l'utilisateur override la policy définie au niveau du compte. </p>
@@ -327,11 +327,11 @@
                 ============================================ -->
                 <section id="auth-policies-cas-usage" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lightbulb"></i> ✅ 2.3. Cas d'usage typiques
+                        <i class="fas fa-lightbulb"></i>2.3. Cas d'usage typiques
                     </h2>
 
                     <p>Selon la documentation :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Exiger MFA pour toutes les méthodes d'authentification ou seulement pour certaines.</li>
                         <li>Imposer un IdP particulier et masquer les autres.</li>
                         <li>Restreindre les accès clients (ex. empêcher Snowsight pour certains utilisateurs).</li>
@@ -344,7 +344,7 @@
                 ============================================ -->
                 <section id="auth-policies-syntaxe" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code"></i> ✅ 2.4. Syntaxe SQL (aperçu)
+                        <i class="fas fa-code"></i>2.4. Syntaxe SQL (aperçu)
                     </h2>
 
                     <p>Exemple simplifié basé sur la doc CREATE AUTHENTICATION POLICY :</p>
@@ -360,17 +360,17 @@
                 </section>
 
                 <!-- ============================================
-                     SECTION 3: SYNTHÈSE SNOWPRO CORE – POINTS CLÉS À RETENIR
+                     SECTION 3: SYNTHÈSE
                 ============================================ -->
                 <section id="synthese-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 3. Synthèse SnowPro Core – Points clés à retenir
+                        <i class="fas fa-star"></i>3. Synthèse SnowPro Core – Points clés à retenir
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔐 MFA</h4>
-                            <ul>
+                            <h4>✔ MFA</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Réservée aux utilisateurs humains.</li>
                                 <li>Deviendra obligatoire pour tous les password users.</li>
                                 <li>Les comptes créés après 2024_08 ont MFA obligatoire par défaut. </li>
@@ -378,24 +378,24 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔐 Authentication Policies</h4>
-                            <ul>
+                            <h4>✔ Authentication Policies</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Définissent les règles d'authentification (MFA, méthodes, IdP, clients).</li>
                                 <li>Peuvent s'appliquer au niveau compte ou utilisateur (user > account). </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔐 SSO + MFA</h4>
-                            <ul>
+                            <h4>✔ SSO + MFA</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Pas obligatoire par défaut → IdP censé gérer la MFA.</li>
                                 <li>Snowflake peut la forcer via une Authentication Policy. </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔐 Service Users</h4>
-                            <ul>
+                            <h4>✔ Service Users</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Ne doivent pas utiliser MFA → utiliser clés, tokens, OAuth… </li>
                             </ul>
                         </div>
