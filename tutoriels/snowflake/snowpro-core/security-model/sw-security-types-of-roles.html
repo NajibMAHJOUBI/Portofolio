@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel Snowflake - Types de Rôles | DataOps Learning</title>
+    <title>Tutoriel - Types de Rôles | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -110,7 +110,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Snowflake - Types de Rôles</h1>
+                    <h1>Types de Rôles</h1>
 
                     <span class="level-badge">Niveau Intermédiaire</span>
 
@@ -144,7 +144,7 @@
                 ============================================ -->
                 <section id="types-roles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-tags"></i> ✅ 1. Types of Roles dans Snowflake
+                        <i class="fas fa-tags"></i>1. Types of Roles dans Snowflake
                     </h2>
 
                     
@@ -157,7 +157,7 @@
                     <p>Créés par les administrateurs selon les besoins métiers.</p>
 
                     <h3>✔ 1.3. Database roles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Des rôles définis au niveau d'une database, qui ne peuvent pas être activés directement mais seulement assignés à des account roles.</li>
                         <li>Le contrôle d'accès dans Snowflake repose sur l'attribution des privilèges à des rôles et l'attribution des rôles aux utilisateurs. </li>
                     </ul>
@@ -168,43 +168,59 @@
                 ============================================ -->
                 <section id="system-defined-roles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i> ✅ 2. System‑Defined Roles (Rôles systèmes)
+                        <i class="fas fa-cogs"></i>2. System‑Defined Roles (Rôles systèmes)
                     </h2>
 
                     
                     <p>Les rôles système sont fournis automatiquement et ne peuvent pas être supprimés.</p>
 
-                    <div class="grid-2cols">
-                        <div class="usage-card">
-                            <h4>✔ ORGADMIN</h4>
-                            <p>Rôle de gestion au niveau organisationnel (multi‑comptes).</p>
-                        </div>
+                    <h3>✔ ORGADMIN</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                            <li>Rôle de gestion au niveau organisationnel (multi‑comptes).</li>
+                    </ul>
+                        
 
-                        <div class="usage-card">
-                            <h4>✔ ACCOUNTADMIN</h4>
-                            <p>Rôle le plus puissant au niveau compte.<br>Combine les capacités de SYSADMIN + SECURITYADMIN.<br>Doit être utilisé seulement pour des tâches critiques (« break‑glass »).</p>
-                        </div>
+                        
+                    <h3>✔ ACCOUNTADMIN</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                                <li>Rôle le plus puissant au niveau compte.</li>
+                                <li>Combine les capacités de SYSADMIN + SECURITYADMIN.</li>
+                                <li>Doit être utilisé seulement pour des tâches critiques (« break‑glass »).</li>
+                    </ul>
+                        
 
-                        <div class="usage-card">
-                            <h4>✔ SECURITYADMIN</h4>
-                            <p>Gère les utilisateurs, les rôles, et les grants.<br>Peut accorder des privilèges aux autres rôles.</p>
-                        </div>
+                        
+                    <h3>✔ SECURITYADMIN</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                            <li>Gère les utilisateurs, les rôles, et les grants.</li>
+                            <li>Peut accorder des privilèges aux autres rôles.</li>
+                        </ul>
 
-                        <div class="usage-card">
-                            <h4>✔ USERADMIN</h4>
-                            <p>Crée et gère utilisateurs + rôles personnalisés.</p>
-                        </div>
+                        
 
-                        <div class="usage-card">
-                            <h4>✔ SYSADMIN</h4>
-                            <p>Gère les ressources techniques du compte :<br>création de warehouses, databases, schemas, tables…<br>Les rôles custom doivent généralement s'inscrire sous SYSADMIN.</p>
-                        </div>
+                        
+                    <h3>✔ USERADMIN</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                            <li>Crée et gère utilisateurs + rôles personnalisés.</li>
+                        </ul>
 
-                        <div class="usage-card">
-                            <h4>✔ PUBLIC</h4>
-                            <p>Rôle attribué automatiquement à tous les utilisateurs.<br>Doit rester sans privilège critique.</p>
-                        </div>
-                    </div>
+                        
+                    <h3>✔ SYSADMIN</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                            <li>Gère les ressources techniques du compte :
+                                <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                                    <li>création de warehouses, databases, schemas, tables…</li>
+                                    <li>Les rôles custom doivent généralement s'inscrire sous SYSADMIN.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        
+                    <h3>✔ PUBLIC</h3>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
+                            <li>Rôle attribué automatiquement à tous les utilisateurs.</li>
+                            <li>Doit rester sans privilège critique.</li>
+                        </ul>
 
                     <p>Ces rôles définissent une structure hiérarchique recommandée par Snowflake. </p>
                 </section>
@@ -214,18 +230,16 @@
                 ============================================ -->
                 <section id="custom-roles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-user-plus"></i> ✅ 3. Custom Roles (Rôles personnalisés)
+                        <i class="fas fa-user-plus"></i>3. Custom Roles (Rôles personnalisés)
                     </h2>
-
-                    
                     <p>Les rôles personnalisés permettent d'implémenter la sécurité selon les besoins de votre organisation.</p>
 
                     <h3>✔ Points essentiels</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Créés via <code class="inline-code">CREATE ROLE</code>.</li>
                         <li>
                             Peuvent être attribués à :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>des utilisateurs,</li>
                                 <li>d'autres rôles (construction de hiérarchie),</li>
                                 <li>des database roles.</li>
@@ -234,7 +248,7 @@
                         <li>Héritent des privilèges des rôles qu'ils contiennent.</li>
                         <li>
                             Recommandé :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>structurer les rôles par fonction (Data Engineer, BI Analyst, Data Scientist…),</li>
                                 <li>éviter d'accorder des privilèges directement aux users (UBAC). </li>
                             </ul>
@@ -247,14 +261,14 @@
                 ============================================ -->
                 <section id="role-hierarchy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sitemap"></i> ✅ 4. Role Hierarchy & Privilege Inheritance
+                        <i class="fas fa-sitemap"></i>4. Role Hierarchy & Privilege Inheritance
                     </h2>
 
                     
                     <p>Snowflake permet de créer une hiérarchie de rôles en attribuant des rôles à d'autres rôles.</p>
 
                     <h3>✔ Héritage des privilèges</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Si ROLE_A est accordé à ROLE_B : ROLE_B hérite de tous les privilèges de ROLE_A.</li>
                         <li>Cette hiérarchie peut être profonde et multi‑niveaux.</li>
                     </ul>
@@ -262,7 +276,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>OWNERSHIP n'est pas héritable</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Le privilège OWNERSHIP est unique et représente la pleine propriété d'un objet.</li>
                             <li>Il ne peut pas être partagé ni propagé dans la hiérarchie. </li>
                         </ul>
@@ -274,7 +288,7 @@
                 ============================================ -->
                 <section id="primary-secondary-roles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exchange-alt"></i> ✅ 5. Primary Role & Secondary Roles
+                        <i class="fas fa-exchange-alt"></i>5. Primary Role & Secondary Roles
                     </h2>
 
                     
@@ -282,13 +296,13 @@
                     <p>Les secondary roles peuvent être activés pour étendre temporairement les privilèges disponibles.</p>
 
                     <h3>✔ 5.1. Primary Role</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le rôle actif par défaut dans la session.</li>
                         <li>Tous les objets créés dans la session sont propriétés du primary role.</li>
                     </ul>
 
                     <h3>✔ 5.2. Secondary Roles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Permettent d'ajouter temporairement des privilèges supplémentaires dans une session.</li>
                         <li>S'activent par : <code class="inline-code">USE SECONDARY ROLES ALL;</code></li>
                         <li>Permettent l'usage exceptionnel de UBAC (grants directs aux utilisateurs).</li>
@@ -298,7 +312,7 @@
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ 5.3. Importance dans Snowflake</strong>
                         <p>Les administrateurs doivent savoir quel rôle est actif car il définit :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>l'accès aux objets,</li>
                             <li>l'owner des objets créés,</li>
                             <li>les privilèges disponibles pendant la session. </li>
@@ -311,40 +325,50 @@
                 ============================================ -->
                 <section id="resume-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 6. Résumé SnowPro Core – Points clés à retenir
+                        <i class="fas fa-star"></i>6. Résumé SnowPro Core – Points clés à retenir
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Thème</th><th>Essentiel à connaître</th>
+                            <th>Thème</th><th>Essentiel à connaître</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Types of roles</strong>
-                                <td>System‑defined, custom roles, database roles
+                            <tr>
+                                <td><strong>Types of roles</strong></td>
+                                <td>System‑defined, custom roles, database roles</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>System‑defined roles</strong></td>
+                                <td>ORGADMIN, ACCOUNTADMIN, SECURITYADMIN, USERADMIN, SYSADMIN, PUBLIC</td>
+                            </tr>
                             
-                            32
-                                <td><strong>System‑defined roles</strong>
-                                <td>ORGADMIN, ACCOUNTADMIN, SECURITYADMIN, USERADMIN, SYSADMIN, PUBLIC
+                                
+                            <tr>
+                                <td><strong>Custom roles</strong></td>
+                                <td>Recommandé pour RBAC, hiérarchisés sous SYSADMIN</td>
+                            </tr>
                             
-                            32
-                                <td><strong>Custom roles</strong>
-                                一道道Recommandé pour RBAC, hiérarchisés sous SYSADMIN
+                                
+                            <tr>
+                                <td><strong>Role Hierarchy</strong></td>
+                                <td>Les rôles héritent des privilèges des rôles qu'ils contiennent</td>
+                            </tr> 
                             
-                            32
-                                <td><strong>Role Hierarchy</strong>
-                                <td>Les rôles héritent des privilèges des rôles qu'ils contiennent
+                            <tr>
+                                <td><strong>Privilege inheritance</strong></td>
+                                <td>Tous les privilèges héritent sauf OWNERSHIP</td>
+                            </tr>    
                             
-                            32
-                                <td><strong>Privilege inheritance</strong>
-                                一道一道Tous les privilèges héritent sauf OWNERSHIP
+                                
+                            <tr>
+                                <td><strong>Primary / Secondary roles</strong></td>
+                                <td>Primary = rôle actif ; Secondary = privilèges additionnels activables</td>
+                            </tr>
                             
-                            32
-                                <td><strong>Primary / Secondary roles</strong>
-                                一道一道Primary = rôle actif ; Secondary = privilèges additionnels activables
-                            
+                                
                         </tbody>
-                    划
+                    </table>
                 </section>
             </main>
         </div>

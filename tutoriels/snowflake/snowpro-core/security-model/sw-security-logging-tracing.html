@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Logging & Tracing | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-chart-line"></i>🧊 Logging & Tracing – Synthèse SnowPro Core
+                            <i class="fas fa-chart-line"></i>Logging & Tracing – Synthèse SnowPro Core
                         </a>
                     </li>
                     <li>
@@ -111,7 +111,7 @@
                     </li>
                     <li>
                         <a href="#points-essentiels">
-                            <i class="fas fa-graduation-cap"></i>9. Points essentiels pour SnowPro Core
+                            <i class="fas fa-graduation-cap"></i>9. Synthèse
                         </a>
                     </li>
                 </ul>
@@ -164,7 +164,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> 🧊 Logging & Tracing – Synthèse SnowPro Core
+                        <i class="fas fa-chart-line"></i>Logging & Tracing – Synthèse SnowPro Core
                     </h2>
 
                     <p>
@@ -177,11 +177,11 @@
                 ============================================ -->
                 <section id="objectif" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-bullseye"></i> ✅ 1. Objectif du Logging & Tracing dans Snowflake
+                        <i class="fas fa-bullseye"></i>1. Objectif du Logging & Tracing dans Snowflake
                     </h2>
 
                     <p>Snowflake offre un mécanisme pour :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Enregistrer des logs applicatifs depuis Snowpark (Python, Java, Scala) ou des procédures stockées.</li>
                         <li>Tracer les événements d'exécution afin de diagnostiquer les erreurs, mesurer les performances et auditer l'activité applicative.</li>
                         <li>Centraliser les logs dans des event tables que vous pouvez interroger en SQL.</li>
@@ -194,12 +194,12 @@
                 ============================================ -->
                 <section id="models-logging" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-clipboard-list"></i> ✅ 2. Models de Logging supportés
+                        <i class="fas fa-clipboard-list"></i>2. Models de Logging supportés
                     </h2>
 
                     <h3>✔ Application Logging</h3>
                     <p>Utilisé pour enregistrer :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Messages de debug</li>
                         <li>Informations métier</li>
                         <li>Erreurs applicatives</li>
@@ -209,7 +209,7 @@
 
                     <h3>✔ Tracing</h3>
                     <p>Utilisé pour suivre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les étapes d'exécution d'un pipeline</li>
                         <li>Les appels imbriqués (UDF → SP → Snowpark)</li>
                         <li>Les durées d'exécution</li>
@@ -223,11 +223,11 @@
                 ============================================ -->
                 <section id="event-tables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-table"></i> ✅ 3. Les Event Tables
+                        <i class="fas fa-table"></i>3. Les Event Tables
                     </h2>
 
                     <p>Les event tables sont des objets Snowflake spécialement conçus pour stocker les logs :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Stockage optimisé pour requêtage SQL</li>
                         <li>Queryable via SELECT standard</li>
                         <li>Peut être intégrée dans un pipeline (e.g. Snowpipe, tasks)</li>
@@ -237,17 +237,17 @@
                     <p>Une event table contient généralement :</p>
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Colonne</th><th>Description</th>
+                            <tr><th>Colonne</th><th>Description</th></tr>
                         </thead>
                         <tbody>
-                            32<td>TIMESTAMP</td><td>moment exact du log</td>
-                            32<td>LEVEL</td><td>DEBUG / INFO / WARN / ERROR</td>
-                            32<td>MESSAGE</td><td>message enregistré</td>
-                            32<td>CONTEXT</td><td>données additionnelles JSON</td>
-                            32<td>TRACE_ID</td><td>identifiant permettant la corrélation</td>
-                            32<td>SPAN_ID</td><td>sous‑événement spécifique</td>
+                            <tr><td>TIMESTAMP</td><td>moment exact du log</td></tr>
+                            <tr><td>LEVEL</td><td>DEBUG / INFO / WARN / ERROR</td></tr>
+                            <tr><td>MESSAGE</td><td>message enregistré</td></tr>
+                            <tr><td>CONTEXT</td><td>données additionnelles JSON</td></tr>
+                            <tr><td>TRACE_ID</td><td>identifiant permettant la corrélation</td></tr>
+                            <tr><td>SPAN_ID</td><td>sous‑événement spécifique</td></tr>
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -255,20 +255,20 @@
                 ============================================ -->
                 <section id="logging-snowpark" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-snowplow"></i> ✅ 4. Logging & Tracing avec Snowpark
+                        <i class="fas fa-snowplow"></i>4. Logging & Tracing avec Snowpark
                     </h2>
 
                     <h3>✔ Snowpark Python / Java / Scala</h3>
                     <p>Les bibliothèques Snowpark intègrent un module logging compatible Snowflake.</p>
                     <p>Possible de :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Créer un logger</li>
                         <li>Écrire des messages dans l'event table</li>
                         <li>Attacher des métadonnées (context & tags)</li>
                     </ul>
 
                     <p>Exemples d'utilisations typiques :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Audit de pipeline</li>
                         <li>Monitoring ML</li>
                         <li>Debugging UDF / SP</li>
@@ -281,11 +281,11 @@
                 ============================================ -->
                 <section id="logging-stored-procedures" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i> ✅ 5. Logging dans les Stored Procedures (SP)
+                        <i class="fas fa-cogs"></i>5. Logging dans les Stored Procedures (SP)
                     </h2>
 
                     <p>Les stored procedures peuvent utiliser :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">snowflake.snowpark.logging</code> (Java/Python SP)</li>
                         <li>la fonction système <code class="inline-code">SYSTEM$LOG()</code> (JavaScript SP)</li>
                     </ul>
@@ -297,18 +297,18 @@
                 ============================================ -->
                 <section id="tracing" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code-branch"></i> ✅ 6. Tracing : corrélation des événements
+                        <i class="fas fa-code-branch"></i>6. Tracing : corrélation des événements
                     </h2>
 
                     <p>Le tracing permet de reconstruire le chemin d'exécution complet d'un workflow :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Chaque opération génère un <strong>trace ID</strong></li>
                         <li>Chaque sous‑opération génère un <strong>span ID</strong></li>
                         <li>Les dépendances sont reliées automatiquement</li>
                     </ul>
 
                     <p>Cela permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>d'identifier un bottleneck,</li>
                         <li>de comprendre une erreur,</li>
                         <li>d'optimiser un pipeline Snowpark/SQL/UDF.</li>
@@ -320,21 +320,21 @@
                 ============================================ -->
                 <section id="avantages" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 7. Principaux avantages pour SnowPro Core
+                        <i class="fas fa-star"></i>7. Principaux avantages pour SnowPro Core
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Avantage</th><th>Description</th>
+                            <tr><th>Avantage</th><th>Description</th></tr>
                         </thead>
                         <tbody>
-                            32<td><strong>Auditabilité</strong></td><td>Logs centralisés pour conformité RGPD/SOC/HIPAA</td>
-                            32<td><strong>Observabilité</strong></td><td>Vue complète des applications exécutées dans Snowflake</td>
-                            32<td><strong>Debug efficace</strong></td><td>Corrélation de logs + stack traces</td>
-                            32<td><strong>Performance</strong></td><td>Identification des étapes coûteuses</td>
-                            32<td><strong>Ops ready</strong></td><td>Intégration avec monitoring / alerte / dashboards</td>
+                            <tr><td><strong>Auditabilité</strong></td><td>Logs centralisés pour conformité RGPD/SOC/HIPAA</td></tr>
+                            <tr><td><strong>Observabilité</strong></td><td>Vue complète des applications exécutées dans Snowflake</td></tr>
+                            <tr><td><strong>Debug efficace</strong></td><td>Corrélation de logs + stack traces</td></tr>
+                            <tr><td><strong>Performance</strong></td><td>Identification des étapes coûteuses</td></tr>
+                            <tr><td><strong>Ops ready</strong></td><td>Intégration avec monitoring / alerte / dashboards</td></tr>
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -342,10 +342,10 @@
                 ============================================ -->
                 <section id="patterns-classiques" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lightbulb"></i> ✅ 8. Patterns classiques à connaître
+                        <i class="fas fa-lightbulb"></i>8. Patterns classiques à connaître
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Logging depuis une UDF/UDTF → event table</li>
                         <li>Tracing d'un pipeline Snowpark → trace ID + span ID</li>
                         <li>Corrélation cross‑language (Python → SQL → SP JS → Snowpark)</li>
@@ -354,16 +354,15 @@
                 </section>
 
                 <!-- ============================================
-                     SECTION 9: POINTS ESSENTIELS POUR SNOWPRO CORE
+                     SECTION 9: SYNTHESE
                 ============================================ -->
                 <section id="points-essentiels" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-graduation-cap"></i> ✅ 9. Points essentiels pour SnowPro Core
+                        <i class="fas fa-graduation-cap"></i>9. Synthèse
                     </h2>
 
                     <div class="info-note">
-                        <strong>🎯 A retenir absolument :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake prend en charge Logging & Tracing natif pour Snowpark, SP, UDF/UDTF.</li>
                             <li>Les logs et traces sont stockés dans des <strong>event tables</strong>.</li>
                             <li>L'architecture Logging/Tracing permet audit, debugging, monitoring.</li>

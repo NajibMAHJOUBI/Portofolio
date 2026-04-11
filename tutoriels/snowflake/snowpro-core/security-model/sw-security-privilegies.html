@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Configuration du contrôle d'accès | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -111,7 +111,7 @@
                     </li>
                     <li>
                         <a href="#synthese-finale">
-                            <i class="fas fa-star"></i>10. Synthèse finale — SnowPro Core « must‑know »
+                            <i class="fas fa-star"></i>10. Synthèse
                         </a>
                     </li>
                 </ul>
@@ -164,21 +164,21 @@
                 ============================================ -->
                 <section id="access-control-config" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lock"></i> ✅ 1. Configuration du contrôle d'accès
+                        <i class="fas fa-lock"></i>1. Configuration du contrôle d'accès
                     </h2>
 
                     
                     <p>Snowflake utilise un modèle d'accès hybride RBAC + DAC + UBAC, mais RBAC est le modèle recommandé pour toutes les implémentations.</p>
 
                     <h3>✔ Principes essentiels</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les privilèges sont accordés à des rôles, non directement aux utilisateurs (sauf exceptions). </li>
                         <li>Les utilisateurs activent un primary role, et peuvent activer d'autres privilèges via les secondary roles. </li>
                         <li>Les owners (privilège OWNERSHIP) gèrent la sécurité de leurs objets (DAC). </li>
                     </ul>
 
                     <h3>✔ Étapes de configuration générale</h3>
-                    <ol>
+                    <ol style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Créer les utilisateurs (USERADMIN).</li>
                         <li>Créer des rôles personnalisés (USERADMIN).</li>
                         <li>Créer la hiérarchie des rôles (USERADMIN/SECURITYADMIN).</li>
@@ -193,19 +193,19 @@
                 ============================================ -->
                 <section id="user-management" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-users"></i> ✅ 2. User Management (Admin — User Management)
+                        <i class="fas fa-users"></i>2. User Management (Admin — User Management)
                     </h2>
 
                     
 
                     <h3>✔ Rôles impliqués dans la gestion utilisateur</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>USERADMIN</strong> : création gestion des USERS et ROLES.</li>
                         <li><strong>SECURITYADMIN</strong> : gestion des privilèges et GRANTS.</li>
                     </ul>
 
                     <h3>✔ Gestion des USERS</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Création via SnowSight, SQL (<code class="inline-code">CREATE USER</code>) ou SCIM (provisionnement IdP).</li>
                         <li>Les utilisateurs ont un primary role défini dans DEFAULT_ROLE.</li>
                         <li>Ils peuvent avoir plusieurs rôles attribués.</li>
@@ -218,7 +218,7 @@
                 ============================================ -->
                 <section id="create-role" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-plus-circle"></i> ✅ 3. CREATE ROLE
+                        <i class="fas fa-plus-circle"></i>3. CREATE ROLE
                     </h2>
 
                     
@@ -227,7 +227,7 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE ROLE analyst;</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Nécessite un rôle ayant privilège CREATE ROLE (souvent USERADMIN).</li>
                         <li>Les rôles peuvent être assignés à d'autres rôles, créant une hiérarchie. </li>
                     </ul>
@@ -238,7 +238,7 @@
                 ============================================ -->
                 <section id="grant-role" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-user-tag"></i> ✅ 4. GRANT ROLE
+                        <i class="fas fa-user-tag"></i>4. GRANT ROLE
                     </h2>
 
                     
@@ -250,7 +250,7 @@ GRANT ROLE analyst TO ROLE finance_team;</code></pre>
                     </div>
 
                     <h3>✔ Points essentiels</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>L'héritage s'applique : un rôle "parent" hérite des privilèges des rôles enfants. </li>
                         <li>Le rôle ACTIVÉ par l'utilisateur détermine les privilèges disponibles dans la session.</li>
                     </ul>
@@ -261,7 +261,7 @@ GRANT ROLE analyst TO ROLE finance_team;</code></pre>
                 ============================================ -->
                 <section id="grant-privilege" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-key"></i> ✅ 5. GRANT PRIVILEGE
+                        <i class="fas fa-key"></i>5. GRANT PRIVILEGE
                     </h2>
 
                     
@@ -273,11 +273,11 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                     </div>
 
                     <h3>✔ Privilèges clés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les privilèges dépendent du type d'objet (warehouse/table/schema/etc.)</li>
                         <li>
                             Exemples :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>USAGE (db, schema, warehouse)</li>
                                 <li>SELECT, INSERT, UPDATE, DELETE (tables)</li>
                                 <li>CREATE TABLE, CREATE VIEW (schema)</li>
@@ -290,7 +290,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Règle d'accès fondamentale</strong>
                         <p>Pour accéder à un objet :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>USAGE on DATABASE</li>
                             <li>+ USAGE on SCHEMA</li>
                             <li>+ privilege on OBJECT </li>
@@ -303,7 +303,7 @@ GRANT USAGE ON WAREHOUSE wh_xs TO ROLE analyst;</code></pre>
                 ============================================ -->
                 <section id="show-grants" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-search"></i> ✅ 6. SHOW GRANTS
+                        <i class="fas fa-search"></i>6. SHOW GRANTS
                     </h2>
 
                     
@@ -331,7 +331,7 @@ SHOW GRANTS ON TABLE sales;</code></pre>
                 ============================================ -->
                 <section id="revoke-role" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-user-minus"></i> ✅ 7. REVOKE ROLE
+                        <i class="fas fa-user-minus"></i>7. REVOKE ROLE
                     </h2>
 
                     
@@ -341,7 +341,7 @@ SHOW GRANTS ON TABLE sales;</code></pre>
                         <pre><code>REVOKE ROLE analyst FROM USER alice;
 REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le rôle doit avoir été préalablement accordé.</li>
                         <li>La révocation coupe immédiatement l'accès via ce rôle.</li>
                     </ul>
@@ -352,7 +352,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                 ============================================ -->
                 <section id="revoke-privilege" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lock-open"></i> ✅ 8. REVOKE PRIVILEGE
+                        <i class="fas fa-lock-open"></i>8. REVOKE PRIVILEGE
                     </h2>
 
                     
@@ -363,7 +363,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                     </div>
 
                     <h3>✔ Détails importants</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake interdit la suppression du privilège OWNERSHIP sans transfert d'ownership.</li>
                         <li>Les privilèges hérités via un "role parent" doivent être révoqués au niveau du rôle parent.</li>
                     </ul>
@@ -374,7 +374,7 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                 ============================================ -->
                 <section id="use-secondary-roles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exchange-alt"></i> ✅ 9. USE SECONDARY ROLES
+                        <i class="fas fa-exchange-alt"></i>9. USE SECONDARY ROLES
                     </h2>
 
                     
@@ -401,56 +401,67 @@ REVOKE ROLE analyst FROM ROLE finance_team;</code></pre>
                 </section>
 
                 <!-- ============================================
-                     SECTION 10: SYNTHÈSE FINALE — SNOWPRO CORE « MUST‑KNOW »
+                     SECTION 10: SYNTHÈSE
                 ============================================ -->
                 <section id="synthese-finale" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 10. Synthèse finale — SnowPro Core « must‑know »
+                        <i class="fas fa-star"></i>10. Synthèse
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Concept</th><th>Essentiel SnowPro Core</th>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Essentiel SnowPro Core</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>RBAC</strong>
-                                <td>Modèle principal : privilèges → rôle → user
+                            <tr>
+                                <td><strong>RBAC</strong></td>
+                                <td>Modèle principal : privilèges → rôle → user</td>
+                            </tr>
                             
-                            32
-                                <td><strong>DAC</strong>
-                                一道一道L'OWNERSHIP contrôle l'objet (non héritable)
                             
-                            32
-                                <td><strong>CREATE ROLE</strong>
-                                一道一道Permet de structurer l'organisation
+                                <td><strong>DAC</strong></td>
+                                <td>L'OWNERSHIP contrôle l'objet (non héritable)</td>
                             
-                            32
-                                <td><strong>GRANT ROLE</strong>
-                                一道一道Assignation des rôles aux users/rôles
+                            <tr>
+                                <td><strong>CREATE ROLE</strong></td>
+                                <td>Permet de structurer l'organisation</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>GRANT ROLE</strong></td>
+                                <td>Assignation des rôles aux users/rôles</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>GRANT PRIVILEGE</strong></td>
+                                <td>Droit d'accéder ou modifier un objet</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Accès minimal</strong></td>
+                                <td>USAGE(DB) + USAGE(SCHEMA) + SELECT/…</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>SHOW GRANTS</strong></td>
+                                <td>Audit central des accès</td>
+                            </tr>
                             
-                            32
-                                <td><strong>GRANT PRIVILEGE</strong>
-                                一道一道Droit d'accéder ou modifier un objet
-                            
-                            32
-                                <td><strong>Accès minimal</strong>
-                                一道一道USAGE(DB) + USAGE(SCHEMA) + SELECT/…
-                            
-                            32
-                                <td><strong>SHOW GRANTS</strong>
-                                一道一道Audit central des accès
-                            
-                            32
-                                <td><strong>REVOKE</strong>
-                                一道一道Suppression du rôle ou privilège
-                            
-                            32
-                                <td><strong>Secondary roles</strong>
-                                一道一道Activation explicite pour UBAC
-                            
+                            <tr>
+                                <td><strong>REVOKE</strong></td>
+                                <td>Suppression du rôle ou privilège</td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Secondary roles</strong></td>
+                                <td>Activation explicite pour UBAC</td>
+                            </tr>
+
                         </tbody>
-                    划
+                    </table>
                 </section>
             </main>
         </div>

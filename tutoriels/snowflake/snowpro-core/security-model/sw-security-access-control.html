@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel Snowflake - Access Control Framework | DataOps Learning</title>
+    <title>Tutoriel - Access Control Framework | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -86,7 +86,7 @@
                     </li>
                     <li>
                         <a href="#synthese-cles">
-                            <i class="fas fa-star"></i>5. Synthèse SnowPro Core – Points clés à retenir
+                            <i class="fas fa-star"></i>5. Synthèse
                         </a>
                     </li>
                 </ul>
@@ -105,7 +105,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Snowflake - Access Control Framework</h1>
+                    <h1>Access Control Framework</h1>
 
                     <span class="level-badge">Niveau Intermédiaire</span>
 
@@ -139,27 +139,27 @@
                 ============================================ -->
                 <section id="access-control-framework" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-lock"></i> ✅ 1. Access Control Framework
+                        <i class="fas fa-lock"></i>1. Access Control Framework
                     </h2>
 
                     
                     <p>Snowflake utilise un modèle hybride de contrôle d'accès, combinant :</p>
 
                     <h3>✔ RBAC – Role-Based Access Control (modèle principal)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les privilèges sont attribués à des rôles, pas à des utilisateurs.</li>
                         <li>Les utilisateurs se voient ensuite attribuer un ou plusieurs rôles.</li>
                         <li>C'est le modèle recommandé car il est scalable et maintenable. </li>
                     </ul>
 
                     <h3>✔ DAC – Discretionary Access Control</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Chaque objet Snowflake a un OWNER (un rôle).</li>
                         <li>L'owner d'un objet peut accorder, révoquer des privilèges, et transférer l'OWNERSHIP. </li>
                     </ul>
 
                     <h3>✔ UBAC – User-Based Access Control (secondaire)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake permet d'accorder des privilèges directement à un utilisateur.</li>
                         <li>Ces privilèges ne sont pris en compte que si <code class="inline-code">USE SECONDARY ROLES = ALL</code>.</li>
                         <li>Ce mécanisme doit rester exceptionnel. </li>
@@ -168,27 +168,31 @@
                     <h3>✔ Concepts fondamentaux :</h3>
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Élément</th><th>Définition</th>
+                            <tr>
+                                <th>Élément</th>
+                                <th>Définition</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>User</strong>
-                                <td>Identité Snowflake (humain ou service). 
-                            
-                            32
-                                <td><strong>Role</strong>
-                                <td>Conteneur de privilèges. Peut être attribué à un utilisateur ou à un autre rôle. 
-                            
-                            32
-                                <td><strong>Privilege</strong>
-                                <td>Droit d'exécuter une action sur un objet. 
-                            
-                            32
-                                <td><strong>Securable Object</strong>
-                                <td>Objet auquel un privilège peut être accordé. 
+                            <tr>
+                                <td><strong>User</strong></td>
+                                <td>Identité Snowflake (humain ou service). </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Role</strong></td>
+                                <td>Conteneur de privilèges. Peut être attribué à un utilisateur ou à un autre rôle. </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privilege</strong></td>
+                                <td>Droit d'exécuter une action sur un objet. </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Securable Object</strong></td>
+                                <td>Objet auquel un privilège peut être accordé. </td>
+                            </tr>
                             
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -196,7 +200,7 @@
                 ============================================ -->
                 <section id="securable-objects" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cubes"></i> ✅ 2. Securable Objects (Objets Sécurisables)
+                        <i class="fas fa-cubes"></i>2. Securable Objects (Objets Sécurisables)
                     </h2>
 
                     
@@ -205,7 +209,7 @@
 
                     <h3>✔ Types d'objets sécurisables</h3>
                     <p>Exemples :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Database</li>
                         <li>Schema</li>
                         <li>Table, View, Stream, Stage</li>
@@ -218,7 +222,7 @@
                         <i class="fas fa-info-circle"></i>
                         <strong>Règle essentielle pour l'accès</strong>
                         <p>Pour accéder à un objet, il faut :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>USAGE sur la Database</li>
                             <li>USAGE sur le Schema</li>
                             <li>Le privilège spécifique (ex : SELECT, INSERT, etc.) </li>
@@ -231,21 +235,21 @@
                 ============================================ -->
                 <section id="role-hierarchy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-sitemap"></i> ✅ 3. Role Hierarchy & Privilege Inheritance
+                        <i class="fas fa-sitemap"></i>3. Role Hierarchy & Privilege Inheritance
                     </h2>
 
                     
                     <p>Dans Snowflake, les rôles peuvent être imbriqués :</p>
 
                     <h3>✔ Héritage</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un rôle A peut être attribué à un rôle B.</li>
                         <li>B hérite automatiquement de tous les privilèges de A.</li>
                         <li>Cette hiérarchie permet une gestion flexible et granulaire. </li>
                     </ul>
 
                     <h3>✔ Rôle principal vs rôles secondaires</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un utilisateur active un primary role dans sa session.</li>
                         <li>Les privilèges basés sur UBAC ne sont actifs que si les secondary roles sont activés avec : <code class="inline-code">USE SECONDARY ROLES ALL;</code> </li>
                     </ul>
@@ -253,7 +257,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>OWNERSHIP et héritage</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Le privilège OWNERSHIP n'est pas héritable et ne peut pas être partagé.</li>
                             <li>OWNERSHIP = privilège absolu → transférable seulement via <code class="inline-code">GRANT OWNERSHIP</code>. </li>
                         </ul>
@@ -265,7 +269,7 @@
                 ============================================ -->
                 <section id="privileges" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-key"></i> ✅ 4. Privileges (Privilèges d'Accès)
+                        <i class="fas fa-key"></i>4. Privileges (Privilèges d'Accès)
                     </h2>
 
                     
@@ -274,21 +278,21 @@
                     <h3>✔ Catégories de privilèges</h3>
 
                     <h4>🔹 Privilèges sur Database</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>USAGE</li>
                         <li>CREATE SCHEMA</li>
                         <li>IMPORTED PRIVILEGES</li>
                     </ul>
 
                     <h4>🔹 Privilèges sur Schema</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>USAGE</li>
                         <li>CREATE TABLE / CREATE VIEW / CREATE STAGE / …</li>
                         <li>MODIFY</li>
                     </ul>
 
                     <h4>🔹 Privilèges sur Tables / Views</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>SELECT</li>
                         <li>INSERT, UPDATE, DELETE</li>
                         <li>TRUNCATE</li>
@@ -296,7 +300,7 @@
                     </ul>
 
                     <h4>🔹 Privilèges sur Warehouses</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>USAGE</li>
                         <li>OPERATE</li>
                         <li>MONITOR</li>
@@ -306,7 +310,7 @@
                     <div class="info-note">
                         <i class="fas fa-crown"></i>
                         <strong>Privilèges supérieurs</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><strong>OWNERSHIP</strong> : donne contrôle total sur l'objet.</li>
                             <li>Permet de transférer l'ownership.</li>
                             <li>Implique automatiquement TOUS les autres privilèges. </li>
@@ -324,17 +328,17 @@ REVOKE SELECT ON TABLE mydb.sales FROM ROLE analyst;</code></pre>
                 </section>
 
                 <!-- ============================================
-                     SECTION 5: SYNTHÈSE SNOWPRO CORE – POINTS CLÉS À RETENIR
+                     SECTION 5: SYNTHÈSE
                 ============================================ -->
                 <section id="synthese-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 5. Synthèse SnowPro Core – Points clés à retenir
+                        <i class="fas fa-star"></i>5. Synthèse
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ RBAC = modèle recommandé</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>On crée des rôles</li>
                                 <li>On accorde des privilèges à ces rôles</li>
                                 <li>On assigne les rôles aux utilisateurs</li>
@@ -343,7 +347,7 @@ REVOKE SELECT ON TABLE mydb.sales FROM ROLE analyst;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ OWNERSHIP</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Privilège suprême (non héritable)</li>
                                 <li>Un seul owner par objet</li>
                             </ul>
@@ -351,14 +355,14 @@ REVOKE SELECT ON TABLE mydb.sales FROM ROLE analyst;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Hiérarchie d'accès</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>USAGE sur DB → USAGE sur Schema → privilège sur l'objet</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4>✔ Héritage des rôles</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Les rôles peuvent être imbriqués</li>
                                 <li>Les privilèges se propagent dans la hiérarchie</li>
                             </ul>
@@ -366,7 +370,7 @@ REVOKE SELECT ON TABLE mydb.sales FROM ROLE analyst;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ UBAC = exceptionnel</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Ne fonctionne que si les secondary roles sont activés</li>
                             </ul>
                         </div>
