@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel Snowflake - Virtual Warehouses | DataOps Learning</title>
+    <title>SnowPro Core Certification - Virtual Warehouses | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../../css/tutoriel.css">
     <link rel="stylesheet" href="../../../../css/icone-fabric.css">
@@ -130,7 +130,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Architecture Snowflake - Virtual Warehouses</h1>
+                    <h1>Virtual Warehouses</h1>
 
                     <span class="level-badge">Niveau Débutant</span>
 
@@ -148,7 +148,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-gears"></i> Data Engineering
@@ -202,17 +202,17 @@
                         <i class="fas fa-tags"></i>2. Types de Warehouses
                     </h2>
 
-                    <h3>1️⃣ Standard Warehouse</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <h3>1. Standard Warehouse</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.0rem;">
                         <li>Type par défaut.</li>
                         <li>Optimisé pour la majorité des workloads analytiques.</li>
                     </ul>
 
-                    <h3>2️⃣ Snowpark-Optimized Warehouse</h3>
+                    <h3>2. Snowpark-Optimized Warehouse</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             Optimisé pour :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li>Snowpark ML</li>
                                 <li>UDFs/UDTFs lourdes</li>
                                 <li>Workloads nécessitant beaucoup de CPU</li>
@@ -276,7 +276,7 @@
                         </li>
                         <li>
                             Modes :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li><b>Auto-scale</b> (min/max clusters)</li>
                                 <li><b>Maximiser la disponibilité</b> ou <b>minimiser les coûts</b></li>
                             </ul>
@@ -293,25 +293,25 @@
                         <i class="fas fa-sliders-h"></i>5. Propriétés importantes d'un Warehouse
                     </h2>
 
-                    <h3>🛑 Auto-Suspend</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <h3>✔ Auto-Suspend</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.0rem;">
                         <li>Arrête automatiquement le Warehouse après une période d'inactivité.</li>
                         <li>Permet d'économiser des crédits.</li>
                     </ul>
 
-                    <h3>▶️ Auto-Resume</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <h3>✔ Auto-Resume</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.rem;">
                         <li>Redémarre automatiquement le Warehouse lorsqu'une requête arrive.</li>
                     </ul>
 
-                    <h3>🔁 Scaling Policy</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <h3>✔ Scaling Policy</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.rem;">
                         <li><b>Standard</b> : équilibre entre performance et coût.</li>
                         <li><b>Economy</b> : limite le scaling pour réduire les coûts.</li>
                     </ul>
 
-                    <h3>🧹 Query Result Caching</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                    <h3>✔ Query Result Caching</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.rem;">
                         <li>Les résultats mis en cache peuvent être renvoyés <b>sans consommer de compute</b>.</li>
                     </ul>
                 </section>
@@ -341,14 +341,14 @@
                         <i class="fas fa-coins"></i>7. Facturation
                     </h2>
 
-                    <h3>🔹 Les crédits dépendent de :</h3>
+                    <h3>✔  Les crédits dépendent de :</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la taille du warehouse,</li>
                         <li>le nombre de clusters (si multi‑cluster),</li>
                         <li>le temps d'exécution.</li>
                     </ul>
 
-                    <h3>🔹 Règles de facturation</h3>
+                    <h3>✔  Règles de facturation</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Minimum 60 secondes à chaque démarrage.</li>
                         <li>Ensuite facturation à la seconde.</li>
@@ -358,7 +358,7 @@
                         </li>
                     </ul>
 
-                    <h3>🔹 Redimensionnement (resizing)</h3>
+                    <h3>✔  Redimensionnement (resizing)</h3>
                     <p>Changer la taille d'un Warehouse :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Provisionne des nouvelles ressources,</li>

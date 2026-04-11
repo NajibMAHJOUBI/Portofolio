@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutoriel Snowflake - Types de Tables | DataOps Learning</title>
+    <title>SnowPro Core Certification - Stockage Snowflake | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../../css/tutoriel.css">
     <link rel="stylesheet" href="../../../../css/icone-fabric.css">
@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Types de Tables</li>
+                <li class="current">Stockage</li>
             </ul>
         </div>
     </div>
@@ -105,7 +105,7 @@
             <main class="tutorial-content">
                 <!-- En-tête du tutoriel -->
                 <div class="tutorial-header">
-                    <h1>Architecture Snowflake - Types de Tables</h1>
+                    <h1>Stockage Snowflake</h1>
 
                     <span class="level-badge">Niveau Débutant</span>
 
@@ -123,7 +123,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-table"></i>Types de Tables
@@ -193,7 +193,6 @@
                         <li><b>Décortiquer l'architecture des micro-partitions</b> : Comprendre pourquoi et comment Snowflake découpe automatiquement vos données, et comment exploiter cette architecture pour des requêtes ultra-rapides sans indexation manuelle.</li>
                         <li><b>Explorer les tables Iceberg</b> : Découvrir comment Snowflake s'ouvre aux formats de données ouverts pour permettre de gérer vos données là où elles résident, sans duplication, tout en bénéficiant de la puissance de calcul Snowflake.</li>
                         <li><b>Maîtriser les tables hybrides</b> : Plonger dans cette innovation récente qui bouscule les frontières traditionnelles entre les bases de données transactionnelles (OLTP) et analytiques (OLAP), en offrant des performances de type ligne sur des données volumineuses.</li>
-                        <li><b>Comparer et choisir</b> : À travers un scénario concret, nous mettrons en œuvre chaque type de table sur un même jeu de données pour illustrer leurs forces et faiblesses respectives.</li>
                     </ul>
                 </section>
 
@@ -366,7 +365,7 @@
                         <li>Snowflake = catalog</li>
                         <li>
                             Snowflake gère :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li>Compaction</li>
                                 <li>Maintenance</li>
                                 <li>DDL/DML complets</li>
@@ -381,7 +380,7 @@
                         <li>Catalog externe (Glue, REST, Open Catalog…)</li>
                         <li>
                             Snowflake peut :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li>Lire</li>
                                 <li>Écrire (selon version Iceberg)</li>
                             </ul>
@@ -420,7 +419,7 @@
                     <h3> 7. Cross‑Cloud / Cross‑Region</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake peut accéder à un external volume dans un autre cloud ou une autre région.</li>
-                        <li>Cela entraîne des <b>egress costs</b> côté cloud provider.</li>
+                        <li>Cela entraîne des <b>coûts</b> côté cloud provider.</li>
                         <li>Snowflake facture les <b>data transfer</b> pour les tables Snowflake‑managed cross‑region.</li>
                     </ul>
 
@@ -494,7 +493,7 @@
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             Supporte :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li><b>PRIMARY KEY</b></li>
                                 <li><b>UNIQUE</b></li>
                                 <li><b>FOREIGN KEY</b></li>
@@ -508,7 +507,7 @@
                         <li>Métadonnées d'applications (état de workflow, sessions, tokens…).</li>
                         <li>
                             Applications nécessitant :
-                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                            <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                 <li>Beaucoup de petites mises à jour</li>
                                 <li>Des lectures rapides par clé</li>
                                 <li>Des contraintes d'intégrité strictes</li>

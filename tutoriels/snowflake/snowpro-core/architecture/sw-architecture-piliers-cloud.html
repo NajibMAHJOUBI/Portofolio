@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tutoriel Snowflake - Architecture Cloud & Snowgrid | DataOps Learning</title>
+        <title>SnowPro Core Certification - Services Cloud & Snowgrid | DataOps Learning</title>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../../../css/tutoriel.css">
@@ -47,7 +47,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">Architecture Cloud & Snowgrid</li>
+                    <li class="current">Services Cloud & Snowgrid</li>
                 </ul>
             </div>
         </div>
@@ -87,22 +87,22 @@
                         </li>
                         <li>
                             <a href="#definition-snowgrid">
-                                <i class="fas fa-globe"></i>1. Définition de Snowgrid
+                                <i class="fas fa-globe"></i>Définition de Snowgrid
                             </a>
                         </li>
                         <li>
                             <a href="#fonctionnalites-snowgrid">
-                                <i class="fas fa-cogs"></i>2. Fonctionnalités clés de Snowgrid
+                                <i class="fas fa-cogs"></i>Fonctionnalités clés de Snowgrid
                             </a>
                         </li>
                         <li>
                             <a href="#composants-snowgrid">
-                                <i class="fas fa-microchip"></i>3. Composants Snowgrid
+                                <i class="fas fa-microchip"></i>Composants Snowgrid
                             </a>
                         </li>
                         <li>
                             <a href="#cas-usage">
-                                <i class="fas fa-chart-line"></i>4. Cas d'usages typiques
+                                <i class="fas fa-chart-line"></i>Cas d'usages typiques
                             </a>
                         </li>
                     </ul>
@@ -121,7 +121,7 @@
                 <main class="tutorial-content">
                     <!-- En-tête du tutoriel -->
                     <div class="tutorial-header">
-                        <h1>Architecture Snowflake - Services Cloud & Snowgrid</h1>
+                        <h1>Services Cloud & Snowgrid</h1>
 
                         <span class="level-badge">Niveau Débutant</span>
 
@@ -139,7 +139,7 @@
 
                         <div class="tech-stack">
                             <span class="tech-tag">
-                                <i class="fab fa-snowflake"></i>Snowflake
+                                <i class="fab snowflake-icon"></i>Snowflake
                             </span>
                             <span class="tech-tag">
                                 <i class="fas fa-cloud"></i>Cloud Architecture
@@ -249,7 +249,7 @@
                     ============================================ -->
                     <section id="definition-snowgrid" class="tutorial-section">
                         <h2>
-                            <i class="fas fa-globe"></i> 1. Définition
+                            <i class="fas fa-globe"></i> Définition
                         </h2>
 
                         <p>
@@ -274,19 +274,19 @@
                     ============================================ -->
                     <section id="fonctionnalites-snowgrid" class="tutorial-section">
                         <h2>
-                            <i class="fas fa-cogs"></i> 2. Fonctionnalités clés de Snowgrid
+                            <i class="fas fa-cogs"></i> Fonctionnalités clés de Snowgrid
                         </h2>
 
-                        <h3>✔ 1. Cross‑Cloud Business Continuity</h3>
+                        <h3>1. Cross‑Cloud Business Continuity</h3>
                         <p>Permet d'assurer la continuité d'activité grâce à :</p>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><b>Replication</b> : copie des bases, warehouses, objets de compte vers une autre région/cloud.</li>
                             <li><b>Failover / Failback</b> : bascule contrôlée vers une région secondaire en cas d'incident.</li>
                             <li><b>Client Redirect</b> : redirection automatique des connexions vers la région de secours.</li>
                         </ul>
-                        <p><b>Objectif</b> : réduire RTO/RPO et garantir la disponibilité mondiale.</p>
+                        <p><b>Objectif</b> : réduire <b>RTO</b> (Recovery Time Objective) / <b>RPO</b> (Recovery Point Objective) et garantir la disponibilité mondiale.</p>
 
-                        <h3>✔ 2. Cross‑Cloud Data Governance</h3>
+                        <h3>2. Cross‑Cloud Data Governance</h3>
                         <p>Snowgrid assure une gouvernance cohérente dans toutes les régions :</p>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Politiques de sécurité uniformes</li>
@@ -295,16 +295,16 @@
                             <li>Respect des contraintes de résidence des données</li>
                         </ul>
 
-                        <h3>✔ 3. Global Data Sharing</h3>
+                        <h3>3. Global Data Sharing</h3>
                         <p>Grâce à Snowgrid, Snowflake permet :</p>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                             <li><b>Secure Data Sharing</b> entre régions et clouds</li>
                             <li><b>Listings globaux</b> sur le Marketplace</li>
                             <li>Collaboration sans copie de données</li>
                         </ul>
                         <p>Les données restent dans leur région d'origine mais sont accessibles globalement.</p>
 
-                        <h3>✔ 4. Global Directory Services</h3>
+                        <h3>4. Global Directory Services</h3>
                         <p>Snowgrid maintient un <b>répertoire global</b> des comptes Snowflake :</p>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Permet de partager des données avec n'importe quel compte Snowflake dans le monde</li>
@@ -317,7 +317,7 @@
                     ============================================ -->
                     <section id="composants-snowgrid" class="tutorial-section">
                         <h2>
-                            <i class="fas fa-microchip"></i> 3. Composants Snowgrid
+                            <i class="fas fa-microchip"></i> Composants Snowgrid
                         </h2>
 
                         <table class="tutorial-table">
@@ -361,25 +361,25 @@
                     ============================================ -->
                     <section id="cas-usage" class="tutorial-section">
                         <h2>
-                            <i class="fas fa-chart-line"></i> 4. Cas d'usages typiques
+                            <i class="fas fa-chart-line"></i> Cas d'usages typiques
                         </h2>
 
                         <h3>Multi‑cloud / Multi‑région</h3>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                             <li>Répondre aux exigences de résidence des données</li>
                             <li>Réduire la dépendance à un seul cloud provider</li>
                             <li>Optimiser les coûts selon les régions</li>
                         </ul>
 
                         <h3>Résilience & Disaster Recovery</h3>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                             <li>Réplication automatique</li>
                             <li>Bascule rapide en cas d'incident</li>
                             <li>Continuité d'activité mondiale</li>
                         </ul>
 
                         <h3>Collaboration globale</h3>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                             <li>Partage de données avec partenaires internationaux</li>
                             <li>Marketplace mondial</li>
                             <li>Clean Rooms multi‑cloud</li>
