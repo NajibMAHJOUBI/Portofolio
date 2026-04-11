@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Alerts & Notifications | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -154,13 +154,13 @@
                 ============================================ -->
                 <section id="alerts-overview" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-bell"></i> ✅ 1. Snowflake Alerts – Overview
+                        <i class="fas fa-bell"></i>1. Snowflake Alerts – Overview
                     </h2>
 
                     <p>Les alerts sont des objets Snowflake permettant d'exécuter automatiquement une action ou d'envoyer une notification lorsque des conditions sur les données sont remplies.</p>
 
                     <p>Elles s'utilisent pour surveiller :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>des règles métier,</li>
                         <li>des erreurs,</li>
                         <li>des dérives de données,</li>
@@ -170,7 +170,7 @@
 
                     <h3>✔ 1.1. Fonctionnement d'une Snowflake Alert</h3>
                     <p>Une alerte se compose de trois éléments :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>CONDITION</strong> : Une requête SQL renvoyant TRUE/FALSE ou retournant des lignes.</li>
                         <li><strong>ACTION</strong> : Une instruction SQL ou un appel à procédure stockée (souvent une notification).</li>
                         <li><strong>SCHEDULE</strong> : Une exécution périodique via l'ordonnanceur Snowflake.</li>
@@ -178,7 +178,7 @@
 
                     <h3>✔ 1.2. Cas d'usage typiques</h3>
                     <p>Selon la documentation :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>détecter seuils de KPI dépassés,</li>
                         <li>détecter des anomalies dans les données,</li>
                         <li>activer une notification automatique,</li>
@@ -189,7 +189,7 @@
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ 1.3. Privilèges requis</strong>
                         <p>Pour créer et exécuter une alerte :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>EXECUTE ALERT au niveau du compte (ACCOUNTADMIN uniquement),</li>
                             <li>USAGE & CREATE ALERT sur le schéma cible,</li>
                             <li>USAGE sur le warehouse utilisé,</li>
@@ -204,11 +204,11 @@
                 ============================================ -->
                 <section id="notifications-overview" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-envelope"></i> ✅ 2. Snowflake Notifications – Overview
+                        <i class="fas fa-envelope"></i>2. Snowflake Notifications – Overview
                     </h2>
 
                     <p>Snowflake propose un système complet de notifications internes pour envoyer des messages à :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>une adresse e-mail,</li>
                         <li>une file Cloud provider (SNS / Event Grid / Pub/Sub),</li>
                         <li>un webhook (Slack, Teams, PagerDuty),</li>
@@ -221,16 +221,16 @@
                 ============================================ -->
                 <section id="email-notifications" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-envelope-open-text"></i> ✅ 3. Email Notifications
+                        <i class="fas fa-envelope-open-text"></i>3. Email Notifications
                     </h2>
 
                     <p>Les notifications e-mail sont envoyées via la procédure système :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">SYSTEM$SEND_EMAIL</code> ou <code class="inline-code">SYSTEM$SEND_SNOWFLAKE_NOTIFICATION</code>.</li>
                     </ul>
 
                     <p>Elles nécessitent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un utilisateur Snowflake avec une adresse e-mail vérifiée.</li>
                         <li>Une notification integration <code class="inline-code">TYPE=EMAIL</code>.</li>
                     </ul>
@@ -243,7 +243,7 @@
                     <p></p>
 
                     <h3>✔ Restrictions e-mails</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake ne peut envoyer qu'aux utilisateurs du même compte Snowflake.</li>
                         <li>L'envoi se fait via AWS SES (détail important) et les messages peuvent être temporairement conservés 30 jours. </li>
                     </ul>
@@ -265,17 +265,17 @@
                 ============================================ -->
                 <section id="cloud-queue-notifications" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cloud-upload-alt"></i> ✅ 4. Notifications vers Cloud Queues
+                        <i class="fas fa-cloud-upload-alt"></i>4. Notifications vers Cloud Queues
                     </h2>
 
                     <p>Snowflake peut envoyer des messages vers :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Amazon SNS,</li>
                         <li>Azure Event Grid,</li>
                         <li>Google Cloud Pub/Sub. </li>
                     </ul>
                     <p>Ces intégrations permettent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>monitoring Snowpipe,</li>
                         <li>erreurs de tasks,</li>
                         <li>intégration avec systèmes d'alertes externes.</li>
@@ -287,11 +287,11 @@
                 ============================================ -->
                 <section id="webhook-notifications" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-webhook"></i> ✅ 5. Webhook Notifications
+                        <i class="fas fa-webhook"></i>5. Webhook Notifications
                     </h2>
 
                     <p>Snowflake supporte officiellement les webhooks pour :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Slack,</li>
                         <li>Microsoft Teams,</li>
                         <li>PagerDuty. </li>
@@ -316,7 +316,7 @@
 
                     <h3>✔ 5.3. Envoyer une notification</h3>
                     <p>On utilise : <code class="inline-code">SYSTEM$SEND_SNOWFLAKE_NOTIFICATION</code> avec les fonctions helper :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>APPLICATION_JSON,</li>
                         <li>TEXT_PLAIN,</li>
                         <li>SANITIZE_WEBHOOK_CONTENT. </li>
@@ -328,7 +328,7 @@
                 ============================================ -->
                 <section id="notification-history" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-history"></i> ✅ 6. Historique des notifications
+                        <i class="fas fa-history"></i>6. Historique des notifications
                     </h2>
 
                     <p>L'historique est consultable via :</p>
@@ -344,41 +344,47 @@
                 ============================================ -->
                 <section id="synthese-alerts-notifications" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> ✅ 7. Synthèse : Alerts vs Notifications
+                        <i class="fas fa-chart-simple"></i>7. Synthèse : Alerts vs Notifications
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Fonction</th><th>Alerts</th><th>Notifications</th>
+                            <tr>
+                                <th>Fonction</th>
+                                <th>Alerts</th>
+                                <th>Notifications</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Déclenchement</strong>
-                                <td>Basé sur une condition SQL + schedule
-                                <td>Appelé via procédure ou lié à un événement (Snowpipe, Task)
+                            <tr>
+                                <td><strong>Déclenchement</strong></td>
+                                <td>Basé sur une condition SQL + schedule</td>
+                                <td>Appelé via procédure ou lié à un événement (Snowpipe, Task)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Type</strong></td>
+                                <td>Objet Snowflake</td>
+                                <td>Message envoyé via intégration</td>
+                            </tr>
                             
-                            32
-                                <td><strong>Type</strong>
-                                <td>Objet Snowflake
-                                <td>Message envoyé via intégration
+                            <tr>
+                                <td><strong>Cible</strong></td>
+                                <td>Action SQL, notification</td>
+                                <td>Email, Cloud Queue, Webhook</td>
+                            </tr>
                             
-                            32
-                                <td><strong>Cible</strong>
-                                <td>Action SQL, notification
-                                <td>Email, Cloud Queue, Webhook
-                            
-                            32
-                                <td><strong>Prérequis</strong>
-                                <td>EXECUTE ALERT
-                                <td>CREATE NOTIFICATION INTEGRATION
-                            
-                            32
-                                <td><strong>Usage</strong>
-                                <td>Surveiller / automatiser
-                                <td>Alerter / externaliser
-                            
+                            <tr>
+                                <td><strong>Prérequis</strong></td>
+                                <td>EXECUTE ALERT</td>
+                                <td>CREATE NOTIFICATION INTEGRATION</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Usage</strong></td>
+                                <td>Surveiller / automatiser</td>
+                                <td>Alerter / externaliser</td>
+                            </tr>
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -386,13 +392,13 @@
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 8. Points clés SnowPro Core – À retenir absolument
+                        <i class="fas fa-star"></i>8. Points clés SnowPro Core – À retenir absolument
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🎯 Snowflake Alerts</h4>
-                            <ul>
+                            <h4>✔ Snowflake Alerts</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Objet SQL évaluant une condition et exécutant une action.</li>
                                 <li>Déclenchée périodiquement (schedule).</li>
                                 <li>Parfait pour surveiller qualité / anomalies / dérives.</li>
@@ -400,8 +406,8 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Notifications</h4>
-                            <ul>
+                            <h4>✔ Notifications</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Envois vers e-mail, SNS, Event Grid, Pub/Sub, slack/Teams/PagerDuty via webhooks.</li>
                                 <li>Requiert une notification integration.</li>
                                 <li>Historique disponible via NOTIFICATION_HISTORY.</li>
@@ -409,8 +415,8 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Distinction majeure</h4>
-                            <ul>
+                            <h4>✔ Distinction majeure</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Alert = logique + condition + action</li>
                                 <li>Notification = moyen d'envoi (email / webhook / cloud queue)</li>
                             </ul>

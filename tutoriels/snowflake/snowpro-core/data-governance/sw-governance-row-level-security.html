@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Row-Level Security (RLS) | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -164,7 +164,7 @@
                 ============================================ -->
                 <section id="rls-introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-table-rows"></i> ✅ 1. Row-Level Security (RLS) dans Snowflake – Introduction
+                        <i class="fas fa-table-rows"></i>1. Row-Level Security (RLS) dans Snowflake – Introduction
                     </h2>
 
                     
@@ -181,16 +181,16 @@
                 ============================================ -->
                 <section id="row-access-policy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-file-alt"></i> ✅ 2. Qu'est‑ce qu'une Row Access Policy ?
+                        <i class="fas fa-file-alt"></i>2. Qu'est‑ce qu'une Row Access Policy ?
                     </h2>
 
                     
                     <p>Une Row Access Policy est un objet de schéma qui :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Détermine si une ligne donnée peut être retournée dans une requête.</li>
                         <li>
                             S'applique à :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>SELECT</li>
                                 <li>Les lignes lues durant UPDATE / DELETE / MERGE</li>
                             </ul>
@@ -199,7 +199,7 @@
                         <li>S'applique à l'exécution, sans modifier les données stockées (même principe que le masking).</li>
                         <li>
                             Elle peut inclure :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Des conditions simples (par rôle).</li>
                                 <li>Des conditions complexes utilisant des mapping tables.</li>
                                 <li>Des context functions (CURRENT_ROLE(), SESSION_USER(), etc.). </li>
@@ -213,16 +213,16 @@
                 ============================================ -->
                 <section id="fonctionnement" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i> ✅ 3. Comment fonctionne une Row Access Policy ?
+                        <i class="fas fa-cogs"></i>3. Comment fonctionne une Row Access Policy ?
                     </h2>
 
                     
                     <p>Snowflake évalue une Row Access Policy ainsi :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La politique renvoie <strong>TRUE</strong> (ligne visible) ou <strong>FALSE</strong> (ligne filtrée).</li>
                         <li>
                             L'expression de la politique peut référencer :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>des fonctions conditionnelles,</li>
                                 <li>des fonctions de contexte (ex. IS_DATABASE_ROLE_IN_SESSION()),</li>
                                 <li>des objets Snowflake (table de mapping).</li>
@@ -241,12 +241,12 @@
                 ============================================ -->
                 <section id="mapping-table" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-table"></i> ✅ 4. Mapping Table (Table d'entitlements)
+                        <i class="fas fa-table"></i>4. Mapping Table (Table d'entitlements)
                     </h2>
 
                     
                     <p>Pour les politiques complexes (ex : filtrage multi‑régions), Snowflake recommande :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De créer une mapping table centralisée.</li>
                         <li>De la stocker dans la même database que la table protégée.</li>
                         <li>Obligatoire si la politique utilise <code class="inline-code">IS_DATABASE_ROLE_IN_SESSION</code>.</li>
@@ -266,7 +266,7 @@ US          | ROLE_USA</code></pre>
                 ============================================ -->
                 <section id="application-policy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-plus-circle"></i> ✅ 5. Application d'une Row Access Policy
+                        <i class="fas fa-plus-circle"></i>5. Application d'une Row Access Policy
                     </h2>
 
                     
@@ -297,13 +297,13 @@ US          | ROLE_USA</code></pre>
                 ============================================ -->
                 <section id="limitations" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exclamation-triangle"></i> ✅ 6. Limitations importantes
+                        <i class="fas fa-exclamation-triangle"></i>6. Limitations importantes
                     </h2>
 
                     
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>RLS ne bloque pas :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>l'insertion de lignes,</li>
                                 <li>la modification ou suppression de lignes visibles selon la politique.</li>
                             </ul>
@@ -318,10 +318,10 @@ US          | ROLE_USA</code></pre>
                 ============================================ -->
                 <section id="scenarios" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 7. Scénarios où la RLS est indispensable
+                        <i class="fas fa-chart-line"></i>7. Scénarios où la RLS est indispensable
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Multi‑tenant (chaque client voit uniquement ses données)</li>
                         <li>Filtrage par région / pays</li>
                         <li>Sécurité interne (salaire, équipes, département)</li>
@@ -334,7 +334,7 @@ US          | ROLE_USA</code></pre>
                 ============================================ -->
                 <section id="architecture-recommandee" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-layer-group"></i> ✅ 8. Architecture recommandée (3 couches de sécurité)
+                        <i class="fas fa-layer-group"></i>8. Architecture recommandée (3 couches de sécurité)
                     </h2>
 
                     <p>D'après l'organisation décrite dans la doc et la pratique Snowflake :</p>
@@ -350,7 +350,7 @@ US          | ROLE_USA</code></pre>
                 ============================================ -->
                 <section id="exemple-conceptuel" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-code"></i> ✅ 9. Exemple conceptuel de Row Access Policy
+                        <i class="fas fa-code"></i>9. Exemple conceptuel de Row Access Policy
                     </h2>
 
                     <h3>1. Table de mapping</h3>
@@ -387,13 +387,13 @@ AS (region STRING) RETURNS BOOLEAN ->
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 10. Points clés SnowPro Core à retenir
+                        <i class="fas fa-star"></i>10. Points clés SnowPro Core à retenir
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🎯 Row-Level Security</h4>
-                            <ul>
+                            <h4>✔ Row-Level Security</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Se met en place via des <strong>Row Access Policies</strong>.</li>
                                 <li>Fonctionne à l'exécution (runtime).</li>
                                 <li>Filtre les lignes sans altérer les données.</li>
@@ -403,15 +403,15 @@ AS (region STRING) RETURNS BOOLEAN ->
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Architecture</h4>
-                            <ul>
+                            <h4>✔ Architecture</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Intégrée avec RBAC / Column Masking pour une sécurité complète.</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Technique</h4>
-                            <ul>
+                            <h4>✔ Technique</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Politique évaluée avec le rôle du <strong>policy owner</strong>.</li>
                                 <li>Mapping table dans la même database.</li>
                                 <li>Une policy peut être appliquée à plusieurs objets.</li>

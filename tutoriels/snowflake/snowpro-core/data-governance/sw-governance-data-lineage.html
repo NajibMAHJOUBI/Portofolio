@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Data Lineage & Access History | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -134,7 +134,7 @@
                 ============================================ -->
                 <section id="data-lineage" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-project-diagram"></i> ✅ 1. Data Lineage dans Snowsight (UI)
+                        <i class="fas fa-project-diagram"></i>1. Data Lineage dans Snowsight (UI)
                     </h2>
 
                     
@@ -142,7 +142,7 @@
                     <p>La data lineage est une fonctionnalité <strong>Enterprise Edition</strong> permettant de visualiser comment les données circulent entre les objets Snowflake (tables, vues, stages, materialized views, etc.).</p>
 
                     <p>Elle permet de comprendre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>d'où viennent les données (upstream)</li>
                         <li>où elles vont (downstream)</li>
                         <li>comment elles sont transformées</li>
@@ -152,17 +152,17 @@
 
                     <h3>✔ 1.1. Ce que Snowflake capture comme lineage</h3>
                     <p>Snowflake enregistre automatiquement deux types de relations :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             <strong>Data movement (avec matérialisation)</strong> :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CTAS (CREATE TABLE AS SELECT)</li>
                                 <li>INSERT, MERGE, COPY INTO, etc.</li>
                             </ul>
                         </li>
                         <li>
                             <strong>Object dependencies (sans copie de données)</strong> :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>vues</li>
                                 <li>materialized views</li>
                                 <li>objets qui référencent d'autres objets</li>
@@ -173,7 +173,7 @@
 
                     <h3>✔ 1.2. Avantages du Data Lineage</h3>
                     <p>Selon la documentation, cela permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Impact analysis</strong> : comprendre les impacts de changement d'un objet</li>
                         <li><strong>Monitoring & troubleshooting</strong> : analyser les flux de données et leurs origines</li>
                         <li><strong>Compliance</strong> : suivre le mouvement des données sensibles</li>
@@ -182,7 +182,7 @@
                     </ul>
 
                     <h3>✔ 1.3. Upstream / Downstream</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un objet <strong>upstream</strong> est la source (ex : table1).</li>
                         <li>Un objet <strong>downstream</strong> est la cible (ex : table2).</li>
                         <li>Snowsight permet d'explorer les relations pas à pas dans les deux directions. </li>
@@ -190,14 +190,14 @@
 
                     <h3>✔ 1.4. Accès dans Snowsight</h3>
                     <p>Pour utiliser le lineage dans l'UI :</p>
-                    <ol>
+                    <ol style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ouvrir Snowsight</li>
                         <li>Aller dans Catalog → Database Explorer</li>
                         <li>Sélectionner un objet supporté (table/view/dynamic table…)</li>
                         <li>Ouvrir l'onglet Lineage</li>
                         <li>
                             Options dans l'interface :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>zoom +/-</li>
                                 <li>explorer upstream/downstream</li>
                                 <li>afficher détails des colonnes/tags </li>
@@ -211,13 +211,13 @@
                 ============================================ -->
                 <section id="access-history" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-history"></i> ✅ 2. Access History – Vue d'Audit des Accès
+                        <i class="fas fa-history"></i>2. Access History – Vue d'Audit des Accès
                     </h2>
 
                     
 
                     <p>L'Access History est une fonctionnalité <strong>Enterprise Edition</strong> permettant d'auditer :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>qui a accédé à quelle donnée</li>
                         <li>quoi a été lu ou modifié</li>
                         <li>quand</li>
@@ -225,7 +225,7 @@
                     </ul>
 
                     <p>Elle est accessible via :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">SNOWFLAKE.ACCOUNT_USAGE.ACCESS_HISTORY</code></li>
                         <li><code class="inline-code">SNOWFLAKE.ORGANIZATION_USAGE.ACCESS_HISTORY</code></li>
                     </ul>
@@ -233,30 +233,30 @@
                     <h3>✔ 2.1. Ce que contient chaque ligne d'Access History</h3>
                     <p>Chaque ligne correspond à une requête SQL exécutée dans le compte.</p>
                     <p>Elle inclut :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             <strong>🔹 Colonnes source auxquelles un utilisateur a accédé</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Directement</li>
                                 <li>Indirectement (via une vue, une jointure…) </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Colonnes projetées dans le résultat</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>→ liste dans <code class="inline-code">direct_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Colonnes utilisées mais non projetées</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>(ex : colonnes de WHERE, JOIN, FILTER)</li>
                                 <li>→ enregistrées dans <code class="inline-code">base_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
                             <strong>🔹 Objets modifiés par la requête</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>→ INSERT, UPDATE, MERGE, DELETE, COPY</li>
                                 <li>→ enregistrés dans <code class="inline-code">objects_modified</code> </li>
                             </ul>
@@ -270,7 +270,7 @@
                         <pre><code>CREATE VIEW v1(vc1, vc2) AS
 SELECT c1, c2 FROM t WHERE t.c3 > 0;</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>C1 et C2 : colonnes sources directes (base_objects_accessed)</li>
                         <li>C3 : colonne utilisée pour filtrer (base_objects_accessed)</li>
                         <li>VC1 et VC2 : colonnes projetées (direct_objects_accessed) </li>
@@ -283,9 +283,9 @@ SELECT c1, c2 FROM t WHERE t.c3 > 0;</code></pre>
 FROM bt, jt
 WHERE bt.c3 = jt.c1;</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>→ Access History enregistre :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>colonnes de bt (C1, C2, C3)</li>
                                 <li>colonnes de jt (C1)</li>
                             </ul>
@@ -295,7 +295,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
 
                     <h3>✔ 2.3. Cas d'usage de l'Access History</h3>
                     <p>Selon la doc, cette vue sert à :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>audit de conformité (GDPR / HIPAA…)</li>
                         <li>identifier quelles données sont réellement utilisées</li>
                         <li>déterminer quelles colonnes sont les plus consultées</li>
@@ -306,7 +306,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ 2.4. Précisions importantes</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Disponible uniquement en Enterprise Edition ou plus </li>
                             <li>Retention : 365 jours</li>
                             <li>Certaines requêtes ne créent pas d'entrée dans Access History selon leur structure </li>
@@ -319,13 +319,13 @@ WHERE bt.c3 = jt.c1;</code></pre>
                 ============================================ -->
                 <section id="relation-lineage-access" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-link"></i> ✅ 3. Relation entre Lineage et Access History
+                        <i class="fas fa-link"></i>3. Relation entre Lineage et Access History
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Lineage = graphique des flux & dépendances</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Montre la circulation des données entre objets (ETL, vues, etc.)</li>
                                 <li>Utilisée pour l'analyse d'impact et la gouvernance</li>
                             </ul>
@@ -333,7 +333,7 @@ WHERE bt.c3 = jt.c1;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Access History = audit détaillé des accès au niveau utilisateur/colonne</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Qui a lu quoi ?</li>
                                 <li>Quelles colonnes ont été projetées, filtrées, joinées ?</li>
                                 <li>Quel objet a été modifié ?</li>
@@ -348,13 +348,13 @@ WHERE bt.c3 = jt.c1;</code></pre>
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 4. Points clés SnowPro Core – à retenir absolument
+                        <i class="fas fa-star"></i>4. Points clés SnowPro Core – à retenir absolument
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🎯 Data Lineage (Snowsight)</h4>
-                            <ul>
+                            <h4>✔ Data Lineage (Snowsight)</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Affiche upstream/downstream</li>
                                 <li>Montre data movement + object dependencies</li>
                                 <li>Inclut lineage au niveau colonne</li>
@@ -364,8 +364,8 @@ WHERE bt.c3 = jt.c1;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Access History</h4>
-                            <ul>
+                            <h4>✔ Access History</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Table d'audit des accès (lecture, écriture)</li>
                                 <li>Fourni par ACCOUNT_USAGE / ORGANIZATION_USAGE</li>
                                 <li>Identifie colonnes utilisées, projetées, filtrées</li>

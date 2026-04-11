@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Privacy & Differential Privacy | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -154,7 +154,7 @@
                 ============================================ -->
                 <section id="privacy-overview" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-shield-alt"></i> ✅ 1. Privacy in Snowflake — Overview
+                        <i class="fas fa-shield-alt"></i>1. Privacy in Snowflake — Overview
                     </h2>
 
                     
@@ -162,35 +162,35 @@
                     <p>Snowflake inclut une suite de fonctionnalités de protection des données et de confidentialité, permettant aux organisations de protéger les données sensibles tout en continuant à fournir des analyses utiles.</p>
 
                     <h3>✔ 1.1. Differential Privacy</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Permet de protéger l'identité des individus dans un dataset sensible, même dans des cas de requêtes ciblées.</li>
                         <li>Data providers peuvent appliquer des privacy policies sur des tables/vues. </li>
                     </ul>
 
                     <h3>✔ 1.2. Aggregation Policies</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Oblige les requêtes à agréger les données avant de retourner un résultat.</li>
                         <li>Empêche les extractions ligne par ligne. </li>
                     </ul>
 
                     <h3>✔ 1.3. Join Policies</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Exige qu'une requête fasse un JOIN pour que les résultats soient retournés.</li>
                         <li>Utilisé pour masquer les données lorsqu'elles ne sont significatives qu'en combinant plusieurs tables. </li>
                     </ul>
 
                     <h3>✔ 1.4. Projection Policies</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Interdit l'utilisation d'un SELECT direct pour projeter une colonne donnée.</li>
                         <li>Empêche l'accès direct à des colonnes sensibles. </li>
                     </ul>
 
                     <h3>✔ 1.5. Synthetic Data</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Génère des datasets réalistes sans exposer de données sensibles.</li>
                         <li>
                             Idéal pour :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>les tests,</li>
                                 <li>la validation,</li>
                                 <li>l'entraînement de modèles internes. </li>
@@ -204,7 +204,7 @@
                 ============================================ -->
                 <section id="differential-privacy-overview" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 2. Differential Privacy — Overview
+                        <i class="fas fa-chart-line"></i>2. Differential Privacy — Overview
                     </h2>
 
                     
@@ -212,13 +212,13 @@
 
                     <h3>✔ 2.1. But de la differential privacy</h3>
                     <p>Elle protège :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>l'identité des personnes, entreprises, localisations,</li>
                         <li>les attributs sensibles,</li>
                         <li>contre des attaques ciblées (ex. differencing, amplification). </li>
                     </ul>
                     <p>Elle permet néanmoins :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>l'analyse statistique,</li>
                         <li>la détection de tendances,</li>
                         <li>le partage sécurisé entre équipes ou avec des partenaires.</li>
@@ -226,7 +226,7 @@
 
                     <h3>✔ 2.2. Problèmes résolus par la differential privacy</h3>
                     <p>Elle réduit le risque de ré‑identification lié à :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la jointure entre datasets sensibles,</li>
                         <li>l'ajout de nouveaux attributs,</li>
                         <li>le démasquage de colonnes,</li>
@@ -239,22 +239,22 @@
                 ============================================ -->
                 <section id="application-differential-privacy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i> ✅ 3. Comment Snowflake applique la differential privacy ?
+                        <i class="fas fa-cogs"></i>3. Comment Snowflake applique la differential privacy ?
                     </h2>
 
                     <p>Snowflake introduit deux mécanismes de protection majeurs :</p>
 
                     <h3>✔ 3.1. Noisy Aggregates</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake ajoute du bruit aux résultats des requêtes agrégées.</li>
                         <li>
                             Caractéristiques :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Sécurité contre thin slicing & differencing attacks.</li>
                                 <li>Requêtes obligatoirement agrégées — pas de SELECT *.</li>
                                 <li>
                                     Quantité de bruit proportionnelle à :
-                                    <ul>
+                                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                         <li>la sensibilité de la requête,</li>
                                         <li>le type d'agrégat,</li>
                                         <li>les transformations appliquées. </li>
@@ -265,7 +265,7 @@
                     </ul>
 
                     <h3>✔ 3.2. Limiting Privacy Loss</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Chaque requête augmente une privacy loss associée à l'utilisateur.</li>
                         <li>Snowflake empêche les requêtes dont le coût dépasserait le privacy budget. </li>
                     </ul>
@@ -276,25 +276,25 @@
                 ============================================ -->
                 <section id="entity-level-privacy" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-layer-group"></i> ✅ 4. Entité protégée : Row-Level vs Entity-Level Privacy
+                        <i class="fas fa-layer-group"></i>4. Entité protégée : Row-Level vs Entity-Level Privacy
                     </h2>
 
                     
 
                     <h3>✔ 4.1. Row-Level Privacy</h3>
                     <p>Utilisable si :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>une entité apparaît 1 seule fois dans la table,</li>
                         <li>aucune colonne n'identifie de manière unique une entité.</li>
                     </ul>
 
                     <h3>✔ 4.2. Entity-Level Privacy (Recommandé)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Nécessite un entity key (ex : email).</li>
                         <li>Snowflake regroupe automatiquement les observations liées à une même entité.</li>
                         <li>
                             Préféré lorsque :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>un individu apparaît sur plusieurs lignes,</li>
                                 <li>la table est utilisée dans des jointures,</li>
                                 <li>la granularité est transactionnelle.</li>
@@ -308,7 +308,7 @@
                 ============================================ -->
                 <section id="privacy-policies" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-file-alt"></i> ✅ 5. Privacy Policies
+                        <i class="fas fa-file-alt"></i>5. Privacy Policies
                     </h2>
 
                     
@@ -316,7 +316,7 @@
                     <p>Fonctionnement :</p>
 
                     <h3>✔ Au moment de la requête :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake vérifie si l'utilisateur dispose d'un budget de confidentialité suffisant.</li>
                         <li>Si oui : résultat renvoyé (avec bruit).</li>
                         <li>Si non : erreur ou refus.</li>
@@ -335,13 +335,13 @@
                 ============================================ -->
                 <section id="limitations" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exclamation-triangle"></i> ✅ 6. Limitations importantes
+                        <i class="fas fa-exclamation-triangle"></i>6. Limitations importantes
                     </h2>
 
                     
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Impossible d'appliquer :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>privacy policy + aggregation policy</li>
                                 <li>privacy policy + masking policy</li>
                             </ul>
@@ -356,16 +356,16 @@
                 ============================================ -->
                 <section id="snowpro-core-attendu" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 7. Ce qui est attendu en SnowPro Core
+                        <i class="fas fa-star"></i>7. Ce qui est attendu en SnowPro Core
                     </h2>
 
                     <p>Vous devez comprendre :</p>
-                    <ul>
-                        <li>🎯 <strong>Le rôle des privacy policies</strong> — Comment elles protègent les données et comment elles s'intègrent aux requêtes.</li>
-                        <li>🎯 <strong>Le concept de "noisy aggregate"</strong> — Pourquoi Snowflake ajoute du bruit + comment cela empêche la ré‑identification.</li>
-                        <li>🎯 <strong>Le privacy budget</strong> — Un mécanisme essentiel pour limiter la consommation d'informations sensibles.</li>
-                        <li>🎯 <strong>Entity-level vs row-level privacy</strong> — Choisir la granularité adaptée selon le dataset.</li>
-                        <li>🎯 <strong>Complémentarité avec la gouvernance Snowflake</strong> — Differential privacy s'ajoute aux autres mécanismes : masking policies, row access policies, object tagging, data classification.</li>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <li>✔ <strong>Le rôle des privacy policies</strong> — Comment elles protègent les données et comment elles s'intègrent aux requêtes.</li>
+                        <li>✔ <strong>Le concept de "noisy aggregate"</strong> — Pourquoi Snowflake ajoute du bruit + comment cela empêche la ré‑identification.</li>
+                        <li>✔ <strong>Le privacy budget</strong> — Un mécanisme essentiel pour limiter la consommation d'informations sensibles.</li>
+                        <li>✔ <strong>Entity-level vs row-level privacy</strong> — Choisir la granularité adaptée selon le dataset.</li>
+                        <li>✔ <strong>Complémentarité avec la gouvernance Snowflake</strong> — Differential privacy s'ajoute aux autres mécanismes : masking policies, row access policies, object tagging, data classification.</li>
                     </ul>
                 </section>
 
@@ -374,11 +374,11 @@
                 ============================================ -->
                 <section id="resume-express" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-graduation-cap"></i> ✅ 8. Résumé express (à mémoriser pour l'examen)
+                        <i class="fas fa-graduation-cap"></i>8. Résumé express (à mémoriser pour l'examen)
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake Privacy Suite = Differential Privacy + Aggregation/Join/Projection policies + Synthetic Data. </li>
                             <li>Differential privacy interdit toute requête non agrégée et ajoute du bruit. </li>
                             <li>Les privacy policies gèrent les budgets de confidentialité pour chaque utilisateur. </li>

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriel Snowflake - Column-Level Security & Masking | DataOps Learning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/tutoriel.css">
-    <link rel="stylesheet" href="../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -149,7 +149,7 @@
                 ============================================ -->
                 <section id="column-level-security" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-columns"></i> ✅ 1. Column-Level Security – Introduction
+                        <i class="fas fa-columns"></i>1. Column-Level Security – Introduction
                     </h2>
 
                     
@@ -158,16 +158,16 @@
                     <p>Elle fait partie des fonctionnalités de gouvernance Snowflake. </p>
 
                     <h3>✔ Objectif</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Masquer ou révéler dynamiquement la valeur d'une colonne selon l'identité du requérant.</li>
                         <li>Empêcher l'exposition de données sensibles comme : PII, PHI, PCI.</li>
                     </ul>
 
                     <h3>✔ Basé sur les Masking Policies</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Une masking policy est un objet SQL appliqué à une colonne (table ou view).</li>
                         <li>Elle définit comment la colonne est masquée selon :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>le rôle,</li>
                                 <li>l'utilisateur,</li>
                                 <li>le contexte de requête.</li>
@@ -181,7 +181,7 @@
                 ============================================ -->
                 <section id="dynamic-data-masking" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-mask"></i> ✅ 2. Dynamic Data Masking (DDM)
+                        <i class="fas fa-mask"></i>2. Dynamic Data Masking (DDM)
                     </h2>
 
                     
@@ -189,13 +189,13 @@
 
                     <h3>✔ Fonctionnement</h3>
                     <p>Lorsqu'une requête accède à une colonne masquée, Snowflake :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Évalue la masking policy</li>
                         <li>Détermine la variante affichée (réelle, partielle, nulle…)</li>
                     </ul>
 
                     <h3>✔ Exemple de logique</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Rôle autorisé → valeur réelle</li>
                         <li>Rôle non autorisé → NULL ou version masquée</li>
                         <li>Développeur → vue tronquée</li>
@@ -203,7 +203,7 @@
                     </ul>
 
                     <h3>✔ Types de masques typiques</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Masquage complet</li>
                         <li>Masquage partiel (ex: xxxx-xxxx-1234)</li>
                         <li>Tokenisation (avec ou sans externalisation)</li>
@@ -217,28 +217,28 @@
                 ============================================ -->
                 <section id="external-tokenization" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-exchange-alt"></i> ✅ 3. External Tokenization
+                        <i class="fas fa-exchange-alt"></i>3. External Tokenization
                     </h2>
 
                     
                     <p>L'external tokenization permet d'utiliser des mécanismes de tokenisation hors Snowflake, via un fournisseur externe.</p>
 
                     <h3>✔ Objectif</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tokeniser/dé‑tokeniser les valeurs en dehors de Snowflake.</li>
                         <li>Conserver les données sensibles en dehors du Data Cloud.</li>
                         <li>Respecter des politiques internes strictes ou des réglementations exigeant tokenisation externe.</li>
                     </ul>
 
                     <h3>✔ Fonctionnement général</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake envoie la valeur à tokeniser à un service externe (appel via external functions).</li>
                         <li>Le service retourne un token.</li>
                         <li>Les tokens sont stockés dans Snowflake, pas les données sensibles.</li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Conformité renforcée</li>
                         <li>Gestion centralisée de la tokenisation</li>
                         <li>Intégration avec masking policies permettant :<br>
@@ -251,14 +251,14 @@
                 ============================================ -->
                 <section id="tag-based-masking" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-tags"></i> ✅ 4. Tag-Based Masking Policies
+                        <i class="fas fa-tags"></i>4. Tag-Based Masking Policies
                     </h2>
 
                     
                     <p>Les tag-based masking policies permettent d'automatiser l'application de politiques de masquage grâce aux tags.</p>
 
                     <h3>✔ Principe</h3>
-                    <ol>
+                    <ol style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Créer une masking policy</li>
                         <li>Créer un tag</li>
                         <li>Associer la masking policy au tag</li>
@@ -267,7 +267,7 @@
                     </ol>
 
                     <h3>✔ Avantages majeurs</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Centralisation</strong> : une politique peut être appliquée à des centaines d'objets via un tag unique.</li>
                         <li><strong>Scalabilité</strong> : en ajoutant simplement un tag à une colonne, elle est immédiatement masquée.</li>
                         <li><strong>Consistance</strong> : les colonnes portant le même tag appliquent la même gouvernance.</li>
@@ -287,40 +287,45 @@
                 ============================================ -->
                 <section id="synthese-comparative" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> ✅ 5. Synthèse comparative
+                        <i class="fas fa-chart-simple"></i>5. Synthèse comparative
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Fonction</th><th>Objectif</th><th>Appliqué où ?</th><th>Automatisable ?</th>
+                            <tr>
+                                <th>Fonction</th>
+                                <th>Objectif</th>
+                                <th>Appliqué où ?</th>
+                                <th>Automatisable ?</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Masking policies</strong>
-                                <td>Masquer dynamiquement
-                                <td>Colonne
-                                <td>Oui (tag-based)
-                            
-                            32
-                                <td><strong>Dynamic Data Masking</strong>
-                                <td>Masquage déterminé par contexte
-                                <td>Colonne
-                                <td>Oui
-                            
-                            32
-                                <td><strong>External Tokenization</strong>
-                                <td>Tokeniser/enlever les données sensibles hors Snowflake
-                                <td>Colonne / pipeline
-                                <td>Oui (via external functions)
-                            
-                            32
-                                <td><strong>Tag-Based Masking</strong>
-                                <td>Gouvernance centralisée en appliquant un tag
-                                <td>Colonne / table
-                                <td>Oui
-                            
+                            <tr>
+                                <td><strong>Masking policies</strong></td>
+                                <td>Masquer dynamiquement</td>
+                                <td>Colonne</td>
+                                <td>Oui (tag-based)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dynamic Data Masking</strong></td>
+                                <td>Masquage déterminé par contexte</td>
+                                <td>Colonne</td>
+                                <td>Oui</td>
+                            </tr>
+                            <tr>
+                                <td><strong>External Tokenization</strong></td>
+                                <td>Tokeniser/enlever les données sensibles hors Snowflake</td>
+                                <td>Colonne / pipeline</td>
+                                <td>Oui (via external functions)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tag-Based Masking</strong></td>
+                                <td>Gouvernance centralisée en appliquant un tag</td>
+                                <td>Colonne / table</td>
+                                <td>Oui</td>
+                            </tr>
                         </tbody>
-                    划
+                    </table>
                 </section>
 
                 <!-- ============================================
@@ -328,13 +333,13 @@
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> ✅ 6. Points clés SnowPro Core
+                        <i class="fas fa-star"></i>6. Points clés SnowPro Core
                     </h2>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🎯 Object Tagging</h4>
-                            <ul>
+                            <h4>✔ Object Tagging</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Tags = objets clé–valeur</li>
                                 <li>Différents objets peuvent portés le même tag</li>
                                 <li>Inheritance & propagation</li>
@@ -342,32 +347,32 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Masking Policies</h4>
-                            <ul>
+                            <h4>✔ Masking Policies</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Objets SQL appliqués à une colonne</li>
                                 <li>Dynamiques, dépendant du contexte utilisateur</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Dynamic Data Masking</h4>
-                            <ul>
+                            <h4>✔ Dynamic Data Masking</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Mécanisme natif de Snowflake</li>
                                 <li>Permet un masquage conditionnel, non destructif</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 External Tokenization</h4>
-                            <ul>
+                            <h4>✔ External Tokenization</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Tokenisation réalisée en dehors du Data Cloud</li>
                                 <li>Idéal pour conformité stricte</li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🎯 Tag-Based Masking Policies</h4>
-                            <ul>
+                            <h4>✔ Tag-Based Masking Policies</h4>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Masquage automatisé basé sur tags</li>
                                 <li>Parfait pour gouvernance à grande échelle</li>
                             </ul>
@@ -380,11 +385,11 @@
                 ============================================ -->
                 <section id="resume-express" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-graduation-cap"></i> ✅ 7. Résumé express (à mémoriser)
+                        <i class="fas fa-graduation-cap"></i>7. Résumé express (à mémoriser)
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Column-level security repose sur <strong>masking policies</strong>.</li>
                             <li><strong>DDM</strong> applique le masquage selon rôle, user, contexte.</li>
                             <li><strong>External tokenization</strong> garde les données sensibles hors Snowflake.</li>
