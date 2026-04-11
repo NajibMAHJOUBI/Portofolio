@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Data Governance | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Data Governance</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#data-governance" class="active">
+                            <i class="fas fa-shield-alt"></i>Gouvernance des Données dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#object-tagging">
+                            <i class="fas fa-tags"></i>Object Tagging
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#data-masking">
+                            <i class="fas fa-mask"></i>Data Masking
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#row-level-security">
+                            <i class="fas fa-table-rows"></i>Row-level Security
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privacy-policies">
+                            <i class="fas fa-lock"></i>Privacy Policies
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trust-center">
+                            <i class="fas fa-shield-heart"></i>Trust Center
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#encryption-key-management">
+                            <i class="fas fa-key"></i>Encryption Key Management
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#alerts-notifications">
+                            <i class="fas fa-bell"></i>Alerts and Notifications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#data-lineage">
+                            <i class="fas fa-project-diagram"></i>Data Lineage
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Data Governance</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-shield-alt"></i>Governance
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: GOUVERNANCE DES DONNÉES DANS SNOWFLAKE
+                ============================================ -->
+                <section id="data-governance" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-alt"></i> Gouvernance des Données dans Snowflake
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-data-governance.html'">
+                            <h4><i class="fas fa-shield-alt"></i> Gouvernance des Données</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les principes et bonnes pratiques de la gouvernance des données dans Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: OBJECT TAGGING
+                ============================================ -->
+                <section id="object-tagging" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-tags"></i> Object Tagging
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-object-tagging.html'">
+                            <h4><i class="fas fa-tags"></i> Object Tagging</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Apprenez à classifier et organiser vos données avec les tags Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: DATA MASKING
+                ============================================ -->
+                <section id="data-masking" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-mask"></i> Data Masking
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-data-masking.html'">
+                            <h4><i class="fas fa-mask"></i> Data Masking</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Protégez les données sensibles avec les politiques de masquage dynamique.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: ROW-LEVEL SECURITY
+                ============================================ -->
+                <section id="row-level-security" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-table-rows"></i> Row-level Security
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-row-level-security.html'">
+                            <h4><i class="fas fa-table-rows"></i> Row-level Security</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Contrôlez l'accès aux données au niveau des lignes avec les Row Access Policies.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: PRIVACY POLICIES
+                ============================================ -->
+                <section id="privacy-policies" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-lock"></i> Privacy Policies
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-privacy-policies.html'">
+                            <h4><i class="fas fa-lock"></i> Privacy Policies</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les politiques de confidentialité différentielle et la protection des données.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 6: TRUST CENTER
+                ============================================ -->
+                <section id="trust-center" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-shield-heart"></i> Trust Center
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-trust-center.html'">
+                            <h4><i class="fas fa-shield-heart"></i> Trust Center</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Surveillez la conformité et la sécurité de votre compte Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 7: ENCRYPTION KEY MANAGEMENT
+                ============================================ -->
+                <section id="encryption-key-management" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-key"></i> Encryption Key Management
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-encryption-key.html'">
+                            <h4><i class="fas fa-key"></i> Encryption Key Management</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Gérez les clés de chiffrement et la sécurité des données au repos.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 8: ALERTS AND NOTIFICATIONS
+                ============================================ -->
+                <section id="alerts-notifications" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-bell"></i> Alerts and Notifications
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-alerts-notifications.html'">
+                            <h4><i class="fas fa-bell"></i> Alerts and Notifications</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Configurez des alertes et notifications pour surveiller votre environnement.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 9: DATA LINEAGE
+                ============================================ -->
+                <section id="data-lineage" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-project-diagram"></i> Data Lineage
+                    </h2>
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='data-governance/sw-governance-data-lineage.html'">
+                            <h4><i class="fas fa-project-diagram"></i> Data Lineage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Visualisez et comprenez les flux de données avec la traçabilité Snowflake.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>

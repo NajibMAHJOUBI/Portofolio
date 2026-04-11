@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Architecture Snowflake | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Architecture et Types de Tables</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#architecture-trois-couches" class="active">
+                            <i class="fas fa-layer-group"></i>Snowflake : Une structure en trois couches
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-tables">
+                            <i class="fas fa-table"></i>Snowflake : Les différents types de Tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#types-vues">
+                            <i class="fas fa-eye"></i>Snowflake : Les différents types de Vues
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bonnes-pratiques">
+                            <i class="fas fa-check-circle"></i>Snowflake : Bonnes pratiques de conceptions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#editions-connections">
+                            <i class="fas fa-crown"></i>Snowflake : Editions et Connections
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Débutant
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>SnowPro Core Certification - COF-C03</h1>
+
+                    <span class="level-badge">Niveau Débutant</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-layer-group"></i>Architecture
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: SNOWFLAKE : ARCHITECTURE SNOWFLAKE
+                ============================================ -->
+                <section id="database" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i>Un tour complet de l'architecture Snowflake
+                    </h2>
+
+                    <p>...</p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : ARCHITECTURE SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-architecture-index.html'">
+                            <div class="item-number">Module 1 / 6</div>
+                            <h4><i class="fas fa-cloud-upload-alt"></i>Piliers de l'architecture</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                        
+                        <!-- Module 2 : INTERFACES SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-interfaces-index.html'">
+                            <div class="item-number">Module 2 / 6</div>
+                            <h4><i class="fas fa-microchip"></i>Interfaces de connexion</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                        
+                        <!-- Module 3 : OBJETS SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-objects-hierarchy.html'">
+                            <div class="item-number">Module 3 / 6</div>
+                            <h4><i class="fas fa-globe"></i>Les objets Snowflake</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                        
+                        <!-- Module 4 :VIRTUAL WAREHOUSES -->
+                        <div class="grid-item" onclick="window.location.href='sw-virtual-warehouses.html'">
+                            <div class="item-number">Module 4 / 6</div>
+                            <h4><i class="fas fa-globe"></i>Les Virtual Warehouses</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>      
+                        
+                        <!-- Module 5 : STOCKAGE SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-storage'">
+                            <div class="item-number">Module 5 / 6</div>
+                            <h4><i class="fas fa-globe"></i>Stockage</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>      
+                        
+                        <!-- Module 5 : INTERFACES SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-interfaces-index'">
+                            <div class="item-number">Module 6 / 6</div>
+                            <h4><i class="fas fa-globe"></i>Interfaces de développement</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>                                     
+                    </div>
+
+
+
+
+
+
+
+                    
+                </section>
+
+                <!-- =======================================================
+                     SECTION 1: SNOWFLAKE : GOUVERNANCE ET SÉCURITÉ SNOWFLAKE
+                ========================================================= -->
+                <section id="database" class="tutorial-section">
+                    <h2>
+                        <i class="fas fa-layer-group"></i>Gouvernance et Sécurité Snowflake
+                    </h2>
+
+                    <p>...</p>
+
+                    <div class="items-grid">
+                        <!-- Module 1 : MODELE DE SÉCURITÉ SNOWFLAKE -->
+                        <div class="grid-item" onclick="window.location.href='sw-security-model.html'">
+                            <div class="item-number">Module 1 / 3</div>
+                            <h4><i class="fas fa-cloud-upload-alt"></i>Le modèle de sécurité Snowflake</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                        
+                        <!-- Module 2 : GOUVERNANCE DES DONNEES -->
+                        <div class="grid-item" onclick="window.location.href='sw-data-governance.html'">
+                            <div class="item-number">Module 2 / 3</div>
+                            <h4><i class="fas fa-microchip"></i>Gouvernance des données</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 60 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                        
+                        <!-- Module 3 : MANAGEMENT DES COUTS -->
+                        <div class="grid-item" onclick="window.location.href='sw-cost-management.html'">
+                            <div class="item-number">Module 3 / 3</div>
+                            <h4><i class="fas fa-globe"></i>Management des coûts</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 50 min</span>
+                            </div>
+                            <p class="item-description">...</p>
+                        </div>
+                                          
+                    </div>
+
+
+
+
+
+
+
+                    
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <style>
+  
+    </style>
+</body>
+</html>
