@@ -28,7 +28,7 @@
                 </button>
 
                 <nav id="mainNav">
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><a href="index.html">Accueil</a></li>
                         <li><a href="index.html#tutorials">Tutoriels</a></li>
                         <li><a href="index.html#about">À Propos</a></li>
@@ -43,11 +43,11 @@
         ============================================ -->
         <div class="breadcrumb">
             <div class="container">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">External Tables</li>
+                    <li class="current">SnowPro Core Certification</li>
                 </ul>
             </div>
         </div>
@@ -182,7 +182,7 @@
                             Snowflake <b>ne stocke pas les données</b> des external tables :
                         </p>
 
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>la donnée reste dans le <b>storage externe</b></li>
                             <li>
                                 Snowflake stocke uniquement <b>des métadonnées au niveau fichier</b> 
@@ -203,7 +203,7 @@
                         <!-- Read-only -->
                         <h3>✔ Read-only</h3>
                         <p>Les external tables sont <strong>en lecture seule</strong> :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Aucun DML possible (INSERT, UPDATE, DELETE)</li>
                             <li>
                                 Elles servent uniquement à interroger et joindre les données.
@@ -221,7 +221,7 @@
 
                         <!-- Performance -->
                         <h3>✔ Performance</h3>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 Les requêtes peuvent être <strong>plus lentes</strong> que sur des Snowflake tables natives.
                             </li>
@@ -263,7 +263,7 @@
 
                         <p>Si Snowflake rencontre une erreur en scannant un fichier :</p>
 
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>le fichier est <strong>ignoré</strong></li>
                             <li>la requête continue avec les fichiers suivants</li>
                             <li>
@@ -286,14 +286,14 @@
                             c'est-à-dire que :
                         </p>
 
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake lit les fichiers <em>tels quels</em></li>
                             <li>la structure <strong>n'a pas besoin d'être connue à l'avance</strong></li>
                         </ul>
 
                         <p>Toutes les external tables incluent automatiquement :</p>
 
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 <code class="inline-code">VALUE</code> 
                                 (colonne VARIANT représentant une ligne du fichier)
@@ -325,7 +325,7 @@
                             dans l'external table, via des expressions appliquées sur :
                         </p>
 
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><code class="inline-code">VALUE</code></li>
                             <li><code class="inline-code">METADATA$FILENAME</code></li>
                             <li>
@@ -351,8 +351,8 @@
 
                         <div class="grid-2cols">
                             <div class="usage-card">
-                                <h3>🔹 Utilisations idéales</h3>
-                                <ul>
+                                <h3>✔  Utilisations idéales</h3>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>Interroger un <strong>data lake</strong> directement (S3/GCS/Azure Blob)</li>
                                     <li>Joindre datasets externes <strong>sans ingestion préalable</strong></li>
                                     <li>Utiliser Snowflake comme <strong>moteur SQL</strong> sur des fichiers non chargés</li>
@@ -360,9 +360,9 @@
                             </div>
 
                             <div class="usage-card">
-                                <h3>🔹 À éviter</h3>
+                                <h3>✔  À éviter</h3>
                                 <p>Si vous avez besoin :</p>
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>de <strong>DML</strong> (INSERT, UPDATE, DELETE)</li>
                                     <li>
                                         de <strong>performance élevée</strong> 
