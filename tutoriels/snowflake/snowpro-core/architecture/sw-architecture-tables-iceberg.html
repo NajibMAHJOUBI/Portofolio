@@ -47,7 +47,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">Apache Iceberg Tables</li>
+                    <li class="current">SnowPro Core Certification</li>
                 </ul>
             </div>
         </div>
@@ -139,7 +139,7 @@
 
                         <div class="tech-stack">
                             <span class="tech-tag">
-                                <i class="fab fa-snowflake"></i>Snowflake
+                                <i class="fab snowflake-icon"></i>Snowflake
                             </span>
                             <span class="tech-tag">
                                 <i class="fas fa-database"></i>Apache Iceberg
@@ -317,7 +317,7 @@ BASE_LOCATION = 'my/relative/path/from/extvol';</code></pre>
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                             <pre><code>CREATE ICEBERG TABLE … AS SELECT
-CREATE ICEBERG TABLE … LIKE [docs.snowflake.com]</code></pre>
+CREATE ICEBERG TABLE … LIKE</code></pre>
                         </div>
 
                         <h3>External catalog</h3>
@@ -418,8 +418,6 @@ CREATE ICEBERG TABLE … LIKE [docs.snowflake.com]</code></pre>
                             <i class="fas fa-chart-line"></i>7. Optimisation & Best Practices
                         </h2>
 
-                        <p>Sources : </p>
-
                         <h3>A. Gestion des External Volumes</h3>
 
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -487,7 +485,7 @@ CREATE ICEBERG TABLE … LIKE [docs.snowflake.com]</code></pre>
                             </li>
                             <li>
                                 Peut choisir la version via :
-                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <ul style="margin-left: 2.5rem; margin-bottom: 0.3rem;">
                                     <li>ICEBERG_VERSION_DEFAULT paramètre</li>
                                     <li>ICEBERG_VERSION = 3 dans CREATE ICEBERG TABLE</li>
                                 </ul>

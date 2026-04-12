@@ -47,7 +47,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">Hybrid Tables</li>
+                    <li class="current">SnowPro Core Certification</li>
                 </ul>
             </div>
         </div>
@@ -134,7 +134,7 @@
 
                         <div class="tech-stack">
                             <span class="tech-tag">
-                                <i class="fab fa-snowflake"></i>Snowflake
+                                <i class="fab snowflake-icon"></i>Snowflake
                             </span>
                             <span class="tech-tag">
                                 <i class="fas fa-database"></i> Hybrid Tables
@@ -211,7 +211,7 @@
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>
                                 <b>Stockage primaire : Row Store</b>
-                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                                <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                                     <li>Optimisé pour les opérations transactionnelles</li>
                                 </ul>
                             </li>
@@ -246,7 +246,7 @@
 
                         <h3>Méthodes de création</h3>
 
-                        <h4>1️⃣ CREATE HYBRID TABLE</h4>
+                        <h4>1 - CREATE HYBRID TABLE</h4>
 
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -258,7 +258,7 @@
                         </div>
                         
 
-                        <h4>2️⃣ CREATE HYBRID TABLE … AS SELECT (CTAS)</h4>
+                        <h4>2 - CREATE HYBRID TABLE … AS SELECT (CTAS)</h4>
 
                         <div class="code-block">
                             <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -270,7 +270,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                         </div>
                         
 
-                        <h4>3️⃣ CREATE HYBRID TABLE … LIKE</h4>
+                        <h4>3 - CREATE HYBRID TABLE … LIKE</h4>
                         <p>Pour répliquer une structure existante.</p>
                     </section>
 
@@ -285,9 +285,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
                         <h3>Stockage</h3>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Footprint plus important que les tables standards</li>
-                            <li>Moins de compression que les tables colonnes
-                                
-                            </li>
+                            <li>Moins de compression que les tables colonnes</li>
                         </ul>
 
                         <h3>Bulk Loading optimisé</h3>
@@ -346,7 +344,7 @@ AS SELECT employee_id, department_id FROM company_employees;</code></pre>
 
                         <h3>A. Drivers & Connectivité</h3>
                         <p>Utiliser un driver compatible (exemples) :</p>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
+                        <ul style="margin-left: 2.5rem; margin-bottom: 0.5rem;">
                             <li>Python Connector ≥ 3.1.0</li>
                             <li>JDBC ≥ 3.13.31</li>
                             <li>SnowSQL ≥ 1.2.28</li>

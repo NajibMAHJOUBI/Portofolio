@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Introduction aux Views</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-eye"></i>Views
@@ -157,10 +157,12 @@
                         <i class="fas fa-eye"></i>Introduction aux vues (Views)
                     </h2>
 
-                    <p>Source Snowflake : </p>
-
                     <p>
-                        Les views (vues) sont un objet fondamental dans Snowflake. Elles permettent d'exposer le résultat d'une requête comme s'il s'agissait d'une table, tout en offrant des capacités de sécurisation, d'abstraction et de gestion logique des données — un sujet essentiel pour la certification SnowPro Core.
+                        Les views (vues) sont un objet fondamental dans Snowflake. 
+                        Elles permettent d'exposer le résultat d'une requête 
+                        comme s'il s'agissait d'une table, tout en offrant 
+                        des capacités de sécurisation, d'abstraction 
+                        et de gestion logique des données.
                     </p>
                 </section>
 
@@ -189,12 +191,6 @@
                     <p></p>
 
                     <div class="info-note">
-                        <i class="fas fa-stethoscope"></i>
-                        <strong>Exemple canonique fourni :</strong>
-                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                            <li><b>doctor_view</b> : expose diagnosis & treatment</li>
-                            <li><b>accountant_view</b> : expose billing_address & cost</li>
-                        </ul>
                         <p>→ Séparation logique selon les rôles d'utilisateurs. </p>
                     </div>
                 </section>
@@ -214,12 +210,7 @@
                         <li>analyses complexes</li>
                     </ul>
 
-                    <h3>Exemples donnés dans la doc :</h3>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Extraire toutes les valeurs distinctes de diagnosis via doctor_view.</li>
-                        <li>Joindre doctor_view et accountant_view pour agréger coût et traitement sans révéler les informations personnelles.</li>
-                    </ul>
-                    <p></p>
+                    
                 </section>
 
                 <!-- ============================================
@@ -270,7 +261,6 @@
 
                     <h3>2. Materialized views</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Mentionnées dans l'introduction (détails ailleurs).</li>
                         <li>Stockent physiquement le résultat</li>
                         <li>Améliorent les performances sur requêtes répétitives</li>
                     </ul>

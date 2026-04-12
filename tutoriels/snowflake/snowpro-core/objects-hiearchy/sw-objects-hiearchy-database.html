@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Databases</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-database"></i>Databases
@@ -154,7 +154,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i>Synthèse SnowPro Core – Databases dans Snowflake
+                        <i class="fas fa-info-circle"></i>Databases dans Snowflake
                     </h2>
 
                     <p>
@@ -179,9 +179,8 @@
                     </p>
 
                     <div class="info-note">
-                        <i class="fas fa-info-circle"></i>
-                        <strong>Importance pour SnowPro Core :</strong>
-                        <p>La database est la racine de l'organisation logique des données d'un compte Snowflake. Elle détermine la structure de tous les objets enfants.</p>
+                        
+                        <p><i class="fas fa-info-circle"></i> La database est la racine de l'organisation logique des données d'un compte Snowflake. Elle détermine la structure de tous les objets enfants.</p>
                     </div>
                 </section>
 
@@ -193,7 +192,7 @@
                         <i class="fas fa-tags"></i>2. Types de bases dans Snowflake
                     </h2>
 
-                    <p>Même si la page principale traite surtout du concept général de database, Snowflake inclut également :</p>
+                    <p>Snowflake inclut également :</p>
 
                     <h3>✔ Databases utilisateur</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -277,7 +276,11 @@
                     <p>→ Le clonage fait partie des bonnes pratiques Snowflake. </p>
 
                     <h3>✔ DROP DATABASE</h3>
-                    <p>Supprimer une base et tout son contenu.</p>
+                    <p>Supprimer une base et tout son contenu :</p>
+                    <div class="code-block">
+                        <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
+                        <pre><code>DROP DATABASE my_db;</code></pre>
+                    </div>                    
                 </section>
 
                 <!-- ============================================

@@ -47,7 +47,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">Views</li>
+                    <li class="current">SnowPro Core Certification</li>
                 </ul>
             </div>
         </div>
@@ -226,7 +226,7 @@
                             
                         </p>
 
-                        <h3>1️⃣ Non‑Materialized Views (vues classiques)</h3>
+                        <h3>1 - Non‑Materialized Views (vues classiques)</h3>
 
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Basées sur une définition de requête réévaluée à chaque exécution.</li>
@@ -234,9 +234,7 @@
                             <li>N'occupent presque pas de stockage (seule la définition SQL est stockée).</li>
                         </ul>
 
-                        <h3>2️⃣ Materialized Views</h3>
-
-                        <p>Bien que mentionnées dans la page, leur détail se trouve ailleurs, mais à retenir :</p>
+                        <h3>2 - Materialized Views</h3>
 
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Stockent les résultats matérialisés.</li>
@@ -285,19 +283,19 @@ FROM hospital_table;</code></pre>
                         </h2>
 
                         <h3>A. Ségrégation des données</h3>
-                        <p>
+                        <p style="margin-left: 1.0rem;">
                             Exposer des colonnes différentes pour différentes catégories d'utilisateurs.
                             
                         </p>
 
                         <h3>B. Abstraction</h3>
-                        <p>Présenter une interface stable même si les tables sous-jacentes changent.</p>
+                        <p style="margin-left: 1.0rem;">Présenter une interface stable même si les tables sous-jacentes changent.</p>
 
                         <h3>C. Sécurité</h3>
-                        <p>Restreindre l'accès aux données sensibles via une vue filtrée.</p>
+                        <p style="margin-left: 1.0rem;">Restreindre l'accès aux données sensibles via une vue filtrée.</p>
 
                         <h3>D. Simplification</h3>
-                        <p>Permet de masquer des jointures ou de la logique complexe.</p>
+                        <p style="margin-left: 1.0rem;">Permet de masquer des jointures ou de la logique complexe.</p>
                     </section>
 
                     <!-- ============================================
@@ -329,7 +327,7 @@ FROM hospital_table;</code></pre>
                                 Une modification de table peut casser une vue si des colonnes disparaissent.
                             </li>
                             <li>
-                                La documentation souligne implicitement l'importance du nommage explicite 
+                                Une bonne pratique est de garder à l'esprit l'importance du nommage explicite 
                                 dans CREATE VIEW.
                                 
                             </li>

@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">File Formats</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-file-alt"></i>File Formats
@@ -198,14 +198,14 @@
                         <i class="fas fa-table"></i>2. File formats supportés par Snowflake
                     </h2>
 
-                    <p>Selon <em>Preparing to load data</em> : Snowflake supporte les formats suivants pour le chargement (<code class="inline-code">COPY INTO &lt;table&gt;</code>) : </p>
+                    <p>Snowflake supporte les formats suivants pour le chargement (<code class="inline-code">COPY INTO &lt;table&gt;</code>) : </p>
 
-                    <h3>🔹 Structured</h3>
+                    <h3>✔  Structured</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>CSV / TSV / autres délimités</strong><br>→ Snowflake supporte toute valeur single-byte comme délimiteur.</li>
                     </ul>
 
-                    <h3>🔹 Semi-structured</h3>
+                    <h3>✔  Semi-structured</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>JSON</li>
                         <li>Avro</li>
@@ -216,7 +216,7 @@
 
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
-                        <strong>Points importants SnowPro Core :</strong>
+                        <strong>Points importants :</strong>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake détecte automatiquement les fichiers Avro/ORC/Parquet compressés.</li>
                             <li>Parquet supporté uniquement en format writer v1 (v2 non supporté).</li>
@@ -237,7 +237,7 @@
 
                     <p>Snowflake propose un large ensemble d'options paramétrables dans <code class="inline-code">CREATE FILE FORMAT</code>.</p>
 
-                    <h3>🔹 A. CSV — options principales</h3>
+                    <h3>✔  A. CSV — options principales</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">COMPRESSION = AUTO | GZIP | BZ2 | ZSTD | …</code></li>
                         <li><code class="inline-code">RECORD_DELIMITER = '&lt;string&gt;'</code></li>
@@ -252,9 +252,8 @@
                         <li><code class="inline-code">ENCODING = 'UTF8'</code> (par défaut)</li>
                         <li><code class="inline-code">TRIM_SPACE = TRUE/FALSE</code></li>
                     </ul>
-                    <p>➡️ Très important pour <code class="inline-code">COPY INTO</code> dans SnowPro Core. </p>
 
-                    <h3>🔹 B. JSON — options principales</h3>
+                    <h3>✔  B. JSON — options principales</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">STRIP_OUTER_ARRAY = TRUE/FALSE</code></li>
                         <li><code class="inline-code">IGNORE_UTF8_ERRORS</code></li>
@@ -266,7 +265,7 @@
                     </ul>
                     <p>JSON est nativement interprété → chargé généralement dans VARIANT. </p>
 
-                    <h3>🔹 C. AVRO, ORC, PARQUET</h3>
+                    <h3>✔  C. AVRO, ORC, PARQUET</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>AVRO</strong> : COMPRESSION, NULL_IF</li>
                         <li><strong>ORC</strong> : TRIM_SPACE, NULL_IF</li>
@@ -274,7 +273,7 @@
                     </ul>
                     <p></p>
 
-                    <h3>🔹 D. XML</h3>
+                    <h3>✔   D. XML</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Supporté pour chargement semi-structuré</li>
                         <li>Chaque top-level element devient une ligne</li>

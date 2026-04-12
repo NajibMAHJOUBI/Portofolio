@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Data Sharing (Provider)</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -96,7 +96,7 @@
                     </li>
                     <li>
                         <a href="#particularites-fonctionnelles">
-                            <i class="fas fa-cogs"></i>6. Particularités fonctionnelles à connaître (Exam)
+                            <i class="fas fa-cogs"></i>6. Particularités fonctionnelles à connaître 
                         </a>
                     </li>
                     <li>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-share-alt"></i>Data Sharing
@@ -302,7 +302,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                 ============================================ -->
                 <section id="particularites-fonctionnelles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cogs"></i>6. Particularités fonctionnelles à connaître (Exam)
+                        <i class="fas fa-cogs"></i>6. Particularités fonctionnelles à connaître
                     </h2>
 
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -323,7 +323,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA mydb.public TO SHARE my_share;</code></pre>
                         <i class="fas fa-eye"></i>7. Ce que le consumer voit
                     </h2>
 
-                    <p>Un consumer crée une database locale "virtuelle" :</p>
+                    <p>Un consumer crée une database locale &laquo; virtuelle &raquo; :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>CREATE DATABASE my_consumed_db FROM SHARE provider_org.provider_account.my_share;</code></pre>

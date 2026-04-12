@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Micro-partitions & Table Design</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -123,7 +123,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-cubes"></i>Micro-partitions
@@ -143,24 +143,19 @@
                     </h2>
 
                     <p>
-                        Voici une synthèse de révision complète, basée exclusivement sur la documentation Snowflake concernant :
+                        Dans cette section, nous allons explorer en profondeur 
+                        les micro‑partitions, qui sont au cœur de l'architecture 
+                        de stockage de Snowflake, ainsi que les meilleures pratiques 
+                        de design des tables pour optimiser les performances 
+                        et la gestion des données. Ces concepts sont essentiels 
+                        pour comprendre comment Snowflake organise physiquement 
+                        les données et comment cela impacte les requêtes, le clustering 
+                        et la maintenance des tables :
                     </p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Micro‑partitions</li>
                         <li>Tables – Design Considerations</li>
                     </ul>
-
-                    <p>Sources officielles :</p>
-                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>Micro‑partitions : </li>
-                        <li>Table Design Considerations : </li>
-                    </ul>
-
-                    <div class="info-note">
-                        <i class="fas fa-info-circle"></i>
-                        <strong>Note importante :</strong>
-                        <p>Cette thématique est cruciale pour la certification SnowPro Core, car elle touche directement les fondements de performance, stockage, clustering et gestion physique des données dans Snowflake.</p>
-                    </div>
                 </section>
 
                 <!-- ============================================
@@ -168,7 +163,7 @@
                 ============================================ -->
                 <section id="micro-partitions-concept" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cubes"></i> ✅ 1. Micro‑partitions — Concept clé de Snowflake
+                        <i class="fas fa-cubes"></i> 1. Micro‑partitions — Concept clé de Snowflake
                     </h2>
 
                     <h3>✔ Définition</h3>
@@ -218,12 +213,12 @@
                 ============================================ -->
                 <section id="table-design-considerations" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-table"></i> ✅ 2. Table Design Considerations
+                        <i class="fas fa-table"></i> 2. Table Design Considerations
                     </h2>
 
-                    <p>Source : Table design considerations. </p>
+                    
 
-                    <h3>🔹 A. Choix des types de données</h3>
+                    <h3> A. Choix des types de données</h3>
 
                     <h4>✔ Utiliser les types DATE & TIMESTAMP</h4>
                     <p>Snowflake recommande :</p>
@@ -235,7 +230,7 @@
 
                     <h4>✔ Référential integrity</h4>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                        <li>PK / FK sont informations seulement (non appliquées), sauf pour Hybrid Tables.</li>
+                        <li>PK / FK sont pour informations seulement (non appliquées), sauf pour Hybrid Tables.</li>
                         <li>NOT NULL est réellement appliqué.</li>
                         <li>PK/FK restent utiles pour :
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -246,7 +241,7 @@
                     </ul>
                     <p></p>
 
-                    <h3>🔹 B. Importance des contraintes comme métadonnées</h3>
+                    <h3> B. Importance des contraintes comme métadonnées</h3>
                     <p>Les contraintes apportent :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>documentation du modèle,</li>
@@ -256,7 +251,7 @@
                     </ul>
                     <p></p>
 
-                    <h3>🔹 C. GET_DDL pour documenter les objets</h3>
+                    <h3> C. GET_DDL pour documenter les objets</h3>
                     <p>Snowflake permet d'extraire la définition d'un objet avec :</p>
                     <div class="code-block">
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
@@ -270,7 +265,7 @@
                     </ul>
                     <p></p>
 
-                    <h3>🔹 D. Best practices générales</h3>
+                    <h3> D. Best practices générales</h3>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Comprendre micro‑partitions & clustering → Optimiser les performances sur gros volumes.</li>
                         <li>Organiser proprement schemas & databases → Structure logique claire = maintenance facilitée.</li>
@@ -284,7 +279,7 @@
                 ============================================ -->
                 <section id="relation-micro-tables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-link"></i> ✅ 3. Relation entre Micro‑partitions et Design des Tables
+                        <i class="fas fa-link"></i> 3. Relation entre Micro‑partitions et Design des Tables
                     </h2>
 
                     <p>Micro‑partitions influencent directement :</p>

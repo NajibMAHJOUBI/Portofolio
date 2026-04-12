@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-cloud-upload-alt"></i>Snowpipe (Introduction)
+                            <i class="fas fa-cloud-upload-alt"></i>Snowpipe
                         </a>
                     </li>
                     <li>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-pipe-valve"></i>Snowpipe
@@ -154,7 +154,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cloud-upload-alt"></i>Snowpipe (Introduction)
+                        <i class="fas fa-cloud-upload-alt"></i>Snowpipe
                     </h2>
 
                     <p>
@@ -173,7 +173,6 @@
                         <i class="fas fa-info-circle"></i>1. Qu'est-ce que Snowpipe ?
                     </h2>
 
-                    <p>Selon la documentation :</p>
                     <div class="info-note">
                         Snowpipe permet de charger les données dès qu'elles sont disponibles dans un stage, en micro‑batches, avec disponibilité quasi‑immédiate pour les utilisateurs.
                         
@@ -247,7 +246,7 @@ FILE_FORMAT = ...</code></pre>
 
                     <p>Snowpipe supporte deux mécanismes :</p>
 
-                    <h3>🔹 A. Automated Snowpipe with Cloud Messaging</h3>
+                    <h3> A. Automated Snowpipe with Cloud Messaging</h3>
                     <p>Snowflake est prévenu automatiquement de l'arrivée de nouveaux fichiers via :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>AWS S3 Event Notifications</li>
@@ -257,7 +256,7 @@ FILE_FORMAT = ...</code></pre>
                     <p>Snowpipe poll ensuite les notifications déposées dans une file (queue) et charge les fichiers correspondants.</p>
                     <p>C'est la méthode la plus utilisée pour le near real-time.</p>
 
-                    <h3>🔹 B. Snowpipe REST API</h3>
+                    <h3> B. Snowpipe REST API</h3>
                     <p>Votre application appelle un endpoint Snowflake en fournissant :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>un nom de pipe</li>

@@ -47,7 +47,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="#">Snowflake</a></li>
-                    <li class="current">Storage Considerations</li>
+                    <li class="current">SnowPro Core Certification</li>
                 </ul>
             </div>
         </div>
@@ -106,7 +106,7 @@
                 <main class="tutorial-content">
                     <!-- En-tête du tutoriel -->
                     <div class="tutorial-header">
-                        <h1>Snowflake - Storage Considerations</h1>
+                        <h1>Snowflake - Bonnnes pratiques pour le stockage de données</h1>
 
                         <span class="level-badge">Niveau Intermédiaire</span>
 
@@ -124,7 +124,7 @@
 
                         <div class="tech-stack">
                             <span class="tech-tag">
-                                <i class="fab fa-snowflake"></i>Snowflake
+                                <i class="fab snowflake-icon"></i>Snowflake
                             </span>
                             <span class="tech-tag">
                                 <i class="fas fa-database"></i>Storage
@@ -144,7 +144,7 @@
                         </h2>
 
                         <p>
-                            Les "Storage Considerations" expliquent comment Snowflake gère le stockage des données 
+                            Voici comment Snowflake gère le stockage des données 
                             et comment optimiser les coûts, notamment dans le cadre du <b>Continuous Data Protection 
                             (CDP)</b> : Time Travel + Fail-safe.
                         </p>
@@ -160,7 +160,7 @@
                         </ul>
 
                         <p>
-                            ➡️ <b>Toutes ces phases sont facturées</b>, car Snowflake stocke les micro‑partitions 
+                            ⚠ <b>Toutes ces phases sont facturées</b>, car Snowflake stocke les micro‑partitions 
                             correspondant à chaque état.
                             
                         </p>
@@ -193,8 +193,8 @@
                         </p>
 
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
-                            <li>→ cela génère de <b>nouvelles micro‑partitions</b></li>
-                            <li>→ et place les anciennes dans Time Travel / Fail-safe</li>
+                            <li>Cela génère de <b>nouvelles micro‑partitions</b></li>
+                            <li>Et place les anciennes dans Time Travel / Fail-safe</li>
                         </ul>
 
                         <p>
