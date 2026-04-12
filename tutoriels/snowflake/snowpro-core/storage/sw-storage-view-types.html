@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,11 +42,11 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Views, Materialized Views & Secure Views</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -86,14 +86,10 @@
                     </li>
                     <li>
                         <a href="#comparatif">
-                            <i class="fas fa-chart-simple"></i>4. Comparatif (utile pour SnowPro Core)
+                            <i class="fas fa-chart-simple"></i>4. Comparatif 
                         </a>
                     </li>
-                    <li>
-                        <a href="#points-cles">
-                            <i class="fas fa-star"></i>5. Points clés à mémoriser pour SnowPro Core
-                        </a>
-                    </li>
+
                 </ul>
 
                 <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
@@ -128,7 +124,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-eye"></i>Views
@@ -160,20 +156,20 @@
                         <i class="fas fa-info-circle"></i>1. What is a View ? (Vue non matérialisée)
                     </h2>
 
-                    <p>Selon la documentation :</p>
+                    
                     <div class="info-note">
                         <em>Une vue permet d'accéder au résultat d'une requête comme s'il s'agissait d'une table.</em>
                         
                     </div>
 
                     <h3>✔ Caractéristiques essentielles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Une vue est une définition SQL nommée, créée avec <code class="inline-code">CREATE VIEW</code>.</li>
                         <li>Elle ne stocke pas de données : les résultats sont recalculés à chaque exécution. </li>
                         <li>Peut être utilisée partout où une table peut l'être (JOIN, sous‑requêtes...). </li>
                         <li>
                             Utilités :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>masquer des colonnes sensibles ;</li>
                                 <li>simplifier l'accès à des tables complexes ;</li>
                                 <li>fournir une vision logique adaptée à différents rôles.</li>
@@ -183,7 +179,7 @@
 
                     <h3>✔ Types de vues dans Snowflake</h3>
                     <p>Snowflake distingue :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Views</strong> (non matérialisées) : calculées à la demande.</li>
                         <li><strong>Materialized Views</strong> : stockent physiquement les résultats. </li>
                     </ul>
@@ -197,25 +193,25 @@
                         <i class="fas fa-chart-line"></i>2. Materialized Views (Vues matérialisées)
                     </h2>
 
-                    <p>Selon la documentation :</p>
+                    
                     <div class="info-note">
                         <em>Une materialized view est un jeu de données pré‑calculé, stocké pour une utilisation ultérieure.</em>
                         
                     </div>
 
                     <h3>✔ Fonctionnement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les résultats de la requête sont stockés physiquement.</li>
                         <li>Les requêtes sont beaucoup plus rapides, car Snowflake lit directement les données matérialisées. </li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Boost massif des performances pour requêtes répétitives ou complexes.<br>
                         Exemples : agrégations lourdes, analyse de semi‑structuré, requêtes fréquentes. </li>
                         <li>
                             Maintenance automatique :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Un service en arrière‑plan met à jour la materialized view après les changements dans la table source. </li>
                             </ul>
                         </li>
@@ -224,7 +220,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Limitations (SnowPro Core aime tester ces points)</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Consomme du compute pour la maintenance. </li>
                             <li>Consomme du stockage.</li>
                             <li>Doit être basée sur une seule table (pas de JOIN), avec restrictions supplémentaires sur la requête.</li>
@@ -232,7 +228,7 @@
                     </div>
 
                     <h3>✔ Idéal pour :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables stables, peu modifiées.</li>
                         <li>Résultats petits en volume par rapport à la table source.</li>
                         <li>Workloads fortement répétitifs.</li>
@@ -247,18 +243,18 @@
                         <i class="fas fa-shield-alt"></i>3. Secure Views (Vues sécurisées)
                     </h2>
 
-                    <p>Selon la documentation :</p>
+                   
                     <div class="info-note">
                         <em>Les secure views empêchent toute exposition indirecte des données sous‑jacentes et masquent la définition de la vue.</em>
                         
                     </div>
 
                     <h3>✔ Pourquoi les utiliser ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les vues non sécurisées peuvent parfois permettre d'inférer des données sensibles via des optimisations internes ou des comportements d'erreur. </li>
                         <li>
                             Les secure views désactivent ces optimisations afin d'empêcher :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>accès indirect aux données source,</li>
                                 <li>déduction par l'utilisateur (ex : division‑by‑zero trick),</li>
                                 <li>exposition de la définition SQL de la vue. </li>
@@ -267,7 +263,7 @@
                     </ul>
 
                     <h3>✔ Fonctionnement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Créées via : <code class="inline-code">CREATE SECURE VIEW …</code></li>
                         <li>Le texte de la vue n'est visible que pour les rôles autorisés (propriétaires). </li>
                         <li>Possible aussi avec des materialized views : <code class="inline-code">CREATE SECURE MATERIALIZED VIEW …</code></li>
@@ -276,13 +272,13 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Inconvénients</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>L'exécution peut être plus lente, car Snowflake ne peut pas appliquer certaines optimisations. </li>
                         </ul>
                     </div>
 
                     <h3>✔ Scénarios typiques</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Masquer des colonnes sensibles (PII, données financières).</li>
                         <li>Fournir un accès sécurisé aux consumers dans un partage de données.</li>
                         <li>Appliquer du row‑level filtering sans exposer la logique.</li>

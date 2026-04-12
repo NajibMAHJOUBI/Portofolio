@@ -46,7 +46,7 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Multi-Cluster Warehouses</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-layer-group"></i>🧊 Multi‑Cluster Warehouses & Scaling Policies
+                            <i class="fas fa-layer-group"></i>Multi‑Cluster Warehouses & Scaling Policies
                         </a>
                     </li>
                     <li>
@@ -101,7 +101,7 @@
                     </li>
                     <li>
                         <a href="#points-cles">
-                            <i class="fas fa-star"></i>7. Points clés pour SnowPro Core
+                            <i class="fas fa-star"></i>7. Points clés 
                         </a>
                     </li>
                 </ul>
@@ -138,7 +138,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-layer-group"></i>Multi-Cluster
@@ -154,7 +154,7 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-layer-group"></i> 🧊 Multi‑Cluster Warehouses & Scaling Policies
+                        <i class="fas fa-layer-group"></i> Multi‑Cluster Warehouses & Scaling Policies
                     </h2>
 
                     <p>
@@ -167,7 +167,7 @@
                 ============================================ -->
                 <section id="definition" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-info-circle"></i> ✅ 1. Qu'est‑ce qu'un Multi‑Cluster Warehouse ?
+                        <i class="fas fa-info-circle"></i> 1. Qu'est‑ce qu'un Multi‑Cluster Warehouse ?
                     </h2>
 
                     <p>Sans multi‑cluster, un warehouse Snowflake est composé d'un seul cluster.</p>
@@ -196,24 +196,24 @@
                 ============================================ -->
                 <section id="limites-clusters" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-bar"></i> ✅ 2. Limites de clusters (par taille de warehouse)
+                        <i class="fas fa-chart-bar"></i> 2. Limites de clusters (par taille de warehouse)
                     </h2>
 
                     <p>La limite dépend de la taille du warehouse : </p>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Taille</th><th>Max clusters</th>
+                            <th>Taille</th><th>Max clusters</th>
                         </thead>
                         <tbody>
-                            32<td>X‑Small → Medium</td><td>300</td>
-                            32<td>Large</td><td>160</td>
-                            32<td>X‑Large</td><td>80</td>
-                            32<td>2XL</td><td>40</td>
-                            32<td>3XL</td><td>20</td>
-                            32<td>4XL</td><td>10</td>
-                            32<td>5XL</td><td>10</td>
-                            32<td>6XL</td><td>10</td>
+                            <tr><td>X‑Small → Medium</td><td>300</td></tr>
+                            <tr><td>Large</td><td>160</td></tr>
+                            <tr><td>X‑Large</td><td>80</td></tr>
+                            <tr><td>2XL</td><td>40</td></tr>
+                            <tr><td>3XL</td><td>20</td></tr>
+                            <tr><td>4XL</td><td>10</td></tr>
+                            <tr><td>5XL</td><td>10</td></tr>
+                            <tr><td>6XL</td><td>10</td></tr>
                         </tbody>
                      </table>
 
@@ -225,7 +225,7 @@
                 ============================================ -->
                 <section id="modes-fonctionnement" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-toggle-on"></i> ✅ 3. Modes de fonctionnement
+                        <i class="fas fa-toggle-on"></i> 3. Modes de fonctionnement
                     </h2>
 
                     <h3>✔ Maximized mode</h3>
@@ -254,15 +254,14 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                 ============================================ -->
                 <section id="scaling-policies" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 4. Scaling Policies (Standard vs Economy)
+                        <i class="fas fa-chart-line"></i> 4. Scaling Policies (Standard vs Economy)
                     </h2>
 
-                    <p>La section dédiée se trouve dans la documentation du multi‑cluster warehouse : </p>
                     <p>Les scaling policies déterminent comment Snowflake ajoute ou retire des clusters.</p>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔹 Standard Scaling Policy</h4>
+                            <h3>Standard Scaling Policy</h3>
                             <p><strong>Politique par défaut.</strong></p>
                             <p><strong>Comportement :</strong></p>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -279,7 +278,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Economy Scaling Policy</h4>
+                            <h3>Economy Scaling Policy</h3>
                             <p><strong>Alternative plus orientée coût.</strong></p>
                             <p><strong>Comportement :</strong></p>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
@@ -302,10 +301,8 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                 ============================================ -->
                 <section id="ajout-retrait-clusters" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> ✅ 5. Comment Snowflake décide d'ajouter ou retirer des clusters ?
+                        <i class="fas fa-chart-simple"></i> 5. Comment Snowflake décide d'ajouter ou retirer des clusters ?
                     </h2>
-
-                    <p>D'après la documentation : </p>
 
                     <h3>Démarrage d'un cluster</h3>
                     <p>Snowflake démarre un cluster supplémentaire lorsque :</p>
@@ -328,7 +325,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                 ============================================ -->
                 <section id="fonctionnalites-partagees" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-share-alt"></i> ✅ 6. Fonctionnalités partagées avec les single‑cluster warehouses
+                        <i class="fas fa-share-alt"></i> 6. Fonctionnalités partagées avec les single‑cluster warehouses
                     </h2>
 
                     <p>Les multi‑cluster offrent les mêmes capacités qu'un warehouse classique :</p>
@@ -344,7 +341,7 @@ MAX_CLUSTER_COUNT = 4</code></pre>
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> 🎯 7. Points clés pour SnowPro Core
+                        <i class="fas fa-star"></i>  7. Points clés 
                     </h2>
 
                     <div class="warning-note">

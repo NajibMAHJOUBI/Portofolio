@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,11 +42,11 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Types de Tables</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-table"></i>🧊 Table Types (Temp/Transient, External, Iceberg, Dynamic)
+                            <i class="fas fa-table"></i>Table Types (Temp/Transient, External, Iceberg, Dynamic)
                         </a>
                     </li>
                     <li>
@@ -91,12 +91,12 @@
                     </li>
                     <li>
                         <a href="#synthese-finale">
-                            <i class="fas fa-chart-simple"></i>🎯 Synthèse finale SnowPro Core
+                            <i class="fas fa-chart-simple"></i> Résumé 
                         </a>
                     </li>
                     <li>
                         <a href="#points-cles">
-                            <i class="fas fa-star"></i>🧠 Points clés à retenir pour la certification
+                            <i class="fas fa-star"></i> Points clés 
                         </a>
                     </li>
                 </ul>
@@ -133,7 +133,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-table"></i>Types de Tables
@@ -149,15 +149,13 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-table"></i> 🧊 Table Types (Temp/Transient, External, Iceberg, Dynamic)
+                        <i class="fas fa-table"></i> Table Types (Temp/Transient, External, Iceberg, Dynamic)
                     </h2>
 
                     <p>
                         Ces quatre types de tables sont essentiels pour comprendre comment Snowflake gère le stockage, la persistance, l'intégration avec des data lakes et la mise à jour automatique des vues matérialisées modernes (Dynamic Tables).
                     </p>
-                    <p>
-                        Ils apparaissent très régulièrement dans la certification SnowPro Core.
-                    </p>
+                    
                 </section>
 
                 <!-- ============================================
@@ -165,11 +163,11 @@
                 ============================================ -->
                 <section id="temporary-transient" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-hourglass-half"></i> ✅ 1. Temporary Tables & Transient Tables
+                        <i class="fas fa-hourglass-half"></i> 1. Temporary Tables & Transient Tables
                     </h2>
 
                     <h3>✔ Temporary Tables (TEMP)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Existent uniquement pour la durée de la session.</li>
                         <li>Automatiquement supprimées à la fin de la session.</li>
                         <li>Stockage dans Snowflake avec Time Travel = 0 jours (pas de Fail-safe).</li>
@@ -177,7 +175,7 @@
                     </ul>
 
                     <h3>✔ Transient Tables</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Persistantes entre sessions, contrairement aux temporary.</li>
                         <li>Time Travel limité (0 ou 1 jour), et pas de Fail-safe.</li>
                         <li>Coût de stockage inférieur car sans fail-safe.</li>
@@ -191,23 +189,29 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type</th><th>Durée</th><th>Time Travel</th><th>Fail-safe</th><th>Usage</th>
+                            <tr>
+                                <th>Type</th>
+                                <th>Durée</th>
+                                <th>Time Travel</th>
+                                <th>Fail-safe</th>
+                                <th>Usage</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Temporary</strong>
-                                <td>session
-                                <td>0 jour
-                                <td>❌
-                                <td>transformations temporaires
-                            
-                            32
-                                <td><strong>Transient</strong>
-                                <td>persistant
-                                <td>limité
-                                <td>❌
-                                <td>staging, tables non critiques
-                            
+                            <tr>
+                                <td><strong>Temporary</strong></td>
+                                <td>session</td>
+                                <td>0 jour</td>
+                                <td>❌</td>
+                                <td>transformations temporaires</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transient</strong></td>
+                                <td>persistant</td>
+                                <td>limité</td>
+                                <td>❌</td>
+                                <td>staging, tables non critiques</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>
@@ -217,12 +221,12 @@
                 ============================================ -->
                 <section id="external-tables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-cloud-upload-alt"></i> ✅ 2. External Tables
+                        <i class="fas fa-cloud-upload-alt"></i> 2. External Tables
                     </h2>
 
                     <h3>✔ Définition</h3>
                     <p>Une external table permet de requêter des données stockées hors de Snowflake, par exemple dans :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>AWS S3</li>
                         <li>Azure Blob</li>
                         <li>Google Cloud Storage </li>
@@ -230,14 +234,14 @@
                     <p>Les données restent dans le data lake, Snowflake ne stocke que des métadonnées.</p>
 
                     <h3>✔ Fonctionnement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake construit des metadata files pour décrire la structure.</li>
                         <li>Les données en elles-mêmes sont lues directement depuis le cloud storage.</li>
                         <li>Supporte les formats semi-structurés (JSON, Parquet, Avro, ORC…). </li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Aucun coût de stockage Snowflake pour les données.</li>
                         <li>Intégration naturelle avec les architectures data lakehouse.</li>
                         <li>Idéal pour data sharing ou ingestion progressive.</li>
@@ -246,7 +250,7 @@
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Limites</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Pas de DML (INSERT/UPDATE/DELETE).</li>
                             <li>Latence dépendant du stockage cloud.</li>
                         </ul>
@@ -258,19 +262,19 @@
                 ============================================ -->
                 <section id="iceberg-tables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-ice-cream"></i> ✅ 3. Iceberg Tables
+                        <i class="fas fa-ice-cream"></i> 3. Iceberg Tables
                     </h2>
 
                     <h3>✔ Définition</h3>
                     <p>Snowflake permet de créer des Iceberg Tables : ce sont des tables compatibles Apache Iceberg, stockées dans des data lakes, mais consultables et manipulables depuis Snowflake comme des tables Snowflake. </p>
 
                     <h3>✔ Caractéristiques</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Basées sur le format Iceberg table (manifests, snapshots, metadata).</li>
                         <li>Les données restent dans le data lake, mais Snowflake lit/écrit via son moteur.</li>
                         <li>
                             Peut fonctionner dans deux modes :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><strong>External Iceberg Tables</strong> : stockage dans votre data lake.</li>
                                 <li><strong>Managed Iceberg Tables</strong> : stockage géré par Snowflake.</li>
                             </ul>
@@ -279,7 +283,7 @@
                     </ul>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Interopérabilité totale avec l'écosystème Iceberg.</li>
                         <li>Time Travel via mécanisme Iceberg.</li>
                         <li>Performance optimisée par Snowflake pour les opérations analytiques.</li>
@@ -292,7 +296,7 @@
                 ============================================ -->
                 <section id="dynamic-tables" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 4. Dynamic Tables (nouvelle génération de transformations)
+                        <i class="fas fa-chart-line"></i> 4. Dynamic Tables (nouvelle génération de transformations)
                     </h2>
 
                     <h3>✔ Définition</h3>
@@ -307,13 +311,13 @@
 TARGET_LAG = '1 minute'
 AS SELECT ...</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake rafraîchit automatiquement la table pour qu'elle reflète les données sources avec un retard maximal (target lag).</li>
                         <li>Calcul géré par compute serverless.</li>
                     </ul>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Rafraîchissement automatique et incrémental.</li>
                         <li>Pas besoin de gérer des pipelines ETL/ELT externes.</li>
                         <li>Supporte transformations complexes, y compris multi‑tables.</li>
@@ -321,7 +325,7 @@ AS SELECT ...</code></pre>
                     </ul>
 
                     <h3>✔ Cas d'usage</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables dérivées constamment mises à jour.</li>
                         <li>Tables d'agrégations, cleansing, enrichissement.</li>
                         <li>Pipelines de transformation "low‑maintenance".</li>
@@ -333,49 +337,50 @@ AS SELECT ...</code></pre>
                 ============================================ -->
                 <section id="synthese-finale" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-simple"></i> 🎯 Synthèse finale SnowPro Core
+                        <i class="fas fa-chart-simple"></i> Résumé
                     </h2>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type</th><th>Où sont les données ?</th><th>DML possible ?</th><th>Particularités</th><th>Usage typique</th>
+                            <th>Type</th><th>Où sont les données ?</th><th>DML possible ?</th><th>Particularités</th><th>Usage typique</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Temporary</strong>
-                                <td>Snowflake
-                                <td>Oui
-                                <td>Session uniquement, no Fail-safe
-                                <td>Transformations temporaires
-                            
-                            32
-                                <td><strong>Transient</strong>
-                                <td>Snowflake
-                                <td>Oui
-                                <td>Pas de Fail-safe, TT faible
-                                <td>Staging persistant
-                            
-                            32
-                                <td><strong>External</strong>
-                                <td>Cloud storage externe
-                                <td>Non
-                                <td>Snowflake stocke uniquement des métadonnées
-                                <td>Lakehouse read-only
-                            
-                            32
-                                <td><strong>Iceberg</strong>
-                                <td>Data lake ou Snowflake (managed)
-                                <td>Oui
-                                <td>Compatibilité Iceberg, snapshots
-                                <td>Lakehouse performant
-                            
-                            32
-                                <td><strong>Dynamic Table</strong>
-                                <td>Snowflake (serverless compute)
-                                <td>Oui
-                                <td>Auto-maintenance avec target lag
-                                <td>Pipelines ELT déclaratifs
-                            
+                            <tr>
+                                <td><strong>Temporary</strong></td>
+                                <td>Snowflake</td>
+                                <td>Oui</td>
+                                <td>Session uniquement, no Fail-safe</td>
+                                <td>Transformations temporaires</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Transient</strong></td>
+                                <td>Snowflake</td>
+                                <td>Oui</td>
+                                <td>Pas de Fail-safe, TT faible</td>
+                                <td>Staging persistant</td>
+                            </tr>
+                            <tr>
+                                <td><strong>External</strong></td>
+                                <td>Cloud storage externe</td>
+                                <td>Non</td>
+                                <td>Snowflake stocke uniquement des métadonnées</td>
+                                <td>Lakehouse read-only</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Iceberg</strong></td>
+                                <td>Data lake ou Snowflake (managed)</td>
+                                <td>Oui</td>
+                                <td>Compatibilité Iceberg, snapshots</td>
+                                <td>Lakehouse performant</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dynamic Table</strong></td>
+                                <td>Snowflake (serverless compute)</td>
+                                <td>Oui</td>
+                                <td>Auto-maintenance avec target lag</td>
+                                <td>Pipelines ELT déclaratifs</td>
+                                </tr>
+                            </tbody>
                         </tbody>
                     </table>
                 </section>
@@ -385,11 +390,11 @@ AS SELECT ...</code></pre>
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> 🧠 Points clés à retenir pour la certification
+                        <i class="fas fa-star"></i>Points clés 
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><strong>Temporary</strong> = durée session ; <strong>Transient</strong> = persistant mais sans Fail-safe.</li>
                             <li><strong>External tables</strong> = lecture de données dans un data lake, pas de DML.</li>
                             <li><strong>Iceberg tables</strong> = tables compatibles Iceberg entièrement modifiables.</li>

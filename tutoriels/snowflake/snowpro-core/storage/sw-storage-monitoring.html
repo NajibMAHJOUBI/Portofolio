@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,11 +42,11 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
-                <li class="current">Data Storage & CDP Costs</li>
+                <li class="current">SnowPro Core Certification</li>
             </ul>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <ul class="toc-list">
                     <li>
                         <a href="#introduction" class="active">
-                            <i class="fas fa-database"></i>🧊 Data Storage, Monitoring & CDP Costs
+                            <i class="fas fa-database"></i>Data Storage, Monitoring & CDP Costs
                         </a>
                     </li>
                     <li>
@@ -86,12 +86,12 @@
                     </li>
                     <li>
                         <a href="#points-cles">
-                            <i class="fas fa-star"></i>4. Points clés à retenir pour SnowPro Core
+                            <i class="fas fa-star"></i>4. Points clés 
                         </a>
                     </li>
                     <li>
                         <a href="#resume-final">
-                            <i class="fas fa-graduation-cap"></i>🧠 Résumé final (super‑synthèse)
+                            <i class="fas fa-graduation-cap"></i> Résumé 
                         </a>
                     </li>
                 </ul>
@@ -128,7 +128,7 @@
 
                     <div class="tech-stack">
                         <span class="tech-tag">
-                            <i class="fab fa-snowflake"></i>Snowflake
+                            <i class="fab snowflake-icon"></i>Snowflake
                         </span>
                         <span class="tech-tag">
                             <i class="fas fa-database"></i>Storage
@@ -144,11 +144,11 @@
                 ============================================ -->
                 <section id="introduction" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-database"></i> 🧊 Data Storage, Monitoring & CDP Costs
+                        <i class="fas fa-database"></i> Data Storage, Monitoring & CDP Costs
                     </h2>
 
                     <p>
-                        Ces notions sont essentielles pour la certification SnowPro Core, car elles touchent aux coûts de stockage, à la compréhension des mécanismes Time Travel / Fail-safe, ainsi qu'aux outils de suivi dans Snowsight et via les vues ACCOUNT_USAGE.
+                        Ces notions touchent aux coûts de stockage, à la compréhension des mécanismes Time Travel / Fail-safe, ainsi qu'aux outils de suivi dans Snowsight et via les vues ACCOUNT_USAGE.
                     </p>
                 </section>
 
@@ -157,18 +157,17 @@
                 ============================================ -->
                 <section id="monitoring-data-storage" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-chart-line"></i> ✅ 1. Monitoring Data Storage (Surveillance du stockage)
+                        <i class="fas fa-chart-line"></i> 1. Monitoring Data Storage (Surveillance du stockage)
                     </h2>
 
-                    <p>La documentation décrit plusieurs niveaux de visibilité : </p>
 
-                    <h3>🔹 1.1. Monitoring au niveau Account (ACCOUNTADMIN)</h3>
+                    <h3> 1.1. Monitoring au niveau Account (ACCOUNTADMIN)</h3>
                     <p>Dans Snowsight :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Admin → Cost management → Consumption</li>
                         <li>
                             Affiche :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>le total du stockage moyen pour l'account,</li>
                                 <li>le stockage des bases de données,</li>
                                 <li>des stages,</li>
@@ -178,27 +177,27 @@
                         <li>Permet d'obtenir une vue globale de l'empreinte de stockage.</li>
                     </ul>
 
-                    <h3>🔹 1.2. Monitoring au niveau table</h3>
+                    <h3> 1.2. Monitoring au niveau table</h3>
                     <p>Méthodes possibles : </p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowsight → Catalog → Database Explorer → Table</li>
                         <li>SHOW TABLES (SQL)</li>
                         <li>TABLE_STORAGE_METRICS (Information Schema / Account Usage)</li>
                     </ul>
 
                     <p><strong>TABLE_STORAGE_METRICS</strong> est la vue la plus détaillée :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>ACTIVE_BYTES : données actives</li>
                         <li>TIME_TRAVEL_BYTES : données historiques (Time Travel)</li>
                         <li>FAILSAFE_BYTES : données en Fail-safe </li>
                     </ul>
                     <p>Elle distingue aussi :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>owned storage</li>
                         <li>referenced storage (cas des clones)</li>
                     </ul>
 
-                    <h3>🔹 1.3. Monitoring des fichiers en stage</h3>
+                    <h3> 1.3. Monitoring des fichiers en stage</h3>
                     <p>Snowflake stocke les fichiers en stage pour l'ingestion. Leur stockage contribue aux coûts de stockage. </p>
                 </section>
 
@@ -207,18 +206,17 @@
                 ============================================ -->
                 <section id="exploring-storage-cost" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-coins"></i> ✅ 2. Exploring Data Storage Cost (Comprendre et explorer les coûts)
+                        <i class="fas fa-coins"></i> 2. Exploring Data Storage Cost (Comprendre et explorer les coûts)
                     </h2>
 
-                    <p>La page dédiée permet de comprendre comment naviguer dans les coûts depuis Snowsight. </p>
 
-                    <h3>🔹 2.1. Accès au tableau de bord Storage Cost</h3>
+                    <h3> 2.1. Accès au tableau de bord Storage Cost</h3>
                     <p>Snowsight :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Admin → Cost management → Consumption → Storage </li>
                         <li>
                             Filtrage possible :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>par tag (attribution analytique des coûts)</li>
                                 <li>par Type (Database / Fail-safe / Stage)</li>
                                 <li>par Object (par base, schéma, table) </li>
@@ -226,24 +224,24 @@
                         </li>
                     </ul>
 
-                    <h3>🔹 2.2. Storage Types considérés dans la facturation</h3>
+                    <h3> 2.2. Storage Types considérés dans la facturation</h3>
                     <p>Le Total Storage Cost comprend :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>fichiers en stage</li>
                         <li>stockage des tables (actif + Time Travel)</li>
                         <li>stockage Fail-safe </li>
                     </ul>
 
-                    <h3>🔹 2.3. Visualisation par table</h3>
+                    <h3> 2.3. Visualisation par table</h3>
                     <p>Dans Snowsight, chaque table affiche :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>→ la taille active (Active Bytes) </li>
                     </ul>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Attention :</strong>
                         <p>Cette taille peut différer du stockage physique réel pour :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>tables clonées</li>
                             <li>tables avec lignes supprimées</li>
                         </ul>
@@ -255,14 +253,13 @@
                 ============================================ -->
                 <section id="cdp-storage-costs" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-clock"></i> ✅ 3. CDP Storage Costs (Time Travel & Fail-safe)
+                        <i class="fas fa-clock"></i> 3. CDP Storage Costs (Time Travel & Fail-safe)
                     </h2>
 
-                    <p>La documentation détaille les mécanismes de Continuous Data Protection (CDP), incluant Time Travel et Fail-safe. </p>
 
-                    <h3>🔹 3.1. Ce qui génère des coûts</h3>
+                    <h3> 3.1. Ce qui génère des coûts</h3>
                     <p>Seront facturés :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>données actives,</li>
                         <li>données Time Travel,</li>
                         <li>Fail-safe,</li>
@@ -270,18 +267,18 @@
                     </ul>
                     <p>Snowflake compresse automatiquement les données et applique la facturation sur la taille compressée. </p>
 
-                    <h3>🔹 3.2. Time Travel & Fail-safe — Facturation</h3>
-                    <ul>
+                    <h3> 3.2. Time Travel & Fail-safe — Facturation</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Facturation par jour pour chaque segment conservé. </li>
                         <li>
                             Snowflake ne stocke pas toute la table :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Snowflake minimise la quantité de stockage pour les données historiques en conservant seulement les informations nécessaires à restaurer les lignes modifiées. </li>
                             </ul>
                         </li>
                         <li>
                             Les copies complètes ne sont créées que pour :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>DROP TABLE,</li>
                                 <li>TRUNCATE<br>
                                 (→ coûte plus cher). </li>
@@ -289,8 +286,8 @@
                         </li>
                     </ul>
 
-                    <h3>🔹 3.3. Particularités pour les Temporary / Transient tables</h3>
-                    <ul>
+                    <h3> 3.3. Particularités pour les Temporary / Transient tables</h3>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Time Travel : 0 à 1 jour max</li>
                         <li>Fail-safe : aucun Fail-safe </li>
                         <li>→ Ces tables sont moins coûteuses.</li>
@@ -302,29 +299,29 @@
                 ============================================ -->
                 <section id="points-cles" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-star"></i> 🎯 4. Points clés à retenir pour SnowPro Core
+                        <i class="fas fa-star"></i> 4. Points clés 
                     </h2>
 
                     <div class="info-note">
                         <h3>✔ Monitoring</h3>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Utiliser <strong>TABLE_STORAGE_METRICS</strong> pour voir Active / Time Travel / Fail-safe. </li>
                             <li>Snowsight → Cost Management → Consumption → Storage. </li>
                         </ul>
 
                         <h3>✔ Cost categories</h3>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Storage = fichiers en stage + bases de données + Time Travel + Fail-safe. </li>
                         </ul>
 
                         <h3>✔ CDP cost behavior</h3>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Tout ce qui transite par Time Travel et Fail-safe reste facturé jusqu'à sortie du Fail-safe. </li>
                             <li>Micro-partitions supprimées via INSERT/COPY/SNOWPIPE contribuent immédiatement à TIME_TRAVEL_BYTES et FAILSAFE_BYTES. </li>
                         </ul>
 
                         <h3>✔ Optimization insights</h3>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Clones n'augmentent pas le stockage tant qu'ils ne modifient pas les données.</li>
                             <li>Temporary & Transient tables = pas de Fail-safe → moins coûteux. </li>
                         </ul>
@@ -336,11 +333,11 @@
                 ============================================ -->
                 <section id="resume-final" class="tutorial-section">
                     <h2>
-                        <i class="fas fa-graduation-cap"></i> 🧠 Résumé final (super‑synthèse)
+                        <i class="fas fa-graduation-cap"></i> Résumé 
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake facture tout stockage, qu'il soit actif, Time Travel ou Fail‑safe.</li>
                             <li>L'outil principal de suivi est <strong>TABLE_STORAGE_METRICS</strong> (granularité par micro-partition).</li>
                             <li>Snowsight permet d'explorer, filtrer, analyser et attribuer les coûts (tags).</li>
