@@ -149,25 +149,25 @@
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔹 1. SIZE_LIMIT</h4>
+                            <h4> 1. SIZE_LIMIT</h4>
                             <p>Limite la taille totale des données chargées.</p>
                             <p>→ Utile pour restreindre un chargement massif involontaire.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 2. PURGE</h4>
+                            <h4> 2. PURGE</h4>
                             <p><code class="inline-code">PURGE = TRUE</code> supprime les fichiers source du stage après un chargement réussi.</p>
                             <p>→ Pratique pour éviter la relecture des fichiers.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 3. FORCE</h4>
+                            <h4> 3. FORCE</h4>
                             <p><code class="inline-code">FORCE = TRUE</code> recharge les fichiers même s'ils ont déjà été chargés.</p>
                             <p>→ À utiliser lors de modifications dans les données sources.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 4. TRUNCATECOLUMNS</h4>
+                            <h4> 4. TRUNCATECOLUMNS</h4>
                             <p>TRUE = tronque silencieusement les valeurs trop longues.</p>
                             <div class="warning-note" style="margin-top: 0.5rem;">
                                 ⚠️ Risque de perte de données. Attention en examen !
@@ -175,19 +175,19 @@
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 5. ENFORCE_LENGTH</h4>
+                            <h4> 5. ENFORCE_LENGTH</h4>
                             <p>TRUE = Snowflake génère une erreur si la valeur dépasse la longueur déclarée.</p>
                             <p>→ Plus strict que TRUNCATECOLUMNS.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 6. MATCH_BY_COLUMN_NAME</h4>
+                            <h4> 6. MATCH_BY_COLUMN_NAME</h4>
                             <p>Gère comment les colonnes du fichier se mappent aux colonnes de la table.</p>
                             <p>Inclut : COLUMN MATCH CRITERIA, LOAD CRITERIA, gestion des colonnes non correspondantes, limitations </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 7. INCLUDE_METADATA</h4>
+                            <h4> 7. INCLUDE_METADATA</h4>
                             <p>Inclut des colonnes système décrivant le fichier source (ex : nom du fichier).</p>
                             <p>→ Utile pour traçabilité.</p>
                         </div>

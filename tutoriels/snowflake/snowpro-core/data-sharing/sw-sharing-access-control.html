@@ -298,7 +298,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔹 PRIVATE SHARING via Snowsight</h4>
+                            <h4> PRIVATE SHARING via Snowsight</h4>
                             <ul>
                                 <li>Snowsight permet de voir toutes les shared databases et leur provenance.</li>
                                 <li>Les consumers gèrent uniquement le catalogue local de la shared database (nom, commentaire, suppression locale).</li>
@@ -306,7 +306,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 SHARING VIA SQL (Provider)</h4>
+                            <h4> SHARING VIA SQL (Provider)</h4>
                             <ul>
                                 <li>CREATE SHARE → GRANT … TO SHARE → ALTER SHARE ADD ACCOUNT.</li>
                                 <li>Share = conteneur de métadonnées (zero-copy).</li>
@@ -315,7 +315,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 PRIVILÈGES SUR LES SHARES</h4>
+                            <h4> PRIVILÈGES SUR LES SHARES</h4>
                             <ul>
                                 <li>USAGE DB, USAGE schema, SELECT table/view.</li>
                                 <li>Secure views obligatoires pour partager des vues.</li>
@@ -325,7 +325,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 LIMITATIONS</h4>
+                            <h4> LIMITATIONS</h4>
                             <ul>
                                 <li>Recréer un objet (DROP/CREATE) ⇒ il sort automatiquement du share.</li>
                                 <li>Un share ne contient qu'une seule database ayant le privilège USAGE.</li>

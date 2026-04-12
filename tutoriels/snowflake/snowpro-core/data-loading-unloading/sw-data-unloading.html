@@ -188,7 +188,7 @@
                     </div>
 
                     <h3>✔ Empty strings vs NULL values</h3>
-                    <p><strong>🔹 Distinction importante (surtout dans les formats CSV)</strong></p>
+                    <p><strong> Distinction importante (surtout dans les formats CSV)</strong></p>
                     <ul>
                         <li><strong>NULL</strong> → deux délimiteurs successifs (ex: ,,)</li>
                         <li><strong>Empty string</strong> → généralement '' (chaîne vide entre quotes)</li>
@@ -196,14 +196,14 @@
 
                     <p>Snowflake fournit plusieurs options pour contrôler cela :</p>
 
-                    <h4>🔹 FIELD_OPTIONALLY_ENCLOSED_BY</h4>
+                    <h4> FIELD_OPTIONALLY_ENCLOSED_BY</h4>
                     <ul>
                         <li>Permet d'envelopper les valeurs chaines dans un caractère (', ").</li>
                         <li>Recommandé pour distinguer NULL et empty string.</li>
                         <li>Peut être NONE (défaut). </li>
                     </ul>
 
-                    <h4>🔹 EMPTY_FIELD_AS_NULL</h4>
+                    <h4> EMPTY_FIELD_AS_NULL</h4>
                     <ul>
                         <li><code class="inline-code">TRUE</code> (défaut) → empty string devient NULL</li>
                         <li><code class="inline-code">FALSE</code> → empty string reste une chaîne vide</li>
@@ -212,7 +212,7 @@
                         ⚠ interdit d'utiliser <code class="inline-code">EMPTY_FIELD_AS_NULL=TRUE</code> avec certains comportements ; cela peut rendre NULL et empty string indistinguables. 
                     </div>
 
-                    <h4>🔹 NULL_IF</h4>
+                    <h4> NULL_IF</h4>
                     <ul>
                         <li>Indique la représentation textuelle qui doit être interprétée comme NULL.</li>
                         <li>Important lorsque <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY = NONE</code> et <code class="inline-code">EMPTY_FIELD_AS_NULL = FALSE</code>. </li>
@@ -293,7 +293,7 @@ FROM mytable;</code></pre>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔹 COPY INTO</h4>
+                            <h4> COPY INTO</h4>
                             <ul>
                                 <li>Peut utiliser une table ou une requête SELECT</li>
                                 <li>Peut partitionner les sorties (<code class="inline-code">PARTITION BY</code>)</li>
@@ -303,7 +303,7 @@ FROM mytable;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Gestion des formats (CSV surtout)</h4>
+                            <h4> Gestion des formats (CSV surtout)</h4>
                             <ul>
                                 <li>Distinction <strong>NULL vs empty string</strong></li>
                                 <li>Options : <code class="inline-code">FIELD_OPTIONALLY_ENCLOSED_BY</code>, <code class="inline-code">EMPTY_FIELD_AS_NULL</code>, <code class="inline-code">NULL_IF</code></li>
@@ -311,7 +311,7 @@ FROM mytable;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Stages</h4>
+                            <h4> Stages</h4>
                             <ul>
                                 <li>Internal stage</li>
                                 <li>External stage (S3 / Azure / GCS)</li>
@@ -320,7 +320,7 @@ FROM mytable;</code></pre>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Performance & organisation</h4>
+                            <h4> Performance & organisation</h4>
                             <ul>
                                 <li>Partitionnement pour data lakes</li>
                                 <li>Nommage automatique des fichiers en parallèle</li>

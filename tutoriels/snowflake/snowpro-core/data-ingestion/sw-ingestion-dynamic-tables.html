@@ -346,32 +346,32 @@ SELECT col1, col2 FROM staging_table;</code></pre>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>🔹 Dynamic Tables = pipeline ELT déclaratif</h4>
+                            <h4> Dynamic Tables = pipeline ELT déclaratif</h4>
                             <p>→ Snowflake orchestre automatiquement.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 TARGET_LAG contrôle la fraîcheur</h4>
+                            <h4> TARGET_LAG contrôle la fraîcheur</h4>
                             <p>→ Plus il est petit, plus la table se rafraîchit souvent (coût compute ↑).</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Change tracking obligatoire en mode incrémental</h4>
+                            <h4> Change tracking obligatoire en mode incrémental</h4>
                             <p>→ Active automatiquement sauf en FULL refresh mode.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Trois modes de refresh : INCREMENTAL / FULL / AUTO</h4>
+                            <h4> Trois modes de refresh : INCREMENTAL / FULL / AUTO</h4>
                             <p>→ AUTO recommandé seulement en développement.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Rafraîchissement manuel possible mais à limiter</h4>
+                            <h4> Rafraîchissement manuel possible mais à limiter</h4>
                             <p>→ Risque de perturber le planificateur automatique.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>🔹 Commandes essentielles :</h4>
+                            <h4> Commandes essentielles :</h4>
                             <ul>
                                 <li>CREATE DYNAMIC TABLE</li>
                                 <li>ALTER DYNAMIC TABLE</li>

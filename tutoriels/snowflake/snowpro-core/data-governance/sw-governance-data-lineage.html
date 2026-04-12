@@ -235,27 +235,27 @@
                     <p>Elle inclut :</p>
                     <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
-                            <strong>🔹 Colonnes source auxquelles un utilisateur a accédé</strong>
+                            <strong> Colonnes source auxquelles un utilisateur a accédé</strong>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Directement</li>
                                 <li>Indirectement (via une vue, une jointure…) </li>
                             </ul>
                         </li>
                         <li>
-                            <strong>🔹 Colonnes projetées dans le résultat</strong>
+                            <strong> Colonnes projetées dans le résultat</strong>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>→ liste dans <code class="inline-code">direct_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
-                            <strong>🔹 Colonnes utilisées mais non projetées</strong>
+                            <strong> Colonnes utilisées mais non projetées</strong>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>(ex : colonnes de WHERE, JOIN, FILTER)</li>
                                 <li>→ enregistrées dans <code class="inline-code">base_objects_accessed</code> </li>
                             </ul>
                         </li>
                         <li>
-                            <strong>🔹 Objets modifiés par la requête</strong>
+                            <strong> Objets modifiés par la requête</strong>
                             <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>→ INSERT, UPDATE, MERGE, DELETE, COPY</li>
                                 <li>→ enregistrés dans <code class="inline-code">objects_modified</code> </li>
