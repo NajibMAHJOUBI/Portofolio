@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -148,13 +148,13 @@
                     </h2>
 
                     <p>L'attribution des coûts permet à une organisation de ventiler l'usage Snowflake vers des unités logiques internes :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>départements</li>
                         <li>environnements</li>
                         <li>projets </li>
                     </ul>
                     <p>Ce mécanisme sert au <strong>showback / chargeback</strong>, facilitant :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la comptabilité interne,</li>
                         <li>l'identification des sources de coûts,</li>
                         <li>la mise en place d'optimisations pertinentes. </li>
@@ -171,7 +171,7 @@
 
                     <h3>✔ 2.1 Object Tags (Balises d'objet)</h3>
                     <p>Ils permettent d'associer :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>des ressources Snowflake (ex. warehouses, bases, users)</li>
                         <li>à des groupes logiques (departments, projects…). </li>
                     </ul>
@@ -179,7 +179,7 @@
 
                     <h3>✔ 2.2 Query Tags (Balises de requête)</h3>
                     <p>Indispensables lorsque :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>une application exécute des requêtes pour plusieurs équipes,</li>
                         <li>des utilisateurs de multiples départements partagent les mêmes ressources. </li>
                     </ul>
@@ -201,7 +201,7 @@
                         <div class="usage-card">
                             <h4>Scenario 1 : Ressource utilisée par un seul département</h4>
                             <p>Exemple : un warehouse dédié.</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>✔ On attribue des object tags au warehouse.</li>
                                 <li>✔ 100% du coût est imputé au département. </li>
                             </ul>
@@ -210,7 +210,7 @@
                         <div class="usage-card">
                             <h4>Scenario 2 : Ressource partagée par plusieurs départements</h4>
                             <p>Exemple : un warehouse utilisé par divers utilisateurs.</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>✔ On attribue un object tag à chaque utilisateur.</li>
                                 <li>✔ Le coût est attribué en fonction des requêtes exécutées par utilisateur. </li>
                             </ul>
@@ -219,7 +219,7 @@
                         <div class="usage-card">
                             <h4>Scenario 3 : Application / workflow partagé</h4>
                             <p>Exemple : requêtes exécutées par une application pour des utilisateurs variés.</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>✔ On utilise les query tags pour associer chaque requête au bon département. </li>
                             </ul>
                         </div>
@@ -236,14 +236,14 @@
 
                     <h3>✔ 4.1 Scope des tags (compte unique vs organisation)</h3>
                     <p>Lorsque vous configurez des tags, vous devez choisir s'ils s'appliquent à :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>un seul compte Snowflake,</li>
                         <li>plusieurs comptes au sein d'une organisation Snowflake. </li>
                     </ul>
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>Règle clé :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Si les ressources d'un département sont dans un seul compte, créez les tags dans ce compte.</li>
                             <li>Si elles sont réparties sur plusieurs comptes, créez les tags dans un compte "central" et répliquez-les. </li>
                         </ul>
@@ -259,7 +259,7 @@
                     </h2>
 
                     <p>Selon Snowflake, l'attribution des coûts améliore la visibilité :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Quel département consomme le plus de crédits ?</li>
                         <li>Quelle équipe génère les requêtes les plus coûteuses ?</li>
                         <li>Quels workloads nécessitent optimisation ? </li>

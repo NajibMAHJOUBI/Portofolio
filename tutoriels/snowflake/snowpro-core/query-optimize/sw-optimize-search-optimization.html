@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -183,7 +183,7 @@
                             <h4>✔ 1. Point Lookups (lookup très sélectif)</h4>
                             <p>Requêtes retournant 1 ou très peu de lignes.</p>
                             <p><strong>Exemples :</strong></p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Dashboards critiques avec filtres très sélectifs</li>
                                 <li>Analyse exploratoire par data scientists</li>
                                 <li>Recherche très ciblée dans des grandes tables</li>
@@ -193,7 +193,7 @@
                         <div class="usage-card">
                             <h4>✔ 2. Requêtes TEXT & IP</h4>
                             <p>Accélération des recherches utilisant :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">SEARCH()</code></li>
                                 <li><code class="inline-code">SEARCH_IP()</code> </li>
                             </ul>
@@ -202,7 +202,7 @@
                         <div class="usage-card">
                             <h4>✔ 3. Substring & Regex</h4>
                             <p>Optimisation des recherches utilisant :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">LIKE</code>, <code class="inline-code">ILIKE</code>, <code class="inline-code">RLIKE</code> </li>
                             </ul>
                         </div>
@@ -210,7 +210,7 @@
                         <div class="usage-card">
                             <h4>✔ 4. Colonnes semi-structurées (VARIANT, OBJECT, ARRAY)</h4>
                             <p>Support des prédicats sur les champs imbriqués, incluant :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Comparaisons (=, IN)</li>
                                 <li>ARRAY_CONTAINS, ARRAYS_OVERLAP</li>
                                 <li>Recherche textuelle dans les champs JSON</li>
@@ -221,7 +221,7 @@
                         <div class="usage-card">
                             <h4>✔ 5. Colonnes structurées ARRAY / OBJECT / MAP</h4>
                             <p>Optimisation pour :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>EQUALITY, IN</li>
                                 <li>SUBSTRING sur champs STRING </li>
                             </ul>
@@ -250,7 +250,7 @@
                     <p></p>
 
                     <h3>✔ Privilèges nécessaires</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>OWNERSHIP sur la table</li>
                         <li>ADD SEARCH OPTIMIZATION sur le schéma </li>
                     </ul>
@@ -272,7 +272,7 @@
     ADD SEARCH OPTIMIZATION ON (col1, col2);</code></pre>
                     </div>
                     <p>Possibilité de préciser le type de recherche :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>EQUALITY</li>
                         <li>SUBSTRING</li>
                         <li>GEO </li>
@@ -291,14 +291,14 @@
 
                     <h3>✔ Coûts de stockage</h3>
                     <p>Le Search Access Path :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Peut peser jusqu'à 1/4 de la taille de la table, parfois plus</li>
                         <li>Peut atteindre la taille de la table si toutes les valeurs sont uniques </li>
                     </ul>
 
                     <h3>✔ Coûts compute</h3>
                     <p>Engendrés par :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La construction initiale des search paths</li>
                         <li>Le maintien à jour (fort impact si high churn)</li>
                         <li>DELETE/INSERT massifs </li>
@@ -327,10 +327,10 @@
                         <i class="fas fa-cogs"></i> 5. Maintenance & comportements spécifiques
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Reconstruction des paths :</strong> Si les valeurs par défaut changent, le Search Access Path devient invalidé et doit être recréé. </li>
                         <li><strong>Ajout / suppression / renommage de colonnes :</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Ajout : pris en compte automatiquement si SOS est activé globalement</li>
                                 <li>Suppression : le path est automatiquement mis à jour</li>
                                 <li>Renommage : pas de changement nécessaire </li>
@@ -348,7 +348,7 @@
                         <i class="fas fa-exclamation-triangle"></i> 6. Cas où SOS n'est pas recommandé
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables avec high churn (maintenance coûteuse)</li>
                         <li>Tables massives rarement interrogées avec forte sélectivité</li>
                         <li>Tables souvent reconstruites / remplacées (coût de maintenance excessif)</li>
@@ -413,7 +413,7 @@
                     </h2>
 
                     <p>Le Search Optimization Service est un accélérateur puissant pour les requêtes très sélectives ou complexes, particulièrement dans des tables volumineuses. C'est un sujet fréquent en SnowPro Core, notamment dans les domaines :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Architecture Snowflake (micro-partitions, pruning)</li>
                         <li>Performance & optimization</li>
                         <li>Coûts & serverless features</li>

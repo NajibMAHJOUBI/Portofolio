@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -162,7 +162,7 @@
                     <div class="info-note">
                         <i class="fas fa-shield-alt"></i>
                         <strong>Principes de conception (IA) :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>sécurité (modèles opérés dans le périmètre Snowflake),</li>
                             <li>confidentialité (Snowflake n'utilise pas vos données clients pour entraîner les modèles partagés),</li>
                             <li>contrôle via RBAC. </li>
@@ -194,7 +194,7 @@
                     </p>
 
                     <h3>2.2. Fonctions clés (exemples les plus courants)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Génération / complétion</strong> : AI_COMPLETE (génération texte ou image‑to‑text). </li>
                         <li><strong>Classification / filtrage</strong> : AI_CLASSIFY, AI_FILTER (booléen exploitable en WHERE). </li>
                         <li><strong>Agrégation IA cross‑lignes</strong> : AI_AGG, AI_SUMMARIZE_AGG (contournent la limite de contexte en opérant par lots agrégés). </li>
@@ -284,7 +284,7 @@
                         <i class="fas fa-code-branch"></i> 5. Différences clés (Cortex Analyst vs AI Functions vs Cortex Search)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>AI Functions (AISQL)</strong> : primitives SQL/Python généralistes et spécialisées (complétion, classification, extraction, embedding, agrégations IA) pour opérer sur texte/images/documents dans Snowflake. </li>
                         <li><strong>Cortex Analyst</strong> : text‑to‑SQL géré pour données structurées ; s'alimente d'un semantic model YAML, expose un REST API et renvoie SQL + réponse. </li>
                         <li><strong>Cortex Search</strong> : recherche hybride managée pour RAG & enterprise search, gère embeddings/index/refresh pour texte non structuré et recherche contextuelle. </li>
@@ -299,7 +299,7 @@
                         <i class="fas fa-star"></i> 6. Points "prêts‑à‑tomber" en SnowPro Core
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Sécurité & gouvernance</strong> : modèles hébergés dans Snowflake, RBAC, données non utilisées pour entraîner des modèles publics. </li>
                         <li><strong>AISQL</strong> : préférez AI_* (nouvelles signatures) aux anciennes fonctions SNOWFLAKE.CORTEX. </li>
                         <li><strong>RAG dans Snowflake</strong> : Cortex Search (retrieval) + AI Functions (génération/synthèse/extraction) = pipeline complet in‑platform. </li>

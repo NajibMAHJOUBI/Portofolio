@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -149,7 +149,7 @@
 
                     <div class="info-note">
                         <strong>Ce que dit la documentation officielle :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake permet le partage <strong>sans copie</strong>, entièrement basé sur la couche de services et le métastore : aucune donnée n'est physiquement copiée vers le compte consumer. </li>
                             <li>Tous les objets partagés sont en <strong>lecture seule</strong> pour les consumers. </li>
                             <li>Les consumers ne paient que pour leur compute, <strong>jamais pour le stockage</strong> associé aux données partagées. </li>
@@ -173,7 +173,7 @@
                     </div>
 
                     <h3>⭐ Caractéristiques clés d'un Direct Share</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Même région</strong> : pas de partage cross‑region ou cross‑cloud.<br>
                         <em>Direct share = “one or more accounts in your region”</em> </li>
                         <li><strong>Zero-copy</strong>, identique aux autres types de sharing.</li>
@@ -184,7 +184,7 @@
                     </ul>
 
                     <h3>⭐ Quand utiliser un direct share ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Collaboration interne dans une même région Snowflake.</li>
                         <li>Partage bilatéral simple, rapide et sans besoins cross‑région / marketplace.</li>
                     </ul>
@@ -228,7 +228,7 @@
                         <div class="usage-card">
                             <h4>✔ Option 1 (Database Roles → Share)</h4>
                             <p><strong>Utile lorsque :</strong></p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Vous voulez segmenter les droits dans un même share.</li>
                                 <li>Le consumer doit gérer des permissions détaillées via les database roles partagés.</li>
                             </ul>
@@ -241,7 +241,7 @@
                         <div class="usage-card">
                             <h4>✔ Option 2 (GRANT direct)</h4>
                             <p><strong>Utile pour :</strong></p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Partager des objets provenant de plusieurs databases d'un même compte.</li>
                                 <li>Faire du sharing simple et direct.</li>
                             </ul>
@@ -249,7 +249,7 @@
                     </div>
 
                     <h3>3.3. Fonctionnement côté consumer</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Après création d'une database à partir d'un share, les consumers peuvent accorder le privilège <code class="inline-code">IMPORTED PRIVILEGES</code> à des rôles locaux. </li>
                         <li>Cela donne accès en lecture à tous les objets partagés.</li>
                         <li>Sans database roles, ce modèle est tout ou rien pour un share unique.<br>
@@ -265,7 +265,7 @@
                         <i class="fas fa-sync-alt"></i> 4. Behavior important du partage Snowflake
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>✔ Partage instantané</strong><br>
                         Dès qu'un provider ajoute un consumer à un share, ce dernier y a accès immédiatement. </li>
                         <li><strong>✔ Mises à jour visibles en temps réel</strong><br>
@@ -325,7 +325,7 @@ FROM SHARE provider_account.my_share;</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4> Direct Share</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Même région uniquement. ✔</li>
                                 <li>Zero‑copy. ✔</li>
                                 <li>Pas de cross‑cloud / cross‑region. ✔</li>
@@ -335,7 +335,7 @@ FROM SHARE provider_account.my_share;</code></pre>
 
                         <div class="usage-card">
                             <h4> Data Sharing Getting Started</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Deux méthodes : database roles OU GRANT direct.</li>
                                 <li>Database roles = segmentation fine mais pas multi‑database.</li>
                                 <li>GRANT direct = le plus flexible.</li>
@@ -345,7 +345,7 @@ FROM SHARE provider_account.my_share;</code></pre>
 
                         <div class="usage-card">
                             <h4> Généralités</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Tout est en lecture seule côté consumer.</li>
                                 <li>Mises à jour visibles immédiatement.</li>
                                 <li>Objets recréés → doivent être ré‑ajoutés au share.</li>

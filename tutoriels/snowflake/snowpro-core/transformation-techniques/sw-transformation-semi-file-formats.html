@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -162,7 +162,7 @@
                     <p>Snowflake supporte nativement plusieurs types semi‑structurés, optimisés pour manipuler des formats comme JSON, Avro, ORC, Parquet, XML.</p>
 
                     <h3>✔ Types disponibles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>VARIANT</strong> : type générique capable de contenir n'importe quel contenu semi‑structuré.</li>
                         <li><strong>OBJECT</strong> : équivalent JSON à un dictionnaire (clé → valeur).</li>
                         <li><strong>ARRAY</strong> : liste ordonnée de valeurs.</li>
@@ -184,7 +184,7 @@
                     <p>Source : <em>Micro‑partitions & Data Clustering</em> </p>
 
                     <h3>✔ Les points essentiels à retenir pour l'examen</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Toutes les données semi‑structurées sont stockées dans des micro‑partitions entre 50MB et 500MB, compressées et en colonnes.</li>
                         <li>Les colonnes semi‑structurées bénéficient des mêmes mécanismes de pruning que les types classiques grâce à la capture de métadonnées (min/max, distinct count…).</li>
                         <li>Le stockage est automatique : aucun partitionnement manuel n'est nécessaire.</li>
@@ -204,7 +204,7 @@
                     <p>La documentation décrit comment interroger des données hiérarchiques stockées dans un type VARIANT.</p>
 
                     <h3>✔ Syntaxe clé pour naviguer dans une colonne VARIANT</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">:</code> → pour accéder aux champs d'objets</li>
                         <li><code class="inline-code">[]</code> → pour accéder aux indices de tableau</li>
                     </ul>
@@ -217,7 +217,7 @@ SELECT v:items[0].price FROM raw_table;</code></pre>
                     </div>
 
                     <h3>✔ Opérations supportées</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Accès aux champs imbriqués</li>
                         <li>Flattening via la fonction TABLE FLATTEN()</li>
                         <li>Conversion via TO_VARIANT, TO_OBJECT, TO_ARRAY</li>
@@ -257,7 +257,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                     </h2>
 
                     <p>Les types semi‑structurés sont inclus dans certaines fonctions d'agrégation comme :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>ARRAY_AGG</li>
                         <li>OBJECT_AGG</li>
                     </ul>
@@ -282,7 +282,7 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Bonnes pratiques</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Préférer le cast explicite (::string, ::number) pour faciliter les filtres.</li>
                             <li>Utiliser FLATTEN() plutôt que des parcours imbriqués complexes.</li>
                             <li>Charger les données semi‑structurées via COPY/ Snowpipe dans une colonne VARIANT pour bénéficier de l'optimisation native.</li>

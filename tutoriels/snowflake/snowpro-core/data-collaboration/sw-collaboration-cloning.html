@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -175,7 +175,7 @@
                     </div>
 
                     <h3>✔ Points clés :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Aucun stockage supplémentaire</strong> au moment du clonage.</li>
                         <li>Le clone partage les micro‑partitions avec l'objet source.</li>
                         <li>Le stockage supplémentaire n'est consommé que lorsque l'un des deux objets est modifié (<strong>copy-on-write</strong>).</li>
@@ -192,7 +192,7 @@
                     </h2>
 
                     <h3>✔ Objets principaux (zero‑copy)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Databases</li>
                         <li>Schemas</li>
                         <li>Tables (y compris tables dynamiques, event tables, Iceberg tables) </li>
@@ -203,7 +203,7 @@
                         <em>You can also clone external stages, file formats, sequences, database roles, alerts, streams, tasks, etc.</em>
                         
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>FILE FORMAT</li>
                         <li>SEQUENCE</li>
                         <li>STAGE</li>
@@ -244,14 +244,14 @@
 
                     <h3>C) Cloner en "point‑in‑time"</h3>
                     <p>Snowflake supporte :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">TIMESTAMP => &lt;timestamp&gt;</code></li>
                         <li><code class="inline-code">OFFSET => &lt;interval&gt;</code></li>
                         <li><code class="inline-code">STATEMENT => &lt;query_id&gt;</code> </li>
                     </ul>
 
                     <h3>D) Paramètres Time Travel utiles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code></li>
                         <li><code class="inline-code">IGNORE HYBRID TABLES</code> </li>
                     </ul>
@@ -272,7 +272,7 @@
 
                     <div class="warning-note">
                         <strong>❗ Important :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les tables temporaires <strong>ne peuvent pas</strong> être clonées avec Time Travel.</li>
                             <li>Les données purgées (ex : transient tables avec 1 jour de rétention) peuvent être ignorées via <code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code>.</li>
                         </ul>
@@ -293,15 +293,15 @@
                     </div>
 
                     <h3>✔ Résumé :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Pour bases & schémas :</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Les objets internes (tables, views…) conservent leurs privilèges d'origine (sur les clones respectifs).</li>
                                 <li>Le schéma / la base clonée elle‑même <strong>n'hérite PAS</strong> des privilèges du conteneur source.</li>
                             </ul>
                         </li>
                         <li><strong>Pour les autres objets :</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Par défaut, les privilèges ne sont pas copiés.</li>
                                 <li>Si l'objet supporte la clause <code class="inline-code">COPY GRANTS</code> : les privilèges (sauf OWNERSHIP) peuvent être copiés.</li>
                             </ul>
@@ -318,7 +318,7 @@
                         <i class="fas fa-exclamation-triangle"></i> 6. Considérations de clonage (au sens large)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>DDL/DML et Time Travel :</strong> <em>DDL/DML transactions, Time Travel, and retention periods can affect the object clone.</em> </li>
                         <li><strong>Object parameters :</strong> Les paramètres explicitement définis sur un objet sont hérités par le clone. </li>
                         <li><strong>Séquences et valeurs par défaut :</strong> <em>A cloned table referencing a sequence may reference the cloned sequence or the source sequence depending on scope.</em> </li>
@@ -335,7 +335,7 @@
                     </h2>
 
                     <p>Bien que non explicitement listé ici, la documentation précise des exceptions :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Certains objets comme les <strong>pipes</strong> donnent OWNERSHIP au rôle créateur lors du clonage. </li>
                     </ul>
                 </section>
@@ -348,7 +348,7 @@
                         <i class="fas fa-star"></i> 8. Bénéfices du clonage Snowflake (pour SnowPro)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Création <strong>instantanée</strong> (aucune copie physique initiale).</li>
                         <li>Environnements dev/test isolés sans surcoût majeur.</li>
                         <li>Réduction des coûts de stockage (<strong>copy‑on‑write</strong>).</li>

@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -158,7 +158,7 @@
                     <p>Ce clone constitue une copie locale complète : branches, tags, commits. </p>
 
                     <p>Avec cette intégration, vous pouvez :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Consommer des fichiers Git comme du code exécuté dans Snowflake (procédures, UDF handlers…).</li>
                         <li>Naviguer dans les branches, tags, fichiers.</li>
                         <li>Exécuter des fichiers .sql ou .py.</li>
@@ -175,14 +175,14 @@
                     </h2>
 
                     <h3>✔ Git Repository Clone Snowflake</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Copie locale complète d'un dépôt Git : branches, tags, commits.</li>
                         <li>Accès aux fichiers comme s'ils étaient dans un stage Snowflake.</li>
                         <li>Snowflake peut fetch les dernières modifications du dépôt externe. </li>
                     </ul>
 
                     <h3>✔ Synchronisation (FETCH)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake met à jour le clone via <code class="inline-code">ALTER GIT REPOSITORY &lt;repo&gt; FETCH</code>.</li>
                         <li>Récupère nouveaux commits et nettoie les éléments supprimés du remote. </li>
                     </ul>
@@ -200,7 +200,7 @@
 
                     <h3>✔ Méthodes d'accès pour le dépôt Git</h3>
                     <p>Snowflake supporte plusieurs types d'authentification :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Aucune authentification (dépôts publics).</li>
                         <li>Authentification par token (PAT GitHub, token GitLab), via un objet SECRET Snowflake.</li>
                         <li>OAuth2 (notamment avec Workspaces).</li>
@@ -230,7 +230,7 @@
                             <h4>🧩 4.1 CREATE GIT REPOSITORY</h4>
                             <p>Crée l'objet Git Repository (clone Snowflake).</p>
                             <p>Permet de définir :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Le remote origin URL</li>
                                 <li>L'API Integration à utiliser</li>
                                 <li>Le secret pour authentification si nécessaire</li>
@@ -266,7 +266,7 @@
                             <h4>🧩 4.5 DESCRIBE GIT REPOSITORY</h4>
                             <p>Affiche les propriétés du repository clone.</p>
                             <p>Exemples de colonnes affichées :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>created_on</li>
                                 <li>origin</li>
                                 <li>api_integration</li>
@@ -290,7 +290,7 @@
                     </h2>
 
                     <p>Depuis le Git Repository clone, Snowflake permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De référencer un fichier comme handler d'une procédure ou UDF</li>
                         <li>D'exécuter directement un script .sql ou .py</li>
                         <li>D'utiliser des fichiers provenant d'une branche spécifique</li>
@@ -306,7 +306,7 @@
                         <i class="fas fa-lock"></i> 6. Privilèges et sécurité
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les opérations Git requièrent des privilèges spécifiques, par exemple OWNERSHIP pour <code class="inline-code">DESCRIBE GIT REPOSITORY</code>. </li>
                         <li><code class="inline-code">API_ALLOWED_PREFIXES</code> dans l'API Integration limite les URLs Git accessibles.</li>
                         <li>Les secrets permettent de stocker les tokens Git de façon sécurisée.</li>

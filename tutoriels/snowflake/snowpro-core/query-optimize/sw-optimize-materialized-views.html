@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -173,7 +173,7 @@
                     <p>Elle se comporte comme une table optimisée pour des requêtes répétitives. </p>
 
                     <h3>✔ Points clés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les données sont pré‑calculées puis stockées.</li>
                         <li>Les requêtes sur une MV sont plus rapides que celles sur la table source.</li>
                         <li>Particulièrement efficace pour agrégations, projections, sélections lourdes.</li>
@@ -192,11 +192,11 @@
                     <p>Snowflake recommande de créer une MV lorsque : </p>
 
                     <h3>✔ Situations optimales</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le résultat contient peu de lignes/colonnes vs la table de base.</li>
                         <li>
                             Le résultat nécessite :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Analyse de données semi‑structurées,</li>
                                 <li>Calculs d'agrégats coûteux.</li>
                             </ul>
@@ -223,17 +223,17 @@
                     <p>Snowflake apporte des avantages significatifs : </p>
 
                     <h3>✔ Performance</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Accélère les requêtes répétitives ou complexes.</li>
                         <li>Requêtes plus rapides que sur la table source.</li>
                     </ul>
 
                     <h3>✔ Maintenance automatique</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Processus de mise à jour transparent après chaque DML (INSERT/UPDATE/DELETE) sur la table source.</li>
                         <li>
                             Snowflake décide automatiquement de compléter ou combiner :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Parties à jour de la MV</li>
                                 <li>Dernières données de la table source si nécessaire</li>
                             </ul>
@@ -246,7 +246,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>⚠ Coûts</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>La maintenance consomme des credits compute.</li>
                             <li>Nécessite Enterprise Edition. </li>
                         </ul>
@@ -262,7 +262,7 @@
                     </h2>
 
                     <p>Certaines limitations sont dans la section détaillée mais non affichées dans l'extrait ; cependant la doc les signale dans la page (limitations des SELECT, etc.) via "Limitations on the select_statement". </p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Certaines expressions SQL ne sont pas autorisées dans la requête de définition.</li>
                         <li>Les MVs ne supportent pas les JOIN complexes (selon la version).</li>
                     </ul>
@@ -289,7 +289,7 @@ FROM base_table;</code></pre>
 
                     <h3>✔ Points importants</h3>
                     <p>La commande accepte :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>SECURE (vue sécurisée)</li>
                         <li>CLUSTER BY (obligatoire si column_list fourni)</li>
                         <li>COPY GRANTS</li>
@@ -310,7 +310,7 @@ FROM base_table;</code></pre>
 
                     <h3>✔ Fonctionnement</h3>
                     <p>Si la MV n'est pas complètement à jour au moment de la requête :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>→ Snowflake met à jour la MV</li>
                         <li>→ Ou combine parts up-to-date + données de la base</li>
                     </ul>
@@ -372,7 +372,7 @@ FROM base_table;</code></pre>
                     <p></p>
 
                     <h3>✔ Modifier / supprimer</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>ALTER MATERIALIZED VIEW</li>
                         <li>DROP MATERIALIZED VIEW</li>
                         <li>DESCRIBE MATERIALIZED VIEW</li>
@@ -390,7 +390,7 @@ FROM base_table;</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ À FAIRE</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Utiliser pour requêtes répétitives sur grosses tables.</li>
                                 <li>Utiliser si les résultats sont petits ou complexes à calculer.</li>
                                 <li>Évaluer volume de DML sur la table source.</li>
@@ -400,7 +400,7 @@ FROM base_table;</code></pre>
 
                         <div class="usage-card">
                             <h4>❗ À ÉVITER</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>MV sur tables avec haut taux de changements (maintenance très coûteuse).</li>
                                 <li>MV pour petites tables (pas de gain).</li>
                                 <li>MV sur queries peu ré-utilisées.</li>

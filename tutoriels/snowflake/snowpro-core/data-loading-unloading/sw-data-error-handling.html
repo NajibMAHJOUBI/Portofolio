@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -241,17 +241,17 @@ FROM TABLE(VALIDATE(
                     </div>
 
                     <h3>📌 Paramètres importants</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong><code class="inline-code">table_name</code></strong> : Nom complet de la table cible du COPY.</li>
                         <li><strong><code class="inline-code">JOB_ID</code></strong> : Un query_id provenant de l'historique des requêtes Snowflake, ou <code class="inline-code">_last</code> pour le dernier COPY du même user / même session.</li>
                     </ul>
 
                     <h3>ℹ Notes d'utilisation essentielles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ne retourne rien si le COPY utilisait <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (par défaut). </li>
                         <li>
                             Échec si :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Le COPY incluait un SELECT transformant les données</li>
                                 <li>L'utilisateur n'a pas les droits sur la table</li>
                                 <li>Les métadonnées du COPY ont expiré</li>
@@ -289,7 +289,7 @@ FROM TABLE(VALIDATE(t1, JOB_ID => '5415fa1e-59c9-4dda-b652-533de02fdcf1'));</cod
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ COPY_OPTIONS</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Comprendre <strong>PURGE, FORCE, TRUNCATECOLUMNS, ENFORCE_LENGTH, MATCH_BY_COLUMN_NAME</strong></li>
                                 <li>Savoir quand FORCER le reload et gérer les colonnes dynamiques.</li>
                             </ul>
@@ -297,7 +297,7 @@ FROM TABLE(VALIDATE(t1, JOB_ID => '5415fa1e-59c9-4dda-b652-533de02fdcf1'));</cod
 
                         <div class="usage-card">
                             <h4>✔ VALIDATION_MODE vs VALIDATE()</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><strong>VALIDATION_MODE</strong> : préchargement.</li>
                                 <li><strong>VALIDATE()</strong> : post‑chargement, analyse d'un job déjà exécuté.</li>
                             </ul>
@@ -305,7 +305,7 @@ FROM TABLE(VALIDATE(t1, JOB_ID => '5415fa1e-59c9-4dda-b652-533de02fdcf1'));</cod
 
                         <div class="usage-card">
                             <h4>✔ VALIDATE</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Très utile pour comprendre les erreurs de format de fichier.</li>
                                 <li>Ne fonctionne pas lorsque <code class="inline-code">ON_ERROR = ABORT_STATEMENT</code> (retour vide).</li>
                                 <li>Identifier les fichiers manquants / ignorés.</li>

@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -158,7 +158,7 @@
                     </h2>
 
                     <p>La documentation Snowflake organise toutes les fonctions en grandes familles, dont :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Fonctions système (SYSTEM$…),</li>
                         <li>Fonctions de table (TABLE(…)),</li>
                         <li>Fonctions SQL standards,</li>
@@ -182,7 +182,7 @@
                     </h2>
 
                     <p>Les fonctions système Snowflake (préfixe <code class="inline-code">SYSTEM$</code>) sont utilisées pour :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Vérifier l'état d'objets,</li>
                         <li>Diagnostiquer la performance,</li>
                         <li>Interroger le clustering (ex. <code class="inline-code">SYSTEM$CLUSTERING_INFORMATION</code>),</li>
@@ -211,7 +211,7 @@
 
                     <h3>✔ RESULT_SCAN() – Fonction clé</h3>
                     <p>Permet de récupérer explicitement les résultats d'une requête précédente :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Permet d'utiliser un jeu de résultats sans réexécuter la requête </li>
                         <li>Fonction utile même lorsque les conditions du persisted result cache ne sont plus remplies </li>
                     </ul>
@@ -244,11 +244,11 @@
                     </div>
 
                     <p>C'est un point très testé dans SnowPro Core :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les résultats persistés ne sont pas réutilisés si la requête contient une external function.</li>
                         <li>
                             Cela implique :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Un coût plus élevé (requête entièrement réévaluée),</li>
                                 <li>Une latence potentiellement plus importante,</li>
                                 <li>Une nécessité de surveiller les performances si l'on utilise des extensions API.</li>
@@ -271,7 +271,7 @@
                     </div>
 
                     <p>Les UDFs Snowflake peuvent être écrites en :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>SQL</li>
                         <li>JavaScript</li>
                         <li>Python (via Snowpark)</li>
@@ -280,7 +280,7 @@
 
                     <h3>✔ Rôle des UDFs</h3>
                     <p>Les UDFs permettent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>D'encapsuler la logique métier,</li>
                         <li>De créer des transformations réutilisables,</li>
                         <li>D'étendre SQL sans recourir aux external functions.</li>
@@ -289,7 +289,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Contraintes importantes SnowPro Core</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les UDFs tournent dans l'environnement Snowflake → stateless</li>
                             <li>Ils peuvent avoir un impact performance important</li>
                             <li>Ils cassent le cache des résultats persistés </li>
@@ -339,7 +339,7 @@
                     </h2>
 
                     <h3>✔ À connaître absolument</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les opérateurs & fonctions Snowflake sont organisés par catégories (système, table, external, UDF).</li>
                         <li>Certaines fonctions empêchent la réutilisation des résultats persistés → impact majeur sur la performance.</li>
                         <li><code class="inline-code">RESULT_SCAN()</code> est une fonction de table clé.</li>
@@ -349,7 +349,7 @@
 
                     <h3>✔ Rôle dans la performance (thématique SnowPro majeure)</h3>
                     <p>Comprendre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>quelles fonctions se réévaluent,</li>
                         <li>lesquelles sont compatibles avec le cache,</li>
                         <li>comment analyser les plans d'exécution.</li>

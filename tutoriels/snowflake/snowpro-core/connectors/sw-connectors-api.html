@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -163,7 +163,7 @@
                     <p>
                         Ces intégrations sont principalement utilisées pour :
                     </p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les external functions,</li>
                         <li>Les services externes nécessitant une authentification IAM,</li>
                         <li>Les API REST privées exposées par une organisation.</li>
@@ -180,13 +180,13 @@
                     </h2>
 
                     <p>Une API integration Snowflake :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Contient les informations d'identité et d'accès permettant à Snowflake d'appeler une API externe (ex. rôle AWS, OAuth GitHub, audience Google…).</li>
                         <li>Définit les endpoints autorisés ou bloqués (<code class="inline-code">API_ALLOWED_PREFIXES</code>, <code class="inline-code">API_BLOCKED_PREFIXES</code>).</li>
                         <li>Sert à sécuriser la communication entre Snowflake et un proxy HTTPS externe (par ex. AWS API Gateway). </li>
                     </ul>
                     <p>Elle est notamment utilisée par :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">CREATE EXTERNAL FUNCTION</code> (pour appeler une API depuis SQL). </li>
                     </ul>
                 </section>
@@ -204,7 +204,7 @@
 
                     <h3>✔ API_PROVIDER</h3>
                     <p>Définit le fournisseur :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>aws_api_gateway, aws_private_api_gateway, aws_gov_api_gateway, aws_gov_private_api_gateway</li>
                         <li>azure_api_management</li>
                         <li>google_api_gateway </li>
@@ -212,7 +212,7 @@
 
                     <h3>✔ Identité & credentials</h3>
                     <p>Selon le type d'API :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>AWS</strong> : API_AWS_ROLE_ARN + éventuellement API_KEY</li>
                         <li><strong>Azure</strong> : AZURE_TENANT_ID, AZURE_AD_APPLICATION_ID, API_KEY optionnel</li>
                         <li><strong>GCP</strong> : GOOGLE_AUDIENCE</li>
@@ -278,7 +278,7 @@
                         <i class="fab fa-git-alt"></i> 4. Cas Git Repository (GitHub, GitLab…)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Support GA pour GitHub (OAuth).</li>
                         <li>Support preview pour les autres providers Git.</li>
                         <li>Permet d'utiliser un token ou l'OAuth pour accéder à une API Git. </li>
@@ -323,7 +323,7 @@ HEADERS = ('X-Custom-Key' = 'value');</code></pre>
                         <i class="fas fa-shield-alt"></i> 6. Sécurité et bonnes pratiques
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utiliser <code class="inline-code">API_ALLOWED_PREFIXES</code> comme périmètre minimal de sécurité.</li>
                         <li>Ne jamais autoriser un préfixe trop large.</li>
                         <li>Activer/désactiver via <code class="inline-code">ENABLED = TRUE|FALSE</code>.</li>
@@ -362,7 +362,7 @@ HEADERS = ('X-Custom-Key' = 'value');</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Commandes associées :</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CREATE API INTEGRATION</li>
                                 <li>ALTER API INTEGRATION</li>
                                 <li>DROP INTEGRATION</li>

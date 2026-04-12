@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -153,7 +153,7 @@
 
                     <div class="info-note">
                         <strong>Ce qu'un utilisateur peut faire dans Snowsight :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Visualiser si la base est issue d'un share.</li>
                             <li>Voir le provider, le type de partage, le nom du share ou listing.</li>
                             <li>Supprimer (DROP) la base consommée (cela ne supprime pas le share dans le compte du provider). </li>
@@ -163,7 +163,7 @@
 
                     <div class="info-note">
                         <strong>Ce qui est important pour SnowPro :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowsight indique clairement la provenance : direct share, Marketplace listing, data exchange, listing privé.</li>
                             <li>Une shared database est toujours en <strong>lecture seule</strong> côté consumer.</li>
                             <li>La suppression de la base côté consumer ne supprime pas le share chez le provider.</li>
@@ -216,7 +216,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                     <div class="info-note">
                         <strong>✔ Notes importantes</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Un share peut contenir des objets provenant de plusieurs bases, si elles sont toutes dans le même compte.<br>
                             <em>A share can include data from multiple databases.</em> </li>
                             <li>Le partage est temps réel : <em>New and modified rows are available immediately to consumers.</em> </li>
@@ -242,7 +242,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                     </div>
 
                     <h3>✔ Privilèges utilisables avec TO SHARE</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>DATABASE</strong> : USAGE, REFERENCE_USAGE (REFERENCE_USAGE requis pour les vues sécurisées multi-databases).</li>
                         <li><strong>SCHEMA</strong> : USAGE</li>
                         <li><strong>TABLE / VIEW / EXTERNAL TABLE / ICEBERG TABLE / DYNAMIC TABLE</strong> : SELECT</li>
@@ -255,7 +255,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                     <div class="warning-note">
                         <strong>✔ Règles importantes pour SnowPro :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Un share ne peut recevoir USAGE que d'une seule database.<br>
                             <em>The USAGE privilege on only a single database can be granted to a share.</em> </li>
                             <li>Pour partager toutes les tables d'un schéma :<br>
@@ -299,7 +299,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4> PRIVATE SHARING via Snowsight</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Snowsight permet de voir toutes les shared databases et leur provenance.</li>
                                 <li>Les consumers gèrent uniquement le catalogue local de la shared database (nom, commentaire, suppression locale).</li>
                             </ul>
@@ -307,7 +307,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                         <div class="usage-card">
                             <h4> SHARING VIA SQL (Provider)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CREATE SHARE → GRANT … TO SHARE → ALTER SHARE ADD ACCOUNT.</li>
                                 <li>Share = conteneur de métadonnées (zero-copy).</li>
                                 <li>Partage immédiat une fois le compte ajouté.</li>
@@ -316,7 +316,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                         <div class="usage-card">
                             <h4> PRIVILÈGES SUR LES SHARES</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>USAGE DB, USAGE schema, SELECT table/view.</li>
                                 <li>Secure views obligatoires pour partager des vues.</li>
                                 <li>UDF doivent être secure et ne pas référencer une autre DB.</li>
@@ -326,7 +326,7 @@ GRANT SELECT ON TABLE mydb.public.sales TO SHARE my_share;</code></pre>
 
                         <div class="usage-card">
                             <h4> LIMITATIONS</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Recréer un objet (DROP/CREATE) ⇒ il sort automatiquement du share.</li>
                                 <li>Un share ne contient qu'une seule database ayant le privilège USAGE.</li>
                             </ul>

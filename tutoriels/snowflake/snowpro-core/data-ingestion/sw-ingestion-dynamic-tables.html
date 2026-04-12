@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -152,14 +152,14 @@
                     <h3>✔ Définition</h3>
                     <p>Une <strong>Dynamic Table</strong> est une table gérée automatiquement par Snowflake, alimentée par une requête SQL déclarative.</p>
                     <p>Elle :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>se met à jour automatiquement selon un délai de fraîcheur (<code class="inline-code">TARGET_LAG</code>),</li>
                         <li>reflète les modifications des objets sources (tables, Iceberg, etc.) sans planification manuelle,</li>
                         <li>simplifie le pipeline ELT sans Streams ni Tasks.</li>
                     </ul>
 
                     <h3>✔ Fonctionnement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Lors de la création, la requête passée dans <code class="inline-code">AS &lt;query&gt;</code> définit le contenu de la Dynamic Table.</li>
                         <li>Snowflake détecte les changements dans les objets sources et applique un rafraîchissement automatique. </li>
                     </ul>
@@ -167,7 +167,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Comparaison rapide :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><strong>Vs Vue</strong> : la Dynamic Table matérialise les données automatiquement.</li>
                             <li><strong>Vs Materialized View</strong> : supporte des transformations complexes (JOIN, UNION…).</li>
                         </ul>
@@ -189,7 +189,7 @@
                     <p>Ex. : <code class="inline-code">TARGET_LAG = '5 minutes'</code> → la table a au plus 5 min de retard.</p>
 
                     <h3>✔ Impact</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Contrôle la fréquence de rafraîchissement.</li>
                         <li>Impacte le coût compute : plus la fréquence est élevée, plus l'usage est important. </li>
                     </ul>
@@ -207,14 +207,14 @@
 
                     <h3>✔ Initialisation</h3>
                     <p>Lors de la création d'une Dynamic Table :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">INITIALIZE = ON_CREATE</code> → rafraîchissement initial immédiat. (par défaut)</li>
                         <li><code class="inline-code">INITIALIZE = ON_SCHEDULE</code> → initialisation selon le target lag. </li>
                     </ul>
 
                     <h3>✔ Modes de Refresh</h3>
                     <p>Une Dynamic Table peut être rafraîchie selon différents modes :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>INCREMENTAL</strong> : ne traite que les données modifiées (optimisé performance).</li>
                         <li><strong>FULL</strong> : recalcul complet.</li>
                         <li><strong>AUTO</strong> : Snowflake choisit automatiquement (recommandé en développement). </li>
@@ -254,21 +254,21 @@ AS ALTER DYNAMIC TABLE my_dynamic_table REFRESH;</code></pre>
 
                     <h3>✔ Change Tracking obligatoire</h3>
                     <p>Pour qu'une Dynamic Table fonctionne en mode incrémental :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le change tracking doit être activé sur toutes les tables sources,</li>
                         <li>Avec un Time Travel non nul,</li>
                         <li>Snowflake tente de l'activer automatiquement (sauf en FULL refresh mode).</li>
                     </ul>
 
                     <h3>✔ Objets sources supportés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables Snowflake</li>
                         <li>Tables Iceberg Snowflake-managed</li>
                         <li>Tables Iceberg externes </li>
                     </ul>
 
                     <h3>✔ Conseils d'architecture</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Découper les Dynamic Tables complexes en plusieurs étapes.</li>
                         <li>Optimiser les requêtes pour tirer avantage du refresh incrémental. </li>
                     </ul>
@@ -300,7 +300,7 @@ AS
 SELECT col1, col2 FROM staging_table;</code></pre>
                     </div>
                     <p><strong>Paramètres importants :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">TARGET_LAG = '&lt;interval&gt;' | DOWNSTREAM</code></li>
                         <li><code class="inline-code">WAREHOUSE = &lt;name&gt;</code></li>
                         <li><code class="inline-code">REFRESH_MODE = AUTO | FULL | INCREMENTAL</code></li>
@@ -312,7 +312,7 @@ SELECT col1, col2 FROM staging_table;</code></pre>
                     <h3>✔ ALTER DYNAMIC TABLE</h3>
                     <p>Source : ALTER DYNAMIC TABLE </p>
                     <p>Permet de modifier :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>TARGET_LAG</li>
                         <li>WAREHOUSE</li>
                         <li>INITIALIZATION_WAREHOUSE</li>
@@ -372,7 +372,7 @@ SELECT col1, col2 FROM staging_table;</code></pre>
 
                         <div class="usage-card">
                             <h4> Commandes essentielles :</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CREATE DYNAMIC TABLE</li>
                                 <li>ALTER DYNAMIC TABLE</li>
                                 <li>DESCRIBE DYNAMIC TABLE</li>

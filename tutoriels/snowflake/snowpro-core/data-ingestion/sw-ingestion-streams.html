@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -161,7 +161,7 @@
                     <p>Fournir une "change table" permettant d'identifier ce qui a changé entre deux versions transactionnelles d'un objet. </p>
 
                     <h3>✔ Fonctionnement général</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Lors de la création d'un stream, Snowflake capture un offset initial : un instantané logique du contenu de la table.</li>
                         <li>Ensuite, Snowflake enregistre tous les changements intervenus après cet offset.</li>
                         <li>Les données restituées incluent des métadonnées sur chaque événement de changement (old/new values, type de changement). </li>
@@ -175,7 +175,7 @@
                     </div>
 
                     <h3>✔ Types d'objets pouvant avoir un stream</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables standard (y compris partagées)</li>
                         <li>Vues (avec change tracking activé)</li>
                         <li>Tables externes</li>
@@ -195,11 +195,11 @@
                     <p>Source : <em>CDC usage details</em> </p>
 
                     <h3>✔ Offset (position temporelle du stream)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le stream retourne les modifications depuis le dernier offset consommé.</li>
                         <li>
                             L'offset n'est avancé que lorsqu'une requête DML consomme les données du stream :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>INSERT</li>
                                 <li>UPDATE</li>
                                 <li>DELETE</li>
@@ -210,7 +210,7 @@
                     </ul>
 
                     <h3>✔ Consommation vs simple lecture</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un <code class="inline-code">SELECT</code> n'avance pas l'offset : on peut inspecter les données sans les consommer.</li>
                         <li>Une opération DML consomme la modification → ces changements ne seront plus renvoyés lors de la prochaine requête. </li>
                     </ul>
@@ -227,11 +227,11 @@
                     <p>Source : <em>Introduction to streams</em> </p>
 
                     <p>Chaque ligne de CDC contient :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les colonnes de la table d'origine</li>
                         <li>
                             Des méta-informations sur le changement :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Type (INSERT/UPDATE/DELETE)</li>
                                 <li>Valeurs avant / après</li>
                                 <li>Métadonnées transactionnelles</li>
@@ -264,14 +264,14 @@
                     </div>
 
                     <h3>✔ Options importantes</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">APPEND_ONLY = TRUE</code> : suit uniquement les INSERT (utile pour éviter updates/deletes).</li>
                         <li><code class="inline-code">SHOW_INITIAL_ROWS = TRUE</code> : renvoie les lignes existantes de la table lors de la création (sinon stream vide).</li>
                         <li>Modes temporels : <code class="inline-code">AT / BEFORE TIMESTAMP, OFFSET, STATEMENT</code> → permettre de créer un stream sur un état passé. </li>
                     </ul>
 
                     <h3>✔ Variants disponibles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Sur une table externe (option INSERT_ONLY)</li>
                         <li>Sur une vue</li>
                         <li>Sur une table Iceberg</li>

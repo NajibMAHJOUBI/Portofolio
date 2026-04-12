@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -165,7 +165,7 @@
                     
 
                     <p>Le Cloud Services layer est une couche de l'architecture Snowflake qui orchestre toutes les opérations nécessaires pour exécuter, optimiser, et sécuriser les requêtes :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Authentification & gestion des sessions</li>
                         <li>Metadata management</li>
                         <li>Optimisation & compilation des requêtes</li>
@@ -198,7 +198,7 @@
                         
                     </div>
                     <p>Cela signifie :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tant que Cloud Services Usage ≤ 10 % de l'usage warehouse → <strong>0 crédit facturé</strong></li>
                         <li>La partie au‑delà de 10 % → crédits facturés</li>
                     </ul>
@@ -206,7 +206,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>Points importants :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Le calcul est effectué <strong>quotidiennement (UTC)</strong>.</li>
                             <li>Le serverless compute <strong>n'entre pas</strong> dans le calcul des 10 %.</li>
                             <li>L'ajustement mensuel est la somme des ajustements quotidiens.</li>
@@ -250,7 +250,7 @@
                     </h2>
 
                     <p>Selon la documentation Snowflake, le Cloud Services layer couvre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>authentification des utilisateurs</li>
                         <li>traitement des métadonnées</li>
                         <li>analyse et planification des requêtes</li>
@@ -311,7 +311,7 @@
                     </h2>
 
                     <p>Snowflake explique que :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le Cloud Services sert au <strong>fonctionnement global de la plateforme</strong>.</li>
                         <li>Il est normalement <strong>minoritaire</strong> par rapport aux warehouses.</li>
                         <li>Cette règle évite une facturation excessive en offrant un "crédit" quotidien équivalent à 10 % de l'usage warehouses.</li>
@@ -328,7 +328,7 @@
                     </h2>
 
                     <p>On peut s'attendre à voir du Cloud Services facturé si :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Très faible usage warehouse mais forte activité metadata</li>
                         <li>Fort usage de requêtes DDL / SHOW / INFORMATION_SCHEMA</li>
                         <li>Nombreux utilisateurs concurrents se connectant / se déconnectant</li>
@@ -391,7 +391,7 @@
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake facture le compute selon <strong>Warehouses + Serverless + Cloud Services</strong>.</li>
                             <li><strong>Cloud Services</strong> = compute administratif de Snowflake.</li>
                             <li>Chaque jour, Snowflake compare : crédits Cloud Services et <strong>10 % des crédits Warehouse</strong>.</li>

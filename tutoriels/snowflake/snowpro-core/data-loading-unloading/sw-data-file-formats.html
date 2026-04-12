@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -151,13 +151,13 @@
 
                     <h3>✔ 1.1 Formats structurés</h3>
                     <p>Snowflake supporte les formats délimités suivants :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>CSV / TSV / autres délimités</strong><br>Tout délimiteur single‑byte est accepté. Le délimiteur par défaut est la virgule. </li>
                     </ul>
 
                     <h3>✔ 1.2 Formats semi‑structurés</h3>
                     <p>Snowflake prend en charge nativement :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>JSON</li>
                         <li>Avro</li>
                         <li>ORC</li>
@@ -168,7 +168,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>Notes importantes :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake gère automatiquement les fichiers Avro/ORC/Parquet compressés.</li>
                             <li>Snowflake supporte uniquement les fichiers Parquet générés avec <strong>Parquet writer v1</strong>, pas v2. </li>
                             <li>Chaque « top-level object » JSON/Avro/ORC/Parquet devient une ligne lors du chargement.</li>
@@ -189,7 +189,7 @@
                     </h2>
 
                     <p>Snowflake recommande la compression des fichiers lors de gros chargements.</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La méthode de compression est déclarée via l'option <code class="inline-code">COMPRESSION</code> du file format.</li>
                         <li>Snowflake détecte automatiquement codec & format lors du chargement de fichiers compressés. </li>
                     </ul>
@@ -228,7 +228,7 @@ FILE FORMAT [ IF NOT EXISTS ] &lt;name&gt;
 
                     <h3>✔ 4.1 TYPE = CSV — Principales options</h3>
                     <p>Exemples d'options supportées :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">COMPRESSION = AUTO, GZIP, BZ2, BROTLI…</code></li>
                         <li><code class="inline-code">FIELD_DELIMITER</code></li>
                         <li><code class="inline-code">RECORD_DELIMITER</code></li>
@@ -252,7 +252,7 @@ FILE FORMAT [ IF NOT EXISTS ] &lt;name&gt;
                     </div>
 
                     <h3>✔ 4.2 TYPE = JSON — Options principales</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">COMPRESSION</code></li>
                         <li><code class="inline-code">STRIP_OUTER_ARRAY</code></li>
                         <li><code class="inline-code">IGNORE_UTF8_ERRORS</code></li>
@@ -263,7 +263,7 @@ FILE FORMAT [ IF NOT EXISTS ] &lt;name&gt;
                     </ul>
 
                     <h3>✔ 4.3 TYPE = PARQUET — Options principales</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">COMPRESSION = AUTO, LZO, SNAPPY, NONE</code></li>
                         <li><code class="inline-code">SNAPPY_COMPRESSION</code></li>
                         <li><code class="inline-code">USE_LOGICAL_TYPE</code></li>
@@ -273,7 +273,7 @@ FILE FORMAT [ IF NOT EXISTS ] &lt;name&gt;
 
                     <h3>✔ 4.4 TYPE = AVRO, ORC, XML</h3>
                     <p>Options plus limitées, avec notamment :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">NULL_IF</code></li>
                         <li><code class="inline-code">TRIM_SPACE</code></li>
                         <li><code class="inline-code">REPLACE_INVALID_CHARACTERS</code> </li>

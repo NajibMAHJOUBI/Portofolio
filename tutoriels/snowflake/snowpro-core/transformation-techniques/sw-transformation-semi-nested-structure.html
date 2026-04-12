@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -168,7 +168,7 @@
 
                     <h3>✔ Principe</h3>
                     <p>FLATTEN retourne une table virtuelle contenant pour chaque élément :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>VALUE</strong> — la valeur extraite</li>
                         <li><strong>INDEX</strong> — position dans un tableau</li>
                         <li><strong>KEY</strong> — nom de clé si OBJECT</li>
@@ -199,7 +199,7 @@ FROM TABLE(FLATTEN(
                     </div>
 
                     <h3>✔ Paramètres (références indirectes)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">INPUT</code> : l'expression VARIANT à traiter (obligatoire)</li>
                         <li><code class="inline-code">PATH</code> : chemin JSON optionnel pour cibler un sous-élément</li>
                         <li><code class="inline-code">MODE</code> : 'ARRAY', 'OBJECT', ou 'BOTH'</li>
@@ -265,7 +265,7 @@ LATERAL FLATTEN(input => t.json_column) f;</code></pre>
                         <i class="fas fa-chart-line"></i> 4. FLATTEN et performance (SnowPro Core)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>✔ FLATTEN = opération <strong>coûteuse</strong> si utilisé massivement (car traverse potentiellement un tableau très large).</li>
                         <li>✔ FLATTEN + LATERAL permet un accès structuré → meilleur que <code class="inline-code">:path</code> en cas de structure variable.</li>
                         <li>✔ Toujours éviter <code class="inline-code">RECURSIVE => TRUE</code> sauf nécessité → Peut provoquer une explosion combinatoire.</li>

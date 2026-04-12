@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -171,7 +171,7 @@
 
                     <div class="info-note">
                         <strong>Points essentiels :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake supporte Amazon S3, Google Cloud Storage, Azure Blob/ADLS. </li>
                             <li>Les données dans les classes archival (ex. S3 Glacier, Azure Archive) ne sont pas accessibles. </li>
                             <li>Un external stage est un objet de base de données stockant : URL du bucket, Credentials ou Storage Integration, File format éventuel. </li>
@@ -223,13 +223,13 @@
 
                     <div class="info-note">
                         <strong>Principes :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Ce n'est pas un objet indépendant : c'est une couche liée au stage. </li>
                             <li>Fonctionne comme une « external table » (métadonnées : taille, last_modified, file_url...).</li>
                             <li>Peut être activé lors de <code class="inline-code">CREATE STAGE DIRECTORY = (ENABLE=TRUE)</code>. </li>
                             <li>
                                 Utilisations :
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>Lister tous les fichiers d'un stage</li>
                                     <li>Construire des pipelines de traitement de fichiers</li>
                                     <li>Joindre fichiers + métadonnées </li>
@@ -237,7 +237,7 @@
                             </li>
                             <li>
                                 Rafraîchissement nécessaire :
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>Automatique via events cloud</li>
                                     <li>Manuel via <code class="inline-code">ALTER STAGE … REFRESH</code> (peut être coûteux) </li>
                                 </ul>
@@ -259,11 +259,11 @@
 
                     <div class="info-note">
                         <strong>Points clés :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Supporté dans internal et external stages. </li>
                             <li>
                                 Types d'URL pour accéder aux fichiers :
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li><strong>Scoped URL</strong> (accès temporaire sécurisé, recommandé)</li>
                                     <li><strong>File URL</strong> (permanent, nécessite privilèges sur le stage)</li>
                                     <li><strong>Pre-signed URL</strong> (pour applications externes, avec expiration configurable) </li>
@@ -271,7 +271,7 @@
                             </li>
                             <li>
                                 Server-side encryption :
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li>Pour éviter corruption lors de GET → vérifier <code class="inline-code">ENCRYPTION='SNOWFLAKE_SSE'</code> sur le stage. </li>
                                 </ul>
                             </li>
@@ -288,7 +288,7 @@
                     </h2>
 
                     <p>Lorsque les fichiers sont organisés dans des sous‑répertoires au sein d'un stage, ceci permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>d'améliorer la lisibilité et le partitionnement logique,</li>
                         <li>d'utiliser <code class="inline-code">PATTERN</code> dans COPY INTO,</li>
                         <li>d'optimiser les refresh de directory tables via <code class="inline-code">SUBPATH</code>. </li>
@@ -326,7 +326,7 @@
 
                     <div class="info-note">
                         <strong>Points importants :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><code class="inline-code">FILE_FORMAT</code> peut être défini directement dans le stage.</li>
                             <li><code class="inline-code">DIRECTORY</code> table peut être activée.</li>
                             <li>Encrypted external stages peuvent utiliser AWS_SSE_S3, AWS_SSE_KMS, ou NONE. </li>
@@ -346,7 +346,7 @@
 
                     <div class="info-note">
                         <strong>Caractéristiques :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Upload possible uniquement vers internal stages (user, table, named).</li>
                             <li>Fichiers automatiquement encryptés AES‑128 ou 256 lors de l'upload.</li>
                         </ul>
@@ -391,7 +391,7 @@
 
                     <p>Permet de visualiser : nom du fichier, taille, date de modification.</p>
                     <p>Ces sorties peuvent être utilisées :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>via le pipe operator <code class="inline-code">-&gt;&gt;</code></li>
                         <li>via <code class="inline-code">TABLE(RESULT_SCAN(LAST_QUERY_ID()))</code></li>
                     </ul>

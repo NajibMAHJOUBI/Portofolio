@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -170,14 +170,14 @@
                     </div>
 
                     <p>Les Snowflake Native Apps sont des applications exécutées directement dans le compte du consumer, permettant au provider :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>d'embarquer logique applicative (Snowpark, SQL, JavaScript, Streamlit),</li>
                         <li>de partager données + business logic de façon sécurisée,</li>
                         <li>de distribuer et monétiser ces apps via Snowflake Marketplace ou via des listings privés.</li>
                     </ul>
 
                     <h3>✔ Objectifs du framework :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Permettre la création d'apps collaboratives sans déplacer les données.</li>
                         <li>Offrir un cadre de développement moderne (versionning, release channels, logs).</li>
                         <li>Exécuter l'app au plus près des données du client, répondant à des exigences fortes de sécurité.</li>
@@ -200,7 +200,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>Provider</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Crée une application package</li>
                                 <li>Emballe des données, scripts, logique</li>
                                 <li>Publie via listing (privé ou Marketplace)</li>
@@ -209,7 +209,7 @@
 
                         <div class="usage-card">
                             <h4>Consumer</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Installe l'app dans son propre compte</li>
                                 <li>Configure les accès demandés</li>
                                 <li>Exécute l'application et ses composants (SQL, Streamlit, UDF, SP…)</li>
@@ -232,7 +232,7 @@
                     </div>
 
                     <p>Un application package contient :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Données partagées</li>
                         <li>Logique applicative (SP, UDF, Snowpark…)</li>
                         <li>Streamlit UI (optionnel)</li>
@@ -267,7 +267,7 @@
                         <em>Initiate the automated security scan.</em> </li>
                         <li>
                             Créer un listing
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Peut être gratuit, privé, ou public</li>
                                 <li>Peut inclure un plan tarifaire pour monétiser<br>
                                 <em>Optional: Add a pricing plan to get paid.</em> </li>
@@ -278,7 +278,7 @@
 
                     <div class="warning-note">
                         <strong>✔ Prérequis de rôle :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Le rôle publiant doit posséder l'application package<br>
                             <em>The role must be the same role that created the application package.</em> </li>
                             <li>CREATE LISTING privilège global</li>
@@ -307,7 +307,7 @@
 
                     <div class="warning-note">
                         <strong>✔ Restrictions importantes :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Pas de tables temporaires, volatiles ou transient.<br>
                             <em>Shared tables cannot be temporary, volatile, or transient tables.</em> </li>
                             <li>Pas de virtual columns / policies avec code Python/JS.<br>
@@ -337,7 +337,7 @@
                         <em>Install an app from a listing.</em> </li>
                         <li>
                             Examiner les demandes d'accès
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>L'app peut demander : privilèges sur objets, références pour accéder à d'autres bases / objets</li>
                             </ul>
                             <em>Review access requests… including privileges and references required by the app.</em> 
@@ -346,7 +346,7 @@
                         <em>Set up an event table to enable logging and event sharing.</em> </li>
                         <li>
                             Utiliser l'app
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>via SQL Worksheets</li>
                                 <li>via Streamlit UI<br>
                                 <em>Use the app… view Streamlit apps created by the provider.</em> </li>
@@ -372,7 +372,7 @@
 
                     <div class="warning-note">
                         <strong>Important pour examen :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Suspension automatique après période d'essai.</li>
                             <li>Les données internes à l'app sont conservées si l'app n'est pas supprimée.</li>
                             <li>S'il existe des objets créés hors de l'app : le consumer doit transférer ownership avant de désinstaller.</li>
@@ -388,7 +388,7 @@
                         <i class="fas fa-star"></i> 8. Atouts majeurs des Snowflake Native Apps (à citer pour l'examen)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les apps s'exécutent dans le compte du consumer : <strong>zéro exposition de données</strong>.</li>
                         <li>Forte intégration avec Snowpark, Streamlit, SQL, collaboration.</li>
                         <li>Distribution via Listings (privés ou Marketplace).</li>

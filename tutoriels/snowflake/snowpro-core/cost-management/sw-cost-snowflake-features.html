@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -146,12 +146,12 @@
                     <p>Il existe trois types de compute :</p>
 
                     <h4> Virtual Warehouse Compute</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ressource compute gérée par l'utilisateur.</li>
                         <li>Facturation à la seconde, minimum 60 secondes à chaque démarrage.</li>
                         <li>
                             Utilisé pour :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>exécuter requêtes SQL</li>
                                 <li>charger des données</li>
                                 <li>transformations (DML)</li>
@@ -160,24 +160,24 @@
                     </ul>
 
                     <h4> Serverless Compute</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ressources compute gérées automatiquement par Snowflake (ex. : Snowpipe, Search Optimization).</li>
                         <li>Snowflake ajuste la taille et le scaling automatiquement pour réduire le coût.</li>
                     </ul>
 
                     <h4> Cloud Services Compute</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utilisé pour : authentification, metadata, optimisation, accès, etc.</li>
                         <li>Gratuit tant que son usage ≤ 10% du coût compute quotidien.</li>
                         <li>Au-delà : facturation en crédits. </li>
                     </ul>
 
                     <h3>✔ 1.2. Storage Cost</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Coût mensuel calculé selon un tarif fixe par téraoctet stocké.</li>
                         <li>
                             Tarif différent selon :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Type de compte (Capacity vs On Demand)</li>
                                 <li>Région</li>
                             </ul>
@@ -186,11 +186,11 @@
                     </ul>
 
                     <h3>✔ 1.3. Data Transfer Cost</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Pas de coût pour l'ingestion (data ingress).</li>
                         <li>
                             Coût pour data egress :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>transfert vers autre région</li>
                                 <li>transfert vers autre cloud provider</li>
                                 <li>tarif variable selon région / cloud </li>
@@ -201,7 +201,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ 1.4. Rappel (SnowPro Core)</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>➡ Le coût Snowflake = Compute + Storage + Data Transfer.</li>
                             <li>➡ Compute = principal poste de dépense.</li>
                             <li>➡ Cloud Services compute est facturé seulement au‑delà de 10% de l'usage compute quotidien.</li>
@@ -227,7 +227,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Informations importantes</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Il peut y avoir un délai jusqu'à 72h avant l'affichage des coûts.</li>
                             <li>L'information est affichée en UTC, pas dans le fuseau horaire local. </li>
                         </ul>
@@ -235,19 +235,19 @@
 
                     <h4>✔ A. Organization Overview</h4>
                     <p>Affiche :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Dépense totale depuis le début du contrat</li>
                         <li>Solde restant</li>
                         <li>Dépenses mensuelles</li>
                         <li>Contribution de chaque compte de l'organisation </li>
                     </ul>
                     <p>Indisponible si :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>l'organisation utilise des comptes On Demand</li>
                         <li>contrat via reseller </li>
                     </ul>
                     <p>Pour y accéder :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Se connecter au compte organisation (ou rôle ORGADMIN activé)</li>
                         <li>Admin → Cost Management</li>
                         <li>Choisir un warehouse XS recommandé</li>
@@ -256,7 +256,7 @@
 
                     <h4>✔ B. Account Overview</h4>
                     <p>Affiche les coûts au niveau du compte :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>consommation de crédits</li>
                         <li>répartition par type (compute, storage, data transfer, cloud services)</li>
                         <li>tendances dans le temps </li>
@@ -268,7 +268,7 @@
 
                     <h4>✔ C. Drilling Down into Costs</h4>
                     <p>Snowsight permet d'explorer les coûts par :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>warehouse</li>
                         <li>type d'usage</li>
                         <li>période</li>
@@ -277,14 +277,14 @@
 
                     <h3>⭐ 2.2. Explorer les coûts via SQL (ACCOUNT_USAGE et ORGANIZATION_USAGE)</h3>
                     <p>Pour les analyses avancées :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>METERING_HISTORY</li>
                         <li>METERING_DAILY_HISTORY</li>
                         <li>WAREHOUSE_METERING_HISTORY</li>
                         <li>CREDIT_USAGE_DAILY (selon édition/région)</li>
                     </ul>
                     <p>Ces vues permettent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>analyses personnalisées</li>
                         <li>export vers BI</li>
                         <li>attribution des coûts par équipe / type d'usage</li>
@@ -340,7 +340,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4> Compute</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>principal composant de coût (warehouse + serverless + cloud services) </li>
                                 <li>Cloud Services compute facturé uniquement au‑delà de 10% de l'usage compute quotidien </li>
                             </ul>
@@ -348,21 +348,21 @@
 
                         <div class="usage-card">
                             <h4> Storage</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>coût mensuel basé sur l'usage moyen quotidien </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4> Data egress</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>coût lors de transferts multi‑régions ou multi‑cloud </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4> Snowsight donne accès :</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Organisation Overview</li>
                                 <li>Account Overview</li>
                                 <li>Drilldown par warehouse, usage type </li>
@@ -371,14 +371,14 @@
 
                         <div class="usage-card">
                             <h4> Délais et fuseaux</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Coûts affichés en UTC et jusqu'à 72h de délai </li>
                             </ul>
                         </div>
 
                         <div class="usage-card">
                             <h4> Rôle nécessaire</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Le rôle ORGADMIN est nécessaire pour voir les coûts en devise </li>
                             </ul>
                         </div>

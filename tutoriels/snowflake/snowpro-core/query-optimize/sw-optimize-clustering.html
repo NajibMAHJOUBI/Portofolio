@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -150,13 +150,13 @@
                     <p>Source : <em>Micro-partitions & Data Clustering</em> </p>
 
                     <h3>✔ Qu'est‑ce qu'une micro-partition ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Unité de stockage fondamentale dans Snowflake : <strong>50 à 500 MB non compressés</strong>.</li>
                         <li>Organisée en format columnar, immuable, et générée automatiquement lors du chargement des données. </li>
                     </ul>
 
                     <h3>✔ Quel lien avec le clustering ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Lors de l'ingestion, les données sont naturellement ordonnées selon l'ordre d'insertion → <strong>natural clustering</strong>. </li>
                         <li>Snowflake stocke pour chaque micro-partition des métadonnées : min/max, distinct count, informations de filtrage.</li>
                         <li>Ces métadonnées permettent le <strong>pruning</strong> : ignorer les micro-partitions non pertinentes. </li>
@@ -166,7 +166,7 @@
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Enjeux du data clustering</strong>
                         <p>Le clustering permet :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>de conserver une organisation logique des valeurs,</li>
                             <li>de maximiser l'efficacité du pruning,</li>
                             <li>d'optimiser les performances sur tables volumineuses.</li>
@@ -190,14 +190,14 @@
 
                     <h3>✔ Quand en définir un ?</h3>
                     <p>Indicateurs :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les requêtes sur la table deviennent plus lentes.</li>
                         <li>Le clustering depth du tableau est élevé. </li>
                     </ul>
 
                     <h3>✔ Bénéfices</h3>
                     <p>Pour les très grandes tables (>1 To ou plusieurs milliards de lignes) :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Meilleur pruning, donc scans plus courts.</li>
                         <li>Meilleure compression des colonnes. </li>
                     </ul>
@@ -219,7 +219,7 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>✔ Attention (SnowPro piège classique)</strong>
                         <p>Snowflake insiste : les clustering keys ne sont pas toujours recommandés. Ils sont adaptés uniquement si :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>la table est très volumineuse,</li>
                             <li>les requêtes filtrent souvent sur les mêmes colonnes,</li>
                             <li>les gains de performance > coûts de maintenance. </li>
@@ -241,7 +241,7 @@
                     <p>Un service Snowflake qui gère automatiquement et continuellement le reclustering des tables ayant un clustering key. </p>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Zéro maintenance :</strong> Vous n'avez plus à surveiller manuellement l'état du clustering.</li>
                         <li>Snowflake reclustre uniquement si nécessaire.</li>
                         <li>Pas de warehouse à spécifier → effectué via compute serverless. </li>
@@ -313,7 +313,7 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Micro-partitions</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Automatiques, petites, colonaires, immuables.</li>
                                 <li>Métadonnées → pruning.</li>
                             </ul>
@@ -321,7 +321,7 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Clustering Keys</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Optimisation pour très grandes tables.</li>
                                 <li>Améliorent le pruning mais coûtent cher si DML fréquent.</li>
                                 <li>À utiliser sélectivement.</li>
@@ -330,7 +330,7 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Automatic Reclustering</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Gère le clustering en continu.</li>
                                 <li>Ne bloque pas les DML.</li>
                                 <li>Coûts en credits via serverless compute.</li>

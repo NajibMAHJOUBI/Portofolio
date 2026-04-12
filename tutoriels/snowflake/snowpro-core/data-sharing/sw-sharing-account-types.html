@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -170,7 +170,7 @@
                     <p>Snowflake permet le partage de données sécurisé, <strong>sans copie</strong>, entre comptes Snowflake ou même avec des utilisateurs n'ayant pas de compte Snowflake.</p>
 
                     <h3>✔ Concepts fondamentaux :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Zero-copy</strong> : les consommateurs accèdent aux données via un partage, sans duplication physique.</li>
                         <li>Le partage fonctionne en générant un <strong>share</strong>, qui regroupe les objets partagés (tables, views sécurisées, UDFs sécurisées, etc.).</li>
                         <li>Les consommateurs utilisent ces données comme des objets locaux (en <strong>lecture seule</strong>).</li>
@@ -191,12 +191,12 @@
                     </div>
 
                     <h3>✔ Provider (fournisseur)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Crée un <strong>share</strong>.</li>
                         <li>Y ajoute les objets (tables, vues, UDF sécurisées).</li>
                         <li>
                             Donne accès soit :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>à un consumer Snowflake existant,</li>
                                 <li>à un reader account (si le client n'a pas de compte Snowflake).</li>
                             </ul>
@@ -204,7 +204,7 @@
                     </ul>
 
                     <h3>✔ Consumer (consommateur)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Peut consulter les données du share sous forme de database partagée.</li>
                         <li>Ne peut pas modifier les objets sources → <strong>lecture seule</strong>.</li>
                     </ul>
@@ -227,12 +227,12 @@
                     </div>
 
                     <h3>✔ Caractéristiques clés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les Reader Accounts sont créés depuis le compte provider.</li>
                         <li>Le <strong>provider paye pour le compute</strong> consommé par les readers.</li>
                         <li>
                             Le consumer via reader account consulte les données via :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>une database partagée,</li>
                                 <li>uniquement en lecture (pas de DML/DDL).</li>
                             </ul>
@@ -241,7 +241,7 @@
                     </ul>
 
                     <h3>✔ Utilisations typiques</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Partage avec des partenaires n'ayant pas de Snowflake.</li>
                         <li>Diffusion de données à des clients externes.</li>
                         <li>Cas d'usage BI/analytics simple.</li>
@@ -262,7 +262,7 @@
                     </div>
 
                     <p>Par analogie directe avec Secure Data Sharing, les objets partageables comprennent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables</li>
                         <li>Views sécurisées</li>
                         <li>UDF sécurisées</li>
@@ -280,7 +280,7 @@
                         <i class="fas fa-lock"></i> 5. Sécurité du Data Sharing
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake ne copie jamais les données : le consumer lit une vue référencée dans le provider.</li>
                         <li>Isolation via <strong>RBAC</strong>.</li>
                         <li>Le provider reste propriétaire des données.</li>
@@ -296,13 +296,13 @@
                     </h2>
 
                     <p><strong>Pour créer un share :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Privilèges nécessaires sur les objets partagés.</li>
                         <li>Rôle système permettant <code class="inline-code">CREATE SHARE</code>.</li>
                     </ul>
 
                     <p><strong>Pour accéder à un share consommé :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">CREATE DATABASE FROM SHARE</code></li>
                         <li>Usage limité au compte spécifié.</li>
                     </ul>
@@ -378,7 +378,7 @@
                         <li>Provider crée un <strong>SHARE</strong>.</li>
                         <li>Il ajoute objets (tables, views…) dans le SHARE.</li>
                         <li>Il assigne le share à :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>un compte consumer existant ou</li>
                                 <li>un reader account.</li>
                             </ul>

@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -170,7 +170,7 @@
                     
 
                     <h3>✔ Fonctions principales</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">PARSE_JSON</code> — convertit une chaîne JSON en VARIANT</li>
                         <li><code class="inline-code">CHECK_JSON</code> — valide qu'une chaîne est un JSON correct</li>
                         <li><code class="inline-code">JSON_EXTRACT_PATH_TEXT</code> — extraire un élément textuel via un chemin JSON</li>
@@ -181,7 +181,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>Points clés pour SnowPro Core :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><code class="inline-code">PARSE_JSON()</code> → renvoie toujours un VARIANT.</li>
                             <li>Si JSON invalide : échec ; pour tolérance aux erreurs → <code class="inline-code">TRY_PARSE_JSON()</code></li>
                             <li>JSON NULL ≠ SQL NULL (dans VARIANT).</li>
@@ -200,7 +200,7 @@
                     <h3>✔ Fonctions essentielles</h3>
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">ARRAY_CONSTRUCT</code>, <code class="inline-code">ARRAY_CONSTRUCT_COMPACT</code></li>
                                 <li><code class="inline-code">ARRAY_APPEND</code> / <code class="inline-code">ARRAY_PREPEND</code></li>
                                 <li><code class="inline-code">ARRAY_CAT</code> — concaténer deux ARRAY</li>
@@ -209,7 +209,7 @@
                             </ul>
                         </div>
                         <div class="usage-card">
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">ARRAY_DISTINCT</code> — valeurs uniques</li>
                                 <li><code class="inline-code">ARRAY_FLATTEN</code> — réduire profondeur</li>
                                 <li><code class="inline-code">ARRAY_GENERATE_RANGE</code> — générer une séquence numérique</li>
@@ -230,7 +230,7 @@
                     </h2>
 
                     <h3>✔ Fonctions clés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">OBJECT_CONSTRUCT</code> — construire un OBJECT à partir de paires clé/valeur</li>
                         <li><code class="inline-code">OBJECT_CONSTRUCT_KEEP_NULL</code> — version conservant les nulls</li>
                         <li><code class="inline-code">OBJECT_DELETE</code>, <code class="inline-code">OBJECT_INSERT</code>, <code class="inline-code">OBJECT_PICK</code></li>
@@ -247,7 +247,7 @@
                         <i class="fas fa-map"></i> 4. Fonctions de MAP (structured MAP)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">MAP_CAT</code> — concaténer deux MAP</li>
                         <li><code class="inline-code">MAP_CONTAINS_KEY</code></li>
                         <li><code class="inline-code">MAP_DELETE</code>, <code class="inline-code">MAP_INSERT</code></li>
@@ -265,7 +265,7 @@
                     </h2>
 
                     <h3>✔ Fonctions principales</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">FLATTEN</code> — table function → exploser ARRAY/OBJECT en lignes </li>
                         <li><code class="inline-code">GET</code> — accéder à une clé/une position</li>
                         <li><code class="inline-code">GET_PATH</code> — extraction par chemin JSON</li>
@@ -293,7 +293,7 @@ FROM table;</code></pre>
                     </h2>
 
                     <p>Snowflake supporte des opérations fonctionnelles sur VARIANT/ARRAY :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">FILTER</code> — filtrer un ARRAY</li>
                         <li><code class="inline-code">TRANSFORM</code> — transformation élément par élément</li>
                         <li><code class="inline-code">REDUCE</code> — réduction (fold)</li>
@@ -311,7 +311,7 @@ FROM table;</code></pre>
                         <i class="fas fa-exchange-alt"></i> 7. Fonctions de conversion / cast
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Conversion ARRAY ↔ STRING</li>
                         <li>Conversions vers OBJECT, ARRAY</li>
                         <li>CAST explicites via <code class="inline-code">::type</code> (ex. <code class="inline-code">data:key::number</code>) </li>
@@ -326,7 +326,7 @@ FROM table;</code></pre>
                         <i class="fas fa-check-double"></i> 8. "Type predicates" (détecter le type d'un VARIANT)
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">IS_ARRAY</code></li>
                         <li><code class="inline-code">IS_OBJECT</code></li>
                         <li><code class="inline-code">IS_VARCHAR</code></li>
@@ -344,7 +344,7 @@ FROM table;</code></pre>
                     </h2>
 
                     <h3>✔ Catégories à mémoriser</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Parsing JSON/XML</li>
                         <li>Manipulation ARRAY</li>
                         <li>Manipulation OBJECT</li>
@@ -354,7 +354,7 @@ FROM table;</code></pre>
                     </ul>
 
                     <h3>✔ Questions fréquentes à l'examen</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Quelle est la différence entre ARRAY_CONSTRUCT et ARRAY_CONSTRUCT_COMPACT ?</strong></li>
                         <li><strong>Comment extraire la liste des clés d'un OBJECT ?</strong> → <code class="inline-code">OBJECT_KEYS()</code></li>
                         <li><strong>Quelle fonction exploser un tableau JSON en lignes ?</strong> → <code class="inline-code">FLATTEN()</code></li>

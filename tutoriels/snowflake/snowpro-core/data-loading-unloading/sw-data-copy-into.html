@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -145,7 +145,7 @@
                     <p>La commande <code class="inline-code">COPY INTO &lt;table&gt;</code> charge des fichiers vers une table Snowflake existante.</p>
 
                     <h3>✔ Sources de fichiers autorisées</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Internal stages</strong> : user (@~), table (@%table), named stage (@mystage)</li>
                         <li><strong>External stages</strong> : S3, GCS, Azure</li>
                         <li><strong>External location directement</strong> (s3://, gcs://, azure://) </li>
@@ -168,13 +168,13 @@ ON_ERROR='CONTINUE';</code></pre>
                     <p></p>
 
                     <h3>✔ Options essentielles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong><code class="inline-code">FILES = ('f1', 'f2')</code></strong> : charger fichiers spécifiques. </li>
                         <li><strong><code class="inline-code">PATTERN</code></strong> (regex) : filtrer les fichiers. </li>
                         <li><strong><code class="inline-code">FILE_FORMAT</code></strong> : FORMAT_NAME ou TYPE = CSV/JSON/AVRO/ORC/PARQUET/XML. </li>
                         <li>
                             <strong><code class="inline-code">VALIDATION_MODE</code></strong> :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>RETURN_ERRORS</li>
                                 <li>RETURN_ALL_ERRORS</li>
                                 <li>RETURN__ROWS</li>
@@ -187,7 +187,7 @@ ON_ERROR='CONTINUE';</code></pre>
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>Bonnes pratiques :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Préparer un file format séparé.</li>
                             <li>Utiliser PATTERN pour limiter les fichiers.</li>
                             <li>Utiliser VALIDATION_MODE pour valider avant ingestion.</li>
@@ -205,7 +205,7 @@ ON_ERROR='CONTINUE';</code></pre>
                     </h2>
 
                     <p>La commande <code class="inline-code">COPY INTO &lt;location&gt;</code> exporte des données d'une table ou requête vers :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>internal stage</li>
                         <li>external stage</li>
                         <li>external location (S3, GCS, Azure) </li>
@@ -221,7 +221,7 @@ FILE_FORMAT = (TYPE = CSV COMPRESSION='GZIP');</code></pre>
                     <p></p>
 
                     <h3>✔ Points clés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Export vers fichiers parallélisés par défaut.</li>
                         <li><strong><code class="inline-code">SINGLE=TRUE</code></strong> permet un fichier unique (sinon Snowflake produit plusieurs fichiers).</li>
                         <li>Supporte seulement <strong>CSV, JSON, PARQUET</strong> pour FILE_FORMAT en déchargement. </li>
@@ -278,13 +278,13 @@ LIST @mystage;</code></pre>
                     <p>Snowflake permet de charger des données directement via l'UI (Snowsight).</p>
 
                     <h3>✔ Formats supportés</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Structurés</strong> : CSV, TSV</li>
                         <li><strong>Semi‑structurés</strong> : JSON, Avro, ORC, Parquet, XML </li>
                     </ul>
 
                     <h3>✔ Sources d'import possibles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Local machine</li>
                         <li>Stages internes ou externes</li>
                         <li>Cloud storage non encore déclaré comme external stage (Classic Console) </li>
@@ -293,7 +293,7 @@ LIST @mystage;</code></pre>
                     <div class="warning-note">
                         <i class="fas fa-exclamation-triangle"></i>
                         <strong>Limitations :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Jusqu'à 250 fichiers par upload</li>
                             <li>Taille max 250 MB par fichier </li>
                         </ul>
@@ -301,12 +301,12 @@ LIST @mystage;</code></pre>
                     </div>
 
                     <h3>✔ Fonctionnement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowsight peut créer automatiquement une table à partir d'un fichier (sauf XML & Iceberg). </li>
                         <li>Les chargements UI exécutent une transaction explicite.</li>
                         <li>
                             Nécessite privilèges :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>DB: USAGE</li>
                                 <li>SCHÉMA: CREATE TABLE</li>
                                 <li>STAGE: USAGE</li>

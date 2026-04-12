@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -151,14 +151,14 @@
 
                     <h3>✔ Query History</h3>
                     <p>Permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De surveiller les requêtes individuelles ou groupées.</li>
                         <li>D'accéder aux métriques d'exécution (durée, warehouse utilisé, scans, etc.).</li>
                         <li>D'accéder au Query Profile, qui permet de visualiser chaque étape du plan d'exécution. </li>
                     </ul>
 
                     <h3>✔ Query Profile (rappel essentiel SnowPro)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Visualisation DAG des opérateurs (TableScan, Join, Filter, Aggregate…).</li>
                         <li>Analyse des étapes lentes et des volumes traités.</li>
                     </ul>
@@ -173,20 +173,20 @@
                     </h2>
 
                     <h3>✔ Symptômes (connu dans Snowsight)</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Message indiquant que la requête dépasse la mémoire disponible sur le cluster.</li>
                         <li>Résultats non affichables dans Snowsight ou nécessitant un résultat limité.</li>
                     </ul>
 
                     <h3>✔ Causes fréquentes</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Requêtes retournant des ensembles de données massifs.</li>
                         <li>Joints ou agrégations produisant des résultats intermédiaires très volumineux.</li>
                         <li>Absence de filtrage ou d'application de LIMIT.</li>
                     </ul>
 
                     <h3>✔ Solutions recommandées</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ajouter des filtres plus sélectifs.</li>
                         <li>Utiliser LIMIT dans Snowsight.</li>
                         <li>Matérialiser des résultats intermédiaires dans une table.</li>
@@ -212,14 +212,14 @@
 
                     <h3>✔ Inefficient Pruning (détection Snowsight)</h3>
                     <p>Snowsight signale qu'une requête a un pruning inefficace lorsque :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les filtres ne sont pas sélectifs</li>
                         <li>Les prédicats ne peuvent pas utiliser les ranges de micropartitions</li>
                         <li>Les colonnes filtrées ne sont pas corrélées au tri des micropartitions </li>
                     </ul>
 
                     <h3>✔ Causes possibles d'inefficient pruning</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Filtre sur une expression (ex: <code class="inline-code">WHERE DATE(timestamp_col) = ...</code>)</li>
                         <li>Filtre sur colonne sans corrélation logique avec l'ordre d'insertion</li>
                         <li>Données fortement skew (valeurs similaires, absence de distribution)</li>
@@ -228,7 +228,7 @@
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Solutions clés (tested SnowPro patterns)</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Utiliser des prédicats SARGables : <code class="inline-code">timestamp_col >= '2025-01-01' AND timestamp_col < '2025-01-02'</code></li>
                             <li>Créer un clustering manuel si nécessaire.</li>
                             <li>Chercher à réduire le nombre de micropartitions touchées.</li>
@@ -248,19 +248,19 @@
 
                     <h3>✔ Congestion du warehouse</h3>
                     <p>Un warehouse est saturé si :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le nombre de requêtes simultanées dépasse sa capacité.</li>
                         <li>Des tâches lourdes monopolisent les clusters.</li>
                     </ul>
 
                     <h3>✔ Résultats visibles</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Requêtes en attente dans Snowsight, affichées comme "Queued".</li>
                         <li>Délai avant exécution.</li>
                     </ul>
 
                     <h3>✔ Solutions</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Augmenter la taille du warehouse (implique plus de compute).</li>
                         <li>Activer multi-cluster pour élasticité.</li>
                         <li>Utiliser des warehouses séparés selon les workloads.</li>
@@ -282,12 +282,12 @@
                     </div>
 
                     <h3>✔ Ce qu'affiche EXPLAIN</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le plan logique optimisé, pas l'exécution réelle.</li>
                         <li>Operators : TableScan, Filter, Join, Aggregate, Sort, Result.</li>
                         <li>
                             Informations sur :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>L'ordre d'exécution</li>
                                 <li>Les stratégies de join</li>
                                 <li>Les filtres utilisés</li>
@@ -319,7 +319,7 @@
                         <i class="fas fa-graduation-cap"></i>
                         <strong>✔ Utilisation SnowPro</strong>
                         <p>On demande souvent :</p>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>À quoi sert EXPLAIN ?</li>
                             <li>Quelle est sa différence avec Query Profile ?</li>
                             <li>Comment EXPLAIN aide-t-il à détecter des scans inutiles ?</li>

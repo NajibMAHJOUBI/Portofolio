@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -149,24 +149,24 @@
 
                     <h3>✔ Principe de fonctionnement</h3>
                     <p>Snowpipe repose sur un objet <strong>PIPE</strong>, qui contient l'instruction <code class="inline-code">COPY INTO &lt;table&gt;</code> définissant :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La source (stage)</li>
                         <li>La table cible </li>
                     </ul>
 
                     <h3>✔ Détection des fichiers</h3>
                     <p>Snowpipe peut être déclenché par :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             <strong>Cloud Messaging (événementiel)</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Utilise S3/SNS/SQS, Azure Event Grid, GCP Pub/Sub</li>
                                 <li>Snowpipe lit les événements et charge automatiquement les fichiers </li>
                             </ul>
                         </li>
                         <li>
                             <strong>Snowpipe REST API</strong>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Le client appelle une API Snowflake et fournit la liste des fichiers </li>
                             </ul>
                         </li>
@@ -174,7 +174,7 @@
 
                     <h3>✔ Support Cloud</h3>
                     <p>Snowpipe supporte :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>S3</li>
                         <li>GCS</li>
                         <li>Azure Blob & ADLS Gen2 </li>
@@ -192,18 +192,18 @@
                     <p>Source : Snowflake Documentation </p>
 
                     <h3>✔ Suppression des fichiers source</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowpipe ne supporte pas <code class="inline-code">PURGE</code>.</li>
                         <li>Il ne supprime pas automatiquement les fichiers du stage.</li>
                         <li>Il faut utiliser <code class="inline-code">REMOVE</code>, ou configurer la politique de cycle de vie du cloud. </li>
                     </ul>
 
                     <h3>✔ Chargement de données historiques</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowpipe via événements ne charge que les fichiers des 7 derniers jours (avec <code class="inline-code">ALTER PIPE … REFRESH</code>).</li>
                         <li>
                             Pour des fichiers plus anciens :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Charger manuellement via <code class="inline-code">COPY INTO &lt;table&gt;</code></li>
                                 <li>Reconfigurer Snowpipe pour l'ingestion automatique</li>
                                 <li>Utiliser <code class="inline-code">ALTER PIPE … REFRESH</code> pour éviter les doublons </li>
@@ -244,12 +244,12 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     </div>
                     <p></p>
                     <p><strong>Points clés :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">AUTO_INGEST = TRUE</code> active les notifications pour ingestion automatique</li>
                         <li><code class="inline-code">copy_statement</code> est l'instruction COPY INTO utilisée par Snowpipe</li>
                         <li>
                             Supporte deux types de sources :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Fichiers en stage</li>
                                 <li>Source de streaming (<code class="inline-code">DATA_SOURCE(TYPE => 'STREAMING')</code>) </li>
                             </ul>
@@ -261,7 +261,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
 
                     <h3>✔ DESCRIBE PIPE</h3>
                     <p>Permet de consulter :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Définition COPY</li>
                         <li>Canal de notification</li>
                         <li>Propriétaire</li>
@@ -286,7 +286,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     <p>Snowpipe Streaming permet l'ingestion ligne par ligne en quasi temps réel, sans utiliser de stage fichier → flux direct dans Snowflake.</p>
 
                     <h3>✔ Avantages</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Latence extrêmement faible</li>
                         <li>Pas de fichiers compressés intermédiaires</li>
                         <li>Pipelines simplifiés</li>
@@ -296,7 +296,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     <h3>✔ Deux architectures</h3>
 
                     <h4>1. Snowpipe Streaming – Architecture Hautes Performances</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utilise le snowpipe‑streaming SDK</li>
                         <li>Prix basé sur le débit (GB non compressé)</li>
                         <li>S'appuie sur un objet PIPE, contre lequel sont ouverts les "channels"</li>
@@ -305,14 +305,14 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     </ul>
 
                     <h4>2. Snowpipe Streaming – Architecture Classique</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utilise le snowflake-ingest SDK</li>
                         <li>Pas d'objet PIPE dédié (chaîne opératoire différente)</li>
                         <li>Fonctionne avec Java 8+ et nécessite JCE</li>
                         <li>Peut ingérer dans des tables standards et Iceberg</li>
                         <li>
                             Gestion d'erreurs configurable :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CONTINUE</li>
                                 <li>SKIP_BATCH</li>
                                 <li>ABORT (défaut) </li>
@@ -332,7 +332,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Snowpipe (fichiers)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Fichiers dans un stage</li>
                                 <li>Détection par notifications cloud</li>
                                 <li>Latence en minutes</li>
@@ -343,7 +343,7 @@ FILE_FORMAT = (TYPE = 'CSV');</code></pre>
 
                         <div class="usage-card">
                             <h4>✔ Snowpipe Streaming (événements / lignes)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Données streamées directement (pas de stage fichier)</li>
                                 <li>Ingestion quasi-immédiate</li>
                                 <li>Utilise un PIPE (HP) ou un channel (classique)</li>

@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -145,7 +145,7 @@
                     <p>La vue <code class="inline-code">WAREHOUSE_LOAD_HISTORY</code> permet d'analyser la charge d'un warehouse Snowflake au fil du temps. Elle est essentielle pour comprendre la concurrence, l'attente des requêtes et optimiser la taille / multi-cluster d'un warehouse.</p>
 
                     <h3>✔ Ce qu'elle mesure</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le niveau de charge (load) d'un warehouse au cours du temps.</li>
                         <li>Le nombre de requêtes en exécution parallèles.</li>
                         <li>Le nombre de requêtes mises en file d'attente (queued).</li>
@@ -153,7 +153,7 @@
                     </ul>
 
                     <h3>✔ À quoi ça sert dans SnowPro Core</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Comprendre pourquoi certaines requêtes sont en queue.</li>
                         <li>Identifier les périodes d'activité intense → ajuster la taille du warehouse ou activer le multi‑cluster.</li>
                         <li>Diagnostiquer les problèmes de latence liés à la concurrence.</li>
@@ -177,20 +177,20 @@
                     <p>La vue <code class="inline-code">WAREHOUSE_METERING_HISTORY</code> mesure la consommation de crédits d'un warehouse.</p>
 
                     <h3>✔ Ce que fournit cette vue</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La consommation totale de crédits par warehouse.</li>
                         <li>Ventilation des crédits par période (typiquement par heure).</li>
                         <li>Distinction entre consommation en mode compute actif, autoscaling ou warehouse suspendu.</li>
                     </ul>
 
                     <h3>✔ Comment elle complète QUERY_ATTRIBUTION_HISTORY</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La vue <code class="inline-code">QUERY_ATTRIBUTION_HISTORY</code> attribue la consommation à chaque requête.</li>
                         <li>La vue <code class="inline-code">WAREHOUSE_METERING_HISTORY</code>, elle, donne la consommation globale du warehouse – y compris l'inactivité.</li>
                     </ul>
 
                     <h3>✔ À quoi ça sert en SnowPro</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Contrôle des coûts Snowflake (facturation au compute).</li>
                         <li>Compréhension de l'impact d'un scaling automatique.</li>
                         <li>Vérification de la consommation liée à une charge anormale.</li>
@@ -210,19 +210,19 @@
 
                     <h3>3.1 ⭐ Snowsight – Analyse graphique des performances</h3>
                     <p>✔ Dans Snowsight, via Monitoring → Query History</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Trier les requêtes par durée.</li>
                         <li>Filtrer par user, warehouse, status.</li>
                     </ul>
                     <p>✔ Visualiser la charge d'un warehouse</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowsight → Compute → Warehouses → onglet Activity</li>
                         <li>Vous y voyez : Charge du warehouse, Concurrency, Requêtes en queue </li>
                     </ul>
 
                     <h3>3.2 ⭐ Query Profile – Analyse détaillée des étapes</h3>
                     <p>(accès via Query History → query_id → Query Profile)</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Visualiser les nœuds les plus coûteux ("Most Expensive Nodes").</li>
                         <li>Analyser le temps passé dans chaque catégorie (scan, filter, join…). </li>
                     </ul>
@@ -230,7 +230,7 @@
 
                     <h3>3.3 ⭐ Analyse programmatique (SQL)</h3>
                     <p>Snowflake recommande d'interroger les vues Account Usage pour créer vos propres tableaux de bord :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">QUERY_HISTORY</code> → analyse fine des temps d'exécution </li>
                         <li><code class="inline-code">WAREHOUSE_LOAD_HISTORY</code> → analyse de la concurrence</li>
                         <li><code class="inline-code">WAREHOUSE_METERING_HISTORY</code> → analyse des crédits</li>
@@ -294,7 +294,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4> Warehouse Load</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Indique si un warehouse est sous-dimensionné.</li>
                                 <li>Les requêtes en queue = surcharge → augmenter taille ou activer multi-cluster.</li>
                             </ul>
@@ -302,7 +302,7 @@
 
                         <div class="usage-card">
                             <h4> Warehouse Metering</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Permet de suivre les coûts compute.</li>
                                 <li>Indique l'impact du scaling et de la consommation réelle vs idle.</li>
                             </ul>
@@ -310,7 +310,7 @@
 
                         <div class="usage-card">
                             <h4> Performance Analysis</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Snowsight est idéal pour inspection visualisée.</li>
                                 <li>ACCOUNT_USAGE est indispensable pour audit et analyse avancée.</li>
                                 <li>Query Profile reste l'outil ultime pour diagnostiquer étape par étape.</li>
@@ -319,7 +319,7 @@
 
                         <div class="usage-card">
                             <h4> Rétention des données</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>ACCOUNT_USAGE : 365 jours pour Query History. </li>
                             </ul>
                         </div>

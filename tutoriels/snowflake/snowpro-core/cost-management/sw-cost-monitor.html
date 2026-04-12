@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -146,12 +146,12 @@
 
                     <h3>✔ 1.1. Budgets</h3>
                     <p>Les budgets permettent de définir une limite mensuelle de crédit appliquée :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>à l'ensemble du compte,</li>
                         <li>ou à un groupe d'objets (custom budgets). </li>
                     </ul>
                     <p>Fonctionnalités essentielles :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Surveillance du crédit consommé par warehouses et fonctionnalités serverless.</li>
                         <li>Alertes si la consommation risque de dépasser la limite.</li>
                         <li>Notifications configurables : email, SNS, Event Grid, Pub/Sub, webhook (Slack, Teams…). </li>
@@ -159,7 +159,7 @@
 
                     <h3>✔ 1.2. Resource Monitors</h3>
                     <p>Les resource monitors permettent de définir des quotas de crédits pour les warehouses, avec :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Notification par email à certains seuils (jusqu'à 5 seuils),</li>
                         <li>Suspension automatique d'un warehouse lorsque le seuil est atteint,</li>
                         <li>Suspension immédiate (abort des requêtes en cours) si configuré. </li>
@@ -172,7 +172,7 @@
 
                     <h3>✔ 1.3. Cost Controls for Warehouses (Best Practices)</h3>
                     <p>Snowflake fournit des bonnes pratiques pour réduire les coûts des warehouses :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utiliser <strong>AUTO-SUSPEND</strong> et <strong>AUTO-RESUME</strong>,</li>
                         <li>Dimensionner correctement les warehouses,</li>
                         <li>Éviter les exécutions prolongées ou inutiles. </li>
@@ -189,14 +189,14 @@
 
                     <h3>✔ 2.1 Objectif des Resource Monitors</h3>
                     <p>Ils permettent de :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>suivre la consommation des crédits,</li>
                         <li>agir automatiquement pour éviter les dérives (notifications, suspension).</li>
                     </ul>
 
                     <h3>✔ 2.2 Actions possibles</h3>
                     <p>Lorsqu'un seuil est atteint :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Notification par email,</li>
                         <li>Suspendre le warehouse après la fin des requêtes,</li>
                         <li>Suspendre immédiatement + abort des requêtes.</li>
@@ -204,7 +204,7 @@
 
                     <h3>✔ 2.3 Configuration</h3>
                     <p>Paramètres requis :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Nom du monitor,</li>
                         <li>Quota de crédits,</li>
                         <li>Type : Account ou Warehouse,</li>
@@ -228,19 +228,19 @@
                     <p>Deux types de coûts :</p>
 
                     <h4>1. Compute Costs</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Snowflake exécute des tâches serverless comme <code class="inline-code">_MEASUREMENT_TASK</code> et <code class="inline-code">_BACKFILL_TASK</code>,</li>
                         <li>Ces tâches consomment des crédits. </li>
                     </ul>
 
                     <h4>2. Storage Costs</h4>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le stockage du metadata des budgets dans plusieurs tables internes (ex. <code class="inline-code">_CONFIGURATION_TABLE</code>, <code class="inline-code">_MEASUREMENT_TABLE</code>…). </li>
                     </ul>
 
                     <h3>✔ 3.2 Analyser ces coûts</h3>
                     <p>Exemples de requêtes fournies par Snowflake :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Pour calculer la consommation totale des tâches serverless (<code class="inline-code">_MEASUREMENT_TASK</code>) sur 28 jours,</li>
                         <li>Pour obtenir le coût par budget. </li>
                     </ul>
@@ -277,7 +277,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>⭐ BUDGETS</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Limites mensuelles, notifications, monitorent warehouses + serverless features.</li>
                                 <li>Peuvent envoyer des alertes via email, SNS, Pub/Sub, webhooks.</li>
                                 <li>Le système de budgets consomme des crédits et de la storage. </li>
@@ -286,7 +286,7 @@
 
                         <div class="usage-card">
                             <h4>⭐ RESOURCE MONITORS</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Limitent la consommation des <strong>warehouses seulement</strong>.</li>
                                 <li>Seuils configurables (jusqu'à 5).</li>
                                 <li>Peuvent suspendre automatiquement un warehouse. </li>
@@ -295,7 +295,7 @@
 
                         <div class="usage-card">
                             <h4>⭐ COST CONTROLS FOR WAREHOUSES</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Auto-suspend indispensable.</li>
                                 <li>Right-sizing des warehouses. </li>
                             </ul>
@@ -303,7 +303,7 @@
 
                         <div class="usage-card">
                             <h4>⭐ CHOIX ENTRE BUDGETS & RESOURCE MONITORS</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Budgets = global + serverless + objets variés (plus large).</li>
                                 <li>Resource monitors = warehouses uniquement.</li>
                                 <li>→ Les deux sont <strong>complémentaires</strong>.</li>

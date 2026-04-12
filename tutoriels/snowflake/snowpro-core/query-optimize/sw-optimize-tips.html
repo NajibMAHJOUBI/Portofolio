@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -169,7 +169,7 @@
 
                     <p>La page Performance Optimization – Guides Overview regroupe l'ensemble des documents essentiels pour comprendre comment optimiser les performances dans Snowflake.</p>
                     <p>Snowflake regroupe plusieurs axes d'optimisation :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Analyse des exécutions passées</li>
                         <li>Optimisation des requêtes</li>
                         <li>Optimisation des warehouses</li>
@@ -190,13 +190,13 @@
                     <p>Permet d'obtenir des informations sur les performances historiques des requêtes.</p>
 
                     <h3>✔ Deux méthodes :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Via Snowsight (Query History, Query Profile)</li>
                         <li>Via SQL sur ACCOUNT_USAGE (ex. QUERY_HISTORY) </li>
                     </ul>
 
                     <h3>✔ Exemples d'usage :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Identifier les requêtes les plus lentes</li>
                         <li>Suivre l'évolution des performances dans le temps</li>
                         <li>Vérifier l'impact d'une optimisation (clustering, SO, warehouse size…)</li>
@@ -215,7 +215,7 @@
                     </h2>
 
                     <h3>✔ Les options d'optimisation comprennent :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Réécriture du SQL</li>
                         <li>Utilisation de prédicats efficaces (SARGables)</li>
                         <li>Pruning grâce aux micropartitions</li>
@@ -226,7 +226,7 @@
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Points classiques dans l'examen :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Comment réduire les bytes scanned ? → via pruning, partitions logiques, filtrage efficace.</li>
                             <li>Quand utiliser SO ? → lorsque les recherches sont très sélectives mais que les données ne sont pas bien corrélées.</li>
                         </ul>
@@ -242,7 +242,7 @@
                     </h2>
 
                     <h3>✔ Concepts clés :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Taille du warehouse</strong> = parallélisme = vitesse potentielle</li>
                         <li><strong>Multi‑cluster warehouse</strong> = améliore la concurrency</li>
                         <li><strong>Query Acceleration Service (QAS)</strong> = accélération ciblée pour certaines requêtes </li>
@@ -251,7 +251,7 @@
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ À connaître pour SnowPro Core :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Quand augmenter la taille ? → tâches lourdes : scans massifs, large joins</li>
                             <li>Quand activer multi-cluster ? → file d'attente (queued), haute concurrence</li>
                             <li>QAS = utile pour charge irrégulière et requêtes bloquantes</li>
@@ -268,12 +268,12 @@
                     </h2>
 
                     <h3>✔ Trois axes principaux :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Regrouper les données similaires</li>
                         <li>Structures optimisées (clustering keys éventuelles pour tables larges)</li>
                         <li>
                             Choisir entre :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Automatic Clustering</li>
                                 <li>Search Optimization Service</li>
                                 <li>Materialized Views </li>
@@ -284,7 +284,7 @@
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Ce qu'on attend de vous en SnowPro Core :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Comprendre quand utiliser chacune de ces fonctionnalités</li>
                             <li>Savoir que Snowflake optimise déjà le stockage automatiquement (micropartitions, colonnes, compression)</li>
                         </ul>
@@ -301,13 +301,13 @@
 
                     <h3>✔ Dans Snowsight :</h3>
                     <p>Performance Explorer permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De visualiser les métriques SQL en temps réel</li>
                         <li>De suivre les tendances (latence, concurrency, bytes scanned, etc.) </li>
                     </ul>
 
                     <h3>✔ Ce que vous devez savoir :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Très utile pour corréler performance & workload</li>
                         <li>Permet d'identifier des pics d'activité ou des requêtes coûteuses</li>
                         <li>Peut remplacer l'utilisation d'ACCOUNT_USAGE pour des analyses plus visuelles</li>
@@ -325,7 +325,7 @@
                     <p>Fonctionnalité d'optimisation automatisée.</p>
 
                     <h3>✔ Ce que fait Optima :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Analyse continue des patterns de workload</li>
                         <li>Applique automatiquement les stratégies les plus efficaces </li>
                     </ul>
@@ -333,7 +333,7 @@
                     <div class="info-note">
                         <i class="fas fa-lightbulb"></i>
                         <strong>✔ Pourquoi c'est important pour SnowPro Core :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Snowflake met en avant l'idée "performance by default"</li>
                             <li>Optima réduit la nécessité de tuning manuel complexe</li>
                             <li>Vous devez connaître les bénéfices, mais pas les détails internes</li>
@@ -352,7 +352,7 @@
                     <p>Inclus dans la page car performance et coûts sont liés.</p>
 
                     <h3>✔ Concepts clés :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Optimisation warehouse = impact direct sur l'usage de crédits</li>
                         <li>Réduction des scans = moins de compute</li>
                         <li>Meilleur clustering = réduction des coûts de recherche optimisée </li>
@@ -414,7 +414,7 @@
 
                     <p>La page Guides Overview – Performance synthétise tout ce que Snowflake attend d'un SnowPro Core sur la performance, un thème très fréquent dans les questions d'examen.</p>
                     <p>Elle couvre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>la compréhension de l'exécution des requêtes,</li>
                         <li>l'optimisation SQL,</li>
                         <li>l'optimisation warehouse,</li>

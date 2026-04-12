@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -175,12 +175,12 @@
                     </div>
 
                     <h3>✔ Caractéristiques clés :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Ce n'est pas un objet de base de données : <strong>pas de privilèges propres</strong>.</li>
                         <li>Associée directement à un stage (interne ou externe).</li>
                         <li>
                             Fournit liste et métadonnées des fichiers :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>nom du fichier</li>
                                 <li>taille</li>
                                 <li>timestamp dernière modification</li>
@@ -232,7 +232,7 @@
                     </h2>
 
                     <p>On peut l'activer :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>À la création du stage → via <code class="inline-code">CREATE STAGE</code></li>
                         <li>Après coup → via <code class="inline-code">ALTER STAGE</code></li>
                     </ul>
@@ -277,7 +277,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                     <p></p>
 
                     <p>Cela retourne des colonnes comme :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>RELATIVE_PATH</li>
                         <li>SIZE</li>
                         <li>LAST_MODIFIED</li>
@@ -302,7 +302,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                     </div>
 
                     <h3>✔ Coûts :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le rafraîchissement automatique via notifications cloud → facturé comme <strong>Snowpipe</strong> (car Snowpipe gère les event notifications) </li>
                         <li>Le rafraîchissement manuel → facturé en <strong>Cloud Services</strong> "standard" (n'apparaît pas dans PIPE_USAGE_HISTORY) </li>
                     </ul>
@@ -321,7 +321,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
 
                     <div class="info-note">
                         <strong>Points clés :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>L'auto‑refresh permet d'ajouter/supprimer automatiquement les fichiers dans la directory table.</li>
                             <li>Certains événements (rename) ne déclenchent pas l'actualisation.</li>
                         </ul>
@@ -342,7 +342,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
                     </div>
 
                     <h3>✔ Mesurer les coûts :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">PIPE_USAGE_HISTORY</code> (Snowpipe events)</li>
                         <li><code class="inline-code">AUTO_REFRESH_REGISTRATION_HISTORY</code> (historique des fichiers et coûts associés) </li>
                     </ul>
@@ -358,7 +358,7 @@ FROM DIRECTORY(@my_stage);</code></pre>
 
                     <p>Une directory table hérite des privilèges du stage. Elle n'a pas ses propres privilèges.</p>
                     <p>Via ThinkETL (confirmant la doc Snowflake) :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Pour interroger → <code class="inline-code">READ</code> ou <code class="inline-code">USAGE</code> selon stage interne/externe</li>
                         <li>Pour rafraîchir → <code class="inline-code">WRITE</code> / <code class="inline-code">ALTER STAGE</code> </li>
                     </ul>

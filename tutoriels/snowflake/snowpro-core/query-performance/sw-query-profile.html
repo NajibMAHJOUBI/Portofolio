@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -153,7 +153,7 @@
                     </h2>
 
                     <p>Dans Snowsight, le Query Profile est accessible depuis :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Les résultats d'une requête exécutée dans un worksheet</li>
                         <li>La page Query History, en sélectionnant une requête</li>
                         <li>Les pages "Grouped Queries" ou "Individual Queries" </li>
@@ -170,11 +170,11 @@
                     </h2>
 
                     <p>Le Query Profile permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>D'explorer chaque étape d'une requête exécutée, à travers un <strong>graphe visuel de l'exécution</strong> (operators / nodes, liens de données). </li>
                         <li>
                             D'obtenir des informations détaillées par étape :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Rows processed</li>
                                 <li>Data scanned</li>
                                 <li>Time spent</li>
@@ -185,7 +185,7 @@
                         <li>Comprendre le plan d'exécution réel produit par Snowflake : Snowflake génère automatiquement un plan d'exécution (DAG d'opérateurs), qui peut différer de l'ordre logique du SQL.</li>
                         <li>
                             Diagnostiquer les problèmes de performance :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Étapes lentes</li>
                                 <li>Surconsommation de compute</li>
                                 <li>Goulots d'étranglement de tri, jointure ou agrégation</li>
@@ -238,7 +238,7 @@
 
                     <h3>✔ Inspecter chaque étape</h3>
                     <p>Un clic sur un node montre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le temps d'exécution</li>
                         <li>Les lignes lues / écrites</li>
                         <li>Les données scannées</li>
@@ -257,11 +257,11 @@
                         <i class="fas fa-lock"></i> 5. Accès et permissions nécessaires
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>✔ Vous pouvez toujours voir vos propres requêtes — L'historique est accessible nativement pour vos exécutions. </li>
                         <li>
                             ✔ Voir les requêtes d'autres utilisateurs dépend de votre rôle :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><strong>ACCOUNTADMIN</strong> : accès complet</li>
                                 <li>Rôle avec privilège MONITOR ou OPERATE sur un warehouse → voir les requêtes des utilisateurs de ce warehouse</li>
                                 <li><strong>GOVERNANCE_VIEWER</strong> : accès aux grouped queries, mais pas aux individual queries </li>
@@ -312,7 +312,7 @@
                     </h2>
 
                     <div class="info-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Le <strong>Query Profile</strong> est l'outil clé pour analyser les performances d'une requête.</li>
                             <li>Il montre les étapes de traitement (plan d'exécution), les métriques de performance, et les flux de données.</li>
                             <li>Il est disponible depuis Query History, Query Results, ou Query ID via l'URL.</li>

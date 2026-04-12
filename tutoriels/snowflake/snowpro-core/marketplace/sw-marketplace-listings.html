@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -155,7 +155,7 @@
                     </div>
 
                     <p>Les listings permettent au provider :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De publier des données publiquement (Marketplace) ou privatement.</li>
                         <li>D'ajouter metadata enrichis : titre, description, queries exemples, informations provider. </li>
                         <li>De monétiser leur data product (Marketplace). </li>
@@ -163,7 +163,7 @@
                     </ul>
 
                     <p>Les consumers peuvent :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Accéder aux données via Marketplace ou via un partage privé.</li>
                         <li>Créer une database depuis le listing.</li>
                     </ul>
@@ -180,7 +180,7 @@
                     <h3>✔ 1. Marketplace Listings (public or private)</h3>
                     <p>Permettent de partager avec tout compte Snowflake, dans toute région cloud.</p>
                     <p><strong>Fonctionnalités clés :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Visibles sur le Snowflake Marketplace.</li>
                         <li>Possibilité de rendre le listing public.</li>
                         <li>Possibilité de facturer l'accès.<br>
@@ -196,7 +196,7 @@
                     <p>Il s'agit d'un Marketplace interne qui centralise les data products uniquement pour les comptes d'une organisation Snowflake.</p>
 
                     <p><strong>Différences clés :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Accessible uniquement dans l'organisation (Internal Marketplace).</li>
                         <li>Contrôlé via RBAC et account targeting. </li>
                         <li>Pas de visibilité publique.</li>
@@ -204,7 +204,7 @@
                     </ul>
 
                     <p><strong>Avantages :</strong></p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Découverte plus simple des datasets internes.</li>
                         <li>Cohérence & gouvernance renforcée.</li>
                         <li>Multiples équipes peuvent publier / consommer.</li>
@@ -224,7 +224,7 @@
                     </h2>
 
                     <p>Dans un listing, le data product représente soit :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>un share Snowflake,</li>
                         <li>un Snowflake Native App.</li>
                     </ul>
@@ -248,11 +248,11 @@
                     </div>
 
                     <h3>✔ Pourquoi c'est important ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Sans auto-fulfillment, un provider doit manuellement répliquer ses données dans les régions où se trouvent ses consumers → fastidieux, lent.</li>
                         <li>
                             Avec auto-fulfillment :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Snowflake réplique automatiquement les données vers les régions cibles.</li>
                                 <li>Le consumer accède au listing dans sa propre région, ce qui réduit la latence.</li>
                                 <li>Fonctionne pour shares et application packages.</li>
@@ -261,14 +261,14 @@
                     </ul>
 
                     <h3>✔ Contraintes :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Pas disponible sur les comptes trial. </li>
                         <li>Le provider doit avoir activé le Global Data Sharing :<br>
                         <code class="inline-code">SELECT SYSTEM$ENABLE_GLOBAL_DATA_SHARING_FOR_ACCOUNT('&lt;account&gt;');</code></li>
                     </ul>
 
                     <h3>✔ Cas d'utilisation :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Paid listings → auto-fulfillment obligatoire. </li>
                         <li>Private listings cross-region → auto-fulfillment activé automatiquement.<br>
                         <em>Snowsight automatically detects whether the consumer is in another region and enables auto-fulfillment.</em> </li>

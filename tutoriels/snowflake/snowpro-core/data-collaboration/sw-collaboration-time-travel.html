@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -160,7 +160,7 @@
                     
 
                     <p>Snowflake Time Travel permet :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>De consulter des données historiques (tables, schémas, bases) à un point du passé.</li>
                         <li>De restaurer des tables, schémas ou bases supprimés ou modifiés, dans les limites de la période de rétention.</li>
                         <li>De cloner un objet à un instant historique (Zero-Copy cloning + Time Travel).</li>
@@ -192,7 +192,7 @@
                     </div>
 
                     <h3>✔ Valeurs :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Standard Edition</strong> → jusqu'à <strong>1 jour</strong>.</li>
                         <li><strong>Enterprise & supérieures</strong> → jusqu'à <strong>90 jours</strong>.</li>
                         <li>Peut être défini au niveau compte, base, schéma, table.</li>
@@ -200,7 +200,7 @@
 
                     <div class="warning-note">
                         <strong>Impact :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Plus la rétention est longue → plus la fonctionnalité Time Travel couvre un historique large.</li>
                             <li>La rétention s'applique aussi aux objets supprimés (possibilité de restauration).</li>
                         </ul>
@@ -260,7 +260,7 @@ BEFORE (OFFSET => -56060);</code></pre>
                     </h2>
 
                     <p>Time Travel permet de restaurer plusieurs types d'objets pendant la rétention :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Tables</li>
                         <li>Schémas</li>
                         <li>Bases</li>
@@ -309,7 +309,7 @@ AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
                     </h2>
 
                     <p>Snowflake combine Time Travel et Zero-Copy Cloning pour permettre :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Le clonage d'un objet à un instant historique, même s'il est supprimé.</li>
                         <li>Des environnements dev/test sur des états passés.</li>
                     </ul>
@@ -329,7 +329,7 @@ AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
                     </h2>
 
                     <div class="warning-note">
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>❌ Tables <strong>TEMPORARY</strong> et <strong>EXTERNAL</strong> ne supportent pas Time Travel. (Confirmé implicitement dans CREATE TABLE / CLONE restrictions.)</li>
                             <li>❌ Les données purgées du Time Travel sont <strong>perdues</strong>. Même avec l'UNDROP, si la période DATA_RETENTION_TIME_IN_DAYS est dépassée → impossible de restaurer.</li>
                             <li>❌ Rétention <strong>limitée selon l'édition</strong>. Examen SnowPro : très souvent testé.</li>

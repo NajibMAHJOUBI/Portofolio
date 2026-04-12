@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -160,7 +160,7 @@
                     </div>
 
                     <h3>✔ Caractéristiques clés :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Zero‑copy</strong> : pas de duplication physique, partage via pointeurs métadonnées.</li>
                         <li><strong>Temps réel</strong> : les consommateurs voient les mises à jour immédiatement.</li>
                         <li>
@@ -169,7 +169,7 @@
                         </li>
                         <li>
                             <strong>Coûts</strong> :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Provider : paie le stockage.</li>
                                 <li>Consumer : paie uniquement le compute pour requêter les données.</li>
                             </ul>
@@ -192,10 +192,10 @@
                     </div>
 
                     <h3>✔ Un share contient :</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             Les objets à partager :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Tables</li>
                                 <li>Views (regular, secure, materialized)</li>
                                 <li>External tables</li>
@@ -222,7 +222,7 @@
 
                     <div class="info-note">
                         <strong>✔ Points importants SnowPro :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Un share ne contient pas de données : uniquement des références.</li>
                             <li>Un share ne peut provenir que d'un seul compte Snowflake.</li>
                             <li>
@@ -244,13 +244,13 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Provider (fournisseur)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Crée le SHARE.</li>
                                 <li>Ajoute objets + comptes cibles.</li>
                                 <li>Contrôle totalement l'accès (RBAC + suppression d'accès).</li>
                                 <li>
                                     Peut partager avec :
-                                    <ul>
+                                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                         <li>Comptes Snowflake</li>
                                         <li>Reader accounts (pour consommateurs sans Snowflake)</li>
                                     </ul>
@@ -260,7 +260,7 @@
 
                         <div class="usage-card">
                             <h4>✔ Consumer (consommateur)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Reçoit un share → crée une database consommée.</li>
                                 <li>Peut consulter les données en lecture seule.</li>
                                 <li>Peut rejoindre plusieurs providers.</li>
@@ -291,12 +291,12 @@
                         <em>Listings let you share data with people in any Snowflake region, across clouds.</em>
                         
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Fonctionne cross‑cloud et cross‑region.</li>
                         <li>Fournit des métadonnées enrichies (titre, description, exemples d'usage).</li>
                         <li>
                             Permet de :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Facturer l'accès</li>
                                 <li>Publier publiquement</li>
                                 <li>Voir les métriques d'usage consumers</li>
@@ -311,7 +311,7 @@
                         <em>Use a direct share to share data with one or more accounts in the same Snowflake region.</em>
                         
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Fonctionne uniquement dans la même région.</li>
                         <li>Pas cross‑cloud.</li>
                         <li>Pas de possibilité de monétiser.</li>
@@ -325,7 +325,7 @@
                         <em>You can share with people who don't have Snowflake accounts by using Reader Accounts.</em>
                         
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Utilisé lorsque le consumer n'a pas son propre compte Snowflake.</li>
                         <li>Le provider crée et gère le compte reader.</li>
                         <li>Le provider paie le compute utilisé par le reader.</li>

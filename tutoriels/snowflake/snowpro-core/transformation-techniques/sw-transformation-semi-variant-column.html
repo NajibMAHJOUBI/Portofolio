@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -148,12 +148,12 @@
                     <p>Jusqu'à <strong>128 MB non compressés</strong> (en pratique un peu moins à cause des surcharges internes et selon l'objet stocké). </p>
 
                     <h3>✔ Quand stocker en VARIANT vs. aplatir ?</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Si vos cas d'usage ne sont pas encore connus, Snowflake recommande de stocker d'abord dans VARIANT.</li>
                         <li>Pour des données "régulières" (ex. JSON avec chaînes/entiers), les besoins de stockage et la performance sont proches du relationnel. </li>
                         <li>
                             Pour améliorer le pruning et réduire le stockage, <strong>aplatir</strong> (via colonnes relationnelles) si vos documents contiennent :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>dates/timestamps (notamment non‑ISO 8601) représentés en chaînes</li>
                                 <li>nombres encodés en chaînes</li>
                                 <li>tableaux</li>
@@ -168,7 +168,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Deux types de NULL dans le semi‑structuré :</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li><strong>SQL NULL</strong> : valeur manquante/inconnue (comme pour les types structurés).</li>
                             <li><strong>JSON null</strong> (dit "VARIANT NULL") : stocké comme chaîne contenant "null" pour le distinguer de SQL NULL. </li>
                         </ul>
@@ -192,11 +192,11 @@
                         <button class="copy-btn"><i class="far fa-copy"></i> Copier</button>
                         <pre><code>PARSE_JSON(&lt;expr&gt; [, '&lt;parameter&gt;'])</code></pre>
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">&lt;expr&gt;</code> : chaîne contenant un JSON valide.</li>
                         <li>
                             <code class="inline-code">'&lt;parameter&gt;'</code> : contrôle notamment la gestion des clés dupliquées :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">'d'</code> = autoriser les clés dupliquées (la dernière valeur l'emporte)</li>
                                 <li><code class="inline-code">'s'</code> = strict (refus des doublons, par défaut). </li>
                             </ul>
@@ -204,7 +204,7 @@
                     </ul>
 
                     <h3>✔ Comportements importants</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Retourne VARIANT ; NULL en entrée → NULL en sortie. </li>
                         <li>Chaîne vide ou espaces uniquement → retourne NULL (pas d'erreur), pour laisser continuer le traitement. </li>
                         <li>La chaîne <code class="inline-code">'null'</code> (littéral) devient un JSON null dans VARIANT (≠ SQL NULL). </li>

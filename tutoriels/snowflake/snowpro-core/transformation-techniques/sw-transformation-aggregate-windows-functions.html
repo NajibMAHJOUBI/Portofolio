@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -160,7 +160,7 @@
                         <div class="usage-card">
                             <h4>1. Agrégation générale</h4>
                             <p>Inclut les fonctions usuelles :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>SUM, AVG, COUNT, COUNT_IF</li>
                                 <li>MIN, MAX, MEDIAN, MODE</li>
                                 <li>LISTAGG (concaténation)</li>
@@ -170,7 +170,7 @@
 
                         <div class="usage-card">
                             <h4>2. Agrégations avancées</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><strong>Bitwise</strong> : BITAND_AGG, BITOR_AGG, BITXOR_AGG</li>
                                 <li><strong>Booléennes</strong> : BOOLAND_AGG, BOOLOR_AGG, BOOLXOR_AGG</li>
                                 <li><strong>Semi‑structuré</strong> : ARRAY_AGG, OBJECT_AGG </li>
@@ -179,7 +179,7 @@
 
                         <div class="usage-card">
                             <h4>3. Statistiques & Probabilités</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>KURTOSIS</li>
                                 <li>SKEW </li>
                             </ul>
@@ -188,7 +188,7 @@
                         <div class="usage-card">
                             <h4>4. Estimation (HyperLogLog, MinHash, t‑Digest)</h4>
                             <p>Important dans SnowPro Core :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>APPROX_COUNT_DISTINCT (alias de HLL)</li>
                                 <li>DATASKETCHES_HLL_*</li>
                                 <li>APPROX_PERCENTILE, APPROX_TOP_K </li>
@@ -199,7 +199,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Particularités Snowflake (attention examen)</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Certaines fonctions ont une syntaxe spéciale : <code class="inline-code">PERCENTILE_CONT</code>, <code class="inline-code">PERCENTILE_DISC</code> utilisent <code class="inline-code">WITHIN GROUP</code>. </li>
                             <li>Beaucoup d'alias existent (VAR_POP = VARIANCE_POP).</li>
                             <li>Entrée vide = généralement NULL, mais pas toujours (ex : COUNT(*) retourne 0).</li>
@@ -220,11 +220,11 @@
                         <em>“Window functions are analytic functions used for running totals, moving averages, rankings…”</em>
                         
                     </div>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Elles retournent une valeur par ligne, contrairement aux agrégations classiques.</li>
                         <li>
                             Elles nécessitent ou peuvent inclure :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>OVER ( … )</li>
                                 <li>PARTITION BY</li>
                                 <li>ORDER BY</li>
@@ -254,20 +254,20 @@
                     </div>
 
                     <h3>✔ PARTITION BY</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Définit des groupes logiques (ex : par client, par jour).</li>
                         <li>Optionnel → une seule partition si absent. </li>
                     </ul>
 
                     <h3>✔ ORDER BY</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Indispensable pour les fonctions de ranking.</li>
                         <li>Indépendant du ORDER BY final de la requête. </li>
                     </ul>
 
                     <h3>✔ Fenêtre (window frame)</h3>
                     <p>Exemples :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><code class="inline-code">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code></li>
                         <li><code class="inline-code">ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING</code> </li>
                     </ul>
@@ -288,13 +288,13 @@
                         <div class="usage-card">
                             <h4>✔ 1. Fenêtres générales</h4>
                             <p>Incluent des fonctions qui existent aussi en agrégation :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>SUM, AVG, COUNT, MIN, MAX</li>
                                 <li>LISTAGG (avec WITHIN GROUP)</li>
                                 <li>CORR, COVAR_POP/SAMP </li>
                             </ul>
                             <p>La différence :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Agrégat → une seule ligne</li>
                                 <li>Window → une sortie par ligne </li>
                             </ul>
@@ -302,7 +302,7 @@
 
                         <div class="usage-card">
                             <h4>✔ 2. Fonctions de ranking</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>ROW_NUMBER</li>
                                 <li>RANK</li>
                                 <li>DENSE_RANK</li>
@@ -313,7 +313,7 @@
 
                         <div class="usage-card">
                             <h4>✔ 3. Fonctions de navigation (window navigation)</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>LAG</li>
                                 <li>LEAD</li>
                                 <li>FIRST_VALUE</li>
@@ -325,7 +325,7 @@
 
                         <div class="usage-card">
                             <h4>✔ 4. Fonctions statistiques avancées</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>KURTOSIS</li>
                                 <li>REGR_* (régression linéaire) </li>
                             </ul>
@@ -334,7 +334,7 @@
                         <div class="usage-card">
                             <h4>✔ 5. Fonctions semi‑structurées & bitwise</h4>
                             <p>Certaines fonctions agrégées sont aussi compatibles sous forme fenêtre :</p>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>ARRAY_AGG, OBJECT_AGG</li>
                                 <li>BITAND_AGG, BOOLAND_AGG </li>
                             </ul>
@@ -376,7 +376,7 @@
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>✔ Particularités Snowflake</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Beaucoup d'agrégations → version fenêtre avec OVER()</li>
                             <li>Certaines fonctions changent de comportement entre agrégat et window (ex. SUM)</li>
                             <li>DISTINCT interdit dans les window functions (ex : AVG(DISTINCT col) OVER() provoque erreur) </li>
@@ -395,7 +395,7 @@
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4>✔ Agrégations</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Toujours un seul résultat</li>
                                 <li>Catégories : standard, booléenne, bitwise, semi‑structurée, estimation</li>
                                 <li>Syntaxe spéciale : LISTAGG … WITHIN GROUP, PERCENTILE_CONT</li>
@@ -404,7 +404,7 @@
 
                         <div class="usage-card">
                             <h4>✔ Window</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Syntaxe obligatoire : OVER()</li>
                                 <li>Composants : PARTITION BY, ORDER BY, Window Frame</li>
                                 <li>Types : navigation, ranking, statistiques, agrégations fenêtre</li>

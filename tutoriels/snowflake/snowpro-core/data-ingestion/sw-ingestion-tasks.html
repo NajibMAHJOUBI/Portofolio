@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -145,17 +145,17 @@
 
                     <h3>✔ Modes de déclenchement</h3>
                     <p>Un task peut être exécuté :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Selon un horaire (CRON, intervalle minutes / heures / secondes) </li>
                         <li>Sur événement, notamment lorsque un stream contient de nouvelles données </li>
                     </ul>
 
                     <h3>✔ Compute pour les tasks</h3>
                     <p>Deux modèles disponibles :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>
                             <strong>Serverless Tasks</strong> : Snowflake alloue automatiquement les ressources nécessaires.
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Taille max équivalente à XXLARGE WH.</li>
                                 <li>Pas de paramètre WAREHOUSE dans CREATE TASK. </li>
                             </ul>
@@ -179,7 +179,7 @@
 
                     <h3>✔ Interaction avec les Streams</h3>
                     <p>Les tasks peuvent automatiquement :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Identifier si un stream contient de nouvelles données (<code class="inline-code">SYSTEM$STREAM_HAS_DATA</code>)</li>
                         <li>Consommer ces changements pour transformer ou charger des données </li>
                     </ul>
@@ -212,11 +212,11 @@ AS
                     <div class="info-note">
                         <i class="fas fa-info-circle"></i>
                         <strong>🟦 Points clés à mémoriser pour SnowPro Core</strong>
-                        <ul>
+                        <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les tasks sont créés suspendus → il faut les activer avec <code class="inline-code">ALTER TASK … RESUME</code>. </li>
                             <li>
                                 Plusieurs options importantes :
-                                <ul>
+                                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                     <li><code class="inline-code">ALLOW_OVERLAPPING_EXECUTION</code></li>
                                     <li><code class="inline-code">USER_TASK_TIMEOUT_MS</code> (timeout)</li>
                                     <li><code class="inline-code">SUSPEND_TASK_AFTER_NUM_FAILURES</code></li>
@@ -230,7 +230,7 @@ AS
 
                     <h3>✔ ALTER TASK</h3>
                     <p>Permet de :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Modifier le schedule</li>
                         <li>Modifier le WH ou la taille serverless</li>
                         <li>Activer/désactiver (RESUME / SUSPEND)</li>
@@ -245,7 +245,7 @@ AS
 
                     <h3>✔ DESCRIBE TASK</h3>
                     <p>Affiche détails complets du task :</p>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>SQL exécuté</li>
                         <li>Schedule</li>
                         <li>Compute model</li>
@@ -304,7 +304,7 @@ DELETE FROM audit_table WHERE event_ts &lt; DATEADD(day,-7,current_timestamp());
                     <div class="grid-2cols">
                         <div class="usage-card">
                             <h4> Tasks = Orchestrateur interne Snowflake</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Automatisent SQL / procédures</li>
                                 <li>Peuvent dépendre d'autres tasks (DAG)</li>
                             </ul>
@@ -312,7 +312,7 @@ DELETE FROM audit_table WHERE event_ts &lt; DATEADD(day,-7,current_timestamp());
 
                         <div class="usage-card">
                             <h4> Deux modes compute :</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Warehouse géré</li>
                                 <li>Serverless auto‑scalable</li>
                             </ul>
@@ -329,7 +329,7 @@ DELETE FROM audit_table WHERE event_ts &lt; DATEADD(day,-7,current_timestamp());
 
                         <div class="usage-card">
                             <h4> Commandes essentielles :</h4>
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>CREATE TASK</li>
                                 <li>ALTER TASK</li>
                                 <li>SHOW TASKS</li>

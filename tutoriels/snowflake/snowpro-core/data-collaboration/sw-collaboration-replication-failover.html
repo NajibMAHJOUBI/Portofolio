@@ -27,7 +27,7 @@
             </button>
 
             <nav id="mainNav">
-                <ul>
+                <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="index.html#tutorials">Tutoriels</a></li>
                     <li><a href="index.html#about">À Propos</a></li>
@@ -42,7 +42,7 @@
     ============================================ -->
     <div class="breadcrumb">
         <div class="container">
-            <ul>
+            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#tutorials">Tutoriels</a></li>
                 <li><a href="#">Snowflake</a></li>
@@ -162,13 +162,13 @@
                     <p><strong>Objectif :</strong> répliquer des objets d'un compte source vers un ou plusieurs comptes cibles d'une même organisation, entre régions et même entre clouds, pour la continuité d'activité et la reprise après sinistre. Les objets répliqués dans les cibles sont des secondaires (réplicas). </p>
 
                     <h3>✔ Éditions requises</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>La réplication de bases & de partages est disponible pour <strong>toutes les éditions</strong>.</li>
                         <li>La réplication d'autres objets de compte (users, roles, warehouses, etc.) ainsi que failover/failback nécessitent <strong>Business Critical Edition (ou +)</strong>. </li>
                     </ul>
 
                     <h3>✔ Groupes de réplication & de basculement</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Replication group</strong> = collection d'objets répliqués en lecture seule.</li>
                         <li><strong>Failover group</strong> = replication group qui peut être promu en primaire pour passer en lecture/écriture ; fournit une cohérence "point‑in‑time" côté cible. </li>
                     </ul>
@@ -188,7 +188,7 @@
                     </h2>
 
                     <h3>✔ Périmètre des groupes</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un objet ne peut être que dans <strong>un seul failover group</strong>.</li>
                         <li>Un objet peut être dans plusieurs replication groups si chaque groupe réplique vers un compte cible différent.</li>
                         <li>Un objet ne peut pas être simultanément dans un replication group et un failover group.</li>
@@ -196,11 +196,11 @@
                     </ul>
 
                     <h3>✔ Limites & Privilèges</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Un seul replication/failover group peut contenir des objets autres que bases & shares pour un même compte. </li>
                         <li>
                             Privilèges :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li><code class="inline-code">CREATE REPLICATION GROUP</code> / <code class="inline-code">CREATE FAILOVER GROUP</code> sur le compte (ACCOUNTADMIN).</li>
                                 <li><code class="inline-code">OWNERSHIP</code> sur les groupes pour gérer ALT/GRANT/REVOKE.</li>
                                 <li><code class="inline-code">FAILOVER</code> sur un failover group pour promouvoir un secondaire en primaire. </li>
@@ -261,7 +261,7 @@
                     <p><strong>Failover group :</strong> permet de promouvoir un secondaire (cible) en primaire ; les objets du groupe deviennent écrits sur le nouveau primaire et en lecture seule sur l'ex‑primaire. </p>
 
                     <h3>✔ Pré‑requis</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>Réplication activée entre comptes</li>
                         <li>Primary/secondary failover groups existants</li>
                         <li>Refresh initial & scheduler en place </li>
@@ -271,7 +271,7 @@
                     <p>Via Snowsight (bulk failover recommandé pour cohérence : promouvoir tous les groupes et connexions en même temps) ou SQL. </p>
 
                     <h3>✔ Scénarios</h3>
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li>DR planifié (exercices)</li>
                         <li>DR non planifié (panne régionale/cloud)</li>
                         <li>Migration contrôlée </li>
@@ -305,11 +305,11 @@
                         <i class="fas fa-coins"></i> 6. Coûts – data transfer liés à la réplication & au BC/DR
                     </h2>
 
-                    <ul>
+                    <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                         <li><strong>Règle globale :</strong> pas de frais d'ingress Snowflake ; frais d'egress quand des données sortent de la région du compte (vers autre région du même cloud ou autre cloud). <strong>Transferts intra‑région gratuits.</strong> </li>
                         <li>
                             Fonctionnalités qui génèrent des coûts de transfert (exemples reliés à ce sujet) :
-                            <ul>
+                            <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                                 <li>Replication (bases/objets) vers un compte dans une autre région/cloud.</li>
                                 <li>Client Redirect lui‑même ne facture pas, mais les flux de données associés (ex. réplication, déchargement, external functions) peuvent générer de l'egress si cross‑region/cloud. </li>
                             </ul>
