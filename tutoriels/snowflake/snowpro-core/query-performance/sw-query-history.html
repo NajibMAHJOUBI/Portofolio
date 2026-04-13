@@ -293,27 +293,27 @@ FROM TABLE(information_schema.query_history(
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Source</th><th>Rétention</th><th>Avantages</th><th>Limites</th>
+                            <th>Source</th><th>Rétention</th><th>Avantages</th><th>Limites</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Snowsight Query History</strong>
-                                <td>14 jours
-                                <td>UI conviviale, Query Profile
-                                <td>Pas de données sur +14 jours
-                            
-                            32
-                                <td><strong>Information Schema – QUERY_HISTORY()</strong>
-                                <td>7 jours
-                                <td>Accès SQL, queries en cours
-                                <td>Fenêtre courte
-                            
-                            32
-                                <td><strong>ACCOUNT_USAGE.QUERY_HISTORY</strong>
-                                <td>365 jours
-                                <td>Audit, analyses avancées
-                                <td>Latence 45 min – 3h (selon vue) 
-                            
+                            <tr>
+                                <td><strong>Snowsight Query History</strong></td>
+                                <td>14 jours</td>
+                                <td>UI conviviale, Query Profile</td>
+                                <td>Pas de données sur +14 jours</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Information Schema – QUERY_HISTORY()</strong></td>
+                                <td>7 jours</td>
+                                <td>Accès SQL, queries en cours</td>
+                                <td>Fenêtre courte</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ACCOUNT_USAGE.QUERY_HISTORY</strong></td>
+                                <td>365 jours</td>
+                                <td>Audit, analyses avancées</td>
+                                <td>Latence 45 min – 3h (selon vue) </td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

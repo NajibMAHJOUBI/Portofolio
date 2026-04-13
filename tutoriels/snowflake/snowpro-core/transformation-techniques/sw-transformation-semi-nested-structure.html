@@ -349,33 +349,37 @@ LATERAL FLATTEN(input => logs.json_event) f;</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Sujet</th><th>Importance</th>
+                            <th>Sujet</th><th>Importance</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>LATERAL indispensable</strong>
-                                卷第Permet d'accéder aux colonnes du parent dans une table function
+                            <tr>
+                                <td><strong>LATERAL indispensable</strong></td>
+                                <td>Permet d'accéder aux colonnes du parent dans une table function</td>
+                            </tr>
                             
-                            32
-                                <td><strong>FLATTEN renvoie une table (clé, valeur, index, path)</strong>
-                                卷第Très utile pour inspecter du JSON
+                            <tr>    
+                                <td><strong>FLATTEN renvoie une table (clé, valeur, index, path)</strong></td>
+                                <td>Très utile pour inspecter du JSON</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VALUE = contenu réel</strong></td>
+                                <td>Souvent un VARIANT</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>VALUE = contenu réel</strong>
-                                卷第Souvent un VARIANT
+                                <td><strong>Champ JSON null ≠ SQL NULL</strong></td>
+                                <td>Important pour filtres et agrégations</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>Champ JSON null ≠ SQL NULL</strong>
-                                卷第Important pour filtres et agrégations
+                                <td><strong>FLATTEN sur ARRAY vs OBJECT</strong></td>
+                                <td>INDEX vs KEY utiles selon le cas</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>FLATTEN sur ARRAY vs OBJECT</strong>
-                                卷第INDEX vs KEY utiles selon le cas
-                            
-                            32
-                                <td><strong>Multi‑FLATTEN possible</strong>
-                                卷第Pour naviguer dans des JSON imbriqués
-                            
+                                <td><strong>Multi‑FLATTEN possible</strong></td>
+                                <td>Pour naviguer dans des JSON imbriqués</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

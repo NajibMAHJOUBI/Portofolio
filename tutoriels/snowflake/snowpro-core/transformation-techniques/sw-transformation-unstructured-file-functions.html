@@ -216,18 +216,18 @@
                     <h3>✔ B. Fonctions Accessors (lecture des métadonnées file-level)</h3>
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Fonction</th><th>Rôle</th>
+                            <th>Fonction</th><th>Rôle</th>
                         </thead>
                         <tbody>
-                            32<td>FL_GET_CONTENT_TYPE</td><td>retourne le MIME type</td>
-                            32<td>FL_GET_ETAG</td><td>retourne le hash du fichier</td>
-                            32<td>FL_GET_FILE_TYPE</td><td>retourne le type de fichier</td>
-                            32<td>FL_GET_LAST_MODIFIED</td><td>timestamp de dernière modification</td>
-                            32<td>FL_GET_RELATIVE_PATH</td><td>chemin relatif dans le stage</td>
-                            32<td>FL_GET_SCOPED_FILE_URL</td><td>scoped URL utilisable dans UDF / external apps</td>
-                            32<td>FL_GET_SIZE</td><td>taille en bytes</td>
-                            32<td>FL_GET_STAGE</td><td>stage source</td>
-                            32<td>FL_GET_STAGE_FILE_URL</td><td>URL du fichier dans le stage </td>
+                            <tr><td>FL_GET_CONTENT_TYPE</td><td>retourne le MIME type</td></tr>
+                            <tr><td>FL_GET_ETAG</td><td>retourne le hash du fichier</td></tr>
+                            <tr><td>FL_GET_FILE_TYPE</td><td>retourne le type de fichier</td></tr>
+                            <tr><td>FL_GET_LAST_MODIFIED</td><td>timestamp de dernière modification</td></tr>
+                            <tr><td>FL_GET_RELATIVE_PATH</td><td>chemin relatif dans le stage</td></tr>
+                            <tr><td>FL_GET_SCOPED_FILE_URL</td><td>scoped URL utilisable dans UDF / external apps</td></tr>
+                            <tr><td>FL_GET_SIZE</td><td>taille en bytes</td></tr>
+                            <tr><td>FL_GET_STAGE</td><td>stage source</td></tr>
+                            <tr><td>FL_GET_STAGE_FILE_URL</td><td>URL du fichier dans le stage </td></tr>
                         </tbody>
                     </table>
 
@@ -235,14 +235,14 @@
                     <p>Ces fonctions retournent TRUE/FALSE selon le type détecté :</p>
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Fonction</th><th>Description</th>
+                            <th>Fonction</th><th>Description</th>
                         </thead>
                         <tbody>
-                            32<td>FL_IS_AUDIO</td><td>Fichier audio ?</td>
-                            32<td>FL_IS_COMPRESSED</td><td>Archive / compressé ?</td>
-                            32<td>FL_IS_DOCUMENT</td><td>Document (PDF, doc, text…) ?</td>
-                            32<td>FL_IS_IMAGE</td><td>Image ?</td>
-                            32<td>FL_IS_VIDEO</td><td>Vidéo ?</td>
+                            <tr><td>FL_IS_AUDIO</td><td>Fichier audio ?</td></tr>
+                            <tr><td>FL_IS_COMPRESSED</td><td>Archive / compressé ?</td></tr>
+                            <tr><td>FL_IS_DOCUMENT</td><td>Document (PDF, doc, text…) ?</td></tr>
+                            <tr><td>FL_IS_IMAGE</td><td>Image ?</td></tr>
+                            <tr><td>FL_IS_VIDEO</td><td>Vidéo ?</td></tr>
                         </tbody>
                     </table>
                     <div class="info-note">
@@ -261,24 +261,25 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type</th><th>Description</th><th>Usage</th>
+                            <th>Type</th><th>Description</th><th>Usage</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Scoped URL</strong>
-                                卷第URL encodée donnant accès temporaire
-                                卷第Accès sécurisé limité, recommandé
+                            <tr>
+                                <td><strong>Scoped URL</strong></td>
+                                <td>URL encodée donnant accès temporaire</td>
+                                <td>Accès sécurisé limité, recommandé</td>
+                            </tr>
+                            <tr>
+                                <td><strong>File URL</strong></td>
+                                <td>URL permanente du fichier dans le stage</td>
+                                <td>Requêtes SQL, API Snowflake</td>
+                            </tr>
+                             <tr>
                             
-                            32
-                                <td><strong>File URL</strong>
-                                卷第URL permanente du fichier dans le stage
-                                卷第Requêtes SQL, API Snowflake
-                            
-                            32
-                                <td><strong>Pre‑signed URL</strong>
-                                卷第URL HTTP signée
-                                卷第Applications externes, téléchargements
-                            
+                                <td><strong>Pre‑signed URL</strong></td>
+                                <td>URL HTTP signée</td>
+                                <td>Applications externes, téléchargements</td>
+                             </tr>
                         </tbody>
                     </table>
                     <div class="info-note">

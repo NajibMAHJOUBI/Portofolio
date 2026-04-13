@@ -307,25 +307,25 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type de fonction</th><th>Impact sur Persisted Results Cache</th>
+                            <th>Type de fonction</th><th>Impact sur Persisted Results Cache</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Fonction système</strong>
-                                卷第Peut casser le cache si évaluée runtime (ex. CURRENT_TIMESTAMP) 
-                            
-                            32
-                                <td><strong>Table function</strong>
-                                卷第Peut réutiliser RESULT_SCAN mais ne déclenche pas automatiquement la réutilisation du cache
-                            
-                            32
-                                <td><strong>External function</strong>
-                                卷第Désactive la réutilisation du persisted result cache 
-                            
-                            32
-                                <td><strong>UDF</strong>
-                                卷第Désactive également la réutilisation du persisted result cache 
-                            
+                            <tr>
+                                <td><strong>Fonction système</strong></td>
+                                <td>Peut casser le cache si évaluée runtime (ex. CURRENT_TIMESTAMP) </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Table function</strong></td>
+                                <td>Peut réutiliser RESULT_SCAN mais ne déclenche pas automatiquement la réutilisation du cache</td>
+                            </tr>
+                            <tr>    
+                                <td><strong>External function</strong></td>
+                                <td>Désactive la réutilisation du persisted result cache </td>
+                            </tr>
+                            <tr>
+                                <td><strong>UDF</strong></td>
+                                <td>Désactive également la réutilisation du persisted result cache </td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>
@@ -366,29 +366,30 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Sujet</th><th>À retenir</th>
+                            <th>Sujet</th><th>À retenir</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Operators & Functions</strong>
-                                卷第Familles de fonctions Snowflake (system, table, external, UDF)
+                            <tr>
+                                <td><strong>Operators & Functions</strong></td>
+                                <td>Familles de fonctions Snowflake (system, table, external, UDF)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>System Functions</strong></td>
+                                <td>Souvent SYSTEM$ ; certaines empêchent le persisted result cache</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Table Functions</strong></td>
+                                <td>Ex. RESULT_SCAN() ; retournent un jeu de résultats tabulaire</td>
+                            </tr>
+                            <tr>
+                                <td><strong>External Functions</strong></td>
+                                <td>Appellent un service externe ; désactivent le cached result</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>System Functions</strong>
-                                卷第Souvent SYSTEM$ ; certaines empêchent le persisted result cache
-                            
-                            32
-                                <td><strong>Table Functions</strong>
-                                卷第Ex. RESULT_SCAN() ; retournent un jeu de résultats tabulaire
-                            
-                            32
-                                <td><strong>External Functions</strong>
-                                卷第Appellent un service externe ; désactivent le cached result
-                            
-                            32
-                                <td><strong>UDFs</strong>
-                                卷第Fonctions personnalisées SQL/JS/Python ; désactivent le cached result
-                            
+                                <td><strong>UDFs</strong></td>
+                                <td>Fonctions personnalisées SQL/JS/Python ; désactivent le cached result</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

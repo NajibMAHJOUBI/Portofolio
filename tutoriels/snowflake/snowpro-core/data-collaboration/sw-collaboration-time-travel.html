@@ -349,29 +349,31 @@ AT (TIMESTAMP => '2026-03-01 12:00:00');</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Fonction</th><th>Time Travel</th><th>Fail-safe</th>
+                            <th>Fonction</th><th>Time Travel</th><th>Fail-safe</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Objectif</strong>
-                                卷第Restauration logique
-                                卷第Récupération interne par Snowflake
+                            <tr>
+                                <td><strong>Objectif</strong></td>
+                                <td>Restauration logique</td>
+                                <td>Récupération interne par Snowflake</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Durée</strong></td>
+                                <td>1 à 90 jours</td>
+                                <td>7 jours (fixe)</td>
                             
-                            32
-                                <td><strong>Durée</strong>
-                                卷第1 à 90 jours
-                                卷第7 jours (fixe)
+                            </tr>
+                            <tr>
+                                <td><strong>Accessible à l'utilisateur ?</strong></td>
+                                <td>✔ Oui (SQL)</td>
+                                <td>❌ Non</td>
                             
-                            32
-                                <td><strong>Accessible à l'utilisateur ?</strong>
-                                卷第✔ Oui (SQL)
-                                卷第❌ Non
-                            
-                            32
-                                <td><strong>Utilisé pour un DROP ?</strong>
-                                卷第✔ Oui (UNDROP)
-                                卷第❌ Non
-                            
+                            </tr>
+                            <tr>
+                                <td><strong>Utilisé pour un DROP ?</strong></td>
+                                <td>✔ Oui (UNDROP)</td>
+                                <td>❌ Non</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

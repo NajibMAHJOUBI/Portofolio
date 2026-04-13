@@ -300,34 +300,35 @@ LATERAL FLATTEN(input => t.items) f;</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Thème</th><th>Question fréquente</th><th>Réponse</th>
+                            <th>Thème</th><th>Question fréquente</th><th>Réponse</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Stockage</strong>
-                                卷第Snowflake stocke-t-il JSON tel quel ?
-                                卷第❌ Non, il stocke en colonnes, compressé, avec métadonnées, dans des micro‑partitions 
+                            <tr>
+                                <td><strong>Stockage</strong></td>
+                                <td>Snowflake stocke-t-il JSON tel quel ?</td>
+                                <td>❌ Non, il stocke en colonnes, compressé, avec métadonnées, dans des micro‑partitions </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Navigation</strong></td>
+                                <td>Comment accéder à un champ JSON ?</td>
+                                <td>Avec <code class="inline-code">:</code> et <code class="inline-code">[]</code></td>
+                            </tr>
+                            <tr>    
+                                <td><strong>Performance</strong></td>
+                                <td>Le semi‑structuré supporte-t-il le pruning ?</td>
+                                <td>✔ Oui, grâce aux métadonnées des micro‑partitions </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Flatten</strong></td>
+                                <td>Pourquoi utiliser FLATTEN ?</td>
+                                <td>Pour transformer ARRAY/OBJECT en lignes tabulaires</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>Navigation</strong>
-                                卷第Comment accéder à un champ JSON ?
-                                卷第Avec <code class="inline-code">:</code> et <code class="inline-code">[]</code>
-                            
-                            32
-                                <td><strong>Performance</strong>
-                                卷第Le semi‑structuré supporte-t-il le pruning ?
-                                卷第✔ Oui, grâce aux métadonnées des micro‑partitions 
-                            
-                            32
-                                <td><strong>Flatten</strong>
-                                卷第Pourquoi utiliser FLATTEN ?
-                                卷第Pour transformer ARRAY/OBJECT en lignes tabulaires
-                            
-                            32
-                                <td><strong>Cast</strong>
-                                卷第Pourquoi caster un champ VARIANT ?
-                                卷第Pour faciliter filtres, comparaisons, agrégations
-                            
+                                <td><strong>Cast</strong></td>
+                                <td>Pourquoi caster un champ VARIANT ?</td>
+                                <td>Pour faciliter filtres, comparaisons, agrégations</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

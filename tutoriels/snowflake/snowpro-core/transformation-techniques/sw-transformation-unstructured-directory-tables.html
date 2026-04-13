@@ -405,37 +405,37 @@ FROM DIRECTORY(@my_stage);</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Point clé</th><th>À retenir pour l'examen</th>
+                            <th>Point clé</th><th>À retenir pour l'examen</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Nature</strong>
-                                卷第Objet implicite sur un stage (pas une table SQL) 
-                            
-                            32
-                                <td><strong>Fonction</strong>
-                                卷第Liste + métadonnées des fichiers dans le stage
-                            
-                            32
-                                <td><strong>Activation</strong>
-                                卷第DIRECTORY = (ENABLE = TRUE)
-                            
-                            32
-                                <td><strong>Refresh</strong>
-                                卷第Manuel (ALTER STAGE … REFRESH) ou automatique (notifications cloud) 
-                            
-                            32
-                                <td><strong>Coûts</strong>
-                                卷第Auto‑refresh → Snowpipe billing ; manuel → Cloud Services billing
-                            
-                            32
-                                <td><strong>Privileges</strong>
-                                卷第Hérite du stage (READ/WRITE/USAGE) 
-                            
-                            32
-                                <td><strong>Monitoring</strong>
-                                卷第PIPE_USAGE_HISTORY, AUTO_REFRESH_REGISTRATION_HISTORY 
-                            
+                            <tr>
+                                <td><strong>Nature</strong></td>
+                                <td>Objet implicite sur un stage (pas une table SQL) </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fonction</strong></td>
+                                <td>Liste + métadonnées des fichiers dans le stage</td>
+                            </tr>
+                            <tr>    
+                                <td><strong>Activation</strong></td>
+                                <td>DIRECTORY = (ENABLE = TRUE)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Refresh</strong></td>
+                                <td>Manuel (ALTER STAGE … REFRESH) ou automatique (notifications cloud) </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coûts</strong></td>
+                                <td>Auto‑refresh → Snowpipe billing ; manuel → Cloud Services billing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privileges</strong></td>
+                                <td>Hérite du stage (READ/WRITE/USAGE) </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Monitoring</strong></td>
+                                <td>PIPE_USAGE_HISTORY, AUTO_REFRESH_REGISTRATION_HISTORY </td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

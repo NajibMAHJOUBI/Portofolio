@@ -334,24 +334,24 @@ FROM base_table;</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type</th><th>Avantages</th><th>Inconvénients</th>
+                            <th>Type</th><th>Avantages</th><th>Inconvénients</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>View</strong>
-                                卷第Simple, pas de stockage
-                                卷第Ré-exécution de la requête ⇒ compute à chaque fois
-                            
-                            32
-                                <td><strong>Materialized View</strong>
-                                卷第Lecture très rapide, maintien automatique
-                                卷第Coût stockage + compute maintenance
-                            
-                            32
-                                <td><strong>Dynamic Table</strong>
-                                卷第Très flexible, transformation automatique
-                                卷第Coût plus élevé, réglages plus complexes
-                            
+                            <tr>
+                                <td><strong>View</strong></td>
+                                <td>Simple, pas de stockage</td>
+                                <td>Ré-exécution de la requête ⇒ compute à chaque fois</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Materialized View</strong></td>
+                                <td>Lecture très rapide, maintien automatique</td>
+                                <td>Coût stockage + compute maintenance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dynamic Table</strong></td>
+                                <td>Très flexible, transformation automatique</td>
+                                <td>Coût plus élevé, réglages plus complexes</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>
@@ -419,33 +419,33 @@ FROM base_table;</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Concept</th><th>Essentiel à retenir</th>
+                            <th>Concept</th><th>Essentiel à retenir</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Définition</strong>
-                                一道一道Résultats pré-calculés, stockés physiquement
-                            
-                            32
-                                <td><strong>Objectif</strong>
-                                一道一道Accélérer requêtes lourdes & répétitives
-                            
-                            32
-                                <td><strong>Rafraîchissement</strong>
-                                一道道Automatique, transparent
-                            
-                            32
-                                <td><strong>Coût</strong>
-                                一道道Compute + stockage
-                            
-                            32
-                                <td><strong>Limitations</strong>
-                                一道道Certaines expressions non permises dans SELECT
-                            
-                            32
-                                <td><strong>Meilleur usage</strong>
-                                一道道Agrégations répétées, filtres sélectifs, semi-structuré, external tables
-                            
+                            <tr>
+                                <td><strong>Définition</strong></td>
+                                <td>Résultats pré-calculés, stockés physiquement</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Objectif</strong></td>
+                                <td>Accélérer requêtes lourdes & répétitives</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rafraîchissement</strong></td>
+                                <td>Automatique, transparent</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coût</strong></td>
+                                <td>Compute + stockage</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Limitations</strong></td>
+                                <td>Certaines expressions non permises dans SELECT</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Meilleur usage</strong></td>
+                                <td>Agrégations répétées, filtres sélectifs, semi-structuré, external tables</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

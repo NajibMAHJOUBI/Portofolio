@@ -334,25 +334,25 @@ LIST @mystage;</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Sujet</th><th>Points clés</th>
+                            <th>Sujet</th><th>Points clés</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>COPY INTO &lt;table&gt;</strong>
-                                <td>Chargement depuis stages externes/internes + external locations ; supporte transformations via SELECT ; FILE_FORMAT & PATTERN essentiels ; VALIDATION_MODE.
-                            
-                            32
-                                <td><strong>COPY INTO &lt;location&gt;</strong>
-                                <td>Déchargement vers stage ou cloud ; formats CSV/JSON/Parquet ; SINGLE=TRUE pour fichier unique.
-                            
-                            32
-                                <td><strong>Local File System</strong>
-                                <td>PUT → upload vers internal stage (encrypté automatiquement) ; puis COPY INTO table ; LIST pour vérifier.
-                            
-                            32
-                                <td><strong>Web UI (Snowsight)</strong>
-                                一道道Méthode simple ; limite 250 MB/fichier ; supporte CSV/JSON/Parquet etc. ; peut créer table automatiquement ; pratique pour petits chargements.
-                            
+                            <tr>
+                                <td><strong>COPY INTO &lt;table&gt;</strong></td>
+                                <td>Chargement depuis stages externes/internes + external locations ; supporte transformations via SELECT ; FILE_FORMAT & PATTERN essentiels ; VALIDATION_MODE.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>COPY INTO &lt;location&gt;</strong></td>
+                                <td>Déchargement vers stage ou cloud ; formats CSV/JSON/Parquet ; SINGLE=TRUE pour fichier unique.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local File System</strong></td>
+                                <td>PUT → upload vers internal stage (encrypté automatiquement) ; puis COPY INTO table ; LIST pour vérifier.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Web UI (Snowsight)</strong></td>
+                                <td>Méthode simple ; limite 250 MB/fichier ; supporte CSV/JSON/Parquet etc. ; peut créer table automatiquement ; pratique pour petits chargements.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

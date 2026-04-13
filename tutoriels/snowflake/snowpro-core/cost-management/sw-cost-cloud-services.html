@@ -227,14 +227,18 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Date</th><th>Compute Credits (Warehouses)</th><th>Cloud Services Credits</th><th>Credit Adjustment (moins élevé des deux)</th><th>Credits Billed</th>
+                            <th>Date</th>
+                            <th>Compute Credits (Warehouses)</th>
+                            <th>Cloud Services Credits</th>
+                            <th>Credit Adjustment (moins élevé des deux)</th>
+                            <th>Credits Billed</th>
                         </thead>
                         <tbody>
-                            32<td>Nov 1</td><td>100</td><td>20</td><td>-10</td><td>110</td>
-                            32<td>Nov 2</td><td>120</td><td>10</td><td>-10</td><td>120</td>
-                            32<td>Nov 3</td><td>80</td><td>5</td><td>-5</td><td>80</td>
-                            32<td>Nov 4</td><td>100</td><td>13</td><td>-10</td><td>103</td>
-                            32<td><strong>Total</strong></td><td><strong>400</strong></td><td><strong>48</strong></td><td><strong>-35</strong></td><td><strong>413</strong></td>
+                            <tr><td>Nov 1</td><td>100</td><td>20</td><td>-10</td><td>110</td></tr>
+                            <tr><td>Nov 2</td><td>120</td><td>10</td><td>-10</td><td>120</td></tr>
+                            <tr><td>Nov 3</td><td>80</td><td>5</td><td>-5</td><td>80</td></tr>
+                            <tr><td>Nov 4</td><td>100</td><td>13</td><td>-10</td><td>103</td></tr>
+                            <tr><td><strong>Total</strong></td><td><strong>400</strong></td><td><strong>48</strong></td><td><strong>-35</strong></td><td><strong>413</strong></td></tr>
                         </tbody>
                     </table>
                     <p></p>
@@ -276,27 +280,27 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Type compute</th><th>Géré par</th><th>Facturé comment ?</th><th>Particularité</th>
+                            <th>Type compute</th><th>Géré par</th><th>Facturé comment ?</th><th>Particularité</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Virtual Warehouses</strong>
-                                <td>Client
-                                <td>Crédits par seconde (min 60 sec au démarrage)
-                                <td>Principal poste de coût
-                            
-                            32
-                                <td><strong>Serverless Compute</strong>
-                                <td>Snowflake
-                                <td>Crédits selon workload (compute-hours)
-                                <td>Autoscaling automatique
-                            
-                            32
-                                <td><strong>Cloud Services</strong>
-                                <td>Snowflake
-                                <td>Crédits MAIS seulement si >10% de l'usage warehouses
-                                <td>Pas toujours facturé
-                            
+                            <tr>
+                                <td><strong>Virtual Warehouses</strong></td>
+                                <td>Client</td>
+                                <td>Crédits par seconde (min 60 sec au démarrage)</td>
+                                <td>Principal poste de coût</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serverless Compute</strong></td>
+                                <td>Snowflake</td>
+                                <td>Crédits selon workload (compute-hours)</td>
+                                <td>Autoscaling automatique</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cloud Services</strong></td>
+                                <td>Snowflake</td>
+                                <td>Crédits MAIS seulement si >10% de l'usage warehouses</td>
+                                <td>Pas toujours facturé</td>
+                            </tr>
                         </tbody>
                     </table>
                     <p></p>

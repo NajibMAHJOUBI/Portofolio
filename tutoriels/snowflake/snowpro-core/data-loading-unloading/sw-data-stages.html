@@ -407,45 +407,45 @@
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Thème</th><th>Points clés</th>
+                            <th>Thème</th><th>Points clés</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>External Stages</strong>
-                                <td>S3, GCS, Azure ; stockage externe ; pas d'archive ; Credentials/Integration nécessaires.
-                            
-                            32
-                                <td><strong>Internal Stages</strong>
-                                <td>User (~), Table (%), Named ; stockés dans Snowflake ; utilisés pour PUT/GET.
-                            
-                            32
-                                <td><strong>Directory Tables</strong>
-                                <td>Métadonnées fichiers ; activées via DIRECTORY=TRUE ; se requêtent via DIRECTORY(@stage).
-                            
-                            32
-                                <td><strong>Unstructured Data</strong>
-                                <td>Accès via scoped/file/pre-signed URLs ; encryption SNOWFLAKE_SSE recommandée.
-                            
-                            32
-                                <td><strong>Organisation par Path</strong>
-                                <td>Utiliser sous-répertoires ; utile pour COPY PATTERN et refresh sélectifs.
-                            
-                            32
-                                <td><strong>CREATE STAGE</strong>
-                                <td>Paramètres selon cloud ; FILE_FORMAT possible ; ENCRYPTION et DIRECTORY optionnels.
-                            
-                            32
-                                <td><strong>PUT</strong>
-                                <td>Upload local → internal stage ; encryption automatique.
-                            
-                            32
-                                <td><strong>GET</strong>
-                                一道道Téléchargement depuis internal stage vers local.
-                            
-                            32
-                                <td><strong>LIST</strong>
-                                一道道Lister le contenu d'un stage ; compatible avec RESULT_SCAN.
-                            
+                            <tr>
+                                <td><strong>External Stages</strong></td>
+                                <td>S3, GCS, Azure ; stockage externe ; pas d'archive ; Credentials/Integration nécessaires.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Internal Stages</strong></td>
+                                <td>User (~), Table (%), Named ; stockés dans Snowflake ; utilisés pour PUT/GET.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Directory Tables</strong></td>
+                                <td>Métadonnées fichiers ; activées via DIRECTORY=TRUE ; se requêtent via DIRECTORY(@stage).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Unstructured Data</strong></td>
+                                <td>Accès via scoped/file/pre-signed URLs ; encryption SNOWFLAKE_SSE recommandée.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Organisation par Path</strong></td>
+                                <td>Utiliser sous-répertoires ; utile pour COPY PATTERN et refresh sélectifs.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CREATE STAGE</strong></td>
+                                <td>Paramètres selon cloud ; FILE_FORMAT possible ; ENCRYPTION et DIRECTORY optionnels.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PUT</strong></td>
+                                <td>Upload local → internal stage ; encryption automatique.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GET</strong></td>
+                                <td>Téléchargement depuis internal stage vers local.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LIST</strong></td>
+                                <td>Lister le contenu d'un stage ; compatible avec RESULT_SCAN.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

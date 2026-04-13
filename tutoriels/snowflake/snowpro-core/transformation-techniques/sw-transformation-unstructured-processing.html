@@ -296,29 +296,30 @@ CREATE OR REPLACE STAGE data_stage DIRECTORY = (ENABLE = TRUE);</code></pre>
 
                     <table class="tutorial-table">
                         <thead>
-                            32<th>Critère</th><th>UDF</th><th>Procedure</th>
+                            <th>Critère</th><th>UDF</th><th>Procedure</th>
                         </thead>
                         <tbody>
-                            32
-                                <td><strong>Accès fichier</strong>
-                                卷第InputStream
-                                卷第SnowflakeFile
+                            <tr>
+                                <td><strong>Accès fichier</strong></td>
+                                <td>InputStream</td>
+                                <td>SnowflakeFile</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Usage</strong></td>
+                                <td>Retourner une valeur (texte, métrique…)</td>
+                                <td>Traitements avancés, transformations complexes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code</strong></td>
+                                <td>souvent plus simple</td>
+                                <td>manipulation de fichiers plus riche</td>
+                            </tr>
+                            <tr>
                             
-                            32
-                                <td><strong>Usage</strong>
-                                卷第Retourner une valeur (texte, métrique…)
-                                卷第Traitements avancés, transformations complexes
-                            
-                            32
-                                <td><strong>Code</strong>
-                                卷第souvent plus simple
-                                卷第manipulation de fichiers plus riche
-                            
-                            32
-                                <td><strong>Idéal pour</strong>
-                                卷第extraction de features, OCR simple
-                                卷第ingestion massive, parsing, transformation pipeline
-                            
+                                <td><strong>Idéal pour</strong></td>
+                                <td>extraction de features, OCR simple</td>
+                                <td>ingestion massive, parsing, transformation pipeline</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>
