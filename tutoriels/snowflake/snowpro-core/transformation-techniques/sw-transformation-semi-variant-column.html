@@ -229,32 +229,32 @@
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>📌 Modéliser selon l'usage</h4>
+                            <h4>Modéliser selon l'usage</h4>
                             <p>Si vos analyses ciblent dates, champs numériques, filtres sur éléments d'ARRAY, envisagez un aplatissage sélectif pour les colonnes critiques → meilleur pruning et coûts moindres. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📌 Gérer les NULL correctement</h4>
+                            <h4>Gérer les NULL correctement</h4>
                             <p>Faites la différence entre SQL NULL et JSON null (dans VARIANT) → impacts sur filtres, agrégations et jointures. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📌 Encodage des dates/nombres</h4>
+                            <h4>Encodage des dates/nombres</h4>
                             <p>Dates/Timestamps en JSON = strings → préférez cast explicite à la lecture (et/ou colonnes relationnelles si réusage intensif). Chiffres encodés en chaînes = performance moindre ; privilégiez des nombres natifs ou des colonnes numériques. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📌 Clés dupliquées</h4>
+                            <h4>Clés dupliquées</h4>
                             <p>Par défaut, PARSE_JSON est strict ('s') : une clé dupliquée lève une erreur ; vous pouvez autoriser via 'd' (la dernière valeur est conservée). </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📌 Tolérance à l'erreur</h4>
+                            <h4>Tolérance à l'erreur</h4>
                             <p>En flux hétérogène (APIs, logs), préférez TRY_PARSE_JSON pour éviter l'échec de la requête en cas de JSON malformé. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>📌 Taille & performance</h4>
+                            <h4>Taille & performance</h4>
                             <p>Surveillez la taille de vos documents (VARIANT ≤ 128 MB non compressés) et l'entrée de PARSE_JSON (≤ 64 MB compressés). Les gros objets sont plus coûteux et limitent certaines opérations. </p>
                         </div>
                     </div>
