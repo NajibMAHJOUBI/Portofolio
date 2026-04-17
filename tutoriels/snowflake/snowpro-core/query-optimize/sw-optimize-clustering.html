@@ -350,22 +350,22 @@ ALTER TABLE t RESUME RECLUSTER;</code></pre>
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>❓ Faut-il définir un clustering key pour toutes les tables ?</h4>
+                            <h4>Faut-il définir un clustering key pour toutes les tables ?</h4>
                             <p>→ Non. Seulement pour les tables volumineuses avec des patterns de filtrage stables. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Automatic Clustering bloque‑t‑il les requêtes ?</h4>
+                            <h4>Automatic Clustering bloque‑t‑il les requêtes ?</h4>
                             <p>→ Jamais. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Le clustering améliore‑t‑il le JOIN ?</h4>
+                            <h4>Le clustering améliore‑t‑il le JOIN ?</h4>
                             <p>→ Indirectement : en améliorant le pruning des tables filtrées.</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Le reclustering commence‑t‑il immédiatement après un CLUSTER BY ?</h4>
+                            <h4>Le reclustering commence‑t‑il immédiatement après un CLUSTER BY ?</h4>
                             <p>→ Parfois non : Snowflake l'exécute uniquement si nécessaire. </p>
                         </div>
                     </div>

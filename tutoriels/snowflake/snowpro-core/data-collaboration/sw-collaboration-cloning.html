@@ -271,7 +271,7 @@
                     </div>
 
                     <div class="warning-note">
-                        <strong>❗ Important :</strong>
+                        <strong> Important :</strong>
                         <ul style="margin-left: 2.5rem; margin-bottom: 1.5rem;">
                             <li>Les tables temporaires <strong>ne peuvent pas</strong> être clonées avec Time Travel.</li>
                             <li>Les données purgées (ex : transient tables avec 1 jour de rétention) peuvent être ignorées via <code class="inline-code">IGNORE TABLES WITH INSUFFICIENT DATA RETENTION</code>.</li>
@@ -400,27 +400,27 @@
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>❓ Le clone consomme‑t‑il du stockage immédiatement ?</h4>
+                            <h4>Le clone consomme‑t‑il du stockage immédiatement ?</h4>
                             <p>→ <strong>Non</strong>, uniquement lorsque des modifications surviennent (<strong>copy‑on‑write</strong>).</p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Les privilèges du schéma source sont‑ils automatiquement transférés ?</h4>
+                            <h4>Les privilèges du schéma source sont‑ils automatiquement transférés ?</h4>
                             <p>→ <strong>Non</strong>, le schéma clone n'hérite pas des privilèges du schéma source. Les objets internes, oui. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Peut‑on cloner via Time Travel ?</h4>
+                            <h4>Peut‑on cloner via Time Travel ?</h4>
                             <p>→ <strong>Oui</strong>, avec <code class="inline-code">AT</code> ou <code class="inline-code">BEFORE</code>. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Peut‑on cloner un stage ou un file format ?</h4>
+                            <h4>Peut‑on cloner un stage ou un file format ?</h4>
                             <p>→ <strong>Oui</strong>. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ COPY GRANTS copie‑t‑il OWNERSHIP ?</h4>
+                            <h4>COPY GRANTS copie‑t‑il OWNERSHIP ?</h4>
                             <p>→ <strong>Non</strong>. </p>
                         </div>
                     </div>

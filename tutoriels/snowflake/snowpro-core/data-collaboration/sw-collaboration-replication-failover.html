@@ -331,32 +331,32 @@
 
                     <div class="grid-2cols">
                         <div class="usage-card">
-                            <h4>❓ Qu'est‑ce qu'un failover group ?</h4>
+                            <h4>Qu'est‑ce qu'un failover group ?</h4>
                             <p>→ Un replication group promouvable en primaire, permettant lecture/écriture après failover, avec cohérence point‑in‑time. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Contraintes d'appartenance aux groupes</h4>
+                            <h4>Contraintes d'appartenance aux groupes</h4>
                             <p>→ Un objet = 1 seul failover group ; possible plusieurs replication groups si comptes cibles différents ; pas à la fois dans un replication group et un failover group. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Activer la réplication pour les comptes</h4>
+                            <h4>Activer la réplication pour les comptes</h4>
                             <p>→ <code class="inline-code">SYSTEM$GLOBAL_ACCOUNT_SET_PARAMETER('&lt;org.account&gt;', 'ENABLE_ACCOUNT_DATABASE_REPLICATION','true')</code> (org admin). </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Basculer d'une DB replication "ancienne" vers group‑based</h4>
+                            <h4>Basculer d'une DB replication "ancienne" vers group‑based</h4>
                             <p>→ <code class="inline-code">SYSTEM$DISABLE_DATABASE_REPLICATION('mydb')</code> puis ajouter la DB au failover group. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Client Redirect – URL</h4>
+                            <h4>Client Redirect – URL</h4>
                             <p>→ <code class="inline-code">org-connection.snowflakecomputing.com</code> ; promotion de la connexion secondaire sans changer l'URL client ; régions différentes requises. </p>
                         </div>
 
                         <div class="usage-card">
-                            <h4>❓ Coûts data transfer</h4>
+                            <h4>Coûts data transfer</h4>
                             <p>→ Egress si inter‑région/inter‑cloud (réplication, unloading, external access…) ; intra‑région = 0. </p>
                         </div>
                     </div>
