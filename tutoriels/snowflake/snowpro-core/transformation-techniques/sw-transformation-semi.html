@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Données Semi-structurées | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Données Semi-structurées</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#file-formats" class="active">
+                            <i class="fas fa-file-alt"></i>File Formats supportés
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#variant-column">
+                            <i class="fas fa-code-branch"></i>Colonne VARIANT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#flattening">
+                            <i class="fas fa-table"></i>Flattening Nested Structure
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#semi-structured-functions">
+                            <i class="fas fa-calculator"></i>Semi-structured Data Functions
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Données Semi-structurées</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab fa-snowflake"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-code-branch"></i>Semi-structuré
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: FILE FORMATS SUPPORTÉS
+                ============================================ -->
+                <section id="file-formats" class="tutorial-section">
+
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='sw-transformation-semi-file-formats.html'">
+                            <h4><i class="fas fa-file-alt"></i> File Formats supportés</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les formats de fichiers semi-structurés supportés par Snowflake (JSON, Avro, Parquet, ORC, XML).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: COLONNE VARIANT
+                ============================================ -->
+                <section id="variant-column" class="tutorial-section">
+
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='sw-transformation-semi-variant-column.html'">
+                            <h4><i class="fas fa-code-branch"></i> Colonne VARIANT</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Utilisez le type VARIANT pour stocker et interroger des données semi-structurées.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: FLATTENING NESTED STRUCTURE
+                ============================================ -->
+                <section id="flattening" class="tutorial-section">
+
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='sw-transformation-semi-nested-structure.html'">
+                            <h4><i class="fas fa-table"></i> Flattening Nested Structure</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Aplatissez les structures imbriquées avec la fonction FLATTEN.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: SEMI-STRUCTURED DATA FUNCTIONS
+                ============================================ -->
+                <section id="semi-structured-functions" class="tutorial-section">
+
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='sw-transformation-semi-data-functions.html'">
+                            <h4><i class="fas fa-calculator"></i> Semi-structured Data Functions</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Manipulez les données semi-structurées avec les fonctions dédiées (ARRAY_AGG, OBJECT_AGG, PARSE_JSON, etc.).</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>

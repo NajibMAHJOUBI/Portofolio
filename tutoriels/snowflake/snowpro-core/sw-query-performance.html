@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Évaluer la Performance des Requêtes | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Évaluer la Performance des Requêtes</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#query-profiling" class="active">
+                            <i class="fas fa-chart-line"></i>Profilage de requêtes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#query-performance">
+                            <i class="fas fa-chart-simple"></i>Analyser les Performances
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#query-history">
+                            <i class="fas fa-history"></i>Historique des requêtes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#warehouse-workload">
+                            <i class="fas fa-coins"></i>Charge d'un Warehouse
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Évaluer la Performance des Requêtes</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab snowflake-icon"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Performance
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PROFILAGE DE REQUÊTES
+                ============================================ -->
+                <section id="query-profiling" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-performance/sw-query-profile.html'">
+                            <h4><i class="fas fa-chart-line"></i> Profilage des requêtes</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Analysez en détail l'exécution des requêtes avec le Query Profile.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: ANALYSER LES PERFORMANCES
+                ============================================ -->
+                <section id="query-performance" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-performance/sw-query-insights.html'">
+                            <h4><i class="fas fa-chart-simple"></i> Analyser les Performances</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Utilisez les outils d'analyse pour optimiser vos requêtes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: HISTORIQUE DES REQUÊTES
+                ============================================ -->
+                <section id="query-history" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-performance/sw-query-history.html'">
+                            <h4><i class="fas fa-history"></i> Historique des requêtes</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Consultez et analysez l'historique des requêtes exécutées.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: CHARGE D'UN WAREHOUSE
+                ============================================ -->
+                <section id="warehouse-workload" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-performance/sw-query-warehouse-workload.html'">
+                            <h4><i class="fas fa-coins"></i> Charge d'un Warehouse</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Surveillez et optimisez la charge de vos entrepôts virtuels.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+
+</body>
+</html>

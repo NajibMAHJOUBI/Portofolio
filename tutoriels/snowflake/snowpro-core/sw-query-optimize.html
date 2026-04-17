@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel Snowflake - Optimisation de Requêtes | DataOps Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/tutoriel.css">
+    <link rel="stylesheet" href="../../../css/icone-fabric.css">
+    <link rel="stylesheet" href="../../../css/tutoriel-grid.css">
+</head>
+
+<body>
+    <!-- ============================================
+         HEADER
+    ============================================ -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-cloud"></i>
+                    <span>DataOps Learning</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#tutorials">Tutoriels</a></li>
+                    <li><a href="index.html#about">À Propos</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         BREADCRUMB
+    ============================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="index.html#tutorials">Tutoriels</a></li>
+                <li><a href="#">Snowflake</a></li>
+                <li class="current">Optimisation de Requêtes</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+    ============================================ -->
+    <div class="container">
+        <div class="tutorial-wrapper">
+            <!-- Table des matières - Sidebar -->
+            <aside class="toc-sidebar">
+                <h3 class="toc-title">
+                    <i class="fas fa-list-ul"></i>
+                    Table des matières
+                </h3>
+
+                <ul class="toc-list">
+                    <li>
+                        <a href="#performance-tips" class="active">
+                            <i class="fas fa-chart-line"></i>Performance dans Snowflake
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#query-acceleration">
+                            <i class="fas fa-bolt"></i>Query Acceleration Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#search-optimization">
+                            <i class="fas fa-search"></i>Search Optimization Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clustering">
+                            <i class="fas fa-cubes"></i>Data Clustering
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#materialized-views">
+                            <i class="fas fa-eye"></i>Materialized Views
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                    <p style="color: var(--gray); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Temps estimé: 25 minutes
+                    </p>
+                    <p style="color: var(--gray);">
+                        <i class="fas fa-signal"></i> Niveau: Intermédiaire
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Contenu principal -->
+            <main class="tutorial-content">
+                <!-- En-tête du tutoriel -->
+                <div class="tutorial-header">
+                    <h1>Snowflake - Optimisation de Requêtes</h1>
+
+                    <span class="level-badge">Niveau Intermédiaire</span>
+
+                    <div class="tutorial-meta">
+                        <span class="meta-item">
+                            <i class="far fa-calendar-alt"></i> Mis à jour: Février 2026
+                        </span>
+                        <span class="meta-item">
+                            <i class="far fa-clock"></i> Durée: 25 min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-chart-bar"></i> Difficulté: Intermédiaire
+                        </span>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag">
+                            <i class="fab snowflake-icon"></i>Snowflake
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-chart-line"></i>Optimisation
+                        </span>
+                        <span class="tech-tag">
+                            <i class="fas fa-cloud"></i> Cloud
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     SECTION 1: PERFORMANCE DANS SNOWFLAKE
+                ============================================ -->
+                <section id="performance-tips" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-optimize/sw-optimize-tips.html'">
+                            <h4><i class="fas fa-chart-line"></i> Performance dans Snowflake</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Découvrez les bonnes pratiques pour optimiser les performances de vos requêtes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 2: QUERY ACCELERATION SERVICE
+                ============================================ -->
+                <section id="query-acceleration" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-optimize/sw-optimize-query-acceleration.html'">
+                            <h4><i class="fas fa-bolt"></i> Query Acceleration Service</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Accélérez les requêtes avec le service d'accélération de requêtes.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 3: SEARCH OPTIMIZATION SERVICE
+                ============================================ -->
+                <section id="search-optimization" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-optimize/sw-optimize-search-optimization.html'">
+                            <h4><i class="fas fa-search"></i> Search Optimization Service</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Optimisez les recherches avec le service d'optimisation de recherche.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 4: DATA CLUSTERING
+                ============================================ -->
+                <section id="clustering" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-optimize/sw-optimize-clustering.html'">
+                            <h4><i class="fas fa-cubes"></i> Data Clustering</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Améliorez le clustering et le pruning des données.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================
+                     SECTION 5: MATERIALIZED VIEWS
+                ============================================ -->
+                <section id="materialized-views" class="tutorial-section">
+                    <div class="items-grid">
+                        <div class="grid-item" onclick="window.location.href='query-optimize/sw-optimize-materialized-views.html'">
+                            <h4><i class="fas fa-eye"></i> Materialized Views</h4>
+                            <div class="item-details">
+                                <span><i class="far fa-clock"></i> 45 min</span>
+                            </div>
+                            <p class="item-description">Accélérez les requêtes répétitives avec les vues matérialisées.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+</body>
+</html>
